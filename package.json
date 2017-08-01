@@ -1,0 +1,17 @@
+{
+  "name": "project-analysis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Luana Martins",
+  "license": "ISC",
+  "dependencies": {
+    "acorn": "^5.1.1",
+    "ast-source": "^2.1.0",
+    "esprima": "^4.0.0",
+    "uglify-js": "^1.3.5"
+  }
+}
