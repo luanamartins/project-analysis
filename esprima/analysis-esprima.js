@@ -9,12 +9,7 @@
 var esprima = require('esprima');
 var fs = require('fs');
 
-var filepath = '';
-
-var programTryCatch = 'try { callHook(); } catch (error) {  test.pushFailure(hookName + " failed on " + test.testName + ": " + (error.message || error), extractStacktrace(error, 0)); }';
-var programPromise = 'new Promise(function(resolve, reject){ resolve(2); })';
-var promiseAnotherPromise = 'const myFirstPromise = new Promise((resolve, reject) => { resolve(42) });'
-var programEvent = 'const myEmitter =  new require(\'events\').EventEmitter; process.on(\'uncaughtException\', (err) => { console.log(\'whoops! there was an error\'); console.log(err); }); myEmitter.emit(\'error\', new Error(\'whoops!\'));';
+var filepath = 'input/program-all-promises.js';
 
 function parseFromFile(filepath) {
     fs.readFile(filepath, 'utf-8', function (err, program) {
@@ -23,10 +18,19 @@ function parseFromFile(filepath) {
         }
 
         var programParsed = esprima.parse(program, {loc: true, range: true});
-        console.log(programParsed);
+
+        fs.writeFile("output/output-all-promises.txt", JSON.stringify(programParsed, null, 4), function(err) {
+            if(err) {
+                return console.log(err);
+            }
+
+            console.log("The file was saved!");
+        });
 
     });
 }
+
+parseFromFile(filepath);
 
 function parse(program){
     var programParsed = esprima.parse(program);
