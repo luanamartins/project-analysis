@@ -1,8 +1,4 @@
-var esprima = require('esprima');
-var acorn = require('acorn');
-var fs = require('fs');
-
-var filepath = '';
+require('dotenv').config()
 
 //var program = 'const answer = 42';
 
