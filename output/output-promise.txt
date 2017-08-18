@@ -1,0 +1,41 @@
+{
+    "type": "Program",
+    "body": [
+        {
+            "type": "VariableDeclaration",
+            "declarations": [
+                {
+                    "type": "VariableDeclarator",
+                    "id": {
+                        "type": "Identifier",
+                        "name": "p1"
+                    },
+                    "init": {
+                        "type": "CallExpression",
+                        "callee": {
+                            "type": "MemberExpression",
+                            "computed": false,
+                            "object": {
+                                "type": "Identifier",
+                                "name": "Promise"
+                            },
+                            "property": {
+                                "type": "Identifier",
+                                "name": "resolve"
+                            }
+                        },
+                        "arguments": [
+                            {
+                                "type": "Literal",
+                                "value": 10,
+                                "raw": "10"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "kind": "var"
+        }
+    ],
+    "sourceType": "script"
+}

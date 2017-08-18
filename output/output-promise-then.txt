@@ -1,0 +1,121 @@
+{
+    "type": "Program",
+    "body": [
+        {
+            "type": "VariableDeclaration",
+            "declarations": [
+                {
+                    "type": "VariableDeclarator",
+                    "id": {
+                        "type": "Identifier",
+                        "name": "p"
+                    },
+                    "init": {
+                        "type": "NewExpression",
+                        "callee": {
+                            "type": "Identifier",
+                            "name": "Promise"
+                        },
+                        "arguments": [
+                            {
+                                "type": "FunctionExpression",
+                                "id": null,
+                                "params": [
+                                    {
+                                        "type": "Identifier",
+                                        "name": "resolve"
+                                    },
+                                    {
+                                        "type": "Identifier",
+                                        "name": "reject"
+                                    }
+                                ],
+                                "body": {
+                                    "type": "BlockStatement",
+                                    "body": [
+                                        {
+                                            "type": "ReturnStatement",
+                                            "argument": {
+                                                "type": "CallExpression",
+                                                "callee": {
+                                                    "type": "Identifier",
+                                                    "name": "resolve"
+                                                },
+                                                "arguments": [
+                                                    {
+                                                        "type": "Literal",
+                                                        "value": 10,
+                                                        "raw": "10"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                },
+                                "generator": false,
+                                "expression": false,
+                                "async": false
+                            }
+                        ]
+                    }
+                }
+            ],
+            "kind": "var"
+        },
+        {
+            "type": "ExpressionStatement",
+            "expression": {
+                "type": "CallExpression",
+                "callee": {
+                    "type": "MemberExpression",
+                    "computed": false,
+                    "object": {
+                        "type": "Identifier",
+                        "name": "p"
+                    },
+                    "property": {
+                        "type": "Identifier",
+                        "name": "then"
+                    }
+                },
+                "arguments": [
+                    {
+                        "type": "ArrowFunctionExpression",
+                        "id": null,
+                        "params": [
+                            {
+                                "type": "Identifier",
+                                "name": "item"
+                            }
+                        ],
+                        "body": {
+                            "type": "CallExpression",
+                            "callee": {
+                                "type": "MemberExpression",
+                                "computed": false,
+                                "object": {
+                                    "type": "Identifier",
+                                    "name": "console"
+                                },
+                                "property": {
+                                    "type": "Identifier",
+                                    "name": "log"
+                                }
+                            },
+                            "arguments": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "item"
+                                }
+                            ]
+                        },
+                        "generator": false,
+                        "expression": true,
+                        "async": false
+                    }
+                ]
+            }
+        }
+    ],
+    "sourceType": "script"
+}
