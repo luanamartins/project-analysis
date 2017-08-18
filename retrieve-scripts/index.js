@@ -39,16 +39,7 @@ function walkingOnRepo(repo) {
         if (err) throw err;
 
         var jsFiles = _.filter(files, function(file){
-
-            var isJSFile = file.endsWith('.js');
-
-            var wordsOfInterest = ['catch', 'then', 'all', 'race'];
-            var contents = fs.readFileSync(file, 'utf8');
-            var containsWordsOfInterest = wordsOfInterest.some(function(word){
-                return contents.indexOf(word) >= 0;
-            });
-
-            return isJSFile && containsWordsOfInterest;
+            return file.endsWith('.js');
         });
 
         console.log(_.size(jsFiles));
