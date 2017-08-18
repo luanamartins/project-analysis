@@ -1,15 +1,9 @@
-//var program = 'const answer = 42';
-// var tokens = esprima.tokenize(program);
-// console.log(tokens);
-// [ { type: 'Keyword', value: 'const' },
-//   { type: 'Identifier', value: 'answer' },
-//   { type: 'Punctuator', value: '=' },
-//   { type: 'Numeric', value: '42' } ]
+const esprima = require('esprima');
+const fs = require('fs');
 
-var esprima = require('esprima');
-var fs = require('fs');
-
-var filepath = 'input/program-all-promises.js';
+const name = 'event';
+const filepath = 'input/examples/program-' + name + '.js';
+const outputFilepath = 'output/output-' + name + '.txt';
 
 function parseFromFile(filepath) {
     fs.readFile(filepath, 'utf-8', function (err, program) {
@@ -17,13 +11,14 @@ function parseFromFile(filepath) {
             console.log(err);
         }
 
-        var programParsed = esprima.parse(program, {loc: true, range: true});
+        console.log("Parsing: " + filepath);
+        const options = {loc: false, range: false};
+        const programParsed = esprima.parse(program, options);
 
-        fs.writeFile("output/output-all-promises.txt", JSON.stringify(programParsed, null, 4), function(err) {
-            if(err) {
+        fs.writeFile(outputFilepath, JSON.stringify(programParsed, null, 4), function (err) {
+            if (err) {
                 return console.log(err);
             }
-
             console.log("The file was saved!");
         });
 
@@ -32,13 +27,13 @@ function parseFromFile(filepath) {
 
 parseFromFile(filepath);
 
-function parse(program){
-    var programParsed = esprima.parse(program);
+function parse(program) {
+    const programParsed = esprima.parseScript(program);
     console.log(JSON.stringify(programParsed));
 }
 
-function tokenize(program){
-    var tokens = esprima.tokenize(program);
+function tokenize(program) {
+    const tokens = esprima.tokenize(program);
     console.log(tokens);
 }
 
