@@ -2,4 +2,14 @@ var p = new Promise(function (resolve, reject) {
     return reject('Error');
 });
 
-p.then((item) => console.log(item)).catch(console.log);
+function print(message){
+    console.log(message);
+}
+
+function training(){
+    return new Promise(function(resolve, reject){
+        resolve('Training solved!');
+    });
+}
+
+p.then(print).catch(console.log);
