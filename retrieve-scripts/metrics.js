@@ -17,7 +17,7 @@ function traverse(obj, fn) {
 
 function getMetrics(filepath){
     var contents = fileModule.readFileSync(filepath);
-    var syntax = esprima.parse(file.toString());
+    var syntax = esprima.parse(contents);
 
     var numberOfTries = 0, numberOfCatches = 0, numberOfThrows = 0, numberOfPromises = 0;
 
