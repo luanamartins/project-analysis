@@ -3,7 +3,6 @@ require('dotenv').config();
 const path = require('path');
 
 const repoModule = require('./repository.js');
-const fileModule = require('./files.js');
 
 //var projectPath = process.env.RETRIEVE_SCRIPTS_ROOT_PATH;
 var projectPath = '';
