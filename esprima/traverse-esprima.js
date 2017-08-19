@@ -1,7 +1,6 @@
 var fs = require('fs');
 require('dotenv').config()
 var esprima = require('esprima');
-// var estraverse = require('estraverse');
 
 var inputFilepath = process.env.INPUT_DIR + 'examples/program-event.js';
 
