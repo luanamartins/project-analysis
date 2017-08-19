@@ -1,61 +1,25 @@
-require('dotenv').config()
+require('dotenv').config();
 
-var fs = require('fs');
-var path = require('path');
-var clone = require('git-clone');
-var _ = require('lodash');
+const path = require('path');
 
-var projectPath = process.env.RETRIEVE_SCRIPTS_ROOT_PATH;
-var inputGithubFilePath = path.join(projectPath, 'github.txt');
-var outputGithubFilePath = path.join(projectPath, 'repos');
-var outputJsFiles = path.join(projectPath, 'output');
+const repoModule = require('./repository.js');
+const fileModule = require('./files.js');
+
+//var projectPath = process.env.RETRIEVE_SCRIPTS_ROOT_PATH;
+var projectPath = '';
+
+console.log(projectPath);
+var inputGithubFilepath = path.join(projectPath, 'github.txt');
+var outputGithubFilepath = path.join(projectPath, 'repos');
 
 function main() {
-    var repos = fs.readFileSync(inputGithubFilePath).toString().split("\n");
+    var repos = repoModule.getRepos(inputGithubFilepath);
     repos.forEach(function (repo) {
-        //checkoutRepo(repo);
-        walkingOnRepo(repo);
+        repoModule.checkoutRepoTo(repo, outputGithubFilepath);
+        var repoName = repoModule.getRepoProjectName(repo);
+        var repoOutputDir = path.join(outputGithubFilepath, repoName);
+        var files = repoModule.getFilesFromDir(repoOutputDir, ['.js']);
+        console.log(files);
     });
 }
-
-function checkoutRepo(repo) {
-
-    console.log('Checking out ', repo);
-
-    var repoName = repo.substring(repo.lastIndexOf("/"));
-    clone(repo, outputGithubFilePath + repoName);
-
-    console.log('Checked out ', repo);
-}
-
-function walkingOnRepo(repo) {
-
-    var dir = require('node-dir');
-    var repoName = repo.substring(repo.lastIndexOf("/"));
-    var repoDir = outputGithubFilePath + repoName;
-    console.log('Getting js files from ', repoDir);
-
-    dir.files(repoDir, function(err, files) {
-        if (err) throw err;
-
-        var jsFiles = _.filter(files, function(file){
-            return file.endsWith('.js');
-        });
-
-        console.log(_.size(jsFiles));
-    });
-}
-
-function copyFile(src, dest) {
-
-    let readStream = fs.createReadStream(src);
-    readStream.once('error', (err) => {
-        console.log(err);
-    });
-    readStream.once('end', () => {
-        console.log('done copying');
-    });
-    readStream.pipe(fs.createWriteStream(dest));
-}
-
 main();
