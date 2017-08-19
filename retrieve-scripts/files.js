@@ -11,6 +11,11 @@ function copyFile(src, dest) {
     readStream.pipe(fs.createWriteStream(dest));
 }
 
+function readFileSync(filepath){
+    return fs.readFileSync(filepath, 'utf8');
+}
+
 module.exports = {
-    copyFile: copyFile
+    copyFile: copyFile,
+    readFileSync: readFileSync
 }
