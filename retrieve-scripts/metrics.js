@@ -1,4 +1,5 @@
 const esprima = require('esprima');
+const fileModule = require('./files.js');
 
 function traverse(obj, fn) {
     for (var key in obj) {
@@ -15,40 +16,40 @@ function traverse(obj, fn) {
 
 
 function getMetrics(filepath){
-    fs.readFile(filepath, function(err, file) {
-        var syntax = esprima.parse(file.toString());
+    var contents = fileModule.readFileSync(filepath);
+    var syntax = esprima.parse(file.toString());
 
-        var numberOfTries = 0, numberOfCatches = 0, numberOfThrows = 0, numberOfPromises = 0;
+    var numberOfTries = 0, numberOfCatches = 0, numberOfThrows = 0, numberOfPromises = 0;
 
-        traverse(syntax, function(obj) {
-            if (obj.type == 'TryStatement') {
-                numberOfTries++;
-            }
+    traverse(syntax, function(obj) {
+        if (obj.type == 'TryStatement') {
+            numberOfTries++;
+        }
 
-            if(obj.handler && obj.handler.type === 'CatchClause'){
-                numberOfCatches++;
-            }
+        if(obj.handler && obj.handler.type === 'CatchClause'){
+            numberOfCatches++;
+        }
 
-            if(obj.type == 'ThrowStatement'){
-                numberOfThrows++;
-            }
+        if(obj.type == 'ThrowStatement'){
+            numberOfThrows++;
+        }
 
-            if(obj.type == 'NewExpression' && obj.callee.name == 'Promise'){
-                numberOfPromises++;
-            }
+        if(obj.type == 'NewExpression' && obj.callee.name == 'Promise'){
+            numberOfPromises++;
+        }
 
-            // if(obj.type == 'CallStatement'){
-            //     if(obj.property && ['resolve', 'reject'].indexOf(obj.property.name) >= 0){
-            //         // TODO
-            //     }
-            // }
+        // if(obj.type == 'CallStatement'){
+        //     if(obj.property && ['resolve', 'reject'].indexOf(obj.property.name) >= 0){
+        //         // TODO
+        //     }
+        // }
 
-        });
-        console.log('Try: ', numberOfTries);
-        console.log('Catch: ', numberOfCatches);
-        console.log('Throw: ', numberOfThrows);
-        console.log('Promise: ', numberOfPromises);
     });
+    console.log('Try: ', numberOfTries);
+    console.log('Catch: ', numberOfCatches);
+    console.log('Throw: ', numberOfThrows);
+    console.log('Promise: ', numberOfPromises);
+
 }
 
 module.exports = {
