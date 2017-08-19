@@ -1,4 +1,4 @@
-var esprima = require('esprima');
+const esprima = require('esprima');
 
 function traverse(obj, fn) {
     for (var key in obj) {
