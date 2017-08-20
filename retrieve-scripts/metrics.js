@@ -1,5 +1,7 @@
 const esprima = require('esprima');
 const fileModule = require('./files.js');
+const tryCatchModule = require('./metrics-try-catch.js');
+const promiseModule = require('./metrics-promise.js');
 
 function traverse(obj, fn) {
     for (var key in obj) {
@@ -15,40 +17,27 @@ function traverse(obj, fn) {
 }
 
 
-function getMetrics(filepath){
+function getMetrics(filepath) {
     var contents = fileModule.readFileSync(filepath);
     var syntax = esprima.parse(contents);
 
-    var numberOfTries = 0, numberOfCatches = 0, numberOfThrows = 0, numberOfPromises = 0;
+    var repoObject = {
+        totalOfJSFiles: 0,
+        totalOfJSFilesEHM: 0,
+        numberOfTries: 0,
+        numberOfCatches: 0,
+        numberOfThrows: 0,
+        numberOfPromises: 0
+    }
 
-    traverse(syntax, function(obj) {
-        if (obj.type == 'TryStatement') {
-            numberOfTries++;
-        }
+    traverse(syntax, function (obj) {
 
-        if(obj.handler && obj.handler.type === 'CatchClause'){
-            numberOfCatches++;
-        }
-
-        if(obj.type == 'ThrowStatement'){
-            numberOfThrows++;
-        }
-
-        if(obj.type == 'NewExpression' && obj.callee.name == 'Promise'){
-            numberOfPromises++;
-        }
-
-        // if(obj.type == 'CallStatement'){
-        //     if(obj.property && ['resolve', 'reject'].indexOf(obj.property.name) >= 0){
-        //         // TODO
-        //     }
-        // }
+        tryCatchModule.handleAnalysis(obj, repoObject);
+        promiseModule.handleAnalysis(obj, repoObject);
 
     });
-    console.log('Try: ', numberOfTries);
-    console.log('Catch: ', numberOfCatches);
-    console.log('Throw: ', numberOfThrows);
-    console.log('Promise: ', numberOfPromises);
+
+    console.log(repoObject);
 
 }
 
