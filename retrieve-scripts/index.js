@@ -3,6 +3,7 @@ require('dotenv').config();
 const path = require('path');
 
 const repoModule = require('./repository.js');
+const metricsModule = require('./metrics.js');
 
 //var projectPath = process.env.RETRIEVE_SCRIPTS_ROOT_PATH;
 var projectPath = '';
@@ -18,7 +19,7 @@ function main() {
         var repoName = repoModule.getRepoProjectName(repo);
         var repoOutputDir = path.join(outputGithubFilepath, repoName);
         var files = repoModule.getFilesFromDir(repoOutputDir, ['.js']);
-        console.log(files);
+        metricsModule.handleMetrics(repoOutputDir, files);
     });
 }
 main();

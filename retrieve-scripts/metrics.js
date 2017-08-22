@@ -1,4 +1,6 @@
 const esprima = require('esprima');
+const path = require('path');
+
 const fileModule = require('./files.js');
 const tryCatchModule = require('./metrics-try-catch.js');
 const promiseModule = require('./metrics-promise.js');
@@ -16,13 +18,10 @@ function traverse(obj, fn) {
     }
 }
 
-
-function getMetrics(filepath) {
-    var contents = fileModule.readFileSync(filepath);
-    var syntax = esprima.parse(contents);
+function handleMetrics(outputDirectory, files) {
 
     var repoObject = {
-        totalOfJSFiles: 0,
+        totalOfJSFiles: files.length,
         totalOfJSFilesEHM: 0,
         numberOfTries: 0,
         numberOfCatches: 0,
@@ -37,10 +36,28 @@ function getMetrics(filepath) {
 
     });
 
-    console.log(repoObject);
+    console.log(eventEmitterObject);
+}
+
+
+function getMetrics(ast, filepath, repoObject) {
+
+    try {
+        console.log(filepath);
+
+        traverse(ast, function (obj) {
+            tryCatchModule.handleAnalysis(obj, repoObject);
+            promiseModule.handleAnalysis(obj, repoObject);
+        });
+    }catch (err){
+        console.log(filepath, ' ', err);
+    }
+}
+
+function getJSFilesEHM(ast, repoObject){
 
 }
 
 module.exports = {
-    getMetrics: getMetrics
+    handleMetrics: handleMetrics
 };
