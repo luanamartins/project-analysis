@@ -27,13 +27,65 @@ function handleMetrics(outputDirectory, files) {
         numberOfCatches: 0,
         numberOfThrows: 0,
         numberOfPromises: 0
+    };
+
+    var eventEmitterObject = {
+        totalOfStringEvents: 0,
+        totalOfEventTypes: 0
+    };
+
+    if (files) {
+        files.forEach(function (item) {
+            var fullFilepath = path.join(outputDirectory, item);
+
+            var contents = fileModule.readFileSync(fullFilepath);
+            var ast = esprima.parse(contents);
+
+            checkEventsTypes(ast, eventEmitterObject);
+            //getMetrics(ast, fullFilepath, repoObject);
+            //getJSFilesEHM(ast, repoObject);
+
+            console.log(item, ' ', repoObject);
+        });
     }
+}
 
-    traverse(syntax, function (obj) {
+//test();
 
-        tryCatchModule.handleAnalysis(obj, repoObject);
-        promiseModule.handleAnalysis(obj, repoObject);
+function test() {
+    var contents = fileModule.readFileSync('');
+    var ast = esprima.parse(contents);
+    var eventEmitterObject = {
+        totalOfStringEvents: 0,
+        totalOfEventTypes: 0
+    };
 
+    checkEventsTypes(ast, eventEmitterObject);
+}
+
+function checkEventsTypes(ast, eventEmitterObject){
+
+    var eventListeningMethods = ['on', 'once'];
+    var eventRaisingMethods = ['emit'];
+
+    traverse(ast, function (node) {
+
+        if(node.type == 'CallExpression'){
+
+            var methodName = node.callee.property.name;
+            if(eventListeningMethods.includes(methodName) || eventRaisingMethods.includes(methodName)){
+                const methodFirstArg = node.arguments[0];
+                if(methodFirstArg.type == 'Literal') {
+                    var raw = node.arguments[0].raw;
+
+                    // the method is an event listener or emitter and is listing/raising a string as event
+                    if (raw.startsWith("'") && raw.endsWith("'")) {
+                        eventEmitterObject.totalOfStringEvents++;
+                    }
+                }
+                eventEmitterObject.totalOfEventTypes++;
+            }
+        }
     });
 
     console.log(eventEmitterObject);
