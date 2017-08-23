@@ -26,7 +26,11 @@ function handleMetrics(outputDirectory, files) {
         numberOfTries: 0,
         numberOfCatches: 0,
         numberOfThrows: 0,
-        numberOfPromises: 0
+        numberOfPromises: 0,
+        numberOfResolves: 0,
+        numberOfRejects: 0,
+        numberOfPromiseThens: 0,
+        numberOfPromiseCatches: 0
     };
 
     var eventEmitterObject = {
@@ -42,8 +46,8 @@ function handleMetrics(outputDirectory, files) {
             var ast = esprima.parse(contents);
 
             checkEventsTypes(ast, eventEmitterObject);
-            //getMetrics(ast, fullFilepath, repoObject);
-            //getJSFilesEHM(ast, repoObject);
+            getMetrics(ast, fullFilepath, repoObject);
+            getJSFilesEHM(ast, repoObject);
 
             console.log(item, ' ', repoObject);
         });
@@ -74,8 +78,8 @@ function checkEventsTypes(ast, eventEmitterObject){
 
             var methodName = node.callee.property.name;
             if(eventListeningMethods.includes(methodName) || eventRaisingMethods.includes(methodName)){
-                const methodFirstArg = node.arguments[0];
-                if(methodFirstArg.type == 'Literal') {
+                const firstArgFromMethod = node.arguments[0];
+                if(firstArgFromMethod.type == 'Literal') {
                     var raw = node.arguments[0].raw;
 
                     // the method is an event listener or emitter and is listing/raising a string as event
@@ -107,9 +111,11 @@ function getMetrics(ast, filepath, repoObject) {
 }
 
 function getJSFilesEHM(ast, repoObject){
+    // Calculate how many files are there on using EHM
 
 }
 
 module.exports = {
-    handleMetrics: handleMetrics
+    handleMetrics: handleMetrics,
+    checkEventsTypes: checkEventsTypes
 };
