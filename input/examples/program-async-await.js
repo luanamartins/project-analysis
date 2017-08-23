@@ -1,3 +1,9 @@
+const superagent = require('superagent');
+
+const NUM_RETRIES = 3;
+
+test();
+
 async function test() {
     let i;
     for (i = 0; i < NUM_RETRIES; ++i) {

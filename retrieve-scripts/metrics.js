@@ -32,7 +32,9 @@ function handleMetrics(outputDirectory, files) {
         numberOfPromiseThens: 0,
         numberOfPromiseCatches: 0,
         numberOfPromiseRaces: 0,
-        numberOfPromiseAll: 0
+        numberOfPromiseAll: 0,
+        numberOfAsyncs: 0,
+        numberOfAwaits: 0,
     };
 
     var eventEmitterObject = {
