@@ -4,6 +4,9 @@ const path = require('path');
 const fileModule = require('./files.js');
 const tryCatchModule = require('./metrics-try-catch.js');
 const promiseModule = require('./metrics-promise.js');
+const asyncAwaitModule = require('./metrics-async-await.js');
+const callbackModule = require('./metrics-callback.js');
+const eventModule = require('./metrics-event.js');
 
 function traverse(obj, fn) {
     for (var key in obj) {
@@ -23,9 +26,11 @@ function handleMetrics(outputDirectory, files) {
     var repoObject = {
         totalOfJSFiles: files.length,
         totalOfJSFilesEHM: 0,
+
         numberOfTries: 0,
         numberOfCatches: 0,
         numberOfThrows: 0,
+
         numberOfPromises: 0,
         numberOfResolves: 0,
         numberOfRejects: 0,
@@ -33,11 +38,16 @@ function handleMetrics(outputDirectory, files) {
         numberOfPromiseCatches: 0,
         numberOfPromiseRaces: 0,
         numberOfPromiseAll: 0,
+
         numberOfAsyncs: 0,
         numberOfAwaits: 0,
+
         numberOfEventMethodsOn: 0,
         numberOfEventMethodsOnce: 0,
-        numberOfEventMethodsEmit: 0
+        numberOfEventMethodsEmit: 0,
+
+        numberOfCallbackAcceptingFunctions: 0,
+        numberOfCallbackErrorFunctions: 0
     };
 
     var eventEmitterObject = {
@@ -111,6 +121,9 @@ function getMetrics(ast, filepath, repoObject) {
         traverse(ast, function (obj) {
             tryCatchModule.handleAnalysis(obj, repoObject);
             promiseModule.handleAnalysis(obj, repoObject);
+            asyncAwaitModule.handleAnalysis(obj, repoObject);
+            callbackModule.handleAnalysis(obj, repoObject);
+            eventModule.handleAnalysis(obj, repoObject);
         });
     }catch (err){
         console.log(filepath, ' ', err);
