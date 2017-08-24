@@ -2,12 +2,70 @@
     "type": "Program",
     "body": [
         {
+            "type": "FunctionDeclaration",
+            "id": {
+                "type": "Identifier",
+                "name": "printFile"
+            },
+            "params": [
+                {
+                    "type": "Identifier",
+                    "name": "callback"
+                }
+            ],
+            "body": {
+                "type": "BlockStatement",
+                "body": [
+                    {
+                        "type": "ExpressionStatement",
+                        "expression": {
+                            "type": "CallExpression",
+                            "callee": {
+                                "type": "Identifier",
+                                "name": "callback"
+                            },
+                            "arguments": [
+                                {
+                                    "type": "Literal",
+                                    "value": "Oops",
+                                    "raw": "'Oops'"
+                                },
+                                {
+                                    "type": "ArrayExpression",
+                                    "elements": [
+                                        {
+                                            "type": "Literal",
+                                            "value": "a",
+                                            "raw": "'a'"
+                                        },
+                                        {
+                                            "type": "Literal",
+                                            "value": "b",
+                                            "raw": "'b'"
+                                        },
+                                        {
+                                            "type": "Literal",
+                                            "value": "c",
+                                            "raw": "'c'"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "generator": false,
+            "expression": false,
+            "async": false
+        },
+        {
             "type": "ExpressionStatement",
             "expression": {
                 "type": "CallExpression",
                 "callee": {
                     "type": "Identifier",
-                    "name": "readFile"
+                    "name": "printFile"
                 },
                 "arguments": [
                     {
@@ -87,6 +145,30 @@
                         "generator": false,
                         "expression": false,
                         "async": false
+                    }
+                ]
+            }
+        },
+        {
+            "type": "ExpressionStatement",
+            "expression": {
+                "type": "CallExpression",
+                "callee": {
+                    "type": "Identifier",
+                    "name": "printFile"
+                },
+                "arguments": [
+                    {
+                        "type": "MemberExpression",
+                        "computed": false,
+                        "object": {
+                            "type": "Identifier",
+                            "name": "console"
+                        },
+                        "property": {
+                            "type": "Identifier",
+                            "name": "log"
+                        }
                     }
                 ]
             }
