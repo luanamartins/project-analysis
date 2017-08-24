@@ -13,6 +13,10 @@ function handleAnalysis(obj, repoObject) {
             if (methodName == 'once') {
                 repoObject.numberOfEventMethodsOnce++;
             }
+
+            if(methodName.argument[0].value == 'uncaughtException'){
+                repoObject.numberOfEventUncaughtException++;
+            }
         }
     }
 }
