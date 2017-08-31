@@ -1,4 +1,5 @@
 const fs = require('fs');
+const excel = require('excel4node');
 
 function copyFile(src, dest) {
     let readStream = fs.createReadStream(src);
@@ -34,11 +35,94 @@ function writeCsvFile(filename, fields, data) {
         if (err) throw err;
         console.log('file saved');
     });
-
 }
+
+function createWorkbook(){
+    return new excel.Workbook();
+}
+
+function createStyle(workbook){
+    return workbook.createStyle({
+        font: {
+            color: '#000000',
+            size: 12
+        },
+        numberFormat: '$#,##0.00; ($#,##0.00); -'
+    });
+}
+
+function createSheet(workbook, sheetname){
+    return workbook.addWorksheet(sheetname);
+}
+
+function writeSheet(worksheet, data, style){
+    var row = 1;
+    var column = 1;
+    data.forEach(function(dataRow){
+        dataRow.forEach(function(value){
+            worksheet.cell(row, column).string(value).style(style);
+            column++;
+        });
+        row++;
+        column = 1;
+    });
+}
+
+function writeWorkbook(workbook, filename){
+    var filenameExt = filename + '.xlsx';
+    //var filenameExt = "/home/lulis/Documents/UFPE/Mestrado/Projeto/Projetos de análise estática/project-analysis/manual-analysis/github.xls";
+    workbook.write(filenameExt);
+}
+
+function writeXlsFile(filename){
+    // Require library
+    var excel = require('excel4node');
+
+// Create a new instance of a Workbook class
+    var workbook = new excel.Workbook();
+
+// Add Worksheets to the workbook
+    var worksheet = workbook.addWorksheet('Yes');
+    var worksheet2 = workbook.addWorksheet('Sheet 2');
+
+// Create a reusable style
+    var style = workbook.createStyle({
+        font: {
+            color: '#000000',
+            size: 12
+        },
+        numberFormat: '$#,##0.00; ($#,##0.00); -'
+    });
+
+// Set value of cell A1 to 100 as a number type styled with paramaters of style
+    worksheet.cell(1,1).number(100).style(style);
+
+// Set value of cell B1 to 300 as a number type styled with paramaters of style
+    worksheet.cell(1,2).number(200).style(style);
+
+// Set value of cell C1 to a formula styled with paramaters of style
+   // worksheet.cell(1,3).formula('A1 + B1').style(style);
+
+// Set value of cell A2 to 'string' styled with paramaters of style
+    worksheet.cell(2,1).string('string').style(style);
+
+// Set value of cell A3 to true as a boolean type styled with paramaters of style but with an adjustment to the font size.
+    worksheet.cell(3,1).bool(true).style(style).style({font: {size: 14}});
+
+    workbook.write(filename + '.xlsx');
+}
+
+writeXlsFile('file2');
+
 
 module.exports = {
     copyFile: copyFile,
     readFileSync: readFileSync,
-    writeCsvFile: writeCsvFile
+    writeCsvFile: writeCsvFile,
+
+    createWorkbook: createWorkbook,
+    createSheet: createSheet,
+    createStyle: createStyle,
+    writeSheet: writeSheet,
+    writeWorkbook: writeWorkbook
 }
