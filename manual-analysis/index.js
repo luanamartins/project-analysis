@@ -20,6 +20,7 @@ const path = require('path');
 
 const repoModule = require('./repository.js')
 const fileModule = require('./files.js');
+const nodegit = require('nodegit');
 
 var projectPath = process.env.MANUAL_ANALYSIS_ROOT_PATH;
 
@@ -27,57 +28,44 @@ var inputGithubFilepath = path.join(projectPath, 'github.txt');
 var outputGithubFilepath = path.join(projectPath, 'repos');
 
 function main() {
+    // nodegit.Clone(repos[i], outputGithubFilepath)
+    //     .then(function(repo){
+    //        console.log(repo);
+    //     })
+    //     .catch(console.log);
+
     var repos = repoModule.getRepos(inputGithubFilepath);
-    var keywords = ['.on', '.once', '.throw', '.catch', 'err', 'error', '.all', '.any', '.race'];
+    var keywords = ['on', 'once', 'throw', 'catch', 'err', 'error', 'all', 'any', 'race'];
     var fields = ['filepath', 'promises', 'promises has keywords', 'callbacks', 'callbacks that uses err,error'];
+    var filesToAnalyze = [];
+    var failedOnFiles = [];
     // var workbook = fileModule.createWorkbook();
     // var style = fileModule.createStyle(workbook);
-    var repo;
-    var tableData = [];
 
     for (var i = 0, len = repos.length; i < len; i++) {
-        repo = repos[i];
-        repoModule.checkoutRepoTo(repo, outputGithubFilepath, function () {
-
-            var repoName = repoModule.getRepoProjectName(repo);
-            var repoOutputDir = path.join(outputGithubFilepath, repoName);
-            var jsFiles = repoModule.getFilesFromDir(repoOutputDir, ['.js']);
-            var failOnFiles = [];
-            var filesToAnalyze = [];
-            var sheetData = {};
-            sheetData.sheetname = repoName;
-
-            for (var j = 0, jsFilesLen = jsFiles.length; j < jsFilesLen; j++) {
-                var file = jsFiles[j];
-                var fullFilepath = path.join(repoOutputDir, file);
-                console.log(fullFilepath);
-                var contents = fileModule.readFileSync(fullFilepath);
-                try {
-                    var tokens = esprima.tokenize(contents);
-                    if (findOne(tokens, keywords)) {
-                        filesToAnalyze.push(fullFilepath);
-                    }
-                } catch (err) {
-                    console.log('Fail to parse: ', fullFilepath);
-                    failOnFiles.push(fullFilepath);
+        var repoName = repoModule.getRepoProjectName(repos[i]);
+        var repoOutputDir = path.join(outputGithubFilepath, repoName);
+        var jsFiles = repoModule.getFilesFromDir(repoOutputDir, ['.js']);
+        for(var j = 0; jsFiles && j < jsFiles.length; j++){
+            var fullFilepath = path.join(repoOutputDir, jsFiles[j]);
+            var contents = fileModule.readFileSync(fullFilepath);
+            try {
+                var tokens = esprima.tokenize(contents);
+                var tokensValues = tokens.map(function(token){
+                    return token.value;
+                });
+                // Tokens são objetos, precisa comparar apenas a propriedade value de cada token com as keywords
+                if (findOne(tokensValues, keywords)) {
+                    filesToAnalyze.push(fullFilepath);
                 }
-
-                // if (j == jsFilesLen - 1) {
-                //     data.push(filesToAnalyze);
-                //     var sheet = fileModule.createSheet(workbook, repoName);
-                //     fileModule.writeSheet(sheet, data, style);
-                // }
+            }catch(err){
+                console.log('Failed to tokenize this file: ', fullFilepath);
+                failedOnFiles.push(fullFilepath);
             }
-
-            sheetData.files = filesToAnalyze;
-            tableData.push(sheetData);
-
-            if(i == len){
-                console.log(tableData);
-            }
-
-        });
+        }
     }
+
+    console.log(filesToAnalyze);
 }
 
 var findOne = function (haystack, arr) {
@@ -85,5 +73,11 @@ var findOne = function (haystack, arr) {
         return haystack.indexOf(v) >= 0;
     });
 };
+
+function testeFindOne(){
+    var haystack = ['apple', 'banana', 'pineapple'];
+    var arr = ['pineapple', 'passion fruit'];
+    console.log(findOne(haystack, arr));
+}
 
 main();
