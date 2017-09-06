@@ -15,12 +15,14 @@ function handleAnalysis(obj, repoObject) {
                 repoObject.numberOfRejects++;
             }
 
-            if (callee.property.name === 'then') {
-                repoObject.numberOfPromiseThens++;
-            }
+            if(callee.property) {
+                if (callee.property.name === 'then') {
+                    repoObject.numberOfPromiseThens++;
+                }
 
-            if (callee.property.name === 'catch') {
-                repoObject.numberOfPromiseCatches++;
+                if (callee.property.name === 'catch') {
+                    repoObject.numberOfPromiseCatches++;
+                }
             }
 
             if (callee.object && callee.object.name == 'Promise') {

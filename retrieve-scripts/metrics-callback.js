@@ -2,23 +2,27 @@ function handleAnalysis(obj, repoObject) {
 
     if(obj.type == 'FunctionDeclaration'){
         // If a function argument is called inside the function, this function is callback-accepting
+
         // Let's use heuristics to identify callbacks for error handling:
         //  - If an argument's name is "err" or "error" is considered error handling callback function
         // Heuristics used by Ali Mesbah on "Don't call us: We'll call you"
 
+        // Still needs to consider ArrowExpressions () => {}
+
         var functionsArgs = obj.params;
         if(obj.body){
-            var functionBody = obj.body;
+            var functionBody = obj.body.body;
 
-            functionBody.forEach(function(statement){
-                if(statement.type == 'CallExpression'){
-                    const calleeName = statement.callee.name;
-                    if(calleeName && functionsArgs.includes(calleeName)){
-                        repoObject.numberOfCallbackAcceptingFunctions++;
+            if(functionBody) {
+                functionBody.forEach(function (statement) {
+                    if (statement.type == 'CallExpression') {
+                        const calleeName = statement.callee.name;
+                        if (calleeName && functionsArgs.includes(calleeName)) {
+                            repoObject.numberOfCallbackAcceptingFunctions++;
+                        }
                     }
-                }
-            });
-
+                });
+            }
         }
     }
 
