@@ -23,7 +23,14 @@ function getFilesFromDir(dir, fileTypes) {
         var files = fs.readdirSync(currentPath);
         for (var i in files) {
             var curFile = path.join(currentPath, files[i]);
-            if (fs.statSync(curFile).isFile() && fileTypes.indexOf(path.extname(curFile)) != -1) {
+
+            const extensionFile = path.extname(curFile);
+            const isFile = fs.statSync(curFile).isFile();
+            const isJsFile = fileTypes.indexOf(extensionFile) != -1;
+            const isNotMinJsFile = !curFile.endsWith('.min.js');
+            const isNotNodeModule = !curFile.endsWith('node_modules');
+
+            if (isFile && isJsFile && isNotMinJsFile && isNotNodeModule) {
                 filesToReturn.push(curFile.replace(dir, ''));
             } else if (fs.statSync(curFile).isDirectory()) {
                 walkDir(curFile);
