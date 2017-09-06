@@ -51,26 +51,25 @@ function createStyle(workbook){
     });
 }
 
-function createSheet(workbook, sheetname){
-    return workbook.addWorksheet(sheetname);
-}
-
-function writeSheet(worksheet, data, style){
+function writeSheet(sheet, titles, data, style){
+    var i;
     var row = 1;
     var column = 1;
-    data.forEach(function(dataRow){
-        dataRow.forEach(function(value){
-            worksheet.cell(row, column).string(value).style(style);
-            column++;
-        });
+    for(i = 0; i < titles.length; i++){
+        sheet.cell(row, column).string(titles[i]).style(style);
+        column++;
+    }
+
+    column = 1;
+    row = 2;
+    for(i = 0; i < data.length; i++) {
+        sheet.cell(row, column).string(data[i]).style(style);
         row++;
-        column = 1;
-    });
+    }
 }
 
 function writeWorkbook(workbook, filename){
     var filenameExt = filename + '.xlsx';
-    //var filenameExt = "/home/lulis/Documents/UFPE/Mestrado/Projeto/Projetos de análise estática/project-analysis/manual-analysis/github.xls";
     workbook.write(filenameExt);
 }
 
@@ -112,7 +111,7 @@ function writeXlsFile(filename){
     workbook.write(filename + '.xlsx');
 }
 
-writeXlsFile('file2');
+// writeXlsFile('file2');
 
 
 module.exports = {
@@ -121,7 +120,6 @@ module.exports = {
     writeCsvFile: writeCsvFile,
 
     createWorkbook: createWorkbook,
-    createSheet: createSheet,
     createStyle: createStyle,
     writeSheet: writeSheet,
     writeWorkbook: writeWorkbook
