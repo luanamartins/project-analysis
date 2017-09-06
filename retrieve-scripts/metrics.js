@@ -67,9 +67,12 @@ function handleMetrics(outputDirectory, files) {
             getMetrics(ast, fullFilepath, repoObject);
             getJSFilesEHM(ast, repoObject);
 
-            console.log(item, ' ', repoObject);
+            //console.log(item, ' ', repoObject);
         });
     }
+
+    console.log(repoObject);
+    console.log(eventEmitterObject);
 }
 
 //test();
@@ -94,18 +97,20 @@ function checkEventsTypes(ast, eventEmitterObject){
 
         if(node.type == 'CallExpression'){
 
-            var methodName = node.callee.property.name;
-            if(eventListeningMethods.includes(methodName) || eventRaisingMethods.includes(methodName)){
-                const firstArgFromMethod = node.arguments[0];
-                if(firstArgFromMethod.type == 'Literal') {
-                    var raw = node.arguments[0].raw;
+            if(node.callee.property) {
+                var methodName = node.callee.property.name;
+                if (eventListeningMethods.includes(methodName) || eventRaisingMethods.includes(methodName)) {
+                    const firstArgFromMethod = node.arguments[0];
+                    if (firstArgFromMethod.type == 'Literal') {
+                        var raw = node.arguments[0].raw;
 
-                    // the method is an event listener or emitter and is listing/raising a string as event
-                    if (raw.startsWith("'") && raw.endsWith("'")) {
-                        eventEmitterObject.totalOfStringEvents++;
+                        // the method is an event listener or emitter and is listing/raising a string as event
+                        if (raw.startsWith("'") && raw.endsWith("'")) {
+                            eventEmitterObject.totalOfStringEvents++;
+                        }
                     }
+                    eventEmitterObject.totalOfEventTypes++;
                 }
-                eventEmitterObject.totalOfEventTypes++;
             }
         }
     });
