@@ -55,4 +55,5 @@ fabric.properties
 # modules.xml
 /.env
 /manual-analysis/repos/
+/manual-analysis/copiedFiles/
 /retrieve-scripts/repos/
