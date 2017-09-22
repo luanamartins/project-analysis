@@ -112,13 +112,13 @@ function randomElements(array, count) {
     return lodash.shuffle(array).slice(0, count);
 }
 
-function testRandomElements(){
+function testRandomElements() {
     var array = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
     console.log(randomElements(array, 3));
 }
 
-function containsAtLeastOne(input, array){
-    var contains = array.some(function(item){
+function containsAtLeastOne(input, array) {
+    var contains = array.some(function (item) {
         return input.indexOf(item) >= 0;
     });
 

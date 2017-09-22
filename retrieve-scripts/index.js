@@ -5,8 +5,7 @@ const path = require('path');
 const repoModule = require('./repository.js');
 const metricsModule = require('./metrics.js');
 
-//var projectPath = process.env.RETRIEVE_SCRIPTS_ROOT_PATH;
-var projectPath = '';
+var projectPath = process.env.RETRIEVE_SCRIPTS_ROOT_PATH;
 
 console.log(projectPath);
 var inputGithubFilepath = path.join(projectPath, 'github.txt');
@@ -20,6 +19,7 @@ function main() {
         var repoOutputDir = path.join(outputGithubFilepath, repoName);
         var files = repoModule.getFilesFromDir(repoOutputDir, ['.js']);
         metricsModule.handleMetrics(repoOutputDir, files);
+        //console.log(files);
     });
 }
 main();
