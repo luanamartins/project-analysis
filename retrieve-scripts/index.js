@@ -17,7 +17,7 @@ function main() {
         repoModule.checkoutRepoTo(repo, outputGithubFilepath);
         var repoName = repoModule.getRepoProjectName(repo);
         var repoOutputDir = path.join(outputGithubFilepath, repoName);
-        var files = repoModule.getFilesFromDir(repoOutputDir, ['.js']);
+        var files = repoModule.getFilesFromDir(repoOutputDir, ['.js'], ['.min.js']);
         metricsModule.handleMetrics(repoOutputDir, files);
         //console.log(files);
     });
