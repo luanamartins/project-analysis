@@ -6,3 +6,5 @@ process.on('uncaughtException', (err) => {
 });
 
 myEmitter.emit('error', new Error('whoops!'));
+
+myEmitter.emit(new Error(), new Error('whoops!'));

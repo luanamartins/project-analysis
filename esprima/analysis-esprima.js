@@ -1,9 +1,9 @@
 const esprima = require('esprima');
 const fs = require('fs');
 
-const name = 'event';
-const filepath = 'input/examples/program-' + name + '.js';
-const outputFilepath = 'output/output-' + name + '.txt';
+const name = 'callback';
+const filepath = 'data/input/program-' + name + '.js';
+const outputFilepath = 'data/output/output-' + name + '.txt';
 
 function parseFromFile(filepath) {
     fs.readFile(filepath, 'utf-8', function (err, program) {
