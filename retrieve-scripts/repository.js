@@ -17,17 +17,25 @@ function getRepoProjectName(fullRepoName){
     return fullRepoName.substring(fullRepoName.lastIndexOf("/"));
 }
 
-function getFilesFromDir(dir, fileTypes) {
+function getFilesFromDir(dir, fileTypes, removeFileTypes) {
     var filesToReturn = [];
     function walkDir(currentPath) {
         var files = fs.readdirSync(currentPath);
         for (var i in files) {
+
             var curFile = path.join(currentPath, files[i]);
-            if (fs.statSync(curFile).isFile() && fileTypes.indexOf(path.extname(curFile)) != -1) {
+
+            const hasFiletype = fileTypes.indexOf(path.extname(curFile)) != -1;
+            // TODO this is not considering .min.js yet
+            const notHasRemoveFileTypes = removeFileTypes.indexOf(path.extname(curFile)) == -1;
+            const isFile = fs.statSync(curFile).isFile();
+
+            if (isFile && hasFiletype && notHasRemoveFileTypes) {
                 filesToReturn.push(curFile.replace(dir, ''));
             } else if (fs.statSync(curFile).isDirectory()) {
                 walkDir(curFile);
             }
+
         }
     };
     walkDir(dir);
