@@ -7,7 +7,7 @@ function handleAnalysis(obj, repoObject) {
         //  - If an argument's name is "err" or "error" is considered error handling callback function
         // Heuristics used by Ali Mesbah on "Don't call us: We'll call you"
 
-        // Still needs to consider ArrowExpressions () => {}
+        // Still needs to consider ArrowExpressions () => {} (Not exactly)
 
         var functionsArgs = obj.params;
         if(obj.body){

@@ -66,8 +66,6 @@ function handleMetrics(outputDirectory, files) {
             checkEventsTypes(ast, eventEmitterObject);
             getMetrics(ast, fullFilepath, repoObject);
             getJSFilesEHM(ast, repoObject);
-
-            //console.log(item, ' ', repoObject);
         });
     }
 
