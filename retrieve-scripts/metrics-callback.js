@@ -29,6 +29,7 @@ function handleAnalysis(obj, repoObject) {
     if (obj.type == 'ExpressionStatement' && obj.expression == 'CallExpression') {
         var callArgs = obj.expression.arguments;
         var callbacks = callArgs.filter(filterCallbacks);
+        repoObject.numberOfCallbackErrorFunctions += callbacks.length;
     }
 
 }
@@ -43,9 +44,7 @@ function filterCallbacks(arg) {
         var params = arg.params;
         var keywords = ['err', 'error', 'e', 'exception'];
 
-        if (params && findOne(keywords, params)) {
-
-        }
+        return params && findOne(keywords, params);
     }
 }
 
