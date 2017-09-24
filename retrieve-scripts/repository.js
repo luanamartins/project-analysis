@@ -9,28 +9,29 @@ function checkoutRepoTo(repo, outputDirectory) {
     console.log('Check out: ', repo);
 }
 
-function getRepos(filepath){
+function getRepos(filepath) {
     return fs.readFileSync(filepath).toString().split("\n");
 }
 
-function getRepoProjectName(fullRepoName){
+function getRepoProjectName(fullRepoName) {
     return fullRepoName.substring(fullRepoName.lastIndexOf("/"));
 }
 
-function getFilesFromDir(dir, fileTypes, removeFileTypes) {
+function getFilesFromDir(dir, extensionsToInclude, extensionsToExclude) {
     var filesToReturn = [];
+
     function walkDir(currentPath) {
         var files = fs.readdirSync(currentPath);
         for (var i in files) {
 
             var curFile = path.join(currentPath, files[i]);
 
-            const hasFiletype = fileTypes.indexOf(path.extname(curFile)) != -1;
+            const acceptExtension = endsWithAny(curFile, extensionsToInclude);
             // TODO this is not considering .min.js yet
-            const notHasRemoveFileTypes = removeFileTypes.indexOf(path.extname(curFile)) == -1;
+            const notRejectExtension = !endsWithAny(curFile, extensionsToExclude);
             const isFile = fs.statSync(curFile).isFile();
 
-            if (isFile && hasFiletype && notHasRemoveFileTypes) {
+            if (isFile && acceptExtension && notRejectExtension) {
                 filesToReturn.push(curFile.replace(dir, ''));
             } else if (fs.statSync(curFile).isDirectory()) {
                 walkDir(curFile);
@@ -42,6 +43,11 @@ function getFilesFromDir(dir, fileTypes, removeFileTypes) {
     return filesToReturn;
 }
 
+function endsWithAny(input, extensions) {
+    return extensions.some(function (extension) {
+        return input.endsWith(extension);
+    });
+}
 
 module.exports = {
     getFilesFromDir: getFilesFromDir,

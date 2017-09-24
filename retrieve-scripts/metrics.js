@@ -70,8 +70,10 @@ function handleMetrics(outputDirectory, files) {
     };
 
     if (files) {
-        files.forEach(function (item) {
-            let fullFilepath = path.join(outputDirectory, item);
+        files.forEach(function (file) {
+
+            let fullFilepath = path.join(outputDirectory, file);
+            console.log(fullFilepath);
 
             let contents = fileModule.readFileSync(fullFilepath);
             let ast = esprima.parse(contents);
