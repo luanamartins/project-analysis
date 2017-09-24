@@ -9,11 +9,11 @@ const callbackModule = require('./metrics-callback.js');
 const eventModule = require('./metrics-event.js');
 
 function traverse(obj, fn) {
-    for (var key in obj) {
+    for (let key in obj) {
         if (obj[key] !== null && fn(obj[key]) === false) {
             return false;
         }
-        if (typeof obj[key] == 'object' && obj[key] !== null) {
+        if (typeof obj[key] === 'object' && obj[key] !== null) {
             if (traverse(obj[key], fn) === false) {
                 return false;
             }
@@ -23,45 +23,57 @@ function traverse(obj, fn) {
 
 function handleMetrics(outputDirectory, files) {
 
-    var repoObject = {
+    let repoObject = {
         totalOfJSFiles: files.length,
         totalOfJSFilesEHM: 0,
 
-        numberOfTries: 0,
-        numberOfCatches: 0,
-        numberOfThrows: 0,
+        tryCatch: {
+            numberOfTries: 0,
+            numberOfCatches: 0,
+            numberOfThrows: 0,
+        },
 
-        numberOfPromises: 0,
-        numberOfResolves: 0,
-        numberOfRejects: 0,
-        numberOfPromiseThens: 0,
-        numberOfPromiseCatches: 0,
-        numberOfPromiseRaces: 0,
-        numberOfPromiseAll: 0,
+        promise: {
+            numberOfPromises: 0,
+            numberOfResolves: 0,
+            numberOfRejects: 0,
+            numberOfPromiseThens: 0,
+            numberOfPromiseCatches: 0,
+            numberOfPromiseRaces: 0,
+            numberOfPromiseAll: 0,
+        },
 
-        numberOfAsyncs: 0,
-        numberOfAwaits: 0,
+        asyncAwait: {
+            numberOfAsyncs: 0,
+            numberOfAwaits: 0,
+        },
 
-        numberOfEventMethodsOn: 0,
-        numberOfEventMethodsOnce: 0,
-        numberOfEventMethodsEmit: 0,
-        numberOfEventUncaughtException: 0,
 
-        numberOfCallbackAcceptingFunctions: 0,
-        numberOfCallbackErrorFunctions: 0
+        events: {
+            numberOfEventMethodsOn: 0,
+            numberOfEventMethodsOnce: 0,
+            numberOfEventMethodsEmit: 0,
+            numberOfEventUncaughtException: 0,
+        },
+
+        callbacks: {
+            numberOfCallbackAcceptingFunctions: 0,
+            numberOfCallbackErrorFunctions: 0,
+            numberOfEmptyCallbacks: 0
+        }
     };
 
-    var eventEmitterObject = {
+    let eventEmitterObject = {
         totalOfStringEvents: 0,
         totalOfEventTypes: 0
     };
 
     if (files) {
         files.forEach(function (item) {
-            var fullFilepath = path.join(outputDirectory, item);
+            let fullFilepath = path.join(outputDirectory, item);
 
-            var contents = fileModule.readFileSync(fullFilepath);
-            var ast = esprima.parse(contents);
+            let contents = fileModule.readFileSync(fullFilepath);
+            let ast = esprima.parse(contents);
 
             checkEventsTypes(ast, eventEmitterObject);
             getMetrics(ast, fullFilepath, repoObject);
@@ -76,9 +88,9 @@ function handleMetrics(outputDirectory, files) {
 //test();
 
 function test() {
-    var contents = fileModule.readFileSync('');
-    var ast = esprima.parse(contents);
-    var eventEmitterObject = {
+    let contents = fileModule.readFileSync('');
+    let ast = esprima.parse(contents);
+    let eventEmitterObject = {
         totalOfStringEvents: 0,
         totalOfEventTypes: 0
     };
@@ -88,19 +100,19 @@ function test() {
 
 function checkEventsTypes(ast, eventEmitterObject){
 
-    var eventListeningMethods = ['on', 'once'];
-    var eventRaisingMethods = ['emit'];
+    let eventListeningMethods = ['on', 'once'];
+    let eventRaisingMethods = ['emit'];
 
     traverse(ast, function (node) {
 
-        if(node.type == 'CallExpression'){
+        if(node.type === 'CallExpression'){
 
             if(node.callee.property) {
-                var methodName = node.callee.property.name;
+                let methodName = node.callee.property.name;
                 if (eventListeningMethods.includes(methodName) || eventRaisingMethods.includes(methodName)) {
                     const firstArgFromMethod = node.arguments[0];
-                    if (firstArgFromMethod.type == 'Literal') {
-                        var raw = node.arguments[0].raw;
+                    if (firstArgFromMethod.type === 'Literal') {
+                        let raw = node.arguments[0].raw;
 
                         // the method is an event listener or emitter and is listing/raising a string as event
                         if (raw.startsWith("'") && raw.endsWith("'")) {
