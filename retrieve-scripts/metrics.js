@@ -54,6 +54,7 @@ function handleMetrics(outputDirectory, files) {
             numberOfEventMethodsOnce: 0,
             numberOfEventMethodsEmit: 0,
             numberOfEventUncaughtException: 0,
+            numberOfEventUnhandledRejection: 0
         },
 
         callbacks: {
