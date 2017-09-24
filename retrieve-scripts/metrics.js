@@ -71,16 +71,17 @@ function handleMetrics(outputDirectory, files) {
 
     if (files) {
         files.forEach(function (file) {
-
             let fullFilepath = path.join(outputDirectory, file);
-            console.log(fullFilepath);
+            try {
+                let contents = fileModule.readFileSync(fullFilepath, 'utf-8');
+                let ast = esprima.parseScript(contents, {tolerant: true});
 
-            let contents = fileModule.readFileSync(fullFilepath);
-            let ast = esprima.parse(contents);
-
-            checkEventsTypes(ast, eventEmitterObject);
-            getMetrics(ast, fullFilepath, repoObject);
-            getJSFilesEHM(ast, repoObject);
+                checkEventsTypes(ast, eventEmitterObject);
+                getMetrics(ast, fullFilepath, repoObject);
+                getJSFilesEHM(ast, repoObject);
+            } catch (err) {
+                console.log(fullFilepath);
+            }
         });
     }
 
@@ -101,16 +102,16 @@ function test() {
     checkEventsTypes(ast, eventEmitterObject);
 }
 
-function checkEventsTypes(ast, eventEmitterObject){
+function checkEventsTypes(ast, eventEmitterObject) {
 
     let eventListeningMethods = ['on', 'once'];
     let eventRaisingMethods = ['emit'];
 
     traverse(ast, function (node) {
 
-        if(node.type === 'CallExpression'){
+        if (node.type === 'CallExpression') {
 
-            if(node.callee.property) {
+            if (node.callee.property) {
                 let methodName = node.callee.property.name;
                 if (eventListeningMethods.includes(methodName) || eventRaisingMethods.includes(methodName)) {
                     const firstArgFromMethod = node.arguments[0];
@@ -144,12 +145,12 @@ function getMetrics(ast, filepath, repoObject) {
             callbackModule.handleAnalysis(obj, repoObject);
             eventModule.handleAnalysis(obj, repoObject);
         });
-    }catch (err){
+    } catch (err) {
         console.log(filepath, ' ', err);
     }
 }
 
-function getJSFilesEHM(ast, repoObject){
+function getJSFilesEHM(ast, repoObject) {
     // Calculate how many files are there on using EHM
 
 }
