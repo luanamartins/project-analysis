@@ -30,6 +30,7 @@ function handleMetrics(outputDirectory, files) {
         tryCatch: {
             numberOfTries: 0,
             numberOfCatches: 0,
+            numberOfEmptyCatches: 0,
             numberOfThrows: 0,
         },
 
