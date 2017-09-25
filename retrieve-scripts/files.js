@@ -15,6 +15,10 @@ function readFileSync(filepath) {
     return fs.readFileSync(filepath, 'utf8');
 }
 
+function countLinesOnFile(filepath) {
+    return require('fs').readFileSync(filepath, 'utf-8').split('\n').length;
+}
+
 function writeCsvFile(filename, fields, data) {
     var json2csv = require('json2csv');
     const extension = '.csv';
@@ -40,5 +44,6 @@ function writeCsvFile(filename, fields, data) {
 module.exports = {
     copyFile: copyFile,
     readFileSync: readFileSync,
-    writeCsvFile: writeCsvFile
+    writeCsvFile: writeCsvFile,
+    countLinesOnFile: countLinesOnFile
 }
