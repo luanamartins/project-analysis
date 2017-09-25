@@ -1,12 +1,13 @@
-function handleAnalysis(obj, repoObject) {
+function handleAnalysis(node, reportObject) {
 
     // Check if it is possible to create async anonymous functions
-    if(obj.type === 'FunctionDeclaration' && obj.async){
-        repoObject.asyncAwait.numberOfAsyncs++;
+    if(node.type === 'FunctionDeclaration' && node.async){
+        reportObject.asyncAwait.numberOfAsyncs++;
     }
 
-    if(obj.type === 'AwaitExpression'){
-        repoObject.asyncAwait.numberOfAwaits++;
+    if(node.type === 'AwaitExpression'){
+        // This is basically the same as then on promises
+        reportObject.asyncAwait.numberOfAwaits++;
     }
 }
 

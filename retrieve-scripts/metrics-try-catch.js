@@ -1,16 +1,22 @@
-
-
-function handleAnalysis(obj, repoObject){
-    if (obj.type === 'TryStatement') {
-        repoObject.tryCatch.numberOfTries++;
+function handleAnalysis(node, reportObject){
+    if (node.type === 'TryStatement') {
+        reportObject.tryCatch.numberOfTries++;
     }
 
-    if (obj.handler && obj.handler.type === 'CatchClause') {
-        repoObject.tryCatch.numberOfCatches++;
+    if (node.handler && node.handler.type === 'CatchClause') {
+        reportObject.tryCatch.numberOfCatches++;
+        if(node.body && node.body.body === []){
+            reportObject.tryCatch.numberOfEmptyCatches++;
+        }
     }
 
-    if (obj.type === 'ThrowStatement') {
-        repoObject.tryCatch.numberOfThrows++;
+    if (node.type === 'ThrowStatement') {
+        reportObject.tryCatch.numberOfThrows++;
+        if(node.argument.type === 'Literal'){
+            // Throwing a string, number or something else
+        } else if(node.argument.type === 'NewExpression' && node.argument.callee.name === 'Error'){
+            // Creation of new Error object
+        }
     }
 }
 

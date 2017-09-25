@@ -1,6 +1,6 @@
-function handleAnalysis(obj, repoObject) {
+function handleAnalysis(node, reportObject) {
 
-    if (obj.type === 'FunctionDeclaration') {
+    if (node.type === 'FunctionDeclaration') {
         // If a function argument is called inside the function, this function is callback-accepting
 
         // Let's use heuristics to identify callbacks for error handling:
@@ -9,16 +9,16 @@ function handleAnalysis(obj, repoObject) {
 
         // Still needs to consider ArrowExpressions () => {} (Not exactly)
 
-        let functionsArgs = obj.params;
-        if (obj.body) {
-            let functionBody = obj.body.body;
+        let functionsArgs = node.params;
+        if (node.body) {
+            let functionBody = node.body.body;
 
             if (functionBody) {
                 functionBody.forEach(function (statement) {
                     if (statement.type === 'CallExpression') {
                         const calleeName = statement.callee.name;
                         if (calleeName && functionsArgs.includes(calleeName)) {
-                            repoObject.callbacks.numberOfCallbackAcceptingFunctions++;
+                            reportObject.callbacks.numberOfCallbackAcceptingFunctions++;
                         }
                     }
                 });
@@ -26,16 +26,16 @@ function handleAnalysis(obj, repoObject) {
         }
     }
 
-    if (obj.type === 'ExpressionStatement' && obj.expression.type === 'CallExpression') {
+    if (node.type === 'ExpressionStatement' && node.expression.type === 'CallExpression') {
 
-        const callArgs = obj.expression.arguments;
+        const callArgs = node.expression.arguments;
 
         const callbacks = callArgs.filter(filterErrorHandlingCallbacks);
-        repoObject.callbacks.numberOfCallbackErrorFunctions += callbacks.length;
+        reportObject.callbacks.numberOfCallbackErrorFunctions += callbacks.length;
 
         for(let i = 0; i < callbacks.length; i++){
             if(callbacks[i].body.type === 'BlockStatement' && callbacks[i].body.body === []){
-                repoObject.callbacks.numberOfEmptyCallbacks++;
+                reportObject.callbacks.numberOfEmptyCallbacks++;
             }
         }
     }

@@ -1,27 +1,27 @@
-function handleAnalysis(obj, repoObject) {
+function handleAnalysis(node, reportObject) {
 
-    if (obj.type === 'NewExpression' && obj.callee.name === 'Promise') {
-        repoObject.promise.numberOfPromises++;
+    if (node.type === 'NewExpression' && node.callee.name === 'Promise') {
+        reportObject.promise.numberOfPromises++;
     }
 
-    if (obj.type === 'CallExpression') {
-        const callee = obj.callee;
+    if (node.type === 'CallExpression') {
+        const callee = node.callee;
         if (callee) {
             if (callee.name === 'resolve') {
-                repoObject.promise.numberOfResolves++;
+                reportObject.promise.numberOfResolves++;
             }
 
             if (callee.name === 'reject') {
-                repoObject.promise.numberOfRejects++;
+                reportObject.promise.numberOfRejects++;
             }
 
             if(callee.property) {
                 if (callee.property.name === 'then') {
-                    repoObject.promise.numberOfPromiseThens++;
+                    reportObject.promise.numberOfPromiseThens++;
                 }
 
                 if (callee.property.name === 'catch') {
-                    repoObject.promise.numberOfPromiseCatches++;
+                    reportObject.promise.numberOfPromiseCatches++;
                 }
             }
 
@@ -29,11 +29,11 @@ function handleAnalysis(obj, repoObject) {
                 if (callee.property) {
                     const methodName = callee.property.name;
                     if (methodName === 'race') {
-                        repoObject.promise.numberOfPromiseRaces++;
+                        reportObject.promise.numberOfPromiseRaces++;
                     }
 
                     if (methodName === 'all') {
-                        repoObject.promise.numberOfPromiseAll++;
+                        reportObject.promise.numberOfPromiseAll++;
                     }
                 }
             }

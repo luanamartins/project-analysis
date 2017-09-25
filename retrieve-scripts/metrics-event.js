@@ -1,27 +1,28 @@
-function handleAnalysis(obj, repoObject) {
-    if (obj.type === 'CallExpression') {
-        if(obj.property) {
-            const methodName = obj.property.name;
+function handleAnalysis(node, reportObject) {
+    
+    if (node.type === 'CallExpression') {
+        if (node.property) {
+            const methodName = node.property.name;
 
             if (methodName === 'on') {
-                repoObject.events.numberOfEventMethodsOn++;
+                reportObject.events.numberOfEventMethodsOn++;
             }
 
             if (methodName === 'emit') {
-                repoObject.events.numberOfEventMethodsEmit++;
+                reportObject.events.numberOfEventMethodsEmit++;
             }
 
             if (methodName === 'once') {
-                repoObject.events.numberOfEventMethodsOnce++;
+                reportObject.events.numberOfEventMethodsOnce++;
             }
             const firstArg = methodName.argument[0];
 
-            if(firstArg.value === 'uncaughtException'){
-                repoObject.events.numberOfEventUncaughtException++;
+            if (firstArg.value === 'uncaughtException') {
+                reportObject.events.numberOfEventUncaughtException++;
             }
 
-            if(firstArg.value === 'unhandledRejection'){
-                repoObject.events.numberOfEventUnhandledRejection++;
+            if (firstArg.value === 'unhandledRejection') {
+                reportObject.events.numberOfEventUnhandledRejection++;
             }
 
         }
