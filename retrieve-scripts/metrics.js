@@ -139,17 +139,17 @@ function checkEventsTypes(ast, eventEmitterObject) {
 }
 
 
-function getMetrics(ast, filepath, repoObject) {
+function getMetrics(ast, filepath, reportObject) {
 
     try {
         console.log(filepath);
 
-        traverse(ast, function (obj) {
-            tryCatchModule.handleAnalysis(obj, repoObject);
-            promiseModule.handleAnalysis(obj, repoObject);
-            asyncAwaitModule.handleAnalysis(obj, repoObject);
-            callbackModule.handleAnalysis(obj, repoObject);
-            eventModule.handleAnalysis(obj, repoObject);
+        traverse(ast, function (node) {
+            tryCatchModule.handleAnalysis(node, reportObject);
+            promiseModule.handleAnalysis(node, reportObject);
+            asyncAwaitModule.handleAnalysis(node, reportObject);
+            callbackModule.handleAnalysis(node, reportObject);
+            eventModule.handleAnalysis(node, reportObject);
         });
     } catch (err) {
         console.log(filepath, ' ', err);
