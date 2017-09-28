@@ -1,0 +1,23 @@
+Acho que nesse caso o interessante seria fazer uma mineracao dos dados para extrair regras de associacao.
+
+Por exemplo, dado que tu tem um conjunto de caracteristicas descrevendo esses repositorios (tou inventando alguns aqui):
+nome do repositório, versão js, data de criação, padrão está presente; tu poderia extrair regras do tipo:
+
+{versao js == 1.0} -> {padrao presente}
+e analisar o quao comum elas sao (confianca da regra, interesse, lift).
+
+Os testes estatísticos variam bastante, fica mais facil de escolher quando tiver com a questão a ser analisada mais bem definida
+tu já tem essas informações dos repositórios organizadas?
+
+
+
+As secoes 6.1 e 6.2 tem toda a parte teorica pra entender como funciona essa parte de associacao e o algoritmo apriori (o mais famoso):
+
+http://infolab.stanford.edu/~ullman/mmds/ch6.pdf
+infolab.stanford.edu
+
+
+o pacote arules no R possui uma implementacao muito boa do apriori
+
+https://cran.r-project.org/web/packages/arules/index.html
+arvores de decisao tbm sao boas pra extrair regras, caso os dados nao se adequem muito bem ao formato do apriori
