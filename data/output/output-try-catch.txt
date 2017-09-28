@@ -33,6 +33,30 @@
                                 }
                             ]
                         }
+                    },
+                    {
+                        "type": "ThrowStatement",
+                        "argument": {
+                            "type": "Literal",
+                            "value": 32,
+                            "raw": "32"
+                        }
+                    },
+                    {
+                        "type": "ThrowStatement",
+                        "argument": {
+                            "type": "Literal",
+                            "value": "Testing throw",
+                            "raw": "'Testing throw'"
+                        }
+                    },
+                    {
+                        "type": "ThrowStatement",
+                        "argument": {
+                            "type": "Literal",
+                            "value": true,
+                            "raw": "true"
+                        }
                     }
                 ]
             },
