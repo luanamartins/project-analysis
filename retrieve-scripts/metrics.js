@@ -26,7 +26,7 @@ function handleMetrics(outputDirectory, files) {
     let repoObject = {
         totalOfJSFiles: files.length,
         totalOfJSLines: 0,
-        totalOfJSFilesEHM: 0,
+        totalOfJSFilesErrorHandler: 0,
 
         tryCatch: {
             numberOfTries: 0,
@@ -76,8 +76,7 @@ function handleMetrics(outputDirectory, files) {
             let fullFilepath = path.join(outputDirectory, file);
             try {
 
-                let totalOfLines = fileModule.countLinesOnFile(fullFilepath);
-                repoObject.totalOfJSLines += totalOfLines;
+                repoObject.totalOfJSLines += fileModule.countLinesOnFile(fullFilepath);
 
                 let contents = fileModule.readFileSync(fullFilepath, 'utf-8');
                 let ast = esprima.parseScript(contents, {tolerant: true});
