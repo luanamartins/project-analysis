@@ -78,93 +78,18 @@
                                     "computed": false,
                                     "object": {
                                         "type": "Identifier",
-                                        "name": "test"
+                                        "name": "console"
                                     },
                                     "property": {
                                         "type": "Identifier",
-                                        "name": "pushFailure"
+                                        "name": "log"
                                     }
                                 },
                                 "arguments": [
                                     {
-                                        "type": "BinaryExpression",
-                                        "operator": "+",
-                                        "left": {
-                                            "type": "BinaryExpression",
-                                            "operator": "+",
-                                            "left": {
-                                                "type": "BinaryExpression",
-                                                "operator": "+",
-                                                "left": {
-                                                    "type": "BinaryExpression",
-                                                    "operator": "+",
-                                                    "left": {
-                                                        "type": "Identifier",
-                                                        "name": "hookName"
-                                                    },
-                                                    "right": {
-                                                        "type": "Literal",
-                                                        "value": " failed on ",
-                                                        "raw": "\" failed on \""
-                                                    }
-                                                },
-                                                "right": {
-                                                    "type": "MemberExpression",
-                                                    "computed": false,
-                                                    "object": {
-                                                        "type": "Identifier",
-                                                        "name": "test"
-                                                    },
-                                                    "property": {
-                                                        "type": "Identifier",
-                                                        "name": "testName"
-                                                    }
-                                                }
-                                            },
-                                            "right": {
-                                                "type": "Literal",
-                                                "value": ": ",
-                                                "raw": "\": \""
-                                            }
-                                        },
-                                        "right": {
-                                            "type": "LogicalExpression",
-                                            "operator": "||",
-                                            "left": {
-                                                "type": "MemberExpression",
-                                                "computed": false,
-                                                "object": {
-                                                    "type": "Identifier",
-                                                    "name": "error"
-                                                },
-                                                "property": {
-                                                    "type": "Identifier",
-                                                    "name": "message"
-                                                }
-                                            },
-                                            "right": {
-                                                "type": "Identifier",
-                                                "name": "error"
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "type": "CallExpression",
-                                        "callee": {
-                                            "type": "Identifier",
-                                            "name": "extractStacktrace"
-                                        },
-                                        "arguments": [
-                                            {
-                                                "type": "Identifier",
-                                                "name": "error"
-                                            },
-                                            {
-                                                "type": "Literal",
-                                                "value": 0,
-                                                "raw": "0"
-                                            }
-                                        ]
+                                        "type": "Literal",
+                                        "value": "Error",
+                                        "raw": "'Error'"
                                     }
                                 ]
                             }

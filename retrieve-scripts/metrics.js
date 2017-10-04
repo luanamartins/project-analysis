@@ -33,6 +33,7 @@ function handleMetrics(outputDirectory, files) {
             numberOfCatches: 0,
             numberOfEmptyCatches: 0,
             numberOfThrows: 0,
+            numberOfUniqueConsole: 0
         },
 
         promise: {
