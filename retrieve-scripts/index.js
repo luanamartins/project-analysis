@@ -33,4 +33,11 @@ function main() {
     });
 }
 
-main();
+
+function test(){
+    const files = ['test.js'];
+    metricsModule.handleMetrics(projectPath, files);
+}
+
+
+test();
