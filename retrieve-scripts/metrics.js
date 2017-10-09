@@ -30,6 +30,7 @@ function handleMetrics(outputDirectory, files) {
 
         tryCatch: {
             numberOfTries: 0,
+            numberOfTriesLines: 0,
 
             numberOfCatches: 0,
             numberOfEmptyCatches: 0,
@@ -54,6 +55,10 @@ function handleMetrics(outputDirectory, files) {
         asyncAwait: {
             numberOfAsyncs: 0,
             numberOfAwaits: 0,
+            numberOfCatches: 0,
+            numberOfEmptyCatches: 0,
+            numberOfCatchesLines: 0,
+            numberOfUniqueConsole: 0
         },
 
 
