@@ -1,11 +1,16 @@
-function calling() {
-    try {
-        callHook();
-        throw new Error('Ops');
-        throw 32;
-        throw 'Testing throw';
-        throw true;
-    } catch (error) {
-        console.log('Error');
+const superagent = require('superagent');
+
+const NUM_RETRIES = 3;
+
+test();
+
+async function test() {
+    let i;
+    for (i = 0; i < NUM_RETRIES; ++i) {
+        try {
+            await superagent.get('http://google.com/this-throws-an-error');
+            break;
+        } catch(err) {}
     }
+    console.log(i); // 3
 }
