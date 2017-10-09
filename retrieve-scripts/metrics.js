@@ -30,12 +30,15 @@ function handleMetrics(outputDirectory, files) {
 
         tryCatch: {
             numberOfTries: 0,
+            numberOfEmptyTries: 0, // TODO
             numberOfTriesLines: 0,
+            numberOfTriesWithUniqueStatement: 0, // TODO
 
             numberOfCatches: 0,
             numberOfEmptyCatches: 0,
             numberOfCatchesLines: 0,
             numberOfUniqueConsole: 0,
+            numberOfCatchesWithUniqueStatement: 0, // TODO
 
             numberOfThrows: 0,
             numberOfThrowsLiteral: 0,
