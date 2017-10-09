@@ -49,8 +49,10 @@ function handleMetrics(outputDirectory, files) {
             numberOfPromises: 0,
             numberOfResolves: 0,
             numberOfRejects: 0,
+
             numberOfPromiseThens: 0,
             numberOfPromiseCatches: 0,
+
             numberOfPromiseRaces: 0,
             numberOfPromiseAll: 0,
         },
@@ -58,7 +60,9 @@ function handleMetrics(outputDirectory, files) {
         asyncAwait: {
             numberOfAsyncs: 0,
             numberOfAwaits: 0,
+
             numberOfCatches: 0,
+
             numberOfEmptyCatches: 0,
             numberOfCatchesLines: 0,
             numberOfUniqueConsole: 0
@@ -69,6 +73,7 @@ function handleMetrics(outputDirectory, files) {
             numberOfEventMethodsOn: 0,
             numberOfEventMethodsOnce: 0,
             numberOfEventMethodsEmit: 0,
+            
             numberOfEventUncaughtException: 0,
             numberOfEventUnhandledRejection: 0
         },
