@@ -2,102 +2,118 @@
     "type": "Program",
     "body": [
         {
-            "type": "TryStatement",
-            "block": {
+            "type": "FunctionDeclaration",
+            "id": {
+                "type": "Identifier",
+                "name": "calling"
+            },
+            "params": [],
+            "body": {
                 "type": "BlockStatement",
                 "body": [
                     {
-                        "type": "ExpressionStatement",
-                        "expression": {
-                            "type": "CallExpression",
-                            "callee": {
-                                "type": "Identifier",
-                                "name": "callHook"
-                            },
-                            "arguments": []
-                        }
-                    },
-                    {
-                        "type": "ThrowStatement",
-                        "argument": {
-                            "type": "NewExpression",
-                            "callee": {
-                                "type": "Identifier",
-                                "name": "Error"
-                            },
-                            "arguments": [
+                        "type": "TryStatement",
+                        "block": {
+                            "type": "BlockStatement",
+                            "body": [
                                 {
-                                    "type": "Literal",
-                                    "value": "Ops",
-                                    "raw": "'Ops'"
-                                }
-                            ]
-                        }
-                    },
-                    {
-                        "type": "ThrowStatement",
-                        "argument": {
-                            "type": "Literal",
-                            "value": 32,
-                            "raw": "32"
-                        }
-                    },
-                    {
-                        "type": "ThrowStatement",
-                        "argument": {
-                            "type": "Literal",
-                            "value": "Testing throw",
-                            "raw": "'Testing throw'"
-                        }
-                    },
-                    {
-                        "type": "ThrowStatement",
-                        "argument": {
-                            "type": "Literal",
-                            "value": true,
-                            "raw": "true"
-                        }
-                    }
-                ]
-            },
-            "handler": {
-                "type": "CatchClause",
-                "param": {
-                    "type": "Identifier",
-                    "name": "error"
-                },
-                "body": {
-                    "type": "BlockStatement",
-                    "body": [
-                        {
-                            "type": "ExpressionStatement",
-                            "expression": {
-                                "type": "CallExpression",
-                                "callee": {
-                                    "type": "MemberExpression",
-                                    "computed": false,
-                                    "object": {
-                                        "type": "Identifier",
-                                        "name": "console"
-                                    },
-                                    "property": {
-                                        "type": "Identifier",
-                                        "name": "log"
+                                    "type": "ExpressionStatement",
+                                    "expression": {
+                                        "type": "CallExpression",
+                                        "callee": {
+                                            "type": "Identifier",
+                                            "name": "callHook"
+                                        },
+                                        "arguments": []
                                     }
                                 },
-                                "arguments": [
-                                    {
+                                {
+                                    "type": "ThrowStatement",
+                                    "argument": {
+                                        "type": "NewExpression",
+                                        "callee": {
+                                            "type": "Identifier",
+                                            "name": "Error"
+                                        },
+                                        "arguments": [
+                                            {
+                                                "type": "Literal",
+                                                "value": "Ops",
+                                                "raw": "'Ops'"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "ThrowStatement",
+                                    "argument": {
                                         "type": "Literal",
-                                        "value": "Error",
-                                        "raw": "'Error'"
+                                        "value": 32,
+                                        "raw": "32"
+                                    }
+                                },
+                                {
+                                    "type": "ThrowStatement",
+                                    "argument": {
+                                        "type": "Literal",
+                                        "value": "Testing throw",
+                                        "raw": "'Testing throw'"
+                                    }
+                                },
+                                {
+                                    "type": "ThrowStatement",
+                                    "argument": {
+                                        "type": "Literal",
+                                        "value": true,
+                                        "raw": "true"
+                                    }
+                                }
+                            ]
+                        },
+                        "handler": {
+                            "type": "CatchClause",
+                            "param": {
+                                "type": "Identifier",
+                                "name": "error"
+                            },
+                            "body": {
+                                "type": "BlockStatement",
+                                "body": [
+                                    {
+                                        "type": "ExpressionStatement",
+                                        "expression": {
+                                            "type": "CallExpression",
+                                            "callee": {
+                                                "type": "MemberExpression",
+                                                "computed": false,
+                                                "object": {
+                                                    "type": "Identifier",
+                                                    "name": "console"
+                                                },
+                                                "property": {
+                                                    "type": "Identifier",
+                                                    "name": "log"
+                                                }
+                                            },
+                                            "arguments": [
+                                                {
+                                                    "type": "Literal",
+                                                    "value": "Error",
+                                                    "raw": "'Error'"
+                                                }
+                                            ]
+                                        }
                                     }
                                 ]
                             }
-                        }
-                    ]
-                }
+                        },
+                        "finalizer": null
+                    }
+                ]
             },
-            "finalizer": null
+            "generator": false,
+            "expression": false,
+            "async": false
         }
     ],
     "sourceType": "script"
