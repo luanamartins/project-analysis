@@ -98,7 +98,11 @@ function handleMetrics(outputDirectory, files) {
                 repoObject.totalOfJSLines += fileModule.countLinesOnFile(fullFilepath);
 
                 let contents = fileModule.readFileSync(fullFilepath, 'utf-8');
-                let ast = esprima.parseScript(contents, {tolerant: true});
+                const options = {
+                    loc: true,
+                    tolerant: true
+                };
+                let ast = esprima.parseScript(contents, options);
 
                 checkEventsTypes(ast, eventEmitterObject);
                 getMetrics(ast, fullFilepath, repoObject);
@@ -110,7 +114,7 @@ function handleMetrics(outputDirectory, files) {
     }
 
     console.log(repoObject);
-    console.log(eventEmitterObject);
+    //console.log(eventEmitterObject);
 }
 
 //test();

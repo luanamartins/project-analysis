@@ -29,7 +29,7 @@ function main() {
         let repoOutputDirectory = path.join(outputGithubFilepath, repositoryName);
         let files = repoModule.getFilesFromDir(repoOutputDirectory, ['.js'], ['.min.js']);
         metricsModule.handleMetrics(repoOutputDirectory, files);
-        //console.log(files);
+        // console.log(files);
     });
 }
 
