@@ -1,3 +1,9 @@
+function getNumberOfLines(node) {
+    const startNumberLine = node.loc.start.line;
+    const endNumberLine = node.loc.end.line;
+    return (endNumberLine - startNumberLine);
+}
+
 function handleAnalysis(node, reportObject) {
 
 
@@ -9,7 +15,15 @@ function handleAnalysis(node, reportObject) {
 
         tryStatementNodes.forEach(function (tryNode) {
             reportObject.tryCatch.numberOfTries++;
-            reportObject.tryCatch.numberOfTriesLines += tryNode.block.body.length;
+            const numberOfLines = getNumberOfLines(tryNode);
+            if (numberOfLines === 0) {
+                reportObject.tryCatch.numberOfEmptyTries++;
+            } else {
+                reportObject.tryCatch.numberOfTriesLines += numberOfLines;
+                if (numberOfLines === 1) {
+                    reportObject.tryCatch.numberOfTriesWithUniqueStatement++;
+                }
+            }
         });
 
         const catchClauseNodes = getCatchClauseNodes(functionBody);
@@ -22,7 +36,7 @@ function handleAnalysis(node, reportObject) {
                 if (nodeBody === []) {
                     reportObject.tryCatch.numberOfEmptyCatches++;
                 } else {
-                    reportObject.tryCatch.numberOfCatchesLines += nodeBody.length;
+                    reportObject.tryCatch.numberOfCatchesLines += getNumberOfLines(catchClause);
                 }
             }
 
