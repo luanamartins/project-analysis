@@ -47,6 +47,8 @@ function handleAnalysis(node, reportObject) {
                         reportObject.tryCatch.numberOfUniqueConsole++;
                     }
                 }
+
+                reportObject.tryCatch.numberOfCatchesWithUniqueStatement++;
             }
         });
 

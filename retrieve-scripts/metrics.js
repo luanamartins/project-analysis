@@ -38,7 +38,7 @@ function handleMetrics(outputDirectory, files) {
             numberOfEmptyCatches: 0,
             numberOfCatchesLines: 0, // TODO test
             numberOfUniqueConsole: 0,
-            numberOfCatchesWithUniqueStatement: 0, // TODO
+            numberOfCatchesWithUniqueStatement: 0, // TODO test
 
             numberOfThrows: 0,
             numberOfThrowsLiteral: 0,
@@ -51,7 +51,9 @@ function handleMetrics(outputDirectory, files) {
             numberOfRejects: 0,
 
             numberOfPromiseThens: 0,
+            numberOfPromiseThenLines: 0, // TODO
             numberOfPromiseCatches: 0,
+            numberOfPromiseCatchesLines: 0, // TODO
 
             numberOfPromiseRaces: 0,
             numberOfPromiseAll: 0,
@@ -61,8 +63,10 @@ function handleMetrics(outputDirectory, files) {
             numberOfAsyncs: 0,
             numberOfAwaits: 0,
 
-            numberOfCatches: 0,
+            numberOfTries: 0, // TODO
+            numberOfTriesLines: 0, // TODO
 
+            numberOfCatches: 0,
             numberOfEmptyCatches: 0,
             numberOfCatchesLines: 0,
             numberOfUniqueConsole: 0
