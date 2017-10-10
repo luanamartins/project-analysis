@@ -1,7 +1,7 @@
 const esprima = require('esprima');
 const fs = require('fs');
 
-const name = 'try-catch';
+const name = 'promise-catch';
 const filepath = 'data/input/program-' + name + '.js';
 const outputFilepath = 'data/output/output-' + name + '.txt';
 
@@ -12,7 +12,7 @@ function parseFromFile(filepath) {
         }
 
         console.log("Parsing: " + filepath);
-        const options = {loc: false, range: false};
+        const options = {loc: true, range: false};
         const programParsed = esprima.parse(program, options);
 
         fs.writeFile(outputFilepath, JSON.stringify(programParsed, null, 4), function (err) {

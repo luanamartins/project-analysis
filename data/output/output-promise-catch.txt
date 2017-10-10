@@ -8,13 +8,33 @@
                     "type": "VariableDeclarator",
                     "id": {
                         "type": "Identifier",
-                        "name": "p"
+                        "name": "p",
+                        "loc": {
+                            "start": {
+                                "line": 1,
+                                "column": 4
+                            },
+                            "end": {
+                                "line": 1,
+                                "column": 5
+                            }
+                        }
                     },
                     "init": {
                         "type": "NewExpression",
                         "callee": {
                             "type": "Identifier",
-                            "name": "Promise"
+                            "name": "Promise",
+                            "loc": {
+                                "start": {
+                                    "line": 1,
+                                    "column": 12
+                                },
+                                "end": {
+                                    "line": 1,
+                                    "column": 19
+                                }
+                            }
                         },
                         "arguments": [
                             {
@@ -23,11 +43,31 @@
                                 "params": [
                                     {
                                         "type": "Identifier",
-                                        "name": "resolve"
+                                        "name": "resolve",
+                                        "loc": {
+                                            "start": {
+                                                "line": 1,
+                                                "column": 30
+                                            },
+                                            "end": {
+                                                "line": 1,
+                                                "column": 37
+                                            }
+                                        }
                                     },
                                     {
                                         "type": "Identifier",
-                                        "name": "reject"
+                                        "name": "reject",
+                                        "loc": {
+                                            "start": {
+                                                "line": 1,
+                                                "column": 39
+                                            },
+                                            "end": {
+                                                "line": 1,
+                                                "column": 45
+                                            }
+                                        }
                                     }
                                 ],
                                 "body": {
@@ -39,28 +79,118 @@
                                                 "type": "CallExpression",
                                                 "callee": {
                                                     "type": "Identifier",
-                                                    "name": "reject"
+                                                    "name": "reject",
+                                                    "loc": {
+                                                        "start": {
+                                                            "line": 2,
+                                                            "column": 11
+                                                        },
+                                                        "end": {
+                                                            "line": 2,
+                                                            "column": 17
+                                                        }
+                                                    }
                                                 },
                                                 "arguments": [
                                                     {
                                                         "type": "Literal",
                                                         "value": "Error",
-                                                        "raw": "'Error'"
+                                                        "raw": "'Error'",
+                                                        "loc": {
+                                                            "start": {
+                                                                "line": 2,
+                                                                "column": 18
+                                                            },
+                                                            "end": {
+                                                                "line": 2,
+                                                                "column": 25
+                                                            }
+                                                        }
                                                     }
-                                                ]
+                                                ],
+                                                "loc": {
+                                                    "start": {
+                                                        "line": 2,
+                                                        "column": 11
+                                                    },
+                                                    "end": {
+                                                        "line": 2,
+                                                        "column": 26
+                                                    }
+                                                }
+                                            },
+                                            "loc": {
+                                                "start": {
+                                                    "line": 2,
+                                                    "column": 4
+                                                },
+                                                "end": {
+                                                    "line": 2,
+                                                    "column": 27
+                                                }
                                             }
                                         }
-                                    ]
+                                    ],
+                                    "loc": {
+                                        "start": {
+                                            "line": 1,
+                                            "column": 47
+                                        },
+                                        "end": {
+                                            "line": 3,
+                                            "column": 1
+                                        }
+                                    }
                                 },
                                 "generator": false,
                                 "expression": false,
-                                "async": false
+                                "async": false,
+                                "loc": {
+                                    "start": {
+                                        "line": 1,
+                                        "column": 20
+                                    },
+                                    "end": {
+                                        "line": 3,
+                                        "column": 1
+                                    }
+                                }
                             }
-                        ]
+                        ],
+                        "loc": {
+                            "start": {
+                                "line": 1,
+                                "column": 8
+                            },
+                            "end": {
+                                "line": 3,
+                                "column": 2
+                            }
+                        }
+                    },
+                    "loc": {
+                        "start": {
+                            "line": 1,
+                            "column": 4
+                        },
+                        "end": {
+                            "line": 3,
+                            "column": 2
+                        }
                     }
                 }
             ],
-            "kind": "var"
+            "kind": "var",
+            "loc": {
+                "start": {
+                    "line": 1,
+                    "column": 0
+                },
+                "end": {
+                    "line": 3,
+                    "column": 3
+                }
+            }
         },
         {
             "type": "ExpressionStatement",
@@ -76,11 +206,41 @@
                             "computed": false,
                             "object": {
                                 "type": "Identifier",
-                                "name": "p"
+                                "name": "p",
+                                "loc": {
+                                    "start": {
+                                        "line": 5,
+                                        "column": 0
+                                    },
+                                    "end": {
+                                        "line": 5,
+                                        "column": 1
+                                    }
+                                }
                             },
                             "property": {
                                 "type": "Identifier",
-                                "name": "then"
+                                "name": "then",
+                                "loc": {
+                                    "start": {
+                                        "line": 5,
+                                        "column": 2
+                                    },
+                                    "end": {
+                                        "line": 5,
+                                        "column": 6
+                                    }
+                                }
+                            },
+                            "loc": {
+                                "start": {
+                                    "line": 5,
+                                    "column": 0
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 6
+                                }
                             }
                         },
                         "arguments": [
@@ -90,7 +250,17 @@
                                 "params": [
                                     {
                                         "type": "Identifier",
-                                        "name": "item"
+                                        "name": "item",
+                                        "loc": {
+                                            "start": {
+                                                "line": 5,
+                                                "column": 8
+                                            },
+                                            "end": {
+                                                "line": 5,
+                                                "column": 12
+                                            }
+                                        }
                                     }
                                 ],
                                 "body": {
@@ -100,29 +270,119 @@
                                         "computed": false,
                                         "object": {
                                             "type": "Identifier",
-                                            "name": "console"
+                                            "name": "console",
+                                            "loc": {
+                                                "start": {
+                                                    "line": 5,
+                                                    "column": 17
+                                                },
+                                                "end": {
+                                                    "line": 5,
+                                                    "column": 24
+                                                }
+                                            }
                                         },
                                         "property": {
                                             "type": "Identifier",
-                                            "name": "log"
+                                            "name": "log",
+                                            "loc": {
+                                                "start": {
+                                                    "line": 5,
+                                                    "column": 25
+                                                },
+                                                "end": {
+                                                    "line": 5,
+                                                    "column": 28
+                                                }
+                                            }
+                                        },
+                                        "loc": {
+                                            "start": {
+                                                "line": 5,
+                                                "column": 17
+                                            },
+                                            "end": {
+                                                "line": 5,
+                                                "column": 28
+                                            }
                                         }
                                     },
                                     "arguments": [
                                         {
                                             "type": "Identifier",
-                                            "name": "item"
+                                            "name": "item",
+                                            "loc": {
+                                                "start": {
+                                                    "line": 5,
+                                                    "column": 29
+                                                },
+                                                "end": {
+                                                    "line": 5,
+                                                    "column": 33
+                                                }
+                                            }
                                         }
-                                    ]
+                                    ],
+                                    "loc": {
+                                        "start": {
+                                            "line": 5,
+                                            "column": 17
+                                        },
+                                        "end": {
+                                            "line": 5,
+                                            "column": 34
+                                        }
+                                    }
                                 },
                                 "generator": false,
                                 "expression": true,
-                                "async": false
+                                "async": false,
+                                "loc": {
+                                    "start": {
+                                        "line": 5,
+                                        "column": 7
+                                    },
+                                    "end": {
+                                        "line": 5,
+                                        "column": 34
+                                    }
+                                }
                             }
-                        ]
+                        ],
+                        "loc": {
+                            "start": {
+                                "line": 5,
+                                "column": 0
+                            },
+                            "end": {
+                                "line": 5,
+                                "column": 35
+                            }
+                        }
                     },
                     "property": {
                         "type": "Identifier",
-                        "name": "catch"
+                        "name": "catch",
+                        "loc": {
+                            "start": {
+                                "line": 5,
+                                "column": 36
+                            },
+                            "end": {
+                                "line": 5,
+                                "column": 41
+                            }
+                        }
+                    },
+                    "loc": {
+                        "start": {
+                            "line": 5,
+                            "column": 0
+                        },
+                        "end": {
+                            "line": 5,
+                            "column": 41
+                        }
                     }
                 },
                 "arguments": [
@@ -131,16 +391,76 @@
                         "computed": false,
                         "object": {
                             "type": "Identifier",
-                            "name": "console"
+                            "name": "console",
+                            "loc": {
+                                "start": {
+                                    "line": 5,
+                                    "column": 42
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 49
+                                }
+                            }
                         },
                         "property": {
                             "type": "Identifier",
-                            "name": "log"
+                            "name": "log",
+                            "loc": {
+                                "start": {
+                                    "line": 5,
+                                    "column": 50
+                                },
+                                "end": {
+                                    "line": 5,
+                                    "column": 53
+                                }
+                            }
+                        },
+                        "loc": {
+                            "start": {
+                                "line": 5,
+                                "column": 42
+                            },
+                            "end": {
+                                "line": 5,
+                                "column": 53
+                            }
                         }
                     }
-                ]
+                ],
+                "loc": {
+                    "start": {
+                        "line": 5,
+                        "column": 0
+                    },
+                    "end": {
+                        "line": 5,
+                        "column": 54
+                    }
+                }
+            },
+            "loc": {
+                "start": {
+                    "line": 5,
+                    "column": 0
+                },
+                "end": {
+                    "line": 5,
+                    "column": 55
+                }
             }
         }
     ],
-    "sourceType": "script"
+    "sourceType": "script",
+    "loc": {
+        "start": {
+            "line": 1,
+            "column": 0
+        },
+        "end": {
+            "line": 5,
+            "column": 55
+        }
+    }
 }
