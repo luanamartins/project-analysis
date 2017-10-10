@@ -1,7 +1,7 @@
 function getNumberOfLines(node) {
     const startNumberLine = node.loc.start.line;
     const endNumberLine = node.loc.end.line;
-    return (endNumberLine - startNumberLine);
+    return (endNumberLine - startNumberLine + 1);
 }
 
 function handleAnalysis(node, reportObject) {
