@@ -54,6 +54,7 @@ function handleMetrics(outputDirectory, files) {
             numberOfPromiseThenLines: 0, // TODO
             numberOfPromiseCatches: 0,
             numberOfPromiseCatchesLines: 0, // TODO
+            numberOfEmptyFunctionsOnPromiseCatches: 0, // TODO
 
             numberOfPromiseRaces: 0,
             numberOfPromiseAll: 0,
