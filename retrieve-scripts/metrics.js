@@ -148,10 +148,10 @@ function checkEventsTypes(ast, eventEmitterObject) {
                 if (eventListeningMethods.includes(methodName) || eventRaisingMethods.includes(methodName)) {
                     const firstArgFromMethod = node.arguments[0];
                     if (firstArgFromMethod.type === 'Literal') {
-                        let raw = node.arguments[0].raw;
+                        let literalValue = node.arguments[0].raw;
 
                         // the method is an event listener or emitter and is listing/raising a string as event
-                        if (raw.startsWith("'") && raw.endsWith("'")) {
+                        if (literalValue.startsWith("'") && literalValue.endsWith("'")) {
                             eventEmitterObject.totalOfStringEvents++;
                         }
                     }
