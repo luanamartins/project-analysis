@@ -1,0 +1,1 @@
+var multiply = new Function('x', 'y', 'return x * y');
