@@ -1,7 +1,7 @@
 const esprima = require('esprima');
 const fs = require('fs');
 
-const name = 'try-catch';
+const name = 'event';
 const filepath = 'data/input/program-' + name + '.js';
 const outputFilepath = 'data/output/output-' + name + '.txt';
 
