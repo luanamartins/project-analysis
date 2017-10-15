@@ -27,16 +27,23 @@ function main() {
 
     repositoriesName.forEach(function (repositoryName) {
         let repoOutputDirectory = path.join(outputGithubFilepath, repositoryName);
-        let files = repoModule.getFilesFromDir(repoOutputDirectory, ['.js'], ['.min.js']);
-        metricsModule.handleMetrics(repoOutputDirectory, files);
-        // console.log(files);
+        let filenames = repoModule.getFilesFromDir(repoOutputDirectory, ['.js'], ['.min.js']);
+        //let files = filenames.map((file) => { path.join(repoOutputDirectory, file) });
+
+        let files = [];
+        filenames.forEach(file => {
+            files.push(path.join(repoOutputDirectory, file));
+        });
+        const metrics = metricsModule.handleMetrics(files);
+        console.log(metrics);
     });
 }
 
 
 function test(){
-    const files = ['test.js'];
-    metricsModule.handleMetrics(projectPath, files);
+    const files = [path.join(projectPath, 'test.js')];
+    const report = metricsModule.handleMetrics(files);
+    console.log(report);
 }
 
 

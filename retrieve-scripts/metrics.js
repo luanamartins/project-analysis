@@ -21,150 +21,109 @@ function traverse(obj, fn) {
     }
 }
 
-function handleMetrics(outputDirectory, files) {
+let repoObject = {
+    totalOfJSFiles: 0,
+    totalOfJSLines: 0,
+    totalOfJSFilesErrorHandler: 0, // TODO
 
-    let repoObject = {
-        totalOfJSFiles: files.length,
-        totalOfJSLines: 0,
-        totalOfJSFilesErrorHandler: 0,
+    tryCatch: {
+        numberOfTries: 0,
+        numberOfEmptyTries: 0, // TODO test
+        numberOfTriesLines: 0, // TODO test
+        numberOfTriesWithUniqueStatement: 0, // TODO test
 
-        tryCatch: {
-            numberOfTries: 0,
-            numberOfEmptyTries: 0, // TODO test
-            numberOfTriesLines: 0, // TODO test
-            numberOfTriesWithUniqueStatement: 0, // TODO test
+        numberOfCatches: 0,
+        numberOfEmptyCatches: 0,
+        numberOfCatchesLines: 0, // TODO test
+        numberOfUniqueConsole: 0,
+        numberOfCatchesWithUniqueStatement: 0, // TODO test
 
-            numberOfCatches: 0,
-            numberOfEmptyCatches: 0,
-            numberOfCatchesLines: 0, // TODO test
-            numberOfUniqueConsole: 0,
-            numberOfCatchesWithUniqueStatement: 0, // TODO test
+        numberOfThrows: 0,
+        numberOfThrowsLiteral: 0,
+        numberOfThrowsErrorObjects: 0,
 
-            numberOfThrows: 0,
-            numberOfThrowsLiteral: 0,
-            numberOfThrowsErrorObjects: 0
-        },
+        numberOfFinallies: 0, // TODO
+        numberOfFinalliesLines: 0, // TODO
+    },
 
-        promise: {
-            numberOfPromises: 0,
-            numberOfResolves: 0,
-            numberOfRejects: 0,
+    promise: {
+        numberOfPromises: 0,
+        numberOfResolves: 0,
+        numberOfRejects: 0,
 
-            numberOfPromiseThens: 0,
-            numberOfPromiseThenLines: 0, // TODO
-            numberOfPromiseCatches: 0,
-            numberOfPromiseCatchesLines: 0, // TODO
-            numberOfEmptyFunctionsOnPromiseCatches: 0, // TODO
+        numberOfPromiseThens: 0,
+        numberOfPromiseThenLines: 0, // TODO
+        numberOfPromiseCatches: 0,
+        numberOfPromiseCatchesLines: 0, // TODO
+        numberOfEmptyFunctionsOnPromiseCatches: 0, // TODO
 
-            numberOfPromiseRaces: 0,
-            numberOfPromiseAll: 0,
-        },
+        numberOfPromiseRaces: 0,
+        numberOfPromiseAll: 0,
+    },
 
-        asyncAwait: {
-            numberOfAsyncs: 0,
-            numberOfAwaits: 0,
+    asyncAwait: {
+        numberOfAsyncs: 0,
+        numberOfAwaits: 0,
 
-            numberOfTries: 0, // TODO
-            numberOfTriesLines: 0, // TODO
+        numberOfTries: 0, // TODO
+        numberOfTriesLines: 0, // TODO
 
-            numberOfCatches: 0,
-            numberOfEmptyCatches: 0,
-            numberOfCatchesLines: 0,
-            numberOfUniqueConsole: 0
-        },
+        numberOfCatches: 0,
+        numberOfEmptyCatches: 0,
+        numberOfCatchesLines: 0,
+        numberOfUniqueConsole: 0,
+
+        numberOfFinallies: 0, // TODO
+        numberOfFinalliesLines: 0, // TODO
+    },
 
 
-        events: {
-            numberOfEventMethodsOn: 0,
-            numberOfEventMethodsOnce: 0,
-            numberOfEventMethodsEmit: 0,
+    events: {
+        numberOfEventMethodsOn: 0,
+        numberOfEventMethodsOnce: 0,
+        numberOfEventMethodsEmit: 0,
 
-            numberOfEventUncaughtException: 0,
-            numberOfEventUnhandledRejection: 0
-        },
+        numberOfEventUncaughtException: 0,
+        numberOfEventUnhandledRejection: 0,
 
-        callbacks: {
-            numberOfCallbackAcceptingFunctions: 0,
-            numberOfCallbackErrorFunctions: 0,
-            numberOfEmptyCallbacks: 0
-        }
-    };
-
-    let eventEmitterObject = {
         totalOfStringEvents: 0,
         totalOfEventTypes: 0
-    };
+    },
+
+    callbacks: {
+        numberOfCallbackAcceptingFunctions: 0,
+        numberOfCallbackErrorFunctions: 0,
+        numberOfEmptyCallbacks: 0
+    }
+};
+
+function handleMetrics(files) {
 
     if (files) {
-        files.forEach(function (file) {
-            let fullFilepath = path.join(outputDirectory, file);
+        files.forEach(function (fullFilepath) {
             try {
-
+                repoObject.totalOfJSLines += files.length;
                 repoObject.totalOfJSLines += fileModule.countLinesOnFile(fullFilepath);
 
                 let contents = fileModule.readFileSync(fullFilepath, 'utf-8');
                 const options = {
                     loc: true,
-                    tolerant: true
+                    tolerant: true,
+                    comments: false
                 };
                 let ast = esprima.parseScript(contents, options);
 
-                checkEventsTypes(ast, eventEmitterObject);
+                // checkEventsTypes(ast, eventEmitterObject);
                 getMetrics(ast, fullFilepath, repoObject);
-                getJSFilesEHM(ast, repoObject);
+                // getJSFilesEHM(ast, repoObject);
             } catch (err) {
                 console.log(fullFilepath);
             }
         });
     }
 
-    console.log(repoObject);
-    //console.log(eventEmitterObject);
+    return repoObject;
 }
-
-//test();
-
-function test() {
-    let contents = fileModule.readFileSync('');
-    let ast = esprima.parse(contents);
-    let eventEmitterObject = {
-        totalOfStringEvents: 0,
-        totalOfEventTypes: 0
-    };
-
-    checkEventsTypes(ast, eventEmitterObject);
-}
-
-function checkEventsTypes(ast, eventEmitterObject) {
-
-    let eventListeningMethods = ['on', 'once'];
-    let eventRaisingMethods = ['emit'];
-
-    traverse(ast, function (node) {
-
-        if (node.type === 'CallExpression') {
-
-            if (node.callee.property) {
-                let methodName = node.callee.property.name;
-                if (eventListeningMethods.includes(methodName) || eventRaisingMethods.includes(methodName)) {
-                    const firstArgFromMethod = node.arguments[0];
-                    if (firstArgFromMethod.type === 'Literal') {
-                        let literalValue = node.arguments[0].raw;
-
-                        // the method is an event listener or emitter and is listing/raising a string as event
-                        if (literalValue.startsWith("'") && literalValue.endsWith("'")) {
-                            eventEmitterObject.totalOfStringEvents++;
-                        }
-                    }
-                    eventEmitterObject.totalOfEventTypes++;
-                }
-            }
-        }
-    });
-
-    console.log(eventEmitterObject);
-}
-
 
 function getMetrics(ast, filepath, reportObject) {
 
@@ -189,6 +148,5 @@ function getJSFilesEHM(ast, repoObject) {
 }
 
 module.exports = {
-    handleMetrics: handleMetrics,
-    checkEventsTypes: checkEventsTypes
+    handleMetrics: handleMetrics
 };

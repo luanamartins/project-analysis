@@ -1,4 +1,7 @@
 function handleAnalysis(node, reportObject) {
+
+    let eventListeningMethods = ['on', 'once'];
+    let eventRaisingMethods = ['emit'];
     
     if (node.type === 'CallExpression') {
         if (node.property) {
@@ -26,6 +29,24 @@ function handleAnalysis(node, reportObject) {
             }
 
         }
+
+
+        if (node.callee.property) {
+            let methodName = node.callee.property.name;
+            if (eventListeningMethods.includes(methodName) || eventRaisingMethods.includes(methodName)) {
+                const firstArgFromMethod = node.arguments[0];
+                if (firstArgFromMethod.type === 'Literal') {
+                    let literalValue = node.arguments[0].raw;
+
+                    // the method is an event listener or emitter and is listing/raising a string as event
+                    if (literalValue.startsWith("'") && literalValue.endsWith("'")) {
+                        reportObject.events.totalOfStringEvents++;
+                    }
+                }
+                reportObject.events.totalOfEventTypes++;
+            }
+        }
+
     }
 }
 

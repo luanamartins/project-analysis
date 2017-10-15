@@ -15,13 +15,25 @@ function handleAnalysis(node, reportObject) {
                 reportObject.promise.numberOfRejects++;
             }
 
-            if(callee.property) {
+            if (callee.property) {
                 if (callee.property.name === 'then') {
                     reportObject.promise.numberOfPromiseThens++;
+
+                    // const callbackFunction = node.arguments[0];
+                    // const callbackFunctionBodyLoc = callbackFunction.body.loc;
+                    // const start = callbackFunctionBodyLoc.start.line;
+                    // const end = callbackFunctionBodyLoc.end.line;
+                    // reportObject.promise.numberOfPromiseThenLines += (end - start);
                 }
 
                 if (callee.property.name === 'catch') {
                     reportObject.promise.numberOfPromiseCatches++;
+
+                    // const callbackFunction = node.arguments[0];
+                    // const callbackFunctionBodyLoc = callbackFunction.body.loc;
+                    // const start = callbackFunctionBodyLoc.start.line;
+                    // const end = callbackFunctionBodyLoc.end.line;
+                    // reportObject.promise.numberOfPromiseCatchesLines += (end - start);
                 }
             }
 

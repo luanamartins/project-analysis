@@ -1,8 +1,32 @@
-function getNumberOfLines(node) {
-    const startNumberLine = node.loc.start.line;
-    const endNumberLine = node.loc.end.line;
-    return (endNumberLine - startNumberLine + 1);
+function getNumberOfLines(node, fromBody) {
+     if(fromBody){
+        return node.length;
+    }
+    const start = node.loc.start.line;
+    const end = node.loc.end.line;
+    return (end - start);
 }
+
+// tryCatch: {
+//     numberOfTries: 0,
+//         numberOfEmptyTries: 0, // TODO test
+//         numberOfTriesLines: 0, // TODO test
+//         numberOfTriesWithUniqueStatement: 0, // TODO test
+//
+//         numberOfCatches: 0,
+//         numberOfEmptyCatches: 0,
+//         numberOfCatchesLines: 0, // TODO test
+//         numberOfUniqueConsole: 0,
+//         numberOfCatchesWithUniqueStatement: 0, // TODO test
+//
+//         numberOfThrows: 0,
+//         numberOfThrowsLiteral: 0,
+//         numberOfThrowsErrorObjects: 0,
+//
+//         numberOfFinallies: 0, // TODO
+//         numberOfFinalliesLines: 0, // TODO
+// }
+
 
 function handleAnalysis(node, reportObject) {
 
@@ -15,7 +39,7 @@ function handleAnalysis(node, reportObject) {
 
         tryStatementNodes.forEach(function (tryNode) {
             reportObject.tryCatch.numberOfTries++;
-            const numberOfLines = getNumberOfLines(tryNode);
+            const numberOfLines = getNumberOfLines(tryNode.block.body, true);
             if (numberOfLines === 0) {
                 reportObject.tryCatch.numberOfEmptyTries++;
             } else {
@@ -26,17 +50,17 @@ function handleAnalysis(node, reportObject) {
             }
         });
 
-        const catchClauseNodes = getCatchClauseNodes(functionBody);
+        const catchClauseNodes = getCatchClauseNodes(tryStatementNodes);
 
         catchClauseNodes.forEach(function (catchClause) {
             reportObject.tryCatch.numberOfCatches++;
             const nodeBody = catchClause.body.body;
 
             if (nodeBody) {
-                if (nodeBody === []) {
+                if (nodeBody.length === 0) {
                     reportObject.tryCatch.numberOfEmptyCatches++;
                 } else {
-                    reportObject.tryCatch.numberOfCatchesLines += getNumberOfLines(catchClause);
+                    reportObject.tryCatch.numberOfCatchesLines += getNumberOfLines(catchClause, false);
                 }
             }
 
@@ -67,6 +91,13 @@ function handleAnalysis(node, reportObject) {
             }
         });
 
+        const finallyStatements = getFinallyStatements(tryStatementNodes);
+
+        finallyStatements.forEach(function (finallyNode) {
+            reportObject.tryCatch.numberOfFinallies++;
+            reportObject.tryCatch.numberOfFinalliesLines += getNumberOfLines(finallyNode, false);
+        });
+
     }
 }
 
@@ -81,13 +112,11 @@ function getTryStatementNodes(functionBodyNode) {
     return tryNodes;
 }
 
-function getCatchClauseNodes(functionBodyNode) {
+function getCatchClauseNodes(tryNodes) {
     let catchNodes = [];
-    functionBodyNode.forEach(function (node) {
-        if (node.type === 'TryStatement') {
-            if (node.handler && node.handler.type === 'CatchClause') {
-                catchNodes.push(node.handler);
-            }
+    tryNodes.forEach(function (node) {
+        if (node.handler) {
+            catchNodes.push(node.handler);
         }
     });
     return catchNodes;
@@ -106,6 +135,16 @@ function getThrowStatementNodes(tryStatementNodes) {
         });
     });
     return throwNodes;
+}
+
+function getFinallyStatements(tryNodes) {
+    let finallyNodes = [];
+    tryNodes.forEach(function (node) {
+        if (node.finalizer) {
+            finallyNodes.push(node.handler);
+        }
+    });
+    return finallyNodes;
 }
 
 module.exports = {
