@@ -1,10 +1,10 @@
-function calling() {
-    try {
-        console.log('');
-        console.log('');
-        console.log('')
-            .value;
-    } catch (error) {
+const myEmitter =  new require('events').EventEmitter;
 
-    }
-}
+process.on('uncaughtException', (err) => {
+    console.log('whoops! there was an error');
+    console.log(err);
+});
+
+myEmitter.emit('error', new Error('whoops!'));
+
+myEmitter.emit(new Error(), new Error('whoops!'));
