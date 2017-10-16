@@ -6,8 +6,8 @@ var testCase  = require('nodeunit').testCase;
 
 const metricsModule = require('../retrieve-scripts/metrics');
 
-var projectPath = 'project-analysis';
-let filename = path.join(projectPath, 'data/input/program-try-empty-catch.js');
+//var projectPath = 'project-analysis';
+let filename = 'data/try-catch/try-catch1.js';
 
 const metricsObject = metricsModule.handleMetrics([filename]);
 
