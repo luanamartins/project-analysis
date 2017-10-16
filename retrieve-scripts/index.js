@@ -35,7 +35,7 @@ function main() {
             files.push(path.join(repoOutputDirectory, file));
         });
         const metrics = metricsModule.handleMetrics(files);
-        console.log(metrics);
+        //console.log(metrics);
     });
 }
 
@@ -43,7 +43,7 @@ function main() {
 function test(){
     const files = [path.join(projectPath, 'test.js')];
     const report = metricsModule.handleMetrics(files);
-    console.log(report);
+    //console.log(report);
 }
 
 
