@@ -1,32 +1,29 @@
 function getNumberOfLines(node, fromBody) {
-     if(fromBody){
-        return node.length;
+    if(node.body) {
+        const isBlockStatement = node.type === 'BlockStatement';
+        const nodeBody = isBlockStatement ? node.body : node.body.body;
+        let numberOfLines = isBlockStatement ? 0 : 1;
+        nodeBody.forEach(function(statement){
+            numberOfLines += getNumberOfLines(statement);
+        });
+        return numberOfLines;
     }
+    return 1;
+}
+
+function getNumberOfLinesByBody(node){
+
+    if(node.body) {
+        return 1 + getNumberOfLinesByBody(node.body);
+    }
+    return 1;
+}
+
+function getNumberOfLinesByLoc(node){
     const start = node.loc.start.line;
     const end = node.loc.end.line;
     return (end - start);
 }
-
-// tryCatch: {
-//     numberOfTries: 0,
-//         numberOfEmptyTries: 0, // TODO test
-//         numberOfTriesLines: 0, // TODO test
-//         numberOfTriesWithUniqueStatement: 0, // TODO test
-//
-//         numberOfCatches: 0,
-//         numberOfEmptyCatches: 0,
-//         numberOfCatchesLines: 0, // TODO test
-//         numberOfUniqueConsole: 0,
-//         numberOfCatchesWithUniqueStatement: 0, // TODO test
-//
-//         numberOfThrows: 0,
-//         numberOfThrowsLiteral: 0,
-//         numberOfThrowsErrorObjects: 0,
-//
-//         numberOfFinallies: 0, // TODO
-//         numberOfFinalliesLines: 0, // TODO
-// }
-
 
 function handleAnalysis(node, reportObject) {
 
@@ -39,10 +36,10 @@ function handleAnalysis(node, reportObject) {
 
         tryStatementNodes.forEach(function (tryNode) {
             reportObject.tryCatch.numberOfTries++;
-            const numberOfLines = getNumberOfLines(tryNode.block.body, true);
-            if (numberOfLines === 0) {
+            if (tryNode.block.body.length === 0) {
                 reportObject.tryCatch.numberOfEmptyTries++;
             } else {
+                const numberOfLines = getNumberOfLines(tryNode.block.body, true);
                 reportObject.tryCatch.numberOfTriesLines += numberOfLines;
                 if (numberOfLines === 1) {
                     reportObject.tryCatch.numberOfTriesWithUniqueStatement++;
@@ -141,7 +138,7 @@ function getFinallyStatements(tryNodes) {
     let finallyNodes = [];
     tryNodes.forEach(function (node) {
         if (node.finalizer) {
-            finallyNodes.push(node.handler);
+            finallyNodes.push(node.finalizer);
         }
     });
     return finallyNodes;
