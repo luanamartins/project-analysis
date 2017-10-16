@@ -39,7 +39,7 @@ function handleAnalysis(node, reportObject) {
             if (tryNode.block.body.length === 0) {
                 reportObject.tryCatch.numberOfEmptyTries++;
             } else {
-                const numberOfLines = getNumberOfLines(tryNode.block.body, true);
+                const numberOfLines = getNumberOfLines(tryNode.block, true);
                 reportObject.tryCatch.numberOfTriesLines += numberOfLines;
                 if (numberOfLines === 1) {
                     reportObject.tryCatch.numberOfTriesWithUniqueStatement++;
