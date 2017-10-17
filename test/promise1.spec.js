@@ -10,18 +10,20 @@ function startTest() {
 }
 
 module.exports = testCase({
-    "One promise only": function (test) {
+    "TC01": function (test) {
         const metrics = startTest();
         const metricsObject = metrics[0];
+
         test.equal(metricsObject.promise.numberOfPromises, 0);
-
-        test.done();
-    },
-
-    "Resolves": function (test) {
-        const metrics = startTest();
-        const metricsObject = metrics[0];
         test.equal(metricsObject.promise.numberOfResolves, 1);
+        test.equal(metricsObject.promise.numberOfRejects, 0);
+        test.equal(metricsObject.promise.numberOfPromiseThens, 0);
+        test.equal(metricsObject.promise.numberOfPromiseThenLines, 0);
+        test.equal(metricsObject.promise.numberOfPromiseCatches, 0);
+        test.equal(metricsObject.promise.numberOfPromiseCatchesLines, 0);
+        test.equal(metricsObject.promise.numberOfEmptyFunctionsOnPromiseCatches, 0);
+        test.equal(metricsObject.promise.numberOfPromiseRaces, 0);
+        test.equal(metricsObject.promise.numberOfPromiseAll, 0);
 
         test.done();
     }
