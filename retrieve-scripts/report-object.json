@@ -1,0 +1,63 @@
+{
+  "totalOfJSFiles": 0,
+  "totalOfJSLines": 0,
+  "totalOfJSFilesErrorHandler": 0,
+  "tryCatch": {
+    "numberOfTries": 0,
+    "numberOfEmptyTries": 0,
+    "numberOfTriesLines": 0,
+    "numberOfTriesWithUniqueStatement": 0,
+    "numberOfCatches": 0,
+    "numberOfEmptyCatches": 0,
+    "numberOfCatchesLines": 0,
+    "numberOfUniqueConsole": 0,
+    "numberOfCatchesWithUniqueStatement": 0,
+    "numberOfThrows": 0,
+    "numberOfThrowsLiteral": 0,
+    "numberOfThrowsErrorObjects": 0,
+    "numberOfFinallies": 0,
+    "numberOfFinalliesLines": 0
+  },
+  "promise": {
+    "numberOfPromises": 0,
+    "numberOfResolves": 0,
+    "numberOfRejects": 0,
+    "numberOfPromiseThens": 0,
+    "numberOfPromiseThenLines": 0,
+    "numberOfPromiseCatches": 0,
+    "numberOfPromiseCatchesLines": 0,
+    "numberOfEmptyFunctionsOnPromiseCatches": 0,
+    "numberOfPromiseRaces": 0,
+    "numberOfPromiseAll": 0
+  },
+  "asyncAwait": {
+    "numberOfAsyncs": 0,
+    "numberOfAwaits": 0,
+    "numberOfTries": 0,
+    "numberOfTriesLines": 0,
+
+
+    "numberOfCatches": 0,
+    "numberOfEmptyCatches": 0,
+    "numberOfCatchesLines": 0,
+    "numberOfUniqueConsole": 0,
+    "numberOfFinallies": 0,
+
+    "numberOfFinalliesLines": 0
+
+  },
+  "events": {
+    "numberOfEventMethodsOn": 0,
+    "numberOfEventMethodsOnce": 0,
+    "numberOfEventMethodsEmit": 0,
+    "numberOfEventUncaughtException": 0,
+    "numberOfEventUnhandledRejection": 0,
+    "totalOfStringEvents": 0,
+    "totalOfEventTypes": 0
+  },
+  "callbacks": {
+    "numberOfCallbackAcceptingFunctions": 0,
+    "numberOfCallbackErrorFunctions": 0,
+    "numberOfEmptyCallbacks": 0
+  }
+}
