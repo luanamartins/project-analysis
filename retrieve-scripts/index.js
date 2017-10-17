@@ -25,6 +25,8 @@ function main() {
         repositoriesName = ['bootstrap'];
     }
 
+
+    let allMetrics = [];
     repositoriesName.forEach(function (repositoryName) {
         let repoOutputDirectory = path.join(outputGithubFilepath, repositoryName);
         let filenames = repoModule.getFilesFromDir(repoOutputDirectory, ['.js'], ['.min.js']);
@@ -34,17 +36,19 @@ function main() {
         filenames.forEach(file => {
             files.push(path.join(repoOutputDirectory, file));
         });
-        const metrics = metricsModule.handleMetrics(files);
-        //console.log(metrics);
+        const repoObjectFilepath = path.join(projectPath, 'report-object.json');
+        allMetrics.push(metricsModule.handleMetrics(files, repoObjectFilepath));
     });
+
+    console.log(allMetrics);
 }
 
 
-function test(){
-    const files = [path.join(projectPath, 'test.js')];
-    const report = metricsModule.handleMetrics(files);
-    //console.log(report);
+function test() {
+    const files = [path.join(projectPath, 'test.js'), path.join(projectPath, 'test.js')];
+    const repoObjectFilepath = path.join(projectPath, 'report-object.json');
+    const report = metricsModule.handleMetrics(files, repoObjectFilepath);
 }
 
 
-test();
+main();
