@@ -1,20 +1,21 @@
-const path = require('path');
 var dotenv = require('dotenv');
-dotenv.load();
 
-var testCase  = require('nodeunit').testCase;
+var testCase = require('nodeunit').testCase;
 
-const metricsModule = require('../retrieve-scripts/metrics');
+function startTest() {
+    const metricsModule = require('../retrieve-scripts/metrics');
+    let filename = './test/data/try-catch/try-catch2.js';
+    const reportJsonFile = './retrieve-scripts/report-object.json';
 
-//var projectPath = 'project-analysis';
-let filename = 'data/try-catch/try-catch2.js';
-
-const metricsObject = metricsModule.handleMetrics([filename]);
+    return metricsModule.handleMetrics([filename], reportJsonFile);
+}
 
 module.exports = testCase({
-    "Empty tries": function(test) {
-        const metric1 = metricsObject.tryCatch.numberOfEmptyTries;
-        test.equal(metric1, 0);
+    "Empty tries": function (test) {
+        const array = startTest();
+        const metricsObject = array[0];
+
+        test.equal(metricsObject.tryCatch.numberOfEmptyTries, 0);
 
         const metric = metricsObject.tryCatch.numberOfTriesLines;
         test.equal(metric, 2);
@@ -22,24 +23,24 @@ module.exports = testCase({
         test.done();
     },
 
-    "Catch lines": function(test){
+    "Catch lines": function (test) {
 
-        const metric1 = metricsObject.tryCatch.numberOfCatches;
-        test.equal(metric1, 1);
+        const array = startTest();
+        const metricsObject = array[0];
 
-        const metric = metricsObject.tryCatch.numberOfCatchesLines;
-        test.equal(metric, 0);
+        test.equal(metricsObject.tryCatch.numberOfCatches, 1);
+        test.equal(metricsObject.tryCatch.numberOfCatchesLines, 0);
 
         test.done();
     },
 
-    "Finally lines": function(test){
+    "Finally lines": function (test) {
 
-        const metric1 = metricsObject.tryCatch.numberOfFinallies;
-        test.equal(metric1, 1);
+        const array = startTest();
+        const metricsObject = array[0];
 
-        const metric = metricsObject.tryCatch.numberOfFinalliesLines;
-        test.equal(metric, 5);
+        test.equal(metricsObject.tryCatch.numberOfFinallies, 1);
+        test.equal(metricsObject.tryCatch.numberOfFinalliesLines, 5);
 
         test.done();
     },
