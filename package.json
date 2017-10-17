@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test-init": "./node_modules/jasmine/bin/jasmine.js init",
-    "test": "./node_modules/jasmine/bin/jasmine.js"
+    "test": "../test"
   },
   "author": "Luana Martins",
   "license": "ISC",
@@ -24,6 +23,5 @@
     "path": "^0.12.7",
     "uglify-js": "^1.3.5"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
