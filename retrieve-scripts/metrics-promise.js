@@ -1,3 +1,5 @@
+const utils = require('./utils');
+
 function handleAnalysis(node, reportObject) {
 
     if (node.type === 'NewExpression' && node.callee.name === 'Promise') {
@@ -7,31 +9,24 @@ function handleAnalysis(node, reportObject) {
     if (node.type === 'CallExpression') {
         const callee = node.callee;
         if (callee) {
-
-
-            if (callee.property) {
-                if (callee.property.name === 'resolve') {
-                    reportObject.promise.numberOfResolves++;
-                }
-
-                if (callee.property.name === 'reject') {
-                    reportObject.promise.numberOfRejects++;
-                }
-
-                if (callee.property.name === 'then') {
-                    reportObject.promise.numberOfPromiseThens++;
-                }
-
-                if (callee.property.name === 'catch') {
-                    reportObject.promise.numberOfPromiseCatches++;
-
-                    // const callbackFunction = node.arguments[0];
-                    // const callbackFunctionBodyLoc = callbackFunction.body.loc;
-                    // const start = callbackFunctionBodyLoc.start.line;
-                    // const end = callbackFunctionBodyLoc.end.line;
-                    // reportObject.promise.numberOfPromiseCatchesLines += (end - start);
-                }
+            if (callee.name === 'resolve' || (callee.property && callee.property.name === 'resolve')) {
+                reportObject.promise.numberOfResolves++;
             }
+
+            if (callee.name === 'reject' || (callee.property && callee.property.name === 'reject')) {
+                reportObject.promise.numberOfRejects++;
+            }
+
+            if (callee.name === 'then' || (callee.property && callee.property.name === 'then')) {
+                reportObject.promise.numberOfPromiseThens++;
+                reportObject.promise.numberOfPromiseThenLines += utils.getNumberOfLines(node);
+            }
+
+            if (callee.name === 'catch' || (callee.property && callee.property.name === 'catch')) {
+                reportObject.promise.numberOfPromiseCatches++;
+                reportObject.promise.numberOfPromiseCatchesLines += utils.getNumberOfLines(node);
+            }
+
 
             if (callee.object && callee.object.name === 'Promise') {
                 if (callee.property) {
