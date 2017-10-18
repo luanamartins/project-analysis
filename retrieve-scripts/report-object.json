@@ -36,15 +36,13 @@
     "numberOfTries": 0,
     "numberOfTriesLines": 0,
 
-
     "numberOfCatches": 0,
     "numberOfEmptyCatches": 0,
     "numberOfCatchesLines": 0,
     "numberOfUniqueConsole": 0,
+
     "numberOfFinallies": 0,
-
     "numberOfFinalliesLines": 0
-
   },
   "events": {
     "numberOfEventMethodsOn": 0,
