@@ -1,17 +1,25 @@
+const utils = require('./utils');
+
 function handleAnalysis(node, reportObject) {
 
     // Unique async functions
     if (node.type === 'FunctionDeclaration' && node.async) {
         reportObject.asyncAwait.numberOfAsyncs++;
 
-        const catchClauses = getCatchClauseNodes(node.body);
+        const tryStatements = utils.getNodeTypes(node.body, 'TryStatement');
+        reportObject.asyncAwait.numberOfTries += tryStatements.length;
+
+        tryStatements.forEach(tryStatement => {
+            reportObject.asyncAwait.numberOfTriesLines += utils.getNumberOfLines(tryStatement);
+        });
+
+        const catchClauses = utils.getNodeTypes(node.body, 'CatchClause');
+        reportObject.asyncAwait.numberOfCatches += catchClauses.length;
 
         catchClauses.forEach((catchClause) => {
             const bodyHandlerCatch = catchClause.body.body;
-            const isEmpty = bodyHandlerCatch.length === 0;
-            reportObject.asyncAwait.numberOfCatches++;
 
-            if (isEmpty) {
+            if (bodyHandlerCatch.length === 0) {
                 // Left the catch block empty
                 reportObject.asyncAwait.numberOfEmptyCatches++;
             } else {
@@ -30,6 +38,12 @@ function handleAnalysis(node, reportObject) {
                 }
             }
         });
+
+        const finallyStatements = getFinallyStatements(tryStatements);
+        reportObject.asyncAwait.numberOfFinallies = finallyStatements.length;
+        finallyStatements.forEach(function (finallyStatement) {
+           reportObject.asyncAwait.numberOfFinalliesLines += utils.getNumberOfLines(finallyStatement);
+        });
     }
 
     if (node.type === 'AwaitExpression') {
@@ -38,29 +52,14 @@ function handleAnalysis(node, reportObject) {
     }
 }
 
-function getCatchClauseNodes(functionDeclaration) {
-
-    let catchClauses = [];
-    traverse(functionDeclaration, function (node) {
-        if(node.type === 'CatchClause'){
-            catchClauses.push(node);
+function getFinallyStatements(tryStatements) {
+    let finallyStatements = [];
+    tryStatements.forEach(statement => {
+        if (statement.finalizer) {
+            finallyStatements = statement.finalizer;
         }
     });
-
-    return catchClauses;
-}
-
-function traverse(obj, fn) {
-    for (let key in obj) {
-        if (obj[key] !== null && fn(obj[key]) === false) {
-            return false;
-        }
-        if (typeof obj[key] === 'object' && obj[key] !== null) {
-            if (traverse(obj[key], fn) === false) {
-                return false;
-            }
-        }
-    }
+    return finallyStatements;
 }
 
 
