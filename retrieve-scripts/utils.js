@@ -1,14 +1,54 @@
 function getNumberOfLines(node) {
-    if (node.body) {
+    if (node.block || node.body) {
+
         const isBlockStatement = node.type === 'BlockStatement';
-        const nodeBody = isBlockStatement ? node.body : node.body.body;
-        let numberOfLines = isBlockStatement ? 0 : 1;
+        const isTryStatement = node.type === 'TryStatement';
+
+        let nodeBody;
+        let numberOfLines;
+
+        if (isBlockStatement) {
+            nodeBody = node.body;
+            numberOfLines = 0;
+        } else if (isTryStatement) {
+            nodeBody = node.block.body;
+            numberOfLines = 1;
+        } else {
+            nodeBody = node.body.body;
+            numberOfLines = 1;
+        }
+
         nodeBody.forEach(function (statement) {
             numberOfLines += getNumberOfLines(statement);
         });
         return numberOfLines;
     }
     return 1;
+}
+
+function getNodeTypes(functionDeclaration, type) {
+
+    let nodeTypes = [];
+    traverse(functionDeclaration, function (node) {
+        if (node.type === type) {
+            nodeTypes.push(node);
+        }
+    });
+
+    return nodeTypes;
+}
+
+function traverse(obj, fn) {
+    for (let key in obj) {
+        if (obj[key] !== null && fn(obj[key]) === false) {
+            return false;
+        }
+        if (typeof obj[key] === 'object' && obj[key] !== null) {
+            if (traverse(obj[key], fn) === false) {
+                return false;
+            }
+        }
+    }
 }
 
 function getNumberOfLinesByBody(node) {
@@ -32,5 +72,6 @@ function getNumberOfLinesByLoc(node) {
 // reportObject.promise.numberOfPromiseCatchesLines += (end - start);
 
 module.exports = {
-    getNumberOfLines: getNumberOfLines
+    getNumberOfLines: getNumberOfLines,
+    getNodeTypes: getNodeTypes
 };
