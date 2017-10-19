@@ -38,7 +38,19 @@ function main() {
             files.push(path.join(repoOutputDirectory, file));
         });
         const repoObjectFilepath = path.join(projectPath, 'report-object.json');
-        allMetrics.push(metricsModule.handleMetrics(files, repoObjectFilepath));
+        const metricsPerScript = metricsModule.handleMetrics(files, repoObjectFilepath);
+        allMetrics.push(metricsPerScript);
+
+        const fields = ["numberOfPromises", "numberOfResolves", "numberOfRejects",
+            "numberOfPromiseThens", "numberOfPromiseThenLines", "numberOfPromiseCatches",
+            "numberOfPromiseCatchesLines", "numberOfEmptyFunctionsOnPromiseCatches",
+            "numberOfPromiseRaces", "numberOfPromiseAll"];
+
+        const promiseData = metricsPerScript.map(repoObject => {
+            return repoObject.promise;
+        });
+        filesModule.writeCsvFile('./statistics/data/' + repositoryName + '.csv', fields, promiseData);
+
     });
 
     //console.log(allMetrics);
