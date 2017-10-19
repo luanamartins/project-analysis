@@ -4,13 +4,14 @@ const path = require('path');
 
 const repoModule = require('./repository.js');
 const metricsModule = require('./metrics.js');
+const filesModule = require('./files.js');
 
 var projectPath = process.env.RETRIEVE_SCRIPTS_ROOT_PATH;
 console.log(projectPath);
 
 let inputGithubFilepath = path.join(projectPath, 'github.txt');
 var outputGithubFilepath = path.join(projectPath, 'repos');
-const checkoutRepos = false;
+const checkoutRepos = true;
 
 function main() {
     let repositoriesName = [];
@@ -19,7 +20,7 @@ function main() {
         reposToCheckout.forEach(function (repo) {
             repoModule.checkoutRepoTo(repo, outputGithubFilepath);
             let repoName = repoModule.getRepoProjectName(repo);
-            repositoriesName.push(repoName);
+            repositoriesName.push(repoName.replace("/", ""));
         });
     } else {
         repositoriesName = ['bootstrap'];
@@ -40,14 +41,17 @@ function main() {
         allMetrics.push(metricsModule.handleMetrics(files, repoObjectFilepath));
     });
 
-    console.log(allMetrics);
+    //console.log(allMetrics);
+
+
+
 }
 
 
 function test() {
-    const files = [path.join(projectPath, 'test.js'), path.join(projectPath, 'test.js')];
+    const files = [path.join(projectPath, 'test.js')];
     const repoObjectFilepath = path.join(projectPath, 'report-object.json');
-    const report = metricsModule.handleMetrics(files, repoObjectFilepath);
+    console.log(metricsModule.handleMetrics(files, repoObjectFilepath));
 }
 
 

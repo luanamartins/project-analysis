@@ -50,7 +50,6 @@ function handleMetrics(files, jsonFilepath) {
             }
         });
     }
-    //console.log('Metrics ', metrics);
     return metrics;
 }
 
