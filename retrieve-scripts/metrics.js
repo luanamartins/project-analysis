@@ -25,13 +25,16 @@ function traverse(obj, fn) {
 function handleMetrics(files, jsonFilepath) {
 
     let metrics = [];
-    //console.log('Files: ', files);
     if (files) {
         files.forEach(function (fullFilepath) {
             try {
                 let repoObject = jsonfile.readFileSync(jsonFilepath);
-                repoObject.totalOfJSLines += files.length;
-                repoObject.totalOfJSLines += fileModule.countLinesOnFile(fullFilepath);
+                //repoObject.totalOfJSLines += files.length;
+                //repoObject.totalOfJSLines += fileModule.countLinesOnFile(fullFilepath);
+
+                // "totalOfJSFiles": 0,
+                // "totalOfJSLines": 0,
+                // "totalOfJSFilesErrorHandler": 0
 
                 let contents = fileModule.readFileSync(fullFilepath, 'utf-8');
                 const options = {
@@ -39,11 +42,11 @@ function handleMetrics(files, jsonFilepath) {
                     tolerant: true,
                     comments: false
                 };
-                let ast = esprima.parseScript(contents, options);
 
-                // checkEventsTypes(ast, eventEmitterObject);
+                let ast = esprima.parseScript(contents, options);
                 getMetrics(ast, fullFilepath, repoObject);
-                // getJSFilesEHM(ast, repoObject);
+                console.log(fullFilepath);
+
                 metrics.push(repoObject);
             } catch (err) {
                 console.log(err);
@@ -66,11 +69,6 @@ function getMetrics(ast, filepath, reportObject) {
     } catch (err) {
         console.log(filepath, ' ', err);
     }
-}
-
-function getJSFilesEHM(ast, repoObject) {
-    // Calculate how many files are there on using EHM
-
 }
 
 module.exports = {

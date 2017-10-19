@@ -1,7 +1,4 @@
 {
-  "totalOfJSFiles": 0,
-  "totalOfJSLines": 0,
-  "totalOfJSFilesErrorHandler": 0,
   "tryCatch": {
     "numberOfTries": 0,
     "numberOfEmptyTries": 0,
