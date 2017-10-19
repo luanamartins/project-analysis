@@ -57,3 +57,5 @@ fabric.properties
 /manual-analysis/repos/
 /manual-analysis/copiedFiles/
 /retrieve-scripts/repos/
+
+statistics/\.idea/
