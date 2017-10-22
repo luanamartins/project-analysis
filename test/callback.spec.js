@@ -10,9 +10,10 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.callbacks.numberOfCallbackAcceptingFunctions, 0);
-        test.equal(metricsObject.callbacks.numberOfCallbackErrorFunctions, 1);
+        test.equal(metricsObject.callbacks.numberOfCallbackErrorFunctions, 0);
+        test.equal(metricsObject.callbacks.numberOfFirstErrorArgFunctions, 1);
         test.equal(metricsObject.callbacks.numberOfEmptyCallbacks, 0);
+        test.equal(metricsObject.callbacks.numberOfConsoleStatementOnly, 1);
 
         test.done();
     },
@@ -24,10 +25,57 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.callbacks.numberOfCallbackAcceptingFunctions, 0);
-        test.equal(metricsObject.callbacks.numberOfCallbackErrorFunctions, 1);
+        test.equal(metricsObject.callbacks.numberOfCallbackErrorFunctions, 0);
+        test.equal(metricsObject.callbacks.numberOfFirstErrorArgFunctions, 1);
         test.equal(metricsObject.callbacks.numberOfEmptyCallbacks, 1);
+        test.equal(metricsObject.callbacks.numberOfConsoleStatementOnly, 0);
+
+        test.done();
+    },
+
+    "TC03": function (test) {
+        let filename = './test/data/callback/callback3.js';
+        const reportJsonFile = './retrieve-scripts/report-object.json';
+        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+
+        const metricsObject = metrics[0];
+
+        test.equal(metricsObject.callbacks.numberOfCallbackErrorFunctions, 0);
+        test.equal(metricsObject.callbacks.numberOfFirstErrorArgFunctions, 1);
+        test.equal(metricsObject.callbacks.numberOfEmptyCallbacks, 0);
+        test.equal(metricsObject.callbacks.numberOfConsoleStatementOnly, 0);
+
+        test.done();
+    },
+
+    "TC04": function (test) {
+        let filename = './test/data/callback/callback4.js';
+        const reportJsonFile = './retrieve-scripts/report-object.json';
+        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+
+        const metricsObject = metrics[0];
+
+        test.equal(metricsObject.callbacks.numberOfCallbackErrorFunctions, 0);
+        test.equal(metricsObject.callbacks.numberOfFirstErrorArgFunctions, 4);
+        test.equal(metricsObject.callbacks.numberOfEmptyCallbacks, 0);
+        test.equal(metricsObject.callbacks.numberOfConsoleStatementOnly, 3);
+
+        test.done();
+    },
+
+    "TC05": function (test) {
+        let filename = './test/data/callback/callback5.js';
+        const reportJsonFile = './retrieve-scripts/report-object.json';
+        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+
+        const metricsObject = metrics[0];
+
+        test.equal(metricsObject.callbacks.numberOfCallbackErrorFunctions, 0);
+        test.equal(metricsObject.callbacks.numberOfFirstErrorArgFunctions, 1);
+        test.equal(metricsObject.callbacks.numberOfEmptyCallbacks, 0);
+        test.equal(metricsObject.callbacks.numberOfConsoleStatementOnly, 1);
 
         test.done();
     }
+
 });

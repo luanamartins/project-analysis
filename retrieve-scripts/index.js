@@ -41,30 +41,38 @@ function main() {
         const metricsPerScript = metricsModule.handleMetrics(files, repoObjectFilepath);
         allMetrics.push(metricsPerScript);
 
-        const fields = ["numberOfPromises", "numberOfResolves", "numberOfRejects",
-            "numberOfPromiseThens", "numberOfPromiseThenLines", "numberOfPromiseCatches",
-            "numberOfPromiseCatchesLines", "numberOfEmptyFunctionsOnPromiseCatches",
-            "numberOfPromiseRaces", "numberOfPromiseAll"];
+        // const fields = ["numberOfPromises", "numberOfResolves", "numberOfRejects",
+        //     "numberOfPromiseThens", "numberOfPromiseThenLines", "numberOfPromiseCatches",
+        //     "numberOfPromiseCatchesLines", "numberOfEmptyFunctionsOnPromiseCatches",
+        //     "numberOfPromiseRaces", "numberOfPromiseAll"];
+
+        // const promiseData = metricsPerScript.map(repoObject => {
+        //     return repoObject.promise;
+        // });
+
+        const fields = [
+            "numberOfCallbackErrorFunctions",
+            "numberOfFirstErrorArgFunctions",
+            "numberOfEmptyCallbacks",
+            "numberOfConsoleStatementOnly"
+        ];
 
         const promiseData = metricsPerScript.map(repoObject => {
-            return repoObject.promise;
+            return repoObject.callbacks;
         });
+
         filesModule.writeCsvFile('./statistics/data/' + repositoryName + '.csv', fields, promiseData);
 
     });
-
-    //console.log(allMetrics);
-
-
-
 }
 
 
 function test() {
     const files = [path.join(projectPath, 'test.js')];
     const repoObjectFilepath = path.join(projectPath, 'report-object.json');
-    console.log(metricsModule.handleMetrics(files, repoObjectFilepath));
+    const metrics = metricsModule.handleMetrics(files, repoObjectFilepath);
+    console.log(metrics);
 }
 
 
-main();
+test();

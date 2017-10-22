@@ -51,8 +51,9 @@
     "totalOfEventTypes": 0
   },
   "callbacks": {
-    "numberOfCallbackAcceptingFunctions": 0,
     "numberOfCallbackErrorFunctions": 0,
-    "numberOfEmptyCallbacks": 0
+    "numberOfFirstErrorArgFunctions": 0,
+    "numberOfEmptyCallbacks": 0,
+    "numberOfConsoleStatementOnly": 0
   }
 }
