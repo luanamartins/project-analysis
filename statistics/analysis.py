@@ -3,13 +3,48 @@ from numpy import genfromtxt
 import numpy as np
 from scipy import stats
 
-bootstrap_data = genfromtxt('data/bootstrap.csv', delimiter=',', skip_header=1)
-socket_io_data = genfromtxt('data/socket.io.csv', delimiter=',', skip_header=1)
+boot = genfromtxt('data/bootstrap.csv', delimiter=',', skip_header=1)
+reveal = genfromtxt('data/reveal.js.csv', delimiter=',', skip_header=1)
+three = genfromtxt('data/three.js.csv', delimiter=',', skip_header=1)
+brackets = genfromtxt('data/brackets.csv', delimiter=',', skip_header=1)
+pdf = genfromtxt('data/pdf.js.csv', delimiter=',', skip_header=1)
+photo = genfromtxt('data/PhotoSwipe.csv', delimiter=',', skip_header=1)
+
+express = genfromtxt('data/express.csv', delimiter=',', skip_header=1)
+hexo = genfromtxt('data/hexo.csv', delimiter=',', skip_header=1)
+node = genfromtxt('data/node.csv', delimiter=',', skip_header=1)
+node_inspector = genfromtxt('data/node-inspector.csv', delimiter=',', skip_header=1)
+parse_server = genfromtxt('data/parse-server.csv', delimiter=',', skip_header=1)
+socket = genfromtxt('data/socket.io.csv', delimiter=',', skip_header=1)
+
+a = [boot, reveal, three, brackets, pdf, photo]
+b = [express, hexo, node, node_inspector, parse_server, socket]
+
+client_repo = []
+for client in a:
+    client_repo = np.concatenate([client[:, 3], client_repo])
+    # client_repo = client_values + client_repo
+
+server_repo = []
+for server in b:
+    server_repo = np.concatenate([server[:, 3], server_repo])
+
+client_repo = list(filter(lambda c: c != 0.0, client_repo))[:20]
+server_repo = list(filter(lambda c: c != 0.0, server_repo))[:20]
+
+print(stats.mannwhitneyu(client_repo, server_repo, alternative='two-sided'))
+
+# a1 = boot[:, 2]
+# b1 = socket[:, 2]
+
 
 # result = mannwhitneyu(bootstrap_data, socket_io_data)
 # print(result)
 
-a = np.arange(25)
-print(a)
-b = np.arange(25) + 4
-print(stats.mannwhitneyu(a, b, alternative='two-sided'))
+# a = np.arange(25)
+# print(a)
+# b = np.arange(25) + 4
+# print(stats.mannwhitneyu(a, b, alternative='two-sided'))
+
+
+
