@@ -18,70 +18,45 @@ function handleAnalysis(node, reportObject) {
         const keywords = ['err', 'error', 'e', 'exception'];
         const listOfErrorHandlingArgs = getErrorHandlingArgs(functionsArgsNames, keywords);
 
+        let isErrorHandlingFunction = false;
+
         if (keywords.includes(functionsArgsNames[0])) {
             reportObject.callbacks.numberOfFirstErrorArgFunctions++;
+            isErrorHandlingFunction = true;
         } else if (listOfErrorHandlingArgs.length > 0) {
             reportObject.callbacks.numberOfCallbackErrorFunctions++;
+            isErrorHandlingFunction = true;
         }
 
-        if (node.body) {
-            let bodyFunction = node.body.body;
-            if (bodyFunction.length === 0) {
-                reportObject.callbacks.numberOfEmptyCallbacks++;
-            }
+        if (isErrorHandlingFunction) {
+            if (node.body) {
+                let bodyFunction = node.body.body;
+                if (bodyFunction.length === 0) {
+                    reportObject.callbacks.numberOfEmptyCallbacks++;
+                }
 
-            const ifStatements = getIfStatements(bodyFunction, listOfErrorHandlingArgs);
-            ifStatements.forEach(ifStatement => {
+                const ifStatements = getIfStatements(bodyFunction, listOfErrorHandlingArgs);
+                ifStatements.forEach(ifStatement => {
 
-                const errorHandlingArg = ifStatement.test.name;
-                if (listOfErrorHandlingArgs.includes(errorHandlingArg)) {
-                    const ifStatementConsequent = ifStatement.consequent;
-                    const ifStatementBody = ifStatementConsequent.body;
+                    const errorHandlingArg = ifStatement.test.name;
+                    if (listOfErrorHandlingArgs.includes(errorHandlingArg)) {
+                        const ifStatementConsequent = ifStatement.consequent;
+                        const ifStatementBody = ifStatementConsequent.body;
 
-                    if (ifStatementBody) {
-                        if (ifStatementBody.length === 0) {
-                            reportObject.callbacks.numberOfEmptyCallbacks++;
-                        } else if (ifStatementBody.length === 1) {
+                        if (ifStatementBody) {
+                            if (ifStatementBody.length === 0) {
+                                reportObject.callbacks.numberOfEmptyCallbacks++;
+                            } else if (ifStatementBody.length === 1) {
+                                reportObject.callbacks.numberOfConsoleStatementOnly++;
+                            }
+                        } else {
                             reportObject.callbacks.numberOfConsoleStatementOnly++;
                         }
-                    } else {
-                        reportObject.callbacks.numberOfConsoleStatementOnly++;
                     }
-                }
-            });
+                });
+            }
         }
-
     }
-
-    // if (node.body) {
-    //     let functionBody = node.body.body;
-    //
-    //     if (functionBody) {
-    //         functionBody.forEach(function (statement) {
-    //             if (statement.type === 'CallExpression') {
-    //                 const calleeName = statement.callee.name;
-    //                 if (calleeName && functionsArgs.includes(calleeName)) {
-    //                     reportObject.callbacks.numberOfHighOrderFunctions++;
-    //                 }
-    //             }
-    //         });
-    //     }
-    // }
-
-
-    // if (node.type === 'ExpressionStatement' && node.expression.type === 'CallExpression') {
-    //
-    //     const callArgs = node.expression.arguments;
-    //
-    //     const callbacks = callArgs.filter(filterErrorHandlingCallbacks);
-    //     reportObject.callbacks.numberOfCallbackErrorFunctions += callbacks.length;
-    //
-    //     for (let i = 0; i < callbacks.length; i++) {
-    //         if (callbacks[i].body.type === 'BlockStatement' && callbacks[i].body.body.length === 0) {
-    //             reportObject.callbacks.numberOfEmptyCallbacks++;
-    //         }
-    //     }
-    // }
 }
 
 function getIfStatements(body, errorVariables) {

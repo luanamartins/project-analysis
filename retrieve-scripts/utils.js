@@ -5,7 +5,7 @@ function getNumberOfLines(node) {
         const isTryStatement = node.type === 'TryStatement';
 
         let nodeBody;
-        let numberOfLines;
+        let numberOfLines = 0;
 
         if (isBlockStatement) {
             nodeBody = node.body;
@@ -17,10 +17,11 @@ function getNumberOfLines(node) {
             nodeBody = node.body.body;
             numberOfLines = 1;
         }
-
-        nodeBody.forEach(function (statement) {
-            numberOfLines += getNumberOfLines(statement);
-        });
+        if(nodeBody) {
+            nodeBody.forEach(function (statement) {
+                numberOfLines += getNumberOfLines(statement);
+            });
+        }
         return numberOfLines;
     }
     return 1;
