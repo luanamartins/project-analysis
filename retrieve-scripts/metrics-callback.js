@@ -37,21 +37,17 @@ function handleAnalysis(node, reportObject) {
 
                 const ifStatements = getIfStatements(bodyFunction, listOfErrorHandlingArgs);
                 ifStatements.forEach(ifStatement => {
+                    const ifStatementConsequent = ifStatement.consequent;
+                    const ifStatementBody = ifStatementConsequent.body;
 
-                    const errorHandlingArg = ifStatement.test.name;
-                    if (listOfErrorHandlingArgs.includes(errorHandlingArg)) {
-                        const ifStatementConsequent = ifStatement.consequent;
-                        const ifStatementBody = ifStatementConsequent.body;
-
-                        if (ifStatementBody) {
-                            if (ifStatementBody.length === 0) {
-                                reportObject.callbacks.numberOfEmptyCallbacks++;
-                            } else if (ifStatementBody.length === 1) {
-                                reportObject.callbacks.numberOfConsoleStatementOnly++;
-                            }
-                        } else {
+                    if (ifStatementBody) {
+                        if (ifStatementBody.length === 0) {
+                            reportObject.callbacks.numberOfEmptyCallbacks++;
+                        } else if (ifStatementBody.length === 1) {
                             reportObject.callbacks.numberOfConsoleStatementOnly++;
                         }
+                    } else {
+                        reportObject.callbacks.numberOfConsoleStatementOnly++;
                     }
                 });
             }
@@ -63,7 +59,10 @@ function getIfStatements(body, errorVariables) {
     let statements = [];
     body.forEach(statement => {
         if (statement.type === 'IfStatement') {
-            statements.push(statement);
+            const errorHandlingArg = statement.test.name;
+            if(errorHandlingArg && errorHandlingArg.includes(errorVariables)) {
+                statements.push(statement);
+            }
         }
     });
 
