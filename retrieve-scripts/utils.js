@@ -1,31 +1,5 @@
-function getNumberOfLines(node) {
-    if (node.block || node.body) {
-
-        const isBlockStatement = node.type === 'BlockStatement';
-        const isTryStatement = node.type === 'TryStatement';
-
-        let nodeBody;
-        let numberOfLines = 0;
-
-        if (isBlockStatement) {
-            nodeBody = node.body;
-            numberOfLines = 0;
-        } else if (isTryStatement) {
-            nodeBody = node.block.body;
-            numberOfLines = 1;
-        } else {
-            nodeBody = node.body.body;
-            numberOfLines = 1;
-        }
-        if(nodeBody) {
-            nodeBody.forEach(function (statement) {
-                numberOfLines += getNumberOfLines(statement);
-            });
-        }
-        return numberOfLines;
-    }
-    return 1;
-}
+var sloc  = require('sloc');
+var fs  = require('fs');
 
 function getNodeTypes(functionDeclaration, type) {
 
@@ -52,27 +26,11 @@ function traverse(obj, fn) {
     }
 }
 
-function getNumberOfLinesByBody(node) {
-
-    if (node.body) {
-        return 1 + getNumberOfLinesByBody(node.body);
-    }
-    return 1;
+function getGeneralStats(fileContents) {
+    return sloc(fileContents, "js");
 }
-
-function getNumberOfLinesByLoc(node) {
-    const start = node.loc.start.line;
-    const end = node.loc.end.line;
-    return (end - start);
-}
-
-// const callbackFunction = node.arguments[0];
-// const callbackFunctionBodyLoc = callbackFunction.body.loc;
-// const start = callbackFunctionBodyLoc.start.line;
-// const end = callbackFunctionBodyLoc.end.line;
-// reportObject.promise.numberOfPromiseCatchesLines += (end - start);
 
 module.exports = {
-    getNumberOfLines: getNumberOfLines,
-    getNodeTypes: getNodeTypes
+    getNodeTypes: getNodeTypes,
+    getGeneralStats: getGeneralStats
 };
