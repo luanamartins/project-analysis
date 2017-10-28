@@ -39,7 +39,7 @@ function handleMetrics(files, jsonFilepath) {
 
                 let contents = fileModule.readFileSync(filepath, 'utf-8');
 
-                const stats = utils.testSloc(contents);
+                const stats = utils.getGeneralStats(contents);
 
                 repoObject.numberOfLogicalLines = stats.source;
                 totalOfLogicalLines += stats.source;
@@ -55,7 +55,7 @@ function handleMetrics(files, jsonFilepath) {
 
                 let ast = esprima.parseScript(contents, options);
 
-                console.log(utils.testSloc(contents));
+                console.log(utils.getGeneralStats(contents));
 
                 getMetrics(ast, filepath, repoObject);
                 console.log(filepath);
