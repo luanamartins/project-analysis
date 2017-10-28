@@ -55,8 +55,6 @@ function handleMetrics(files, jsonFilepath) {
 
                 let ast = esprima.parseScript(contents, options);
 
-                console.log(utils.getGeneralStats(contents));
-
                 getMetrics(ast, filepath, repoObject);
                 console.log(filepath);
 
