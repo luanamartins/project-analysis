@@ -46,4 +46,4 @@ module.exports = {
     readFileSync: readFileSync,
     writeCsvFile: writeCsvFile,
     countLinesOnFile: countLinesOnFile
-}
+};

@@ -8,6 +8,7 @@ const promiseModule = require('./metrics-promise.js');
 const asyncAwaitModule = require('./metrics-async-await.js');
 const callbackModule = require('./metrics-callback.js');
 const eventModule = require('./metrics-event.js');
+const utils = require('./utils.js');
 
 function traverse(obj, fn) {
     for (let key in obj) {
@@ -26,17 +27,26 @@ function handleMetrics(files, jsonFilepath) {
 
     let metrics = [];
     if (files) {
-        files.forEach(function (fullFilepath) {
+        let totalOfLogicalLines = 0;
+        let totalOfPhysicalLines = 0;
+        files.forEach(function (filepath) {
             try {
                 let repoObject = jsonfile.readFileSync(jsonFilepath);
-                //repoObject.totalOfJSLines += files.length;
-                //repoObject.totalOfJSLines += fileModule.countLinesOnFile(fullFilepath);
 
                 // "totalOfJSFiles": 0,
                 // "totalOfJSLines": 0,
                 // "totalOfJSFilesErrorHandler": 0
 
-                let contents = fileModule.readFileSync(fullFilepath, 'utf-8');
+                let contents = fileModule.readFileSync(filepath, 'utf-8');
+
+                const stats = utils.testSloc(contents);
+
+                repoObject.numberOfLogicalLines = stats.source;
+                totalOfLogicalLines += stats.source;
+
+                repoObject.numberOfPhysicalLines = stats.total;
+                totalOfLogicalLines += stats.source;
+
                 const options = {
                     loc: true,
                     tolerant: true,
@@ -44,8 +54,11 @@ function handleMetrics(files, jsonFilepath) {
                 };
 
                 let ast = esprima.parseScript(contents, options);
-                getMetrics(ast, fullFilepath, repoObject);
-                console.log(fullFilepath);
+
+                console.log(utils.testSloc(contents));
+
+                getMetrics(ast, filepath, repoObject);
+                console.log(filepath);
 
                 metrics.push(repoObject);
             } catch (err) {

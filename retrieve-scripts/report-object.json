@@ -1,4 +1,7 @@
 {
+  "numberOfLogicalLines": 0,
+  "numberOfPhysicalLines": 0,
+
   "tryCatch": {
     "numberOfTries": 0,
     "numberOfEmptyTries": 0,
