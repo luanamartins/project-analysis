@@ -59,3 +59,5 @@ fabric.properties
 /retrieve-scripts/repos/
 
 statistics/\.idea/
+
+statistics/src/__pycache__/
