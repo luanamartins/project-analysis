@@ -23,7 +23,7 @@ function main() {
             repositoriesName.push(repoName.replace("/", ""));
         });
     } else {
-        repositoriesName = ['bootstrap'];
+        repositoriesName = ['three.js'];
     }
 
 
@@ -54,25 +54,31 @@ function main() {
             "numberOfCallbackErrorFunctions",
             "numberOfFirstErrorArgFunctions",
             "numberOfEmptyCallbacks",
-            "numberOfConsoleStatementOnly"
+            "numberOfConsoleStatementOnly",
+            "numberOfLogicalLines",
+            "numberOfPhysicalLines"
         ];
 
-        const promiseData = metricsPerScript.map(repoObject => {
-            return repoObject.callbacks;
+        const data = metricsPerScript.map(repoObject => {
+            let metrics = repoObject.callbacks;
+            metrics.numberOfLogicalLines = repoObject.numberOfLogicalLines;
+            metrics.numberOfPhysicalLines = repoObject.numberOfPhysicalLines;
+            return metrics;
         });
 
-        filesModule.writeCsvFile('./statistics/data/' + repositoryName + '.csv', fields, promiseData);
+        filesModule.writeCsvFile('./statistics/data/' + repositoryName + '.csv', fields, data);
 
     });
+    console.log('Finished');
 }
 
 
 function test() {
-    const files = [path.join(projectPath, 'test.js')];
+    const files = [path.join(projectPath, 'test.js'), path.join(projectPath, 'test.js')];
     const repoObjectFilepath = path.join(projectPath, 'report-object.json');
     const metrics = metricsModule.handleMetrics(files, repoObjectFilepath);
     console.log(metrics);
 }
 
 
-test();
+main();

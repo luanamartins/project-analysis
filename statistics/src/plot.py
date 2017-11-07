@@ -4,9 +4,35 @@ import matplotlib.pyplot as pyplot
 import numpy as np
 
 
+def plot_two_groups_histogram(data_one, title_one, data_two, title_two, hist_title):
+    bins = np.linspace(10, 100)
+
+    pyplot.hist(data_one, bins, alpha=0.5, label=title_one, edgecolor='k')
+    pyplot.hist(data_two, bins, alpha=0.5, label=title_two, edgecolor='k')
+    pyplot.legend(loc='upper right', edgecolor='k')
+    pyplot.title(hist_title)
+    pyplot.grid(True)
+    pyplot.show()
+
+
 def plot_histogram(data, title):
-    pyplot.hist(data, bins='auto')
+    pyplot.hist(data)
     # pyplot.title("Histogram with 'auto' bins")
+    pyplot.title(title)
+    pyplot.show()
+
+
+def plot_violinplot(data, labels, title):
+    #pos = [1,2]
+    #data = [np.random.normal(0, std, size=100) for std in pos]
+
+    pos = [1, 2]
+    pyplot.figure()
+    ax = pyplot.subplot(111)
+    pyplot.violinplot(data, points=10, widths=0.3, showmeans=False, showextrema=True, showmedians=True)
+    ax.set_xticklabels(labels)
+    ax.set_xticks(pos)
+
     pyplot.title(title)
     pyplot.show()
 
@@ -109,7 +135,7 @@ def table():
     # data_list = np.random.randint(10, 90, size=(len(rows), len(columns)))
 
     data_table = toyplot.data.Table()
-    data_table["# NUMBER OF CALLBACKS"] = [1,2,3,4];
+    data_table["# NUMBER OF CALLBACKS"] = [1,2,3,4]
     # read_csv("data/bootstrap.csv")
     data_table = data_table[:10]
     print(data_table)
@@ -118,3 +144,11 @@ def table():
     table = canvas.table(data_table)
     # table.cells.column[[0, 1]].width = 200
     toyplot.browser.show(canvas)
+
+# import random
+# x = [random.gauss(3,1) for _ in range(400)]
+# y = [random.gauss(4,2) for _ in range(400)]
+#
+# plot_two_groups_histogram(x, 'x', y, 'y', 'Title')
+
+# plot_violinplot([[1,2,3,4,5,100], [3,4,5,6]], ['Client-side', 'Server-side'])

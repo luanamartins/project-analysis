@@ -27,7 +27,6 @@ function getFilesFromDir(dir, extensionsToInclude, extensionsToExclude) {
             var curFile = path.join(currentPath, files[i]);
 
             const acceptExtension = endsWithAny(curFile, extensionsToInclude);
-            // TODO this is not considering .min.js yet
             const notRejectExtension = !endsWithAny(curFile, extensionsToExclude);
             const isFile = fs.statSync(curFile).isFile();
 

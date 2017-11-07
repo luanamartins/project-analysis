@@ -1,0 +1,2 @@
+- dividir cada valor pelo total LLOC
+- rescale range 0 e 100

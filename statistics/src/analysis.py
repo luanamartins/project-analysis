@@ -1,9 +1,6 @@
-# from scipy.stats import mannwhitneyu
+from scipy.stats import mannwhitneyu
 from numpy import genfromtxt
-from scipy import stats
-from matplotlib.pyplot import *
 
-from src.plot import *
 from src.stats import *
 
 
@@ -26,43 +23,44 @@ def main():
     client_array = [boot, reveal, three, brackets, pdf, photo]
     server_array = [express, hexo, node, node_inspector, parse_server, socket]
 
-
-    # boot_loc = np.sum(boot[:, 4])
-    # # print(boot_loc)
-    #
-    # boot_loc = np.sum(node[:, 4])
-    # print(boot_loc)
-
     objects = ('Bootstrap', 'reveal.js', 'three.js', 'brackets', 'pdf.js', 'PhotoSwipe')
     objects_server = ('Express', 'Hexo', 'Node', 'Node-inspector', 'parse-server', 'socket.io')
-    #
-    # data = get_data(client_array, 2, 4)
-    # data2 = get_data(server_array, 2, 4)
-    # # bar_graph(data, objects,'label', 'title')
-    # double_bar_graph()
-    # # bar_graph(data2, objects_server, 'label', 'title')
 
-    for i in range(0, len(client_array)):
-        print(objects[i])
-        print('numberOfLogicalLines: ', sum(get_column_as_array(client_array[i], 4)))
-        print('numberOfCallbackErrorFunctions: ', sum(get_column_as_array(client_array[i], 0)))
-        print('numberOfFirstErrorArgFunctions: ', sum(get_column_as_array(client_array[i], 1)))
-        print('numberOfEmptyCallbacks: ', sum(get_column_as_array(client_array[i], 2)))
-        print('numberOfConsoleStatementOnly: ', sum(get_column_as_array(client_array[i], 3)))
-        print('-----------')
+    client_metric1_values = get_normalized_data(client_array, objects, 0, 4)
+    client_metric2_values = get_normalized_data(client_array, objects, 1, 4)
+    client_metric3_values = get_normalized_data(client_array, objects, 2, 4)
+    client_metric4_values = get_normalized_data(client_array, objects, 3, 4)
 
-    for i in range(0, len(server_array)):
-        print(objects_server[i])
-        print('numberOfLogicalLines: ', sum(get_column_as_array(server_array[i], 4)))
-        print('numberOfCallbackErrorFunctions: ', sum(get_column_as_array(server_array[i], 0)))
-        print('numberOfFirstErrorArgFunctions: ', sum(get_column_as_array(server_array[i], 1)))
-        print('numberOfEmptyCallbacks: ', sum(get_column_as_array(server_array[i], 2)))
-        print('numberOfConsoleStatementOnly: ', sum(get_column_as_array(server_array[i], 3)))
-        print('-----------')
+    server_metric1_values = get_normalized_data(server_array, objects_server, 0, 4)
+    server_metric2_values = get_normalized_data(server_array, objects_server, 1, 4)
+    server_metric3_values = get_normalized_data(server_array, objects_server, 2, 4)
+    server_metric4_values = get_normalized_data(server_array, objects_server, 3, 4)
+
+    # plot_two_groups_histogram(client_metric4_values, 'client', server_metric4_values, 'server',
+    #                            'Number of logging callbacks')
 
 
-    # for i in range(0, len(server_array)):
-    #     print(objects_server[i], sum(get_column_as_array(server_array[i], 4)))
+    titles = ['Number of error handling callback functions', 'Number of Error-first callback functions',
+              'Number of empty callbacks', 'Number of logging callbacks']
+    # plot_violinplot([client_metric4_values, server_metric4_values], ['Client', 'Server'], titles[3])
+
+
+    print(titles[0])
+    result = mannwhitneyu(client_metric1_values, server_metric1_values)
+    print(result)
+
+    print(titles[1])
+    result = mannwhitneyu(client_metric2_values, server_metric2_values)
+    print(result)
+
+    print(titles[2])
+    result = mannwhitneyu(client_metric3_values, server_metric3_values)
+    print(result)
+
+    print(titles[3])
+    u, p_value = mannwhitneyu(client_metric4_values, server_metric4_values)
+    print(result)
+
 
 main()
 
