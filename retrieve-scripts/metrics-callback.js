@@ -15,7 +15,7 @@ function handleAnalysis(node, reportObject) {
             return param.name;
         });
 
-        const keywords = ['err', 'error', 'e', 'exception'];
+        const keywords = ['err', 'error', 'e', 'exception', 'reason', 'er'];
         const listOfErrorHandlingArgs = getErrorHandlingArgs(functionsArgsNames, keywords);
 
         let isErrorHandlingFunction = false;
