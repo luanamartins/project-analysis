@@ -1,5 +1,5 @@
 var testCase = require('nodeunit').testCase;
-const metricsModule = require('../retrieve-scripts/metrics');
+const metricsModule = require('./../../retrieve-scripts/metrics');
 
 
 module.exports = testCase({
