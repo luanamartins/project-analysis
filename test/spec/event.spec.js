@@ -17,8 +17,8 @@ module.exports = testCase({
         test.equal(metricsObject.events.numberOfEventMethodsEmit, 0);
         test.equal(metricsObject.events.numberOfEventUncaughtException, 0);
         test.equal(metricsObject.events.numberOfEventUnhandledRejection, 0);
-        test.equal(metricsObject.events.totalOfStringEvents, 4);
-        test.equal(metricsObject.events.totalOfEventTypes, 4);
+        test.equal(metricsObject.events.totalOfStringEvents, 1);
+        test.equal(metricsObject.events.totalOfEventTypes, 0);
 
         test.done();
     },
@@ -36,7 +36,7 @@ module.exports = testCase({
         test.equal(metricsObject.events.numberOfEventUncaughtException, 1);
         test.equal(metricsObject.events.numberOfEventUnhandledRejection, 0);
         test.equal(metricsObject.events.totalOfStringEvents, 4);
-        test.equal(metricsObject.events.totalOfEventTypes, 4);
+        test.equal(metricsObject.events.totalOfEventTypes, 0);
 
         test.done();
     }

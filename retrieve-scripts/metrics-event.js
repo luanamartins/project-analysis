@@ -43,8 +43,9 @@ function handleAnalysis(node, reportObject) {
             }
 
             if (eventListeningMethods.includes(methodName) || eventRaisingMethods.includes(methodName)) {
+                const typeOfFirstArg = typeof(firstArg.value);
                 if (firstArg.type === 'Literal') {
-                    let literalValue = node.arguments[0].raw;
+                    const literalValue = node.arguments[0].raw;
 
                     // the method is an event listener or emitter and is listing/raising a string as event
                     if (literalValue.startsWith("'") && literalValue.endsWith("'")) {
@@ -58,7 +59,9 @@ function handleAnalysis(node, reportObject) {
                     if (firstArg && firstArg.value === 'unhandledRejection') {
                         reportObject.events.numberOfEventUnhandledRejection++;
                     }
-                } else {
+                }
+
+                if(typeOfFirstArg !== 'string') {
                     reportObject.events.totalOfEventTypes++;
                 }
             }
@@ -68,10 +71,12 @@ function handleAnalysis(node, reportObject) {
 }
 
 function containsSubstring(array, item) {
-    const contains = array.some(function (arrayItem) {
-        return item.indexOf(arrayItem) >= 0;
-    });
-
+    let contains = false;
+    if(item && typeof(item) === 'string'){
+        contains = array.some(function (arrayItem) {
+            return item.indexOf(arrayItem) >= 0;
+        });
+    }
     return contains;
 }
 
