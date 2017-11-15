@@ -15,10 +15,37 @@ module.exports = testCase({
         test.equal(metricsObject.asyncAwait.numberOfAwaits, 1);
         test.equal(metricsObject.asyncAwait.numberOfTries, 1);
         test.equal(metricsObject.asyncAwait.numberOfTriesLines, 3);
+
         test.equal(metricsObject.asyncAwait.numberOfCatches, 1);
         test.equal(metricsObject.asyncAwait.numberOfEmptyCatches, 1);
         test.equal(metricsObject.asyncAwait.numberOfCatchesLines, 0);
         test.equal(metricsObject.asyncAwait.numberOfUniqueConsole, 0);
+
+        test.equal(metricsObject.asyncAwait.numberOfFinallies, 0);
+        test.equal(metricsObject.asyncAwait.numberOfFinalliesLines, 0);
+
+        test.done();
+    },
+
+
+    "TC02": function (test) {
+        let filename = './test/data/async-await/async-await2.js';
+        const reportJsonFile = './retrieve-scripts/report-object.json';
+        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+
+        const metricsObject = metrics[0];
+
+        test.equal(metricsObject.asyncAwait.numberOfAsyncs, 1);
+        test.equal(metricsObject.asyncAwait.numberOfAwaits, 1);
+        test.equal(metricsObject.asyncAwait.numberOfTries, 1);
+        test.equal(metricsObject.asyncAwait.numberOfTriesLines, 3);
+
+        test.equal(metricsObject.asyncAwait.numberOfCatches, 1);
+        test.equal(metricsObject.asyncAwait.numberOfEmptyCatches, 0);
+        test.equal(metricsObject.asyncAwait.numberOfCatchesLines, 0);
+        test.equal(metricsObject.asyncAwait.numberOfUniqueConsole, 1);
+
+        test.equal(metricsObject.asyncAwait.numberOfFinallies, 0);
         test.equal(metricsObject.asyncAwait.numberOfFinalliesLines, 0);
 
         test.done();
