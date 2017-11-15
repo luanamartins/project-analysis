@@ -6,22 +6,6 @@ function handleAnalysis(node, reportObject) {
     let eventRaisingMethods = ['emit'];
 
     if (node.type === 'CallExpression') {
-        // if (node.property) {
-        //     const methodName = node.property.name;
-        //
-        //     if (methodName === 'on') {
-        //         reportObject.events.numberOfEventMethodsOn++;
-        //     }
-        //
-        //     if (methodName === 'emit') {
-        //         reportObject.events.numberOfEventMethodsEmit++;
-        //     }
-        //
-        //     if (methodName === 'once') {
-        //         reportObject.events.numberOfEventMethodsOnce++;
-        //     }
-        // }
-
         if (node.callee.property) {
 
             let methodName = node.callee.property.name;
@@ -61,8 +45,8 @@ function handleAnalysis(node, reportObject) {
                     }
                 }
 
-                if(typeOfFirstArg !== 'string') {
-                    reportObject.events.totalOfEventTypes++;
+                if (typeOfFirstArg !== 'string') {
+                    reportObject.events.totalOfEventsExceptStringType++;
                 }
             }
         }
@@ -72,7 +56,12 @@ function handleAnalysis(node, reportObject) {
 
 function containsSubstring(array, item) {
     let contains = false;
-    if(item && typeof(item) === 'string'){
+
+    if (item === 'e') {
+        return true;
+    }
+
+    if (item && typeof(item) === 'string') {
         contains = array.some(function (arrayItem) {
             return item.indexOf(arrayItem) >= 0;
         });

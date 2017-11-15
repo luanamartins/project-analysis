@@ -51,7 +51,7 @@
     "numberOfEventUncaughtException": 0,
     "numberOfEventUnhandledRejection": 0,
     "totalOfStringEvents": 0,
-    "totalOfEventTypes": 0
+    "totalOfEventsExceptStringType": 0
   },
   "callbacks": {
     "numberOfCallbackErrorFunctions": 0,
