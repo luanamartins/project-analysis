@@ -56,7 +56,7 @@ function getFinallyStatements(tryStatements) {
     let finallyStatements = [];
     tryStatements.forEach(statement => {
         if (statement.finalizer) {
-            finallyStatements = statement.finalizer;
+            finallyStatements.push(statement.finalizer);
         }
     });
     return finallyStatements;
