@@ -27,25 +27,15 @@ function handleMetrics(files, jsonFilepath) {
 
     let metrics = [];
     if (files) {
-        let totalOfLogicalLines = 0;
-        let totalOfPhysicalLines = 0;
         files.forEach(function (filepath) {
             try {
                 let repoObject = jsonfile.readFileSync(jsonFilepath);
 
-                // "totalOfJSFiles": 0,
-                // "totalOfJSLines": 0,
-                // "totalOfJSFilesErrorHandler": 0
-
                 let contents = fileModule.readFileSync(filepath, 'utf-8');
-
                 const stats = utils.getGeneralStats(contents);
 
                 repoObject.numberOfLogicalLines = stats.source;
-                totalOfLogicalLines += stats.source;
-
                 repoObject.numberOfPhysicalLines = stats.total;
-                totalOfLogicalLines += stats.source;
 
                 const options = {
                     loc: true,

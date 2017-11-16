@@ -17,5 +17,4 @@ async function test() {
         }
     }
     console.log(i);
-
 }

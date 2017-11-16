@@ -47,7 +47,6 @@ function handleAnalysis(node, reportObject) {
     }
 
     if (node.type === 'AwaitExpression') {
-        // This is basically the same as then on promises
         reportObject.asyncAwait.numberOfAwaits++;
     }
 }
