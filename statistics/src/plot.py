@@ -166,14 +166,14 @@ def bar_line_graph(metric_label, objects, lines_of_code, metric_values):
     # log_y_values = np.log(lines_of_code)
 
     ax.bar(pos, k_lines_of_code, color='skyblue')
+    ax.set_ylim([0, 1000])
+
     ax.plot(pos, metric_values, marker='o', color='forestgreen')
 
     red_patch = mpatches.Patch(color='skyblue', label='Lines of code * 1K')
     blue_line = mlines.Line2D([], [], color='forestgreen', marker='.', markersize=15, label=metric_label)
     pyplot.legend(handles=[red_patch, blue_line], bbox_to_anchor=(0., 1.02, 1., .102), loc=3, ncol=2, mode="expand", borderaxespad=0.)
     # pyplot.legend(handles=[red_patch, blue_line])
-
-    #labels = ["Monday", "Tuesday", "Wednesday"]
 
     pyplot.xticks(pos, objects, ha='right', rotation=45)
     pyplot.subplots_adjust(bottom=0.2)

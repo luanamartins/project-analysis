@@ -69,8 +69,8 @@ def get_normalized_data(array, objects, metric_index, loc_index):
 
     for i in range(0, len(array)):
         values_from_array = get_column_as_array(array[i], metric_index)
-        loc = sum(get_column_as_array(array[i], loc_index))
-        a = rescale(normalize(values_from_array, loc))
+        total_of_logical_lines = sum(get_column_as_array(array[i], loc_index))
+        a = rescale(normalize(values_from_array, total_of_logical_lines))
         values = values + list(filter(lambda x: x != 0, a))
 
     return values
@@ -82,7 +82,6 @@ def percentage(matrix, index):
     if total_of_callbacks == 0:
         return 0
     else:
-        #print(total_of_metric, ' ', total_of_callbacks)
         return (total_of_metric / total_of_callbacks) * 100
 
 
@@ -128,6 +127,10 @@ def calculate_test(titles, client_metric_values, server_metric_values):
     print(result)
 
     print('------------------------------------------------------------------')
+
+
+def normalize_array(array, objects, metric_index, loc_index):
+    get_normalized_data(array, objects, metric_index, loc_index)
 
 
 def summary(data):

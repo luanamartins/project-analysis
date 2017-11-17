@@ -39,9 +39,9 @@ def main():
                           get_total_lines_of_code(three, 4), get_total_lines_of_code(brackets, 4),
                           get_total_lines_of_code(pdf, 4),get_total_lines_of_code(photo, 4)]
 
-    # total_metrics_client = [np.sum(get_column_as_array(boot, 2)), np.sum(get_column_as_array(reveal, 2)),
-    #                         np.sum(get_column_as_array(three, 2)),np.sum(get_column_as_array(brackets, 2)),
-    #                         np.sum(get_column_as_array(pdf, 2)),np.sum(get_column_as_array(photo, 2))]
+    total_metrics_client = [np.sum(get_column_as_array(boot, 2)), np.sum(get_column_as_array(reveal, 2)),
+                            np.sum(get_column_as_array(three, 2)),np.sum(get_column_as_array(brackets, 2)),
+                            np.sum(get_column_as_array(pdf, 2)),np.sum(get_column_as_array(photo, 2))]
     #
     client_metric_values = [client_metric1_values, client_metric2_values, client_metric3_values, client_metric4_values]
     #
@@ -52,13 +52,13 @@ def main():
     server_metric3_values = get_normalized_data(server_array, objects_server, 2, 4)
     server_metric4_values = get_normalized_data(server_array, objects_server, 3, 4)
     #
-    # total_lines_server = [get_total_lines_of_code(express, 4), get_total_lines_of_code(hexo, 4),
-    #                       get_total_lines_of_code(node, 4), get_total_lines_of_code(node_inspector, 4),
-    #                       get_total_lines_of_code(parse_server, 4), get_total_lines_of_code(socket, 4)]
-    #
-    # total_metrics_server = [np.sum(get_column_as_array(express, 2)), np.sum(get_column_as_array(hexo, 2)),
-    #                         np.sum(get_column_as_array(node, 2)), np.sum(get_column_as_array(node_inspector, 2)),
-    #                         np.sum(get_column_as_array(parse_server, 2)), np.sum(get_column_as_array(socket, 2))]
+    total_lines_server = [get_total_lines_of_code(express, 4), get_total_lines_of_code(hexo, 4),
+                          get_total_lines_of_code(node, 4), get_total_lines_of_code(node_inspector, 4),
+                          get_total_lines_of_code(parse_server, 4), get_total_lines_of_code(socket, 4)]
+
+    total_metrics_server = [np.sum(get_column_as_array(express, 2)), np.sum(get_column_as_array(hexo, 2)),
+                            np.sum(get_column_as_array(node, 2)), np.sum(get_column_as_array(node_inspector, 2)),
+                            np.sum(get_column_as_array(parse_server, 2)), np.sum(get_column_as_array(socket, 2))]
     #
     server_metric_values = [server_metric1_values, server_metric2_values, server_metric3_values, server_metric4_values]
     #
@@ -77,8 +77,8 @@ def main():
     # print('lines ', total_lines_server)
     # print('metrics', total_metrics_server)
     #
-    # bar_line_graph('Logging error handling callbacks', objects_client, total_lines_client, total_metrics_client)
-    # bar_line_graph('Logging error handling callbacks', objects_server, total_lines_server, total_metrics_server)
+    bar_line_graph('Logging error handling callbacks', objects_client, total_lines_client, total_metrics_client)
+    bar_line_graph('Logging error handling callbacks', objects_server, total_lines_server, total_metrics_server)
 
     # empty = []
     # consoleOnly = []
@@ -119,7 +119,7 @@ def main():
     # plot_two_groups_histogram(client_metric4_values, 'client', server_metric4_values, 'server',
     #                            'Number of logging callbacks')
 
-    # plot_two_groups_histogram(client_metric1_values, 'client', server_metric1_values, 'server', titles[0], titles[0] + '.png')
+    #plot_two_groups_histogram(client_metric1_values, 'client', server_metric1_values, 'server', titles[0], titles[0] + '.png')
     # plot_two_groups_histogram(client_metric2_values, 'client', server_metric2_values, 'server', titles[1], titles[1] + '.png')
     # plot_two_groups_histogram(client_metric3_values, 'client', server_metric3_values, 'server', titles[2], titles[2] + '.png')
     # plot_two_groups_histogram(client_metric4_values, 'client', server_metric4_values, 'server',titles[3], titles[3] + '.png')
