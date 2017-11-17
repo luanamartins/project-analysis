@@ -64,7 +64,7 @@ def get_randomly_n_items(data, n):
     return np.random.choice(len(data), size=n, replace=False)
 
 
-def get_normalized_data(array, objects, metric_index, loc_index):
+def get_normalized_rescaled_data(array, objects, metric_index, loc_index):
     values = []
 
     for i in range(0, len(array)):
@@ -74,6 +74,16 @@ def get_normalized_data(array, objects, metric_index, loc_index):
         values = values + list(filter(lambda x: x != 0, a))
 
     return values
+
+
+def get_normalized_data(matrices, metric_index, loc_index):
+    repos = []
+    for matrix in matrices:
+        metric = get_column_as_array(matrix, metric_index)
+        lloc = get_column_as_array(matrix, loc_index)
+        repos = repos + (np.sum(metric) * 100)/ np.sum(lloc)
+
+    return repos
 
 
 def percentage(matrix, index):
@@ -137,4 +147,3 @@ def summary(data):
     print(stats.describe(data))
 
 # print(rescale(normalize([5,0,0], 16000)))
-

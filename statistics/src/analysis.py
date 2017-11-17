@@ -30,10 +30,10 @@ def main():
     titles = ['Number of error handling callback functions', 'Number of Error-first callback functions',
               'Number of empty error handling callbacks', 'Number of logging error handling callbacks']
 
-    client_metric1_values = get_normalized_data(client_array, objects_client, 0, 4)
-    client_metric2_values = get_normalized_data(client_array, objects_client, 1, 4)
-    client_metric3_values = get_normalized_data(client_array, objects_client, 2, 4)
-    client_metric4_values = get_normalized_data(client_array, objects_client, 3, 4)
+    client_metric1_values = get_normalized_rescaled_data(client_array, objects_client, 0, 4)
+    client_metric2_values = get_normalized_rescaled_data(client_array, objects_client, 1, 4)
+    client_metric3_values = get_normalized_rescaled_data(client_array, objects_client, 2, 4)
+    client_metric4_values = get_normalized_rescaled_data(client_array, objects_client, 3, 4)
 
     total_lines_client = [get_total_lines_of_code(boot, 4), get_total_lines_of_code(reveal, 4),
                           get_total_lines_of_code(three, 4), get_total_lines_of_code(brackets, 4),
@@ -47,10 +47,10 @@ def main():
     #
     # print(total_lines_client)
     #
-    server_metric1_values = get_normalized_data(server_array, objects_server, 0, 4)
-    server_metric2_values = get_normalized_data(server_array, objects_server, 1, 4)
-    server_metric3_values = get_normalized_data(server_array, objects_server, 2, 4)
-    server_metric4_values = get_normalized_data(server_array, objects_server, 3, 4)
+    server_metric1_values = get_normalized_rescaled_data(server_array, objects_server, 0, 4)
+    server_metric2_values = get_normalized_rescaled_data(server_array, objects_server, 1, 4)
+    server_metric3_values = get_normalized_rescaled_data(server_array, objects_server, 2, 4)
+    server_metric4_values = get_normalized_rescaled_data(server_array, objects_server, 3, 4)
     #
     total_lines_server = [get_total_lines_of_code(express, 4), get_total_lines_of_code(hexo, 4),
                           get_total_lines_of_code(node, 4), get_total_lines_of_code(node_inspector, 4),
@@ -59,9 +59,10 @@ def main():
     total_metrics_server = [np.sum(get_column_as_array(express, 2)), np.sum(get_column_as_array(hexo, 2)),
                             np.sum(get_column_as_array(node, 2)), np.sum(get_column_as_array(node_inspector, 2)),
                             np.sum(get_column_as_array(parse_server, 2)), np.sum(get_column_as_array(socket, 2))]
-    #
+
     server_metric_values = [server_metric1_values, server_metric2_values, server_metric3_values, server_metric4_values]
-    #
+
+
     # print(total_lines_server)
 
     # bar_line_graph('Empty error handling callbacks', objects_client, total_lines_client, total_metrics_client)
@@ -76,9 +77,9 @@ def main():
     #                         np.sum(get_column_as_array(parse_server, 3)), np.sum(get_column_as_array(socket, 3))]
     # print('lines ', total_lines_server)
     # print('metrics', total_metrics_server)
-    #
-    bar_line_graph('Logging error handling callbacks', objects_client, total_lines_client, total_metrics_client)
-    bar_line_graph('Logging error handling callbacks', objects_server, total_lines_server, total_metrics_server)
+
+    # bar_line_graph('Logging error handling callbacks', objects_client, total_lines_client, total_metrics_client)
+    # bar_line_graph('Logging error handling callbacks', objects_server, total_lines_server, total_metrics_server)
 
     # empty = []
     # consoleOnly = []
@@ -130,7 +131,7 @@ def main():
     # plot_violinplot([client_metric3_values, server_metric3_values], ['Client', 'Server'], titles[2], titles[2] + '.png')
     # plot_violinplot([client_metric4_values, server_metric4_values], ['Client', 'Server'], titles[3], titles[3] + '.png')
 
-    calculate_test(titles, client_metric_values, server_metric_values)
+    # calculate_test(titles, client_metric_values, server_metric_values)
     # summary(client_metric1_values)
     # summary(server_metric1_values)
 
