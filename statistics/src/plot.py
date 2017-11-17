@@ -103,54 +103,6 @@ def double_bar_graph():
     pyplot.show()
 
 
-def table():
-    # fig, ax = pyplot.subplots()
-    #
-    # # Hide axes
-    # ax.xaxis.set_visible(False)
-    # ax.yaxis.set_visible(False)
-    #
-    # # Table from Ed Smith answer
-    # # ax = pyplot.subplot2grid((1, 1), (0, 0), colspan=2, rowspan=2)
-    #
-    # columns = ('Number of tadslkfalsfd', 'Low', 'Chg.', 'Chg. %', 'Time', 'T?')
-    # rows = ['Gold', 'Silver', 'Copper', 'Aluminum']
-    #
-    # data_list = np.random.randint(10, 90, size=(len(rows), len(columns)))
-    # pyplot.table(cellText=data_list,
-    #          rowLabels=rows,
-    #          colLabels=columns,
-    #          loc='upper center')
-    #
-    # ax.axis('off')
-    #
-    # pyplot.show()
-
-
-    # columns = ('Number of tadslkfalsfd', 'Low', 'Chg.', 'Chg. %', 'Time', 'T?')
-    # rows = ['Gold', 'Silver', 'Copper', 'Aluminum']
-    #
-    # data_list = np.random.randint(10, 90, size=(len(rows), len(columns)))
-    # pyplot.table(cellText=data_list)
-    # pyplot.show()
-
-    # columns = ('Number of tadslkfalsfd', 'Low', 'Chg.', 'Chg. %', 'Time', 'T?')
-    # rows = ['Gold', 'Silver', 'Copper', 'Aluminum']
-    # titles = ['Number of tadslkfalsfd', 'Low', 'Chg.', 'Chg. %', 'Time', 'T?']
-    # data_list = np.random.randint(10, 90, size=(len(rows), len(columns)))
-
-    data_table = toyplot.data.Table()
-    data_table["# NUMBER OF CALLBACKS"] = [1,2,3,4]
-    # read_csv("data/bootstrap.csv")
-    data_table = data_table[:10]
-    print(data_table)
-
-    canvas = toyplot.Canvas(width=1400, height=300)
-    table = canvas.table(data_table)
-    # table.cells.column[[0, 1]].width = 200
-    toyplot.browser.show(canvas)
-
-
 def bar_line_graph(metric_label, objects, lines_of_code, metric_values):
 
     fig = pyplot.figure()
