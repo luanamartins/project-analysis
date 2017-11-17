@@ -3,7 +3,7 @@ const utils = require('./utils');
 function handleAnalysis(node, reportObject) {
 
 
-    if (node.type === 'FunctionDeclaration' && !node.async) {
+    if (node.type === 'FunctionDeclaration' || node.type === 'ArrowFunctionExpression' && !node.async) {
 
         const functionBody = node.body.body;
 

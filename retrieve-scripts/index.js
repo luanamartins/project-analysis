@@ -6,11 +6,11 @@ const repoModule = require('./repository.js');
 const metricsModule = require('./metrics.js');
 const filesModule = require('./files.js');
 
-var projectPath = process.env.RETRIEVE_SCRIPTS_ROOT_PATH;
+const projectPath = process.env.RETRIEVE_SCRIPTS_ROOT_PATH;
 console.log(projectPath);
 
 let inputGithubFilepath = path.join(projectPath, 'github.txt');
-var outputGithubFilepath = path.join(projectPath, 'repos');
+const outputGithubFilepath = path.join(projectPath, 'repos');
 const checkoutRepos = true;
 
 function main() {
@@ -74,11 +74,11 @@ function main() {
 
 
 function test() {
-    const files = [path.join(projectPath, 'test.js'), path.join(projectPath, 'test.js')];
+    const files = [path.join(projectPath, 'test.js')];
     const repoObjectFilepath = path.join(projectPath, 'report-object.json');
     const metrics = metricsModule.handleMetrics(files, repoObjectFilepath);
     console.log(metrics);
 }
 
 
-main();
+test();

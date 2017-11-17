@@ -1,33 +1,41 @@
-var sloc  = require('sloc');
-var fs  = require('fs');
+var sloc = require('sloc');
+var fs = require('fs');
 
 function getNumberOfLines(node) {
-    if (node.block || node.body) {
+    let numberOfLines = 1;
 
-        const isBlockStatement = node.type === 'BlockStatement';
+    if (!node) {
+        return 0;
+    }
+
+    if (node.block || node.body) {
+        const isBlockStatement = node.type === 'BlockStatement' || node.type === 'Program';
         const isTryStatement = node.type === 'TryStatement';
 
         let nodeBody;
-        let numberOfLines = 0;
+        numberOfLines = 0;
 
         if (isBlockStatement) {
             nodeBody = node.body;
             numberOfLines = 0;
         } else if (isTryStatement) {
             nodeBody = node.block.body;
-            numberOfLines = 1;
+            const handlerNumberOfLines = getNumberOfLines(node.handler);
+            const finalizerNumberOfLines = getNumberOfLines(node.finalizer);
+            numberOfLines = 1 + handlerNumberOfLines + finalizerNumberOfLines;
         } else {
             nodeBody = node.body.body;
             numberOfLines = 1;
         }
-        if(nodeBody) {
+
+        if (nodeBody) {
             nodeBody.forEach(function (statement) {
                 numberOfLines += getNumberOfLines(statement);
             });
         }
-        return numberOfLines;
     }
-    return 1;
+
+    return numberOfLines;
 }
 
 function getNodeTypes(functionDeclaration, type) {
@@ -40,6 +48,22 @@ function getNodeTypes(functionDeclaration, type) {
     });
 
     return nodeTypes;
+}
+
+function getAllProperties(object) {
+    let keys = [];
+    for (var property in object) {
+        if (object.hasOwnProperty(property)) {
+            if (typeof(object[property]) === 'object' && object[property] !== null) {
+                const propsFromProperty = getAllProperties(object[property]);
+                keys = keys.concat(propsFromProperty);
+            } else {
+                keys.push(property);
+            }
+        }
+    }
+
+    return keys;
 }
 
 function traverse(obj, fn) {
@@ -62,5 +86,6 @@ function getGeneralStats(fileContents) {
 module.exports = {
     getNumberOfLines: getNumberOfLines,
     getNodeTypes: getNodeTypes,
-    getGeneralStats: getGeneralStats
+    getGeneralStats: getGeneralStats,
+    getAllProperties: getAllProperties
 };

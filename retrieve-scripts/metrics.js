@@ -1,6 +1,6 @@
 const esprima = require('esprima');
 const path = require('path');
-var jsonfile = require('jsonfile');
+const jsonfile = require('jsonfile');
 
 const fileModule = require('./files.js');
 const tryCatchModule = require('./metrics-try-catch.js');
@@ -44,6 +44,8 @@ function handleMetrics(files, jsonFilepath) {
                 };
 
                 let ast = esprima.parseScript(contents, options);
+                //console.log(ast);
+                console.log('total:', utils.getNumberOfLines(ast));
 
                 getMetrics(ast, filepath, repoObject);
                 console.log(filepath);

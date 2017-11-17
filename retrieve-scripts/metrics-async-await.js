@@ -42,7 +42,7 @@ function handleAnalysis(node, reportObject) {
         const finallyStatements = getFinallyStatements(tryStatements);
         reportObject.asyncAwait.numberOfFinallies = finallyStatements.length;
         finallyStatements.forEach(function (finallyStatement) {
-           reportObject.asyncAwait.numberOfFinalliesLines += utils.getNumberOfLines(finallyStatement);
+            reportObject.asyncAwait.numberOfFinalliesLines += utils.getNumberOfLines(finallyStatement);
         });
     }
 
