@@ -76,12 +76,13 @@ def get_normalized_rescaled_data(array, objects, metric_index, loc_index):
     return values
 
 
-def get_normalized_data(matrices, metric_index, loc_index):
+def normalize_metric(repositories, metric_index, loc_index):
     repos = []
-    for matrix in matrices:
-        metric = get_column_as_array(matrix, metric_index)
-        lloc = get_column_as_array(matrix, loc_index)
-        repos = repos + (np.sum(metric) * 100)/ np.sum(lloc)
+    for repo in repositories:
+        metric = get_column_as_array(repo, metric_index)
+        repo_total_lines = get_column_as_array(repo, loc_index)
+        sample_value = (np.sum(metric) * 100) / np.sum(repo_total_lines)
+        repos.append(sample_value)
 
     return repos
 
@@ -140,7 +141,7 @@ def calculate_test(titles, client_metric_values, server_metric_values):
 
 
 def normalize_array(array, objects, metric_index, loc_index):
-    get_normalized_data(array, objects, metric_index, loc_index)
+    normalize_metric(array, objects, metric_index, loc_index)
 
 
 def summary(data):
