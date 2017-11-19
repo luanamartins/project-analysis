@@ -44,7 +44,6 @@ function handleMetrics(files, jsonFilepath) {
                 };
 
                 let ast = esprima.parseScript(contents, options);
-                //console.log(ast);
                 console.log('total:', utils.getNumberOfLines(ast));
 
                 getMetrics(ast, filepath, repoObject);
