@@ -19,8 +19,7 @@ function main() {
     let allMetrics = [];
     repositoriesName.forEach(function (repositoryName) {
         let files = getFilesFromDirectory(repositoryName);
-        const repoObjectFilepath = path.join(projectPath, 'report-object.json');
-        const metricsPerScript = metricsModule.handleMetrics(files, repoObjectFilepath);
+        const metricsPerScript = metricsModule.handleMetrics(files, projectPath);
         allMetrics.push(metricsPerScript);
 
         const fields = [

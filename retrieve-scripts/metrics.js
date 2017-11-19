@@ -23,12 +23,13 @@ function traverse(obj, fn) {
     }
 }
 
-function handleMetrics(files, jsonFilepath) {
+function handleMetrics(files, projectPath) {
 
     let metrics = [];
     if (files) {
         files.forEach(function (filepath) {
             try {
+                const jsonFilepath = path.join(projectPath, 'report-object.json');
                 let repoObject = jsonfile.readFileSync(jsonFilepath);
 
                 let contents = fileModule.readFileSync(filepath, 'utf-8');
