@@ -18,13 +18,13 @@ function getRepoProjectName(fullRepoName) {
 }
 
 function getFilesFromDir(dir, extensionsToInclude, extensionsToExclude) {
-    var filesToReturn = [];
+    let filesToReturn = [];
 
     function walkDir(currentPath) {
-        var files = fs.readdirSync(currentPath);
-        for (var i in files) {
+        let files = fs.readdirSync(currentPath);
+        for (const i in files) {
 
-            var curFile = path.join(currentPath, files[i]);
+            let curFile = path.join(currentPath, files[i]);
 
             const acceptExtension = endsWithAny(curFile, extensionsToInclude);
             const notRejectExtension = !endsWithAny(curFile, extensionsToExclude);
@@ -37,7 +37,7 @@ function getFilesFromDir(dir, extensionsToInclude, extensionsToExclude) {
             }
 
         }
-    };
+    }
     walkDir(dir);
     return filesToReturn;
 }
