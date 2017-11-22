@@ -73,8 +73,7 @@ function getFilesFromDirectory(repositoryName) {
 
 function test() {
     const files = [path.join(projectPath, 'test.js')];
-    const repoObjectFilepath = path.join(projectPath, 'report-object.json');
-    const metrics = metricsModule.handleMetrics(files, repoObjectFilepath);
+    const metrics = metricsModule.handleMetrics(files, projectPath);
     console.log(metrics);
 }
 

@@ -1,6 +1,7 @@
 const esprima = require('esprima');
 const path = require('path');
 const jsonfile = require('jsonfile');
+const exec = require('sync-exec');
 
 const fileModule = require('./files.js');
 const tryCatchModule = require('./metrics-try-catch.js');
@@ -23,13 +24,19 @@ function traverse(obj, fn) {
     }
 }
 
+function createRepoObject(projectPath){
+    const jsonFilepath = path.join(projectPath, 'report-object.json');
+    return jsonfile.readFileSync(jsonFilepath);
+}
+
 function extractMetricsForFilepath(projectPath, filepath) {
 
-    const jsonFilepath = path.join(projectPath, 'report-object.json');
-    let repoObject = jsonfile.readFileSync(jsonFilepath);
+    let repoObject = createRepoObject(projectPath);
 
-    let contents = fileModule.readFileSync(filepath, 'utf-8');
-    const stats = utils.getGeneralStats(contents);
+    // let contents = fileModule.readFileSync(filepath, 'utf-8');
+    let fileContents = exec('uglifyjs ' + filepath + ' -b').stdout;
+
+    const stats = utils.getGeneralStats(fileContents);
 
     repoObject.numberOfLogicalLines = stats.source;
     repoObject.numberOfPhysicalLines = stats.total;
@@ -40,10 +47,10 @@ function extractMetricsForFilepath(projectPath, filepath) {
         comments: false
     };
 
-    let ast = esprima.parseScript(contents, options);
+    let ast = esprima.parseScript(fileContents, options);
     console.log(filepath);
     getMetrics(ast, filepath, repoObject);
-    
+
     return repoObject;
 }
 

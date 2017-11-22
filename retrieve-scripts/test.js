@@ -1,11 +1,20 @@
-function t() {
+
+function calling() {
     try {
-        http.get('http://google.com/this-throws-an-error');
-    } catch (err) {
-        console.log(err);
+    } catch (error) {
+        console.log('Error');
+        for (i = 0; i < 100; i++)
+        {
+            console.log('hello');
+        }
+
+
+
+
     } finally {
-        console.log('finally here');
-        console.log('finally here');
-        console.log('finally here');
+        console.log('');
+        console.log('');
+        console.log('');
+        throw new Error('Ops!');
     }
 }
