@@ -23,34 +23,38 @@ function traverse(obj, fn) {
     }
 }
 
+function extractMetricsForFilepath(projectPath, filepath) {
+
+    const jsonFilepath = path.join(projectPath, 'report-object.json');
+    let repoObject = jsonfile.readFileSync(jsonFilepath);
+
+    let contents = fileModule.readFileSync(filepath, 'utf-8');
+    const stats = utils.getGeneralStats(contents);
+
+    repoObject.numberOfLogicalLines = stats.source;
+    repoObject.numberOfPhysicalLines = stats.total;
+
+    const options = {
+        loc: true,
+        tolerant: true,
+        comments: false
+    };
+
+    let ast = esprima.parseScript(contents, options);
+    console.log(filepath);
+    getMetrics(ast, filepath, repoObject);
+    
+    return repoObject;
+}
+
 function handleMetrics(files, projectPath) {
 
     let metrics = [];
     if (files) {
         files.forEach(function (filepath) {
             try {
-                const jsonFilepath = path.join(projectPath, 'report-object.json');
-                let repoObject = jsonfile.readFileSync(jsonFilepath);
+                metrics.push(extractMetricsForFilepath(projectPath, filepath));
 
-                let contents = fileModule.readFileSync(filepath, 'utf-8');
-                const stats = utils.getGeneralStats(contents);
-
-                repoObject.numberOfLogicalLines = stats.source;
-                repoObject.numberOfPhysicalLines = stats.total;
-
-                const options = {
-                    loc: true,
-                    tolerant: true,
-                    comments: false
-                };
-
-                let ast = esprima.parseScript(contents, options);
-                console.log('total:', utils.getNumberOfLines(ast));
-
-                getMetrics(ast, filepath, repoObject);
-                console.log(filepath);
-
-                metrics.push(repoObject);
             } catch (err) {
                 console.log(err);
             }
