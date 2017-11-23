@@ -1,5 +1,7 @@
 var sloc = require('sloc');
 var fs = require('fs');
+const path = require('path');
+const jsonfile = require('jsonfile');
 
 function getNumberOfLines(node) {
     if (node.loc && node.loc.start && node.loc.end) {
@@ -7,6 +9,19 @@ function getNumberOfLines(node) {
     } else {
         return 0;
     }
+}
+
+function listPropertiesOf(object) {
+    let listOfProperties = [];
+    for (let key in object) {
+        if (typeof (object[key]) === 'object' && object[key] !== null) {
+            listOfProperties = listOfProperties.concat(listPropertiesOf(object[key]));
+        } else {
+            listOfProperties.push(key);
+        }
+    }
+
+    return listOfProperties;
 }
 
 function getNumberOfLinesOld(node) {
@@ -91,10 +106,17 @@ function getGeneralStats(fileContents) {
     return sloc(fileContents, "js");
 }
 
+function createRepoObject(projectPath){
+    const jsonFilepath = path.join(projectPath, 'report-object.json');
+    return jsonfile.readFileSync(jsonFilepath);
+}
+
 module.exports = {
     getNumberOfLinesOld: getNumberOfLinesOld,
     getNumberOfLines: getNumberOfLines,
     getNodeTypes: getNodeTypes,
     getGeneralStats: getGeneralStats,
-    getAllProperties: getAllProperties
+    getAllProperties: getAllProperties,
+    listPropertiesOf: listPropertiesOf,
+    createRepoObject: createRepoObject
 };

@@ -1,9 +1,6 @@
 const esprima = require('esprima');
-const path = require('path');
-const jsonfile = require('jsonfile');
 const exec = require('sync-exec');
 
-const fileModule = require('./files.js');
 const tryCatchModule = require('./metrics-try-catch.js');
 const promiseModule = require('./metrics-promise.js');
 const asyncAwaitModule = require('./metrics-async-await.js');
@@ -24,14 +21,9 @@ function traverse(obj, fn) {
     }
 }
 
-function createRepoObject(projectPath){
-    const jsonFilepath = path.join(projectPath, 'report-object.json');
-    return jsonfile.readFileSync(jsonFilepath);
-}
-
 function extractMetricsForFilepath(projectPath, filepath) {
 
-    let repoObject = createRepoObject(projectPath);
+    let repoObject = utils.createRepoObject(projectPath);
 
     // let contents = fileModule.readFileSync(filepath, 'utf-8');
     let fileContents = exec('uglifyjs ' + filepath + ' -b').stdout;

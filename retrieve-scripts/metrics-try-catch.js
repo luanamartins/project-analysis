@@ -2,10 +2,14 @@ const utils = require('./utils');
 
 function handleAnalysis(node, reportObject) {
 
+    if (node.type === 'FunctionDeclaration' || node.type === 'ArrowFunctionExpression' || node.type === 'FunctionExpression' && !node.async) {
 
-    if (node.type === 'FunctionDeclaration' || node.type === 'ArrowFunctionExpression' && !node.async) {
-
-        const functionBody = node.body.body;
+        let functionBody;
+        if (node.type === 'ArrowFunctionExpression') {
+            functionBody = node.body;
+        } else {
+            functionBody = node.body.body;
+        }
 
         const tryStatementNodes = getTryStatementNodes(functionBody);
 
@@ -78,11 +82,15 @@ function handleAnalysis(node, reportObject) {
 
 function getTryStatementNodes(functionBodyNode) {
     let tryNodes = [];
-    functionBodyNode.forEach(function (node) {
-        if (node.type === 'TryStatement') {
-            tryNodes.push(node);
-        }
-    });
+    if (Array.isArray(functionBodyNode)) {
+        functionBodyNode.forEach(function (node) {
+            if (node.type === 'TryStatement') {
+                tryNodes.push(node);
+            }
+        });
+    } else if (functionBodyNode.type === 'TryStatement') {
+        tryNodes.push(node);
+    }
     return tryNodes;
 }
 

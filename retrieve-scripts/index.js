@@ -5,13 +5,14 @@ const path = require('path');
 const repoModule = require('./repository.js');
 const metricsModule = require('./metrics.js');
 const filesModule = require('./files.js');
+const utils = require('./utils.js');
 
 const projectPath = process.env.RETRIEVE_SCRIPTS_ROOT_PATH;
 console.log(projectPath);
 
 let inputGithubFilepath = path.join(projectPath, 'github.txt');
 const outputGithubFilepath = path.join(projectPath, 'repos');
-const checkoutRepos = true;
+const checkoutRepos = false;
 
 function main() {
     let repositoriesName = getRepositoriesNames();
@@ -22,19 +23,15 @@ function main() {
         const metricsPerScript = metricsModule.handleMetrics(files, projectPath);
         allMetrics.push(metricsPerScript);
 
-        const fields = [
-            "numberOfCallbackErrorFunctions",
-            "numberOfFirstErrorArgFunctions",
-            "numberOfEmptyCallbacks",
-            "numberOfConsoleStatementOnly",
-            "numberOfLogicalLines",
-            "numberOfPhysicalLines"
-        ];
+        const fields = utils.listPropertiesOf(utils.createRepoObject(projectPath));
 
         const data = metricsPerScript.map(repoObject => {
-            let metrics = repoObject.callbacks;
-            metrics.numberOfLogicalLines = repoObject.numberOfLogicalLines;
-            metrics.numberOfPhysicalLines = repoObject.numberOfPhysicalLines;
+            let metrics = {
+                numberOfLogicalLines: repoObject.numberOfLogicalLines,
+                numberOfPhysicalLines: repoObject.numberOfPhysicalLines
+            };
+            Object.assign(metrics, repoObject.tryCatch, repoObject.promise, repoObject.asyncAwait, repoObject.events, repoObject.callbacks);
+
             return metrics;
         });
 
@@ -54,7 +51,7 @@ function getRepositoriesNames() {
             repositoriesName.push(repoName.replace("/", ""));
         });
     } else {
-        repositoriesName = ['three.js'];
+        repositoriesName = ['socket.io'];
     }
     return repositoriesName;
 }
@@ -77,5 +74,4 @@ function test() {
     console.log(metrics);
 }
 
-
-test();
+main();
