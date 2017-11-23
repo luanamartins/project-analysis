@@ -7,12 +7,6 @@ function handleAnalysis(node, reportObject) {
         node.type === 'ArrowFunctionExpression') {
         // If a function argument is called inside the function, this function is callback-accepting
 
-        // Let's use heuristics to identify callbacks for error handling:
-        //  - If an argument's name is "err" or "error" is considered error handling callback function
-        // Heuristics used by Ali Mesbah on "Don't call us: We'll call you"
-
-        // Still needs to consider ArrowExpressions () => {} (Not exactly)
-
         reportObject.callbacks.numberOfLines += utils.getNumberOfLines(node);
 
         let functionsArgsNames = node.params.map((param) => {
