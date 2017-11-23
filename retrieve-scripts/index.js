@@ -62,7 +62,9 @@ function getFilesFromDirectory(repositoryName) {
 
     let files = [];
     filenames.forEach(file => {
-        files.push(path.join(repoOutputDirectory, file));
+        if(!file.includes('node_modules')) {
+            files.push(path.join(repoOutputDirectory, file));
+        }
     });
     return files;
 }
