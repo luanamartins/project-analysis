@@ -49,17 +49,18 @@ function extractMetricsForFilepath(projectPath, filepath) {
 function handleMetrics(files, projectPath) {
 
     let metrics = [];
+    let errorOnFiles = [];
     if (files) {
         files.forEach(function (filepath) {
             try {
                 metrics.push(extractMetricsForFilepath(projectPath, filepath));
-
             } catch (err) {
                 console.log(err);
+                errorOnFiles.push(filepath);
             }
         });
     }
-    return metrics;
+    return [metrics, errorOnFiles];
 }
 
 function getMetrics(ast, filepath, reportObject) {
