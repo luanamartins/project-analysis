@@ -2,6 +2,14 @@ var sloc = require('sloc');
 var fs = require('fs');
 
 function getNumberOfLines(node) {
+    if (node.loc && node.loc.start && node.loc.end) {
+        return node.loc.end.line - node.loc.start.line;
+    } else {
+        return 0;
+    }
+}
+
+function getNumberOfLinesOld(node) {
     let numberOfLines = 1;
 
     if (!node) {
@@ -20,8 +28,8 @@ function getNumberOfLines(node) {
             numberOfLines = 0;
         } else if (isTryStatement) {
             nodeBody = node.block.body;
-            const handlerNumberOfLines = getNumberOfLines(node.handler);
-            const finalizerNumberOfLines = getNumberOfLines(node.finalizer);
+            const handlerNumberOfLines = getNumberOfLinesOld(node.handler);
+            const finalizerNumberOfLines = getNumberOfLinesOld(node.finalizer);
             numberOfLines = 1 + handlerNumberOfLines + finalizerNumberOfLines;
         } else {
             nodeBody = node.body.body;
@@ -30,7 +38,7 @@ function getNumberOfLines(node) {
 
         if (nodeBody) {
             nodeBody.forEach(function (statement) {
-                numberOfLines += getNumberOfLines(statement);
+                numberOfLines += getNumberOfLinesOld(statement);
             });
         }
     }
@@ -84,6 +92,7 @@ function getGeneralStats(fileContents) {
 }
 
 module.exports = {
+    getNumberOfLinesOld: getNumberOfLinesOld,
     getNumberOfLines: getNumberOfLines,
     getNodeTypes: getNodeTypes,
     getGeneralStats: getGeneralStats,
