@@ -7,8 +7,6 @@ function handleAnalysis(node, reportObject) {
         node.type === 'ArrowFunctionExpression') {
         // If a function argument is called inside the function, this function is callback-accepting
 
-        reportObject.callbacks.numberOfLines += utils.getNumberOfLines(node);
-
         let functionsArgsNames = node.params.map((param) => {
             return param.name;
         });
@@ -27,9 +25,12 @@ function handleAnalysis(node, reportObject) {
         }
 
         if (isErrorHandlingFunction) {
+
+            reportObject.callbacks.numberOfLines += utils.getNumberOfLines(node);
+
             if (node.body) {
                 let bodyFunction = node.body.body;
-                if (bodyFunction.length === 0) {
+                if (bodyFunction && bodyFunction.length === 0) {
                     reportObject.callbacks.numberOfEmptyCallbacks++;
                 }
 
