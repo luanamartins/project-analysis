@@ -1,3 +1,5 @@
+const utils = require('./utils');
+
 function handleAnalysis(node, reportObject) {
 
     const keywords = ['err', 'error', 'exception', 'reason', 'er'];
@@ -23,6 +25,7 @@ function handleAnalysis(node, reportObject) {
             if (eventRaisingMethods.includes(methodName)) {
                 if (methodName === 'emit' && firstArgEhm) {
                     reportObject.events.numberOfEventMethodsEmit++;
+                    reportObject.events.numberOfEventEmitLines += utils.getNumberOfLines(node);
                 }
             }
 

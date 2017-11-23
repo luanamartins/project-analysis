@@ -19,7 +19,18 @@ function handleAnalysis(node, reportObject) {
 
             if (callee.name === 'then' || (callee.property && callee.property.name === 'then')) {
                 reportObject.promise.numberOfPromiseThens++;
-                reportObject.promise.numberOfPromiseThenLines += utils.getNumberOfLines(node);
+                let numberOfLines = utils.getNumberOfLines(node);
+                const numberOfArgumentsOnThen = node.arguments.length;
+
+                if (numberOfLines === 0 && numberOfArgumentsOnThen !== 0) {
+                    numberOfLines = 1;
+                }
+                reportObject.promise.numberOfPromiseThenFulfilledLines += numberOfLines;
+
+                if (numberOfArgumentsOnThen === 2) {
+                    reportObject.promise.numberOfPromiseThenRejectedLines += utils.getNumberOfLines(node.arguments[1]);
+                }
+
             }
 
             if (callee.name === 'catch' || (callee.property && callee.property.name === 'catch')) {

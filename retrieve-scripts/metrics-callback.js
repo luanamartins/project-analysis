@@ -1,3 +1,5 @@
+const utils = require('./utils');
+
 function handleAnalysis(node, reportObject) {
 
     if (node.type === 'FunctionDeclaration' ||
@@ -10,6 +12,8 @@ function handleAnalysis(node, reportObject) {
         // Heuristics used by Ali Mesbah on "Don't call us: We'll call you"
 
         // Still needs to consider ArrowExpressions () => {} (Not exactly)
+
+        reportObject.callbacks.numberOfLines += utils.getNumberOfLines(node);
 
         let functionsArgsNames = node.params.map((param) => {
             return param.name;

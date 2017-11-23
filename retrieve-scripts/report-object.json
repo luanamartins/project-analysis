@@ -27,7 +27,8 @@
     "numberOfRejects": 0,
 
     "numberOfPromiseThens": 0,
-    "numberOfPromiseThenLines": 0,
+    "numberOfPromiseThenFulfilledLines": 0,
+    "numberOfPromiseThenRejectedLines": 0,
 
     "numberOfPromiseCatches": 0,
     "numberOfPromiseCatchesLines": 0,
@@ -56,6 +57,7 @@
     "numberOfEventMethodsOnce": 0,
 
     "numberOfEventMethodsEmit": 0,
+    "numberOfEventEmitLines": 0,
 
     "numberOfEventUncaughtException": 0,
     "numberOfEventUnhandledRejection": 0,
@@ -67,6 +69,7 @@
     "numberOfCallbackErrorFunctions": 0,
     "numberOfFirstErrorArgFunctions": 0,
     "numberOfEmptyCallbacks": 0,
-    "numberOfConsoleStatementOnly": 0
+    "numberOfConsoleStatementOnly": 0,
+    "numberOfLines": 0
   }
 }
