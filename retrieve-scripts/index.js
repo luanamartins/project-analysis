@@ -12,16 +12,15 @@ console.log(projectPath);
 
 let inputGithubFilepath = path.join(projectPath, 'github.txt');
 const outputGithubFilepath = path.join(projectPath, 'repos');
-const checkoutRepos = false;
+const checkoutRepos = true;
 
 function main() {
     let repositoriesName = getRepositoriesNames();
 
-    let allMetrics = [];
     repositoriesName.forEach(function (repositoryName) {
         let files = getFilesFromDirectory(repositoryName);
+
         const metricsPerScript = metricsModule.handleMetrics(files, projectPath);
-        allMetrics.push(metricsPerScript);
 
         const fields = utils.listPropertiesOf(utils.createRepoObject(projectPath));
 
@@ -62,7 +61,7 @@ function getFilesFromDirectory(repositoryName) {
 
     let files = [];
     filenames.forEach(file => {
-        if(!file.includes('node_modules')) {
+        if (!file.includes('node_modules')) {
             files.push(path.join(repoOutputDirectory, file));
         }
     });
