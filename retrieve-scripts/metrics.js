@@ -49,7 +49,6 @@ function extractMetricsForFilepath(projectPath, filepath) {
 function handleMetrics(files, projectPath) {
 
     let metrics = [];
-    let errorOnFiles = [];
     if (files) {
         files.forEach(function (filepath) {
             try {
@@ -60,7 +59,7 @@ function handleMetrics(files, projectPath) {
             }
         });
     }
-    return [metrics, errorOnFiles];
+    return metrics;
 }
 
 function getMetrics(ast, filepath, reportObject) {

@@ -5,7 +5,7 @@ const metricsModule = require('../../retrieve-scripts/metrics');
 module.exports = testCase({
     "TC01": function (test) {
         const filename = './test/data/try-catch/try-catch1.js';
-        const reportJsonFile = './retrieve-scripts/report-object.json';
+        const reportJsonFile = './retrieve-scripts';
 
         const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
         const metricsObject = metrics[0];
@@ -30,7 +30,7 @@ module.exports = testCase({
 
     "TC02": function (test) {
         const filename = './test/data/try-catch/try-catch2.js';
-        const reportJsonFile = './retrieve-scripts/report-object.json';
+        const reportJsonFile = './retrieve-scripts';
 
         const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
         const metricsObject = metrics[0];
@@ -55,7 +55,7 @@ module.exports = testCase({
 
     "TC03": function (test) {
         const filename = './test/data/try-catch/try-catch3.js';
-        const reportJsonFile = './retrieve-scripts/report-object.json';
+        const reportJsonFile = './retrieve-scripts';
 
         const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
         const metricsObject = metrics[0];
