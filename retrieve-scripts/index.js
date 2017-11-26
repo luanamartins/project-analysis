@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const path = require('path');
 const fs = require('fs');
+const async = require('async');
 
 const repoModule = require('./repository.js');
 const metricsModule = require('./metrics.js');
@@ -19,29 +20,63 @@ function main() {
 
     let reposToCheckout = repoModule.getRepos(inputGithubFilepath);
     let repositoriesName = checkoutRepos(reposToCheckout, false);
+    console.time('time');
 
-    repositoriesName.forEach(function (repositoryName) {
-        
-        const files = getFilesFromDirectory(repositoryName);
-
-        const metricsPerScript = metricsModule.handleMetrics(files, projectPath);
-
-        const repoObject = utils.createRepoObject(projectPath);
-
-        const fields = utils.listPropertiesOf(repoObject);
-
-        const data = metricsPerScript.map(repoObject => {
-            let metrics = {
-                numberOfLogicalLines: repoObject.numberOfLogicalLines,
-                numberOfPhysicalLines: repoObject.numberOfPhysicalLines
-            };
-            Object.assign(metrics, repoObject.tryCatch, repoObject.promise, repoObject.asyncAwait, repoObject.events, repoObject.callbacks);
-
-            return metrics;
-        });
-        filesModule.writeCsvFile('./statistics/data/' + repositoryName + '.csv', fields, data);
+    async.each(repositoriesName, shouldRunParallel, function (err) {
+        console.log(err);
     });
+
     console.log('Finished');
+    console.timeEnd('time');
+}
+
+function shouldRunParallel(repositoryName) {
+    async.waterfall(
+        [
+            async.apply(firstFunction, repositoryName),
+            secondFunction,
+            thirdFunction,
+            forthFunction,
+            fifthFunction
+        ]
+    );
+}
+
+function firstFunction(repositoryName, callback) {
+    const files = getFilesFromDirectory(repositoryName);
+    callback(null, repositoryName, files);
+}
+
+function secondFunction(repositoryName, files, callback) {
+    const metrics = metricsModule.handleMetrics(files, projectPath);
+    callback(null, repositoryName, metrics);
+}
+
+function thirdFunction(repositoryName, metrics, callback) {
+    const repoObject = utils.createRepoObject(projectPath);
+    const fields = utils.listPropertiesOf(repoObject);
+    callback(null, repositoryName, metrics, fields);
+}
+
+function forthFunction(repositoryName, metricsPerScript, fields, callback) {
+
+    const data = metricsPerScript.map(repoObject => {
+        let metrics = {
+            numberOfLogicalLines: repoObject.numberOfLogicalLines,
+            numberOfPhysicalLines: repoObject.numberOfPhysicalLines
+        };
+        Object.assign(metrics, repoObject.tryCatch, repoObject.promise, repoObject.asyncAwait, repoObject.events, repoObject.callbacks);
+
+        return metrics;
+    });
+
+    callback(null, repositoryName, fields, data);
+
+}
+
+function fifthFunction(repositoryName, fields, data, callback) {
+    filesModule.writeCsvFile('./statistics/data/' + repositoryName + '.csv', fields, data);
+    callback(null);
 }
 
 
@@ -54,7 +89,7 @@ function checkoutRepos(reposToCheckout, checkoutEverything) {
             repositoriesName.push(repoName.replace("/", ""));
         });
     } else {
-        repositoriesName = ['socket.io'];
+        repositoriesName = ['socket.io', 'hexo'];
     }
     return repositoriesName;
 }
