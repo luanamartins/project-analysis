@@ -37,32 +37,32 @@ function main() {
 function shouldRunParallel(repositoryName) {
     async.waterfall(
         [
-            async.apply(firstFunction, repositoryName),
-            secondFunction,
-            thirdFunction,
-            forthFunction,
-            fifthFunction
+            async.apply(getFilesOfRepository, repositoryName),
+            extractMetricsFromFiles,
+            getMetricsNamesForHeader,
+            getDataFromMetrics,
+            writeMetricsOnFile
         ]
     );
 }
 
-function firstFunction(repositoryName, callback) {
+function getFilesOfRepository(repositoryName, callback) {
     const files = getFilesFromDirectory(repositoryName);
     callback(null, repositoryName, files);
 }
 
-function secondFunction(repositoryName, files, callback) {
+function extractMetricsFromFiles(repositoryName, files, callback) {
     const metrics = metricsModule.handleMetrics(files, projectPath);
     callback(null, repositoryName, metrics);
 }
 
-function thirdFunction(repositoryName, metrics, callback) {
+function getMetricsNamesForHeader(repositoryName, metrics, callback) {
     const repoObject = utils.createRepoObject(projectPath);
     const fields = utils.listPropertiesOf(repoObject);
     callback(null, repositoryName, metrics, fields);
 }
 
-function forthFunction(repositoryName, metricsPerScript, fields, callback) {
+function getDataFromMetrics(repositoryName, metricsPerScript, fields, callback) {
 
     const data = metricsPerScript.map(repoObject => {
         let metrics = {
@@ -78,7 +78,7 @@ function forthFunction(repositoryName, metricsPerScript, fields, callback) {
 
 }
 
-function fifthFunction(repositoryName, fields, data, callback) {
+function writeMetricsOnFile(repositoryName, fields, data, callback) {
     filesModule.writeCsvFile('./statistics/data/' + repositoryName + '.csv', fields, data);
     callback(null);
 }
