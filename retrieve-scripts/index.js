@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const path = require('path');
+const fs = require('fs');
 
 const repoModule = require('./repository.js');
 const metricsModule = require('./metrics.js');
@@ -12,17 +13,22 @@ console.log(projectPath);
 
 let inputGithubFilepath = path.join(projectPath, 'github.txt');
 const outputGithubFilepath = path.join(projectPath, 'repos');
-const checkoutRepos = true;
+
 
 function main() {
-    let repositoriesName = getRepositoriesNames();
+
+    let reposToCheckout = repoModule.getRepos(inputGithubFilepath);
+    let repositoriesName = checkoutRepos(reposToCheckout, false);
 
     repositoriesName.forEach(function (repositoryName) {
-        let files = getFilesFromDirectory(repositoryName);
+        
+        const files = getFilesFromDirectory(repositoryName);
 
         const metricsPerScript = metricsModule.handleMetrics(files, projectPath);
 
-        const fields = utils.listPropertiesOf(utils.createRepoObject(projectPath));
+        const repoObject = utils.createRepoObject(projectPath);
+
+        const fields = utils.listPropertiesOf(repoObject);
 
         const data = metricsPerScript.map(repoObject => {
             let metrics = {
@@ -33,17 +39,15 @@ function main() {
 
             return metrics;
         });
-
         filesModule.writeCsvFile('./statistics/data/' + repositoryName + '.csv', fields, data);
-
     });
     console.log('Finished');
 }
 
-function getRepositoriesNames() {
+
+function checkoutRepos(reposToCheckout, checkoutEverything) {
     let repositoriesName = [];
-    if (checkoutRepos) {
-        let reposToCheckout = repoModule.getRepos(inputGithubFilepath);
+    if (checkoutEverything) {
         reposToCheckout.forEach(function (repo) {
             repoModule.checkoutRepoTo(repo, outputGithubFilepath);
             let repoName = repoModule.getRepoProjectName(repo);

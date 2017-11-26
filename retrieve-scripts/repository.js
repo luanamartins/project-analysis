@@ -1,7 +1,9 @@
 const path = require('path');
-var fs = require('fs');
-var _ = require('lodash');
-var clone = require('git-clone');
+const _ = require('lodash');
+const clone = require('git-clone');
+const fs = require('fs');
+
+const filesModule = require('./files');
 
 function checkoutRepoTo(repo, outputDirectory) {
     var repoName = repo.substring(repo.lastIndexOf("/"));
@@ -10,7 +12,8 @@ function checkoutRepoTo(repo, outputDirectory) {
 }
 
 function getRepos(filepath) {
-    return fs.readFileSync(filepath).toString().split("\n");
+    const content = filesModule.readFileSync(filepath);
+    return content.toString().split("\n");
 }
 
 function getRepoProjectName(fullRepoName) {
@@ -29,8 +32,11 @@ function getFilesFromDir(dir, extensionsToInclude, extensionsToExclude) {
             const acceptExtension = endsWithAny(curFile, extensionsToInclude);
             const notRejectExtension = !endsWithAny(curFile, extensionsToExclude);
             const isFile = fs.statSync(curFile).isFile();
+            const isNotOnNodeModules = !curFile.includes('node_modules');
 
-            if (isFile && acceptExtension && notRejectExtension) {
+            const shouldRetriveFile = isFile && acceptExtension && notRejectExtension && isNotOnNodeModules;
+
+            if (shouldRetriveFile) {
                 filesToReturn.push(curFile.replace(dir, ''));
             } else if (fs.statSync(curFile).isDirectory()) {
                 walkDir(curFile);
