@@ -20,14 +20,18 @@ function main() {
 
     let reposToCheckout = repoModule.getRepos(inputGithubFilepath);
     let repositoriesName = checkoutRepos(reposToCheckout, false);
-    console.time('time');
+    var start = new Date();
+    var hrstart = process.hrtime();
 
     async.each(repositoriesName, shouldRunParallel, function (err) {
         console.log(err);
     });
 
     console.log('Finished');
-    console.timeEnd('time');
+    var end = new Date() - start, hrend = process.hrtime(hrstart);
+
+    console.info("Execution time: %dms", end);
+    console.info("Execution time (hr): %ds %dms", hrend[0], hrend[1]/1000000);
 }
 
 function shouldRunParallel(repositoryName) {
