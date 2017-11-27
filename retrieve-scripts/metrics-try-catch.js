@@ -12,48 +12,16 @@ function handleAnalysis(node, reportObject) {
         }
 
         const tryStatementNodes = getTryStatementNodes(functionBody);
-
         tryStatementNodes.forEach(function (tryNode) {
-            reportObject.tryCatch.numberOfTries++;
-            if (tryNode.block.body.length === 0) {
-                reportObject.tryCatch.numberOfEmptyTries++;
-            } else {
-                const numberOfLines = utils.getNumberOfLines(tryNode);
-                reportObject.tryCatch.numberOfTriesLines += numberOfLines;
-                if (numberOfLines === 1) {
-                    reportObject.tryCatch.numberOfTriesWithUniqueStatement++;
-                }
-            }
+            handleTryStatement(reportObject, tryNode);
         });
 
         const catchClauseNodes = getCatchClauseNodes(tryStatementNodes);
-
         catchClauseNodes.forEach(function (catchClause) {
-            reportObject.tryCatch.numberOfCatches++;
-            const nodeBody = catchClause.body.body;
-
-            if (nodeBody) {
-                if (nodeBody.length === 0) {
-                    reportObject.tryCatch.numberOfEmptyCatches++;
-                } else {
-                    reportObject.tryCatch.numberOfCatchesLines += utils.getNumberOfLines(catchClause);
-                }
-            }
-
-            if (nodeBody.length === 1 && nodeBody[0].type === 'ExpressionStatement') {
-                if (nodeBody[0].expression.type === 'CallExpression') {
-                    const calleeObject = nodeBody[0].expression.callee.object;
-                    if (calleeObject && calleeObject.name === 'console') {
-                        reportObject.tryCatch.numberOfUniqueConsole++;
-                    }
-                }
-
-                reportObject.tryCatch.numberOfCatchesWithUniqueStatement++;
-            }
+            handleCatchClause(reportObject, catchClause);
         });
 
         const finallyStatements = getFinallyStatements(tryStatementNodes);
-
         finallyStatements.forEach(function (finallyNode) {
             reportObject.tryCatch.numberOfFinallies++;
             reportObject.tryCatch.numberOfFinalliesLines += utils.getNumberOfLines(finallyNode);
@@ -62,23 +30,63 @@ function handleAnalysis(node, reportObject) {
         const nodes = tryStatementNodes.concat(catchClauseNodes).concat(finallyStatements);
 
         const throwStatementNodes = getThrowStatementNodes(nodes);
-
         throwStatementNodes.forEach(function (throwNode) {
-            reportObject.tryCatch.numberOfThrows++;
-
-            if (throwNode.argument.type === 'Literal') {
-                // Throwing a string, number or something else
-                reportObject.tryCatch.numberOfThrowsLiteral++;
-
-            } else if (throwNode.argument.type === 'NewExpression' && throwNode.argument.callee.name === 'Error') {
-                // Creation of new Error object
-                reportObject.tryCatch.numberOfThrowsErrorObjects++;
-            }
+            handleThrowStatement(reportObject, throwNode);
         });
-
-
     }
 }
+
+function handleTryStatement(reportObject, tryNode) {
+    reportObject.tryCatch.numberOfTries++;
+    if (tryNode.block.body.length === 0) {
+        reportObject.tryCatch.numberOfEmptyTries++;
+    } else {
+        const numberOfLines = utils.getNumberOfLines(tryNode.block);
+        reportObject.tryCatch.numberOfTriesLines += numberOfLines;
+        const numberOfLinesOnTryBlock = numberOfLines - 1;
+        if (numberOfLinesOnTryBlock === 1) {
+            reportObject.tryCatch.numberOfTriesWithUniqueStatement++;
+        }
+    }
+}
+
+function handleCatchClause(reportObject, catchClause) {
+    reportObject.tryCatch.numberOfCatches++;
+    const nodeBody = catchClause.body.body;
+
+    if (nodeBody) {
+        if (nodeBody.length === 0) {
+            reportObject.tryCatch.numberOfEmptyCatches++;
+        } else {
+            reportObject.tryCatch.numberOfCatchesLines += utils.getNumberOfLines(catchClause);
+        }
+    }
+
+    if (nodeBody.length === 1 && nodeBody[0].type === 'ExpressionStatement') {
+        if (nodeBody[0].expression.type === 'CallExpression') {
+            const calleeObject = nodeBody[0].expression.callee.object;
+            if (calleeObject && calleeObject.name === 'console') {
+                reportObject.tryCatch.numberOfUniqueConsole++;
+            }
+        }
+
+        reportObject.tryCatch.numberOfCatchesWithUniqueStatement++;
+    }
+}
+
+function handleThrowStatement(reportObject, throwNode) {
+    reportObject.tryCatch.numberOfThrows++;
+
+    if (throwNode.argument.type === 'Literal') {
+        // Throwing a string, number or something else
+        reportObject.tryCatch.numberOfThrowsLiteral++;
+
+    } else if (throwNode.argument.type === 'NewExpression' && throwNode.argument.callee.name === 'Error') {
+        // Creation of new Error object
+        reportObject.tryCatch.numberOfThrowsErrorObjects++;
+    }
+}
+
 
 function getTryStatementNodes(functionBodyNode) {
     let tryNodes = [];
