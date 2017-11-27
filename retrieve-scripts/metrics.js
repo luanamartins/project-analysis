@@ -55,7 +55,6 @@ function handleMetrics(files, projectPath) {
                 metrics.push(extractMetricsForFilepath(projectPath, filepath));
             } catch (err) {
                 console.log(err);
-                errorOnFiles.push(filepath);
             }
         });
     }
