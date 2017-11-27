@@ -1,14 +1,14 @@
-var p = new Promise(function (resolve, reject) {
-    return reject('Error');
+var p = new Promise(function(resolve, reject) {
+    return reject("Error");
 });
 
-function print(message){
+function print(message) {
     console.log(message);
 }
 
-function training(){
-    return new Promise(function(resolve, reject){
-        resolve('Training solved!');
+function training() {
+    return new Promise(function(resolve, reject) {
+        resolve("Training solved!");
     });
 }
 

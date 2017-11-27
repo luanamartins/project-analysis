@@ -10,10 +10,9 @@ async function test() {
         try {
             await http.get('http://google.com/this-throws-an-error');
             break;
-        } catch(err) {
+        } catch (err) {
             console.log(err);
         }
     }
     console.log(i);
-
 }
