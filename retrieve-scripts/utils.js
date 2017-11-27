@@ -106,7 +106,7 @@ function getGeneralStats(fileContents) {
     return sloc(fileContents, "js");
 }
 
-function createRepoObject(projectPath){
+function createRepoObject(projectPath) {
     const jsonFilepath = path.join(projectPath, 'report-object.json');
     return jsonfile.readFileSync(jsonFilepath);
 }

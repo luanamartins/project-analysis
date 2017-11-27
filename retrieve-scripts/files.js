@@ -33,8 +33,8 @@ function writeCsvFile(filepath, fields, data) {
     //     }
     // ];
 
-    var csv = json2csv({ data: data, fields: fields });
-    fs.writeFile(filepath, csv, function(err) {
+    var csv = json2csv({data: data, fields: fields});
+    fs.writeFile(filepath, csv, function (err) {
         if (err) throw err;
         console.log('file saved');
     });

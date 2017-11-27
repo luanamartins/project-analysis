@@ -18,17 +18,17 @@ const outputGithubFilepath = path.join(projectPath, 'repos');
 
 function main() {
 
-    let reposToCheckout = repoModule.getRepos(inputGithubFilepath);
-    let repositoriesName = checkoutRepos(reposToCheckout, false);
-    var start = new Date();
-    var hrstart = process.hrtime();
+    const reposToCheckout = repoModule.getRepos(inputGithubFilepath);
+    const repositoriesName = checkoutRepos(reposToCheckout, true);
+    const start = new Date();
+    const hrstart = process.hrtime();
 
     async.each(repositoriesName, shouldRunParallel, function (err) {
         console.log(err);
     });
 
     console.log('Finished');
-    var end = new Date() - start, hrend = process.hrtime(hrstart);
+    const end = new Date() - start, hrend = process.hrtime(hrstart);
 
     console.info("Execution time: %dms", end);
     console.info("Execution time (hr): %ds %dms", hrend[0], hrend[1]/1000000);
@@ -118,4 +118,4 @@ function test() {
     console.log(metrics);
 }
 
-main();
+test();
