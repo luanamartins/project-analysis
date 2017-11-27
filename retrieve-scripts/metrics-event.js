@@ -35,7 +35,7 @@ function handleAnalysis(node, reportObject) {
                     const literalValue = node.arguments[0].raw;
 
                     // the method is an event listener or emitter and is listing/raising a string as event
-                    if (literalValue.startsWith("'") && literalValue.endsWith("'")) {
+                    if (isString(literalValue)) {
                         reportObject.events.totalOfStringEvents++;
                     }
 
@@ -55,6 +55,12 @@ function handleAnalysis(node, reportObject) {
         }
 
     }
+}
+
+function isString(literalValue){
+    const hasDoubleQuotes = literalValue.startsWith("\"") && literalValue.endsWith("\"");
+    const hasSingleQuotes = literalValue.startsWith("'") && literalValue.endsWith("'");
+    return hasDoubleQuotes || hasSingleQuotes;
 }
 
 function containsSubstring(array, item) {
