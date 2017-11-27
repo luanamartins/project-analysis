@@ -34,21 +34,23 @@ function handleAnalysis(node, reportObject) {
                     reportObject.callbacks.numberOfEmptyCallbacks++;
                 }
 
-                const ifStatements = getIfStatements(bodyFunction, listOfErrorHandlingArgs);
-                ifStatements.forEach(ifStatement => {
-                    const ifStatementConsequent = ifStatement.consequent;
-                    const ifStatementBody = ifStatementConsequent.body;
+                if(bodyFunction) {
+                    const ifStatements = getIfStatements(bodyFunction, listOfErrorHandlingArgs);
+                    ifStatements.forEach(ifStatement => {
+                        const ifStatementConsequent = ifStatement.consequent;
+                        const ifStatementBody = ifStatementConsequent.body;
 
-                    if (ifStatementBody) {
-                        if (ifStatementBody.length === 0) {
-                            reportObject.callbacks.numberOfEmptyCallbacks++;
-                        } else if (ifStatementBody.length === 1) {
+                        if (ifStatementBody) {
+                            if (ifStatementBody.length === 0) {
+                                reportObject.callbacks.numberOfEmptyCallbacks++;
+                            } else if (ifStatementBody.length === 1) {
+                                reportObject.callbacks.numberOfConsoleStatementOnly++;
+                            }
+                        } else {
                             reportObject.callbacks.numberOfConsoleStatementOnly++;
                         }
-                    } else {
-                        reportObject.callbacks.numberOfConsoleStatementOnly++;
-                    }
-                });
+                    });
+                }
             }
         }
     }
