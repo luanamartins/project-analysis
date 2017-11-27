@@ -26,24 +26,28 @@ function getFilesFromDir(dir, extensionsToInclude, extensionsToExclude) {
     function walkDir(currentPath) {
         let files = fs.readdirSync(currentPath);
         for (const i in files) {
+            try {
+                let curFile = path.join(currentPath, files[i]);
 
-            let curFile = path.join(currentPath, files[i]);
+                const acceptExtension = endsWithAny(curFile, extensionsToInclude);
+                const notRejectExtension = !endsWithAny(curFile, extensionsToExclude);
+                const isNotOnNodeModules = !curFile.includes('node_modules');
+                const isFile = fs.statSync(curFile).isFile();
 
-            const acceptExtension = endsWithAny(curFile, extensionsToInclude);
-            const notRejectExtension = !endsWithAny(curFile, extensionsToExclude);
-            const isFile = fs.statSync(curFile).isFile();
-            const isNotOnNodeModules = !curFile.includes('node_modules');
+                const shouldRetrieveFile = isFile && acceptExtension && notRejectExtension && isNotOnNodeModules;
 
-            const shouldRetriveFile = isFile && acceptExtension && notRejectExtension && isNotOnNodeModules;
-
-            if (shouldRetriveFile) {
-                filesToReturn.push(curFile.replace(dir, ''));
-            } else if (fs.statSync(curFile).isDirectory()) {
-                walkDir(curFile);
+                if (shouldRetrieveFile) {
+                    filesToReturn.push(curFile.replace(dir, ''));
+                } else if (fs.statSync(curFile).isDirectory()) {
+                    walkDir(curFile);
+                }
+            } catch (err) {
+                console.log(err);
             }
 
         }
     }
+
     walkDir(dir);
     return filesToReturn;
 }
