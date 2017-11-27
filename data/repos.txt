@@ -1,1 +1,45 @@
 https://github.com/twbs/bootstrap
+https://github.com/hakimel/reveal.js
+https://github.com/mrdoob/three.js
+https://github.com/adobe/brackets
+https://github.com/mozilla/pdf.js
+https://github.com/dimsemenov/PhotoSwipe
+https://github.com/nodejs/node
+https://github.com/socketio/socket.io
+https://github.com/expressjs/express
+https://github.com/hexojs/hexo
+https://github.com/parse-community/parse-server
+https://github.com/node-inspector/node-inspector
+
+
+1ª execução:
+Execution time: 7006486ms
+Execution time (hr): 7006s 485.905297ms
+
+
+client:
+https://github.com/d3/d3
+https://github.com/meteor/meteor
+https://github.com/facebookincubator/create-react-app
+https://github.com/Semantic-Org/Semantic-UI
+https://github.com/reactjs/redux
+https://github.com/chartjs/Chart.js
+https://github.com/impress/impress.js
+https://github.com/Dogfalo/materialize
+https://github.com/blueimp/jQuery-File-Upload
+https://github.com/jashkenas/backbone
+https://github.com/zurb/foundation-sites
+https://github.com/adam-p/markdown-here
+https://github.com/babel/babel
+
+server:
+https://github.com/atom/atom
+https://github.com/facebook/react-native
+https://github.com/webpack/webpack
+https://github.com/axios/axios
+https://github.com/lodash/lodash
+https://github.com/typicode/json-server
+https://github.com/gulpjs/gulp
+https://github.com/TryGhost/Ghost
+https://github.com/yarnpkg/yarn
+
