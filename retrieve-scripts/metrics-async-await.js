@@ -22,9 +22,6 @@ function handleAnalysis(node, reportObject) {
             if (bodyHandlerCatch.length === 0) {
                 // Left the catch block empty
                 reportObject.asyncAwait.numberOfEmptyCatches++;
-            } else {
-                // Number of lines on catch block
-                reportObject.asyncAwait.numberOfCatchesLines += bodyHandlerCatch.length;
             }
             reportObject.asyncAwait.numberOfCatchesLines += utils.getNumberOfLines(catchClause);
 
