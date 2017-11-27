@@ -50,7 +50,7 @@ module.exports = testCase({
 
     "TC04": function (test) {
         let filename = './test/data/callback/callback4.js';
-        const reportJsonFile = './retrieve-scripts/report-object.json';
+        const reportJsonFile = './retrieve-scripts';
         const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
 
         const metricsObject = metrics[0];
@@ -65,7 +65,7 @@ module.exports = testCase({
 
     "TC05": function (test) {
         let filename = './test/data/callback/callback5.js';
-        const reportJsonFile = './retrieve-scripts/report-object.json';
+        const reportJsonFile = './retrieve-scripts';
         const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
 
         const metricsObject = metrics[0];

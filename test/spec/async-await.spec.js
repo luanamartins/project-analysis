@@ -94,11 +94,11 @@ module.exports = testCase({
 
         test.equal(metricsObject.asyncAwait.numberOfCatches, 1);
         test.equal(metricsObject.asyncAwait.numberOfEmptyCatches, 0);
-        test.equal(metricsObject.asyncAwait.numberOfCatchesLines, 1);
+        test.equal(metricsObject.asyncAwait.numberOfCatchesLines, 2);
         test.equal(metricsObject.asyncAwait.numberOfUniqueConsole, 1);
 
         test.equal(metricsObject.asyncAwait.numberOfFinallies, 1);
-        test.equal(metricsObject.asyncAwait.numberOfFinalliesLines, 3);
+        test.equal(metricsObject.asyncAwait.numberOfFinalliesLines, 4);
 
         test.done();
     }
