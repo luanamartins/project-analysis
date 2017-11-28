@@ -49,7 +49,7 @@ module.exports = testCase({
         test.equal(metricsObject.promise.numberOfPromiseThenRejectedLines, 0);
 
         test.equal(metricsObject.promise.numberOfPromiseCatches, 1);
-        test.equal(metricsObject.promise.numberOfPromiseCatchesLines, 1);
+        test.equal(metricsObject.promise.numberOfPromiseCatchesLines, 0);
         test.equal(metricsObject.promise.numberOfEmptyFunctionsOnPromiseCatches, 0);
 
         test.equal(metricsObject.promise.numberOfPromiseRaces, 0);
@@ -72,11 +72,11 @@ module.exports = testCase({
         test.equal(metricsObject.promise.numberOfRejects, 1);
 
         test.equal(metricsObject.promise.numberOfPromiseThens, 1);
-        test.equal(metricsObject.promise.numberOfPromiseThenFulfilledLines, 0);
+        test.equal(metricsObject.promise.numberOfPromiseThenFulfilledLines, 1);
         test.equal(metricsObject.promise.numberOfPromiseThenRejectedLines, 0);
 
         test.equal(metricsObject.promise.numberOfPromiseCatches, 1);
-        test.equal(metricsObject.promise.numberOfPromiseCatchesLines, 1);
+        test.equal(metricsObject.promise.numberOfPromiseCatchesLines, 0);
         test.equal(metricsObject.promise.numberOfEmptyFunctionsOnPromiseCatches, 0);
 
         test.equal(metricsObject.promise.numberOfPromiseRaces, 0);
@@ -120,7 +120,7 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.promise.numberOfPromises, 3);
+        test.equal(metricsObject.promise.numberOfPromises, 1);
 
         test.equal(metricsObject.promise.numberOfResolves, 2);
         test.equal(metricsObject.promise.numberOfRejects, 1);
@@ -134,6 +134,87 @@ module.exports = testCase({
         test.equal(metricsObject.promise.numberOfEmptyFunctionsOnPromiseCatches, 0);
 
         test.equal(metricsObject.promise.numberOfPromiseRaces, 1);
+        test.equal(metricsObject.promise.numberOfPromiseAll, 0);
+
+        test.done();
+    },
+
+    "TC06": function (test) {
+
+        let filename = './test/data/promise/promise6.js';
+        const reportJsonFile = './retrieve-scripts';
+        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+
+        const metricsObject = metrics[0];
+
+        test.equal(metricsObject.promise.numberOfPromises, 1);
+
+        test.equal(metricsObject.promise.numberOfResolves, 0);
+        test.equal(metricsObject.promise.numberOfRejects, 1);
+
+        test.equal(metricsObject.promise.numberOfPromiseThens, 1);
+        test.equal(metricsObject.promise.numberOfPromiseThenFulfilledLines, 1);
+        test.equal(metricsObject.promise.numberOfPromiseThenRejectedLines, 0);
+
+        test.equal(metricsObject.promise.numberOfPromiseCatches, 1);
+        test.equal(metricsObject.promise.numberOfPromiseCatchesLines, 5);
+        test.equal(metricsObject.promise.numberOfEmptyFunctionsOnPromiseCatches, 0);
+
+        test.equal(metricsObject.promise.numberOfPromiseRaces, 0);
+        test.equal(metricsObject.promise.numberOfPromiseAll, 0);
+
+        test.done();
+    },
+
+    "TC07": function (test) {
+
+        let filename = './test/data/promise/promise7.js';
+        const reportJsonFile = './retrieve-scripts';
+        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+
+        const metricsObject = metrics[0];
+
+        test.equal(metricsObject.promise.numberOfPromises, 1);
+
+        test.equal(metricsObject.promise.numberOfResolves, 0);
+        test.equal(metricsObject.promise.numberOfRejects, 1);
+
+        test.equal(metricsObject.promise.numberOfPromiseThens, 1);
+        test.equal(metricsObject.promise.numberOfPromiseThenFulfilledLines, 3);
+        test.equal(metricsObject.promise.numberOfPromiseThenRejectedLines, 0);
+
+        test.equal(metricsObject.promise.numberOfPromiseCatches, 1);
+        test.equal(metricsObject.promise.numberOfPromiseCatchesLines, 5);
+        test.equal(metricsObject.promise.numberOfEmptyFunctionsOnPromiseCatches, 0);
+
+        test.equal(metricsObject.promise.numberOfPromiseRaces, 0);
+        test.equal(metricsObject.promise.numberOfPromiseAll, 0);
+
+        test.done();
+    },
+
+    "TC08": function (test) {
+
+        let filename = './test/data/promise/promise8.js';
+        const reportJsonFile = './retrieve-scripts';
+        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+
+        const metricsObject = metrics[0];
+
+        test.equal(metricsObject.promise.numberOfPromises, 1);
+
+        test.equal(metricsObject.promise.numberOfResolves, 0);
+        test.equal(metricsObject.promise.numberOfRejects, 1);
+
+        test.equal(metricsObject.promise.numberOfPromiseThens, 1);
+        test.equal(metricsObject.promise.numberOfPromiseThenFulfilledLines, 3);
+        test.equal(metricsObject.promise.numberOfPromiseThenRejectedLines, 8);
+
+        test.equal(metricsObject.promise.numberOfPromiseCatches, 0);
+        test.equal(metricsObject.promise.numberOfPromiseCatchesLines, 0);
+        test.equal(metricsObject.promise.numberOfEmptyFunctionsOnPromiseCatches, 0);
+
+        test.equal(metricsObject.promise.numberOfPromiseRaces, 0);
         test.equal(metricsObject.promise.numberOfPromiseAll, 0);
 
         test.done();
