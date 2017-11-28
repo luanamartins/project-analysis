@@ -1,0 +1,16 @@
+"numberOfLogicalLines","numberOfPhysicalLines","numberOfTries","numberOfEmptyTries","numberOfTriesLines","numberOfTriesWithUniqueStatement","numberOfCatches","numberOfEmptyCatches","numberOfCatchesLines","numberOfUniqueConsole","numberOfCatchesWithUniqueStatement","numberOfThrows","numberOfThrowsLiteral","numberOfThrowsErrorObjects","numberOfFinallies","numberOfFinalliesLines","numberOfPromises","numberOfResolves","numberOfRejects","numberOfPromiseThens","numberOfPromiseThenFulfilledLines","numberOfPromiseThenRejectedLines","numberOfPromiseCatches","numberOfPromiseCatchesLines","numberOfEmptyFunctionsOnPromiseCatches","numberOfPromiseRaces","numberOfPromiseAll","numberOfAsyncs","numberOfAwaits","numberOfTries","numberOfTriesLines","numberOfCatches","numberOfEmptyCatches","numberOfCatchesLines","numberOfUniqueConsole","numberOfFinallies","numberOfFinalliesLines","numberOfEventMethodsOn","numberOfEventMethodsOnce","numberOfEventMethodsEmit","numberOfEventEmitLines","numberOfEventUncaughtException","numberOfEventUnhandledRejection","totalOfStringEvents","totalOfEventsExceptStringType","numberOfCallbackErrorFunctions","numberOfFirstErrorArgFunctions","numberOfEmptyCallbacks","numberOfConsoleStatementOnly","numberOfLines"
+49,49,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,4
+40,42,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+12,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+588,588,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+81,81,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+1287,1287,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+91,91,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+861,861,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0
+1569,1569,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+484,484,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,9
+396,396,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+2416,2429,0,0,0,1,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,72
+615,620,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,17,3,0,0,117
+1147,1154,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
