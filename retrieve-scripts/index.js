@@ -23,15 +23,17 @@ function main() {
     const start = new Date();
     const hrstart = process.hrtime();
 
-    async.each(repositoriesName, shouldRunParallel, function (err) {
-        console.log(err);
+    async.each(repositoriesName, shouldRunParallel, function (err, callback) {
+        if(err) {
+            console.log(err);
+        }
+        console.log('Finished');
+        const end = new Date() - start, hrend = process.hrtime(hrstart);
+
+        console.info("Execution time: %dms", end);
+        console.info("Execution time (hr): %ds %dms", hrend[0], hrend[1]/1000000);
+        callback();
     });
-
-    console.log('Finished');
-    const end = new Date() - start, hrend = process.hrtime(hrstart);
-
-    console.info("Execution time: %dms", end);
-    console.info("Execution time (hr): %ds %dms", hrend[0], hrend[1]/1000000);
 }
 
 function shouldRunParallel(repositoryName) {
@@ -118,4 +120,4 @@ function test() {
     console.log(metrics);
 }
 
-test();
+main();
