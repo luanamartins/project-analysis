@@ -40,8 +40,10 @@ def main():
     summary(client_normalized)
     summary(server_normalized)
 
-    calculate_factor(np.matrix(client_matrices))
-    calculate_factor(np.matrix(server_matrices))
+    # DescribeResult(nobs=22, minmax=(0.0, 1086.9565217391305), mean=67.638598376599106, variance=54699.624228211855,
+    #                skewness=4.025973891574418, kurtosis=15.011438235850928)
+    # DescribeResult(nobs=22, minmax=(0.0, 1838.3470069887571), mean=167.24456997219079, variance=172608.21495526787,
+    #                skewness=3.2934849672734487, kurtosis=10.330401131671172)
 
 
 
