@@ -60,6 +60,13 @@ def get_data(matrices, index_metric, index_loc):
     return data
 
 
+# TO FIX
+def calculate_factor(matrix):
+    rows = matrix.shape[0]
+    for x in range(0, rows):
+        print(rows.min())
+
+
 def get_randomly_n_items(data, n):
     return np.random.choice(len(data), size=n, replace=False)
 
@@ -79,13 +86,15 @@ def get_normalized_rescaled_data(array, objects, metric_index, loc_index):
 def normalize_metric(repositories, metric_index, loc_index):
     repos = []
     for repo in repositories:
-        metric = get_column_as_array(repo, metric_index)
-        repo_total_lines = get_column_as_array(repo, loc_index)
-        sample_value = (np.sum(metric) * 100) / np.sum(repo_total_lines)
+        metric_total = np.sum(get_column_as_array(repo, metric_index))
+        repo_total_lines = np.sum(get_column_as_array(repo, loc_index))
+        if repo_total_lines != 0:
+            sample_value = (metric_total * 100000) / repo_total_lines
+        else:
+            sample_value = 0
         repos.append(sample_value)
 
     return repos
-
 
 def percentage(matrix, index):
     total_of_callbacks = sum(get_column_as_array(matrix, 0)) + sum(get_column_as_array(matrix, 1))
@@ -94,6 +103,10 @@ def percentage(matrix, index):
         return 0
     else:
         return (total_of_metric / total_of_callbacks) * 100
+
+
+def mann_whitney_u_test(client_array, server_array):
+    return mannwhitneyu(client_array, server_array, alternative='two-sided')
 
 
 def calculate_test(titles, client_metric_values, server_metric_values):

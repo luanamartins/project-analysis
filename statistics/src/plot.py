@@ -62,19 +62,19 @@ def bar_graph(data, objects, ylabel, title):
     pyplot.show()
    
  
-def double_bar_graph():
-    N = 5
-    men_means = (20, 35, 30, 35, 27)
-    men_std = (2, 3, 4, 1, 2)
+def double_bar_graph(n, men_means, men_std, women_means, women_std):
+    # n = 5
+    # men_means = (20, 35, 30, 35, 27)
+    # men_std = (2, 3, 4, 1, 2)
 
-    ind = np.arange(N)  # the x locations for the groups
+    ind = np.arange(n)  # the x locations for the groups
     width = 0.35  # the width of the bars
 
     fig, ax = pyplot.subplots()
     rects1 = ax.bar(ind, men_means, width, color='b', yerr=men_std)
 
-    women_means = (25, 32, 34, 20, 25)
-    women_std = (3, 5, 2, 3, 3)
+    # women_means = (25, 32, 34, 20, 25)
+    # women_std = (3, 5, 2, 3, 3)
     rects2 = ax.bar(ind + width, women_means, width, color='r', yerr=women_std)
 
     # add some text for labels, title and axes ticks

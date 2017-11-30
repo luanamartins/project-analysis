@@ -1,11 +1,51 @@
-from scipy.stats import mannwhitneyu
-from numpy import genfromtxt
+from numpy import *
+from os import listdir
+from os.path import isfile, join
+import numpy as np
+
 
 from src.stats import *
 from src.plot import *
 
 
 def main():
+    client_path = 'data/client'
+    client_files = [f for f in listdir(client_path) if isfile(join(client_path, f))]
+    client_matrices = [genfromtxt(client_path + '/' + filename, delimiter=',', skip_header=1) for filename in client_files]
+
+    server_path = 'data/server'
+    server_files = [f for f in listdir(server_path) if isfile(join(server_path, f))]
+    server_matrices = [genfromtxt(server_path + '/' + filename, delimiter=',', skip_header=1) for filename in
+                       server_files]
+
+    metric_indexes = range(2, 49)
+    loc_index = 0
+
+    client_normalized = normalize_metric(client_matrices, metric_indexes[20], loc_index)
+    server_normalized = normalize_metric(server_matrices, metric_indexes[20], loc_index)
+
+    # plot_violinplot(client, [], 'fasd', 'adfa')
+    
+    client_means = np.mean(client_normalized, axis=0)
+    server_means = np.mean(server_normalized, axis=0)
+
+    client_std = np.std(client_normalized, ddof=1)
+    server_std = np.std(client_normalized, ddof=1)
+
+    # double_bar_graph(1, client_means, client_std, server_means, server_std)
+
+    print(client_normalized)
+    print(server_normalized)
+
+    summary(client_normalized)
+    summary(server_normalized)
+
+    calculate_factor(np.matrix(client_matrices))
+    calculate_factor(np.matrix(server_matrices))
+
+
+
+def main2():
 
     boot = genfromtxt('data/bootstrap.csv', delimiter=',', skip_header=1)
     reveal = genfromtxt('data/reveal.js.csv', delimiter=',', skip_header=1)
@@ -60,8 +100,8 @@ def main():
     # [0.0, 0.0, 0.0, 0.0069607183461333211, 0.0, 0.0]
     # [0.0, 0.0, 0.00098298574547795847, 0.0017282051725180814, 0.0, 0.0]
 
-    client = normalize_metric(client_array, 3, 4)
-    server = normalize_metric(server_array, 3, 4)
+    client = normalize_metric(client_array, 3, 0)
+    server = normalize_metric(server_array, 3, 0)
     print(client)
     print(server)
 
@@ -115,7 +155,7 @@ def main():
     #                         np.sum(get_column_as_array(node, 3)), np.sum(get_column_as_array(node_inspector, 3)),
     #                         np.sum(get_column_as_array(parse_server, 3)), np.sum(get_column_as_array(socket, 3))]
     # print('lines ', total_lines_server)
-    # print('metrics', total_metrics_server)
+    # print('metrics.txt', total_metrics_server)
 
     # bar_line_graph('Logging error handling callbacks', objects_client, total_lines_client, total_metrics_client)
     # bar_line_graph('Logging error handling callbacks', objects_server, total_lines_server, total_metrics_server)
