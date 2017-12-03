@@ -60,11 +60,30 @@ def get_data(matrices, index_metric, index_loc):
     return data
 
 
-# TO FIX
-def calculate_factor(matrix):
-    rows = matrix.shape[0]
-    for x in range(0, rows):
-        print(rows.min())
+def convert_matrix_to_array(matrix):
+    result = []
+    for row in matrix:
+        row_metrics = row[2:]
+        result = [a for a in row_metrics if a != 0] + result
+    return result
+
+
+def divide(divisor, dividend):
+    return dividend / divisor
+
+
+def calculate_factor_for_matrix(matrix):
+    total_lines_repo = sum(matrix[0])
+    arr = [i / total_lines_repo for i in convert_matrix_to_array(matrix)]
+    factor = np.amin(arr)
+    return factor
+
+
+def calculate_factor(matrices):
+    factors = []
+    for matrix in matrices:
+        factors.append(calculate_factor_for_matrix(matrix))
+    return np.amin(factors)
 
 
 def get_randomly_n_items(data, n):
@@ -95,6 +114,7 @@ def normalize_metric(repositories, metric_index, loc_index):
         repos.append(sample_value)
 
     return repos
+
 
 def percentage(matrix, index):
     total_of_callbacks = sum(get_column_as_array(matrix, 0)) + sum(get_column_as_array(matrix, 1))
