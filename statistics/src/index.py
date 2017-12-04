@@ -30,11 +30,11 @@ def main():
 
     execute_tests(client_matrices, factor, loc_index, metrics_labels, server_matrices)
 
-    client_error_handling = error_handling_percent_per_matrix(client_matrices, loc_index)
-    server_error_handling = error_handling_percent_per_matrix(server_matrices, loc_index)
-
-    print('Client: ', client_error_handling)
-    print('Server: ', server_error_handling)
+    # client_error_handling = error_handling_percent_per_matrix(client_matrices, loc_index)
+    # server_error_handling = error_handling_percent_per_matrix(server_matrices, loc_index)
+    #
+    # print('Client: ', client_error_handling)
+    # print('Server: ', server_error_handling)
 
         # bar_line_graph('Empty error handling callbacks', objects_client, total_lines_client, total_metrics_client)
         # bar_line_graph('Empty error handling callbacks', objects_server, total_lines_server, total_metrics_server)
@@ -57,8 +57,10 @@ def main():
 
 
 def execute_tests(client_matrices, factor, loc_index, metrics_labels, server_matrices):
-    for metric_index in range(2, 50):
+    # less, greater, two-sided
+    alternative = 'less'
 
+    for metric_index in range(2, 50):
         client_normalized = normalize_metric_by_script(client_matrices, metric_index, loc_index, factor)
         server_normalized = normalize_metric_by_script(server_matrices, metric_index, loc_index, factor)
         print('------------------------------------------------------------------')
@@ -71,7 +73,7 @@ def execute_tests(client_matrices, factor, loc_index, metrics_labels, server_mat
         print('Client: ', client_normalized)
         print('Server: ', server_normalized)
         try:
-            test_result = execute_test(client_normalized, server_normalized)
+            test_result = execute_test(client_normalized, server_normalized, alternative)
             print(test_result)
             print(test_result.pvalue)
             # plot_two_groups_histogram_test(client_normalized, server_normalized, metrics_labels[metric_index])

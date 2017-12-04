@@ -120,8 +120,9 @@ def error_handling_percent_per_matrix(matrices, loc_index):
 
     return (error_handling_lines * 100) / total_lines_repository
 
-def execute_test(client_metric, server_metric):
-    result = mannwhitneyu(client_metric, server_metric, alternative='greater')
+
+def execute_test(client_metric, server_metric, alternative):
+    result = mannwhitneyu(client_metric, server_metric, alternative=alternative)
     return result
 
 
