@@ -48,16 +48,6 @@ def main():
             print(inst)
         print('------------------------------------------------------------------')
 
-    # client_means = np.mean(client_normalized, axis=0)
-    # server_means = np.mean(server_normalized, axis=0)
-    #
-    # client_std = np.std(client_normalized, ddof=1)
-    # server_std = np.std(client_normalized, ddof=1)
-    #
-    # print(calculate_factor(client_matrices))
-    # print(calculate_factor(server_matrices))
-
-
 
 def main2():
 
@@ -155,8 +145,6 @@ def main2():
     #
     # server_metric_values = [server_metric1_values, server_metric2_values, server_metric3_values, server_metric4_values]
 
-
-    # print(total_lines_server)
 
     # bar_line_graph('Empty error handling callbacks', objects_client, total_lines_client, total_metrics_client)
     # bar_line_graph('Empty error handling callbacks', objects_server, total_lines_server, total_metrics_server)

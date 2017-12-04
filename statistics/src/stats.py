@@ -91,7 +91,6 @@ def normalize_metric_by_repository(repositories, metric_index, loc_index, factor
             repos.append(sample_value)
         # else:
         #     sample_value = 0
-
     return repos
 
 def normalize_metric_by_script(repositories, metric_index, loc_index, factor):
@@ -105,16 +104,16 @@ def normalize_metric_by_script(repositories, metric_index, loc_index, factor):
                 metrics.append(sample_value)
             # else:
             #     sample_value = 0
-
     return metrics
 
+
 def percentage(matrix, index):
-    total_of_callbacks = sum(get_column_as_array(matrix, 0)) + sum(get_column_as_array(matrix, 1))
+    total_of_lines = sum(get_column_as_array(matrix, 0))
     total_of_metric = sum(get_column_as_array(matrix, index))
-    if total_of_callbacks == 0:
+    if total_of_lines == 0:
         return 0
     else:
-        return (total_of_metric / total_of_callbacks) * 100
+        return (total_of_metric / total_of_lines) * 100
 
 
 def execute_test(client_metric, server_metric):
@@ -129,4 +128,3 @@ def normalize_array(array, objects, metric_index, loc_index):
 def summary(data):
     print(stats.describe(data))
 
-# print(rescale(normalize([5,0,0], 16000)))
