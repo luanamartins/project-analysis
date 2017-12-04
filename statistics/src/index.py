@@ -54,7 +54,6 @@ def main():
     client_error_handling = error_handling_percent_per_matrix(client_matrices, 0)
     server_error_handling = error_handling_percent_per_matrix(server_matrices, 0)
 
-
     print(client_error_handling)
     print(server_error_handling)
 
