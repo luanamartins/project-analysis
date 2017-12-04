@@ -2,7 +2,6 @@ from numpy import *
 from os import listdir
 from os.path import isfile, join
 
-
 from src.stats import *
 from src.plot import *
 from src.files import *
