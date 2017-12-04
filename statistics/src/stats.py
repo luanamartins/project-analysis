@@ -43,33 +43,12 @@ def get_metrics(matrix, index_metric, index_loc):
     return data_values
 
 
-def get_metric_from_project(matrix, index_metric, index_loc):
-    loc = np.sum(get_column_as_array(matrix, index_loc))
-    metric = np.sum(get_column_as_array(matrix, index_metric))
-    return metric / loc
-
-
-def get_total_lines_of_code(matrix, index):
-    return np.sum(get_column_as_array(matrix, index))
-
-
-def get_data(matrices, index_metric, index_loc):
-    data = []
-    for matrix in matrices:
-        data.append(get_metric_from_project(matrix, index_metric, index_loc))
-    return data
-
-
 def convert_matrix_to_array(matrix):
     result = []
     for row in matrix:
         row_metrics = row[2:]
         result = [a for a in row_metrics if a != 0] + result
     return result
-
-
-def divide(divisor, dividend):
-    return dividend / divisor
 
 
 def calculate_factor_for_matrix(matrix):
