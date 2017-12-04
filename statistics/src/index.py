@@ -21,38 +21,18 @@ def main():
     client_factor = smallest_number(client_matrices)
     server_factor = smallest_number(server_matrices)
     factor = min(client_factor, server_factor)
+    dot_and_zero_size = 2
     if factor < 1:
-        factor = len(str(1/factor)) - 2
+        factor = len(str(1/factor)) - dot_and_zero_size
         factor = pow(10, factor)
 
     metrics_labels = read_file('src/notes/metrics.txt')
-
     loc_index = 0
 
-    for metric_index in range(2, 50):
+    execute_tests(client_matrices, factor, loc_index, metrics_labels, server_matrices)
 
-        # client_normalized = normalize_metric_by_script(client_matrices, metric_index, loc_index, factor)
-        # server_normalized = normalize_metric_by_script(server_matrices, metric_index, loc_index, factor)
-        # print('------------------------------------------------------------------')
-        # print('Metric index:', metric_index)
-        # print('Metric name: ', metrics_labels[metric_index])
-        # print('Sample size (client): ', len(client_normalized))
-        # print('Sample size (server): ', len(server_normalized))
-        # print('Median client: ', np.median(client_normalized))
-        # print('Median server: ', np.median(server_normalized))
-        # print('Client: ', client_normalized)
-        # print('Server: ', server_normalized)
-        # try:
-        #     test_result = execute_test(client_normalized, server_normalized)
-        #     print(test_result)
-        #     print(test_result.pvalue)
-        #     # plot_two_groups_histogram_test(client_normalized, server_normalized, metrics_labels[metric_index])
-        # except Exception as inst:
-        #     print(inst)
-        print('------------------------------------------------------------------')
-
-    client_error_handling = error_handling_percent_per_matrix(client_matrices, 0)
-    server_error_handling = error_handling_percent_per_matrix(server_matrices, 0)
+    client_error_handling = error_handling_percent_per_matrix(client_matrices, loc_index)
+    server_error_handling = error_handling_percent_per_matrix(server_matrices, loc_index)
 
     print('Client: ', client_error_handling)
     print('Server: ', server_error_handling)
@@ -75,6 +55,32 @@ def main():
         # calculate_test(titles, client_metric_values, server_metric_values)
         # summary(client_metric1_values)
         # summary(server_metric1_values)
+
+
+def execute_tests(client_matrices, factor, loc_index, metrics_labels, server_matrices):
+    for metric_index in range(2, 50):
+
+        client_normalized = normalize_metric_by_script(client_matrices, metric_index, loc_index, factor)
+        server_normalized = normalize_metric_by_script(server_matrices, metric_index, loc_index, factor)
+        print('------------------------------------------------------------------')
+        print('Metric index:', metric_index)
+        print('Metric name: ', metrics_labels[metric_index])
+        print('Sample size (client): ', len(client_normalized))
+        print('Sample size (server): ', len(server_normalized))
+        print('Median client: ', np.median(client_normalized))
+        print('Median server: ', np.median(server_normalized))
+        print('Client: ', client_normalized)
+        print('Server: ', server_normalized)
+        try:
+            test_result = execute_test(client_normalized, server_normalized)
+            print(test_result)
+            print(test_result.pvalue)
+            # plot_two_groups_histogram_test(client_normalized, server_normalized, metrics_labels[metric_index])
+
+        except Exception as inst:
+            print(inst)
+        print('------------------------------------------------------------------')
+
 
 main()
 
