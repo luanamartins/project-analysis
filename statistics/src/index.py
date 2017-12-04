@@ -54,8 +54,8 @@ def main():
     client_error_handling = error_handling_percent_per_matrix(client_matrices, 0)
     server_error_handling = error_handling_percent_per_matrix(server_matrices, 0)
 
-    print(client_error_handling)
-    print(server_error_handling)
+    print('Client: ', client_error_handling)
+    print('Server: ', server_error_handling)
 
         # bar_line_graph('Empty error handling callbacks', objects_client, total_lines_client, total_metrics_client)
         # bar_line_graph('Empty error handling callbacks', objects_server, total_lines_server, total_metrics_server)
