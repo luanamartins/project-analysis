@@ -79,7 +79,7 @@ def calculate_factor_for_matrix(matrix):
     return factor
 
 
-def calculate_factor(matrices):
+def smallest_number(matrices):
     factors = []
     for matrix in matrices:
         factors.append(calculate_factor_for_matrix(matrix))
@@ -102,19 +102,32 @@ def get_normalized_rescaled_data(array, objects, metric_index, loc_index):
     return values
 
 
-def normalize_metric(repositories, metric_index, loc_index):
+def normalize_metric_by_repository(repositories, metric_index, loc_index, factor):
     repos = []
     for repo in repositories:
         metric_total = np.sum(get_column_as_array(repo, metric_index))
         repo_total_lines = np.sum(get_column_as_array(repo, loc_index))
-        if repo_total_lines != 0:
-            sample_value = (metric_total * 100000) / repo_total_lines
-        else:
-            sample_value = 0
-        repos.append(sample_value)
+        if repo_total_lines > 0 and metric_total > 0:
+            sample_value = (metric_total * factor) / repo_total_lines
+            repos.append(sample_value)
+        # else:
+        #     sample_value = 0
 
     return repos
 
+def normalize_metric_by_script(repositories, metric_index, loc_index, factor):
+    metrics = []
+    for repo in repositories:
+        metric_scripts = get_column_as_array(repo, metric_index)
+        repo_total_lines = np.sum(get_column_as_array(repo, loc_index))
+        for metric in metric_scripts:
+            if repo_total_lines > 0 and metric > 0:
+                sample_value = (metric * factor) / repo_total_lines
+                metrics.append(sample_value)
+            # else:
+            #     sample_value = 0
+
+    return metrics
 
 def percentage(matrix, index):
     total_of_callbacks = sum(get_column_as_array(matrix, 0)) + sum(get_column_as_array(matrix, 1))
@@ -125,56 +138,13 @@ def percentage(matrix, index):
         return (total_of_metric / total_of_callbacks) * 100
 
 
-def mann_whitney_u_test(client_array, server_array):
-    return mannwhitneyu(client_array, server_array, alternative='two-sided')
-
-
-def calculate_test(titles, client_metric_values, server_metric_values):
-    print('------------------------------------------------------------------')
-
-    print(titles[0])
-    result = mannwhitneyu(client_metric_values[0], server_metric_values[0], alternative='two-sided')
-    print('Sample size (client): ', len(client_metric_values[0]))
-    print('Sample size (server): ', len(server_metric_values[0]))
-    print('Median client: ', np.median(client_metric_values[0]))
-    print('Median server: ', np.median(server_metric_values[0]))
-    print(result)
-
-    print('------------------------------------------------------------------')
-
-    print(titles[1])
-    result = mannwhitneyu(client_metric_values[1], server_metric_values[1], alternative='two-sided')
-    print('Sample size (client): ', len(client_metric_values[1]))
-    print('Sample size (server): ', len(server_metric_values[1]))
-    print('Median client: ', np.median(client_metric_values[1]))
-    print('Median server: ', np.median(server_metric_values[1]))
-    print(result)
-
-    print('------------------------------------------------------------------')
-
-    print(titles[2])
-    result = mannwhitneyu(client_metric_values[2], server_metric_values[2], alternative='two-sided')
-    print('Sample size (client): ', len(client_metric_values[2]))
-    print('Sample size (server): ', len(server_metric_values[2]))
-    print('Median client: ', np.median(client_metric_values[2]))
-    print('Median server: ', np.median(server_metric_values[2]))
-    print(result)
-
-    print('------------------------------------------------------------------')
-
-    print(titles[3])
-    result = mannwhitneyu(client_metric_values[3], server_metric_values[3], alternative='two-sided')
-    print('Sample size (client): ', len(client_metric_values[3]))
-    print('Sample size (server): ', len(server_metric_values[3]))
-    print('Median client: ', np.median(client_metric_values[3]))
-    print('Median server: ', np.median(server_metric_values[3]))
-    print(result)
-
-    print('------------------------------------------------------------------')
+def execute_test(client_metric, server_metric):
+    result = mannwhitneyu(client_metric, server_metric, alternative='two-sided')
+    return result
 
 
 def normalize_array(array, objects, metric_index, loc_index):
-    normalize_metric(array, objects, metric_index, loc_index)
+    normalize_metric_by_repository(array, objects, metric_index, loc_index)
 
 
 def summary(data):

@@ -1,11 +1,11 @@
 from numpy import *
 from os import listdir
 from os.path import isfile, join
-import numpy as np
 
 
 from src.stats import *
 from src.plot import *
+from src.files import *
 
 
 def main():
@@ -18,31 +18,45 @@ def main():
     server_matrices = [genfromtxt(server_path + '/' + filename, delimiter=',', skip_header=1) for filename in
                        server_files]
 
-    metric_indexes = range(2, 49)
+    client_factor = smallest_number(client_matrices)
+    server_factor = smallest_number(server_matrices)
+    factor = min(client_factor, server_factor)
+    if factor < 1:
+        factor = len(str(1/factor)) - 2
+        factor = pow(10, factor)
+
+    metrics_labels = read_file('src/notes/metrics.txt')
+
     loc_index = 0
 
-    client_normalized = normalize_metric(client_matrices, metric_indexes[20], loc_index)
-    server_normalized = normalize_metric(server_matrices, metric_indexes[20], loc_index)
+    for metric_index in range(2, 49):
 
-    # plot_violinplot(client, [], 'fasd', 'adfa')
-    
-    client_means = np.mean(client_normalized, axis=0)
-    server_means = np.mean(server_normalized, axis=0)
+        client_normalized = normalize_metric_by_script(client_matrices, metric_index, loc_index, factor)
+        server_normalized = normalize_metric_by_script(server_matrices, metric_index, loc_index, factor)
+        print('------------------------------------------------------------------')
+        print('Metric index:', metric_index)
+        print('Metric name: ', metrics_labels[metric_index])
+        print('Sample size (client): ', len(client_normalized))
+        print('Sample size (server): ', len(server_normalized))
+        print('Median client: ', np.median(client_normalized))
+        print('Median server: ', np.median(server_normalized))
+        print('Client: ', client_normalized)
+        print('Server: ', server_normalized)
+        try:
+            print(execute_test(client_normalized, server_normalized))
+        except Exception as inst:
+            print(inst)
+        print('------------------------------------------------------------------')
 
-    client_std = np.std(client_normalized, ddof=1)
-    server_std = np.std(client_normalized, ddof=1)
+    # client_means = np.mean(client_normalized, axis=0)
+    # server_means = np.mean(server_normalized, axis=0)
+    #
+    # client_std = np.std(client_normalized, ddof=1)
+    # server_std = np.std(client_normalized, ddof=1)
+    #
+    # print(calculate_factor(client_matrices))
+    # print(calculate_factor(server_matrices))
 
-    # double_bar_graph(1, client_means, client_std, server_means, server_std)
-
-    # print(client_normalized)
-    # print(server_normalized)
-
-
-    print(calculate_factor(client_matrices))
-    print(calculate_factor(server_matrices))
-
-    # print(calculate_factor(client_matrices[0]))
-    # print(calculate_factor(server_matrices[0]))
 
 
 def main2():
@@ -70,8 +84,8 @@ def main2():
     titles = ['Error handling callbacks', 'Error-first argument callbacks',
               'Empty error handling callbacks', 'Logging error handling callbacks']
 
-    client = normalize_metric(client_array, 0, 4)
-    server = normalize_metric(server_array, 0, 4)
+    client = normalize_metric_by_repository(client_array, 0, 4)
+    server = normalize_metric_by_repository(server_array, 0, 4)
     print(client)
     print(server)
 
@@ -81,8 +95,8 @@ def main2():
     bar_graph(client, objects_client, '', titles[0])
     bar_graph(server, objects_server, '', titles[0])
 
-    client = normalize_metric(client_array, 1, 4)
-    server = normalize_metric(server_array, 1, 4)
+    client = normalize_metric_by_repository(client_array, 1, 4)
+    server = normalize_metric_by_repository(server_array, 1, 4)
     print(client)
     print(server)
 
@@ -92,16 +106,16 @@ def main2():
     bar_graph(client, objects_client, '', titles[1])
     bar_graph(server, objects_server, '', titles[1])
 
-    client = normalize_metric(client_array, 2, 4)
-    server = normalize_metric(server_array, 2, 4)
+    client = normalize_metric_by_repository(client_array, 2, 4)
+    server = normalize_metric_by_repository(server_array, 2, 4)
     print(client)
     print(server)
 
     # [0.0, 0.0, 0.0, 0.0069607183461333211, 0.0, 0.0]
     # [0.0, 0.0, 0.00098298574547795847, 0.0017282051725180814, 0.0, 0.0]
 
-    client = normalize_metric(client_array, 3, 0)
-    server = normalize_metric(server_array, 3, 0)
+    client = normalize_metric_by_repository(client_array, 3, 0)
+    server = normalize_metric_by_repository(server_array, 3, 0)
     print(client)
     print(server)
 
