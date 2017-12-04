@@ -51,28 +51,12 @@ def main():
         #     print(inst)
         print('------------------------------------------------------------------')
 
+    client_error_handling = error_handling_percent_per_matrix(client_matrices, 0)
+    server_error_handling = error_handling_percent_per_matrix(server_matrices, 0)
 
-    error_handling_metrics_indices = [8, 21, 33, 49]
 
-    client_error_handling = 0
-    total_client_lines = 0
-    for matrix in client_matrices:
-        total_client_lines += sum(get_column_as_array(matrix, 0))
-        for index in error_handling_metrics_indices:
-            client_error_handling += sum(get_column_as_array(matrix, index))
-
-    server_error_handling = 0
-    total_server_lines = 0
-    for matrix in server_matrices:
-        total_server_lines += sum(get_column_as_array(matrix, 0))
-        for index in error_handling_metrics_indices:
-            server_error_handling += sum(get_column_as_array(matrix, index))
-
-    print(str(client_error_handling) + ' ' + str(total_client_lines))
-    print(str(server_error_handling) + ' ' + str(total_server_lines))
-
-    print((client_error_handling * 100) / total_client_lines)
-    print((server_error_handling * 100) / total_server_lines)
+    print(client_error_handling)
+    print(server_error_handling)
 
         # bar_line_graph('Empty error handling callbacks', objects_client, total_lines_client, total_metrics_client)
         # bar_line_graph('Empty error handling callbacks', objects_server, total_lines_server, total_metrics_server)
