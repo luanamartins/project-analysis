@@ -55,68 +55,39 @@ def main():
     error_handling_metrics_indices = [8, 21, 33, 49]
 
     client_error_handling = 0
+    total_client_lines = 0
     for matrix in client_matrices:
-        print(error_handling_porcentage_per_matrix(matrix, error_handling_metrics_indices))
+        total_client_lines += sum(get_column_as_array(matrix, 0))
+        for index in error_handling_metrics_indices:
+            client_error_handling += sum(get_column_as_array(matrix, index))
 
     server_error_handling = 0
+    total_server_lines = 0
     for matrix in server_matrices:
-        print(error_handling_porcentage_per_matrix(matrix, error_handling_metrics_indices))
+        total_server_lines += sum(get_column_as_array(matrix, 0))
+        for index in error_handling_metrics_indices:
+            server_error_handling += sum(get_column_as_array(matrix, index))
 
+    print(str(client_error_handling) + ' ' + str(total_client_lines))
+    print(str(server_error_handling) + ' ' + str(total_server_lines))
 
-    print(client_error_handling)
-    print(server_error_handling)
+    print((client_error_handling * 100) / total_client_lines)
+    print((server_error_handling * 100) / total_server_lines)
 
         # bar_line_graph('Empty error handling callbacks', objects_client, total_lines_client, total_metrics_client)
         # bar_line_graph('Empty error handling callbacks', objects_server, total_lines_server, total_metrics_server)
-        # empty = []
-        # consoleOnly = []
-        # for client in client_array:
-        #     empty.append(percentage(client, 2))
-        #     consoleOnly.append(percentage(client, 3))
-        # print(empty)
-        # print(consoleOnly)
+
         # bar_graph(empty, objects_client, 'Percentage', 'Empty callbacks (client-side)')
         # bar_graph(consoleOnly, objects_client, 'Percentage', 'Logging error (client-side)')
-        #
-        # empty = []
-        # consoleOnly = []
-        # for server in server_array:
-        #     empty.append(percentage(server, 2))
-        #     consoleOnly.append(percentage(server, 3))
-        # print(empty)
-        # print(consoleOnly)
-        #
+
         # bar_graph(empty, objects_server, 'Percentage', 'Empty callbacks (server-side)')
         # bar_graph(consoleOnly, objects_server, 'Percentage', 'Logging error (server-side)')
 
-        # server_metric1_values = get_randomly_n_items(server_metric1_values, len(client_metric1_values))
-        # np.savetxt("server_metric1_values.csv", server_metric1_values, delimiter=",")
-        #
-        # server_metric2_values = get_randomly_n_items(server_metric2_values, len(client_metric2_values))
-        # np.savetxt("server_metric2_values.csv", server_metric2_values, delimiter=",")
-        #
-        # server_metric3_values = get_randomly_n_items(server_metric3_values, len(client_metric3_values))
-        # np.savetxt("server_metric3_values.csv", server_metric1_values, delimiter=",")
-        #
-        # server_metric4_values = get_randomly_n_items(server_metric4_values, len(client_metric4_values))
-        # np.savetxt("server_metric4_values.csv", server_metric4_values, delimiter=",")
-
-
-
-
-        # plot_two_groups_histogram(client_metric4_values, 'client', server_metric4_values, 'server',
-        #                            'Number of logging callbacks')
+        # plot_two_groups_histogram(client_metric4_values, 'client', server_metric4_values, 'server','Number of logging callbacks')
 
         #plot_two_groups_histogram(client_metric1_values, 'client', server_metric1_values, 'server', titles[0], titles[0] + '.png')
-        # plot_two_groups_histogram(client_metric2_values, 'client', server_metric2_values, 'server', titles[1], titles[1] + '.png')
-        # plot_two_groups_histogram(client_metric3_values, 'client', server_metric3_values, 'server', titles[2], titles[2] + '.png')
-        # plot_two_groups_histogram(client_metric4_values, 'client', server_metric4_values, 'server',titles[3], titles[3] + '.png')
-        #
-        #
+
         # plot_violinplot([client_metric1_values, server_metric1_values], ['Client', 'Server'], titles[0], titles[0] + '.png')
-        # plot_violinplot([client_metric2_values, server_metric2_values], ['Client', 'Server'], titles[1], titles[1] + '.png')
-        # plot_violinplot([client_metric3_values, server_metric3_values], ['Client', 'Server'], titles[2], titles[2] + '.png')
-        # plot_violinplot([client_metric4_values, server_metric4_values], ['Client', 'Server'], titles[3], titles[3] + '.png')
 
         # calculate_test(titles, client_metric_values, server_metric_values)
         # summary(client_metric1_values)
