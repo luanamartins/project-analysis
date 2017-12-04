@@ -1,2 +1,13 @@
 - dividir cada valor pelo total LLOC
 - rescale range 0 e 100
+
+
+1ª execução:
+Execution time: 7006486ms
+Execution time (hr): 7006s 485.905297ms
+
+2ª execução:
+Execution time: 2593504ms
+Execution time (hr): 2593s 504.342662ms
+
+3ª execução:
