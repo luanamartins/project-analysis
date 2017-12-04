@@ -28,41 +28,43 @@ def main():
     metrics_labels = read_file('src/notes/metrics.txt')
     loc_index = 0
 
-    execute_tests(client_matrices, factor, loc_index, metrics_labels, server_matrices)
+    execute_summary(client_matrices, metrics_labels)
+
+    # execute_tests(client_matrices, factor, loc_index, metrics_labels, server_matrices)
 
     # client_error_handling = error_handling_percent_per_matrix(client_matrices, loc_index)
     # server_error_handling = error_handling_percent_per_matrix(server_matrices, loc_index)
-    #
+
     # print('Client: ', client_error_handling)
     # print('Server: ', server_error_handling)
 
-        # bar_line_graph('Empty error handling callbacks', objects_client, total_lines_client, total_metrics_client)
-        # bar_line_graph('Empty error handling callbacks', objects_server, total_lines_server, total_metrics_server)
+    # bar_line_graph('Empty error handling callbacks', objects_client, total_lines_client, total_metrics_client)
+    # bar_line_graph('Empty error handling callbacks', objects_server, total_lines_server, total_metrics_server)
 
-        # bar_graph(empty, objects_client, 'Percentage', 'Empty callbacks (client-side)')
-        # bar_graph(consoleOnly, objects_client, 'Percentage', 'Logging error (client-side)')
+    # bar_graph(empty, objects_client, 'Percentage', 'Empty callbacks (client-side)')
+    # bar_graph(consoleOnly, objects_client, 'Percentage', 'Logging error (client-side)')
 
-        # bar_graph(empty, objects_server, 'Percentage', 'Empty callbacks (server-side)')
-        # bar_graph(consoleOnly, objects_server, 'Percentage', 'Logging error (server-side)')
+    # bar_graph(empty, objects_server, 'Percentage', 'Empty callbacks (server-side)')
+    # bar_graph(consoleOnly, objects_server, 'Percentage', 'Logging error (server-side)')
 
-        # plot_two_groups_histogram(client_metric4_values, 'client', server_metric4_values, 'server','Number of logging callbacks')
+    # plot_two_groups_histogram(client_metric4_values, 'client', server_metric4_values, 'server','Number of logging callbacks')
 
-        #plot_two_groups_histogram(client_metric1_values, 'client', server_metric1_values, 'server', titles[0], titles[0] + '.png')
+    #plot_two_groups_histogram(client_metric1_values, 'client', server_metric1_values, 'server', titles[0], titles[0] + '.png')
 
-        # plot_violinplot([client_metric1_values, server_metric1_values], ['Client', 'Server'], titles[0], titles[0] + '.png')
+    # plot_violinplot([client_metric1_values, server_metric1_values], ['Client', 'Server'], titles[0], titles[0] + '.png')
 
-        # calculate_test(titles, client_metric_values, server_metric_values)
-        # summary(client_metric1_values)
-        # summary(server_metric1_values)
+    # calculate_test(titles, client_metric_values, server_metric_values)
+    # summary(client_metric1_values)
+    # summary(server_metric1_values)
 
 
 def execute_tests(client_matrices, factor, loc_index, metrics_labels, server_matrices):
     # less, greater, two-sided
-    alternative = 'less'
+    alternative = 'two-sided'
 
     for metric_index in range(2, 50):
-        client_normalized = normalize_metric_by_script(client_matrices, metric_index, loc_index, factor)
-        server_normalized = normalize_metric_by_script(server_matrices, metric_index, loc_index, factor)
+        client_normalized = normalize_metric_by_repository(client_matrices, metric_index, loc_index, factor)
+        server_normalized = normalize_metric_by_repository(server_matrices, metric_index, loc_index, factor)
         print('------------------------------------------------------------------')
         print('Metric index:', metric_index)
         print('Metric name: ', metrics_labels[metric_index])
@@ -82,6 +84,18 @@ def execute_tests(client_matrices, factor, loc_index, metrics_labels, server_mat
             print(inst)
         print('------------------------------------------------------------------')
 
+
+def execute_summary(matrices, metrics_labels):
+
+    for metric_index in range(2, 50):
+        metrics = []
+        for matrix in matrices:
+            metric_values = [i for i in get_column_as_array(matrix, metric_index) if i != 0]
+            if metric_values is not []:
+                metrics = metrics + metric_values
+        print(metrics_labels[metric_index])
+        summary(metrics)
+        print('------------------------------------------------------------------')
 
 main()
 
