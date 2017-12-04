@@ -18,6 +18,10 @@ def plot_two_groups_histogram(data_one, title_one, data_two, title_two, hist_tit
     pyplot.gcf().clear()
 
 
+def plot_two_groups_histogram_test(client_values, server_values, figure_name):
+    plot_two_groups_histogram(client_values, 'client', server_values, 'server', figure_name, figure_name)
+
+
 def plot_histogram(data, title):
     pyplot.hist(data)
     # pyplot.title("Histogram with 'auto' bins")
