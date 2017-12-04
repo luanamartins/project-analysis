@@ -107,17 +107,18 @@ def normalize_metric_by_script(repositories, metric_index, loc_index, factor):
     return metrics
 
 
-def percentage(matrix, index):
+def error_handling_porcentage_per_matrix(matrix, error_handling_indices):
     total_of_lines = sum(get_column_as_array(matrix, 0))
-    total_of_metric = sum(get_column_as_array(matrix, index))
-    if total_of_lines == 0:
-        return 0
-    else:
-        return (total_of_metric / total_of_lines) * 100
+
+    total_of_metric = 0
+    for error_handling_index in error_handling_indices:
+        total_of_metric += sum(get_column_as_array(matrix, error_handling_index))
+
+    return 0 if total_of_lines == 0 else ((total_of_metric * 100) / total_of_lines)
 
 
 def execute_test(client_metric, server_metric):
-    result = mannwhitneyu(client_metric, server_metric, alternative='two-sided')
+    result = mannwhitneyu(client_metric, server_metric, alternative='greater')
     return result
 
 
