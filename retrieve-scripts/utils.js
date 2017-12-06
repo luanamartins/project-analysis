@@ -4,7 +4,7 @@ const path = require('path');
 const jsonfile = require('jsonfile');
 
 function getNumberOfLines(node) {
-    if (node.loc && node.loc.start && node.loc.end) {
+    if (node && node.loc && node.loc.start && node.loc.end) {
         return node.loc.end.line - node.loc.start.line;
     } else {
         return 0;
