@@ -16,16 +16,16 @@ function handleAnalysis(node, reportObject) {
 
             if (eventListeningMethods.includes(methodName)) {
                 if (methodName === 'on' && isFirstArgErrorHandling) {
-                    reportObject.events.numberOfEventMethodsOn++;
+                    reportObject.eventsNumberOfEventMethodsOn++;
                 } else if (methodName === 'once' && isFirstArgErrorHandling) {
-                    reportObject.events.numberOfEventMethodsOnce++;
+                    reportObject.eventsNumberOfEventMethodsOnce++;
                 }
             }
 
             if (eventRaisingMethods.includes(methodName)) {
                 if (methodName === 'emit' && isFirstArgErrorHandling) {
-                    reportObject.events.numberOfEventMethodsEmit++;
-                    reportObject.events.numberOfEventEmitLines += utils.getNumberOfLines(node);
+                    reportObject.eventsNumberOfEventMethodsEmit++;
+                    reportObject.eventsNumberOfEventEmitLines += utils.getNumberOfLines(node);
                 }
             }
 
@@ -36,20 +36,20 @@ function handleAnalysis(node, reportObject) {
 
                     // the method is an event listener or emitter and is listing/raising a string as event
                     if (isString(literalValue)) {
-                        reportObject.events.totalOfStringEvents++;
+                        reportObject.eventsTotalOfStringEvents++;
                     }
 
                     if (firstArgObject && firstArgObject.value === 'uncaughtException') {
-                        reportObject.events.numberOfEventUncaughtException++;
+                        reportObject.eventsNumberOfEventUncaughtException++;
                     }
 
                     if (firstArgObject && firstArgObject.value === 'unhandledRejection') {
-                        reportObject.events.numberOfEventUnhandledRejection++;
+                        reportObject.eventsNumberOfEventUnhandledRejection++;
                     }
                 }
 
                 if (typeOfFirstArg !== 'string') {
-                    reportObject.events.totalOfEventsExceptStringType++;
+                    reportObject.eventsTotalOfEventsExceptStringType++;
                 }
             }
         }

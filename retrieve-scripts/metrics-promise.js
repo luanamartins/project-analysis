@@ -3,22 +3,22 @@ const utils = require('./utils');
 function handleAnalysis(node, reportObject) {
 
     if (node.type === 'NewExpression' && node.callee.name === 'Promise') {
-        reportObject.promise.numberOfPromises++;
+        reportObject.promiseNumberOfPromises++;
     }
 
     if (node.type === 'CallExpression') {
         const callee = node.callee;
         if (callee) {
             if (callee.name === 'resolve' || (callee.property && callee.property.name === 'resolve')) {
-                reportObject.promise.numberOfResolves++;
+                reportObject.promiseNumberOfResolves++;
             }
 
             if (callee.name === 'reject' || (callee.property && callee.property.name === 'reject')) {
-                reportObject.promise.numberOfRejects++;
+                reportObject.promiseNumberOfRejects++;
             }
 
             if (callee.name === 'then' || (callee.property && callee.property.name === 'then')) {
-                reportObject.promise.numberOfPromiseThens++;
+                reportObject.promiseNumberOfPromiseThens++;
                 let numberOfLines = utils.getNumberOfLines(node);
                 const numberOfArgumentsOnThen = node.arguments.length;
 
@@ -29,18 +29,18 @@ function handleAnalysis(node, reportObject) {
                 }
 
                 if (numberOfArgumentsOnThen >= 1) {
-                    reportObject.promise.numberOfPromiseThenFulfilledLines += numberOfLines;
+                    reportObject.promiseNumberOfPromiseThenFulfilledLines += numberOfLines;
                 }
 
                 if (numberOfArgumentsOnThen === 2) {
-                    reportObject.promise.numberOfPromiseThenRejectedLines += utils.getNumberOfLines(node.arguments[1]);
+                    reportObject.promiseNumberOfPromiseThenRejectedLines += utils.getNumberOfLines(node.arguments[1]);
                 }
 
             }
 
             if (callee.name === 'catch' || (callee.property && callee.property.name === 'catch')) {
-                reportObject.promise.numberOfPromiseCatches++;
-                reportObject.promise.numberOfPromiseCatchesLines += utils.getNumberOfLines(node.arguments[0]);
+                reportObject.promiseNumberOfPromiseCatches++;
+                reportObject.promiseNumberOfPromiseCatchesLines += utils.getNumberOfLines(node.arguments[0]);
             }
 
 
@@ -48,11 +48,11 @@ function handleAnalysis(node, reportObject) {
                 if (callee.property) {
                     const methodName = callee.property.name;
                     if (methodName === 'race') {
-                        reportObject.promise.numberOfPromiseRaces++;
+                        reportObject.promiseNumberOfPromiseRaces++;
                     }
 
                     if (methodName === 'all') {
-                        reportObject.promise.numberOfPromiseAll++;
+                        reportObject.promiseNumberOfPromiseAll++;
                     }
                 }
             }

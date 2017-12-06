@@ -2,74 +2,57 @@
   "numberOfLogicalLines": 0,
   "numberOfPhysicalLines": 0,
 
-  "tryCatch": {
-    "numberOfTries": 0,
-    "numberOfEmptyTries": 0,
-    "numberOfTriesLines": 0,
-    "numberOfTriesWithUniqueStatement": 0,
+  "tryCatchNumberOfTries": 0,
+  "tryCatchNumberOfEmptyTries": 0,
+  "tryCatchNumberOfTriesLines": 0,
+  "tryCatchNumberOfTriesWithUniqueStatement": 0,
+  "tryCatchNumberOfCatches": 0,
+  "tryCatchNumberOfEmptyCatches": 0,
+  "tryCatchNumberOfCatchesLines": 0,
+  "tryCatchNumberOfUniqueConsole": 0,
+  "tryCatchNumberOfCatchesWithUniqueStatement": 0,
+  "tryCatchNumberOfThrows": 0,
+  "tryCatchNumberOfThrowsLiteral": 0,
+  "tryCatchNumberOfThrowsErrorObjects": 0,
+  "tryCatchNumberOfFinallies": 0,
+  "tryCatchNumberOfFinalliesLines": 0,
 
-    "numberOfCatches": 0,
-    "numberOfEmptyCatches": 0,
-    "numberOfCatchesLines": 0,
-    "numberOfUniqueConsole": 0,
-    "numberOfCatchesWithUniqueStatement": 0,
+  "promiseNumberOfPromises": 0,
+  "promiseNumberOfResolves": 0,
+  "promiseNumberOfRejects": 0,
+  "promiseNumberOfPromiseThens": 0,
+  "promiseNumberOfPromiseThenFulfilledLines": 0,
+  "promiseNumberOfPromiseThenRejectedLines": 0,
+  "promiseNumberOfPromiseCatches": 0,
+  "promiseNumberOfPromiseCatchesLines": 0,
+  "promiseNumberOfEmptyFunctionsOnPromiseCatches": 0,
+  "promiseNumberOfPromiseRaces": 0,
+  "promiseNumberOfPromiseAll": 0,
 
-    "numberOfThrows": 0,
-    "numberOfThrowsLiteral": 0,
-    "numberOfThrowsErrorObjects": 0,
+  "asyncAwaitNumberOfAsyncs": 0,
+  "asyncAwaitNumberOfAwaits": 0,
+  "asyncAwaitNumberOfTries": 0,
+  "asyncAwaitNumberOfTriesLines": 0,
+  "asyncAwaitNumberOfCatches": 0,
+  "asyncAwaitNumberOfEmptyCatches": 0,
+  "asyncAwaitNumberOfCatchesLines": 0,
+  "asyncAwaitNumberOfUniqueConsole": 0,
+  "asyncAwaitNumberOfFinallies": 0,
+  "asyncAwaitNumberOfFinalliesLines": 0,
 
-    "numberOfFinallies": 0,
-    "numberOfFinalliesLines": 0
-  },
-  "promise": {
-    "numberOfPromises": 0,
-    "numberOfResolves": 0,
-    "numberOfRejects": 0,
+  "eventsNumberOfEventMethodsOn": 0,
+  "eventsNumberOfEventMethodsOnce": 0,
+  "eventsNumberOfEventMethodsEmit": 0,
+  "eventsNumberOfEventEmitLines": 0,
+  "eventsNumberOfEventUncaughtException": 0,
+  "eventsNumberOfEventUnhandledRejection": 0,
+  "eventsTotalOfStringEvents": 0,
+  "eventsTotalOfEventsExceptStringType": 0,
 
-    "numberOfPromiseThens": 0,
-    "numberOfPromiseThenFulfilledLines": 0,
-    "numberOfPromiseThenRejectedLines": 0,
+  "callbacksNumberOfCallbackErrorFunctions": 0,
+  "callbacksNumberOfFirstErrorArgFunctions": 0,
+  "callbacksNumberOfEmptyCallbacks": 0,
+  "callbacksNumberOfConsoleStatementOnly": 0,
+  "callbacksNumberOfLines": 0
 
-    "numberOfPromiseCatches": 0,
-    "numberOfPromiseCatchesLines": 0,
-    "numberOfEmptyFunctionsOnPromiseCatches": 0,
-
-    "numberOfPromiseRaces": 0,
-    "numberOfPromiseAll": 0
-  },
-  "asyncAwait": {
-    "numberOfAsyncs": 0,
-    "numberOfAwaits": 0,
-
-    "numberOfTries": 0,
-    "numberOfTriesLines": 0,
-
-    "numberOfCatches": 0,
-    "numberOfEmptyCatches": 0,
-    "numberOfCatchesLines": 0,
-    "numberOfUniqueConsole": 0,
-
-    "numberOfFinallies": 0,
-    "numberOfFinalliesLines": 0
-  },
-  "events": {
-    "numberOfEventMethodsOn": 0,
-    "numberOfEventMethodsOnce": 0,
-
-    "numberOfEventMethodsEmit": 0,
-    "numberOfEventEmitLines": 0,
-
-    "numberOfEventUncaughtException": 0,
-    "numberOfEventUnhandledRejection": 0,
-
-    "totalOfStringEvents": 0,
-    "totalOfEventsExceptStringType": 0
-  },
-  "callbacks": {
-    "numberOfCallbackErrorFunctions": 0,
-    "numberOfFirstErrorArgFunctions": 0,
-    "numberOfEmptyCallbacks": 0,
-    "numberOfConsoleStatementOnly": 0,
-    "numberOfLines": 0
-  }
 }

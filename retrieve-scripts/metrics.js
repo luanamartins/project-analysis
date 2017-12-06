@@ -21,10 +21,7 @@ function traverse(obj, fn) {
     }
 }
 
-function extractMetricsForFilepath(projectPath, filepath) {
-
-    let repoObject = utils.createRepoObject(projectPath);
-
+function extractMetricsForFilepath(repoObject, filepath) {
     // let contents = fileModule.readFileSync(filepath, 'utf-8');
     let fileContents = exec('uglifyjs ' + filepath + ' -b').stdout;
 
@@ -40,7 +37,7 @@ function extractMetricsForFilepath(projectPath, filepath) {
     };
 
     let ast = esprima.parseScript(fileContents, options);
-    console.log(filepath);
+
     getMetrics(ast, filepath, repoObject);
 
     return repoObject;
@@ -50,12 +47,18 @@ function handleMetrics(files, projectPath) {
 
     let metrics = [];
     if (files) {
+        let i = 0;
         files.forEach(function (filepath) {
+
             try {
-                metrics.push(extractMetricsForFilepath(projectPath, filepath));
+                console.log(i + ': ' + filepath);
+                const repoObject = utils.createRepoObject(projectPath);
+                metrics.push(extractMetricsForFilepath(repoObject, filepath));
+                i += 1;
             } catch (err) {
                 console.log(err);
             }
+
         });
     }
     return metrics;

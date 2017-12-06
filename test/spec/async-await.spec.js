@@ -10,22 +10,23 @@ module.exports = testCase({
         const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
 
         const metricsObject = metrics[0];
-        // console.log(metrics);
+        console.log(reportJsonFile);
+        console.log(metrics);
         console.log(metricsObject);
 
-        test.equal(metricsObject.asyncAwait.numberOfAsyncs, 1);
-        test.equal(metricsObject.asyncAwait.numberOfAwaits, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfAsyncs, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfAwaits, 1);
 
-        test.equal(metricsObject.asyncAwait.numberOfTries, 1);
-        test.equal(metricsObject.asyncAwait.numberOfTriesLines, 3);
+        test.equal(metricsObject.asyncAwaitNumberOfTries, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfTriesLines, 3);
 
-        test.equal(metricsObject.asyncAwait.numberOfCatches, 1);
-        test.equal(metricsObject.asyncAwait.numberOfEmptyCatches, 1);
-        test.equal(metricsObject.asyncAwait.numberOfCatchesLines, 0);
-        test.equal(metricsObject.asyncAwait.numberOfUniqueConsole, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfCatches, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfEmptyCatches, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfCatchesLines, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfUniqueConsole, 0);
 
-        test.equal(metricsObject.asyncAwait.numberOfFinallies, 0);
-        test.equal(metricsObject.asyncAwait.numberOfFinalliesLines, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfFinallies, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfFinalliesLines, 0);
 
         test.done();
     },
@@ -38,19 +39,19 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.asyncAwait.numberOfAsyncs, 1);
-        test.equal(metricsObject.asyncAwait.numberOfAwaits, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfAsyncs, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfAwaits, 1);
 
-        test.equal(metricsObject.asyncAwait.numberOfTries, 1);
-        test.equal(metricsObject.asyncAwait.numberOfTriesLines, 3);
+        test.equal(metricsObject.asyncAwaitNumberOfTries, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfTriesLines, 3);
 
-        test.equal(metricsObject.asyncAwait.numberOfCatches, 1);
-        test.equal(metricsObject.asyncAwait.numberOfEmptyCatches, 0);
-        test.equal(metricsObject.asyncAwait.numberOfCatchesLines, 2);
-        test.equal(metricsObject.asyncAwait.numberOfUniqueConsole, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfCatches, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfEmptyCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfCatchesLines, 2);
+        test.equal(metricsObject.asyncAwaitNumberOfUniqueConsole, 1);
 
-        test.equal(metricsObject.asyncAwait.numberOfFinallies, 0);
-        test.equal(metricsObject.asyncAwait.numberOfFinalliesLines, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfFinallies, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfFinalliesLines, 0);
 
         test.done();
     },
@@ -62,19 +63,19 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.asyncAwait.numberOfAsyncs, 1);
-        test.equal(metricsObject.asyncAwait.numberOfAwaits, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfAsyncs, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfAwaits, 1);
 
-        test.equal(metricsObject.asyncAwait.numberOfTries, 1);
-        test.equal(metricsObject.asyncAwait.numberOfTriesLines, 3);
+        test.equal(metricsObject.asyncAwaitNumberOfTries, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfTriesLines, 3);
 
-        test.equal(metricsObject.asyncAwait.numberOfCatches, 1);
-        test.equal(metricsObject.asyncAwait.numberOfEmptyCatches, 0);
-        test.equal(metricsObject.asyncAwait.numberOfCatchesLines, 2);
-        test.equal(metricsObject.asyncAwait.numberOfUniqueConsole, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfCatches, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfEmptyCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfCatchesLines, 2);
+        test.equal(metricsObject.asyncAwaitNumberOfUniqueConsole, 1);
 
-        test.equal(metricsObject.asyncAwait.numberOfFinallies, 1);
-        test.equal(metricsObject.asyncAwait.numberOfFinalliesLines, 2);
+        test.equal(metricsObject.asyncAwaitNumberOfFinallies, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfFinalliesLines, 2);
 
         test.done();
     },
@@ -86,19 +87,19 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.asyncAwait.numberOfAsyncs, 1);
-        test.equal(metricsObject.asyncAwait.numberOfAwaits, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfAsyncs, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfAwaits, 1);
 
-        test.equal(metricsObject.asyncAwait.numberOfTries, 1);
-        test.equal(metricsObject.asyncAwait.numberOfTriesLines, 3);
+        test.equal(metricsObject.asyncAwaitNumberOfTries, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfTriesLines, 3);
 
-        test.equal(metricsObject.asyncAwait.numberOfCatches, 1);
-        test.equal(metricsObject.asyncAwait.numberOfEmptyCatches, 0);
-        test.equal(metricsObject.asyncAwait.numberOfCatchesLines, 2);
-        test.equal(metricsObject.asyncAwait.numberOfUniqueConsole, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfCatches, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfEmptyCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfCatchesLines, 2);
+        test.equal(metricsObject.asyncAwaitNumberOfUniqueConsole, 1);
 
-        test.equal(metricsObject.asyncAwait.numberOfFinallies, 1);
-        test.equal(metricsObject.asyncAwait.numberOfFinalliesLines, 4);
+        test.equal(metricsObject.asyncAwaitNumberOfFinallies, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfFinalliesLines, 4);
 
         test.done();
     }

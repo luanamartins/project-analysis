@@ -1,5 +1,5 @@
-var sloc = require('sloc');
-var fs = require('fs');
+const sloc = require('sloc');
+const fs = require('fs');
 const path = require('path');
 const jsonfile = require('jsonfile');
 

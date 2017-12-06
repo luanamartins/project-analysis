@@ -4,26 +4,26 @@ function handleAnalysis(node, reportObject) {
 
     // Unique async functions
     if (node.type === 'FunctionDeclaration' && node.async) {
-        reportObject.asyncAwait.numberOfAsyncs++;
+        reportObject.asyncAwaitNumberOfAsyncs++;
 
         const tryStatements = utils.getNodeTypes(node.body, 'TryStatement');
-        reportObject.asyncAwait.numberOfTries += tryStatements.length;
+        reportObject.asyncAwaitNumberOfTries += tryStatements.length;
 
         tryStatements.forEach(tryStatement => {
-            reportObject.asyncAwait.numberOfTriesLines += utils.getNumberOfLines(tryStatement.block);
+            reportObject.asyncAwaitNumberOfTriesLines += utils.getNumberOfLines(tryStatement.block);
         });
 
         const catchClauses = utils.getNodeTypes(node.body, 'CatchClause');
-        reportObject.asyncAwait.numberOfCatches += catchClauses.length;
+        reportObject.asyncAwaitNumberOfCatches += catchClauses.length;
 
         catchClauses.forEach((catchClause) => {
             const bodyHandlerCatch = catchClause.body.body;
 
             if (bodyHandlerCatch.length === 0) {
                 // Left the catch block empty
-                reportObject.asyncAwait.numberOfEmptyCatches++;
+                reportObject.asyncAwaitNumberOfEmptyCatches++;
             }
-            reportObject.asyncAwait.numberOfCatchesLines += utils.getNumberOfLines(catchClause);
+            reportObject.asyncAwaitNumberOfCatchesLines += utils.getNumberOfLines(catchClause);
 
             // Catch clause has 1 statement only
             if (bodyHandlerCatch.length === 1) {
@@ -31,21 +31,21 @@ function handleAnalysis(node, reportObject) {
                 const uniqueStatement = bodyHandlerCatch[0];
                 if (uniqueStatement.type === 'ExpressionStatement' && uniqueStatement.expression.type === 'CallExpression') {
                     if (uniqueStatement.expression.callee.object.name === 'console') {
-                        reportObject.asyncAwait.numberOfUniqueConsole++;
+                        reportObject.asyncAwaitNumberOfUniqueConsole++;
                     }
                 }
             }
         });
 
         const finallyStatements = getFinallyStatements(tryStatements);
-        reportObject.asyncAwait.numberOfFinallies = finallyStatements.length;
+        reportObject.asyncAwaitNumberOfFinallies = finallyStatements.length;
         finallyStatements.forEach(function (finallyStatement) {
-            reportObject.asyncAwait.numberOfFinalliesLines += utils.getNumberOfLines(finallyStatement);
+            reportObject.asyncAwaitNumberOfFinalliesLines += utils.getNumberOfLines(finallyStatement);
         });
     }
 
     if (node.type === 'AwaitExpression') {
-        reportObject.asyncAwait.numberOfAwaits++;
+        reportObject.asyncAwaitNumberOfAwaits++;
     }
 }
 

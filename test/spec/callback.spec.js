@@ -10,10 +10,10 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.callbacks.numberOfCallbackErrorFunctions, 0);
-        test.equal(metricsObject.callbacks.numberOfFirstErrorArgFunctions, 1);
-        test.equal(metricsObject.callbacks.numberOfEmptyCallbacks, 0);
-        test.equal(metricsObject.callbacks.numberOfConsoleStatementOnly, 1);
+        test.equal(metricsObject.callbacksNumberOfCallbackErrorFunctions, 0);
+        test.equal(metricsObject.callbacksNumberOfFirstErrorArgFunctions, 1);
+        test.equal(metricsObject.callbacksNumberOfEmptyCallbacks, 0);
+        test.equal(metricsObject.callbacksNumberOfConsoleStatementOnly, 1);
 
         test.done();
     },
@@ -25,10 +25,10 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.callbacks.numberOfCallbackErrorFunctions, 0);
-        test.equal(metricsObject.callbacks.numberOfFirstErrorArgFunctions, 1);
-        test.equal(metricsObject.callbacks.numberOfEmptyCallbacks, 1);
-        test.equal(metricsObject.callbacks.numberOfConsoleStatementOnly, 0);
+        test.equal(metricsObject.callbacksNumberOfCallbackErrorFunctions, 0);
+        test.equal(metricsObject.callbacksNumberOfFirstErrorArgFunctions, 1);
+        test.equal(metricsObject.callbacksNumberOfEmptyCallbacks, 1);
+        test.equal(metricsObject.callbacksNumberOfConsoleStatementOnly, 0);
 
         test.done();
     },
@@ -40,10 +40,10 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.callbacks.numberOfCallbackErrorFunctions, 0);
-        test.equal(metricsObject.callbacks.numberOfFirstErrorArgFunctions, 1);
-        test.equal(metricsObject.callbacks.numberOfEmptyCallbacks, 0);
-        test.equal(metricsObject.callbacks.numberOfConsoleStatementOnly, 0);
+        test.equal(metricsObject.callbacksNumberOfCallbackErrorFunctions, 0);
+        test.equal(metricsObject.callbacksNumberOfFirstErrorArgFunctions, 1);
+        test.equal(metricsObject.callbacksNumberOfEmptyCallbacks, 0);
+        test.equal(metricsObject.callbacksNumberOfConsoleStatementOnly, 0);
 
         test.done();
     },
@@ -55,10 +55,10 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.callbacks.numberOfCallbackErrorFunctions, 0);
-        test.equal(metricsObject.callbacks.numberOfFirstErrorArgFunctions, 4);
-        test.equal(metricsObject.callbacks.numberOfEmptyCallbacks, 0);
-        test.equal(metricsObject.callbacks.numberOfConsoleStatementOnly, 3);
+        test.equal(metricsObject.callbacksNumberOfCallbackErrorFunctions, 0);
+        test.equal(metricsObject.callbacksNumberOfFirstErrorArgFunctions, 4);
+        test.equal(metricsObject.callbacksNumberOfEmptyCallbacks, 0);
+        test.equal(metricsObject.callbacksNumberOfConsoleStatementOnly, 3);
 
         test.done();
     },
@@ -70,10 +70,10 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.callbacks.numberOfCallbackErrorFunctions, 0);
-        test.equal(metricsObject.callbacks.numberOfFirstErrorArgFunctions, 1);
-        test.equal(metricsObject.callbacks.numberOfEmptyCallbacks, 0);
-        test.equal(metricsObject.callbacks.numberOfConsoleStatementOnly, 1);
+        test.equal(metricsObject.callbacksNumberOfCallbackErrorFunctions, 0);
+        test.equal(metricsObject.callbacksNumberOfFirstErrorArgFunctions, 1);
+        test.equal(metricsObject.callbacksNumberOfEmptyCallbacks, 0);
+        test.equal(metricsObject.callbacksNumberOfConsoleStatementOnly, 1);
 
         test.done();
     }

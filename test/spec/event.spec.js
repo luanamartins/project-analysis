@@ -12,13 +12,13 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.events.numberOfEventMethodsOn, 1);
-        test.equal(metricsObject.events.numberOfEventMethodsOnce, 0);
-        test.equal(metricsObject.events.numberOfEventMethodsEmit, 0);
-        test.equal(metricsObject.events.numberOfEventUncaughtException, 0);
-        test.equal(metricsObject.events.numberOfEventUnhandledRejection, 0);
-        test.equal(metricsObject.events.totalOfStringEvents, 1);
-        test.equal(metricsObject.events.totalOfEventsExceptStringType, 0);
+        test.equal(metricsObject.eventsNumberOfEventMethodsOn, 1);
+        test.equal(metricsObject.eventsNumberOfEventMethodsOnce, 0);
+        test.equal(metricsObject.eventsNumberOfEventMethodsEmit, 0);
+        test.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
+        test.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 0);
+        test.equal(metricsObject.eventsTotalOfStringEvents, 1);
+        test.equal(metricsObject.eventsTotalOfEventsExceptStringType, 0);
 
         test.done();
     },
@@ -30,13 +30,13 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.events.numberOfEventMethodsOn, 2);
-        test.equal(metricsObject.events.numberOfEventMethodsOnce, 0);
-        test.equal(metricsObject.events.numberOfEventMethodsEmit, 0);
-        test.equal(metricsObject.events.numberOfEventUncaughtException, 0);
-        test.equal(metricsObject.events.numberOfEventUnhandledRejection, 0);
-        test.equal(metricsObject.events.totalOfStringEvents, 3);
-        test.equal(metricsObject.events.totalOfEventsExceptStringType, 0);
+        test.equal(metricsObject.eventsNumberOfEventMethodsOn, 2);
+        test.equal(metricsObject.eventsNumberOfEventMethodsOnce, 0);
+        test.equal(metricsObject.eventsNumberOfEventMethodsEmit, 0);
+        test.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
+        test.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 0);
+        test.equal(metricsObject.eventsTotalOfStringEvents, 3);
+        test.equal(metricsObject.eventsTotalOfEventsExceptStringType, 0);
 
         test.done();
     },
@@ -48,13 +48,13 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.events.numberOfEventMethodsOn, 2);
-        test.equal(metricsObject.events.numberOfEventMethodsOnce, 0);
-        test.equal(metricsObject.events.numberOfEventMethodsEmit, 0);
-        test.equal(metricsObject.events.numberOfEventUncaughtException, 1);
-        test.equal(metricsObject.events.numberOfEventUnhandledRejection, 0);
-        test.equal(metricsObject.events.totalOfStringEvents, 4);
-        test.equal(metricsObject.events.totalOfEventsExceptStringType, 0);
+        test.equal(metricsObject.eventsNumberOfEventMethodsOn, 2);
+        test.equal(metricsObject.eventsNumberOfEventMethodsOnce, 0);
+        test.equal(metricsObject.eventsNumberOfEventMethodsEmit, 0);
+        test.equal(metricsObject.eventsNumberOfEventUncaughtException, 1);
+        test.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 0);
+        test.equal(metricsObject.eventsTotalOfStringEvents, 4);
+        test.equal(metricsObject.eventsTotalOfEventsExceptStringType, 0);
 
         test.done();
     }

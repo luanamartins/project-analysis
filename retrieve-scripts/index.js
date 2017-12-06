@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 const path = require('path');
-const fs = require('fs');
 const async = require('async');
 
 const repoModule = require('./repository.js');
@@ -12,14 +11,14 @@ const utils = require('./utils.js');
 const projectPath = process.env.RETRIEVE_SCRIPTS_ROOT_PATH;
 console.log(projectPath);
 
-let inputGithubFilepath = path.join(projectPath, 'github.txt');
+const inputGithubFilepath = path.join(projectPath, 'github.txt');
 const outputGithubFilepath = path.join(projectPath, 'repos');
 
 
 function main() {
 
     const reposToCheckout = repoModule.getRepos(inputGithubFilepath);
-    const repositoriesName = checkoutRepos(reposToCheckout, true);
+    const repositoriesName = checkoutRepos(reposToCheckout, false);
     const start = new Date();
     const hrstart = process.hrtime();
 
@@ -64,17 +63,18 @@ function getMetricsNamesForHeader(repositoryName, metrics, callback) {
 
 function getDataFromMetrics(repositoryName, metricsPerScript, fields, callback) {
 
-    const data = metricsPerScript.map(repoObject => {
-        let metrics = {
-            numberOfLogicalLines: repoObject.numberOfLogicalLines,
-            numberOfPhysicalLines: repoObject.numberOfPhysicalLines
-        };
-        Object.assign(metrics, repoObject.tryCatch, repoObject.promise, repoObject.asyncAwait, repoObject.events, repoObject.callbacks);
+    // const data = metricsPerScript.map(repoObject => {
+    //     let metrics = {
+    //         numberOfLogicalLines: repoObject.numberOfLogicalLines,
+    //         numberOfPhysicalLines: repoObject.numberOfPhysicalLines
+    //     };
+    //     // FIX ME It's overriding the properties on the same name
+    //     Object.assign(metrics, repoObject.tryCatch, repoObject.promise, repoObject.asyncAwait, repoObject.events, repoObject.callbacks);
+    //
+    //     return metrics;
+    // });
 
-        return metrics;
-    });
-
-    callback(null, repositoryName, fields, data);
+    callback(null, repositoryName, fields, metricsPerScript);
 
 }
 
@@ -93,14 +93,15 @@ function checkoutRepos(reposToCheckout, checkoutEverything) {
             repositoriesName.push(repoName.replace("/", ""));
         });
     } else {
-        repositoriesName = ['socket.io', 'hexo'];
+        repositoriesName = ['babel'];
     }
     return repositoriesName;
 }
 
 function getFilesFromDirectory(repositoryName) {
-    let repoOutputDirectory = path.join(outputGithubFilepath, repositoryName);
-    let filenames = repoModule.getFilesFromDir(repoOutputDirectory, ['.js'], ['.min.js']);
+    const repoOutputDirectory = path.join(outputGithubFilepath, repositoryName);
+    // const repoOutputDirectory = path.join(projectPath, 'test-parallel');
+    const filenames = repoModule.getFilesFromDir(repoOutputDirectory, ['.js'], ['.min.js']);
 
     let files = [];
     filenames.forEach(file => {
@@ -113,7 +114,8 @@ function getFilesFromDirectory(repositoryName) {
 
 
 function test() {
-    const files = [path.join(projectPath, 'test.js')];
+    const test_path = path.join(projectPath, 'test.js')
+    const files = [test_path,test_path,test_path,test_path,test_path,test_path,test_path,test_path,test_path];
     const metrics = metricsModule.handleMetrics(files, projectPath);
     console.log(metrics);
 }
