@@ -34,7 +34,7 @@ function handleAnalysis(node, reportObject) {
                     reportObject.callbacksNumberOfEmptyCallbacks++;
                 }
 
-                if(bodyFunction) {
+                if (bodyFunction) {
                     const ifStatements = getIfStatements(bodyFunction, listOfErrorHandlingArgs);
                     ifStatements.forEach(ifStatement => {
                         const ifStatementConsequent = ifStatement.consequent;
@@ -61,7 +61,7 @@ function getIfStatements(body, errorVariables) {
     body.forEach(statement => {
         if (statement.type === 'IfStatement') {
             const errorHandlingArg = statement.test.name;
-            if(errorHandlingArg && errorHandlingArg.includes(errorVariables)) {
+            if (errorHandlingArg && errorHandlingArg.includes(errorVariables)) {
                 statements.push(statement);
             }
         }

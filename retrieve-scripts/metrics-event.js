@@ -40,7 +40,7 @@ function handleAnalysis(node, reportObject) {
 
                 if (methodName === 'emit' && isFirstArgErrorHandling) {
                     reportObject.eventsNumberOfEventMethodsEmit++;
-                    if(errorHandlingFunction) {
+                    if (errorHandlingFunction) {
                         reportObject.eventsNumberOfEventEmitLines += utils.getNumberOfLines(errorHandlingFunction);
                     }
                 }
