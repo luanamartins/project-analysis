@@ -1,20 +1,27 @@
+function* statementTestGenerator() {
+    switch (1) {
+        case 2:
+            break;
 
-function calling() {
-    try {
-    } catch (error) {
-        console.log('Error');
-        for (i = 0; i < 100; i++)
-        {
-            console.log('hello');
-        }
-
-
-
-
-    } finally {
-        console.log('');
-        console.log('');
-        console.log('');
-        throw new Error('Ops!');
+        default:
+            break;
     }
+    try {} catch (e) {}
+    try {} finally {}
+    do {} while (false);
+    for (;false; ) {}
+    for (var x in {}) {}
+    for (var x of simpleGenerator()) {}
+    if (false) {} else {}
+    {
+        var x = 1;
+    }
+    {
+        const y = 2;
+    }
+    yield 1;
+}
+
+function* simpleGenerator() {
+    yield 1;
 }
