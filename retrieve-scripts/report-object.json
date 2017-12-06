@@ -43,6 +43,8 @@
   "eventsNumberOfEventMethodsOn": 0,
   "eventsNumberOfEventMethodsOnce": 0,
   "eventsNumberOfEventMethodsEmit": 0,
+  "eventsNumberOfEventOnLines": 0,
+  "eventsNumberOfEventOnceLines": 0,
   "eventsNumberOfEventEmitLines": 0,
   "eventsNumberOfEventUncaughtException": 0,
   "eventsNumberOfEventUnhandledRejection": 0,

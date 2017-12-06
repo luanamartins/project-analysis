@@ -15,17 +15,34 @@ function handleAnalysis(node, reportObject) {
             const isFirstArgErrorHandling = firstArgObject && firstArgObject.value ? containsSubstring(keywords, firstArgObject.value) : false;
 
             if (eventListeningMethods.includes(methodName)) {
+
+                const errorHandlingFunction = node.arguments[1];
+
                 if (methodName === 'on' && isFirstArgErrorHandling) {
+
                     reportObject.eventsNumberOfEventMethodsOn++;
+                    if (errorHandlingFunction) {
+                        reportObject.eventsNumberOfEventOnLines += utils.getNumberOfLines(errorHandlingFunction);
+                    }
+
                 } else if (methodName === 'once' && isFirstArgErrorHandling) {
+
                     reportObject.eventsNumberOfEventMethodsOnce++;
+                    if (errorHandlingFunction) {
+                        reportObject.eventsNumberOfEventOnceLines += utils.getNumberOfLines(errorHandlingFunction);
+                    }
                 }
             }
 
             if (eventRaisingMethods.includes(methodName)) {
+
+                const errorHandlingFunction = node.arguments[1];
+
                 if (methodName === 'emit' && isFirstArgErrorHandling) {
                     reportObject.eventsNumberOfEventMethodsEmit++;
-                    reportObject.eventsNumberOfEventEmitLines += utils.getNumberOfLines(node);
+                    if(errorHandlingFunction) {
+                        reportObject.eventsNumberOfEventEmitLines += utils.getNumberOfLines(errorHandlingFunction);
+                    }
                 }
             }
 
@@ -57,7 +74,7 @@ function handleAnalysis(node, reportObject) {
     }
 }
 
-function isString(literalValue){
+function isString(literalValue) {
     const hasDoubleQuotes = literalValue.startsWith("\"") && literalValue.endsWith("\"");
     const hasSingleQuotes = literalValue.startsWith("'") && literalValue.endsWith("'");
     return hasDoubleQuotes || hasSingleQuotes;
