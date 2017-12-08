@@ -66,7 +66,7 @@ function handleCatchClause(reportObject, catchClause) {
         if (nodeBody[0].expression.type === 'CallExpression') {
             const calleeObject = nodeBody[0].expression.callee.object;
             if (calleeObject && calleeObject.name === 'console') {
-                reportObject.tryCatchNumberOfUniqueConsole++;
+                reportObject.tryCatchNumberOfCatchesWithUniqueConsole++;
             }
         }
 

@@ -6,7 +6,7 @@ const metricsModule = require('../../retrieve-scripts/metrics');
 module.exports = testCase({
 
     "TC01": function (test) {
-        let filename = './test/data/event/event1.js';
+        const filename = './test/data/event/event1.js';
         const reportJsonFile = './retrieve-scripts';
         const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
 
@@ -27,7 +27,7 @@ module.exports = testCase({
     },
 
     "TC02": function (test) {
-        let filename = './test/data/event/event2.js';
+        const filename = './test/data/event/event2.js';
         const reportJsonFile = './retrieve-scripts';
         const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
 
@@ -48,7 +48,7 @@ module.exports = testCase({
     },
 
     "TC03": function (test) {
-        let filename = './test/data/event/event3.js';
+        const filename = './test/data/event/event3.js';
         const reportJsonFile = './retrieve-scripts';
         const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
 
@@ -69,7 +69,7 @@ module.exports = testCase({
     },
 
     "TC04": function (test) {
-        let filename = './test/data/event/event4.js';
+        const filename = './test/data/event/event4.js';
         const reportJsonFile = './retrieve-scripts';
         const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
 
@@ -90,7 +90,7 @@ module.exports = testCase({
     },
 
     "TC05": function (test) {
-        let filename = './test/data/event/event5.js';
+        const filename = './test/data/event/event5.js';
         const reportJsonFile = './retrieve-scripts';
         const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
 

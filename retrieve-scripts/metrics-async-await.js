@@ -31,7 +31,7 @@ function handleAnalysis(node, reportObject) {
                 const uniqueStatement = bodyHandlerCatch[0];
                 if (uniqueStatement.type === 'ExpressionStatement' && uniqueStatement.expression.type === 'CallExpression') {
                     if (uniqueStatement.expression.callee.object.name === 'console') {
-                        reportObject.asyncAwaitNumberOfUniqueConsole++;
+                        reportObject.asyncAwaitNumberOfCatchesWithUniqueConsole++;
                     }
                 }
             }

@@ -3,6 +3,7 @@ var testCase = require('nodeunit').testCase;
 const metricsModule = require('../../retrieve-scripts/metrics');
 
 module.exports = testCase({
+
     "TC01": function (test) {
         const filename = './test/data/try-catch/try-catch1.js';
         const reportJsonFile = './retrieve-scripts';
@@ -18,7 +19,7 @@ module.exports = testCase({
         test.equal(metricsObject.tryCatchNumberOfCatches, 1);
         test.equal(metricsObject.tryCatchNumberOfEmptyCatches, 0);
         test.equal(metricsObject.tryCatchNumberOfCatchesLines, 5);
-        test.equal(metricsObject.tryCatchNumberOfUniqueConsole, 0);
+        test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 0);
 
         test.equal(metricsObject.tryCatchNumberOfThrows, 0);
@@ -46,7 +47,7 @@ module.exports = testCase({
         test.equal(metricsObject.tryCatchNumberOfCatches, 1);
         test.equal(metricsObject.tryCatchNumberOfEmptyCatches, 1);
         test.equal(metricsObject.tryCatchNumberOfCatchesLines, 0);
-        test.equal(metricsObject.tryCatchNumberOfUniqueConsole, 0);
+        test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 0);
 
         test.equal(metricsObject.tryCatchNumberOfThrows, 0);
@@ -74,7 +75,7 @@ module.exports = testCase({
         test.equal(metricsObject.tryCatchNumberOfCatches, 1);
         test.equal(metricsObject.tryCatchNumberOfEmptyCatches, 0);
         test.equal(metricsObject.tryCatchNumberOfCatchesLines, 5);
-        test.equal(metricsObject.tryCatchNumberOfUniqueConsole, 0);
+        test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 0);
 
         test.equal(metricsObject.tryCatchNumberOfThrows, 1);
@@ -102,7 +103,7 @@ module.exports = testCase({
         test.equal(metricsObject.tryCatchNumberOfCatches, 1);
         test.equal(metricsObject.tryCatchNumberOfEmptyCatches, 0);
         test.equal(metricsObject.tryCatchNumberOfCatchesLines, 2);
-        test.equal(metricsObject.tryCatchNumberOfUniqueConsole, 1);
+        test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 1);
         test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 1);
 
         test.equal(metricsObject.tryCatchNumberOfThrows, 0);
@@ -130,7 +131,7 @@ module.exports = testCase({
         test.equal(metricsObject.tryCatchNumberOfCatches, 0);
         test.equal(metricsObject.tryCatchNumberOfEmptyCatches, 0);
         test.equal(metricsObject.tryCatchNumberOfCatchesLines, 0);
-        test.equal(metricsObject.tryCatchNumberOfUniqueConsole, 0);
+        test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 0);
 
         test.equal(metricsObject.tryCatchNumberOfThrows, 0);
@@ -158,7 +159,7 @@ module.exports = testCase({
         test.equal(metricsObject.tryCatchNumberOfCatches, 0);
         test.equal(metricsObject.tryCatchNumberOfEmptyCatches, 0);
         test.equal(metricsObject.tryCatchNumberOfCatchesLines, 0);
-        test.equal(metricsObject.tryCatchNumberOfUniqueConsole, 0);
+        test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 0);
 
         test.equal(metricsObject.tryCatchNumberOfThrows, 0);
@@ -186,7 +187,7 @@ module.exports = testCase({
         test.equal(metricsObject.tryCatchNumberOfCatches, 0);
         test.equal(metricsObject.tryCatchNumberOfEmptyCatches, 0);
         test.equal(metricsObject.tryCatchNumberOfCatchesLines, 0);
-        test.equal(metricsObject.tryCatchNumberOfUniqueConsole, 0);
+        test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 0);
 
         test.equal(metricsObject.tryCatchNumberOfThrows, 0);
@@ -214,7 +215,7 @@ module.exports = testCase({
         test.equal(metricsObject.tryCatchNumberOfCatches, 1);
         test.equal(metricsObject.tryCatchNumberOfEmptyCatches, 1);
         test.equal(metricsObject.tryCatchNumberOfCatchesLines, 0);
-        test.equal(metricsObject.tryCatchNumberOfUniqueConsole, 0);
+        test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 0);
 
         test.equal(metricsObject.tryCatchNumberOfThrows, 0);

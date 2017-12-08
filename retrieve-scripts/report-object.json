@@ -9,7 +9,7 @@
   "tryCatchNumberOfCatches": 0,
   "tryCatchNumberOfEmptyCatches": 0,
   "tryCatchNumberOfCatchesLines": 0,
-  "tryCatchNumberOfUniqueConsole": 0,
+  "tryCatchNumberOfCatchesWithUniqueConsole": 0,
   "tryCatchNumberOfCatchesWithUniqueStatement": 0,
   "tryCatchNumberOfThrows": 0,
   "tryCatchNumberOfThrowsLiteral": 0,
@@ -36,7 +36,7 @@
   "asyncAwaitNumberOfCatches": 0,
   "asyncAwaitNumberOfEmptyCatches": 0,
   "asyncAwaitNumberOfCatchesLines": 0,
-  "asyncAwaitNumberOfUniqueConsole": 0,
+  "asyncAwaitNumberOfCatchesWithUniqueConsole": 0,
   "asyncAwaitNumberOfFinallies": 0,
   "asyncAwaitNumberOfFinalliesLines": 0,
 

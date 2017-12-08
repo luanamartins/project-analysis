@@ -4,9 +4,9 @@ const metricsModule = require('../../retrieve-scripts/metrics');
 
 
 module.exports = testCase({
-    "TC01": function (test) {
 
-        let filename = './test/data/promise/promise1.js';
+    "TC01": function (test) {
+        const filename = './test/data/promise/promise1.js';
         const reportJsonFile = './retrieve-scripts';
         const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
 
@@ -32,8 +32,7 @@ module.exports = testCase({
     },
 
     "TC02": function (test) {
-
-        let filename = './test/data/promise/promise2.js';
+        const filename = './test/data/promise/promise2.js';
         const reportJsonFile = './retrieve-scripts';
         const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
 
@@ -59,8 +58,7 @@ module.exports = testCase({
     },
 
     "TC03": function (test) {
-
-        let filename = './test/data/promise/promise3.js';
+        const filename = './test/data/promise/promise3.js';
         const reportJsonFile = './retrieve-scripts';
         const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
 
@@ -86,8 +84,7 @@ module.exports = testCase({
     },
 
     "TC04": function (test) {
-
-        let filename = './test/data/promise/promise4.js';
+        const filename = './test/data/promise/promise4.js';
         const reportJsonFile = './retrieve-scripts';
         const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
 
@@ -113,8 +110,7 @@ module.exports = testCase({
     },
 
     "TC05": function (test) {
-
-        let filename = './test/data/promise/promise5.js';
+        const filename = './test/data/promise/promise5.js';
         const reportJsonFile = './retrieve-scripts';
         const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
 
@@ -140,8 +136,7 @@ module.exports = testCase({
     },
 
     "TC06": function (test) {
-
-        let filename = './test/data/promise/promise6.js';
+        const filename = './test/data/promise/promise6.js';
         const reportJsonFile = './retrieve-scripts';
         const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
 
@@ -167,8 +162,7 @@ module.exports = testCase({
     },
 
     "TC07": function (test) {
-
-        let filename = './test/data/promise/promise7.js';
+        const filename = './test/data/promise/promise7.js';
         const reportJsonFile = './retrieve-scripts';
         const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
 
@@ -194,8 +188,7 @@ module.exports = testCase({
     },
 
     "TC08": function (test) {
-
-        let filename = './test/data/promise/promise8.js';
+        const filename = './test/data/promise/promise8.js';
         const reportJsonFile = './retrieve-scripts';
         const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
 
