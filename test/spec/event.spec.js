@@ -36,7 +36,7 @@ module.exports = testCase({
         test.equal(metricsObject.eventsNumberOfEventMethodsOn, 2);
         test.equal(metricsObject.eventsNumberOfEventMethodsOnce, 0);
         test.equal(metricsObject.eventsNumberOfEventMethodsEmit, 0);
-        test.equal(metricsObject.eventsNumberOfEventOnLines, 0);
+        test.equal(metricsObject.eventsNumberOfEventOnLines, 2);
         test.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
         test.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
         test.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
@@ -54,10 +54,10 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.eventsNumberOfEventMethodsOn, 2);
+        test.equal(metricsObject.eventsNumberOfEventMethodsOn, 3);
         test.equal(metricsObject.eventsNumberOfEventMethodsOnce, 0);
         test.equal(metricsObject.eventsNumberOfEventMethodsEmit, 0);
-        test.equal(metricsObject.eventsNumberOfEventOnLines, 0);
+        test.equal(metricsObject.eventsNumberOfEventOnLines, 4);
         test.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
         test.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
         test.equal(metricsObject.eventsNumberOfEventUncaughtException, 1);
@@ -78,7 +78,7 @@ module.exports = testCase({
         test.equal(metricsObject.eventsNumberOfEventMethodsOn, 2);
         test.equal(metricsObject.eventsNumberOfEventMethodsOnce, 0);
         test.equal(metricsObject.eventsNumberOfEventMethodsEmit, 1);
-        test.equal(metricsObject.eventsNumberOfEventOnLines, 2);
+        test.equal(metricsObject.eventsNumberOfEventOnLines, 4);
         test.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
         test.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
         test.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
@@ -99,7 +99,7 @@ module.exports = testCase({
         test.equal(metricsObject.eventsNumberOfEventMethodsOn, 2);
         test.equal(metricsObject.eventsNumberOfEventMethodsOnce, 0);
         test.equal(metricsObject.eventsNumberOfEventMethodsEmit, 1);
-        test.equal(metricsObject.eventsNumberOfEventOnLines, 7);
+        test.equal(metricsObject.eventsNumberOfEventOnLines, 9);
         test.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
         test.equal(metricsObject.eventsNumberOfEventEmitLines, 5);
         test.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
