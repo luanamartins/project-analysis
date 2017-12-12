@@ -8,17 +8,6 @@ const callbackModule = require('./metrics-callback.js');
 const eventModule = require('./metrics-event.js');
 const utils = require('./utils.js');
 
-function traverse(obj, fn) {
-    for (let key in obj) {
-        if (obj[key] !== null && fn(obj[key]) === false) {
-            return false;
-        }
-        if (typeof obj[key] === 'object' && obj[key] !== null) {
-            if (traverse(obj[key], fn) === false) {
-                return false;
-            }
-        }
-    }
 }
 
 function extractMetricsForFilepath(repoObject, filepath) {
