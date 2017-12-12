@@ -127,6 +127,58 @@ function createRepoObject(projectPath) {
     return jsonfile.readFileSync(jsonFilepath);
 }
 
+function calculate(startList, endList) {
+    const size = startList.length;
+    let lines = 0;
+
+    if (startList.length === 0 || endList.length === 0) {
+        return lines;
+    }
+
+    let i = 0;
+    let startValues = [startList[i]];
+
+    let endValues = [endList[i]];
+    for (let i = 1; i < size; i++) {
+        if (notIntersectAny(startValues, endValues, startList[i], endList[i])) {
+            startValues.push(startList[i]);
+            endValues.push(endList[i]);
+        }
+
+    }
+
+    // console.log(startValues);
+    // console.log(endValues);
+    startValues.forEach(function (item, index) {
+        lines += endValues[index] - startValues[index];
+    });
+    return lines;
+}
+
+function notIntersectAny(startList, endList, start2, end2) {
+    const list = [];
+    startList.forEach(function (item, index) {
+        if (startList[index] < start2 && endList[index] > end2) {
+            list.push(true);
+        }
+    });
+    return list.length === 0;
+}
+
+function guid() {
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+        s4() + '-' + s4() + s4() + s4();
+}
+
+function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+}
+
+console.log(calculate([17, 21], [19, 26]));
+// console.log(calculate([2, 4], [12, 9]));
+
 module.exports = {
     getNumberOfLinesOld: getNumberOfLinesOld,
     traverse: traverse,
@@ -135,5 +187,7 @@ module.exports = {
     getGeneralStats: getGeneralStats,
     getAllProperties: getAllProperties,
     listPropertiesOf: listPropertiesOf,
-    createRepoObject: createRepoObject
+    createRepoObject: createRepoObject,
+    calculate: calculate,
+    guid: guid
 };
