@@ -116,7 +116,7 @@ module.exports = testCase({
         test.done();
     },
 
-    "TC05": function (test) {
+    "TCObjectModel": function (test) {
         const filename = './test/data/try-catch/ObjectModel.js';
         const reportJsonFile = './retrieve-scripts';
 
@@ -144,7 +144,7 @@ module.exports = testCase({
         test.done();
     },
 
-    "TC06": function (test) {
+    "TCTransformationOff": function (test) {
         const filename = './test/data/try-catch/TransformationOff.js';
         const reportJsonFile = './retrieve-scripts';
 
@@ -172,7 +172,7 @@ module.exports = testCase({
         test.done();
     },
 
-    "TC07": function (test) {
+    "TCObject": function (test) {
         const filename = './test/data/try-catch/Object.js';
         const reportJsonFile = './retrieve-scripts';
 
@@ -200,7 +200,7 @@ module.exports = testCase({
         test.done();
     },
 
-    "TC08": function (test) {
+    "TCStatementTestGenerator": function (test) {
         const filename = './test/data/try-catch/StatementTestGenerator.js';
         const reportJsonFile = './retrieve-scripts';
 
@@ -223,6 +223,34 @@ module.exports = testCase({
         test.equal(metricsObject.tryCatchNumberOfThrowsErrorObjects, 0);
 
         test.equal(metricsObject.tryCatchNumberOfFinallies, 1);
+        test.equal(metricsObject.tryCatchNumberOfFinalliesLines, 0);
+
+        test.done();
+    },
+
+    "TC05": function (test) {
+        const filename = './test/data/try-catch/try-catch5.js';
+        const reportJsonFile = './retrieve-scripts';
+
+        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+        const metricsObject = metrics[0];
+
+        test.equal(metricsObject.tryCatchNumberOfTries, 2);
+        test.equal(metricsObject.tryCatchNumberOfEmptyTries, 0);
+        test.equal(metricsObject.tryCatchNumberOfTriesLines, 10);
+        test.equal(metricsObject.tryCatchNumberOfTriesWithUniqueStatement, 0);
+
+        test.equal(metricsObject.tryCatchNumberOfCatches, 2);
+        test.equal(metricsObject.tryCatchNumberOfEmptyCatches, 1);
+        test.equal(metricsObject.tryCatchNumberOfCatchesLines, 2);
+        test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 1);
+        test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 1);
+
+        test.equal(metricsObject.tryCatchNumberOfThrows, 0);
+        test.equal(metricsObject.tryCatchNumberOfThrowsLiteral, 0);
+        test.equal(metricsObject.tryCatchNumberOfThrowsErrorObjects, 0);
+
+        test.equal(metricsObject.tryCatchNumberOfFinallies, 0);
         test.equal(metricsObject.tryCatchNumberOfFinalliesLines, 0);
 
         test.done();
