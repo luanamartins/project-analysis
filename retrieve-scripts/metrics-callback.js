@@ -28,6 +28,10 @@ function handleAnalysis(node, reportObject) {
 
             reportObject.callbacksNumberOfLines += utils.getNumberOfLines(node);
 
+            const location = node.loc;
+            reportObject.callbacksNumberOfLinesStart.push(location.start.line);
+            reportObject.callbacksNumberOfLinesEnd.push(location.end.line);
+
             if (node.body) {
                 let bodyFunction = node.body.body;
                 if (bodyFunction && bodyFunction.length === 0) {

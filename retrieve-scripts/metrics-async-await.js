@@ -11,6 +11,9 @@ function handleAnalysis(node, reportObject) {
 
         tryStatements.forEach(tryStatement => {
             reportObject.asyncAwaitNumberOfTriesLines += utils.getNumberOfLines(tryStatement.block);
+            const location = tryStatement.block.loc;
+            reportObject.asyncAwaitNumberOfTriesLinesStart.push(location.start.line);
+            reportObject.asyncAwaitNumberOfTriesLinesEnd.push(location.end.line);
         });
 
         const catchClauses = utils.getNodeTypes(node.body, 'CatchClause');
@@ -24,6 +27,9 @@ function handleAnalysis(node, reportObject) {
                 reportObject.asyncAwaitNumberOfEmptyCatches++;
             }
             reportObject.asyncAwaitNumberOfCatchesLines += utils.getNumberOfLines(catchClause);
+            const location = catchClause.loc;
+            reportObject.asyncAwaitNumberOfCatchesLinesStart.push(location.start.line);
+            reportObject.asyncAwaitNumberOfCatchesLinesEnd.push(location.end.line);
 
             // Catch clause has 1 statement only
             if (bodyHandlerCatch.length === 1) {
@@ -41,6 +47,11 @@ function handleAnalysis(node, reportObject) {
         reportObject.asyncAwaitNumberOfFinallies = finallyStatements.length;
         finallyStatements.forEach(function (finallyStatement) {
             reportObject.asyncAwaitNumberOfFinalliesLines += utils.getNumberOfLines(finallyStatement);
+
+            const location = finallyStatement.loc;
+            reportObject.asyncAwaitNumberOfFinalliesLinesStart.push(location.start.line);
+            reportObject.asyncAwaitNumberOfFinalliesLinesEnd.push(location.end.line);
+
         });
     }
 

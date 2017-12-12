@@ -25,6 +25,11 @@ function handleAnalysis(node, reportObject) {
         finallyStatements.forEach(function (finallyNode) {
             reportObject.tryCatchNumberOfFinallies++;
             reportObject.tryCatchNumberOfFinalliesLines += utils.getNumberOfLines(finallyNode);
+
+            const location = finallyNode.loc;
+            reportObject.tryCatchNumberOfFinalliesLinesStart.push(location.start.line);
+            reportObject.tryCatchNumberOfFinalliesLinesEnd.push(location.end.line);
+
         });
 
         const nodes = tryStatementNodes.concat(catchClauseNodes).concat(finallyStatements);
@@ -43,6 +48,11 @@ function handleTryStatement(reportObject, tryNode) {
     } else {
         const numberOfLines = utils.getNumberOfLines(tryNode.block);
         reportObject.tryCatchNumberOfTriesLines += numberOfLines;
+
+        const location = tryNode.block.loc;
+        reportObject.tryCatchNumberOfTriesLinesStart.push(location.start.line);
+        reportObject.tryCatchNumberOfTriesLinesEnd.push(location.end.line);
+
         const numberOfLinesOnTryBlock = numberOfLines - 1;
         if (numberOfLinesOnTryBlock === 1) {
             reportObject.tryCatchNumberOfTriesWithUniqueStatement++;
@@ -59,6 +69,11 @@ function handleCatchClause(reportObject, catchClause) {
             reportObject.tryCatchNumberOfEmptyCatches++;
         } else {
             reportObject.tryCatchNumberOfCatchesLines += utils.getNumberOfLines(catchClause);
+
+            const location = catchClause.loc;
+            reportObject.tryCatchNumberOfCatchesLinesStart.push(location.start.line);
+            reportObject.tryCatchNumberOfCatchesLinesEnd.push(location.end.line);
+
         }
     }
 

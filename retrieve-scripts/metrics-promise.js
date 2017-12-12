@@ -30,10 +30,20 @@ function handleAnalysis(node, reportObject) {
 
                 if (numberOfArgumentsOnThen >= 1) {
                     reportObject.promiseNumberOfPromiseThenFulfilledLines += numberOfLines;
+
+                    const location = node.arguments[0].loc;
+                    reportObject.promiseNumberOfPromiseThenFulfilledLinesStart.push(location.start.line);
+                    reportObject.promiseNumberOfPromiseThenFulfilledLinesEnd.push(location.end.line);
+
                 }
 
                 if (numberOfArgumentsOnThen === 2) {
                     reportObject.promiseNumberOfPromiseThenRejectedLines += utils.getNumberOfLines(node.arguments[1]);
+
+                    const location = node.arguments[1].loc;
+                    reportObject.promiseNumberOfPromiseThenRejectedLinesStart.push(location.start.line);
+                    reportObject.promiseNumberOfPromiseThenRejectedLinesEnd.push(location.end.line);
+
                 }
 
             }
@@ -41,6 +51,11 @@ function handleAnalysis(node, reportObject) {
             if (callee.name === 'catch' || (callee.property && callee.property.name === 'catch')) {
                 reportObject.promiseNumberOfPromiseCatches++;
                 reportObject.promiseNumberOfPromiseCatchesLines += utils.getNumberOfLines(node.arguments[0]);
+
+                const location = node.arguments[0].loc;
+                reportObject.promiseNumberOfPromiseCatchesLinesStart.push(location.start.line);
+                reportObject.promiseNumberOfPromiseCatchesLinesEnd.push(location.end.line);
+
             }
 
 
