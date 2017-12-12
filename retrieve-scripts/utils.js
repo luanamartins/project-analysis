@@ -11,6 +11,19 @@ function getNumberOfLines(node) {
     }
 }
 
+function traverse(obj, fn) {
+    for (let key in obj) {
+        if (obj[key] !== null && fn(obj[key]) === false) {
+            return false;
+        }
+        if (typeof obj[key] === 'object' && obj[key] !== null) {
+            if (traverse(obj[key], fn) === false) {
+                return false;
+            }
+        }
+    }
+}
+
 function listPropertiesOf(object) {
     let listOfProperties = [];
     for (let key in object) {
@@ -113,6 +126,7 @@ function createRepoObject(projectPath) {
 
 module.exports = {
     getNumberOfLinesOld: getNumberOfLinesOld,
+    traverse: traverse,
     getNumberOfLines: getNumberOfLines,
     getNodeTypes: getNodeTypes,
     getGeneralStats: getGeneralStats,

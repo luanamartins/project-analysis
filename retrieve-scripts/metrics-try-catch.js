@@ -104,16 +104,13 @@ function handleThrowStatement(reportObject, throwNode) {
 
 
 function getTryStatementNodes(functionBodyNode) {
+
     let tryNodes = [];
-    if (Array.isArray(functionBodyNode)) {
-        functionBodyNode.forEach(function (node) {
-            if (node.type === 'TryStatement') {
-                tryNodes.push(node);
-            }
-        });
-    } else if (functionBodyNode.type === 'TryStatement') {
-        tryNodes.push(node);
-    }
+    utils.traverse(functionBodyNode, function (node) {
+        if (node.type === 'TryStatement') {
+            tryNodes.push(node);
+        }
+    });
     return tryNodes;
 }
 
