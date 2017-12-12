@@ -102,7 +102,7 @@ function containsSubstring(array, item) {
 
     if (item && typeof(item) === 'string') {
         contains = array.some(function (arrayItem) {
-            return item.indexOf(arrayItem) >= 0;
+            return item.toLowerCase().indexOf(arrayItem) >= 0;
         });
     }
     return contains;
