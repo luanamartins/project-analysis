@@ -97,6 +97,22 @@ def execute_summary(matrices, metrics_labels):
         summary(metrics)
         print('------------------------------------------------------------------')
 
+
+def test(matrices):
+    matrix_pos = 0
+    for matrix in matrices:
+        second = get_column_as_array(matrix, 2)
+        third = get_column_as_array(matrix, 3)
+        size = len(second)
+        for i in range(0, size):
+            if third[i] > second[i]:
+                print('Size: ', size)
+                print(third[i], ' ', second[i])
+                print('matrix_pos: ', matrix_pos)
+                print('file: ', i)
+        matrix_pos += 1
+    # print(get_column_as_array([[1,2,3,4],[1,2,3,4],[1,2,3,4],[1,2,3,4]], 1))
+
 main()
 
 
