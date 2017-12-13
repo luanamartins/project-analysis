@@ -1,0 +1,4 @@
+- Adiciona 2 métricas no repoObject para start line e end line em cada métrica de contagem de linhas de código
+- Listar os números de start line e end line de cada métrica
+- Fazer a intersecção entre os valores de cada métrica
+- Calcular o número de linhas de cada métrica
