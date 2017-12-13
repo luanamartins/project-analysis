@@ -108,5 +108,49 @@ module.exports = testCase({
         test.equal(metricsObject.eventsTotalOfEventsExceptStringType, 0);
 
         test.done();
+    },
+
+
+    "TC07": function (test) {
+        const filename = './test/data/event/event7.js';
+        const reportJsonFile = './retrieve-scripts';
+        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+
+        const metricsObject = metrics[0];
+
+        test.equal(metricsObject.eventsNumberOfEventMethodsOn, 1);
+        test.equal(metricsObject.eventsNumberOfEventMethodsOnce, 2);
+        test.equal(metricsObject.eventsNumberOfEventMethodsEmit, 0);
+        test.equal(metricsObject.eventsNumberOfEventOnLines, 7);
+        test.equal(metricsObject.eventsNumberOfEventOnceLines, 7);
+        test.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
+        test.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
+        test.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 0);
+        test.equal(metricsObject.eventsTotalOfStringEvents, 3);
+        test.equal(metricsObject.eventsTotalOfEventsExceptStringType, 2);
+
+        test.done();
+    },
+
+    "TC08": function (test) {
+        const filename = './test/data/event/event8.js';
+        const reportJsonFile = './retrieve-scripts';
+        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+
+        const metricsObject = metrics[0];
+
+        test.equal(metricsObject.eventsNumberOfEventMethodsOn, 1);
+        test.equal(metricsObject.eventsNumberOfEventMethodsOnce, 2);
+        test.equal(metricsObject.eventsNumberOfEventMethodsEmit, 0);
+        test.equal(metricsObject.eventsNumberOfEventOnLines, 7);
+        test.equal(metricsObject.eventsNumberOfEventOnceLines, 7);
+        test.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
+        test.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
+        test.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 1);
+        test.equal(metricsObject.eventsTotalOfStringEvents, 4);
+        test.equal(metricsObject.eventsTotalOfEventsExceptStringType, 2);
+
+        test.done();
     }
+
 });
