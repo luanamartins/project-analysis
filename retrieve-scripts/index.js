@@ -62,18 +62,6 @@ function getMetricsNamesForHeader(repositoryName, metrics, callback) {
 }
 
 function getDataFromMetrics(repositoryName, metricsPerScript, fields, callback) {
-
-    // const data = metricsPerScript.map(repoObject => {
-    //     let metrics = {
-    //         numberOfLogicalLines: repoObject.numberOfLogicalLines,
-    //         numberOfPhysicalLines: repoObject.numberOfPhysicalLines
-    //     };
-    //     // FIX ME It's overriding the properties on the same name
-    //     Object.assign(metrics, repoObject.tryCatch, repoObject.promise, repoObject.asyncAwait, repoObject.events, repoObject.callbacks);
-    //
-    //     return metrics;
-    // });
-
     callback(null, repositoryName, fields, metricsPerScript);
 
 }
