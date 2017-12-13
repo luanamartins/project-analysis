@@ -50,12 +50,25 @@ function handleAnalysis(node, reportObject) {
 
             if (callee.name === 'catch' || (callee.property && callee.property.name === 'catch')) {
                 reportObject.promiseNumberOfPromiseCatches++;
-                reportObject.promiseNumberOfPromiseCatchesLines += utils.getNumberOfLines(node.arguments[0]);
+                const numberOfArgumentsOnCatch = node.arguments.length;
+                if (numberOfArgumentsOnCatch >= 1) {
 
-                const location = node.arguments[0].loc;
-                reportObject.promiseNumberOfPromiseCatchesLinesStart.push(location.start.line);
-                reportObject.promiseNumberOfPromiseCatchesLinesEnd.push(location.end.line);
+                    const firstArgument = node.arguments[0];
+                    const location = firstArgument.loc;
 
+                    reportObject.promiseNumberOfPromiseCatchesLines += utils.getNumberOfLines(firstArgument);
+                    reportObject.promiseNumberOfPromiseCatchesLinesStart.push(location.start.line);
+                    reportObject.promiseNumberOfPromiseCatchesLinesEnd.push(location.end.line);
+
+                    if (utils.getNumberOfLines(firstArgument) === 0 &&
+                        (firstArgument.type === 'FunctionDeclaration' || firstArgument.type === 'FunctionExpression')) {
+                        reportObject.promiseNumberOfEmptyFunctionsOnPromiseCatches++;
+                    }
+                }
+
+                if (numberOfArgumentsOnCatch === 0) {
+                    reportObject.promiseNumberOfEmptyFunctionsOnPromiseCatches++;
+                }
             }
 
 

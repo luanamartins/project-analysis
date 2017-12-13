@@ -211,5 +211,57 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfPromiseAll, 0);
 
         test.done();
+    },
+
+    "TC09": function (test) {
+        const filename = './test/data/promise/promise9.js';
+        const reportJsonFile = './retrieve-scripts';
+        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+
+        const metricsObject = metrics[0];
+
+        test.equal(metricsObject.promiseNumberOfPromises, 1);
+
+        test.equal(metricsObject.promiseNumberOfResolves, 0);
+        test.equal(metricsObject.promiseNumberOfRejects, 1);
+
+        test.equal(metricsObject.promiseNumberOfPromiseThens, 1);
+        test.equal(metricsObject.promiseNumberOfPromiseThenFulfilledLines, 3);
+        test.equal(metricsObject.promiseNumberOfPromiseThenRejectedLines, 0);
+
+        test.equal(metricsObject.promiseNumberOfPromiseCatches, 1);
+        test.equal(metricsObject.promiseNumberOfPromiseCatchesLines, 0);
+        test.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 1);
+
+        test.equal(metricsObject.promiseNumberOfPromiseRaces, 0);
+        test.equal(metricsObject.promiseNumberOfPromiseAll, 0);
+
+        test.done();
+    },
+
+    "TC10": function (test) {
+        const filename = './test/data/promise/promise10.js';
+        const reportJsonFile = './retrieve-scripts';
+        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+
+        const metricsObject = metrics[0];
+
+        test.equal(metricsObject.promiseNumberOfPromises, 1);
+
+        test.equal(metricsObject.promiseNumberOfResolves, 0);
+        test.equal(metricsObject.promiseNumberOfRejects, 1);
+
+        test.equal(metricsObject.promiseNumberOfPromiseThens, 1);
+        test.equal(metricsObject.promiseNumberOfPromiseThenFulfilledLines, 3);
+        test.equal(metricsObject.promiseNumberOfPromiseThenRejectedLines, 0);
+
+        test.equal(metricsObject.promiseNumberOfPromiseCatches, 1);
+        test.equal(metricsObject.promiseNumberOfPromiseCatchesLines, 0);
+        test.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 1);
+
+        test.equal(metricsObject.promiseNumberOfPromiseRaces, 0);
+        test.equal(metricsObject.promiseNumberOfPromiseAll, 0);
+
+        test.done();
     }
 });
