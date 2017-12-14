@@ -115,7 +115,7 @@ def error_handling_percent_per_matrix(matrices, loc_index):
 
     error_handling_lines = 0
     total_lines_repository = 0
-    error_handling_metrics_indices = [8, 21, 33, 49]
+    error_handling_metrics_indices = [8, 21, 23, 33, 40, 41, 51]
 
     for matrix in matrices:
         total_lines_repository += sum(get_column_as_array(matrix, loc_index))
@@ -123,6 +123,9 @@ def error_handling_percent_per_matrix(matrices, loc_index):
             error_handling_lines += sum(get_column_as_array(matrix, index))
 
     return (error_handling_lines * 100) / total_lines_repository
+
+
+# def empty_blocks_per_matrix(matrices, loc_index):
 
 
 def execute_test(client_metric, server_metric, alternative):
