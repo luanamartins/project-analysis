@@ -26,15 +26,16 @@ def main():
     metrics_labels = read_file('src/notes/metrics.txt')
     loc_index = 0
 
-    execute_summary(client_matrices, metrics_labels)
+    # execute_summary(client_matrices, metrics_labels)
 
     execute_tests(client_matrices, factor, loc_index, metrics_labels, server_matrices)
+    #
+    # client_error_handling = error_handling_percent_per_matrix(client_matrices, loc_index)
+    # server_error_handling = error_handling_percent_per_matrix(server_matrices, loc_index)
+    #
+    # print('Client: ', client_error_handling)
+    # print('Server: ', server_error_handling)
 
-    client_error_handling = error_handling_percent_per_matrix(client_matrices, loc_index)
-    server_error_handling = error_handling_percent_per_matrix(server_matrices, loc_index)
-
-    print('Client: ', client_error_handling)
-    print('Server: ', server_error_handling)
 
     # bar_line_graph('Empty error handling callbacks', objects_client, total_lines_client, total_metrics_client)
     # bar_line_graph('Empty error handling callbacks', objects_server, total_lines_server, total_metrics_server)
@@ -65,7 +66,7 @@ def calculate_factor(client_matrices, server_matrices):
 
 def execute_tests(client_matrices, factor, loc_index, metrics_labels, server_matrices):
     # less, greater, two-sided
-    alternative = 'two-sided'
+    alternative = 'greater'
 
     for metric_index in range(2, 50):
         client_normalized = normalize_metric_by_repository(client_matrices, metric_index, loc_index, factor)
@@ -77,8 +78,8 @@ def execute_tests(client_matrices, factor, loc_index, metrics_labels, server_mat
         print('Sample size (server): ', len(server_normalized))
         print('Median client: ', np.median(client_normalized))
         print('Median server: ', np.median(server_normalized))
-        print('Client: ', client_normalized)
-        print('Server: ', server_normalized)
+        # print('Client: ', client_normalized)
+        # print('Server: ', server_normalized)
         try:
             test_result = execute_test(client_normalized, server_normalized, alternative)
             print(test_result)
