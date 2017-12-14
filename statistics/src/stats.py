@@ -54,6 +54,8 @@ def convert_matrix_to_array(matrix):
 def calculate_factor_for_matrix(matrix):
     total_lines_repo = sum(matrix[0])
     arr = [i / total_lines_repo for i in convert_matrix_to_array(matrix)]
+    if len(arr) == 0:
+        return 0
     factor = np.amin(arr)
     return factor
 
@@ -61,7 +63,9 @@ def calculate_factor_for_matrix(matrix):
 def smallest_number(matrices):
     factors = []
     for matrix in matrices:
-        factors.append(calculate_factor_for_matrix(matrix))
+        factor = calculate_factor_for_matrix(matrix)
+        if factor != 0:
+            factors.append(calculate_factor_for_matrix(matrix))
     return np.amin(factors)
 
 

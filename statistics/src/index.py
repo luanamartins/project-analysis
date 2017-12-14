@@ -9,13 +9,17 @@ from src.files import *
 
 def main():
     client_path = 'data/client'
-    client_files = [f for f in listdir(client_path) if isfile(join(client_path, f))]
+    client_files = sorted([f for f in listdir(client_path) if isfile(join(client_path, f))], key=lambda s: s.lower())
     client_matrices = [genfromtxt(client_path + '/' + filename, delimiter=',', skip_header=1) for filename in client_files]
 
     server_path = 'data/server'
-    server_files = [f for f in listdir(server_path) if isfile(join(server_path, f))]
-    server_matrices = [genfromtxt(server_path + '/' + filename, delimiter=',', skip_header=1) for filename in
-                       server_files]
+    server_files = sorted([f for f in listdir(server_path) if isfile(join(server_path, f))], key=lambda s: s.lower())
+    server_matrices = [genfromtxt(server_path + '/' + filename, delimiter=',', skip_header=1) for filename in server_files]
+
+    # test(client_matrices)
+    # print('-----')
+    # test(server_matrices)
+    # print('finished')
 
     client_factor = smallest_number(client_matrices)
     server_factor = smallest_number(server_matrices)
@@ -30,13 +34,13 @@ def main():
 
     execute_summary(client_matrices, metrics_labels)
 
-    # execute_tests(client_matrices, factor, loc_index, metrics_labels, server_matrices)
+    execute_tests(client_matrices, factor, loc_index, metrics_labels, server_matrices)
 
-    # client_error_handling = error_handling_percent_per_matrix(client_matrices, loc_index)
-    # server_error_handling = error_handling_percent_per_matrix(server_matrices, loc_index)
+    client_error_handling = error_handling_percent_per_matrix(client_matrices, loc_index)
+    server_error_handling = error_handling_percent_per_matrix(server_matrices, loc_index)
 
-    # print('Client: ', client_error_handling)
-    # print('Server: ', server_error_handling)
+    print('Client: ', client_error_handling)
+    print('Server: ', server_error_handling)
 
     # bar_line_graph('Empty error handling callbacks', objects_client, total_lines_client, total_metrics_client)
     # bar_line_graph('Empty error handling callbacks', objects_server, total_lines_server, total_metrics_server)
@@ -94,7 +98,10 @@ def execute_summary(matrices, metrics_labels):
             if metric_values is not []:
                 metrics = metrics + metric_values
         print(metrics_labels[metric_index])
-        summary(metrics)
+        if len(metrics) != 0:
+            summary(metrics)
+        else:
+            print('empty array')
         print('------------------------------------------------------------------')
 
 
