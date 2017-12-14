@@ -1,0 +1,150 @@
+Factor:  100000
+numberOfTries
+DescribeResult(nobs=446, minmax=(1.0, 160.0), mean=7.2309417040358746, variance=224.14205169547034, skewness=4.969484910186334, kurtosis=32.50716244375639)
+------------------------------------------------------------------
+numberOfEmptyTries
+empty array
+------------------------------------------------------------------
+numberOfTriesLines
+DescribeResult(nobs=446, minmax=(2.0, 920.0), mean=37.816143497757849, variance=6788.0155590265531, skewness=4.931592268167345, kurtosis=35.081625791915826)
+------------------------------------------------------------------
+numberOfTriesWithUniqueStatement
+DescribeResult(nobs=300, minmax=(1.0, 88.0), mean=6.0899999999999999, variance=106.54371237458194, skewness=4.219728103731384, kurtosis=23.026350989803625)
+------------------------------------------------------------------
+numberOfCatches
+DescribeResult(nobs=421, minmax=(1.0, 154.0), mean=7.1401425178147271, variance=223.78745617011654, skewness=4.874162415869225, kurtosis=30.438457681327726)
+------------------------------------------------------------------
+numberOfEmptyCatches
+DescribeResult(nobs=115, minmax=(1.0, 96.0), mean=7.8695652173913047, variance=170.51792524790235, skewness=3.5232946858506153, kurtosis=17.147622331749346)
+------------------------------------------------------------------
+numberOfCatchesLines
+DescribeResult(nobs=372, minmax=(2.0, 304.0), mean=19.405913978494624, variance=1031.0450323160305, skewness=3.9839199097872164, kurtosis=21.89245596462912)
+------------------------------------------------------------------
+numberOfUniqueConsole
+DescribeResult(nobs=30, minmax=(1.0, 8.0), mean=2.8333333333333335, variance=4.0057471264367814, skewness=0.9415111055175251, kurtosis=-0.1964599256086239)
+------------------------------------------------------------------
+numberOfCatchesWithUniqueStatement
+DescribeResult(nobs=186, minmax=(1.0, 36.0), mean=4.338709677419355, variance=23.976547515257192, skewness=2.915386716575231, kurtosis=11.122722715130235)
+------------------------------------------------------------------
+numberOfThrows
+DescribeResult(nobs=70, minmax=(1.0, 11.0), mean=2.6714285714285713, variance=3.4701863354037266, skewness=2.139576610668956, kurtosis=5.664248832011747)
+------------------------------------------------------------------
+numberOfThrowsLiteral
+/home/lulis/.local/lib/python3.5/site-packages/numpy/core/fromnumeric.py:3146: RuntimeWarning: Degrees of freedom <= 0 for slice
+  **kwargs)
+/home/lulis/.local/lib/python3.5/site-packages/numpy/core/_methods.py:127: RuntimeWarning: invalid value encountered in double_scalars
+  ret = ret.dtype.type(ret / rcount)
+DescribeResult(nobs=1, minmax=(2.0, 2.0), mean=2.0, variance=nan, skewness=0.0, kurtosis=-3.0)
+------------------------------------------------------------------
+numberOfThrowsErrorObjects
+DescribeResult(nobs=21, minmax=(1.0, 10.0), mean=2.7619047619047619, variance=3.7904761904761899, skewness=2.75923084192831, kurtosis=7.51502802959522)
+------------------------------------------------------------------
+numberOfFinallies
+DescribeResult(nobs=78, minmax=(1.0, 22.0), mean=4.4230769230769234, variance=16.662837162837164, skewness=2.3326906621909442, kurtosis=6.244755003379552)
+------------------------------------------------------------------
+numberOfFinalliesLines
+DescribeResult(nobs=78, minmax=(2.0, 66.0), mean=14.141025641025641, variance=158.04478854478853, skewness=1.6478371527521092, kurtosis=3.228562314199216)
+------------------------------------------------------------------
+numberOfPromises
+DescribeResult(nobs=68, minmax=(1.0, 13.0), mean=2.0588235294117645, variance=3.4591747146619842, skewness=3.3913827666005067, kurtosis=15.905290010049217)
+------------------------------------------------------------------
+numberOfResolves
+DescribeResult(nobs=273, minmax=(1.0, 183.0), mean=4.5567765567765566, variance=139.00503663003661, skewness=12.900427438311263, kurtosis=190.83769384858905)
+------------------------------------------------------------------
+numberOfRejects
+DescribeResult(nobs=131, minmax=(1.0, 134.0), mean=5.1374045801526718, variance=167.55020551967121, skewness=8.148203602587698, kurtosis=75.07672795902616)
+------------------------------------------------------------------
+numberOfPromiseThens
+DescribeResult(nobs=179, minmax=(1.0, 131.0), mean=5.3296089385474863, variance=136.85142175632413, skewness=7.794275017218483, kurtosis=75.14773070567101)
+------------------------------------------------------------------
+numberOfPromiseThenFulfilledLines
+DescribeResult(nobs=149, minmax=(2.0, 593.0), mean=40.738255033557046, variance=6737.5999455831679, skewness=4.575455731716122, kurtosis=23.135718706070655)
+------------------------------------------------------------------
+numberOfPromiseThenRejectedLines
+DescribeResult(nobs=52, minmax=(2.0, 112.0), mean=8.9807692307692299, variance=276.17609351432884, skewness=4.882257734166774, kurtosis=26.82600331671502)
+------------------------------------------------------------------
+numberOfPromiseCatches
+DescribeResult(nobs=50, minmax=(1.0, 50.0), mean=3.5600000000000001, variance=60.577959183673457, skewness=4.88485378060221, kurtosis=24.872379293864125)
+------------------------------------------------------------------
+numberOfPromiseCatchesLines
+DescribeResult(nobs=41, minmax=(2.0, 107.0), mean=9.8292682926829276, variance=363.14512195121949, skewness=3.9632833667747303, kurtosis=16.07442328939663)
+------------------------------------------------------------------
+numberOfEmptyFunctionsOnPromiseCatches
+DescribeResult(nobs=7, minmax=(1.0, 10.0), mean=3.0, variance=11.666666666666666, skewness=1.4365775656193496, kurtosis=0.5457142857142854)
+------------------------------------------------------------------
+numberOfPromiseRaces
+DescribeResult(nobs=1, minmax=(2.0, 2.0), mean=2.0, variance=nan, skewness=0.0, kurtosis=-3.0)
+------------------------------------------------------------------
+numberOfPromiseAll
+DescribeResult(nobs=41, minmax=(1.0, 17.0), mean=2.0975609756097562, variance=7.3402439024390249, skewness=4.324770609079795, kurtosis=20.665517838358742)
+------------------------------------------------------------------
+numberOfAsyncs
+DescribeResult(nobs=5, minmax=(1.0, 1.0), mean=1.0, variance=0.0, skewness=0.0, kurtosis=-3.0)
+------------------------------------------------------------------
+numberOfAwaits
+DescribeResult(nobs=7, minmax=(1.0, 9.0), mean=3.5714285714285716, variance=6.9523809523809534, skewness=1.327535203813645, kurtosis=0.7192249953086884)
+------------------------------------------------------------------
+numberOfTries
+empty array
+------------------------------------------------------------------
+numberOfTriesLines
+empty array
+------------------------------------------------------------------
+numberOfCatches
+empty array
+------------------------------------------------------------------
+numberOfEmptyCatches
+empty array
+------------------------------------------------------------------
+numberOfCatchesLines
+empty array
+------------------------------------------------------------------
+numberOfUniqueConsole
+empty array
+------------------------------------------------------------------
+numberOfFinallies
+empty array
+------------------------------------------------------------------
+numberOfFinalliesLines
+empty array
+------------------------------------------------------------------
+numberOfEventMethodsOn
+DescribeResult(nobs=47, minmax=(1.0, 5.0), mean=1.574468085106383, variance=0.81498612395929726, skewness=1.836212303731534, kurtosis=3.4332625576394538)
+------------------------------------------------------------------
+numberOfEventMethodsOnce
+DescribeResult(nobs=1, minmax=(2.0, 2.0), mean=2.0, variance=nan, skewness=0.0, kurtosis=-3.0)
+------------------------------------------------------------------
+numberOfEventMethodsEmit
+DescribeResult(nobs=5, minmax=(1.0, 5.0), mean=2.7999999999999998, variance=4.2000000000000002, skewness=0.29615285103456146, kurtosis=-1.7908163265306125)
+------------------------------------------------------------------
+numberOfEventEmitLines
+DescribeResult(nobs=35, minmax=(2.0, 23.0), mean=5.8571428571428568, variance=29.361344537815125, skewness=1.9463502361109344, kurtosis=3.1843502099764445)
+------------------------------------------------------------------
+numberOfEventUncaughtException
+empty array
+------------------------------------------------------------------
+numberOfEventUnhandledRejection
+empty array
+------------------------------------------------------------------
+totalOfStringEvents
+DescribeResult(nobs=2, minmax=(1.0, 1.0), mean=1.0, variance=0.0, skewness=0.0, kurtosis=-3.0)
+------------------------------------------------------------------
+totalOfEventsExceptStringType
+DescribeResult(nobs=5, minmax=(1.0, 1.0), mean=1.0, variance=0.0, skewness=0.0, kurtosis=-3.0)
+------------------------------------------------------------------
+numberOfCallbackErrorFunctions
+DescribeResult(nobs=325, minmax=(1.0, 226.0), mean=6.8246153846153845, variance=304.68210826210827, skewness=7.9927634439044235, kurtosis=83.20995219275807)
+------------------------------------------------------------------
+numberOfFirstErrorArgFunctions
+DescribeResult(nobs=114, minmax=(1.0, 106.0), mean=5.0614035087719298, variance=115.77495730476633, skewness=7.703501527412677, kurtosis=67.22391926697289)
+------------------------------------------------------------------
+numberOfEmptyCallbacks
+DescribeResult(nobs=81, minmax=(1.0, 361.0), mean=11.506172839506172, variance=1751.0530864197531, skewness=7.438519687059627, kurtosis=58.78140261161047)
+------------------------------------------------------------------
+numberOfConsoleStatementOnly
+DescribeResult(nobs=481, minmax=(1.0, 321.0), mean=6.0478170478170474, variance=352.82062543312554, skewness=11.729112328717866, kurtosis=174.38880355242497)
+------------------------------------------------------------------
+numberOfLines
+DescribeResult(nobs=9, minmax=(1.0, 15.0), mean=3.2222222222222223, variance=21.19444444444445, skewness=2.131761284950011, kurtosis=3.069853427441174)
+------------------------------------------------------------------
+------------------------------------------------------------------
