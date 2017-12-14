@@ -21,14 +21,8 @@ def main():
     # test(server_matrices)
     # print('finished')
 
-    client_factor = smallest_number(client_matrices)
-    server_factor = smallest_number(server_matrices)
-    factor = min(client_factor, server_factor)
-    dot_and_zero_size = 2
-    if factor < 1:
-        factor = len(str(1/factor)) - dot_and_zero_size
-        factor = pow(10, factor)
-
+    factor = calculate_factor(client_matrices, server_matrices)
+    print('Factor: ', factor)
     metrics_labels = read_file('src/notes/metrics.txt')
     loc_index = 0
 
@@ -56,6 +50,17 @@ def main():
     #plot_two_groups_histogram(client_metric1_values, 'client', server_metric1_values, 'server', titles[0], titles[0] + '.png')
 
     # plot_violinplot([client_metric1_values, server_metric1_values], ['Client', 'Server'], titles[0], titles[0] + '.png')
+
+
+def calculate_factor(client_matrices, server_matrices):
+    client_factor = smallest_number(client_matrices)
+    server_factor = smallest_number(server_matrices)
+    factor = min(client_factor, server_factor)
+    dot_and_zero_size = 2
+    if factor < 1:
+        factor = len(str(1 / factor)) - dot_and_zero_size
+        factor = pow(10, factor)
+    return factor
 
 
 def execute_tests(client_matrices, factor, loc_index, metrics_labels, server_matrices):
