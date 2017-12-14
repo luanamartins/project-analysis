@@ -57,10 +57,6 @@ def main():
 
     # plot_violinplot([client_metric1_values, server_metric1_values], ['Client', 'Server'], titles[0], titles[0] + '.png')
 
-    # calculate_test(titles, client_metric_values, server_metric_values)
-    # summary(client_metric1_values)
-    # summary(server_metric1_values)
-
 
 def execute_tests(client_matrices, factor, loc_index, metrics_labels, server_matrices):
     # less, greater, two-sided
