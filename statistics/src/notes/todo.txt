@@ -11,3 +11,5 @@ Execution time: 2593504ms
 Execution time (hr): 2593s 504.342662ms
 
 3ª execução:
+Execution time: 40506588ms
+Execution time (hr): 40506s 588.115683ms
