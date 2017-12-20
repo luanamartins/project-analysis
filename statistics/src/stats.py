@@ -8,6 +8,12 @@ def get_column_as_array(matrix, index):
     return [row[index] for row in matrix]
 
 
+def total_lines(matrices):
+    lines = 0
+    for matrix in matrices:
+        lines += sum(get_column_as_array(matrix, 0))
+    return lines
+
 def normalize(data, factor):
     # print(data)
     normalizer = lambda x: (x * 100) / factor
