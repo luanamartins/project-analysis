@@ -7,16 +7,16 @@ function handleAnalysis(node, reportObject) {
         node.type === 'ArrowFunctionExpression') {
         // If a function argument is called inside the function, this function is callback-accepting
 
-        let functionsArgsNames = node.params.map((param) => {
+        let functionsArgsOfTypeString = node.params.filter((param) => typeof(param.name) === 'string');
+        let functionsArgsNames = functionsArgsOfTypeString.map((param) => {
             return param.name;
         });
 
-        const keywords = ['err', 'error', 'e', 'exception', 'reason', 'er'];
-        const listOfErrorHandlingArgs = getErrorHandlingArgs(functionsArgsNames, keywords);
+        const listOfErrorHandlingArgs = getErrorHandlingArguments(functionsArgsNames);
 
         let isErrorHandlingFunction = false;
 
-        if (keywords.includes(functionsArgsNames[0])) {
+        if (functionsArgsNames[0] && isErrorHandlingArgument(functionsArgsNames[0])) {
             reportObject.callbacksNumberOfFirstErrorArgFunctions++;
             isErrorHandlingFunction = true;
         } else if (listOfErrorHandlingArgs.length > 0) {
@@ -74,15 +74,34 @@ function getIfStatements(body, errorVariables) {
     return statements;
 }
 
-function getErrorHandlingArgs(args, haystack) {
+function getErrorHandlingArguments(array) {
     let errorHandlingArgs = [];
-    args.forEach(arg => {
-        if (haystack.includes(arg)) {
-            errorHandlingArgs.push(arg);
+    array.forEach(item => {
+        if (isErrorHandlingArgument(item)) {
+            errorHandlingArgs.push(item);
         }
     });
 
     return errorHandlingArgs;
+}
+
+function isErrorHandlingArgument(argument) {
+    const keywordsHigherSize = ['error', 'exception', 'reason', 'reject'];
+    const keywordsLowerSize = ['err', 'e', 'er'];
+
+    const containsExactly = keywordsLowerSize.includes(argument);
+    const containsSubstrings = substring(argument, keywordsHigherSize);
+
+    return (containsExactly || containsSubstrings);
+}
+
+function substring(item, keywords) {
+    if (keywords) {
+        const list = keywords.filter(keyword => item.indexOf(keyword) >= 0);
+        return list.length !== 0;
+    } else {
+        return false;
+    }
 }
 
 
@@ -91,20 +110,6 @@ function getErrorHandlingArgs(args, haystack) {
 //  console.log a message of error
 //  Still are handling errors
 
-function filterErrorHandlingCallbacks(arg) {
-    if (arg.type === 'FunctionExpression') {
-        const params = arg.params;
-        const keywords = ['err', 'error', 'e', 'exception'];
-
-        return params && findOne(keywords, params);
-    }
-}
-
-let findOne = function (haystack, arr) {
-    return arr.some(function (v) {
-        return haystack.indexOf(v.name) >= 0;
-    });
-};
 
 module.exports = {
     handleAnalysis: handleAnalysis

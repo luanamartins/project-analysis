@@ -18,7 +18,7 @@ const outputGithubFilepath = path.join(projectPath, 'repos');
 function main() {
 
     const reposToCheckout = repoModule.getRepos(inputGithubFilepath);
-    const repositoriesName = checkoutRepos(reposToCheckout, false);
+    const repositoriesName = checkoutRepos(reposToCheckout, true);
     const start = new Date();
     const hrstart = process.hrtime();
 
@@ -37,10 +37,7 @@ function shouldRunParallel(repositoryName) {
     async.waterfall(
         [
             async.apply(getFilesOfRepository, repositoryName),
-            extractMetricsFromFiles,
-            getMetricsNamesForHeader,
-            getDataFromMetrics,
-            writeMetricsOnFile
+            extractMetricsFromFiles
         ]
     );
 }
@@ -52,24 +49,30 @@ function getFilesOfRepository(repositoryName, callback) {
 
 function extractMetricsFromFiles(repositoryName, files, callback) {
     const metrics = metricsModule.handleMetrics(files, projectPath);
-    callback(null, repositoryName, metrics);
-}
 
-function getMetricsNamesForHeader(repositoryName, metrics, callback) {
     const repoObject = utils.createRepoObject(projectPath);
     const fields = utils.listPropertiesOf(repoObject);
-    callback(null, repositoryName, metrics, fields);
-}
+    filesModule.writeCsvFile('./statistics/data/' + repositoryName + '.csv', fields, metrics);
 
-function getDataFromMetrics(repositoryName, metricsPerScript, fields, callback) {
-    callback(null, repositoryName, fields, metricsPerScript);
-
-}
-
-function writeMetricsOnFile(repositoryName, fields, data, callback) {
-    filesModule.writeCsvFile('./statistics/data/' + repositoryName + '.csv', fields, data);
     callback(null);
 }
+
+// function writeMetricsToFile(repositoryName, metrics, callback) {
+//     const repoObject = utils.createRepoObject(projectPath);
+//     const fields = utils.listPropertiesOf(repoObject);
+//     filesModule.writeCsvFile('./statistics/data/' + repositoryName + '.csv', fields, metrics);
+//     callback(null);
+// }
+
+// function getDataFromMetrics(repositoryName, metricsPerScript, fields, callback) {
+//     callback(null, repositoryName, fields, metricsPerScript);
+//
+// }
+//
+// function writeMetricsOnFile(repositoryName, fields, data, callback) {
+//     filesModule.writeCsvFile('./statistics/data/' + repositoryName + '.csv', fields, data);
+//     callback(null);
+// }
 
 
 function checkoutRepos(reposToCheckout, checkoutEverything) {
@@ -81,7 +84,7 @@ function checkoutRepos(reposToCheckout, checkoutEverything) {
             repositoriesName.push(repoName.replace("/", ""));
         });
     } else {
-        repositoriesName = ['babel'];
+        repositoriesName = ['teste'];
     }
     return repositoriesName;
 }
@@ -104,8 +107,9 @@ function getFilesFromDirectory(repositoryName) {
 function test() {
     const test_path = path.join(projectPath, 'test.js')
     const files = [test_path,test_path,test_path,test_path,test_path,test_path,test_path,test_path,test_path];
+    //const files = [test_path];
     const metrics = metricsModule.handleMetrics(files, projectPath);
-    console.log(metrics);
+    // console.log(metrics);
 }
 
 main();
