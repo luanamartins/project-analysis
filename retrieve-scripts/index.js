@@ -51,8 +51,8 @@ function extractMetricsFromFiles(repositoryName, files, callback) {
     const metrics = metricsModule.handleMetrics(files, projectPath);
 
     const repoObject = utils.createRepoObject(projectPath);
-    const fields = utils.listPropertiesOf(repoObject);
-    filesModule.writeCsvFile('./statistics/data/' + repositoryName + '.csv', fields, metrics);
+    const headers = utils.listPropertiesOf(repoObject);
+    filesModule.writeCsvFile('./statistics/data/' + repositoryName + '.csv', headers, metrics);
 
     callback(null);
 }
