@@ -23,3 +23,7 @@ https://github.com/Modernizr/Modernizr
 https://github.com/jlmakes/scrollreveal
 https://github.com/niklasvh/html2canvas
 https://github.com/bramp/js-sequence-diagrams
+https://github.com/ccampbell/mousetrap
+https://github.com/kimmobrunfeldt/progressbar.js
+https://github.com/bramp/js-sequence-diagrams
+https://github.com/jashkenas/underscore

@@ -25,3 +25,4 @@ https://github.com/electron/spectron
 https://github.com/eslint/eslint
 https://github.com/openlayers/openlayers
 https://github.com/pouchdb/pouchdb
+https://github.com/mholt/PapaParse
