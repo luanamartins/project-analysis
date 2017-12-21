@@ -2,7 +2,7 @@ const utils = require('./utils');
 
 function handleAnalysis(node, reportObject) {
 
-    const keywords = ['err', 'error', 'exception', 'reason'];
+    const keywords = ['error', 'exception', 'reason', 'reject'];
 
     const eventListeningMethods = ['on', 'once'];
     const eventRaisingMethods = ['emit'];
@@ -96,7 +96,7 @@ function isString(literalValue) {
 function containsSubstring(array, item) {
     let contains = false;
 
-    if (item === 'e' || item === 'er') {
+    if (item === 'e' || item === 'er' || item === 'err') {
         return true;
     }
 
