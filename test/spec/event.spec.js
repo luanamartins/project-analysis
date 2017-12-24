@@ -139,10 +139,10 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.eventsNumberOfEventMethodsOn, 1);
+        test.equal(metricsObject.eventsNumberOfEventMethodsOn, 2);
         test.equal(metricsObject.eventsNumberOfEventMethodsOnce, 2);
         test.equal(metricsObject.eventsNumberOfEventMethodsEmit, 0);
-        test.equal(metricsObject.eventsNumberOfEventOnLines, 7);
+        test.equal(metricsObject.eventsNumberOfEventOnLines, 9);
         test.equal(metricsObject.eventsNumberOfEventOnceLines, 7);
         test.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
         test.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
