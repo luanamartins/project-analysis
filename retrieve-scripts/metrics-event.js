@@ -2,7 +2,7 @@ const utils = require('./utils');
 
 function handleAnalysis(node, reportObject) {
 
-    const keywords = ['error', 'exception', 'reason', 'reject'];
+    const keywords = ['error', 'exception', 'reason', 'reject', 'err'];
 
     const eventListeningMethods = ['on', 'once'];
     const eventRaisingMethods = ['emit'];
@@ -11,10 +11,11 @@ function handleAnalysis(node, reportObject) {
         if (node.callee.property) {
 
             let methodName = node.callee.property.name;
+            const numberOfArguments = node.arguments.length;
             const firstArgObject = node.arguments[0];
             const isFirstArgErrorHandling = firstArgObject && firstArgObject.value ? containsSubstring(keywords, firstArgObject.value) : false;
 
-            if (eventListeningMethods.includes(methodName)) {
+            if (numberOfArguments >= 2 && eventListeningMethods.includes(methodName)) {
 
                 const errorHandlingFunction = node.arguments[1];
 
@@ -42,7 +43,7 @@ function handleAnalysis(node, reportObject) {
                 }
             }
 
-            if (eventRaisingMethods.includes(methodName)) {
+            if (numberOfArguments >= 2 && eventRaisingMethods.includes(methodName)) {
 
                 const errorHandlingFunction = node.arguments[1];
 
@@ -59,7 +60,7 @@ function handleAnalysis(node, reportObject) {
                 }
             }
 
-            if (eventListeningMethods.includes(methodName) || eventRaisingMethods.includes(methodName)) {
+            if (numberOfArguments > 0 && (eventListeningMethods.includes(methodName) || eventRaisingMethods.includes(methodName))) {
                 const typeOfFirstArg = typeof(firstArgObject.value);
                 if (firstArgObject.type === 'Literal') {
                     const literalValue = node.arguments[0].raw;
