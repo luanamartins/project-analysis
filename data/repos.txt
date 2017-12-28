@@ -17,4 +17,8 @@ Execution time (hr): 28552s 512.817982ms
 Execution time: 18373773ms
 Execution time (hr): 18373s 772.995972ms
 
+Client: 1779399.0
+Server: 1669461.0
+Total: 3448860.0
+
 Problemas com babel no processamento de redux, retinajs, ui-grid
