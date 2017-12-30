@@ -4,8 +4,12 @@ from scipy import stats
 
 
 def get_column_as_array(matrix, index):
-    # return matrix[:, index]
-    return [row[index] for row in matrix]
+    # return [row[index] for row in matrix]
+
+    if matrix.ndim == 1:
+        return [matrix[index]]
+    else:
+        return [row[index] for row in matrix]
 
 
 def total_lines(matrices):
