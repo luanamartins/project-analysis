@@ -17,8 +17,33 @@ Execution time (hr): 28552s 512.817982ms
 Execution time: 18373773ms
 Execution time (hr): 18373s 772.995972ms
 
-Client: 1779399.0
-Server: 1669461.0
-Total: 3448860.0
+Client: 2697886.0
+Server: 1872475.0
+Total: 4570361.0
 
-Problemas com babel no processamento de redux, retinajs, ui-grid
+Problemas com babel no processamento de:
+- server:
+    https://github.com/linnovate/mean
+    https://github.com/browserify/browserify
+    https://github.com/Hashnode/mern-starter
+    https://github.com/sindresorhus/pageres
+    https://github.com/caolan/async
+    https://github.com/facebook/jest
+    https://github.com/tgriesser/knex
+    https://github.com/webdriverio/webdriverio
+
+- client:
+    https://github.com/reactjs/redux
+    https://github.com/strues/retinajs
+    https://github.com/t4t5/sweetalert
+    https://github.com/angular-ui/ui-grid
+    https://github.com/kvz/locutus
+
+
+extrair repo para server:
+- https://github.com/sindresorhus/awesome-nodejs (done)
+- https://github.com/wbinnssmith/awesome-promises
+- https://github.com/sindresorhus/awesome-observables
+
+extração do github:
+- link: https://github.com/search?p=19&q=JavaScript+stars%3A%3E1000+forks%3A%3E500+pushed%3A%3E2016-03-01&type=Repositories&utf8=%E2%9C%93
