@@ -82,6 +82,7 @@ https://github.com/pouchdb/pouchdb
 https://github.com/dcodeIO/protobuf.js
 https://github.com/pugjs/pug
 https://github.com/facebook/react-native
+https://github.com/reactGo/reactGo
 https://github.com/request/request
 https://github.com/ReactiveX/RxJS
 https://github.com/balderdashy/sails

@@ -22,12 +22,14 @@ https://github.com/HospitalRun/hospitalrun-frontend
 https://github.com/niklasvh/html2canvas
 https://github.com/impress/impress.js
 https://github.com/usablica/intro.js
+https://github.com/BonsaiDen/JavaScript-Garden
 https://github.com/liammclennan/JavaScript-Koans
 https://github.com/blueimp/JavaScript-Load-Image
 https://github.com/hapijs/joi
 https://github.com/blueimp/jQuery-File-Upload
 https://github.com/bramp/js-sequence-diagrams
 https://github.com/jsdoc3/jsdoc
+https://github.com/aFarkas/lazysizes
 https://github.com/ashleydw/lightbox
 https://github.com/adam-p/markdown-here
 https://github.com/Dogfalo/materialize
@@ -54,6 +56,7 @@ https://github.com/jlmakes/scrollreveal
 https://github.com/Semantic-Org/Semantic-UI
 https://github.com/mycolorway/simditor
 https://github.com/lorenzofox3/Smart-Table
+https://github.com/cferdinandi/smooth-scroll
 https://github.com/sockjs/sockjs-client
 https://github.com/summernote/summernote
 https://github.com/svgdotjs/svg.js
