@@ -56,6 +56,10 @@ Problemas com babel no processamento de:
     https://github.com/microjs/microjs.com
     https://github.com/airyland/vux
     https://github.com/ro31337/libretaxi
+    https://github.com/videojs/videojs-contrib-hls
+    https://github.com/facebook/jest
+    https://github.com/benweet/stackedit
+    https://github.com/owncloud/core
 
 
 extrair repo para server:
@@ -64,4 +68,4 @@ extrair repo para server:
 - https://github.com/sindresorhus/awesome-observables
 
 extração do github:
-- link: https://github.com/search?p=23&q=JavaScript+stars%3A%3E1000+forks%3A%3E500+pushed%3A%3E2016-03-01&type=Repositories&utf8=%E2%9C%93
+- link: https://github.com/search?p=30&q=JavaScript+stars%3A%3E1000+forks%3A%3E500+pushed%3A%3E2016-03-01&type=Repositories&utf8=%E2%9C%93
