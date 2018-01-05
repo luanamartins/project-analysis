@@ -34,8 +34,13 @@ Problemas com babel no processamento de:
     https://github.com/react-community/create-react-native-app
     https://github.com/zeit/hyper
     https://github.com/Soundnode/soundnode-app
+    https://github.com/HabitRPG/habitica
+    https://github.com/nylas/nylas-mail
 
 - client:
+    https://github.com/mathjax/MathJax
+    https://github.com/ant-design/ant-design-mobile
+    https://github.com/invoiceninja/invoiceninja
     https://github.com/reactjs/redux
     https://github.com/strues/retinajs
     https://github.com/t4t5/sweetalert
@@ -60,6 +65,15 @@ Problemas com babel no processamento de:
     https://github.com/facebook/jest
     https://github.com/benweet/stackedit
     https://github.com/owncloud/core
+    https://github.com/brave/browser-laptop
+    https://github.com/cdnjs/cdnjs
+    https://github.com/clappr/clappr
+    https://github.com/FineUploader/fine-uploader
+    https://github.com/netlify/netlify-cms
+    https://github.com/processing/p5.js
+    https://github.com/pixijs/pixi.js
+    https://github.com/limonte/sweetalert2
+    https://github.com/videojs/video.js
 
 
 extrair repo para server:

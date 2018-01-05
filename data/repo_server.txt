@@ -108,7 +108,6 @@ https://github.com/yarnpkg/yarn
 https://github.com/webtorrent/webtorrent
 https://github.com/angular/protractor
 https://github.com/swagger-api/swagger-js
-https://github.com/HabitRPG/habitica
 https://github.com/karma-runner/karma
 https://github.com/Automattic/wp-calypso
 https://github.com/jashkenas/coffeescript
@@ -120,6 +119,4 @@ https://github.com/kriasoft/react-starter-kit
 https://github.com/node-serialport/node-serialport
 https://github.com/devtools-html/debugger.html
 https://github.com/muaz-khan/RecordRTC
-https://github.com/nylas/nylas-mail
 https://github.com/SheetJS/js-xlsx
-https://github.com/muaz-khan/RecordRTC
