@@ -16,19 +16,76 @@ def main():
     server_files = sorted([f for f in listdir(server_path) if isfile(join(server_path, f))], key=lambda s: s.lower())
     server_matrices = [genfromtxt(server_path + '/' + filename, delimiter=',', skip_header=1) for filename in server_files]
 
+    client_lines = total_lines(client_matrices)
+    server_lines = total_lines(server_matrices)
+
+    client_total_files = total_files(client_matrices)
+    server_total_files = total_files(server_matrices)
+
+    # print('Client: ' + str(client_lines))
+    # print('Server: ' + str(server_lines))
+    # print('Total of lloc: ' + str(client_lines + server_lines))
+
+    # print('Total of files (Client): ' + str(client_total_files))
+    # print('Total of files (Server): ' + str(server_total_files))
+    # print('Total of files: ' + str(client_total_files + server_total_files))
+
+    # Promise -> promiseNumberOfPromiseCatches(22)
+    # asyncAwait -> asyncAwaitNumberOfCatches(31)
+    # eventos -> eventsNumberOfEventMethodsOn(37), eventsNumberOfEventMethodsOnce(38)
+
+    # indices_promises = [22]
+    # indices_async_awaits = [31]
+    # indices_events = [37, 38]
+
+    # Promise -> promiseNumberOfPromises(16)
+    # asyncAwait -> asyncAwaitNumberOfAsyncs(27)
+    # eventos -> eventsNumberOfEventMethodsOn(37), eventsNumberOfEventMethodsOnce(38), eventsNumberOfEventMethodsEmit(39)
+
+
+    indices_promises = [16]
+    indices_async_awaits = [27]
+    indices_events = [37, 38, 39]
+
+
+    promises_client = total_category_files(client_matrices, indices_promises)
+    promises_server = total_category_files(server_matrices, indices_promises)
+
+    async_await_client = total_category_files(client_matrices, indices_async_awaits)
+    async_await_server = total_category_files(server_matrices, indices_async_awaits)
+
+    events_client = total_category_files(client_matrices, indices_events)
+    events_server = total_category_files(server_matrices, indices_events)
+
+    none_client = client_total_files - promises_client - async_await_client - events_client
+    none_server = server_total_files - promises_server - async_await_server - events_server
+
+    print('Promises: ' + str(promises_client) + ' ' + str(promises_server))
+
+    print('Async-await: ' + str(async_await_client) + ' ' + str(async_await_server))
+
+    print('Events: ' + str(events_client) + ' ' + str(events_server))
+
+    print('None: ' + str(none_client) + ' ' + str(none_server))
+
+    print('Total of files: ' + str(client_total_files) + ' ' + str(server_total_files))
+
+
+
+
     # test(client_matrices)
     # print('-----')
     # test(server_matrices)
     # print('finished')
 
-    factor = calculate_factor(client_matrices, server_matrices)
-    print('Factor: ', factor)
-    metrics_labels = read_file('src/notes/metrics.txt')
-    loc_index = 0
-
-    # execute_summary(client_matrices, metrics_labels)
-
-    execute_tests(client_matrices, factor, loc_index, metrics_labels, server_matrices)
+    # factor = calculate_factor(client_matrices, server_matrices)
+    # print('Factor: ', factor)
+    # metrics_labels = read_file('src/notes/metrics.txt')
+    # loc_index = 0
+    #
+    # # execute_summary(client_matrices, metrics_labels)
+    #
+    # execute_tests(client_matrices, factor, loc_index, metrics_labels, server_matrices)
     #
     # client_error_handling = error_handling_percent_per_matrix(client_matrices, loc_index)
     # server_error_handling = error_handling_percent_per_matrix(server_matrices, loc_index)
@@ -132,8 +189,12 @@ main()
 # result = mannwhitneyu(bootstrap_data, socket_io_data)
 # print(result)
 
+# a = np.array([25])
 # a = np.arange(25)
+# a = np.array([[ -7.94627203e+01,  -1.81562235e+02,  -3.05418070e+02,  -2.38451033e+02],[  9.43740653e+01,   1.69312771e+02,   1.68545575e+01,  -1.44450299e+02],[  5.61599000e+00,   8.76135909e+01,   1.18959245e+02,  -1.44049237e+02]])
+# print(a.ndim)
 # print(a)
+# print(get_column_as_array(a, 0))
 # b = np.arange(25) + 4
 # print(stats.mannwhitneyu(a, b, alternative='two-sided'))
 

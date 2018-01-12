@@ -18,6 +18,43 @@ def total_lines(matrices):
         lines += sum(get_column_as_array(matrix, 0))
     return lines
 
+
+def total_files(matrices):
+    files = 0
+    for matrix in matrices:
+        files += len(matrix)
+    return files
+
+
+def total_category_repositories(matrices, indices):
+    # promises -> 23
+    # async-await -> 40
+    # events -> 56, 57, 58
+    total = 0
+    for matrix in matrices:
+        for index in indices:
+            if sum(get_column_as_array(matrix, index)) > 0:
+                total += 1
+                break
+    return total
+
+
+def total_category_files(matrices, indices):
+    total = 0
+    for matrix in matrices:
+        if matrix.ndim == 1:
+            for index in indices:
+                if matrix[index] > 0:
+                    total += 1
+        else:
+            for row in matrix:
+                for index in indices:
+                    if row[index] > 0:
+                        total += 1
+                        break
+    return total
+
+
 def normalize(data, factor):
     # print(data)
     normalizer = lambda x: (x * 100) / factor
@@ -62,7 +99,11 @@ def convert_matrix_to_array(matrix):
 
 
 def calculate_factor_for_matrix(matrix):
-    total_lines_repo = sum(matrix[0])
+    total_lines_repo = 0
+    if matrix.ndim == 1:
+        total_lines_repo = [matrix[0]]
+    else:
+        total_lines_repo = sum(matrix[0])
     arr = [i / total_lines_repo for i in convert_matrix_to_array(matrix)]
     if len(arr) == 0:
         return 0
