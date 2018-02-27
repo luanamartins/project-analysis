@@ -104,17 +104,3 @@ https://github.com/webtorrent/webtorrent
 https://github.com/wekan/wekan
 https://github.com/winstonjs/winston
 https://github.com/yarnpkg/yarn
-
-https://github.com/angular/protractor
-https://github.com/swagger-api/swagger-js
-https://github.com/karma-runner/karma
-https://github.com/Automattic/wp-calypso
-https://github.com/jashkenas/coffeescript
-https://github.com/websockets/ws
-https://github.com/jquery/jquery
-https://github.com/joemccann/dillinger
-https://github.com/Jermolene/TiddlyWiki5
-https://github.com/kriasoft/react-starter-kit
-https://github.com/devtools-html/debugger.html
-https://github.com/muaz-khan/RecordRTC
-https://github.com/SheetJS/js-xlsx

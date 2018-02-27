@@ -12,7 +12,7 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.promiseNumberOfPromises, 0);
+        test.equal(metricsObject.promiseNumberOfPromises, 1);
 
         test.equal(metricsObject.promiseNumberOfResolves, 1);
         test.equal(metricsObject.promiseNumberOfRejects, 0);
@@ -38,7 +38,7 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.promiseNumberOfPromises, 1);
+        test.equal(metricsObject.promiseNumberOfPromises, 2);
 
         test.equal(metricsObject.promiseNumberOfResolves, 0);
         test.equal(metricsObject.promiseNumberOfRejects, 1);
@@ -64,7 +64,7 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.promiseNumberOfPromises, 2);
+        test.equal(metricsObject.promiseNumberOfPromises, 3);
 
         test.equal(metricsObject.promiseNumberOfResolves, 1);
         test.equal(metricsObject.promiseNumberOfRejects, 1);
@@ -90,7 +90,7 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.promiseNumberOfPromises, 1);
+        test.equal(metricsObject.promiseNumberOfPromises, 2);
 
         test.equal(metricsObject.promiseNumberOfResolves, 1);
         test.equal(metricsObject.promiseNumberOfRejects, 0);
@@ -116,7 +116,7 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.promiseNumberOfPromises, 1);
+        test.equal(metricsObject.promiseNumberOfPromises, 6);
 
         test.equal(metricsObject.promiseNumberOfResolves, 2);
         test.equal(metricsObject.promiseNumberOfRejects, 1);
@@ -142,7 +142,7 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.promiseNumberOfPromises, 1);
+        test.equal(metricsObject.promiseNumberOfPromises, 2);
 
         test.equal(metricsObject.promiseNumberOfResolves, 0);
         test.equal(metricsObject.promiseNumberOfRejects, 1);
@@ -168,7 +168,7 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.promiseNumberOfPromises, 1);
+        test.equal(metricsObject.promiseNumberOfPromises, 2);
 
         test.equal(metricsObject.promiseNumberOfResolves, 0);
         test.equal(metricsObject.promiseNumberOfRejects, 1);
@@ -194,7 +194,7 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.promiseNumberOfPromises, 1);
+        test.equal(metricsObject.promiseNumberOfPromises, 2);
 
         test.equal(metricsObject.promiseNumberOfResolves, 0);
         test.equal(metricsObject.promiseNumberOfRejects, 1);
@@ -220,7 +220,7 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.promiseNumberOfPromises, 1);
+        test.equal(metricsObject.promiseNumberOfPromises, 2);
 
         test.equal(metricsObject.promiseNumberOfResolves, 0);
         test.equal(metricsObject.promiseNumberOfRejects, 1);
@@ -246,7 +246,7 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.promiseNumberOfPromises, 1);
+        test.equal(metricsObject.promiseNumberOfPromises, 2);
 
         test.equal(metricsObject.promiseNumberOfResolves, 0);
         test.equal(metricsObject.promiseNumberOfRejects, 1);

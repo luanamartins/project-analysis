@@ -8,11 +8,11 @@ from src.files import *
 
 
 def main():
-    client_path = 'data/client'
+    client_path = 'data/client-reviewed'
     client_files = sorted([f for f in listdir(client_path) if isfile(join(client_path, f))], key=lambda s: s.lower())
     client_matrices = [genfromtxt(client_path + '/' + filename, delimiter=',', skip_header=1) for filename in client_files]
 
-    server_path = 'data/server'
+    server_path = 'data/server-reviewed'
     server_files = sorted([f for f in listdir(server_path) if isfile(join(server_path, f))], key=lambda s: s.lower())
     server_matrices = [genfromtxt(server_path + '/' + filename, delimiter=',', skip_header=1) for filename in server_files]
 
@@ -30,23 +30,33 @@ def main():
     # print('Total of files (Server): ' + str(server_total_files))
     # print('Total of files: ' + str(client_total_files + server_total_files))
 
+    # Try-catch -> tryCatchNumberOfCatches(6)
     # Promise -> promiseNumberOfPromiseCatches(22)
     # asyncAwait -> asyncAwaitNumberOfCatches(31)
     # eventos -> eventsNumberOfEventMethodsOn(37), eventsNumberOfEventMethodsOnce(38)
 
+    # indices_try_catches = [6]
     # indices_promises = [22]
     # indices_async_awaits = [31]
     # indices_events = [37, 38]
 
+    # Try-catch -> tryCatchNumberOfTries(2)
     # Promise -> promiseNumberOfPromises(16)
     # asyncAwait -> asyncAwaitNumberOfAsyncs(27)
     # eventos -> eventsNumberOfEventMethodsOn(37), eventsNumberOfEventMethodsOnce(38), eventsNumberOfEventMethodsEmit(39)
 
-
+    indices_try_catches = [2]
+    indices_empty_try = [3]
+    indices_empty_catch = [7]
     indices_promises = [16]
     indices_async_awaits = [27]
     indices_events = [37, 38, 39]
 
+    try_catch_client = total_category_files(client_matrices, indices_try_catches)
+    try_catch_server = total_category_files(server_matrices, indices_try_catches)
+
+    empty_try_catch_client = total_category_files(client_matrices, indices_try_catches)
+    empty_try_catch_server = total_category_files(server_matrices, indices_try_catches)
 
     promises_client = total_category_files(client_matrices, indices_promises)
     promises_server = total_category_files(server_matrices, indices_promises)
@@ -57,8 +67,12 @@ def main():
     events_client = total_category_files(client_matrices, indices_events)
     events_server = total_category_files(server_matrices, indices_events)
 
-    none_client = client_total_files - promises_client - async_await_client - events_client
-    none_server = server_total_files - promises_server - async_await_server - events_server
+    # none_client = client_total_files - promises_client - async_await_client - events_client
+    # none_server = server_total_files - promises_server - async_await_server - events_server
+
+    print('Try-catch: ' + str(try_catch_client) + ' ' + str(try_catch_server))
+
+    print('Empty: ' + str(empty_try_catch_client) + ' ' + str(empty_try_catch_server))
 
     print('Promises: ' + str(promises_client) + ' ' + str(promises_server))
 
@@ -66,9 +80,11 @@ def main():
 
     print('Events: ' + str(events_client) + ' ' + str(events_server))
 
-    print('None: ' + str(none_client) + ' ' + str(none_server))
-
     print('Total of files: ' + str(client_total_files) + ' ' + str(server_total_files))
+
+    print('Total of lines: ' + str(client_lines) + ' ' + str(server_lines))
+
+    print('Total of repositories: ' + str(len(client_matrices)) + ' ' + str(len(server_matrices)))
 
 
 

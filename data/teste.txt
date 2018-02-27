@@ -1,0 +1,5 @@
+https://github.com/chartjs/Chart.js
+https://github.com/google/closure-library
+https://github.com/ellisonleao/clumsy-bird
+https://github.com/facebookincubator/create-react-app
+https://github.com/d3/d3

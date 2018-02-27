@@ -18,6 +18,7 @@ function handleAnalysis(node, reportObject) {
             }
 
             if (callee.name === 'then' || (callee.property && callee.property.name === 'then')) {
+                reportObject.promiseNumberOfPromises++;
                 reportObject.promiseNumberOfPromiseThens++;
                 let numberOfLines = utils.getNumberOfLines(node);
                 const numberOfArgumentsOnThen = node.arguments.length;
@@ -73,6 +74,7 @@ function handleAnalysis(node, reportObject) {
 
 
             if (callee.object && callee.object.name === 'Promise') {
+                reportObject.promiseNumberOfPromises++;
                 if (callee.property) {
                     const methodName = callee.property.name;
                     if (methodName === 'race') {

@@ -1,0 +1,3 @@
+- Files which errors on esprima parse is being ignored
+- Como identificar uma função faz tratamento de erros através de eventos?
+    - Identificar as libs que cada projeto utiliza e verificar através delas as funções que lançam ou tratam eventos de erro
