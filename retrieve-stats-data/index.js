@@ -70,26 +70,46 @@ function getGithubData(repo) {
         var openPullResponse = JSON.parse(responses[2])
         var closedPullResponse = JSON.parse(responses[3])
 
-        return {
-            repo_name: repo,
-            forks: generalResponse.forks,
-            stars: generalResponse.stargazers_count,
-            watchers: generalResponse.subscribers_count,
-            open_issues: generalResponse.open_issues_count - openPullResponse.total_count,
-            closed_issues: closedIssuesResponse.total_count,
-            open_pull_requests: openPullResponse.total_count,
-            closed_pull_requests: closedPullResponse.total_count
-        }
+        return new Promise(function (resolve, reject) {
+            try {
+                resolve({
+                    repo_name: repo,
+                    forks: generalResponse.forks,
+                    stars: generalResponse.stargazers_count,
+                    watchers: generalResponse.subscribers_count,
+                    open_issues: generalResponse.open_issues_count - openPullResponse.total_count,
+                    closed_issues: closedIssuesResponse.total_count,
+                    open_pull_requests: openPullResponse.total_count,
+                    closed_pull_requests: closedPullResponse.total_count
+                })
+            } catch (error) {
+                reject(error)
+            }
+        })
     })
 }
 
 const projectPath = process.env.PROJECT_PATH
 
-const repositories = getAllRepositories('data/teste.txt').map((repo) => getGithubData(repo))
-Promise.all(repositories).then((data) => {
-    const filepath = projectPath + '/data/client.csv'
-    filesModule.writeCsvFile(filepath, null, data)
-}).catch(console.log)
+const repositories = getAllRepositories('data/teste.txt')
+console.log(repositories)
+
+// getGithubData('nodejs/node').then(console.log)
+
+var actions = repositories.map(function (repo) {
+    getGithubData(repo)
+})
+
+Promise.all(actions).then(function (results) {
+    console.log(results)
+})
+
+// const repositories = getAllRepositories('data/teste.txt').map((repo) => getGithubData(repo))
+// Promise.all(repositories).then((data) => {
+//     // const filepath = projectPath + '/data/client.csv'
+//     // filesModule.writeCsvFile(filepath, null, data)
+//     console.log('Data: ', data)
+// }).catch(console.log)
 
 
 
