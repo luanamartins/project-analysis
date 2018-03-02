@@ -6,7 +6,7 @@ from scipy import stats
 def get_column_as_array(matrix, index):
     # return [row[index] for row in matrix]
 
-    if type(matrix) is not list or matrix.ndim == 1:
+    if matrix.ndim == 1:
         return [matrix[index]]
     else:
         return [row[index] for row in matrix]
@@ -149,6 +149,7 @@ def normalize_metric_by_repository(repositories, metric_index, loc_index, factor
         #     sample_value = 0
     return repos
 
+
 def normalize_metric_by_script(repositories, metric_index, loc_index, factor):
     metrics = []
     for repo in repositories:
@@ -177,7 +178,43 @@ def error_handling_percent_per_matrix(matrices, loc_index):
     return (error_handling_lines * 100) / total_lines_repository
 
 
-# def empty_blocks_per_matrix(matrices, loc_index):
+def get_block_per_file(matrices, loc_indices, search_value):
+    answer = 0
+    for matrix in matrices:
+        array = []
+        for loc_index in loc_indices:
+            array.append(get_column_as_array(matrix, loc_index))
+
+        array = [i for i in array if i == search_value]
+        answer += len(array)
+    return answer
+
+
+def empty_block_per_file(matrices, loc_indices):
+    answer = 0
+    for matrix in matrices:
+        array = []
+        for loc_index in loc_indices:
+            array.append(get_column_as_array(matrix, loc_index))
+
+        array = [i for i in array if i == 0]
+        answer += len(array)
+    return answer
+
+
+def get_array_empty_block_per_file(matrices, loc_index):
+    answer = []
+    for matrix in matrices:
+        array = [i for i in get_column_as_array(matrix, loc_index) if i == 0]
+        answer.append(len(array))
+    return answer
+
+
+def get_percentage(value, total):
+    if total > 0:
+        return (value * 100) / total
+    else:
+        return 0
 
 
 def execute_test(client_metric, server_metric, alternative):

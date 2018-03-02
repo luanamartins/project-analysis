@@ -41,7 +41,7 @@ def main():
     promise_number_indices = [16]  # promiseNumberOfPromises(16)
     promise_number_catches_indices = [22]  # promiseNumberOfPromiseCatches(22)
 
-    async_await_number_async_indices = [27]  # asyncAwaitNumberOfAsyncs
+    async_await_number_async_indices = [31]  # asyncAwaitNumberOfCatchesLines
 
     event_raise_indices = [37, 38]  # eventsNumberOfEventMethodsOn(37), eventsNumberOfEventMethodsOnce(38)
     event_all_indices = [37, 38,
@@ -73,7 +73,7 @@ def main():
 
     print('RQ1.1')
 
-    tries = try_catch_client_try + try_catch_server_try
+    tries = try_catch_client_catch + try_catch_server_catch
     promises = promises_client + promises_server
     async_await = async_await_client + async_await_server
     events = events_client + events_server
@@ -86,11 +86,98 @@ def main():
 
     print('----------------------------------------------------')
 
-    promises_array = np.array(get_column_as_array(client_matrices, promise_number_catches_indices) + \
-                     get_column_as_array(server_matrices, promise_number_catches_indices))
-    events_array = np.array(get_column_as_array(client_matrices, event_raise_indices) + \
-                   get_column_as_array(server_matrices, event_raise_indices))
-    print(ztest(promises_array, events_array))
+    # promises_array = np.array(get_column_as_array(client_matrices, promise_number_catches_indices) + \
+    #                  get_column_as_array(server_matrices, promise_number_catches_indices))
+    # events_array = np.array(get_column_as_array(client_matrices, event_raise_indices) + \
+    #                get_column_as_array(server_matrices, event_raise_indices))
+    # print(ztest(promises_array, events_array))
+
+    print('----------------------------------------------------')
+
+    print('RQ1.2 - empty approach')
+
+    try_catch_empty_catch_indices = [7]
+    try_catch_catches_indices = [6]
+
+    promises_catch_empty_indices = [24]
+    promises_catch_indices = [22]
+
+    async_await_empty_catch_indices = [32]
+    async_await_catch_indices = [31]
+
+    callbacks_empty_indices = [49]
+    callbacks_indices = [47, 48]
+
+    events_handle_lines = [37,38]
+    events_handle_empty_lines = [40, 41]
+
+
+    try_catch_empty_array = total_category_files(client_matrices, try_catch_empty_catch_indices) + \
+                            total_category_files(server_matrices, try_catch_empty_catch_indices)
+    try_catch_total_catches = total_category_files(client_matrices, try_catch_catches_indices) + \
+                            total_category_files(server_matrices, try_catch_catches_indices)
+
+    promises_empty_array = total_category_files(client_matrices, promises_catch_empty_indices) + \
+                           total_category_files(server_matrices, promises_catch_empty_indices)
+    promises_array = total_category_files(client_matrices, promises_catch_indices) + \
+                           total_category_files(server_matrices, promises_catch_indices)
+
+
+    async_await_empty_array = total_category_files(client_matrices, async_await_empty_catch_indices) + \
+                              total_category_files(server_matrices, async_await_empty_catch_indices)
+    async_await_array = total_category_files(client_matrices, async_await_catch_indices) + \
+                              total_category_files(server_matrices, async_await_catch_indices)
+
+    callback_empty_array = total_category_files(client_matrices, callbacks_empty_indices) + \
+                           total_category_files(server_matrices, callbacks_empty_indices)
+    callback_array = total_category_files(client_matrices, callbacks_indices) + \
+                           total_category_files(server_matrices, callbacks_indices)
+
+    events_empty_array = empty_block_per_file(client_matrices, events_handle_empty_lines) + \
+                         empty_block_per_file(server_matrices, events_handle_empty_lines)
+    events_array = empty_block_per_file(client_matrices, events_handle_lines) + \
+                         empty_block_per_file(server_matrices, events_handle_lines)
+
+
+    print('Try-catch: ' + str(try_catch_empty_array) + ' ' + str((try_catch_empty_array*100)/try_catch_total_catches))
+    print('Promises: ' + str(promises_empty_array) + ' ' + str((promises_empty_array*100)/promises_array))
+    print('Async-await: ' + str(async_await_empty_array) + ' ' + str((async_await_empty_array*100)/async_await_array))
+    print('Callbacks: ' + str(callback_empty_array) + ' ' + str((callback_empty_array*100)/callback_array))
+    print('Events: ' + str(events_empty_array) + ' ' + str(get_percentage(events_empty_array, events_array)))
+
+    print('----------------------------------------------------')
+
+    print('RQ1.2 - get number of lines')
+
+    try_catch_lines_indices = [8]
+    lines = total_category_files(client_matrices, try_catch_lines_indices) + \
+            total_category_files(server_matrices, try_catch_lines_indices)
+    print('try-catch lines: ', lines)
+
+    promises_catch_lines_indices = [23]
+    lines = total_category_files(client_matrices, promises_catch_lines_indices) + \
+            total_category_files(server_matrices, promises_catch_lines_indices)
+    print('promises lines: ', lines)
+
+    async_await_catch_lines_indices = [33]
+    lines = total_category_files(client_matrices, async_await_catch_lines_indices) + \
+            total_category_files(server_matrices, async_await_catch_lines_indices)
+    print('async-await lines: ', lines)
+
+
+    callback_lines_indices = [51]
+    lines = total_category_files(client_matrices, callback_lines_indices) + \
+            total_category_files(server_matrices, callback_lines_indices)
+    print('callback lines: ', lines)
+
+    events_lines_indices = [40,41]
+    lines = total_category_files(client_matrices, events_lines_indices) + \
+            total_category_files(server_matrices, events_lines_indices)
+    print('events lines: ', lines)
+
+
+
+    print('----------------------------------------------------')
 
     print('Total of files: ' + str(client_total_files) + ' ' + str(server_total_files))
     print('Total of lines: ' + str(client_lines) + ' ' + str(server_lines))
