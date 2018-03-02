@@ -1,0 +1,31 @@
+RQ1.1
+Try-catch tries: 3060 62.58948660257722
+Promises: 759 15.524647167109839
+Async-await: 5 0.1022704029453876
+Events: 1065 21.78359582736756
+----------------------------------------------------
+----------------------------------------------------
+RQ1.2 - empty approach
+Try-catch: 959 31.33986928104575
+Promises: 35 4.61133069828722
+Async-await: 1 20.0
+Callbacks: 264 4.155517078545569
+Events: 0 0.0
+----------------------------------------------------
+RQ1.2 - get number of lines
+try-catch lines:  2777
+try-catch lines (mean):  0.907516339869281
+promises lines:  537
+promises lines (mean):  0.7075098814229249
+async-await lines:  4
+5
+async-await lines (mean):  0.8
+callback lines:  6147
+callback lines (mean):  0.967574374311349
+events lines:  726
+events lines (mean):  0.750775594622544
+----------------------------------------------------
+Total of files: 26602 31349
+Total of lines: 4048235.0 4215078.0
+Total of repositories: 86 106
+Factor:  100000
