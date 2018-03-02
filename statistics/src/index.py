@@ -10,11 +10,13 @@ from src.files import *
 def main():
     client_path = 'data/client-reviewed'
     client_files = sorted([f for f in listdir(client_path) if isfile(join(client_path, f))], key=lambda s: s.lower())
-    client_matrices = [genfromtxt(client_path + '/' + filename, delimiter=',', skip_header=1) for filename in client_files]
+    client_matrices = [genfromtxt(client_path + '/' + filename, delimiter=',', skip_header=1) for filename in
+                       client_files]
 
     server_path = 'data/server-reviewed'
     server_files = sorted([f for f in listdir(server_path) if isfile(join(server_path, f))], key=lambda s: s.lower())
-    server_matrices = [genfromtxt(server_path + '/' + filename, delimiter=',', skip_header=1) for filename in server_files]
+    server_matrices = [genfromtxt(server_path + '/' + filename, delimiter=',', skip_header=1) for filename in
+                       server_files]
 
     client_lines = total_lines(client_matrices)
     server_lines = total_lines(server_matrices)
@@ -30,74 +32,83 @@ def main():
     # print('Total of files (Server): ' + str(server_total_files))
     # print('Total of files: ' + str(client_total_files + server_total_files))
 
-    # Try-catch -> tryCatchNumberOfCatches(6)
-    # Promise -> promiseNumberOfPromiseCatches(22)
-    # asyncAwait -> asyncAwaitNumberOfCatches(31)
-    # eventos -> eventsNumberOfEventMethodsOn(37), eventsNumberOfEventMethodsOnce(38)
+    try_catch_tries_indices = [2]  # tryCatchNumberOfTries(2)
+    try_catch_catches_indices = [6]  # tryCatchNumberOfCatches(6)
+    try_catch_finally_indices = [14]  # tryCatchNumberOfFinallies(14)
+    try_catch_empty_try_indices = [3]  # tryCatchNumberOfEmptyTries(3)
+    try_catch_empty_catch_indices = [7]  # tryCatchNumberOfEmptyCatches(7)
 
-    # indices_try_catches = [6]
-    # indices_promises = [22]
-    # indices_async_awaits = [31]
-    # indices_events = [37, 38]
+    promise_number_indices = [16]  # promiseNumberOfPromises(16)
+    promise_number_catches_indices = [22]  # promiseNumberOfPromiseCatches(22)
 
-    # Try-catch -> tryCatchNumberOfTries(2)
-    # Promise -> promiseNumberOfPromises(16)
-    # asyncAwait -> asyncAwaitNumberOfAsyncs(27)
-    # eventos -> eventsNumberOfEventMethodsOn(37), eventsNumberOfEventMethodsOnce(38), eventsNumberOfEventMethodsEmit(39)
+    async_await_number_async_indices = [27]  # asyncAwaitNumberOfAsyncs
 
-    indices_try_catches = [2]
-    indices_empty_try = [3]
-    indices_empty_catch = [7]
-    indices_promises = [16]
-    indices_async_awaits = [27]
-    indices_events = [37, 38, 39]
+    event_raise_indices = [37, 38]  # eventsNumberOfEventMethodsOn(37), eventsNumberOfEventMethodsOnce(38)
+    event_all_indices = [37, 38,
+                         39]  # eventsNumberOfEventMethodsOn(37), eventsNumberOfEventMethodsOnce(38), eventsNumberOfEventMethodsEmit(39)
 
-    try_catch_client = total_category_files(client_matrices, indices_try_catches)
-    try_catch_server = total_category_files(server_matrices, indices_try_catches)
+    try_catch_client_try = total_category_files(client_matrices, try_catch_tries_indices)
+    try_catch_server_try = total_category_files(server_matrices, try_catch_tries_indices)
 
-    empty_try_catch_client = total_category_files(client_matrices, indices_try_catches)
-    empty_try_catch_server = total_category_files(server_matrices, indices_try_catches)
+    try_catch_client_catch = total_category_files(client_matrices, try_catch_catches_indices)
+    try_catch_server_catch = total_category_files(server_matrices, try_catch_catches_indices)
 
-    promises_client = total_category_files(client_matrices, indices_promises)
-    promises_server = total_category_files(server_matrices, indices_promises)
+    try_catch_client_finally = total_category_files(client_matrices, try_catch_finally_indices)
+    try_catch_server_finally = total_category_files(server_matrices, try_catch_finally_indices)
 
-    async_await_client = total_category_files(client_matrices, indices_async_awaits)
-    async_await_server = total_category_files(server_matrices, indices_async_awaits)
+    try_catch_empty_catch_client = total_category_files(client_matrices, try_catch_empty_catch_indices)
+    try_catch_empty_catch_server = total_category_files(server_matrices, try_catch_empty_catch_indices)
 
-    events_client = total_category_files(client_matrices, indices_events)
-    events_server = total_category_files(server_matrices, indices_events)
+    promises_client = total_category_files(client_matrices, promise_number_catches_indices)
+    promises_server = total_category_files(server_matrices, promise_number_catches_indices)
+
+    async_await_client = total_category_files(client_matrices, async_await_number_async_indices)
+    async_await_server = total_category_files(server_matrices, async_await_number_async_indices)
+
+    events_client = total_category_files(client_matrices, event_all_indices)
+    events_server = total_category_files(server_matrices, event_all_indices)
 
     # none_client = client_total_files - promises_client - async_await_client - events_client
     # none_server = server_total_files - promises_server - async_await_server - events_server
 
-    print('Try-catch: ' + str(try_catch_client) + ' ' + str(try_catch_server))
+    print('RQ1.1')
 
-    print('Empty: ' + str(empty_try_catch_client) + ' ' + str(empty_try_catch_server))
+    tries = try_catch_client_try + try_catch_server_try
+    promises = promises_client + promises_server
+    async_await = async_await_client + async_await_server
+    events = events_client + events_server
+    total = tries + promises + async_await + events
 
-    print('Promises: ' + str(promises_client) + ' ' + str(promises_server))
+    print('Try-catch tries: ' + str(tries) + ' ' + str((tries * 100 / total)))
+    print('Promises: ' + str(promises) + ' ' + str((promises * 100 / total)))
+    print('Async-await: ' + str(async_await) + ' ' + str((async_await * 100 / total)))
+    print('Events: ' + str(events) + ' ' + str((events * 100 / total)))
 
-    print('Async-await: ' + str(async_await_client) + ' ' + str(async_await_server))
+    print('----------------------------------------------------')
 
-    print('Events: ' + str(events_client) + ' ' + str(events_server))
+    promises_array = np.array(get_column_as_array(client_matrices, promise_number_catches_indices) + \
+                     get_column_as_array(server_matrices, promise_number_catches_indices))
+    events_array = np.array(get_column_as_array(client_matrices, event_raise_indices) + \
+                   get_column_as_array(server_matrices, event_raise_indices))
+    print(ztest(promises_array, events_array))
 
     print('Total of files: ' + str(client_total_files) + ' ' + str(server_total_files))
-
     print('Total of lines: ' + str(client_lines) + ' ' + str(server_lines))
-
     print('Total of repositories: ' + str(len(client_matrices)) + ' ' + str(len(server_matrices)))
 
-
-
+    # print('Try-catch catches: ' + str(try_catch_client_catch + try_catch_server_catch))
+    # print('Try-catch empty catches: ' + str(try_catch_empty_catch_client + try_catch_empty_catch_server))
+    # print('Try-catch finallies: ' + str(try_catch_client_finally + try_catch_server_finally))
 
     # test(client_matrices)
     # print('-----')
     # test(server_matrices)
     # print('finished')
 
-    # factor = calculate_factor(client_matrices, server_matrices)
-    # print('Factor: ', factor)
-    # metrics_labels = read_file('src/notes/metrics.txt')
-    # loc_index = 0
+    factor = calculate_factor(client_matrices, server_matrices)
+    print('Factor: ', factor)
+    metrics_labels = read_file('src/notes/metrics.txt')
+    loc_index = 0
     #
     # # execute_summary(client_matrices, metrics_labels)
     #
@@ -108,7 +119,6 @@ def main():
     #
     # print('Client: ', client_error_handling)
     # print('Server: ', server_error_handling)
-
 
     # bar_line_graph('Empty error handling callbacks', objects_client, total_lines_client, total_metrics_client)
     # bar_line_graph('Empty error handling callbacks', objects_server, total_lines_server, total_metrics_server)
@@ -121,7 +131,7 @@ def main():
 
     # plot_two_groups_histogram(client_metric4_values, 'client', server_metric4_values, 'server','Number of logging callbacks')
 
-    #plot_two_groups_histogram(client_metric1_values, 'client', server_metric1_values, 'server', titles[0], titles[0] + '.png')
+    # plot_two_groups_histogram(client_metric1_values, 'client', server_metric1_values, 'server', titles[0], titles[0] + '.png')
 
     # plot_violinplot([client_metric1_values, server_metric1_values], ['Client', 'Server'], titles[0], titles[0] + '.png')
 
@@ -165,7 +175,6 @@ def execute_tests(client_matrices, factor, loc_index, metrics_labels, server_mat
 
 
 def execute_summary(matrices, metrics_labels):
-
     for metric_index in range(2, 50):
         metrics = []
         for matrix in matrices:
@@ -195,8 +204,8 @@ def test(matrices):
         matrix_pos += 1
     # print(get_column_as_array([[1,2,3,4],[1,2,3,4],[1,2,3,4],[1,2,3,4]], 1))
 
-main()
 
+main()
 
 # a1 = boot[:, 2]
 # b1 = socket[:, 2]
@@ -213,5 +222,3 @@ main()
 # print(get_column_as_array(a, 0))
 # b = np.arange(25) + 4
 # print(stats.mannwhitneyu(a, b, alternative='two-sided'))
-
-

@@ -6,7 +6,7 @@ from scipy import stats
 def get_column_as_array(matrix, index):
     # return [row[index] for row in matrix]
 
-    if matrix.ndim == 1:
+    if type(matrix) is not list or matrix.ndim == 1:
         return [matrix[index]]
     else:
         return [row[index] for row in matrix]
@@ -93,8 +93,9 @@ def get_metrics(matrix, index_metric, index_loc):
 def convert_matrix_to_array(matrix):
     result = []
     for row in matrix:
-        row_metrics = row[2:]
-        result = [a for a in row_metrics if a != 0] + result
+        if type(row) is np.ndarray:
+            row_metrics = row[2:]
+            result = [a for a in row_metrics if a != 0] + result
     return result
 
 
@@ -191,3 +192,5 @@ def normalize_array(array, objects, metric_index, loc_index):
 def summary(data):
     print(stats.describe(data))
 
+def ztest(sample1, sample2):
+    return stats.ttest_ind(sample1, sample2)
