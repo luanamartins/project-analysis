@@ -2,6 +2,7 @@ require('dotenv').config()
 const request = require('request')
 const filesModule = require('./files')
 const fs = require('fs')
+const utils = require('./utils.js');
 
 // var url = '/search/issues?q=repo:nodejs/node+type:issue+state:closed'
 // var urlC = '/repos/nodejs/node'
@@ -89,20 +90,44 @@ function getGithubData(repo) {
     })
 }
 
+
+function getData() {
+
+}
+
 const projectPath = process.env.PROJECT_PATH
 
 const repositories = getAllRepositories('data/teste.txt')
 console.log(repositories)
 
+repositories.forEach(function(repo) {
+    getGithubData(repo)
+        .then(function(data){
+            // console.log(data)
+            const headers = utils.listPropertiesOf(data)
+            console.log('rr ', headers)
+
+        })
+        .catch(function(err){
+            console.log('Error on: ', repo)
+            console.log(err)
+        })
+})
+
+
+const filename = 'retrieve-stats-data/results.csv'
+filesModule.writeCsvFile(filename, headers, data)
+
+
 // getGithubData('nodejs/node').then(console.log)
 
-var actions = repositories.map(function (repo) {
-    getGithubData(repo)
-})
-
-Promise.all(actions).then(function (results) {
-    console.log(results)
-})
+// var actions = repositories.map(function (repo) {
+//     getGithubData(repo)
+// })
+//
+// Promise.all(actions).then(function (results) {
+//     console.log(results)
+// })
 
 // const repositories = getAllRepositories('data/teste.txt').map((repo) => getGithubData(repo))
 // Promise.all(repositories).then((data) => {
