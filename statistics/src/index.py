@@ -33,159 +33,129 @@ def main():
     # print('Total of files: ' + str(client_total_files + server_total_files))
 
     try_catch_tries_indices = [2]  # tryCatchNumberOfTries(2)
-    try_catch_catches_indices = [6]  # tryCatchNumberOfCatches(6)
-    try_catch_finally_indices = [14]  # tryCatchNumberOfFinallies(14)
     try_catch_empty_try_indices = [3]  # tryCatchNumberOfEmptyTries(3)
+    try_catch_catches_indices = [6]  # tryCatchNumberOfCatches(6)
     try_catch_empty_catch_indices = [7]  # tryCatchNumberOfEmptyCatches(7)
+    try_catch_lines_catch_indices = [8] # tryCatchNumberOfCatchesLines(8)
+    try_catch_finally_indices = [14]  # tryCatchNumberOfFinallies(14)
+
 
     promise_number_indices = [16]  # promiseNumberOfPromises(16)
     promise_number_catches_indices = [22]  # promiseNumberOfPromiseCatches(22)
+    promises_number_catch_lines_indices = [23] # promiseNumberOfPromiseThenRejectedLines(23)
+    promises_catch_empty_indices = [24] # promiseNumberOfPromiseCatches(24)
 
-    async_await_number_async_indices = [31]  # asyncAwaitNumberOfCatchesLines
+    async_await_indices = [27] # asyncAwaitNumberOfAsyncs(27)
+    async_await_number_of_catch_indices = [31]  # asyncAwaitNumberOfCatches(31)
+    async_await_empty_catch_indices = [32] # asyncAwaitNumberOfEmptyCatches(32)
+    async_await_catch_lines_indices = [33] # asyncAwaitNumberOfCatchesLines(33)
 
     event_raise_indices = [37, 38]  # eventsNumberOfEventMethodsOn(37), eventsNumberOfEventMethodsOnce(38)
-    event_all_indices = [37, 38,
-                         39]  # eventsNumberOfEventMethodsOn(37), eventsNumberOfEventMethodsOnce(38), eventsNumberOfEventMethodsEmit(39)
+    event_all_indices = [37, 38, 39]  # eventsNumberOfEventMethodsOn(37), eventsNumberOfEventMethodsOnce(38), eventsNumberOfEventMethodsEmit(39)
+    events_handle_empty_lines = [40, 41]
+    events_catch_lines_indices = [40, 41]
 
-    try_catch_client_try = total_category_files(client_matrices, try_catch_tries_indices)
-    try_catch_server_try = total_category_files(server_matrices, try_catch_tries_indices)
+    callbacks_empty_indices = [49] # callbacksNumberOfEmptyCallbacks(49)
+    callbacks_indices = [47, 48] # callbacksNumberOfCallbackErrorFunctions(47), callbacksNumberOfFirstErrorArgFunctions(48)
+    callback_lines_indices = [51]
 
-    try_catch_client_catch = total_category_files(client_matrices, try_catch_catches_indices)
-    try_catch_server_catch = total_category_files(server_matrices, try_catch_catches_indices)
 
-    try_catch_client_finally = total_category_files(client_matrices, try_catch_finally_indices)
-    try_catch_server_finally = total_category_files(server_matrices, try_catch_finally_indices)
+    try_catch_number_of_try = total_category_files(client_matrices, try_catch_tries_indices) + \
+                       total_category_files(server_matrices, try_catch_tries_indices)
+    try_catch_number_of_catch = total_category_files(client_matrices, try_catch_catches_indices) + \
+                              total_category_files(server_matrices, try_catch_catches_indices)
+    try_catch_number_of_empty_catch = total_category_files(client_matrices, try_catch_empty_catch_indices) + \
+                            total_category_files(server_matrices, try_catch_empty_catch_indices)
+    try_catch_number_of_catch_lines = total_category_files(client_matrices, try_catch_lines_catch_indices) + \
+            total_category_files(server_matrices, try_catch_lines_catch_indices)
 
-    try_catch_empty_catch_client = total_category_files(client_matrices, try_catch_empty_catch_indices)
-    try_catch_empty_catch_server = total_category_files(server_matrices, try_catch_empty_catch_indices)
 
-    promises_client = total_category_files(client_matrices, promise_number_catches_indices)
-    promises_server = total_category_files(server_matrices, promise_number_catches_indices)
+    promise_number = total_category_files(client_matrices, promise_number_indices) + \
+                    total_category_files(server_matrices, promise_number_indices)
+    promise_number_of_catch = total_category_files(client_matrices, promise_number_catches_indices) + \
+                     total_category_files(server_matrices, promise_number_catches_indices)
+    promise_number_of_empty_catch = total_category_files(client_matrices, promises_catch_empty_indices) + \
+                           total_category_files(server_matrices, promises_catch_empty_indices)
+    promise_number_of_catch_lines = total_category_files(client_matrices, promises_number_catch_lines_indices) + \
+            total_category_files(server_matrices, promises_number_catch_lines_indices)
 
-    async_await_client = total_category_files(client_matrices, async_await_number_async_indices)
-    async_await_server = total_category_files(server_matrices, async_await_number_async_indices)
 
-    events_client = total_category_files(client_matrices, event_all_indices)
-    events_server = total_category_files(server_matrices, event_all_indices)
+    async_await_number = total_category_files(client_matrices, async_await_indices) + \
+                    total_category_files(server_matrices, async_await_indices)
+    async_await_number_of_catch = total_category_files(client_matrices, async_await_number_of_catch_indices) + \
+                                  total_category_files(server_matrices, async_await_number_of_catch_indices)
+    async_await_number_of_empty_catch = total_category_files(client_matrices, async_await_empty_catch_indices) + \
+                              total_category_files(server_matrices, async_await_empty_catch_indices)
+    async_await_number_of_catch_lines = total_category_files(client_matrices, async_await_catch_lines_indices) + \
+                                 total_category_files(server_matrices, async_await_catch_lines_indices)
 
-    number_events_catch = total_category_files(client_matrices, event_raise_indices) + \
+
+    callback_number = total_category_files(client_matrices, callbacks_indices) + \
+                      total_category_files(server_matrices, callbacks_indices)
+    callback_number_of_empty_callbacks = total_category_files(client_matrices, callbacks_empty_indices) + \
+                           total_category_files(server_matrices, callbacks_empty_indices)
+    callback_number_of_catch_lines = total_category_files(client_matrices, callback_lines_indices) + \
+                                 total_category_files(server_matrices, callback_lines_indices)
+
+
+    event_number_of_events = total_category_files(client_matrices, event_all_indices) + \
+                    total_category_files(server_matrices, event_all_indices)
+    event_number_of_catch = total_category_files(client_matrices, event_raise_indices) + \
                    total_category_files(server_matrices, event_raise_indices)
+    event_number_of_empty_lines = empty_block_per_file(client_matrices, events_handle_empty_lines) + \
+                         empty_block_per_file(server_matrices, events_handle_empty_lines)
+    event_number_of_catch_lines = total_category_files(client_matrices, events_catch_lines_indices) + \
+                                  total_category_files(server_matrices, events_catch_lines_indices)
 
-    # none_client = client_total_files - promises_client - async_await_client - events_client
-    # none_server = server_total_files - promises_server - async_await_server - events_server
-
-    print('RQ1.1')
-
-    tries = try_catch_client_catch + try_catch_server_catch
-    promises = promises_client + promises_server
-    async_await = async_await_client + async_await_server
-    events = events_client + events_server
-    total = tries + promises + async_await + events
-
-    print('Try-catch tries: ' + str(tries) + ' ' + str((tries * 100 / total)))
-    print('Promises: ' + str(promises) + ' ' + str((promises * 100 / total)))
-    print('Async-await: ' + str(async_await) + ' ' + str((async_await * 100 / total)))
-    print('Events: ' + str(events) + ' ' + str((events * 100 / total)))
 
     print('----------------------------------------------------')
+    print('RQ1.1')
 
-    # number_promises = np.array(get_column_as_array(client_matrices, promise_number_catches_indices) + \
-    #                  get_column_as_array(server_matrices, promise_number_catches_indices))
-    # number_events_catch = np.array(get_column_as_array(client_matrices, event_raise_indices) + \
-    #                get_column_as_array(server_matrices, event_raise_indices))
-    # print(ztest(number_promises, number_events_catch))
+    total = try_catch_number_of_catch + promise_number_of_catch + async_await_number_of_catch + event_number_of_catch
+
+    print('Try-catch tries: ' + str(try_catch_number_of_catch) + ' ' + str(get_percentage(try_catch_number_of_catch, total)))
+    print('Promises: ' + str(promise_number_of_catch) + ' ' + str(get_percentage(promise_number_of_catch, total)))
+    print('Async-await: ' + str(async_await_number_of_catch) + ' ' + str(get_percentage(async_await_number_of_catch, total)))
+    print('Events: ' + str(event_number_of_catch) + ' ' + str(get_percentage(event_number_of_catch, total)))
 
     print('----------------------------------------------------')
 
     print('RQ1.2 - empty approach')
 
-    try_catch_empty_catch_indices = [7]
-    try_catch_catches_indices = [6]
-
-    promises_catch_empty_indices = [24]
-    promises_catch_indices = [22]
-
-    async_await_empty_catch_indices = [32]
-    async_await_catch_indices = [31]
-
-    callbacks_empty_indices = [49]
-    callbacks_indices = [47, 48]
-
-    events_handle_lines = [37,38]
-    events_handle_empty_lines = [40, 41]
-
-
-    try_catch_empty_array = total_category_files(client_matrices, try_catch_empty_catch_indices) + \
-                            total_category_files(server_matrices, try_catch_empty_catch_indices)
-    try_catch_number = total_category_files(client_matrices, try_catch_catches_indices) + \
-                            total_category_files(server_matrices, try_catch_catches_indices)
-
-    promises_empty_array = total_category_files(client_matrices, promises_catch_empty_indices) + \
-                           total_category_files(server_matrices, promises_catch_empty_indices)
-    number_promises = total_category_files(client_matrices, promises_catch_indices) + \
-                           total_category_files(server_matrices, promises_catch_indices)
-
-
-    async_await_empty_array = total_category_files(client_matrices, async_await_empty_catch_indices) + \
-                              total_category_files(server_matrices, async_await_empty_catch_indices)
-    number_async_await = total_category_files(client_matrices, async_await_catch_indices) + \
-                              total_category_files(server_matrices, async_await_catch_indices)
-
-    callback_empty_array = total_category_files(client_matrices, callbacks_empty_indices) + \
-                           total_category_files(server_matrices, callbacks_empty_indices)
-    number_callback = total_category_files(client_matrices, callbacks_indices) + \
-                           total_category_files(server_matrices, callbacks_indices)
-
-    events_empty_array = empty_block_per_file(client_matrices, events_handle_empty_lines) + \
-                         empty_block_per_file(server_matrices, events_handle_empty_lines)
-    number_events_catch = total_category_files(client_matrices, events_handle_lines) + \
-                          total_category_files(server_matrices, events_handle_lines)
-
-
-    print('Try-catch: ' + str(try_catch_empty_array) + ' ' + str((try_catch_empty_array*100)/try_catch_number))
-    print('Promises: ' + str(promises_empty_array) + ' ' + str((promises_empty_array*100)/number_promises))
-    print('Async-await: ' + str(async_await_empty_array) + ' ' + str((async_await_empty_array*100)/number_async_await))
-    print('Callbacks: ' + str(callback_empty_array) + ' ' + str((callback_empty_array*100)/number_callback))
-    print('Events: ' + str(events_empty_array) + ' ' + str(get_percentage(events_empty_array, number_events_catch)))
+    print('Try-catch: ' + str(try_catch_number_of_empty_catch) + ' ' + str(get_percentage(try_catch_number_of_empty_catch, try_catch_number_of_catch)))
+    print('Promises: ' + str(promise_number_of_empty_catch) + ' ' + str(get_percentage(promise_number_of_empty_catch, promise_number_of_catch)))
+    print('Async-await: ' + str(async_await_number_of_empty_catch) + ' ' + str(get_percentage(async_await_number_of_empty_catch, async_await_number_of_catch)))
+    print('Callbacks: ' + str(callback_number_of_empty_callbacks) + ' ' + str(get_percentage(callback_number_of_empty_callbacks, callback_number)))
+    print('Events: ' + str(event_number_of_empty_lines) + ' ' + str(get_percentage(event_number_of_empty_lines, event_number_of_catch)))
 
     print('----------------------------------------------------')
 
     print('RQ1.2 - get number of lines')
 
-    try_catch_lines_indices = [8]
-    lines = total_category_files(client_matrices, try_catch_lines_indices) + \
-            total_category_files(server_matrices, try_catch_lines_indices)
-    print('try-catch lines: ', lines)
-    print('try-catch lines (mean): ', lines/try_catch_number)
+    print('try-catch lines: ', try_catch_number_of_catch_lines)
+    print('try-catch lines (mean): ', try_catch_number_of_catch_lines/try_catch_number_of_catch)
 
-    promises_catch_lines_indices = [23]
-    lines = total_category_files(client_matrices, promises_catch_lines_indices) + \
-            total_category_files(server_matrices, promises_catch_lines_indices)
-    print('promises lines: ', lines)
-    print('promises lines (mean): ', lines/number_promises)
+    print('promises lines: ', promise_number_of_catch_lines)
+    print('promises lines (mean): ', promise_number_of_catch_lines/promise_number_of_catch)
 
-    async_await_catch_lines_indices = [33]
-    lines = total_category_files(client_matrices, async_await_catch_lines_indices) + \
-            total_category_files(server_matrices, async_await_catch_lines_indices)
-    print('async-await lines: ', lines)
-    print(number_async_await)
-    print('async-await lines (mean): ', lines/number_async_await)
+    print('async-await lines: ', async_await_number_of_catch_lines)
+    print('async-await lines (mean): ', async_await_number_of_catch_lines/async_await_number_of_catch)
 
-    callback_lines_indices = [51]
-    lines = total_category_files(client_matrices, callback_lines_indices) + \
-            total_category_files(server_matrices, callback_lines_indices)
-    print('callback lines: ', lines)
-    print('callback lines (mean): ', lines/number_callback)
+    print('callback lines: ', callback_number_of_catch_lines)
+    print('callback lines (mean): ', callback_number_of_catch_lines/callback_number)
 
-    events_catch_lines_indices = [40, 41]
-    lines = total_category_files(client_matrices, events_catch_lines_indices) + \
-            total_category_files(server_matrices, events_catch_lines_indices)
-    print('events lines: ', lines)
-    print('events lines (mean): ', lines/number_events_catch)
+    print('events lines: ', event_number_of_catch_lines)
+    print('events lines (mean): ', event_number_of_catch_lines/event_number_of_catch)
 
+    print('----------------------------------------------------')
+
+    print('RQ1.2 - get only one statement error handler constructs')
+
+    # print('try-catch: ', has_only_one_statement())
 
 
     print('----------------------------------------------------')
+
 
     print('Total of files: ' + str(client_total_files) + ' ' + str(server_total_files))
     print('Total of lines: ' + str(client_lines) + ' ' + str(server_lines))

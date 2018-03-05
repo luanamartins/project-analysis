@@ -4,10 +4,6 @@ const filesModule = require('./files')
 const fs = require('fs')
 const utils = require('./utils.js');
 
-// var url = '/search/issues?q=repo:nodejs/node+type:issue+state:closed'
-// var urlC = '/repos/nodejs/node'
-
-
 function getAllRepositories(filepath) {
     const projectPath = process.env.PROJECT_PATH
     const path = projectPath + '/' + filepath
@@ -90,33 +86,51 @@ function getGithubData(repo) {
     })
 }
 
+function deleteFromArray(array, deleteValue) {
+    const result = []
+    array.forEach(function (item) {
+        if (item != deleteValue) {
+            result.push(item)
+        }
+    })
 
-function getData() {
-
+    return result
 }
+
 
 const projectPath = process.env.PROJECT_PATH
 
 const repositories = getAllRepositories('data/teste.txt')
 console.log(repositories)
 
-repositories.forEach(function(repo) {
-    getGithubData(repo)
-        .then(function(data){
-            // console.log(data)
-            const headers = utils.listPropertiesOf(data)
-            console.log('rr ', headers)
-
-        })
-        .catch(function(err){
-            console.log('Error on: ', repo)
-            console.log(err)
-        })
+let prom = []
+repositories.forEach(function (repo) {
+    prom.push(new Promise(function (resolve, reject) {
+        getGithubData(repo)
+            .then(function (data) {
+                resolve(data)
+            })
+            .catch(function (err) {
+                resolve({})
+                console.log('https://github.com/' + repo)
+            })
+    }))
 })
 
+Promise.all(prom)
+    .then(function (values) {
+        //console.log('values ', values)
+        const filename = 'retrieve-stats-data/results.csv'
+        const headers = ['repo_name', 'forks', 'stars', 'watchers', 'open_issues',
+            'closed_issues', 'open_pull_requests', 'closed_pull_requests']
 
-const filename = 'retrieve-stats-data/results.csv'
-filesModule.writeCsvFile(filename, headers, data)
+        filesModule.writeCsvFile(filename, headers, deleteFromArray(values, {}))
+    })
+    .catch(console.log)
+
+
+// const filename = 'retrieve-stats-data/results.csv'
+// filesModule.writeCsvFile(filename, headers, data)
 
 
 // getGithubData('nodejs/node').then(console.log)

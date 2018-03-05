@@ -202,11 +202,19 @@ def empty_block_per_file(matrices, loc_indices):
     return answer
 
 
-def get_array_empty_block_per_file(matrices, loc_index):
-    answer = []
+# def get_array_empty_block_per_file(matrices, loc_index):
+#     answer = []
+#     for matrix in matrices:
+#         array = [i for i in get_column_as_array(matrix, loc_index) if i == 0]
+#         answer.append(len(array))
+#     return answer
+
+
+def has_only_one_statement(matrices, loc_indices):
+    answer = 0
     for matrix in matrices:
-        array = [i for i in get_column_as_array(matrix, loc_index) if i == 0]
-        answer.append(len(array))
+        for loc_index in loc_indices:
+            answer += get_column_as_array(matrix, loc_index).count(1)
     return answer
 
 

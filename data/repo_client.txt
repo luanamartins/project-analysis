@@ -58,7 +58,7 @@ https://github.com/gnab/remark
 https://github.com/hakimel/reveal.js
 https://github.com/RocketChat/Rocket.Chat
 https://github.com/jlmakes/scrollreveal
-https://github.com/Sem'ic-Org/Semantic-UI
+https://github.com/Semantic-Org/Semantic-UI
 https://github.com/mycolorway/simditor
 https://github.com/lorenzofox3/Smart-Table
 https://github.com/cferdinandi/smooth-scroll
