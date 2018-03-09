@@ -1,0 +1,487 @@
+Factor:  100000
+------------------------------------------------------------------
+Metric index: 2
+Metric name:  tryCatchNumberOfTries
+Sample size (client):  74
+Sample size (server):  90
+Median client:  319.305658154
+Median server:  256.840289058
+MannwhitneyuResult(statistic=3624.0, pvalue=0.33210317111488874)
+0.332103171115
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 3
+Metric name:  tryCatchNumberOfEmptyTries
+Sample size (client):  2
+Sample size (server):  2
+Median client:  22.649155745
+Median server:  2.28186400241
+MannwhitneyuResult(statistic=4.0, pvalue=0.24527811680677281)
+0.245278116807
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 4
+Metric name:  tryCatchNumberOfTriesLines
+Sample size (client):  74
+Sample size (server):  90
+Median client:  1401.0545812
+Median server:  1025.84616391
+MannwhitneyuResult(statistic=3699.0, pvalue=0.22332744053399256)
+0.223327440534
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 5
+Metric name:  tryCatchNumberOfTriesWithUniqueStatement
+Sample size (client):  64
+Sample size (server):  82
+Median client:  240.332541751
+Median server:  142.639554721
+MannwhitneyuResult(statistic=3016.0, pvalue=0.12257008511252375)
+0.122570085113
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 6
+Metric name:  tryCatchNumberOfCatches
+Sample size (client):  73
+Sample size (server):  90
+Median client:  306.139334767
+Median server:  250.735811216
+MannwhitneyuResult(statistic=3540.0, pvalue=0.39569928057457748)
+0.395699280575
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 7
+Metric name:  tryCatchNumberOfEmptyCatches
+Sample size (client):  54
+Sample size (server):  57
+Median client:  74.5481857046
+Median server:  37.910379862
+MannwhitneyuResult(statistic=1972.5, pvalue=0.010628267517380118)
+0.0106282675174
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 8
+Metric name:  tryCatchNumberOfCatchesLines
+Sample size (client):  69
+Sample size (server):  86
+Median client:  748.596381784
+Median server:  722.331002486
+MannwhitneyuResult(statistic=2966.0, pvalue=0.99856363179333807)
+0.998563631793
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 9
+Metric name:  tryCatchNumberOfCatchesWithUniqueConsole
+Sample size (client):  14
+Sample size (server):  16
+Median client:  9.85704253162
+Median server:  7.94731396293
+MannwhitneyuResult(statistic=114.5, pvalue=0.93373199167915666)
+0.933731991679
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 10
+Metric name:  tryCatchNumberOfCatchesWithUniqueStatement
+Sample size (client):  63
+Sample size (server):  79
+Median client:  96.4413154595
+Median server:  88.6917960089
+MannwhitneyuResult(statistic=2674.0, pvalue=0.44746508845066257)
+0.447465088451
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 11
+Metric name:  tryCatchNumberOfThrows
+Sample size (client):  38
+Sample size (server):  49
+Median client:  38.2963342113
+Median server:  35.4157812721
+MannwhitneyuResult(statistic=954.5, pvalue=0.84395988965684565)
+0.843959889657
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 12
+Metric name:  tryCatchNumberOfThrowsLiteral
+Sample size (client):  2
+Sample size (server):  5
+Median client:  17.1658162173
+Median server:  6.28227816742
+MannwhitneyuResult(statistic=4.0, pvalue=0.84645059687659063)
+0.846450596877
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 13
+Metric name:  tryCatchNumberOfThrowsErrorObjects
+Sample size (client):  27
+Sample size (server):  25
+Median client:  14.4529556294
+Median server:  18.752344043
+MannwhitneyuResult(statistic=314.0, pvalue=0.6735673926255572)
+0.673567392626
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 14
+Metric name:  tryCatchNumberOfFinallies
+Sample size (client):  35
+Sample size (server):  32
+Median client:  37.3477071536
+Median server:  20.3475081694
+MannwhitneyuResult(statistic=671.5, pvalue=0.16351115460859578)
+0.163511154609
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 15
+Metric name:  tryCatchNumberOfFinalliesLines
+Sample size (client):  35
+Sample size (server):  32
+Median client:  132.567537104
+Median server:  56.1225402519
+MannwhitneyuResult(statistic=700.5, pvalue=0.078851329586859822)
+0.0788513295869
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 16
+Metric name:  promiseNumberOfPromises
+Sample size (client):  51
+Sample size (server):  79
+Median client:  74.2344571605
+Median server:  184.162062615
+MannwhitneyuResult(statistic=1512.5, pvalue=0.016790088790549561)
+0.0167900887905
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 17
+Metric name:  promiseNumberOfResolves
+Sample size (client):  51
+Sample size (server):  78
+Median client:  69.4927032662
+Median server:  144.506658843
+MannwhitneyuResult(statistic=1575.5, pvalue=0.046648826898016263)
+0.046648826898
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 18
+Metric name:  promiseNumberOfRejects
+Sample size (client):  31
+Sample size (server):  47
+Median client:  43.3034333436
+Median server:  37.2439478585
+MannwhitneyuResult(statistic=770.0, pvalue=0.67548212043734268)
+0.675482120437
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 19
+Metric name:  promiseNumberOfPromiseThens
+Sample size (client):  43
+Sample size (server):  62
+Median client:  98.1333558442
+Median server:  186.198981763
+MannwhitneyuResult(statistic=1157.5, pvalue=0.25412862152397886)
+0.254128621524
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 20
+Metric name:  promiseNumberOfPromiseThenFulfilledLines
+Sample size (client):  42
+Sample size (server):  61
+Median client:  360.906627494
+Median server:  699.300699301
+MannwhitneyuResult(statistic=1135.5, pvalue=0.33050527688296361)
+0.330505276883
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 21
+Metric name:  promiseNumberOfPromiseThenRejectedLines
+Sample size (client):  25
+Sample size (server):  33
+Median client:  63.724709256
+Median server:  38.8760791463
+MannwhitneyuResult(statistic=404.5, pvalue=0.90625615081436939)
+0.906256150814
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 22
+Metric name:  promiseNumberOfPromiseCatches
+Sample size (client):  29
+Sample size (server):  49
+Median client:  14.1602945341
+Median server:  48.4966052376
+MannwhitneyuResult(statistic=546.0, pvalue=0.089957240292145094)
+0.0899572402921
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 23
+Metric name:  promiseNumberOfPromiseCatchesLines
+Sample size (client):  28
+Sample size (server):  46
+Median client:  32.5764100307
+Median server:  95.7555844437
+MannwhitneyuResult(statistic=499.0, pvalue=0.10727611919432133)
+0.107276119194
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 24
+Metric name:  promiseNumberOfEmptyFunctionsOnPromiseCatches
+Sample size (client):  4
+Sample size (server):  10
+Median client:  22.0373542472
+Median server:  5.77883849889
+MannwhitneyuResult(statistic=37.0, pvalue=0.019624414976639706)
+0.0196244149766
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 25
+Metric name:  promiseNumberOfPromiseRaces
+Sample size (client):  4
+Sample size (server):  6
+Median client:  2.93817267869
+Median server:  7.69028329121
+MannwhitneyuResult(statistic=7.5, pvalue=0.39233033977656451)
+0.392330339777
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 26
+Metric name:  promiseNumberOfPromiseAll
+Sample size (client):  19
+Sample size (server):  37
+Median client:  16.5965921664
+Median server:  22.4190113216
+MannwhitneyuResult(statistic=301.5, pvalue=0.39165499087630706)
+0.391654990876
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 27
+Metric name:  asyncAwaitNumberOfAsyncs
+Sample size (client):  4
+Sample size (server):  10
+Median client:  3.55059039325
+Median server:  20.4488078959
+MannwhitneyuResult(statistic=11.0, pvalue=0.22830669840650797)
+0.228306698407
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 28
+Metric name:  asyncAwaitNumberOfAwaits
+Sample size (client):  5
+Sample size (server):  15
+Median client:  17.861927302
+Median server:  112.774888791
+MannwhitneyuResult(statistic=25.0, pvalue=0.29453066386789428)
+0.294530663868
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 29
+Metric name:  asyncAwaitNumberOfTries
+Sample size (client):  0
+Sample size (server):  4
+/home/lulis/.local/lib/python3.5/site-packages/numpy/core/fromnumeric.py:2909: RuntimeWarning: Mean of empty slice.
+  out=out, **kwargs)
+Median client:  nan
+Median server:  2.45966432791
+/home/lulis/.local/lib/python3.5/site-packages/numpy/core/_methods.py:80: RuntimeWarning: invalid value encountered in double_scalars
+  ret = ret.dtype.type(ret / rcount)
+/usr/local/lib/python3.5/dist-packages/scipy/stats/stats.py:4879: RuntimeWarning: divide by zero encountered in double_scalars
+  z = (bigu - meanrank) / sd
+MannwhitneyuResult(statistic=0.0, pvalue=0.0)
+0.0
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 30
+Metric name:  asyncAwaitNumberOfTriesLines
+Sample size (client):  0
+Sample size (server):  4
+Median client:  nan
+Median server:  82.069124106
+MannwhitneyuResult(statistic=0.0, pvalue=0.0)
+0.0
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 31
+Metric name:  asyncAwaitNumberOfCatches
+Sample size (client):  0
+Sample size (server):  4
+Median client:  nan
+Median server:  1.86044412416
+MannwhitneyuResult(statistic=0.0, pvalue=0.0)
+0.0
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 32
+Metric name:  asyncAwaitNumberOfEmptyCatches
+Sample size (client):  0
+Sample size (server):  1
+Median client:  nan
+Median server:  1.51139592528
+MannwhitneyuResult(statistic=0.0, pvalue=0.0)
+0.0
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 33
+Metric name:  asyncAwaitNumberOfCatchesLines
+Sample size (client):  0
+Sample size (server):  3
+Median client:  nan
+Median server:  14.5948115445
+MannwhitneyuResult(statistic=0.0, pvalue=0.0)
+0.0
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 34
+Metric name:  asyncAwaitNumberOfCatchesWithUniqueConsole
+Sample size (client):  0
+Sample size (server):  0
+Median client:  nan
+Median server:  nan
+MannwhitneyuResult(statistic=0.0, pvalue=0.0)
+0.0
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 35
+Metric name:  asyncAwaitNumberOfFinallies
+Sample size (client):  0
+Sample size (server):  2
+Median client:  nan
+Median server:  2.52648702625
+MannwhitneyuResult(statistic=0.0, pvalue=0.0)
+0.0
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 36
+Metric name:  asyncAwaitNumberOfFinalliesLines
+Sample size (client):  0
+Sample size (server):  2
+Median client:  nan
+Median server:  10.3653412433
+MannwhitneyuResult(statistic=0.0, pvalue=0.0)
+0.0
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 37
+Metric name:  eventsNumberOfEventMethodsOn
+Sample size (client):  33
+Sample size (server):  67
+Median client:  12.627591287
+Median server:  37.535524693
+MannwhitneyuResult(statistic=518.5, pvalue=1.7128383232217081e-05)
+1.71283832322e-05
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 38
+Metric name:  eventsNumberOfEventMethodsOnce
+Sample size (client):  9
+Sample size (server):  23
+Median client:  3.21343644894
+Median server:  30.9023485785
+MannwhitneyuResult(statistic=28.5, pvalue=0.0017913774568501949)
+0.00179137745685
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 39
+Metric name:  eventsNumberOfEventMethodsEmit
+Sample size (client):  15
+Sample size (server):  51
+Median client:  11.8666192002
+Median server:  25.135732958
+MannwhitneyuResult(statistic=280.5, pvalue=0.12040466230881743)
+0.120404662309
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 40
+Metric name:  eventsNumberOfEventOnLines
+Sample size (client):  27
+Sample size (server):  60
+Median client:  28.9926885711
+Median server:  95.88977758
+MannwhitneyuResult(statistic=513.5, pvalue=0.0066131223916618478)
+0.00661312239166
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 41
+Metric name:  eventsNumberOfEventOnceLines
+Sample size (client):  4
+Sample size (server):  18
+Median client:  7.26585465583
+Median server:  118.67026695
+MannwhitneyuResult(statistic=7.0, pvalue=0.015262858577121431)
+0.0152628585771
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 42
+Metric name:  eventsNumberOfEventEmitLines
+Sample size (client):  1
+Sample size (server):  7
+Median client:  1.01962003859
+Median server:  5.16208961388
+MannwhitneyuResult(statistic=1.0, pvalue=0.38273308888522595)
+0.382733088885
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 43
+Metric name:  eventsNumberOfEventUncaughtException
+Sample size (client):  9
+Sample size (server):  22
+Median client:  4.86665368892
+Median server:  15.2342973393
+MannwhitneyuResult(statistic=51.0, pvalue=0.038717934096499818)
+0.0387179340965
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 44
+Metric name:  eventsNumberOfEventUnhandledRejection
+Sample size (client):  3
+Sample size (server):  8
+Median client:  2.7660986944
+Median server:  4.68325443707
+MannwhitneyuResult(statistic=11.0, pvalue=0.91870740542828888)
+0.918707405428
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 45
+Metric name:  eventsTotalOfStringEvents
+Sample size (client):  59
+Sample size (server):  84
+Median client:  247.066090179
+Median server:  427.663813566
+MannwhitneyuResult(statistic=1828.5, pvalue=0.0077845338657739913)
+0.00778453386577
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 46
+Metric name:  eventsTotalOfEventsExceptStringType
+Sample size (client):  50
+Sample size (server):  47
+Median client:  35.5245040873
+Median server:  20.4373594932
+MannwhitneyuResult(statistic=1355.0, pvalue=0.19506923785327457)
+0.195069237853
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 47
+Metric name:  callbacksNumberOfCallbackErrorFunctions
+Sample size (client):  60
+Sample size (server):  66
+Median client:  64.533402458
+Median server:  49.7660918088
+MannwhitneyuResult(statistic=2195.0, pvalue=0.29473890382397405)
+0.294738903824
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 48
+Metric name:  callbacksNumberOfFirstErrorArgFunctions
+Sample size (client):  75
+Sample size (server):  98
+Median client:  208.768267223
+Median server:  646.211973161
+MannwhitneyuResult(statistic=2418.0, pvalue=0.0001186528566495286)
+0.00011865285665
+------------------------------------------------------------------
+------------------------------------------------------------------
+Metric index: 49
+Metric name:  callbacksNumberOfEmptyCallbacks
+Sample size (client):  12
+Sample size (server):  22
+Median client:  10.295527161
+Median server:  10.4353550584
+MannwhitneyuResult(statistic=118.0, pvalue=0.62655558895898622)
+0.626555588959
+------------------------------------------------------------------

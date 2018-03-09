@@ -18,4 +18,5 @@ print('Factor: ', factor)
 metrics_labels = read_file('src/notes/metrics.txt')
 loc_index = 0
 
-execute_tests(client_matrices, server_matrices, factor, loc_index, metrics_labels, 'less')
+# alternative => less, greater, two-sided
+execute_tests(client_matrices, server_matrices, factor, loc_index, metrics_labels, 'two-sided')
