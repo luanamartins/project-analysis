@@ -1,0 +1,92 @@
+-------------------------------------------------------
+forks
+Sum: 468419.0
+Mean:  2439.68229167
+Median:  1035.0
+CLIENT - forks
+Sum: 267252.0
+Mean:  3144.14117647
+Median:  1031.0
+SERVER - forks
+Sum: 192539.0
+Mean:  1816.40566038
+Median:  1020.0
+-------------------------------------------------------
+stars
+Sum: 2684414.0
+Mean:  13981.3229167
+Median:  9367.0
+CLIENT - stars
+Sum: 1211116.0
+Mean:  14248.4235294
+Median:  8593.0
+SERVER - stars
+Sum: 1428911.0
+Mean:  13480.2924528
+Median:  9501.0
+-------------------------------------------------------
+watchers
+Sum: 109460.0
+Mean:  570.104166667
+Median:  309.5
+CLIENT - watchers
+Sum: 54361.0
+Mean:  639.541176471
+Median:  307.0
+SERVER - watchers
+Sum: 53810.0
+Mean:  507.641509434
+Median:  311.5
+-------------------------------------------------------
+open_issues
+Sum: 38369.0
+Mean:  199.838541667
+Median:  99.5
+CLIENT - open_issues
+Sum: 20530.0
+Mean:  241.529411765
+Median:  91.0
+SERVER - open_issues
+Sum: 17682.0
+Mean:  166.811320755
+Median:  108.0
+-------------------------------------------------------
+closed_issues
+Sum: 305165.0
+Mean:  1589.40104167
+Median:  777.0
+CLIENT - closed_issues
+Sum: 129324.0
+Mean:  1521.45882353
+Median:  580.0
+SERVER - closed_issues
+Sum: 173489.0
+Mean:  1636.68867925
+Median:  881.0
+-------------------------------------------------------
+open_pull_requests
+Sum: 4670.0
+Mean:  24.3229166667
+Median:  12.0
+CLIENT - open_pull_requests
+Sum: 2172.0
+Mean:  25.5529411765
+Median:  11.0
+SERVER - open_pull_requests
+Sum: 2392.0
+Mean:  22.5660377358
+Median:  13.5
+-------------------------------------------------------
+closed_pull_requests
+Sum: 165847.0
+Mean:  863.786458333
+Median:  348.5
+CLIENT - closed_pull_requests
+Sum: 66739.0
+Mean:  785.164705882
+Median:  272.0
+SERVER - closed_pull_requests
+Sum: 97629.0
+Mean:  921.028301887
+Median:  429.0
+-------------------------------------------------------

@@ -67,6 +67,8 @@ function handleCatchClause(reportObject, catchClause) {
     if (nodeBody) {
         if (nodeBody.length === 0) {
             reportObject.tryCatchNumberOfEmptyCatches++;
+        } else if (nodeBody.length === 1) {
+            reportObject.tryCatchNumberOfCatchesWithUniqueStatement++;
         } else {
             reportObject.tryCatchNumberOfCatchesLines += utils.getNumberOfLines(catchClause);
 
@@ -84,8 +86,6 @@ function handleCatchClause(reportObject, catchClause) {
                 reportObject.tryCatchNumberOfCatchesWithUniqueConsole++;
             }
         }
-
-        reportObject.tryCatchNumberOfCatchesWithUniqueStatement++;
     }
 }
 

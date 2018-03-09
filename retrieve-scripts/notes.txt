@@ -1,0 +1,2 @@
+babel --plugins transform-es2015-arrow-functions retrieve-scripts/repos/teste/test.js
+uglifyjs retrieve-scripts/repos/teste/test.js -b

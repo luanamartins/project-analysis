@@ -2,6 +2,7 @@ import numpy as np
 from scipy.stats import mannwhitneyu
 from scipy import stats
 
+from functools import reduce
 
 def get_column_as_array(matrix, index):
     # return [row[index] for row in matrix]
@@ -10,6 +11,14 @@ def get_column_as_array(matrix, index):
         return [matrix[index]]
     else:
         return [row[index] for row in matrix]
+
+
+
+def get_column_as_one_array(matrices, index):
+    result = []
+    for matrix in matrices:
+        result.append(matrix[:,index])
+    return result
 
 
 def total_lines(matrices):
@@ -39,7 +48,7 @@ def total_category_repositories(matrices, indices):
     return total
 
 
-def total_category_files(matrices, indices):
+def get_value_of_metric(matrices, indices):
     total = 0
     for matrix in matrices:
         if matrix.ndim == 1:
@@ -52,6 +61,21 @@ def total_category_files(matrices, indices):
                     if row[index] > 0:
                         total += 1
                         break
+    return total
+
+
+def get_array(matrices, indices):
+    total = []
+    for matrix in matrices:
+        if matrix.ndim == 1:
+            for index in indices:
+                if matrix[index] > 0:
+                    total.append(matrix[index])
+        else:
+            for row in matrix:
+                for index in indices:
+                    if row[index] > 0:
+                        total.append(row[index])
     return total
 
 
@@ -214,7 +238,11 @@ def has_only_one_statement(matrices, loc_indices):
     answer = 0
     for matrix in matrices:
         for loc_index in loc_indices:
-            answer += get_column_as_array(matrix, loc_index).count(1)
+            array = get_column_as_array(matrix, loc_index)
+            for item in array:
+                if item == 1.0:
+                    answer += 1
+            # answer += get_column_as_array(matrix, loc_index).count(float(1))
     return answer
 
 
@@ -239,3 +267,67 @@ def summary(data):
 
 def ztest(sample1, sample2):
     return stats.ttest_ind(sample1, sample2)
+
+def execute_tests(client_matrices, server_matrices, factor, loc_index, metrics_labels, alternative):
+    # alternative => less, greater, two-sided
+    # alternative = 'less'
+
+    for metric_index in range(2, 50):
+        client_normalized = normalize_metric_by_repository(client_matrices, metric_index, loc_index, factor)
+        server_normalized = normalize_metric_by_repository(server_matrices, metric_index, loc_index, factor)
+        print('------------------------------------------------------------------')
+        print('Metric index:', metric_index)
+        print('Metric name: ', metrics_labels[metric_index])
+        print('Sample size (client): ', len(client_normalized))
+        print('Sample size (server): ', len(server_normalized))
+        print('Median client: ', np.median(client_normalized))
+        print('Median server: ', np.median(server_normalized))
+        # print('Client: ', client_normalized)
+        # print('Server: ', server_normalized)
+        try:
+            test_result = execute_test(client_normalized, server_normalized, alternative)
+            print(test_result)
+            print(test_result.pvalue)
+            # plot_two_groups_histogram_test(client_normalized, server_normalized, metrics_labels[metric_index])
+
+        except Exception as inst:
+            print(inst)
+        print('------------------------------------------------------------------')
+
+
+def execute_summary(matrices, metrics_labels):
+    for metric_index in range(2, 50):
+        metrics = []
+        for matrix in matrices:
+            metric_values = [i for i in get_column_as_array(matrix, metric_index) if i != 0]
+            if metric_values is not []:
+                metrics = metrics + metric_values
+        print(metrics_labels[metric_index])
+        if len(metrics) != 0:
+            summary(metrics)
+        else:
+            print('empty array')
+        print('------------------------------------------------------------------')
+
+
+def get_index_column_as_array_for_matrices(matrices, index):
+    result = []
+    for matrix in matrices:
+        result += get_column_as_array(matrix, index)
+        # result = np.concatenate(matrix[:,index])
+    return result
+
+
+def calculate_factor(client_matrices, server_matrices):
+    client_factor = smallest_number(client_matrices)
+    server_factor = smallest_number(server_matrices)
+    factor = min(client_factor, server_factor)
+    dot_and_zero_size = 2
+    if factor < 1:
+        factor = len(str(1 / factor)) - dot_and_zero_size
+        factor = pow(10, factor)
+    return factor
+
+
+def remove_zeros(array, value):
+    return [value for value in array if value != value]

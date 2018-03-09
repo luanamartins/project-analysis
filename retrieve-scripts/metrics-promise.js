@@ -55,35 +55,64 @@ function handleAnalysis(node, reportObject) {
                 if (numberOfArgumentsOnCatch >= 1) {
 
                     const firstArgument = node.arguments[0];
+                    let firstArgumentBody;
+                    let lines = 0;
+                    if (firstArgument.body) {
+                        firstArgumentBody = firstArgument.body.body;
+                        for (let i = 0; i < firstArgumentBody.length; i++) {
+                            lines += utils.getNumberOfLines(firstArgumentBody[i]);
+                        }
+                    } else {
+                        lines += utils.getNumberOfLines(firstArgument);
+                    }
                     const location = firstArgument.loc;
 
-                    reportObject.promiseNumberOfPromiseCatchesLines += utils.getNumberOfLines(firstArgument);
+                    // const lines = utils.getNumberOfLines(firstArgument);
+                    reportObject.promiseNumberOfPromiseCatchesLines += lines;
                     reportObject.promiseNumberOfPromiseCatchesLinesStart.push(location.start.line);
                     reportObject.promiseNumberOfPromiseCatchesLinesEnd.push(location.end.line);
 
-                    if (utils.getNumberOfLines(firstArgument) === 0 &&
-                        (firstArgument.type === 'FunctionDeclaration' || firstArgument.type === 'FunctionExpression')) {
-                        reportObject.promiseNumberOfEmptyFunctionsOnPromiseCatches++;
+                    if (firstArgument.type === 'FunctionDeclaration' ||
+                        firstArgument.type === 'FunctionExpression') {
+                        // const lines = utils.getNumberOfLines(firstArgument);
+                        if (lines === 0) {
+                            reportObject.promiseNumberOfEmptyFunctionsOnPromiseCatches++;
+                        } else if (lines === 1) {
+                            reportObject.promiseNumberOfCatchesWithUniqueStatement++;
+
+                            if (firstArgumentBody[0].type === 'ExpressionStatement' && firstArgumentBody[0].expression.type === 'CallExpression') {
+                                const calleeObject = firstArgumentBody[0].expression.callee.object;
+                                if (calleeObject && calleeObject.name === 'console') {
+                                    reportObject.promiseNumberOfCatchesWithUniqueConsole++;
+                                }
+                            }
+                        }
                     }
+
+                    // if(firstArgument.type === 'MemberExpression' && firstArgument.object.name === 'console') {
+                    //     reportObject.promiseNumberOfCatchesWithUniqueConsole++;
+                    //     reportObject.promiseNumberOfCatchesWithUniqueStatement++;
+                    // }
                 }
 
                 if (numberOfArgumentsOnCatch === 0) {
                     reportObject.promiseNumberOfEmptyFunctionsOnPromiseCatches++;
                 }
+
             }
+        }
 
 
-            if (callee.object && callee.object.name === 'Promise') {
-                reportObject.promiseNumberOfPromises++;
-                if (callee.property) {
-                    const methodName = callee.property.name;
-                    if (methodName === 'race') {
-                        reportObject.promiseNumberOfPromiseRaces++;
-                    }
+        if (callee.object && callee.object.name === 'Promise') {
+            reportObject.promiseNumberOfPromises++;
+            if (callee.property) {
+                const methodName = callee.property.name;
+                if (methodName === 'race') {
+                    reportObject.promiseNumberOfPromiseRaces++;
+                }
 
-                    if (methodName === 'all') {
-                        reportObject.promiseNumberOfPromiseAll++;
-                    }
+                if (methodName === 'all') {
+                    reportObject.promiseNumberOfPromiseAll++;
                 }
             }
         }

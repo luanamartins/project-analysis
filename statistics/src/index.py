@@ -36,131 +36,149 @@ def main():
     try_catch_empty_try_indices = [3]  # tryCatchNumberOfEmptyTries(3)
     try_catch_catches_indices = [6]  # tryCatchNumberOfCatches(6)
     try_catch_empty_catch_indices = [7]  # tryCatchNumberOfEmptyCatches(7)
-    try_catch_lines_catch_indices = [8] # tryCatchNumberOfCatchesLines(8)
+    try_catch_lines_catch_indices = [8]  # tryCatchNumberOfCatchesLines(8)
+    try_catch_unique_console_catch_indices = [9]  # tryCatchNumberOfCatchesWithUniqueConsole(9)
+    try_catch_one_statement_catch_indices = [10]  # tryCatchNumberOfCatchesWithUniqueStatement(10)
     try_catch_finally_indices = [14]  # tryCatchNumberOfFinallies(14)
-
 
     promise_number_indices = [16]  # promiseNumberOfPromises(16)
     promise_number_catches_indices = [22]  # promiseNumberOfPromiseCatches(22)
-    promises_number_catch_lines_indices = [23] # promiseNumberOfPromiseThenRejectedLines(23)
-    promises_catch_empty_indices = [24] # promiseNumberOfPromiseCatches(24)
+    promises_number_catch_lines_indices = [23]  # promiseNumberOfPromiseThenRejectedLines(23)
+    promises_catch_empty_indices = [24]  # promiseNumberOfPromiseCatches(24)
 
-    async_await_indices = [27] # asyncAwaitNumberOfAsyncs(27)
+    async_await_indices = [27]  # asyncAwaitNumberOfAsyncs(27)
     async_await_number_of_catch_indices = [31]  # asyncAwaitNumberOfCatches(31)
-    async_await_empty_catch_indices = [32] # asyncAwaitNumberOfEmptyCatches(32)
-    async_await_catch_lines_indices = [33] # asyncAwaitNumberOfCatchesLines(33)
+    async_await_empty_catch_indices = [32]  # asyncAwaitNumberOfEmptyCatches(32)
+    async_await_catch_lines_indices = [33]  # asyncAwaitNumberOfCatchesLines(33)
 
     event_raise_indices = [37, 38]  # eventsNumberOfEventMethodsOn(37), eventsNumberOfEventMethodsOnce(38)
-    event_all_indices = [37, 38, 39]  # eventsNumberOfEventMethodsOn(37), eventsNumberOfEventMethodsOnce(38), eventsNumberOfEventMethodsEmit(39)
+    event_all_indices = [37, 38,
+                         39]  # eventsNumberOfEventMethodsOn(37), eventsNumberOfEventMethodsOnce(38), eventsNumberOfEventMethodsEmit(39)
     events_handle_empty_lines = [40, 41]
     events_catch_lines_indices = [40, 41]
 
-    callbacks_empty_indices = [49] # callbacksNumberOfEmptyCallbacks(49)
-    callbacks_indices = [47, 48] # callbacksNumberOfCallbackErrorFunctions(47), callbacksNumberOfFirstErrorArgFunctions(48)
-    callback_lines_indices = [51]
+    callbacks_empty_indices = [49]  # callbacksNumberOfEmptyCallbacks(49)
+    callbacks_indices = [47,
+                         48]  # callbacksNumberOfCallbackErrorFunctions(47), callbacksNumberOfFirstErrorArgFunctions(48)
+    callback_console_only_indices = [50]  # callbacksNumberOfConsoleStatementOnly(50)
+    callback_lines_indices = [51]  # callbacksNumberOfLines(51)
 
+    try_catch_number_of_try = get_value_of_metric(client_matrices, try_catch_tries_indices) + \
+                              get_value_of_metric(server_matrices, try_catch_tries_indices)
+    try_catch_number_of_catch = get_value_of_metric(client_matrices, try_catch_catches_indices) + \
+                                get_value_of_metric(server_matrices, try_catch_catches_indices)
+    try_catch_number_of_empty_catch = get_value_of_metric(client_matrices, try_catch_empty_catch_indices) + \
+                                      get_value_of_metric(server_matrices, try_catch_empty_catch_indices)
+    try_catch_number_of_catch_lines = get_value_of_metric(client_matrices, try_catch_lines_catch_indices) + \
+                                      get_value_of_metric(server_matrices, try_catch_lines_catch_indices)
+    try_catch_number_of_catch_one_statement = get_value_of_metric(client_matrices,
+                                                                  try_catch_one_statement_catch_indices) + \
+                                              get_value_of_metric(server_matrices,
+                                                                  try_catch_one_statement_catch_indices)
 
-    try_catch_number_of_try = total_category_files(client_matrices, try_catch_tries_indices) + \
-                       total_category_files(server_matrices, try_catch_tries_indices)
-    try_catch_number_of_catch = total_category_files(client_matrices, try_catch_catches_indices) + \
-                              total_category_files(server_matrices, try_catch_catches_indices)
-    try_catch_number_of_empty_catch = total_category_files(client_matrices, try_catch_empty_catch_indices) + \
-                            total_category_files(server_matrices, try_catch_empty_catch_indices)
-    try_catch_number_of_catch_lines = total_category_files(client_matrices, try_catch_lines_catch_indices) + \
-            total_category_files(server_matrices, try_catch_lines_catch_indices)
+    promise_number = get_value_of_metric(client_matrices, promise_number_indices) + \
+                     get_value_of_metric(server_matrices, promise_number_indices)
+    promise_number_of_catch = get_value_of_metric(client_matrices, promise_number_catches_indices) + \
+                              get_value_of_metric(server_matrices, promise_number_catches_indices)
+    promise_number_of_empty_catch = get_value_of_metric(client_matrices, promises_catch_empty_indices) + \
+                                    get_value_of_metric(server_matrices, promises_catch_empty_indices)
+    promise_number_of_catch_lines = get_value_of_metric(client_matrices, promises_number_catch_lines_indices) + \
+                                    get_value_of_metric(server_matrices, promises_number_catch_lines_indices)
+    promise_number_of_catch_one_statement = has_only_one_statement(client_matrices,
+                                                                   promises_number_catch_lines_indices) + \
+                                            has_only_one_statement(server_matrices, promises_number_catch_lines_indices)
 
+    async_await_number = get_value_of_metric(client_matrices, async_await_indices) + \
+                         get_value_of_metric(server_matrices, async_await_indices)
+    async_await_number_of_catch = get_value_of_metric(client_matrices, async_await_number_of_catch_indices) + \
+                                  get_value_of_metric(server_matrices, async_await_number_of_catch_indices)
+    async_await_number_of_empty_catch = get_value_of_metric(client_matrices, async_await_empty_catch_indices) + \
+                                        get_value_of_metric(server_matrices, async_await_empty_catch_indices)
+    async_await_number_of_catch_lines = get_value_of_metric(client_matrices, async_await_catch_lines_indices) + \
+                                        get_value_of_metric(server_matrices, async_await_catch_lines_indices)
+    async_await_number_of_catch_one_statement = has_only_one_statement(client_matrices,
+                                                                       async_await_catch_lines_indices) + \
+                                                has_only_one_statement(server_matrices, async_await_catch_lines_indices)
 
-    promise_number = total_category_files(client_matrices, promise_number_indices) + \
-                    total_category_files(server_matrices, promise_number_indices)
-    promise_number_of_catch = total_category_files(client_matrices, promise_number_catches_indices) + \
-                     total_category_files(server_matrices, promise_number_catches_indices)
-    promise_number_of_empty_catch = total_category_files(client_matrices, promises_catch_empty_indices) + \
-                           total_category_files(server_matrices, promises_catch_empty_indices)
-    promise_number_of_catch_lines = total_category_files(client_matrices, promises_number_catch_lines_indices) + \
-            total_category_files(server_matrices, promises_number_catch_lines_indices)
+    callback_number = get_value_of_metric(client_matrices, callbacks_indices) + \
+                      get_value_of_metric(server_matrices, callbacks_indices)
+    callback_number_of_empty_callbacks = get_value_of_metric(client_matrices, callbacks_empty_indices) + \
+                                         get_value_of_metric(server_matrices, callbacks_empty_indices)
+    callback_number_of_catch_lines = get_value_of_metric(client_matrices, callback_lines_indices) + \
+                                     get_value_of_metric(server_matrices, callback_lines_indices)
+    callback_number_of_catch_one_statement = get_value_of_metric(client_matrices, callback_console_only_indices) + \
+                                             get_value_of_metric(server_matrices, callback_console_only_indices)
 
-
-    async_await_number = total_category_files(client_matrices, async_await_indices) + \
-                    total_category_files(server_matrices, async_await_indices)
-    async_await_number_of_catch = total_category_files(client_matrices, async_await_number_of_catch_indices) + \
-                                  total_category_files(server_matrices, async_await_number_of_catch_indices)
-    async_await_number_of_empty_catch = total_category_files(client_matrices, async_await_empty_catch_indices) + \
-                              total_category_files(server_matrices, async_await_empty_catch_indices)
-    async_await_number_of_catch_lines = total_category_files(client_matrices, async_await_catch_lines_indices) + \
-                                 total_category_files(server_matrices, async_await_catch_lines_indices)
-
-
-    callback_number = total_category_files(client_matrices, callbacks_indices) + \
-                      total_category_files(server_matrices, callbacks_indices)
-    callback_number_of_empty_callbacks = total_category_files(client_matrices, callbacks_empty_indices) + \
-                           total_category_files(server_matrices, callbacks_empty_indices)
-    callback_number_of_catch_lines = total_category_files(client_matrices, callback_lines_indices) + \
-                                 total_category_files(server_matrices, callback_lines_indices)
-
-
-    event_number_of_events = total_category_files(client_matrices, event_all_indices) + \
-                    total_category_files(server_matrices, event_all_indices)
-    event_number_of_catch = total_category_files(client_matrices, event_raise_indices) + \
-                   total_category_files(server_matrices, event_raise_indices)
+    event_number_of_events = get_value_of_metric(client_matrices, event_all_indices) + \
+                             get_value_of_metric(server_matrices, event_all_indices)
+    event_number_of_catch = get_value_of_metric(client_matrices, event_raise_indices) + \
+                            get_value_of_metric(server_matrices, event_raise_indices)
     event_number_of_empty_lines = empty_block_per_file(client_matrices, events_handle_empty_lines) + \
-                         empty_block_per_file(server_matrices, events_handle_empty_lines)
-    event_number_of_catch_lines = total_category_files(client_matrices, events_catch_lines_indices) + \
-                                  total_category_files(server_matrices, events_catch_lines_indices)
+                                  empty_block_per_file(server_matrices, events_handle_empty_lines)
+    event_number_of_catch_lines = get_value_of_metric(client_matrices, events_catch_lines_indices) + \
+                                  get_value_of_metric(server_matrices, events_catch_lines_indices)
+    event_number_of_catch_one_statement = has_only_one_statement(client_matrices, events_catch_lines_indices) + \
+                                          has_only_one_statement(server_matrices, events_catch_lines_indices)
 
 
     print('----------------------------------------------------')
-    print('RQ1.1')
-
-    total = try_catch_number_of_catch + promise_number_of_catch + async_await_number_of_catch + event_number_of_catch
-
-    print('Try-catch tries: ' + str(try_catch_number_of_catch) + ' ' + str(get_percentage(try_catch_number_of_catch, total)))
-    print('Promises: ' + str(promise_number_of_catch) + ' ' + str(get_percentage(promise_number_of_catch, total)))
-    print('Async-await: ' + str(async_await_number_of_catch) + ' ' + str(get_percentage(async_await_number_of_catch, total)))
-    print('Events: ' + str(event_number_of_catch) + ' ' + str(get_percentage(event_number_of_catch, total)))
-
-    print('----------------------------------------------------')
-
     print('RQ1.2 - empty approach')
 
-    print('Try-catch: ' + str(try_catch_number_of_empty_catch) + ' ' + str(get_percentage(try_catch_number_of_empty_catch, try_catch_number_of_catch)))
-    print('Promises: ' + str(promise_number_of_empty_catch) + ' ' + str(get_percentage(promise_number_of_empty_catch, promise_number_of_catch)))
-    print('Async-await: ' + str(async_await_number_of_empty_catch) + ' ' + str(get_percentage(async_await_number_of_empty_catch, async_await_number_of_catch)))
-    print('Callbacks: ' + str(callback_number_of_empty_callbacks) + ' ' + str(get_percentage(callback_number_of_empty_callbacks, callback_number)))
-    print('Events: ' + str(event_number_of_empty_lines) + ' ' + str(get_percentage(event_number_of_empty_lines, event_number_of_catch)))
+    print('Try-catch: ' + str(try_catch_number_of_empty_catch) + ' ' + str(
+        get_percentage(try_catch_number_of_empty_catch, try_catch_number_of_catch)))
+    print('Promises: ' + str(promise_number_of_empty_catch) + ' ' + str(
+        get_percentage(promise_number_of_empty_catch, promise_number_of_catch)))
+    print('Async-await: ' + str(async_await_number_of_empty_catch) + ' ' + str(
+        get_percentage(async_await_number_of_empty_catch, async_await_number_of_catch)))
+    print('Callbacks: ' + str(callback_number_of_empty_callbacks) + ' ' + str(
+        get_percentage(callback_number_of_empty_callbacks, callback_number)))
+    print('Events: ' + str(event_number_of_empty_lines) + ' ' + str(
+        get_percentage(event_number_of_empty_lines, event_number_of_catch)))
 
     print('----------------------------------------------------')
 
     print('RQ1.2 - get number of lines')
 
     print('try-catch lines: ', try_catch_number_of_catch_lines)
-    print('try-catch lines (mean): ', try_catch_number_of_catch_lines/try_catch_number_of_catch)
+    print('try-catch lines (mean): ', try_catch_number_of_catch_lines / try_catch_number_of_catch)
 
     print('promises lines: ', promise_number_of_catch_lines)
-    print('promises lines (mean): ', promise_number_of_catch_lines/promise_number_of_catch)
+    print('promises lines (mean): ', promise_number_of_catch_lines / promise_number_of_catch)
 
     print('async-await lines: ', async_await_number_of_catch_lines)
-    print('async-await lines (mean): ', async_await_number_of_catch_lines/async_await_number_of_catch)
+    print('async-await lines (mean): ', async_await_number_of_catch_lines / async_await_number_of_catch)
 
     print('callback lines: ', callback_number_of_catch_lines)
-    print('callback lines (mean): ', callback_number_of_catch_lines/callback_number)
+    print('callback lines (mean): ', callback_number_of_catch_lines / callback_number)
 
     print('events lines: ', event_number_of_catch_lines)
-    print('events lines (mean): ', event_number_of_catch_lines/event_number_of_catch)
+    print('events lines (mean): ', event_number_of_catch_lines / event_number_of_catch)
 
     print('----------------------------------------------------')
 
     print('RQ1.2 - get only one statement error handler constructs')
 
-    # print('try-catch: ', has_only_one_statement())
+    print('try-catch: ', str(try_catch_number_of_catch_one_statement))
+    print('try-catch %: ', str(get_percentage(try_catch_number_of_catch_one_statement, try_catch_number_of_catch)))
 
+    # print('promises: ', str(promise_number_of_catch_one_statement))
+    # print('promises %: ', str(get_percentage(promise_number_of_catch_one_statement, promise_number_of_catch)))
+    #
+    # print('async-await: ', str(async_await_number_of_catch_one_statement))
+    # print('async-await %: ',
+    #       str(get_percentage(async_await_number_of_catch_one_statement, async_await_number_of_catch)))
+
+    print('callback: ', str(callback_number_of_catch_one_statement))
+    print('callback %: ', str(get_percentage(callback_number_of_catch_one_statement, callback_number)))
+
+    # print('events: ', str(event_number_of_catch_one_statement))
+    # print('events %: ', str(get_percentage(event_number_of_catch_one_statement, event_number_of_events)))
 
     print('----------------------------------------------------')
-
 
     print('Total of files: ' + str(client_total_files) + ' ' + str(server_total_files))
     print('Total of lines: ' + str(client_lines) + ' ' + str(server_lines))
     print('Total of repositories: ' + str(len(client_matrices)) + ' ' + str(len(server_matrices)))
-
 
     factor = calculate_factor(client_matrices, server_matrices)
     print('Factor: ', factor)
@@ -193,59 +211,6 @@ def main():
     # plot_violinplot([client_metric1_values, server_metric1_values], ['Client', 'Server'], titles[0], titles[0] + '.png')
 
 
-def calculate_factor(client_matrices, server_matrices):
-    client_factor = smallest_number(client_matrices)
-    server_factor = smallest_number(server_matrices)
-    factor = min(client_factor, server_factor)
-    dot_and_zero_size = 2
-    if factor < 1:
-        factor = len(str(1 / factor)) - dot_and_zero_size
-        factor = pow(10, factor)
-    return factor
-
-
-def execute_tests(client_matrices, factor, loc_index, metrics_labels, server_matrices):
-    # less, greater, two-sided
-    alternative = 'greater'
-
-    for metric_index in range(2, 50):
-        client_normalized = normalize_metric_by_repository(client_matrices, metric_index, loc_index, factor)
-        server_normalized = normalize_metric_by_repository(server_matrices, metric_index, loc_index, factor)
-        print('------------------------------------------------------------------')
-        print('Metric index:', metric_index)
-        print('Metric name: ', metrics_labels[metric_index])
-        print('Sample size (client): ', len(client_normalized))
-        print('Sample size (server): ', len(server_normalized))
-        print('Median client: ', np.median(client_normalized))
-        print('Median server: ', np.median(server_normalized))
-        # print('Client: ', client_normalized)
-        # print('Server: ', server_normalized)
-        try:
-            test_result = execute_test(client_normalized, server_normalized, alternative)
-            print(test_result)
-            print(test_result.pvalue)
-            # plot_two_groups_histogram_test(client_normalized, server_normalized, metrics_labels[metric_index])
-
-        except Exception as inst:
-            print(inst)
-        print('------------------------------------------------------------------')
-
-
-def execute_summary(matrices, metrics_labels):
-    for metric_index in range(2, 50):
-        metrics = []
-        for matrix in matrices:
-            metric_values = [i for i in get_column_as_array(matrix, metric_index) if i != 0]
-            if metric_values is not []:
-                metrics = metrics + metric_values
-        print(metrics_labels[metric_index])
-        if len(metrics) != 0:
-            summary(metrics)
-        else:
-            print('empty array')
-        print('------------------------------------------------------------------')
-
-
 def test(matrices):
     matrix_pos = 0
     for matrix in matrices:
@@ -263,6 +228,9 @@ def test(matrices):
 
 
 main()
+
+# print(["1", "2", "1"].count(1))
+# print([1,2,1].count(1))
 
 # a1 = boot[:, 2]
 # b1 = socket[:, 2]
