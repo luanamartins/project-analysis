@@ -1,0 +1,2 @@
+shapiro - promises:  AndersonResult(statistic=145.11348349751495, critical_values=array([ 0.573,  0.653,  0.783,  0.913,  1.086]), significance_level=array([ 15. ,  10. ,   5. ,   2.5,   1. ]))
+shapiro - events:  AndersonResult(statistic=187.84069725079394, critical_values=array([ 0.574,  0.653,  0.784,  0.914,  1.088]), significance_level=array([ 15. ,  10. ,   5. ,   2.5,   1. ]))

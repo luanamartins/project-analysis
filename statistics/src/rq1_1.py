@@ -50,19 +50,19 @@ total = try_catch_number_of_catch + promise_number_of_catch + async_await_number
 
 print('------------------------------------------------------------------------------------')
 
-# promises = get_array(all_matrices, [22])
-# # print(len(remove_zeros(promises, 0)))
-# print(len(promises))
-# print(np.mean(promises))
-# print(np.var(promises))
+promises = get_array(all_matrices, [22])
+# print(len(remove_zeros(promises, 0)))
+print(len(promises))
+print(np.mean(promises))
+print(np.var(promises))
+
+events = get_array(all_matrices, event_raise_indices)
+print(len(events))
+print(np.mean(events))
+print(np.var(events))
 #
-# events = get_array(all_matrices, event_raise_indices)
-# print(len(events))
-# print(np.mean(events))
-# print(np.var(events))
-#
-# print('shapiro - promises: ', stats.anderson(promises))
-# print('shapiro - events: ', stats.anderson(events))
+print('shapiro - promises: ', stats.anderson(promises))
+print('shapiro - events: ', stats.anderson(events))
 #
 # print(stats.ttest_ind(promises, events, equal_var = False))
 

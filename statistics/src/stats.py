@@ -64,6 +64,32 @@ def get_value_of_metric(matrices, indices):
     return total
 
 
+def get_value_of_metric_event_empty(matrices):
+    total = 0
+    for matrix in matrices:
+        if matrix.ndim == 1:
+            if (matrix[38] == 1 and matrix[41] == 0) or (matrix[37] == 1 and matrix[40] == 0):
+                total += 1
+        else:
+            for row in matrix:
+                if (row[38] == 1 and row[41] == 0) or (row[37] == 1 and row[40] == 0):
+                    total += 1
+    return total
+
+
+def get_value_equals_to(matrices, index, value):
+    total = 0
+    for matrix in matrices:
+        if matrix.ndim == 1:
+            if matrix[index] == value:
+                total += 1
+        else:
+            for row in matrix:
+                if row[index] == value:
+                    total += 1
+    return total
+
+
 def get_array(matrices, indices):
     total = []
     for matrix in matrices:
