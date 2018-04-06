@@ -91,7 +91,7 @@ function test() {
     // const files = [test_path,test_path,test_path,test_path,test_path,test_path,test_path,test_path,test_path];
     const files = [test_path];
     const metrics = metricsModule.handleMetrics(files, projectPath);
-    // console.log(metrics);
+    console.log(metrics);
 }
 
-main();
+test();

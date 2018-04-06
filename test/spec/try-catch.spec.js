@@ -18,7 +18,7 @@ module.exports = testCase({
 
         test.equal(metricsObject.tryCatchNumberOfCatches, 1);
         test.equal(metricsObject.tryCatchNumberOfEmptyCatches, 0);
-        test.equal(metricsObject.tryCatchNumberOfCatchesLines, 5);
+        test.equal(metricsObject.tryCatchNumberOfCatchesLines, 4);
         test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 0);
 
@@ -27,7 +27,7 @@ module.exports = testCase({
         test.equal(metricsObject.tryCatchNumberOfThrowsErrorObjects, 0);
 
         test.equal(metricsObject.tryCatchNumberOfFinallies, 1);
-        test.equal(metricsObject.tryCatchNumberOfFinalliesLines, 5);
+        test.equal(metricsObject.tryCatchNumberOfFinalliesLines, 4);
 
         test.done();
     },
@@ -41,7 +41,7 @@ module.exports = testCase({
 
         test.equal(metricsObject.tryCatchNumberOfTries, 1);
         test.equal(metricsObject.tryCatchNumberOfEmptyTries, 0);
-        test.equal(metricsObject.tryCatchNumberOfTriesLines, 3);
+        test.equal(metricsObject.tryCatchNumberOfTriesLines, 2);
         test.equal(metricsObject.tryCatchNumberOfTriesWithUniqueStatement, 0);
 
         test.equal(metricsObject.tryCatchNumberOfCatches, 1);
@@ -55,7 +55,7 @@ module.exports = testCase({
         test.equal(metricsObject.tryCatchNumberOfThrowsErrorObjects, 0);
 
         test.equal(metricsObject.tryCatchNumberOfFinallies, 1);
-        test.equal(metricsObject.tryCatchNumberOfFinalliesLines, 7);
+        test.equal(metricsObject.tryCatchNumberOfFinalliesLines, 6);
 
         test.done();
     },
@@ -74,7 +74,7 @@ module.exports = testCase({
 
         test.equal(metricsObject.tryCatchNumberOfCatches, 1);
         test.equal(metricsObject.tryCatchNumberOfEmptyCatches, 0);
-        test.equal(metricsObject.tryCatchNumberOfCatchesLines, 5);
+        test.equal(metricsObject.tryCatchNumberOfCatchesLines, 4);
         test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 0);
 
@@ -83,7 +83,7 @@ module.exports = testCase({
         test.equal(metricsObject.tryCatchNumberOfThrowsErrorObjects, 1);
 
         test.equal(metricsObject.tryCatchNumberOfFinallies, 1);
-        test.equal(metricsObject.tryCatchNumberOfFinalliesLines, 5);
+        test.equal(metricsObject.tryCatchNumberOfFinalliesLines, 4);
 
         test.done();
     },
@@ -97,12 +97,12 @@ module.exports = testCase({
 
         test.equal(metricsObject.tryCatchNumberOfTries, 1);
         test.equal(metricsObject.tryCatchNumberOfEmptyTries, 0);
-        test.equal(metricsObject.tryCatchNumberOfTriesLines, 2);
+        test.equal(metricsObject.tryCatchNumberOfTriesLines, 1);
         test.equal(metricsObject.tryCatchNumberOfTriesWithUniqueStatement, 1);
 
         test.equal(metricsObject.tryCatchNumberOfCatches, 1);
         test.equal(metricsObject.tryCatchNumberOfEmptyCatches, 0);
-        test.equal(metricsObject.tryCatchNumberOfCatchesLines, 2);
+        test.equal(metricsObject.tryCatchNumberOfCatchesLines, 1);
         test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 1);
         test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 1);
 
@@ -111,7 +111,7 @@ module.exports = testCase({
         test.equal(metricsObject.tryCatchNumberOfThrowsErrorObjects, 0);
 
         test.equal(metricsObject.tryCatchNumberOfFinallies, 1);
-        test.equal(metricsObject.tryCatchNumberOfFinalliesLines, 4);
+        test.equal(metricsObject.tryCatchNumberOfFinalliesLines, 3);
 
         test.done();
     },

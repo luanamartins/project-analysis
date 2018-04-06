@@ -2,7 +2,8 @@ const utils = require('./utils');
 
 function handleAnalysis(node, reportObject) {
 
-    if (node.type === 'FunctionDeclaration' || node.type === 'ArrowFunctionExpression' || node.type === 'FunctionExpression' && !node.async) {
+    if (node.type === 'FunctionDeclaration' || node.type === 'ArrowFunctionExpression' ||
+        node.type === 'FunctionExpression' && !node.async) {
 
         let functionBody;
         if (node.type === 'ArrowFunctionExpression') {
@@ -17,19 +18,14 @@ function handleAnalysis(node, reportObject) {
         });
 
         const catchClauseNodes = getCatchClauseNodes(tryStatementNodes);
-        catchClauseNodes.forEach(function (catchClause) {
-            handleCatchClause(reportObject, catchClause);
-        });
+        catchClauseNodes.map((catchClause) => handleCatchClause(reportObject, catchClause));
+        // catchClauseNodes.forEach(function (catchClause) {
+        //     handleCatchClause(reportObject, catchClause);
+        // });
 
         const finallyStatements = getFinallyStatements(tryStatementNodes);
         finallyStatements.forEach(function (finallyNode) {
-            reportObject.tryCatchNumberOfFinallies++;
-            reportObject.tryCatchNumberOfFinalliesLines += utils.getNumberOfLines(finallyNode);
-
-            const location = finallyNode.loc;
-            reportObject.tryCatchNumberOfFinalliesLinesStart.push(location.start.line);
-            reportObject.tryCatchNumberOfFinalliesLinesEnd.push(location.end.line);
-
+            handleFinallyClause(reportObject, finallyNode);
         });
 
         const nodes = tryStatementNodes.concat(catchClauseNodes).concat(finallyStatements);
@@ -41,52 +37,58 @@ function handleAnalysis(node, reportObject) {
     }
 }
 
+function handleFinallyClause(reportObject, finallyNode) {
+    reportObject.tryCatchNumberOfFinallies++;
+    reportObject.tryCatchNumberOfFinalliesLines += utils.getNumberOfLines(finallyNode);
+
+    const location = finallyNode.loc;
+    reportObject.tryCatchNumberOfFinalliesLinesStart.push(location.start.line);
+    reportObject.tryCatchNumberOfFinalliesLinesEnd.push(location.end.line);
+}
+
 function handleTryStatement(reportObject, tryNode) {
     reportObject.tryCatchNumberOfTries++;
-    if (tryNode.block.body.length === 0) {
+    const tryNodeBlock = tryNode.block;
+    if (tryNodeBlock.body.length === 0) {
         reportObject.tryCatchNumberOfEmptyTries++;
     } else {
-        const numberOfLines = utils.getNumberOfLines(tryNode.block);
+        const numberOfLines = utils.getNumberOfLines(tryNodeBlock);
         reportObject.tryCatchNumberOfTriesLines += numberOfLines;
 
-        const location = tryNode.block.loc;
-        reportObject.tryCatchNumberOfTriesLinesStart.push(location.start.line);
-        reportObject.tryCatchNumberOfTriesLinesEnd.push(location.end.line);
-
-        const numberOfLinesOnTryBlock = numberOfLines - 1;
-        if (numberOfLinesOnTryBlock === 1) {
+        if (numberOfLines === 1) {
             reportObject.tryCatchNumberOfTriesWithUniqueStatement++;
         }
+
+        const location = tryNodeBlock.loc;
+        reportObject.tryCatchNumberOfTriesLinesStart.push(location.start.line);
+        reportObject.tryCatchNumberOfTriesLinesEnd.push(location.end.line);
     }
 }
 
 function handleCatchClause(reportObject, catchClause) {
     reportObject.tryCatchNumberOfCatches++;
     const nodeBody = catchClause.body.body;
-
+    reportObject.tryCatchNumberOfCatchesLines += utils.getNumberOfLines(catchClause);
     if (nodeBody) {
         if (nodeBody.length === 0) {
             reportObject.tryCatchNumberOfEmptyCatches++;
         } else if (nodeBody.length === 1) {
             reportObject.tryCatchNumberOfCatchesWithUniqueStatement++;
-        } else {
-            reportObject.tryCatchNumberOfCatchesLines += utils.getNumberOfLines(catchClause);
 
-            const location = catchClause.loc;
-            reportObject.tryCatchNumberOfCatchesLinesStart.push(location.start.line);
-            reportObject.tryCatchNumberOfCatchesLinesEnd.push(location.end.line);
-
-        }
-    }
-
-    if (nodeBody.length === 1 && nodeBody[0].type === 'ExpressionStatement') {
-        if (nodeBody[0].expression.type === 'CallExpression') {
-            const calleeObject = nodeBody[0].expression.callee.object;
-            if (calleeObject && calleeObject.name === 'console') {
-                reportObject.tryCatchNumberOfCatchesWithUniqueConsole++;
+            const uniqueStatement = nodeBody[0];
+            if (uniqueStatement.type === 'ExpressionStatement' && uniqueStatement.expression.type === 'CallExpression') {
+                const calleeObject = uniqueStatement.expression.callee.object;
+                if (calleeObject && calleeObject.name === 'console') {
+                    reportObject.tryCatchNumberOfCatchesWithUniqueConsole++;
+                }
             }
+
         }
+        const location = catchClause.loc;
+        reportObject.tryCatchNumberOfCatchesLinesStart.push(location.start.line);
+        reportObject.tryCatchNumberOfCatchesLinesEnd.push(location.end.line);
     }
+
 }
 
 function handleThrowStatement(reportObject, throwNode) {

@@ -5,8 +5,8 @@ const jsonfile = require('jsonfile');
 
 function getNumberOfLines(node) {
     if (node && node.loc && node.loc.start && node.loc.end) {
-        const lines = node.loc.end.line - node.loc.start.line;
-        return (lines === 0)? 1 : lines;
+        let lines = node.loc.end.line - node.loc.start.line;
+        return (lines === 0) ? lines : lines - 1;
     } else {
         return 0;
     }
@@ -106,19 +106,6 @@ function getAllProperties(object) {
     return keys;
 }
 
-function traverse(obj, fn) {
-    for (let key in obj) {
-        if (obj[key] !== null && fn(obj[key]) === false) {
-            return false;
-        }
-        if (typeof obj[key] === 'object' && obj[key] !== null) {
-            if (traverse(obj[key], fn) === false) {
-                return false;
-            }
-        }
-    }
-}
-
 function getGeneralStats(fileContents) {
     return sloc(fileContents, "js");
 }
@@ -128,19 +115,24 @@ function createRepoObject(projectPath) {
     return jsonfile.readFileSync(jsonFilepath);
 }
 
-function calculate(startList, endList) {
-    const size = startList.length;
-    let lines = 0;
+function calculateIntersections(startList, endList) {
+    const startSize = startList.length;
+    const endSize = endList.length;
 
-    if (startList.length === 0 || endList.length === 0) {
-        return lines;
+    if (startSize === 0 || endSize === 0) {
+        return 0;
+    } else if (startSize === 1 || endSize === 1) {
+        const result = endList[0] - startList[0];
+        if(result === 0) return 0;
+        return result - 1;
     }
 
     let i = 0;
+    let lines = 0;
     let startValues = [startList[i]];
 
     let endValues = [endList[i]];
-    for (let i = 1; i < size; i++) {
+    for (let i = 1; i < startSize; i++) {
         if (notIntersectAny(startValues, endValues, startList[i], endList[i])) {
             startValues.push(startList[i]);
             endValues.push(endList[i]);
@@ -177,8 +169,8 @@ function s4() {
         .substring(1);
 }
 
-console.log(calculate([17, 21], [19, 26]));
-// console.log(calculate([2, 4], [12, 9]));
+console.log(calculateIntersections([17, 21], [19, 26]));
+// console.log(calculateIntersections([2, 4], [12, 9]));
 
 module.exports = {
     getNumberOfLinesOld: getNumberOfLinesOld,
@@ -189,6 +181,6 @@ module.exports = {
     getAllProperties: getAllProperties,
     listPropertiesOf: listPropertiesOf,
     createRepoObject: createRepoObject,
-    calculate: calculate,
+    calculate: calculateIntersections,
     guid: guid
 };
