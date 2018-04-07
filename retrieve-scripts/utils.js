@@ -27,11 +27,6 @@ function traverse(obj, fn) {
 function listPropertiesOf(object) {
     let listOfProperties = [];
     for (let key in object) {
-        // if (typeof (object[key]) === 'object' && object[key] !== null) {
-        //     listOfProperties = listOfProperties.concat(listPropertiesOf(object[key]));
-        // } else {
-        //     listOfProperties.push(key);
-        // }
         if (key.indexOf('LinesStart') < 0 && key.indexOf('LinesEnd') < 0) {
             listOfProperties.push(key);
         }
