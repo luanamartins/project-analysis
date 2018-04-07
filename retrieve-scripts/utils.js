@@ -1,5 +1,4 @@
 const sloc = require('sloc');
-const fs = require('fs');
 const path = require('path');
 const jsonfile = require('jsonfile');
 
@@ -33,7 +32,7 @@ function listPropertiesOf(object) {
         // } else {
         //     listOfProperties.push(key);
         // }
-        if (key.indexOf("LinesStart") < 0 && key.indexOf("LinesEnd") < 0) {
+        if (key.indexOf('LinesStart') < 0 && key.indexOf('LinesEnd') < 0) {
             listOfProperties.push(key);
         }
     }
