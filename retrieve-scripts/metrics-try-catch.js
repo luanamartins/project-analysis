@@ -13,27 +13,19 @@ function handleAnalysis(node, reportObject) {
         }
 
         const tryStatementNodes = getTryStatementNodes(functionBody);
-        tryStatementNodes.forEach(function (tryNode) {
-            handleTryStatement(reportObject, tryNode);
-        });
+        tryStatementNodes.map((tryNode) => handleTryStatement(reportObject, tryNode));
 
         const catchClauseNodes = getCatchClauseNodes(tryStatementNodes);
         catchClauseNodes.map((catchClause) => handleCatchClause(reportObject, catchClause));
-        // catchClauseNodes.forEach(function (catchClause) {
-        //     handleCatchClause(reportObject, catchClause);
-        // });
 
         const finallyStatements = getFinallyStatements(tryStatementNodes);
-        finallyStatements.forEach(function (finallyNode) {
-            handleFinallyClause(reportObject, finallyNode);
-        });
+        finallyStatements.map((finallyNode) => handleFinallyClause(reportObject, finallyNode));
 
         const nodes = tryStatementNodes.concat(catchClauseNodes).concat(finallyStatements);
 
         const throwStatementNodes = getThrowStatementNodes(nodes);
-        throwStatementNodes.forEach(function (throwNode) {
-            handleThrowStatement(reportObject, throwNode);
-        });
+        throwStatementNodes.map((throwNode) => handleThrowStatement(reportObject, throwNode));
+        
     }
 }
 
