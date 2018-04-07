@@ -48,10 +48,10 @@ function handleAnalysis(node, reportObject) {
                             if (ifStatementBody.length === 0) {
                                 reportObject.callbacksNumberOfEmptyCallbacks++;
                             } else if (ifStatementBody.length === 1) {
-                                reportObject.callbacksNumberOfConsoleStatementOnly++;
+                                reportObject.callbacksNumberOfFunctionsWithUniqueConsole++;
                             }
                         } else {
-                            reportObject.callbacksNumberOfConsoleStatementOnly++;
+                            reportObject.callbacksNumberOfFunctionsWithUniqueConsole++;
                         }
                     });
                 }
