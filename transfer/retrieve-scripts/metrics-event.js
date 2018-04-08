@@ -13,7 +13,7 @@ function handleAnalysis(node, reportObject) {
             let methodName = node.callee.property.name;
             const numberOfArguments = node.arguments.length;
             const firstArgObject = node.arguments[0];
-            const isFirstArgErrorHandling = firstArgObject && firstArgObject.value ? containsSubstring(keywords, firstArgObject.value) : false;
+            const isFirstArgErrorHandling = firstArgObject && firstArgObject.value ? utils.isAnErrorArgument(firstArgObject.value) : false;
 
             if (numberOfArguments >= 2 && eventListeningMethods.includes(methodName)) {
 
@@ -94,22 +94,6 @@ function isString(literalValue) {
     return hasDoubleQuotes || hasSingleQuotes;
 }
 
-function containsSubstring(array, item) {
-    let contains = false;
-
-    if (item === 'e' || item === 'er' || item === 'err') {
-        return true;
-    }
-
-    if (item && typeof(item) === 'string') {
-        contains = array.some(function (arrayItem) {
-            return item.toLowerCase().indexOf(arrayItem) >= 0;
-        });
-    }
-    return contains;
-}
-
-// console.log(containsSubstring(['err', 'error', 'exception', 'reason', 'er'], 'connection'));
 
 module.exports = {
     handleAnalysis: handleAnalysis

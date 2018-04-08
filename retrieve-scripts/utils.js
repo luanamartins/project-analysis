@@ -2,10 +2,31 @@ const sloc = require('sloc');
 const path = require('path');
 const jsonfile = require('jsonfile');
 
+
+function isAnErrorArgument(argument) {
+    const keywords = ['error', 'exception', 'reason', 'reject', 'err'];
+    return containsSubstring(keywords,argument);
+}
+
+function containsSubstring(array, item) {
+    let contains = false;
+
+    if (item === 'e' || item === 'er' || item === 'err') {
+        return true;
+    }
+
+    if (item && typeof(item) === 'string') {
+        contains = array.some(function (arrayItem) {
+            return item.toLowerCase().indexOf(arrayItem) >= 0;
+        });
+    }
+    return contains;
+}
+
 function getNumberOfLines(node) {
     if (node && node.loc && node.loc.start && node.loc.end) {
         let lines = node.loc.end.line - node.loc.start.line;
-        return (lines === 0) ? lines : lines - 1;
+        return (lines > 0) ? lines - 1: 0;
     } else {
         return 0;
     }
@@ -176,5 +197,6 @@ module.exports = {
     listPropertiesOf: listPropertiesOf,
     createRepoObject: createRepoObject,
     calculate: calculateIntersections,
-    guid: guid
+    guid: guid,
+    isAnErrorArgument: isAnErrorArgument
 };
