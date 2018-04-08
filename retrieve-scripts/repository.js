@@ -6,7 +6,7 @@ const fs = require('fs');
 const filesModule = require('./files');
 
 function checkoutRepoTo(repo, outputDirectory) {
-    var repoName = repo.substring(repo.lastIndexOf("/"));
+    const repoName = repo.substring(repo.lastIndexOf("/"));
     clone(repo, outputDirectory + repoName);
     console.log('Check out: ', repo);
 }

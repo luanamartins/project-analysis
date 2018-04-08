@@ -12,7 +12,7 @@ function getNumberOfLines(node) {
 }
 
 function traverse(obj, fn) {
-    for (let key in obj) {
+    for (const key in obj) {
         if (obj[key] !== null && fn(obj[key]) === false) {
             return false;
         }
@@ -26,7 +26,7 @@ function traverse(obj, fn) {
 
 function listPropertiesOf(object) {
     let listOfProperties = [];
-    for (let key in object) {
+    for (const key in object) {
         if (key.indexOf('LinesStart') < 0 && key.indexOf('LinesEnd') < 0) {
             listOfProperties.push(key);
         }
@@ -86,7 +86,7 @@ function getNodeTypes(functionDeclaration, type) {
 
 function getAllProperties(object) {
     let keys = [];
-    for (var property in object) {
+    for (const property in object) {
         if (object.hasOwnProperty(property)) {
             if (typeof(object[property]) === 'object' && object[property] !== null) {
                 const propsFromProperty = getAllProperties(object[property]);

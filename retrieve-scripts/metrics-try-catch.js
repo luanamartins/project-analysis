@@ -25,7 +25,7 @@ function handleAnalysis(node, reportObject) {
 
         const throwStatementNodes = getThrowStatementNodes(nodes);
         throwStatementNodes.map((throwNode) => handleThrowStatement(reportObject, throwNode));
-        
+
     }
 }
 
