@@ -1,12 +1,13 @@
 require('dotenv').load();
 var testCase = require('nodeunit').testCase;
 const metricsModule = require('../../retrieve-scripts/metrics');
+const suiteCasePath = process.env.PROJECT_PATH + '/test/data/event/';
 
 
 module.exports = testCase({
 
     "TC01": function (test) {
-        const filename = './test/data/event/event1.js';
+        const filename = suiteCasePath + 'event1.js';
         const reportJsonFile = './retrieve-scripts';
         const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
 
