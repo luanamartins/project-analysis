@@ -5,16 +5,13 @@ function handleAnalysis(node, reportObject) {
     // Unique async functions
     if (node.type === 'FunctionDeclaration' && node.async) {
         reportObject.asyncAwaitNumberOfAsyncs++;
+        const params = node.params;
+        const errorArgs = getListOfErrorArguments(params);
 
         const tryStatements = utils.getNodeTypes(node.body, 'TryStatement');
         reportObject.asyncAwaitNumberOfTries += tryStatements.length;
 
-        tryStatements.forEach(tryStatement => {
-            reportObject.asyncAwaitNumberOfTriesLines += utils.getNumberOfLines(tryStatement.block);
-            const location = tryStatement.block.loc;
-            reportObject.asyncAwaitNumberOfTriesLinesStart.push(location.start.line);
-            reportObject.asyncAwaitNumberOfTriesLinesEnd.push(location.end.line);
-        });
+        tryStatements.map(tryStatement => calculateNumberOfLines());
 
         const catchClauses = utils.getNodeTypes(node.body, 'CatchClause');
         reportObject.asyncAwaitNumberOfCatches += catchClauses.length;
@@ -58,6 +55,13 @@ function handleAnalysis(node, reportObject) {
     if (node.type === 'AwaitExpression') {
         reportObject.asyncAwaitNumberOfAwaits++;
     }
+}
+
+function calculateNumberOfLines(reportObject, tryStatement) {
+    reportObject.asyncAwaitNumberOfTriesLines += utils.getNumberOfLines(tryStatement.block);
+    const location = tryStatement.block.loc;
+    reportObject.asyncAwaitNumberOfTriesLinesStart.push(location.start.line);
+    reportObject.asyncAwaitNumberOfTriesLinesEnd.push(location.end.line);
 }
 
 function getFinallyStatements(tryStatements) {
