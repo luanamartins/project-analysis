@@ -17,21 +17,24 @@ function handleAnalysis(node, reportObject) {
         reportObject.asyncAwaitNumberOfCatches += catchClauses.length;
 
         catchClauses.forEach((catchClause) => {
-            const bodyHandlerCatch = catchClause.body.body;
+            const bodyHandlerCatch = catchClause.body;
+            const numberStatementsOfBody = utils.getNumberOfLines(bodyHandlerCatch);
 
-            if (bodyHandlerCatch.length === 0) {
-                // Left the catch block empty
-                reportObject.asyncAwaitNumberOfEmptyCatches++;
-            }
-            reportObject.asyncAwaitNumberOfCatchesLines += utils.getNumberOfLines(catchClause);
+            reportObject.asyncAwaitNumberOfCatchesLines += numberStatementsOfBody;
             const location = catchClause.loc;
             reportObject.asyncAwaitNumberOfCatchesLinesStart.push(location.start.line);
             reportObject.asyncAwaitNumberOfCatchesLinesEnd.push(location.end.line);
 
+            if (numberStatementsOfBody === 0) {
+                // Left the catch block empty
+                reportObject.asyncAwaitNumberOfEmptyCatches++;
+            }
+
             // Catch clause has 1 statement only
-            if (bodyHandlerCatch.length === 1) {
+            if (numberStatementsOfBody === 1) {
+                reportObject.asyncAwaitNumberOfCatchesWithUniqueStatement++;
                 // Handles errors on console only
-                const uniqueStatement = bodyHandlerCatch[0];
+                const uniqueStatement = bodyHandlerCatch.body[0];
                 if (uniqueStatement.type === 'ExpressionStatement' && uniqueStatement.expression.type === 'CallExpression') {
                     if (uniqueStatement.expression.callee.object.name === 'console') {
                         reportObject.asyncAwaitNumberOfCatchesWithUniqueConsole++;

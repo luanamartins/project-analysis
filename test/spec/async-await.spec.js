@@ -21,6 +21,7 @@ module.exports = testCase({
         test.equal(metricsObject.asyncAwaitNumberOfCatches, 1);
         test.equal(metricsObject.asyncAwaitNumberOfEmptyCatches, 1);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesLines, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueStatement, 0);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueConsole, 0);
 
         test.equal(metricsObject.asyncAwaitNumberOfFinallies, 0);
@@ -45,6 +46,7 @@ module.exports = testCase({
         test.equal(metricsObject.asyncAwaitNumberOfCatches, 1);
         test.equal(metricsObject.asyncAwaitNumberOfEmptyCatches, 0);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesLines, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueStatement, 1);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueConsole, 1);
 
         test.equal(metricsObject.asyncAwaitNumberOfFinallies, 0);
@@ -68,6 +70,7 @@ module.exports = testCase({
         test.equal(metricsObject.asyncAwaitNumberOfCatches, 1);
         test.equal(metricsObject.asyncAwaitNumberOfEmptyCatches, 0);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesLines, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueStatement, 1);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueConsole, 1);
 
         test.equal(metricsObject.asyncAwaitNumberOfFinallies, 1);
@@ -91,6 +94,7 @@ module.exports = testCase({
         test.equal(metricsObject.asyncAwaitNumberOfCatches, 1);
         test.equal(metricsObject.asyncAwaitNumberOfEmptyCatches, 0);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesLines, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueStatement, 1);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueConsole, 1);
 
         test.equal(metricsObject.asyncAwaitNumberOfFinallies, 1);
