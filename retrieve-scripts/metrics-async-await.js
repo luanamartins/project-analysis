@@ -6,7 +6,7 @@ function handleAnalysis(node, reportObject) {
     if (node.type === 'FunctionDeclaration' && node.async) {
         reportObject.asyncAwaitNumberOfAsyncs++;
         const params = node.params;
-        const errorArgs = getListOfErrorArguments(params);
+        // const errorArgs = utils.getListOfErrorArguments(params);
 
         const tryStatements = utils.getNodeTypes(node.body, 'TryStatement');
         reportObject.asyncAwaitNumberOfTries += tryStatements.length;
