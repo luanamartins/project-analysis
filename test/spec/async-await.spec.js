@@ -1,13 +1,14 @@
 require('dotenv').load();
-var testCase = require('nodeunit').testCase;
+const testCase = require('nodeunit').testCase;
 const metricsModule = require('../../retrieve-scripts/metrics');
+const suiteCasePath = process.env.PROJECT_PATH + '/test/data/async-await/';
+const projectPath = process.env.RETRIEVE_SCRIPTS_ROOT_PATH;
 
 module.exports = testCase({
 
     "TC01": function (test) {
-        const filename = './test/data/async-await/async-await1.js';
-        const reportJsonFile = './retrieve-scripts';
-        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+        const filename = suiteCasePath + 'async-await1.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
 
         const metricsObject = metrics[0];
 
@@ -30,9 +31,8 @@ module.exports = testCase({
 
 
     "TC02": function (test) {
-        const filename = './test/data/async-await/async-await2.js';
-        const reportJsonFile = './retrieve-scripts';
-        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+        const filename = suiteCasePath + 'async-await2.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
 
         const metricsObject = metrics[0];
 
@@ -54,9 +54,8 @@ module.exports = testCase({
     },
 
     "TC03": function (test) {
-        const filename = './test/data/async-await/async-await3.js';
-        const reportJsonFile = './retrieve-scripts';
-        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+        const filename = suiteCasePath + 'async-await3.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
 
         const metricsObject = metrics[0];
 
@@ -78,9 +77,8 @@ module.exports = testCase({
     },
 
     "TC04": function (test) {
-        const filename = './test/data/async-await/async-await4.js';
-        const reportJsonFile = './retrieve-scripts';
-        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+        const filename = suiteCasePath + 'async-await4.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
 
         const metricsObject = metrics[0];
 

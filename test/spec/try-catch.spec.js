@@ -1,14 +1,14 @@
 require('dotenv').load();
 var testCase = require('nodeunit').testCase;
 const metricsModule = require('../../retrieve-scripts/metrics');
+const suiteCasePath = process.env.PROJECT_PATH + '/test/data/promise/';
+const projectPath = process.env.RETRIEVE_SCRIPTS_ROOT_PATH;
 
 module.exports = testCase({
 
     "TC01": function (test) {
-        const filename = './test/data/try-catch/try-catch1.js';
-        const reportJsonFile = './retrieve-scripts';
-
-        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+        const filename = suiteCasePath + 'try-catch1.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
         const metricsObject = metrics[0];
 
         test.equal(metricsObject.tryCatchNumberOfTries, 1);
@@ -33,10 +33,8 @@ module.exports = testCase({
     },
 
     "TC02": function (test) {
-        const filename = './test/data/try-catch/try-catch2.js';
-        const reportJsonFile = './retrieve-scripts';
-
-        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+        const filename = suiteCasePath + 'try-catch2.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
         const metricsObject = metrics[0];
 
         test.equal(metricsObject.tryCatchNumberOfTries, 1);
@@ -61,10 +59,9 @@ module.exports = testCase({
     },
 
     "TC03": function (test) {
-        const filename = './test/data/try-catch/try-catch3.js';
-        const reportJsonFile = './retrieve-scripts';
+        const filename = suiteCasePath + 'try-catch3.js';
 
-        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
         const metricsObject = metrics[0];
 
         test.equal(metricsObject.tryCatchNumberOfTries, 1);
@@ -89,10 +86,8 @@ module.exports = testCase({
     },
 
     "TC04": function (test) {
-        const filename = './test/data/try-catch/try-catch4.js';
-        const reportJsonFile = './retrieve-scripts';
-
-        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+        const filename = suiteCasePath + 'try-catch4.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
         const metricsObject = metrics[0];
 
         test.equal(metricsObject.tryCatchNumberOfTries, 1);
@@ -117,10 +112,8 @@ module.exports = testCase({
     },
 
     "TCObjectModel": function (test) {
-        const filename = './test/data/try-catch/ObjectModel.js';
-        const reportJsonFile = './retrieve-scripts';
-
-        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+        const filename = suiteCasePath + 'ObjectModel.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
         const metricsObject = metrics[0];
 
         test.equal(metricsObject.tryCatchNumberOfTries, 0);
@@ -145,10 +138,8 @@ module.exports = testCase({
     },
 
     "TCTransformationOff": function (test) {
-        const filename = './test/data/try-catch/TransformationOff.js';
-        const reportJsonFile = './retrieve-scripts';
-
-        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+        const filename = suiteCasePath + 'TransformationOff.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
         const metricsObject = metrics[0];
 
         test.equal(metricsObject.tryCatchNumberOfTries, 0);
@@ -173,10 +164,8 @@ module.exports = testCase({
     },
 
     "TCObject": function (test) {
-        const filename = './test/data/try-catch/Object.js';
-        const reportJsonFile = './retrieve-scripts';
-
-        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+        const filename = suiteCasePath + 'Object.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
         const metricsObject = metrics[0];
 
         test.equal(metricsObject.tryCatchNumberOfTries, 0);
@@ -201,10 +190,8 @@ module.exports = testCase({
     },
 
     "TCStatementTestGenerator": function (test) {
-        const filename = './test/data/try-catch/StatementTestGenerator.js';
-        const reportJsonFile = './retrieve-scripts';
-
-        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+        const filename = suiteCasePath + 'StatementTestGenerator.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
         const metricsObject = metrics[0];
 
         test.equal(metricsObject.tryCatchNumberOfTries, 2);
@@ -229,10 +216,8 @@ module.exports = testCase({
     },
 
     "TC05": function (test) {
-        const filename = './test/data/try-catch/try-catch5.js';
-        const reportJsonFile = './retrieve-scripts';
-
-        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+        const filename = suiteCasePath + 'try-catch5.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
         const metricsObject = metrics[0];
 
         test.equal(metricsObject.tryCatchNumberOfTries, 2);

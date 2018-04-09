@@ -1,12 +1,14 @@
-var testCase = require('nodeunit').testCase;
+require('dotenv').load();
+const testCase = require('nodeunit').testCase;
 const metricsModule = require('./../../retrieve-scripts/metrics');
+const suiteCasePath = process.env.PROJECT_PATH + '/test/data/callback/';
+const projectPath = process.env.RETRIEVE_SCRIPTS_ROOT_PATH;
 
 
 module.exports = testCase({
     "TC01": function (test) {
-        const filename = './test/data/callback/callback1.js';
-        const reportJsonFile = './retrieve-scripts';
-        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+        const filename = suiteCasePath + 'callback1.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
 
         const metricsObject = metrics[0];
 
@@ -20,9 +22,8 @@ module.exports = testCase({
     },
 
     "TC02": function (test) {
-        const filename = './test/data/callback/callback2.js';
-        const reportJsonFile = './retrieve-scripts';
-        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+        const filename = suiteCasePath + 'callback2.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
 
         const metricsObject = metrics[0];
 
@@ -36,9 +37,8 @@ module.exports = testCase({
     },
 
     "TC03": function (test) {
-        const filename = './test/data/callback/callback3.js';
-        const reportJsonFile = './retrieve-scripts';
-        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+        const filename = suiteCasePath + 'callback3.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
 
         const metricsObject = metrics[0];
 
@@ -52,9 +52,8 @@ module.exports = testCase({
     },
 
     "TC04": function (test) {
-        const filename = './test/data/callback/callback4.js';
-        const reportJsonFile = './retrieve-scripts';
-        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+        const filename = suiteCasePath + 'callback4.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
 
         const metricsObject = metrics[0];
 
@@ -68,9 +67,8 @@ module.exports = testCase({
     },
 
     "TC05": function (test) {
-        const filename = './test/data/callback/callback5.js';
-        const reportJsonFile = './retrieve-scripts';
-        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+        const filename = suiteCasePath + 'callback5.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
 
         const metricsObject = metrics[0];
 

@@ -2,14 +2,14 @@ require('dotenv').load();
 var testCase = require('nodeunit').testCase;
 const metricsModule = require('../../retrieve-scripts/metrics');
 const suiteCasePath = process.env.PROJECT_PATH + '/test/data/event/';
+const projectPath = process.env.RETRIEVE_SCRIPTS_ROOT_PATH;
 
 
 module.exports = testCase({
 
     "TC01": function (test) {
         const filename = suiteCasePath + 'event1.js';
-        const reportJsonFile = './retrieve-scripts';
-        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
 
         const metricsObject = metrics[0];
 
@@ -28,9 +28,8 @@ module.exports = testCase({
     },
 
     "TC02": function (test) {
-        const filename = './test/data/event/event2.js';
-        const reportJsonFile = './retrieve-scripts';
-        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+        const filename = suiteCasePath + 'event2.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
 
         const metricsObject = metrics[0];
 
@@ -49,9 +48,8 @@ module.exports = testCase({
     },
 
     "TC03": function (test) {
-        const filename = './test/data/event/event3.js';
-        const reportJsonFile = './retrieve-scripts';
-        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+        const filename = suiteCasePath + 'event3.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
 
         const metricsObject = metrics[0];
 
@@ -70,9 +68,8 @@ module.exports = testCase({
     },
 
     "TC04": function (test) {
-        const filename = './test/data/event/event4.js';
-        const reportJsonFile = './retrieve-scripts';
-        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+        const filename = suiteCasePath + 'event4.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
 
         const metricsObject = metrics[0];
 
@@ -91,9 +88,8 @@ module.exports = testCase({
     },
 
     "TC05": function (test) {
-        const filename = './test/data/event/event5.js';
-        const reportJsonFile = './retrieve-scripts';
-        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+        const filename = suiteCasePath + 'event5.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
 
         const metricsObject = metrics[0];
 
@@ -102,7 +98,7 @@ module.exports = testCase({
         test.equal(metricsObject.eventsNumberOfEventMethodsEmit, 1);
         test.equal(metricsObject.eventsNumberOfEventOnLines, 9);
         test.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
-        test.equal(metricsObject.eventsNumberOfEventEmitLines, 5);
+        test.equal(metricsObject.eventsNumberOfEventEmitLines, 4);
         test.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
         test.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 0);
         test.equal(metricsObject.eventsTotalOfStringEvents, 3);
@@ -113,9 +109,8 @@ module.exports = testCase({
 
 
     "TC07": function (test) {
-        const filename = './test/data/event/event7.js';
-        const reportJsonFile = './retrieve-scripts';
-        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+        const filename = suiteCasePath + 'event7.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
 
         const metricsObject = metrics[0];
 
@@ -134,9 +129,8 @@ module.exports = testCase({
     },
 
     "TC08": function (test) {
-        const filename = './test/data/event/event8.js';
-        const reportJsonFile = './retrieve-scripts';
-        const metrics = metricsModule.handleMetrics([filename], reportJsonFile);
+        const filename = suiteCasePath + 'event8.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
 
         const metricsObject = metrics[0];
 
