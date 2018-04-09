@@ -23,7 +23,7 @@ function calculateArrayLines(repoObject) {
     repoObject.tryCatchNumberOfFinalliesLines = utils.calculate(repoObject.tryCatchNumberOfFinalliesLinesStart, repoObject.tryCatchNumberOfFinalliesLinesEnd);
     delete repoObject.tryCatchNumberOfFinalliesLinesStart;
     delete repoObject.tryCatchNumberOfFinalliesLinesEnd;
-    
+
     repoObject.promiseNumberOfPromiseThenFulfilledLines = utils.calculate(repoObject.promiseNumberOfPromiseThenFulfilledLinesStart, repoObject.promiseNumberOfPromiseThenFulfilledLinesEnd);
     delete repoObject.promiseNumberOfPromiseThenFulfilledLinesStart;
     delete repoObject.promiseNumberOfPromiseThenFulfilledLinesEnd;
@@ -96,12 +96,10 @@ function extractMetricsForFilepath(repoObject, filepath) {
 }
 
 function handleMetrics(files, projectPath) {
-
     let metrics = [];
     if (files) {
         let i = 0;
         files.forEach(function (filepath) {
-
             try {
                 console.log(i + ': ' + filepath);
                 i += 1;
@@ -110,7 +108,6 @@ function handleMetrics(files, projectPath) {
             } catch (err) {
                 console.log(err);
             }
-
         });
     }
     return metrics;
