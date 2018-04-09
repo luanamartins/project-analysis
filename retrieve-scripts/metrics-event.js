@@ -2,8 +2,6 @@ const utils = require('./utils');
 
 function handleAnalysis(node, reportObject) {
 
-    const keywords = ['error', 'exception', 'reason', 'reject', 'err'];
-
     const eventListeningMethods = ['on', 'once'];
     const eventRaisingMethods = ['emit'];
 
@@ -67,7 +65,7 @@ function handleAnalysis(node, reportObject) {
                     const literalValue = node.arguments[0].raw;
 
                     // the method is an event listener or emitter and is listing/raising a string as event
-                    if (isString(literalValue)) {
+                    if (utils.isString(literalValue)) {
                         reportObject.eventsTotalOfStringEvents++;
                     }
 
@@ -87,12 +85,6 @@ function handleAnalysis(node, reportObject) {
         }
 
     }
-}
-
-function isString(literalValue) {
-    const hasDoubleQuotes = literalValue.startsWith("\"") && literalValue.endsWith("\"");
-    const hasSingleQuotes = literalValue.startsWith("'") && literalValue.endsWith("'");
-    return hasDoubleQuotes || hasSingleQuotes;
 }
 
 module.exports = {
