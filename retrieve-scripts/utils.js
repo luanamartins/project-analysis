@@ -45,6 +45,12 @@ function traverse(obj, fn) {
     }
 }
 
+function isString(literalValue) {
+    const hasDoubleQuotes = literalValue.startsWith("\"") && literalValue.endsWith("\"");
+    const hasSingleQuotes = literalValue.startsWith("'") && literalValue.endsWith("'");
+    return hasDoubleQuotes || hasSingleQuotes;
+}
+
 function listPropertiesOf(object) {
     let listOfProperties = [];
     for (const key in object) {
@@ -198,5 +204,6 @@ module.exports = {
     createRepoObject: createRepoObject,
     calculate: calculateIntersections,
     guid: guid,
-    isAnErrorArgument: isAnErrorArgument
+    isAnErrorArgument: isAnErrorArgument,
+    isString: isString
 };
