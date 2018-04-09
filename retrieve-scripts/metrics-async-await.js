@@ -11,7 +11,7 @@ function handleAnalysis(node, reportObject) {
         const tryStatements = utils.getNodeTypes(node.body, 'TryStatement');
         reportObject.asyncAwaitNumberOfTries += tryStatements.length;
 
-        tryStatements.map(tryStatement => calculateNumberOfLines());
+        tryStatements.map(tryStatement => calculateNumberOfLines(reportObject, tryStatement));
 
         const catchClauses = utils.getNodeTypes(node.body, 'CatchClause');
         reportObject.asyncAwaitNumberOfCatches += catchClauses.length;
