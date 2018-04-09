@@ -1,7 +1,7 @@
 const esprima = require('esprima');
 const exec = require('sync-exec');
 const fs = require('fs');
-const temp = require('fs-temp')
+const temp = require('fs-temp');
 
 const tryCatchModule = require('./metrics-try-catch.js');
 const promiseModule = require('./metrics-promise.js');

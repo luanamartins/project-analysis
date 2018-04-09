@@ -106,7 +106,7 @@ function getFilesFromDirectory(repositoryName) {
 
 
 function test() {
-    const test_path = path.join(projectPath, 'test.js')
+    const test_path = path.join(projectPath, 'test.js');
     const files = [test_path,test_path,test_path,test_path,test_path,test_path,test_path,test_path,test_path];
     //const files = [test_path];
     const metrics = metricsModule.handleMetrics(files, projectPath);

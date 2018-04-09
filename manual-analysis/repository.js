@@ -36,7 +36,7 @@ function getFilesFromDir(dir, fileTypes) {
                 walkDir(curFile);
             }
         }
-    };
+    }
     walkDir(dir);
     return filesToReturn;
 }

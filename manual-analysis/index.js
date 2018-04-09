@@ -26,7 +26,7 @@ const path = require('path');
 const excel = require('excel4node');
 const lodash = require('lodash');
 
-const repoModule = require('./repository.js')
+const repoModule = require('./repository.js');
 const fileModule = require('./files.js');
 const nodegit = require('nodegit');
 

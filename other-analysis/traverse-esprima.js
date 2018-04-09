@@ -1,5 +1,5 @@
 var fs = require('fs');
-require('dotenv').config()
+require('dotenv').config();
 var esprima = require('esprima');
 
 var inputFilepath = process.env.INPUT_DIR + 'examples/program-event.js';

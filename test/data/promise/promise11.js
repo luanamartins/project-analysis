@@ -1,5 +1,5 @@
-p = Promise.resolve('')
-p2 = Promise.resolve('')
+p = Promise.resolve('');
+p2 = Promise.resolve('');
 
 p.then(function(ok) {
     console.log("not error");

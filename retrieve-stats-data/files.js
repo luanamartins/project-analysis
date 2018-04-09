@@ -1,5 +1,5 @@
-const json2csv = require('json2csv')
-const fs = require('fs')
+const json2csv = require('json2csv');
+const fs = require('fs');
 
 function writeCsvFile(filepath, headers, data) {
     const extension = '.csv';
@@ -29,4 +29,4 @@ function writeCsvFile(filepath, headers, data) {
 
 module.exports = {
     writeCsvFile: writeCsvFile
-}
+};

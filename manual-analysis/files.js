@@ -123,4 +123,4 @@ module.exports = {
     createStyle: createStyle,
     writeSheet: writeSheet,
     writeWorkbook: writeWorkbook
-}
+};

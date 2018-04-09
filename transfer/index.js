@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 
 //var program = 'const answer = 42';
 
