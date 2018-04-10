@@ -1,4 +1,4 @@
-var p = new Promise(function(resolve, reject) {1
+var p = new Promise(function(resolve, reject) {
     return reject("Error");
 });
 
