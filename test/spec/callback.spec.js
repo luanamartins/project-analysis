@@ -31,7 +31,8 @@ module.exports = testCase({
         test.equal(metricsObject.callbacksNumberOfCallbackErrorFunctions, 0);
         test.equal(metricsObject.callbacksNumberOfFirstErrorArgFunctions, 1);
         test.equal(metricsObject.callbacksNumberOfEmptyCallbacks, 1);
-        test.equal(metricsObject.callbacksNumberOfConsoleStatementOnly, 0);
+        test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueStatement, 0);
+        test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueConsole, 0);
         test.equal(metricsObject.callbacksNumberOfLines, 0);
 
         test.done();
@@ -46,8 +47,9 @@ module.exports = testCase({
         test.equal(metricsObject.callbacksNumberOfCallbackErrorFunctions, 0);
         test.equal(metricsObject.callbacksNumberOfFirstErrorArgFunctions, 1);
         test.equal(metricsObject.callbacksNumberOfEmptyCallbacks, 0);
-        test.equal(metricsObject.callbacksNumberOfConsoleStatementOnly, 0);
-        test.equal(metricsObject.callbacksNumberOfLines, 2);
+        test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueStatement, 0);
+        test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueConsole, 0);
+        test.equal(metricsObject.callbacksNumberOfLines, 1);
 
         test.done();
     },
@@ -61,7 +63,8 @@ module.exports = testCase({
         test.equal(metricsObject.callbacksNumberOfCallbackErrorFunctions, 0);
         test.equal(metricsObject.callbacksNumberOfFirstErrorArgFunctions, 4);
         test.equal(metricsObject.callbacksNumberOfEmptyCallbacks, 0);
-        test.equal(metricsObject.callbacksNumberOfConsoleStatementOnly, 3);
+        test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueStatement, 3);
+        test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueConsole, 3);
         test.equal(metricsObject.callbacksNumberOfLines, 11);
 
         test.done();
@@ -76,7 +79,8 @@ module.exports = testCase({
         test.equal(metricsObject.callbacksNumberOfCallbackErrorFunctions, 0);
         test.equal(metricsObject.callbacksNumberOfFirstErrorArgFunctions, 1);
         test.equal(metricsObject.callbacksNumberOfEmptyCallbacks, 0);
-        test.equal(metricsObject.callbacksNumberOfConsoleStatementOnly, 1);
+        test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueStatement, 1);
+        test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueConsole, 1);
         test.equal(metricsObject.callbacksNumberOfLines, 3);
 
         test.done();
