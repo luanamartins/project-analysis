@@ -83,7 +83,6 @@ function handleAnalysis(node, reportObject) {
                 }
             }
         }
-
     }
 }
 

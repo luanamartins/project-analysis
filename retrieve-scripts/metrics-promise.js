@@ -35,7 +35,6 @@ function handleAnalysis(node, reportObject) {
                     const location = node.arguments[0].loc;
                     reportObject.promiseNumberOfPromiseThenFulfilledLinesStart.push(location.start.line);
                     reportObject.promiseNumberOfPromiseThenFulfilledLinesEnd.push(location.end.line);
-
                 }
 
                 if (numberOfArgumentsOnThen === 2) {
@@ -44,9 +43,7 @@ function handleAnalysis(node, reportObject) {
                     const location = node.arguments[1].loc;
                     reportObject.promiseNumberOfPromiseThenRejectedLinesStart.push(location.start.line);
                     reportObject.promiseNumberOfPromiseThenRejectedLinesEnd.push(location.end.line);
-
                 }
-
             }
 
             if (callee.name === 'catch' || (callee.property && callee.property.name === 'catch')) {
