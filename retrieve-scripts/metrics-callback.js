@@ -52,7 +52,7 @@ function handleAnalysis(node, reportObject) {
                                 reportObject.callbacksNumberOfFunctionsWithUniqueStatement++;
                                 const uniqueStatement = ifStatementConsequent.body[0];
                                 if(utils.isConsoleStatement(uniqueStatement)){
-                                    reportObject.asyncAwaitNumberOfCatchesWithUniqueConsole++;
+                                    reportObject.callbacksNumberOfFunctionsWithUniqueConsole++;
                                 }
                             }
                         }
