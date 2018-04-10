@@ -5,4 +5,4 @@ var p = new Promise(function(resolve, reject) {
 p.then(function(ok) {
     console.log("not error");
     console.log("adf4ef");
-}).catch(function(){});
+}).catch(function() {});

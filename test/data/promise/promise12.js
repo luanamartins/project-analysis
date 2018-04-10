@@ -1,5 +1,6 @@
-p = Promise.resolve('');
-p2 = Promise.resolve('');
+p = Promise.resolve("");
+
+p2 = Promise.resolve("");
 
 p.then(function(ok) {
     console.log("not error");
@@ -8,6 +9,6 @@ p.then(function(ok) {
     console.log("");
 });
 
-p2.catch(function(){
-    console.log('')
+p2.catch(function() {
+    console.log("");
 });
