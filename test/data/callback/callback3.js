@@ -11,5 +11,3 @@ let f = function handler(node) {
 };
 
 f(null);
-
-
