@@ -55,32 +55,21 @@ function handleAnalysis(node, reportObject) {
                 if (numberOfArgumentsOnCatch >= 1) {
 
                     const firstArgument = node.arguments[0];
-                    let firstArgumentBody;
-                    let lines = 0;
-                    if (firstArgument.body) {
-                        firstArgumentBody = firstArgument.body.body;
-                        for (let i = 0; i < firstArgumentBody.length; i++) {
-                            lines += utils.getNumberOfLines(firstArgumentBody[i]);
-                        }
-                    } else {
-                        lines += utils.getNumberOfLines(firstArgument);
-                    }
-                    const location = firstArgument.loc;
+                    const lines = utils.getNumberOfLines(firstArgument);
 
-                    // const lines = utils.getNumberOfLines(firstArgument);
+                    const location = firstArgument.loc;
                     reportObject.promiseNumberOfPromiseCatchesLines += lines;
                     reportObject.promiseNumberOfPromiseCatchesLinesStart.push(location.start.line);
                     reportObject.promiseNumberOfPromiseCatchesLinesEnd.push(location.end.line);
 
                     if (firstArgument.type === 'FunctionDeclaration' ||
                         firstArgument.type === 'FunctionExpression') {
-                        // const lines = utils.getNumberOfLines(firstArgument);
                         if (lines === 0) {
                             reportObject.promiseNumberOfEmptyFunctionsOnPromiseCatches++;
                         } else if (lines === 1) {
                             reportObject.promiseNumberOfCatchesWithUniqueStatement++;
 
-                            const statement = firstArgumentBody[0];
+                            const statement = firstArgument.body[0];
                             if(utils.isConsoleStatement()) {
                                 reportObject.promiseNumberOfCatchesWithUniqueConsole++;
                             }
@@ -91,10 +80,8 @@ function handleAnalysis(node, reportObject) {
                 if (numberOfArgumentsOnCatch === 0) {
                     reportObject.promiseNumberOfEmptyFunctionsOnPromiseCatches++;
                 }
-
             }
         }
-
 
         if (callee.object && callee.object.name === 'Promise') {
             reportObject.promiseNumberOfPromises++;

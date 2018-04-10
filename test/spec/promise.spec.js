@@ -45,7 +45,7 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfRejects, 1);
 
         test.equal(metricsObject.promiseNumberOfPromiseThens, 1);
-        test.equal(metricsObject.promiseNumberOfPromiseThenFulfilledLines, 2);
+        test.equal(metricsObject.promiseNumberOfPromiseThenFulfilledLines, 1);
         test.equal(metricsObject.promiseNumberOfPromiseThenRejectedLines, 0);
 
         test.equal(metricsObject.promiseNumberOfPromiseCatches, 1);
