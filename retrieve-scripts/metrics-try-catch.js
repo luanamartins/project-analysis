@@ -68,13 +68,13 @@ function handleCatchClause(reportObject, catchClause) {
             reportObject.tryCatchNumberOfCatchesWithUniqueStatement++;
 
             const uniqueStatement = nodeBody[0];
-            if (uniqueStatement.type === 'ExpressionStatement' && uniqueStatement.expression.type === 'CallExpression') {
-                const calleeObject = uniqueStatement.expression.callee.object;
-                if (calleeObject && calleeObject.name === 'console') {
-                    reportObject.tryCatchNumberOfCatchesWithUniqueConsole++;
-                }
+            if(utils.isConsoleStatement(uniqueStatement)){
+                reportObject.tryCatchNumberOfCatchesWithUniqueConsole++;
             }
 
+            if(utils.isThrowStatement(uniqueStatement)){
+                reportObject.tryCatchNumberOfCatchesThrowError++;
+            }
         }
         const location = catchClause.loc;
         reportObject.tryCatchNumberOfCatchesLinesStart.push(location.start.line);

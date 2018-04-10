@@ -188,6 +188,12 @@ function isConsoleStatement(statement) {
     return false;
 }
 
+function isThrowStatement(statement) {
+    if(statement.type === 'ThrowStatement') {
+        return true;
+    }
+}
+
 function guid() {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
         s4() + '-' + s4() + s4() + s4();
@@ -215,5 +221,6 @@ module.exports = {
     guid: guid,
     isAnErrorArgument: isAnErrorArgument,
     isString: isString,
-    isConsoleStatement: isConsoleStatement
+    isConsoleStatement: isConsoleStatement,
+    isThrowStatement: isThrowStatement
 };
