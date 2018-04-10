@@ -179,6 +179,15 @@ function notIntersectAny(startList, endList, start2, end2) {
     return list.length === 0;
 }
 
+function isConsoleStatement(statement) {
+    if (statement.type === 'ExpressionStatement' && statement.expression.type === 'CallExpression') {
+        if (statement.expression.callee.object.name === 'console') {
+            return true;
+        }
+    }
+    return false;
+}
+
 function guid() {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
         s4() + '-' + s4() + s4() + s4();
@@ -205,5 +214,6 @@ module.exports = {
     calculate: calculateIntersections,
     guid: guid,
     isAnErrorArgument: isAnErrorArgument,
-    isString: isString
+    isString: isString,
+    isConsoleStatement: isConsoleStatement
 };

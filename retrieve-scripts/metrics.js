@@ -72,7 +72,7 @@ function extractMetricsForFilepath(repoObject, filepath) {
 
     const tempFilepath = temp.writeFileSync(fileContents);
 
-    fileContents = exec('uglifyjs ' + tempFilepath + ' -b').stdout;
+    fileContents = exec('uglifyjs --beautify bracketize=true ' + tempFilepath).stdout;
     fs.unlinkSync(tempFilepath);
 
     const stats = utils.getGeneralStats(fileContents);

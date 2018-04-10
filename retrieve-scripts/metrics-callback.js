@@ -42,16 +42,19 @@ function handleAnalysis(node, reportObject) {
                     const ifStatements = getIfStatements(bodyFunction, listOfErrorHandlingArgs);
                     ifStatements.forEach(ifStatement => {
                         const ifStatementConsequent = ifStatement.consequent;
-                        const ifStatementBody = ifStatementConsequent.body;
+                        // const ifStatementBody = ifStatementConsequent.body;
 
-                        if (ifStatementBody) {
-                            if (ifStatementBody.length === 0) {
+                        if (ifStatementConsequent) {
+                            const numberOfStatementsOnIf = utils.getNumberOfLines(ifStatementConsequent);
+                            if (numberOfStatementsOnIf === 0) {
                                 reportObject.callbacksNumberOfEmptyCallbacks++;
-                            } else if (ifStatementBody.length === 1) {
-                                reportObject.callbacksNumberOfFunctionsWithUniqueConsole++;
+                            } else if (numberOfStatementsOnIf === 1) {
+                                reportObject.callbacksNumberOfFunctionsWithUniqueStatement++;
+                                const uniqueStatement = ifStatementConsequent.body[0];
+                                if(utils.isConsoleStatement(uniqueStatement)){
+                                    reportObject.asyncAwaitNumberOfCatchesWithUniqueConsole++;
+                                }
                             }
-                        } else {
-                            reportObject.callbacksNumberOfFunctionsWithUniqueConsole++;
                         }
                     });
                 }

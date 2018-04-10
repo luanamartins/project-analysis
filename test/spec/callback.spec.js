@@ -15,8 +15,9 @@ module.exports = testCase({
         test.equal(metricsObject.callbacksNumberOfCallbackErrorFunctions, 0);
         test.equal(metricsObject.callbacksNumberOfFirstErrorArgFunctions, 1);
         test.equal(metricsObject.callbacksNumberOfEmptyCallbacks, 0);
-        test.equal(metricsObject.callbacksNumberOfConsoleStatementOnly, 1);
-        test.equal(metricsObject.callbacksNumberOfLines, 3);
+        test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueConsole, 1);
+        test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueStatement, 1);
+        test.equal(metricsObject.callbacksNumberOfLines, 4);
 
         test.done();
     },

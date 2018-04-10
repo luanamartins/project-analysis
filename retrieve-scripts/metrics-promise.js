@@ -80,19 +80,12 @@ function handleAnalysis(node, reportObject) {
                         } else if (lines === 1) {
                             reportObject.promiseNumberOfCatchesWithUniqueStatement++;
 
-                            if (firstArgumentBody[0].type === 'ExpressionStatement' && firstArgumentBody[0].expression.type === 'CallExpression') {
-                                const calleeObject = firstArgumentBody[0].expression.callee.object;
-                                if (calleeObject && calleeObject.name === 'console') {
-                                    reportObject.promiseNumberOfCatchesWithUniqueConsole++;
-                                }
+                            const statement = firstArgumentBody[0];
+                            if(utils.isConsoleStatement()) {
+                                reportObject.promiseNumberOfCatchesWithUniqueConsole++;
                             }
                         }
                     }
-
-                    // if(firstArgument.type === 'MemberExpression' && firstArgument.object.name === 'console') {
-                    //     reportObject.promiseNumberOfCatchesWithUniqueConsole++;
-                    //     reportObject.promiseNumberOfCatchesWithUniqueStatement++;
-                    // }
                 }
 
                 if (numberOfArgumentsOnCatch === 0) {

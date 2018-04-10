@@ -89,7 +89,7 @@
   "callbacksNumberOfFirstErrorArgFunctions": 0,
   "callbacksNumberOfEmptyCallbacks": 0,
   "callbacksNumberOfFunctionsWithUniqueConsole": 0,
-  "callbacksNumberOfFunctionWithUniqueStatement": 0,
+  "callbacksNumberOfFunctionsWithUniqueStatement": 0,
   "callbacksNumberOfLines": 0,
   "callbacksNumberOfLinesStart": [],
   "callbacksNumberOfLinesEnd": []
