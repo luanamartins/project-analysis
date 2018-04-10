@@ -99,7 +99,7 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfRejects, 0);
 
         test.equal(metricsObject.promiseNumberOfPromiseThens, 1);
-        test.equal(metricsObject.promiseNumberOfPromiseThenFulfilledLines, 2);
+        test.equal(metricsObject.promiseNumberOfPromiseThenFulfilledLines, 1);
         test.equal(metricsObject.promiseNumberOfPromiseThenRejectedLines, 0);
 
         test.equal(metricsObject.promiseNumberOfPromiseCatches, 0);
@@ -126,7 +126,7 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfRejects, 1);
 
         test.equal(metricsObject.promiseNumberOfPromiseThens, 1);
-        test.equal(metricsObject.promiseNumberOfPromiseThenFulfilledLines, 2);
+        test.equal(metricsObject.promiseNumberOfPromiseThenFulfilledLines, 1);
         test.equal(metricsObject.promiseNumberOfPromiseThenRejectedLines, 0);
 
         test.equal(metricsObject.promiseNumberOfPromiseCatches, 0);
@@ -153,11 +153,11 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfRejects, 1);
 
         test.equal(metricsObject.promiseNumberOfPromiseThens, 1);
-        test.equal(metricsObject.promiseNumberOfPromiseThenFulfilledLines, 2);
+        test.equal(metricsObject.promiseNumberOfPromiseThenFulfilledLines, 1);
         test.equal(metricsObject.promiseNumberOfPromiseThenRejectedLines, 0);
 
         test.equal(metricsObject.promiseNumberOfPromiseCatches, 1);
-        test.equal(metricsObject.promiseNumberOfPromiseCatchesLines, 5);
+        test.equal(metricsObject.promiseNumberOfPromiseCatchesLines, 4);
         test.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 0);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
@@ -180,11 +180,11 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfRejects, 1);
 
         test.equal(metricsObject.promiseNumberOfPromiseThens, 1);
-        test.equal(metricsObject.promiseNumberOfPromiseThenFulfilledLines, 3);
+        test.equal(metricsObject.promiseNumberOfPromiseThenFulfilledLines, 2);
         test.equal(metricsObject.promiseNumberOfPromiseThenRejectedLines, 0);
 
         test.equal(metricsObject.promiseNumberOfPromiseCatches, 1);
-        test.equal(metricsObject.promiseNumberOfPromiseCatchesLines, 5);
+        test.equal(metricsObject.promiseNumberOfPromiseCatchesLines, 4);
         test.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 0);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
@@ -209,8 +209,8 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfRejects, 1);
 
         test.equal(metricsObject.promiseNumberOfPromiseThens, 1);
-        test.equal(metricsObject.promiseNumberOfPromiseThenFulfilledLines, 3);
-        test.equal(metricsObject.promiseNumberOfPromiseThenRejectedLines, 8);
+        test.equal(metricsObject.promiseNumberOfPromiseThenFulfilledLines, 2);
+        test.equal(metricsObject.promiseNumberOfPromiseThenRejectedLines, 7);
 
         test.equal(metricsObject.promiseNumberOfPromiseCatches, 0);
         test.equal(metricsObject.promiseNumberOfPromiseCatchesLines, 0);
@@ -236,7 +236,7 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfRejects, 1);
 
         test.equal(metricsObject.promiseNumberOfPromiseThens, 1);
-        test.equal(metricsObject.promiseNumberOfPromiseThenFulfilledLines, 3);
+        test.equal(metricsObject.promiseNumberOfPromiseThenFulfilledLines, 2);
         test.equal(metricsObject.promiseNumberOfPromiseThenRejectedLines, 0);
 
         test.equal(metricsObject.promiseNumberOfPromiseCatches, 1);
@@ -263,7 +263,7 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfRejects, 1);
 
         test.equal(metricsObject.promiseNumberOfPromiseThens, 1);
-        test.equal(metricsObject.promiseNumberOfPromiseThenFulfilledLines, 3);
+        test.equal(metricsObject.promiseNumberOfPromiseThenFulfilledLines, 2);
         test.equal(metricsObject.promiseNumberOfPromiseThenRejectedLines, 0);
 
         test.equal(metricsObject.promiseNumberOfPromiseCatches, 1);
@@ -290,7 +290,7 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfRejects, 0);
 
         test.equal(metricsObject.promiseNumberOfPromiseThens, 1);
-        test.equal(metricsObject.promiseNumberOfPromiseThenFulfilledLines, 3);
+        test.equal(metricsObject.promiseNumberOfPromiseThenFulfilledLines, 2);
         test.equal(metricsObject.promiseNumberOfPromiseThenRejectedLines, 0);
 
         test.equal(metricsObject.promiseNumberOfPromiseCatches, 2);

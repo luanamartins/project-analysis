@@ -69,8 +69,8 @@ function handleAnalysis(node, reportObject) {
                         } else if (lines === 1) {
                             reportObject.promiseNumberOfCatchesWithUniqueStatement++;
 
-                            const statement = firstArgument.body[0];
-                            if(utils.isConsoleStatement()) {
+                            const statement = firstArgument.body.body[0];
+                            if(utils.isConsoleStatement(statement)) {
                                 reportObject.promiseNumberOfCatchesWithUniqueConsole++;
                             }
                         }
