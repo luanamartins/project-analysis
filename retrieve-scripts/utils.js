@@ -181,7 +181,11 @@ function notIntersectAny(startList, endList, start2, end2) {
 
 function isConsoleStatement(statement) {
     if (statement.type === 'ExpressionStatement' && statement.expression.type === 'CallExpression') {
-        if (statement.expression.callee.object.name === 'console') {
+        const callee = statement.expression.callee;
+
+        // This is necessary because some functions are not called by a object
+        // or is a recursive function
+        if (callee.object && callee.object.name === 'console') {
             return true;
         }
     }

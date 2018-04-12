@@ -4,7 +4,7 @@ function printFile(callback) {
 
 printFile(function(err, data) {
     if (err) {
-        return console.error(err);
+        console.error(err);
     }
     console.log(data);
 });
