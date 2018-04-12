@@ -2,7 +2,7 @@ const utils = require('./utils');
 
 function handleAnalysis(node, reportObject) {
 
-    // Unique async functions
+    // Asynchronous functions
     if (node.type === 'FunctionDeclaration' && node.async) {
         reportObject.asyncAwaitNumberOfAsyncs++;
         const params = node.params;
@@ -16,48 +16,56 @@ function handleAnalysis(node, reportObject) {
         const catchClauses = utils.getNodeTypes(node.body, 'CatchClause');
         reportObject.asyncAwaitNumberOfCatches += catchClauses.length;
 
-        catchClauses.forEach((catchClause) => {
-            const bodyHandlerCatch = catchClause.body;
-            const numberStatementsOfBody = utils.getNumberOfLines(bodyHandlerCatch);
-
-            reportObject.asyncAwaitNumberOfCatchesLines += numberStatementsOfBody;
-            const location = catchClause.loc;
-            reportObject.asyncAwaitNumberOfCatchesLinesStart.push(location.start.line);
-            reportObject.asyncAwaitNumberOfCatchesLinesEnd.push(location.end.line);
-
-            if (numberStatementsOfBody === 0) {
-                // Left the catch block empty
-                reportObject.asyncAwaitNumberOfEmptyCatches++;
-            }
-
-            // Catch clause has 1 statement only
-            if (numberStatementsOfBody === 1) {
-                reportObject.asyncAwaitNumberOfCatchesWithUniqueStatement++;
-                // Handles errors on console only
-                const uniqueStatement = bodyHandlerCatch.body[0];
-                if (uniqueStatement.type === 'ExpressionStatement' && uniqueStatement.expression.type === 'CallExpression') {
-                    if (uniqueStatement.expression.callee.object.name === 'console') {
-                        reportObject.asyncAwaitNumberOfCatchesWithUniqueConsole++;
-                    }
-                }
-            }
-        });
+        catchClauses.map((catchClause) => handleCatchClauses(catchClause, reportObject));
 
         const finallyStatements = getFinallyStatements(tryStatements);
         reportObject.asyncAwaitNumberOfFinallies = finallyStatements.length;
-        finallyStatements.forEach(function (finallyStatement) {
-            reportObject.asyncAwaitNumberOfFinalliesLines += utils.getNumberOfLines(finallyStatement);
-
-            const location = finallyStatement.loc;
-            reportObject.asyncAwaitNumberOfFinalliesLinesStart.push(location.start.line);
-            reportObject.asyncAwaitNumberOfFinalliesLinesEnd.push(location.end.line);
-
-        });
+        finallyStatements.map((finallyStatement) => handleFinallyClauses(finallyStatement, reportObject));
     }
 
     if (node.type === 'AwaitExpression') {
         reportObject.asyncAwaitNumberOfAwaits++;
     }
+}
+
+function handleCatchClauses(catchClause, reportObject) {
+    const bodyHandlerCatch = catchClause.body;
+    const numberStatementsOfBody = utils.getNumberOfLines(bodyHandlerCatch);
+
+    reportObject.asyncAwaitNumberOfCatchesLines += numberStatementsOfBody;
+    const location = catchClause.loc;
+    reportObject.asyncAwaitNumberOfCatchesLinesStart.push(location.start.line);
+    reportObject.asyncAwaitNumberOfCatchesLinesEnd.push(location.end.line);
+
+    // Left the catch block empty
+    if (numberStatementsOfBody === 0) {
+        reportObject.asyncAwaitNumberOfEmptyCatches++;
+    }
+
+    // Catch clause has 1 statement only
+    if (numberStatementsOfBody === 1) {
+        reportObject.asyncAwaitNumberOfCatchesWithUniqueStatement++;
+        // Handles errors on console only
+        const uniqueStatement = bodyHandlerCatch.body[0];
+        if (uniqueStatement.type === 'ExpressionStatement' && uniqueStatement.expression.type === 'CallExpression') {
+            if (uniqueStatement.expression.callee.object.name === 'console') {
+                reportObject.asyncAwaitNumberOfCatchesWithUniqueConsole++;
+            }
+        }
+    }
+
+
+    // Catch clause has await expressions which receives an error argument
+    
+
+}
+
+function handleFinallyClauses(finallyStatement, reportObject) {
+    reportObject.asyncAwaitNumberOfFinalliesLines += utils.getNumberOfLines(finallyStatement);
+
+    const location = finallyStatement.loc;
+    reportObject.asyncAwaitNumberOfFinalliesLinesStart.push(location.start.line);
+    reportObject.asyncAwaitNumberOfFinalliesLinesEnd.push(location.end.line);
 }
 
 function calculateNumberOfLines(reportObject, tryStatement) {
