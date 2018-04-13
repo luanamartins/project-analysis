@@ -118,7 +118,7 @@ function getMetrics(ast, filepath, reportObject) {
     try {
         utils.traverse(ast, function (node) {
             if (node.type === 'ExpressionStatement' && node.directive && node.directive === 'use strict') {
-                reportObject.numberOfStrictMode++;
+                reportObject.numberOfStrictModeGlobal++;
             }
             tryCatchModule.handleAnalysis(node, reportObject);
             promiseModule.handleAnalysis(node, reportObject);

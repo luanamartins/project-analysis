@@ -12,6 +12,7 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
+        test.equal(metricsObject.numberOfStrictModeGlobal, 0);
         test.equal(metricsObject.asyncAwaitNumberOfAsyncs, 1);
         test.equal(metricsObject.asyncAwaitNumberOfAwaits, 1);
 
@@ -38,6 +39,7 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
+        test.equal(metricsObject.numberOfStrictModeGlobal, 0);
         test.equal(metricsObject.asyncAwaitNumberOfAsyncs, 1);
         test.equal(metricsObject.asyncAwaitNumberOfAwaits, 1);
 
@@ -63,6 +65,7 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
+        test.equal(metricsObject.numberOfStrictModeGlobal, 0);
         test.equal(metricsObject.asyncAwaitNumberOfAsyncs, 1);
         test.equal(metricsObject.asyncAwaitNumberOfAwaits, 1);
 
@@ -88,6 +91,7 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
+        test.equal(metricsObject.numberOfStrictModeGlobal, 0);
         test.equal(metricsObject.asyncAwaitNumberOfAsyncs, 1);
         test.equal(metricsObject.asyncAwaitNumberOfAwaits, 1);
 
@@ -113,6 +117,7 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
+        test.equal(metricsObject.numberOfStrictModeGlobal, 0);
         test.equal(metricsObject.asyncAwaitNumberOfAsyncs, 1);
         test.equal(metricsObject.asyncAwaitNumberOfAwaits, 2);
 
@@ -138,7 +143,7 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.numberOfStrictMode, 1);
+        test.equal(metricsObject.numberOfStrictModeGlobal, 1);
         test.equal(metricsObject.asyncAwaitNumberOfAsyncs, 1);
         test.equal(metricsObject.asyncAwaitNumberOfAwaits, 2);
 
