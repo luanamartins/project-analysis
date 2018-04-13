@@ -59,6 +59,7 @@
   "asyncAwaitNumberOfCatchesWithUniqueConsole": 0,
   "asyncAwaitNumberOfCatchesWithUniqueStatement": 0,
   "asyncAwaitNumberOfCatchesThrowError":0,
+  "asyncAwaitNumberOfAwaitErrorArgsOnCatches":0,
   "asyncAwaitNumberOfCatchesRethrowError":0,
   "asyncAwaitNumberOfFinallies": 0,
   "asyncAwaitNumberOfFinalliesLines": 0,

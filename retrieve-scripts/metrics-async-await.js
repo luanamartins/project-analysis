@@ -5,8 +5,8 @@ function handleAnalysis(node, reportObject) {
     // Asynchronous functions
     if (node.type === 'FunctionDeclaration' && node.async) {
         reportObject.asyncAwaitNumberOfAsyncs++;
-        const params = node.params;
-        // const errorArgs = utils.getListOfErrorArguments(params);
+        const params = node.params.map((item) => item.name);
+        const errorArgs = params.filter((param) => utils.isAnErrorArgument(param));
 
         const tryStatements = utils.getNodeTypes(node.body, 'TryStatement');
         reportObject.asyncAwaitNumberOfTries += tryStatements.length;
@@ -16,7 +16,7 @@ function handleAnalysis(node, reportObject) {
         const catchClauses = utils.getNodeTypes(node.body, 'CatchClause');
         reportObject.asyncAwaitNumberOfCatches += catchClauses.length;
 
-        catchClauses.map((catchClause) => handleCatchClauses(catchClause, reportObject));
+        catchClauses.map((catchClause) => handleCatchClauses(errorArgs, catchClause, reportObject));
 
         const finallyStatements = getFinallyStatements(tryStatements);
         reportObject.asyncAwaitNumberOfFinallies = finallyStatements.length;
@@ -28,7 +28,7 @@ function handleAnalysis(node, reportObject) {
     }
 }
 
-function handleCatchClauses(catchClause, reportObject) {
+function handleCatchClauses(errorArgs, catchClause, reportObject) {
     const bodyHandlerCatch = catchClause.body;
     const numberStatementsOfBody = utils.getNumberOfLines(bodyHandlerCatch);
 
@@ -42,7 +42,7 @@ function handleCatchClauses(catchClause, reportObject) {
         reportObject.asyncAwaitNumberOfEmptyCatches++;
     }
 
-    // Catch clause has 1 statement only
+    // Catch clause has one statement only
     if (numberStatementsOfBody === 1) {
         reportObject.asyncAwaitNumberOfCatchesWithUniqueStatement++;
         // Handles errors on console only
@@ -54,10 +54,33 @@ function handleCatchClauses(catchClause, reportObject) {
         }
     }
 
-
     // Catch clause has await expressions which receives an error argument
-    
+    const awaitExpressions = getAwaitExpressions(catchClause, reportObject);
 
+}
+
+function getAwaitExpressions(catchClause, reportObject) {
+    // TODO returns the await expressions which any arguments matches with any item on errorArgs
+    const number = 0;
+    const catchClauseArgs = [catchClause.param.name];
+    utils.traverse(catchClause, function (node) {
+        if (node.type === 'AwaitExpression') {
+            const expression = node.argument;
+            if (expression.type === 'CallExpression') {
+                let awaitExpressionArgs = expression.arguments;
+                if (awaitExpressionArgs.length !== 0) {
+                    awaitExpressionArgs = awaitExpressionArgs.filter((arg) => arg.type === 'Identifier').map((item) => {
+                        return item.name;
+                    });
+
+                    if (utils.containsAnyErrorArgument(catchClauseArgs, awaitExpressionArgs)) {
+                        // TODO An await expression which calling function receives an error argument from the catch clause
+                        reportObject.asyncAwaitNumberOfAwaitErrorArgsOnCatches++;
+                    }
+                }
+            }
+        }
+    });
 }
 
 function handleFinallyClauses(finallyStatement, reportObject) {

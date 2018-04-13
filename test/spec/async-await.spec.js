@@ -21,6 +21,7 @@ module.exports = testCase({
         test.equal(metricsObject.asyncAwaitNumberOfCatches, 1);
         test.equal(metricsObject.asyncAwaitNumberOfEmptyCatches, 1);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesLines, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfAwaitErrorArgsOnCatches, 0);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueStatement, 0);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueConsole, 0);
 
@@ -46,6 +47,7 @@ module.exports = testCase({
         test.equal(metricsObject.asyncAwaitNumberOfCatches, 1);
         test.equal(metricsObject.asyncAwaitNumberOfEmptyCatches, 0);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesLines, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfAwaitErrorArgsOnCatches, 0);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueStatement, 1);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueConsole, 1);
 
@@ -70,6 +72,7 @@ module.exports = testCase({
         test.equal(metricsObject.asyncAwaitNumberOfCatches, 1);
         test.equal(metricsObject.asyncAwaitNumberOfEmptyCatches, 0);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesLines, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfAwaitErrorArgsOnCatches, 0);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueStatement, 1);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueConsole, 1);
 
@@ -94,8 +97,34 @@ module.exports = testCase({
         test.equal(metricsObject.asyncAwaitNumberOfCatches, 1);
         test.equal(metricsObject.asyncAwaitNumberOfEmptyCatches, 0);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesLines, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfAwaitErrorArgsOnCatches, 0);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueStatement, 1);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueConsole, 1);
+
+        test.equal(metricsObject.asyncAwaitNumberOfFinallies, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfFinalliesLines, 3);
+
+        test.done();
+    },
+
+    "TC05": function (test) {
+        const filename = suiteCasePath + 'async-await5.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
+
+        const metricsObject = metrics[0];
+
+        test.equal(metricsObject.asyncAwaitNumberOfAsyncs, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfAwaits, 2);
+
+        test.equal(metricsObject.asyncAwaitNumberOfTries, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfTriesLines, 2);
+
+        test.equal(metricsObject.asyncAwaitNumberOfCatches, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfEmptyCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfCatchesLines, 2);
+        test.equal(metricsObject.asyncAwaitNumberOfAwaitErrorArgsOnCatches, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueStatement, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueConsole, 0);
 
         test.equal(metricsObject.asyncAwaitNumberOfFinallies, 1);
         test.equal(metricsObject.asyncAwaitNumberOfFinalliesLines, 3);

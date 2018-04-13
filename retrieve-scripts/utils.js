@@ -5,8 +5,26 @@ const jsonfile = require('jsonfile');
 
 function isAnErrorArgument(argument) {
     const keywords = ['error', 'exception', 'reason', 'reject', 'err'];
-    return containsSubstring(keywords,argument);
+    return containsSubstring(keywords, argument);
 }
+
+function hasAnErrorArgument(array) {
+    if (array) {
+        return array.some((item) => isAnErrorArgument(item));
+    }
+    return false;
+}
+
+function containsAnyErrorArgument(errArgs, array) {
+    if (errArgs && array && errArgs.length > 0 && array.length > 0) {
+        return array.some((item) => {
+            return errArgs.includes(item);
+        });
+    }
+    return false;
+}
+
+console.log(hasAnErrorArgument(['clara', 'asdfas']))
 
 function containsSubstring(array, item) {
     let contains = false;
@@ -26,7 +44,7 @@ function containsSubstring(array, item) {
 function getNumberOfLines(node) {
     if (node && node.loc && node.loc.start && node.loc.end) {
         let lines = node.loc.end.line - node.loc.start.line;
-        return (lines > 0) ? lines - 1: 0;
+        return (lines > 0) ? lines - 1 : 0;
     } else {
         return 0;
     }
@@ -144,7 +162,7 @@ function calculateIntersections(startList, endList) {
         return 0;
     } else if (startSize === 1 || endSize === 1) {
         const result = endList[0] - startList[0];
-        if(result === 0) return 0;
+        if (result === 0) return 0;
         return result - 1;
     }
 
@@ -193,7 +211,7 @@ function isConsoleStatement(statement) {
 }
 
 function isThrowStatement(statement) {
-    if(statement.type === 'ThrowStatement') {
+    if (statement.type === 'ThrowStatement') {
         return true;
     }
 }
@@ -209,7 +227,7 @@ function s4() {
         .substring(1);
 }
 
-console.log(calculateIntersections([17, 21], [19, 26]));
+// console.log(calculateIntersections([17, 21], [19, 26]));
 // console.log(calculateIntersections([2, 4], [12, 9]));
 
 module.exports = {
@@ -226,5 +244,6 @@ module.exports = {
     isAnErrorArgument: isAnErrorArgument,
     isString: isString,
     isConsoleStatement: isConsoleStatement,
-    isThrowStatement: isThrowStatement
+    isThrowStatement: isThrowStatement,
+    containsAnyErrorArgument: containsAnyErrorArgument
 };
