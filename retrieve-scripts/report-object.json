@@ -1,6 +1,7 @@
 {
   "numberOfLogicalLines": 0,
   "numberOfPhysicalLines": 0,
+  "numberOfStrictMode": 0,
 
   "tryCatchNumberOfTries": 0,
   "tryCatchNumberOfEmptyTries": 0,
