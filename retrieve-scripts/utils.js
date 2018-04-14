@@ -24,7 +24,19 @@ function containsAnyErrorArgument(errArgs, array) {
     return false;
 }
 
-console.log(hasAnErrorArgument(['clara', 'asdfas']))
+function getIdentifiersNames(args) {
+    if (args) {
+        if (Array.isArray(args))
+            return args.filter(arg => arg.type === 'Identifier').map((arg) => {
+                return arg.name
+            });
+        else {
+            return [args.name];
+        }
+    }
+
+    return [];
+}
 
 function containsSubstring(array, item) {
     let contains = false;
@@ -245,5 +257,7 @@ module.exports = {
     isString: isString,
     isConsoleStatement: isConsoleStatement,
     isThrowStatement: isThrowStatement,
-    containsAnyErrorArgument: containsAnyErrorArgument
+    containsAnyErrorArgument: containsAnyErrorArgument,
+    getIdentifiersNames: getIdentifiersNames,
+    hasAnErrorArgument: hasAnErrorArgument
 };
