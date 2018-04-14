@@ -64,7 +64,7 @@ function handleCatchClauses(errorArgs, catchClause, reportObject) {
         if (awaitArgument.type === 'CallExpression') {
             const awaitArgs = utils.getIdentifiersNames(awaitArgument.arguments);
             const args = utils.containsAnyErrorArgument(catchClauseErrorArgs, awaitArgs);
-            if(args) {
+            if (args) {
                 reportObject.asyncAwaitNumberOfAwaitErrorArgsOnCatches++;
             }
         }

@@ -8,22 +8,19 @@ function handleAnalysis(node, reportObject) {
     if (node.type === 'CallExpression') {
         if (node.callee.property) {
 
-            let methodName = node.callee.property.name;
+            const methodName = node.callee.property.name;
             const numberOfArguments = node.arguments.length;
             const firstArgObject = node.arguments[0];
             const isFirstArgErrorHandling = firstArgObject &&
             firstArgObject.value ? utils.isAnErrorArgument(firstArgObject.value) : false;
 
-            if (numberOfArguments >= 2 && eventListeningMethods.includes(methodName)) {
+            if (numberOfArguments > 1 && eventListeningMethods.includes(methodName)) {
 
                 const errorHandlingFunction = node.arguments[1];
-
                 if (methodName === 'on' && isFirstArgErrorHandling) {
-
                     reportObject.eventsNumberOfEventMethodsOn++;
                     if (errorHandlingFunction) {
                         reportObject.eventsNumberOfEventOnLines += utils.getNumberOfLines(errorHandlingFunction);
-
                         const location = errorHandlingFunction.loc;
                         reportObject.eventsNumberOfEventOnLinesStart.push(location.start.line);
                         reportObject.eventsNumberOfEventOnLinesEnd.push(location.end.line);
@@ -34,7 +31,6 @@ function handleAnalysis(node, reportObject) {
                     reportObject.eventsNumberOfEventMethodsOnce++;
                     if (errorHandlingFunction) {
                         reportObject.eventsNumberOfEventOnceLines += utils.getNumberOfLines(errorHandlingFunction);
-
                         const location = errorHandlingFunction.loc;
                         reportObject.eventsNumberOfEventOnceLinesStart.push(location.start.line);
                         reportObject.eventsNumberOfEventOnceLinesEnd.push(location.end.line);
