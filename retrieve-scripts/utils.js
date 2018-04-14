@@ -203,8 +203,6 @@ function calculateIntersections(startList, endList) {
 
     }
 
-    // console.log(startValues);
-    // console.log(endValues);
     startValues.forEach(function (item, index) {
         lines += endValues[index] - startValues[index];
     });
