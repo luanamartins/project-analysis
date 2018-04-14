@@ -38,6 +38,18 @@ function getIdentifiersNames(args) {
     return [];
 }
 
+function getStatementsByType(body, type) {
+    const result = [];
+    if (body) {
+        traverse(body, function (node) {
+            if (node.type === type) {
+                result.push(node);
+            }
+        });
+    }
+    return result;
+}
+
 function containsSubstring(array, item) {
     let contains = false;
 
@@ -243,21 +255,22 @@ function s4() {
 // console.log(calculateIntersections([2, 4], [12, 9]));
 
 module.exports = {
-    getNumberOfLinesOld: getNumberOfLinesOld,
-    traverse: traverse,
-    getNumberOfLines: getNumberOfLines,
-    getNodeTypes: getNodeTypes,
-    getGeneralStats: getGeneralStats,
-    getAllProperties: getAllProperties,
-    listPropertiesOf: listPropertiesOf,
-    createRepoObject: createRepoObject,
+    getNumberOfLinesOld,
+    traverse,
+    getNumberOfLines,
+    getNodeTypes,
+    getGeneralStats,
+    getAllProperties,
+    listPropertiesOf,
+    createRepoObject,
     calculate: calculateIntersections,
-    guid: guid,
-    isAnErrorArgument: isAnErrorArgument,
-    isString: isString,
-    isConsoleStatement: isConsoleStatement,
-    isThrowStatement: isThrowStatement,
-    containsAnyErrorArgument: containsAnyErrorArgument,
-    getIdentifiersNames: getIdentifiersNames,
-    hasAnErrorArgument: hasAnErrorArgument
+    guid,
+    isAnErrorArgument,
+    isString,
+    isConsoleStatement,
+    isThrowStatement,
+    containsAnyErrorArgument,
+    getIdentifiersNames,
+    hasAnErrorArgument,
+    getStatementsByType
 };

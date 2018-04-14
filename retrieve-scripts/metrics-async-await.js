@@ -29,8 +29,9 @@ function handleAnalysis(node, reportObject) {
 }
 
 function handleCatchClauses(errorArgs, catchClause, reportObject) {
-    const bodyHandlerCatch = catchClause.body;
-    const numberStatementsOfBody = utils.getNumberOfLines(bodyHandlerCatch);
+    const catchClauseErrorArgs = utils.getIdentifiersNames(catchClause.param);
+    const catchClauseBody = catchClause.body;
+    const numberStatementsOfBody = utils.getNumberOfLines(catchClauseBody);
 
     reportObject.asyncAwaitNumberOfCatchesLines += numberStatementsOfBody;
     const location = catchClause.loc;
@@ -46,7 +47,7 @@ function handleCatchClauses(errorArgs, catchClause, reportObject) {
     if (numberStatementsOfBody === 1) {
         reportObject.asyncAwaitNumberOfCatchesWithUniqueStatement++;
         // Handles errors on console only
-        const uniqueStatement = bodyHandlerCatch.body[0];
+        const uniqueStatement = catchClauseBody.body[0];
         if (uniqueStatement.type === 'ExpressionStatement' && uniqueStatement.expression.type === 'CallExpression') {
             if (uniqueStatement.expression.callee.object.name === 'console') {
                 reportObject.asyncAwaitNumberOfCatchesWithUniqueConsole++;
@@ -55,32 +56,20 @@ function handleCatchClauses(errorArgs, catchClause, reportObject) {
     }
 
     // Catch clause has await expressions which receives an error argument
-    const awaitExpressions = getAwaitExpressions(catchClause, reportObject);
 
-}
+    const awaitExpressions = utils.getStatementsByType(catchClauseBody, 'AwaitExpression');
 
-function getAwaitExpressions(catchClause, reportObject) {
-    // TODO returns the await expressions which any arguments matches with any item on errorArgs
-    const number = 0;
-    const catchClauseArgs = [catchClause.param.name];
-    utils.traverse(catchClause, function (node) {
-        if (node.type === 'AwaitExpression') {
-            const expression = node.argument;
-            if (expression.type === 'CallExpression') {
-                let awaitExpressionArgs = expression.arguments;
-                if (awaitExpressionArgs.length !== 0) {
-                    awaitExpressionArgs = awaitExpressionArgs.filter((arg) => arg.type === 'Identifier').map((item) => {
-                        return item.name;
-                    });
-
-                    if (utils.containsAnyErrorArgument(catchClauseArgs, awaitExpressionArgs)) {
-                        // TODO An await expression which calling function receives an error argument from the catch clause
-                        reportObject.asyncAwaitNumberOfAwaitErrorArgsOnCatches++;
-                    }
-                }
+    awaitExpressions.forEach(function (awaitExpression) {
+        const awaitArgument = awaitExpression.argument;
+        if (awaitArgument.type === 'CallExpression') {
+            const awaitArgs = utils.getIdentifiersNames(awaitArgument.arguments);
+            const args = utils.containsAnyErrorArgument(catchClauseErrorArgs, awaitArgs);
+            if(args) {
+                reportObject.asyncAwaitNumberOfAwaitErrorArgsOnCatches++;
             }
         }
     });
+
 }
 
 function handleFinallyClauses(finallyStatement, reportObject) {
