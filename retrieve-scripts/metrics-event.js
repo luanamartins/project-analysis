@@ -87,5 +87,5 @@ function handleAnalysis(node, reportObject) {
 }
 
 module.exports = {
-    handleAnalysis: handleAnalysis
+    handleAnalysis
 };

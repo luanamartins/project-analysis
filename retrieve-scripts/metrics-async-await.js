@@ -99,5 +99,5 @@ function getFinallyStatements(tryStatements) {
 
 
 module.exports = {
-    handleAnalysis: handleAnalysis
+    handleAnalysis
 };

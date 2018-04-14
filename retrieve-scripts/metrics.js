@@ -132,5 +132,5 @@ function getMetrics(ast, filepath, reportObject) {
 }
 
 module.exports = {
-    handleMetrics: handleMetrics
+    handleMetrics
 };

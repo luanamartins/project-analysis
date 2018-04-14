@@ -152,5 +152,5 @@ function getFinallyStatements(tryNodes) {
 }
 
 module.exports = {
-    handleAnalysis: handleAnalysis
+    handleAnalysis
 };

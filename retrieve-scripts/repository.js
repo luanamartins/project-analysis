@@ -59,8 +59,8 @@ function endsWithAny(input, extensions) {
 }
 
 module.exports = {
-    getFilesFromDir: getFilesFromDir,
-    checkoutRepoTo: checkoutRepoTo,
-    getRepos: getRepos,
-    getRepoProjectName: getRepoProjectName
+    getFilesFromDir,
+    checkoutRepoTo,
+    getRepos,
+    getRepoProjectName
 };

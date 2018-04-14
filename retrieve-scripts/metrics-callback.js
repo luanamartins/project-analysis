@@ -99,5 +99,5 @@ function getIfStatementsWithErrorArgs(body, errorVariables) {
 
 
 module.exports = {
-    handleAnalysis: handleAnalysis
+    handleAnalysis
 };
