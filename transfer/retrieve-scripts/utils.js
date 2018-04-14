@@ -188,6 +188,6 @@ module.exports = {
     getAllProperties: getAllProperties,
     listPropertiesOf: listPropertiesOf,
     createRepoObject: createRepoObject,
-    calculate: calculate,
+    calculateIntersections: calculate,
     guid: guid
 };

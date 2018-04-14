@@ -263,7 +263,7 @@ module.exports = {
     getAllProperties,
     listPropertiesOf,
     createRepoObject,
-    calculate: calculateIntersections,
+    calculateIntersections,
     guid,
     isAnErrorArgument,
     isString,

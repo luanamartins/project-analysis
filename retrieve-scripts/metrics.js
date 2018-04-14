@@ -12,55 +12,55 @@ const utils = require('./utils.js');
 
 function calculateArrayLines(repoObject) {
 
-    repoObject.tryCatchNumberOfTriesLines = utils.calculate(repoObject.tryCatchNumberOfTriesLinesStart, repoObject.tryCatchNumberOfTriesLinesEnd);
+    repoObject.tryCatchNumberOfTriesLines = utils.calculateIntersections(repoObject.tryCatchNumberOfTriesLinesStart, repoObject.tryCatchNumberOfTriesLinesEnd);
     delete repoObject.tryCatchNumberOfTriesLinesStart;
     delete repoObject.tryCatchNumberOfTriesLinesEnd;
 
-    repoObject.tryCatchNumberOfCatchesLines = utils.calculate(repoObject.tryCatchNumberOfCatchesLinesStart, repoObject.tryCatchNumberOfCatchesLinesEnd);
+    repoObject.tryCatchNumberOfCatchesLines = utils.calculateIntersections(repoObject.tryCatchNumberOfCatchesLinesStart, repoObject.tryCatchNumberOfCatchesLinesEnd);
     delete repoObject.tryCatchNumberOfCatchesLinesStart;
     delete repoObject.tryCatchNumberOfCatchesLinesEnd;
 
-    repoObject.tryCatchNumberOfFinalliesLines = utils.calculate(repoObject.tryCatchNumberOfFinalliesLinesStart, repoObject.tryCatchNumberOfFinalliesLinesEnd);
+    repoObject.tryCatchNumberOfFinalliesLines = utils.calculateIntersections(repoObject.tryCatchNumberOfFinalliesLinesStart, repoObject.tryCatchNumberOfFinalliesLinesEnd);
     delete repoObject.tryCatchNumberOfFinalliesLinesStart;
     delete repoObject.tryCatchNumberOfFinalliesLinesEnd;
 
-    repoObject.promiseNumberOfPromiseThenFulfilledLines = utils.calculate(repoObject.promiseNumberOfPromiseThenFulfilledLinesStart, repoObject.promiseNumberOfPromiseThenFulfilledLinesEnd);
+    repoObject.promiseNumberOfPromiseThenFulfilledLines = utils.calculateIntersections(repoObject.promiseNumberOfPromiseThenFulfilledLinesStart, repoObject.promiseNumberOfPromiseThenFulfilledLinesEnd);
     delete repoObject.promiseNumberOfPromiseThenFulfilledLinesStart;
     delete repoObject.promiseNumberOfPromiseThenFulfilledLinesEnd;
 
-    repoObject.promiseNumberOfPromiseThenRejectedLines = utils.calculate(repoObject.promiseNumberOfPromiseThenRejectedLinesStart, repoObject.promiseNumberOfPromiseThenRejectedLinesEnd);
+    repoObject.promiseNumberOfPromiseThenRejectedLines = utils.calculateIntersections(repoObject.promiseNumberOfPromiseThenRejectedLinesStart, repoObject.promiseNumberOfPromiseThenRejectedLinesEnd);
     delete repoObject.promiseNumberOfPromiseThenRejectedLinesStart;
     delete repoObject.promiseNumberOfPromiseThenRejectedLinesEnd;
 
-    repoObject.promiseNumberOfPromiseCatchesLines = utils.calculate(repoObject.promiseNumberOfPromiseCatchesLinesStart, repoObject.promiseNumberOfPromiseCatchesLinesEnd);
+    repoObject.promiseNumberOfPromiseCatchesLines = utils.calculateIntersections(repoObject.promiseNumberOfPromiseCatchesLinesStart, repoObject.promiseNumberOfPromiseCatchesLinesEnd);
     delete repoObject.promiseNumberOfPromiseCatchesLinesStart;
     delete repoObject.promiseNumberOfPromiseCatchesLinesEnd;
 
-    repoObject.asyncAwaitNumberOfTriesLines = utils.calculate(repoObject.asyncAwaitNumberOfTriesLinesStart, repoObject.asyncAwaitNumberOfTriesLinesEnd);
+    repoObject.asyncAwaitNumberOfTriesLines = utils.calculateIntersections(repoObject.asyncAwaitNumberOfTriesLinesStart, repoObject.asyncAwaitNumberOfTriesLinesEnd);
     delete repoObject.asyncAwaitNumberOfTriesLinesStart;
     delete repoObject.asyncAwaitNumberOfTriesLinesEnd;
 
-    repoObject.asyncAwaitNumberOfCatchesLines = utils.calculate(repoObject.asyncAwaitNumberOfCatchesLinesStart, repoObject.asyncAwaitNumberOfCatchesLinesEnd);
+    repoObject.asyncAwaitNumberOfCatchesLines = utils.calculateIntersections(repoObject.asyncAwaitNumberOfCatchesLinesStart, repoObject.asyncAwaitNumberOfCatchesLinesEnd);
     delete repoObject.asyncAwaitNumberOfCatchesLinesStart;
     delete repoObject.asyncAwaitNumberOfCatchesLinesEnd;
 
-    repoObject.asyncAwaitNumberOfFinalliesLines = utils.calculate(repoObject.asyncAwaitNumberOfFinalliesLinesStart, repoObject.asyncAwaitNumberOfFinalliesLinesEnd);
+    repoObject.asyncAwaitNumberOfFinalliesLines = utils.calculateIntersections(repoObject.asyncAwaitNumberOfFinalliesLinesStart, repoObject.asyncAwaitNumberOfFinalliesLinesEnd);
     delete repoObject.asyncAwaitNumberOfFinalliesLinesStart;
     delete repoObject.asyncAwaitNumberOfFinalliesLinesEnd;
 
-    repoObject.eventsNumberOfEventOnLines = utils.calculate(repoObject.eventsNumberOfEventOnLinesStart, repoObject.eventsNumberOfEventOnLinesEnd);
+    repoObject.eventsNumberOfEventOnLines = utils.calculateIntersections(repoObject.eventsNumberOfEventOnLinesStart, repoObject.eventsNumberOfEventOnLinesEnd);
     delete repoObject.eventsNumberOfEventOnLinesStart;
     delete repoObject.eventsNumberOfEventOnLinesEnd;
 
-    repoObject.eventsNumberOfEventOnceLines = utils.calculate(repoObject.eventsNumberOfEventOnceLinesStart, repoObject.eventsNumberOfEventOnceLinesEnd);
+    repoObject.eventsNumberOfEventOnceLines = utils.calculateIntersections(repoObject.eventsNumberOfEventOnceLinesStart, repoObject.eventsNumberOfEventOnceLinesEnd);
     delete repoObject.eventsNumberOfEventOnceLinesStart;
     delete repoObject.eventsNumberOfEventOnceLinesEnd;
 
-    repoObject.eventsNumberOfEventEmitLines = utils.calculate(repoObject.eventsNumberOfEventEmitLinesStart, repoObject.eventsNumberOfEventEmitLinesEnd);
+    repoObject.eventsNumberOfEventEmitLines = utils.calculateIntersections(repoObject.eventsNumberOfEventEmitLinesStart, repoObject.eventsNumberOfEventEmitLinesEnd);
     delete repoObject.eventsNumberOfEventEmitLinesStart;
     delete repoObject.eventsNumberOfEventEmitLinesEnd;
 
-    repoObject.callbacksNumberOfLines = utils.calculate(repoObject.callbacksNumberOfLinesStart, repoObject.callbacksNumberOfLinesEnd);
+    repoObject.callbacksNumberOfLines = utils.calculateIntersections(repoObject.callbacksNumberOfLinesStart, repoObject.callbacksNumberOfLinesEnd);
     delete repoObject.callbacksNumberOfLinesStart;
     delete repoObject.callbacksNumberOfLinesEnd;
 }
