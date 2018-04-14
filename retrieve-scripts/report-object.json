@@ -17,7 +17,7 @@
   "tryCatchNumberOfCatchesWithUniqueConsole": 0,
   "tryCatchNumberOfCatchesWithUniqueStatement": 0,
   "tryCatchNumberOfCatchesThrowError": 0,
-  "tryCatchNumberOfCatchesRethrowError":0,
+  "tryCatchNumberOfCatchesRethrowError": 0,
   "tryCatchNumberOfThrows": 0,
   "tryCatchNumberOfThrowsLiteral": 0,
   "tryCatchNumberOfThrowsErrorObjects": 0,

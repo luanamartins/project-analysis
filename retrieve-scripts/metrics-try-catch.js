@@ -68,14 +68,15 @@ function handleCatchClause(reportObject, catchClause) {
             reportObject.tryCatchNumberOfCatchesWithUniqueStatement++;
 
             const uniqueStatement = nodeBody[0];
-            if(utils.isConsoleStatement(uniqueStatement)){
+            if (utils.isConsoleStatement(uniqueStatement)) {
                 reportObject.tryCatchNumberOfCatchesWithUniqueConsole++;
             }
 
-            if(utils.isThrowStatement(uniqueStatement)){
+            if (utils.isThrowStatement(uniqueStatement)) {
                 reportObject.tryCatchNumberOfCatchesThrowError++;
             }
         }
+
         const location = catchClause.loc;
         reportObject.tryCatchNumberOfCatchesLinesStart.push(location.start.line);
         reportObject.tryCatchNumberOfCatchesLinesEnd.push(location.end.line);
