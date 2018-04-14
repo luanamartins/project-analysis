@@ -1,8 +1,9 @@
 require('dotenv').load();
 const testCase = require('nodeunit').testCase;
-const metricsModule = require('../../retrieve-scripts/metrics');
-const suiteCasePath = process.env.PROJECT_PATH + '/test/data/promise/';
 const projectPath = process.env.RETRIEVE_SCRIPTS_ROOT_PATH;
+const suiteCasePath = process.env.PROJECT_PATH + '/test/data/promise/';
+const metricsModule = require(projectPath + '/metrics');
+
 
 module.exports = testCase({
 
