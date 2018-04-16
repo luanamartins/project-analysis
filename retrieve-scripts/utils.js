@@ -22,6 +22,13 @@ function containsAnyErrorArgument(errArgs, array) {
     return false;
 }
 
+function isStrictMode(node) {
+    if(node && node.type === 'ExpressionStatement' &&
+        node.directive && node.directive === 'use strict') {
+        return true;
+    }
+}
+
 function getIdentifiersNames(args) {
     if (args) {
         if (Array.isArray(args)) {
@@ -268,5 +275,6 @@ module.exports = {
     containsAnyErrorArgument,
     getIdentifiersNames,
     hasAnErrorArgument,
-    getStatementsByType
+    getStatementsByType,
+    isStrictMode
 };

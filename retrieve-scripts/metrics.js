@@ -92,7 +92,15 @@ function extractMetricsForFilepath(repoObject, filepath) {
 
     calculateArrayLines(repoObject);
 
+    fixStrictMode(repoObject);
+
     return repoObject;
+}
+
+function fixStrictMode(repoObject) {
+    if(repoObject.numberOfStrictModeGlobal > 0) {
+        repoObject.numberOfStrictModeLocal -= 1;
+    }
 }
 
 function handleMetrics(files, projectPath) {
@@ -114,12 +122,21 @@ function handleMetrics(files, projectPath) {
 }
 
 function getMetrics(ast, filepath, reportObject) {
-
     try {
-        utils.traverse(ast, function (node) {
-            if (node.type === 'ExpressionStatement' && node.directive && node.directive === 'use strict') {
+
+        if (ast.body) {
+            const firstStatement = ast.body[0];
+            if (utils.isStrictMode(firstStatement)) {
                 reportObject.numberOfStrictModeGlobal++;
             }
+        }
+
+        utils.traverse(ast, function (node) {
+
+            if (utils.isStrictMode(node)) {
+                reportObject.numberOfStrictModeLocal++;
+            }
+
             tryCatchModule.handleAnalysis(node, reportObject);
             promiseModule.handleAnalysis(node, reportObject);
             asyncAwaitModule.handleAnalysis(node, reportObject);
