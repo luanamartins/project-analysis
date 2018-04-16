@@ -16,21 +16,19 @@ function hasAnErrorArgument(array) {
 }
 
 function containsAnyErrorArgument(errArgs, array) {
-    if (errArgs && array && errArgs.length > 0 && array.length > 0) {
-        return array.some((item) => {
-            return errArgs.includes(item);
-        });
+    if (errArgs && errArgs.length > 0 && array && array.length > 0) {
+        return array.some((item) => errArgs.includes(item));
     }
     return false;
 }
 
 function getIdentifiersNames(args) {
     if (args) {
-        if (Array.isArray(args))
+        if (Array.isArray(args)) {
             return args.filter(arg => arg.type === 'Identifier').map((arg) => {
                 return arg.name
             });
-        else {
+        } else {
             return [args.name];
         }
     }
