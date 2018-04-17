@@ -17,6 +17,7 @@
   "tryCatchNumberOfCatchesLinesEnd": [],
   "tryCatchNumberOfCatchesWithUniqueConsole": 0,
   "tryCatchNumberOfCatchesWithUniqueStatement": 0,
+  "tryCatchNumberOfContinuesOnCatches": 0,
   "tryCatchNumberOfCatchesThrowError": 0,
   "tryCatchNumberOfCatchesRethrowError": 0,
   "tryCatchNumberOfThrows": 0,

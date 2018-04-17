@@ -77,6 +77,9 @@ function handleCatchClause(reportObject, catchClause) {
             }
         }
 
+        const continueStatements = utils.getNodeTypes(catchClause, 'ContinueStatement');
+        reportObject.tryCatchNumberOfContinuesOnCatches += continueStatements.length;
+
         const location = catchClause.loc;
         reportObject.tryCatchNumberOfCatchesLinesStart.push(location.start.line);
         reportObject.tryCatchNumberOfCatchesLinesEnd.push(location.end.line);
