@@ -13,11 +13,31 @@ function handleAnalysis(node, reportObject) {
 
         const errorArguments = params.filter(item => utils.isAnErrorArgument(item));
 
-        if (errorArguments.length > 0) { // it is an error handling function
-            reportObject.callbacksNumberOfCallbackErrorFunctions++;
+        if (errorArguments.length > 0) { // it has at least one error argument
 
             const numberOfLines = utils.getNumberOfLines(node);
             reportObject.callbacksNumberOfLines += numberOfLines;
+
+            if (errorArguments.length === 1 && params.length === 1) {
+                // callback has only one argument and it is an error argument
+                reportObject.callbacksNumberOfFunctionsWithUniqueErrorArg++;
+                reportObject.callbacksNumberOfFunctionsWithUniqueStatement++;
+
+                // callback has only one argument and an error argument and also is empty
+                if(isEmptyCallback(node, errorArguments, numberOfLines)) {
+                    reportObject.callbacksNumberOfEmptyFunctionsWithUniqueErrorArg++;
+                }
+
+                // Callback features:
+                //  (i) has only one error argument
+                //  (ii) has only one statement and it is a console.log
+                const statement = node.body.body[0];
+                if (utils.isConsoleStatement(statement)) {
+                    reportObject.callbacksNumberOfFunctionsWithUniqueConsole++;
+                }
+            }
+
+            reportObject.callbacksNumberOfCallbackErrorFunctions++;
 
             const location = node.loc;
             reportObject.callbacksNumberOfLinesStart.push(location.start.line);
@@ -63,25 +83,15 @@ function isEmptyCallback(node, errorArguments, numberOfLines) {
         return true;
     } else {
         const bodyFunction = node.body;
-        return !useAnyArguments(bodyFunction, errorArguments);
+        return !utils.useAnyArguments(bodyFunction, errorArguments);
     }
-}
-
-function useAnyArguments(body, args) {
-    let hasErrorArgs = false;
-    utils.traverse(body, function (bodyFunctionNode) {
-        if (!hasErrorArgs && typeof(bodyFunctionNode) === 'string' && args.includes(bodyFunctionNode)) {
-            hasErrorArgs = true;
-        }
-    });
-    return hasErrorArgs;
 }
 
 function getIfStatementsWithErrorArgs(body, errorVariables) {
     let statements = [];
     body.forEach(statement => {
         if (statement.type === 'IfStatement') {
-            const containsErrorArgOnTest = useAnyArguments(statement.test, errorVariables);
+            const containsErrorArgOnTest = utils.useAnyArguments(statement.test, errorVariables);
             if (containsErrorArgOnTest) {
                 statements.push(statement);
             }

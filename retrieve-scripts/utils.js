@@ -158,6 +158,16 @@ function getNodeTypes(functionDeclaration, type) {
     return nodeTypes;
 }
 
+function useAnyArguments(body, args) {
+    let hasErrorArgs = false;
+    traverse(body, function (bodyFunctionNode) {
+        if (!hasErrorArgs && typeof(bodyFunctionNode) === 'string' && args.includes(bodyFunctionNode)) {
+            hasErrorArgs = true;
+        }
+    });
+    return hasErrorArgs;
+}
+
 function getAllProperties(object) {
     let keys = [];
     for (const property in object) {
@@ -276,5 +286,6 @@ module.exports = {
     getIdentifiersNames,
     hasAnErrorArgument,
     getStatementsByType,
-    isStrictMode
+    isStrictMode,
+    useAnyArguments
 };

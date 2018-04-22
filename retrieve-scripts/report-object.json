@@ -95,6 +95,8 @@
   "callbacksNumberOfEmptyCallbacks": 0,
   "callbacksNumberOfFunctionsWithUniqueConsole": 0,
   "callbacksNumberOfFunctionsWithUniqueStatement": 0,
+  "callbacksNumberOfFunctionsWithUniqueErrorArg": 0,
+  "callbacksNumberOfEmptyFunctionsWithUniqueErrorArg": 0,
   "callbacksNumberOfLines": 0,
   "callbacksNumberOfLinesStart": [],
   "callbacksNumberOfLinesEnd": []
