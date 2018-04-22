@@ -18,7 +18,7 @@ module.exports = testCase({
         test.equal(metricsObject.tryCatchNumberOfTriesWithUniqueStatement, 0);
 
         test.equal(metricsObject.tryCatchNumberOfCatches, 1);
-        test.equal(metricsObject.tryCatchNumberOfEmptyCatches, 0);
+        test.equal(metricsObject.tryCatchNumberOfEmptyCatches, 1);
         test.equal(metricsObject.tryCatchNumberOfCatchesLines, 4);
         test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 0);
@@ -71,7 +71,7 @@ module.exports = testCase({
         test.equal(metricsObject.tryCatchNumberOfTriesWithUniqueStatement, 0);
 
         test.equal(metricsObject.tryCatchNumberOfCatches, 1);
-        test.equal(metricsObject.tryCatchNumberOfEmptyCatches, 0);
+        test.equal(metricsObject.tryCatchNumberOfEmptyCatches, 1);
         test.equal(metricsObject.tryCatchNumberOfCatchesLines, 4);
         test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 0);
@@ -227,7 +227,7 @@ module.exports = testCase({
         test.equal(metricsObject.tryCatchNumberOfTriesWithUniqueStatement, 0);
 
         test.equal(metricsObject.tryCatchNumberOfCatches, 2);
-        test.equal(metricsObject.tryCatchNumberOfEmptyCatches, 1);
+        test.equal(metricsObject.tryCatchNumberOfEmptyCatches, 2);
         test.equal(metricsObject.tryCatchNumberOfCatchesLines, 2);
         test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 1);
         test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 1);
@@ -280,7 +280,7 @@ module.exports = testCase({
         test.equal(metricsObject.tryCatchNumberOfTriesWithUniqueStatement, 0);
 
         test.equal(metricsObject.tryCatchNumberOfCatches, 1);
-        test.equal(metricsObject.tryCatchNumberOfEmptyCatches, 0);
+        test.equal(metricsObject.tryCatchNumberOfEmptyCatches, 1);
         test.equal(metricsObject.tryCatchNumberOfCatchesLines, 1);
         test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 1);

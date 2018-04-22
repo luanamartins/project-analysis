@@ -64,16 +64,24 @@ function handleCatchClause(reportObject, catchClause) {
     if (nodeBody) {
         if (nodeBody.length === 0) {
             reportObject.tryCatchNumberOfEmptyCatches++;
-        } else if (nodeBody.length === 1) {
-            reportObject.tryCatchNumberOfCatchesWithUniqueStatement++;
+        } else {
+            if (nodeBody.length === 1) {
+                reportObject.tryCatchNumberOfCatchesWithUniqueStatement++;
 
-            const uniqueStatement = nodeBody[0];
-            if (utils.isConsoleStatement(uniqueStatement)) {
-                reportObject.tryCatchNumberOfCatchesWithUniqueConsole++;
+                const uniqueStatement = nodeBody[0];
+                if (utils.isConsoleStatement(uniqueStatement)) {
+                    reportObject.tryCatchNumberOfCatchesWithUniqueConsole++;
+                }
+
+                if (utils.isThrowStatement(uniqueStatement)) {
+                    reportObject.tryCatchNumberOfCatchesThrowError++;
+                }
             }
 
-            if (utils.isThrowStatement(uniqueStatement)) {
-                reportObject.tryCatchNumberOfCatchesThrowError++;
+            // When any error argument is ever used, then this block is basically empty
+            const catchClauseError = utils.getIdentifiersNames(catchClause.param);
+            if (!utils.useAnyArguments(nodeBody, catchClauseError)) {
+                reportObject.tryCatchNumberOfEmptyCatches++;
             }
         }
 
