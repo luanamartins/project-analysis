@@ -25,3 +25,15 @@ function t2() {
 // t2();
 throw 44;
 
+
+// Result when window.onerror is on the top of file:
+// Mozilla:
+// myerror  44
+// Chrome: 
+// myerror  null
+
+// Result when window.onerror is on the bottom of file:
+// Mozilla:
+// uncaught exception: 44
+// Chrome: 
+// Uncaught 44
