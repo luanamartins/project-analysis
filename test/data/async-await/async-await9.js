@@ -14,7 +14,7 @@ async function test() {
         } catch (err) {
             await handleError(err);
             if(i > 2) {
-                throw 'error';
+                throw err;
             }
         } finally {
             console.log("finally here");
