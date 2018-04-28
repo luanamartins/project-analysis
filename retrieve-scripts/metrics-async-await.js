@@ -56,7 +56,6 @@ function handleCatchClauses(errorArgs, catchClause, reportObject) {
     }
 
     // Catch clause has await expressions which receives an error argument
-
     const awaitExpressions = utils.getStatementsByType(catchClauseBody, 'AwaitExpression');
 
     awaitExpressions.forEach(function (awaitExpression) {
@@ -69,6 +68,11 @@ function handleCatchClauses(errorArgs, catchClause, reportObject) {
             }
         }
     });
+
+
+    // Number of throws on catches
+    const statements = utils.getStatementsByType(catchClauseBody, 'ThrowStatement');
+    reportObject.asyncAwaitNumberOfThrowErrorsOnCatches += statements.length;
 
 }
 

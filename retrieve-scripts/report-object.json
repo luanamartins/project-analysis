@@ -64,6 +64,7 @@
   "asyncAwaitNumberOfCatchesThrowError":0,
   "asyncAwaitNumberOfAwaitErrorArgsOnCatches":0,
   "asyncAwaitNumberOfCatchesRethrowError":0,
+  "asyncAwaitNumberOfThrowErrorsOnCatches": 0,
   "asyncAwaitNumberOfFinallies": 0,
   "asyncAwaitNumberOfFinalliesLines": 0,
   "asyncAwaitNumberOfFinalliesLinesStart": [],
