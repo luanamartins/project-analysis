@@ -15,16 +15,32 @@ function handleCatches(reportObject, node) {
 
         if (firstArgument.type === 'FunctionDeclaration' ||
             firstArgument.type === 'FunctionExpression') {
+
+            const functionBody = firstArgument.body;
+            const args = utils.getIdentifiersNames(firstArgument.params);
+
             if (lines === 0) {
                 reportObject.promiseNumberOfEmptyFunctionsOnPromiseCatches++;
             } else if (lines === 1) {
                 reportObject.promiseNumberOfCatchesWithUniqueStatement++;
 
-                const statement = firstArgument.body.body[0];
+                const statement = functionBody.body[0];
                 if (utils.isConsoleStatement(statement)) {
                     reportObject.promiseNumberOfCatchesWithUniqueConsole++;
                 }
             }
+
+            // Number of throws on catches
+            const throwStatements = utils.getStatementsByType(functionBody, 'ThrowStatement');
+            reportObject.promiseNumberOfThrowErrorsOnCatches += throwStatements.length;
+
+            // Number of rethrow an error argument
+            throwStatements.forEach(throwStatement => {
+                const throwArgument = utils.getIdentifiersNames(throwStatement.argument);
+                if(utils.containsAnyErrorArgument(args, throwArgument)) {
+                    reportObject.promiseNumberOfRethrowsOnCatches++;
+                }
+            });
         }
     }
 

@@ -45,6 +45,8 @@
   "promiseNumberOfEmptyFunctionsOnPromiseCatches": 0,
   "promiseNumberOfCatchesWithUniqueConsole": 0,
   "promiseNumberOfCatchesWithUniqueStatement": 0,
+  "promiseNumberOfThrowErrorsOnCatches": 0,
+  "promiseNumberOfRethrowsOnCatches": 0,
   "promiseNumberOfPromiseRaces": 0,
   "promiseNumberOfPromiseAll": 0,
 
