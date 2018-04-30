@@ -17,24 +17,44 @@ function handleAnalysis(node, reportObject) {
             if (numberOfArguments > 1 && eventListeningMethods.includes(methodName)) {
 
                 const errorHandlingFunction = node.arguments[1];
-                if (methodName === 'on' && isFirstArgErrorHandling) {
-                    reportObject.eventsNumberOfEventMethodsOn++;
-                    if (errorHandlingFunction) {
-                        reportObject.eventsNumberOfEventOnLines += utils.getNumberOfLines(errorHandlingFunction);
-                        const location = errorHandlingFunction.loc;
-                        reportObject.eventsNumberOfEventOnLinesStart.push(location.start.line);
-                        reportObject.eventsNumberOfEventOnLinesEnd.push(location.end.line);
+
+                if (isFirstArgErrorHandling) {
+                    if (methodName === 'on') {
+                        reportObject.eventsNumberOfEventMethodsOn++;
+                        if (errorHandlingFunction) {
+                            reportObject.eventsNumberOfEventOnLines += utils.getNumberOfLines(errorHandlingFunction);
+                            const location = errorHandlingFunction.loc;
+                            reportObject.eventsNumberOfEventOnLinesStart.push(location.start.line);
+                            reportObject.eventsNumberOfEventOnLinesEnd.push(location.end.line);
+                        }
+
+                    } else if (methodName === 'once') {
+
+                        reportObject.eventsNumberOfEventMethodsOnce++;
+                        if (errorHandlingFunction) {
+                            reportObject.eventsNumberOfEventOnceLines += utils.getNumberOfLines(errorHandlingFunction);
+                            const location = errorHandlingFunction.loc;
+                            reportObject.eventsNumberOfEventOnceLinesStart.push(location.start.line);
+                            reportObject.eventsNumberOfEventOnceLinesEnd.push(location.end.line);
+                        }
                     }
 
-                } else if (methodName === 'once' && isFirstArgErrorHandling) {
+                    const handlerBody = errorHandlingFunction.body;
+                    const handlerArgs = utils.getIdentifiersNames(errorHandlingFunction.params);
 
-                    reportObject.eventsNumberOfEventMethodsOnce++;
-                    if (errorHandlingFunction) {
-                        reportObject.eventsNumberOfEventOnceLines += utils.getNumberOfLines(errorHandlingFunction);
-                        const location = errorHandlingFunction.loc;
-                        reportObject.eventsNumberOfEventOnceLinesStart.push(location.start.line);
-                        reportObject.eventsNumberOfEventOnceLinesEnd.push(location.end.line);
-                    }
+                    // Throw an error
+                    const throwStatements = utils.getStatementsByType(handlerBody, 'ThrowStatement');
+                    reportObject.eventsNumberOfThrowErrorsOnCatches += throwStatements.length;
+
+
+                    // Number of rethrow an error argument
+                    throwStatements.forEach(throwStatement => {
+                        const argument = utils.getIdentifiersNames(throwStatement.argument);
+                        if(utils.containsAnyErrorArgument(handlerArgs, argument)) {
+                            reportObject.eventsNumberOfRethrowsOnCatches++;
+                        }
+                    });
+
                 }
             }
 

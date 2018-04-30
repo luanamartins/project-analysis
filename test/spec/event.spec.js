@@ -19,6 +19,8 @@ module.exports = testCase({
         test.equal(metricsObject.eventsNumberOfEventOnLines, 0);
         test.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
         test.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
+        test.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
+        test.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
         test.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
         test.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 0);
         test.equal(metricsObject.eventsTotalOfStringEvents, 1);
@@ -39,6 +41,8 @@ module.exports = testCase({
         test.equal(metricsObject.eventsNumberOfEventOnLines, 2);
         test.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
         test.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
+        test.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
+        test.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
         test.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
         test.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 0);
         test.equal(metricsObject.eventsTotalOfStringEvents, 3);
@@ -59,6 +63,8 @@ module.exports = testCase({
         test.equal(metricsObject.eventsNumberOfEventOnLines, 4);
         test.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
         test.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
+        test.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
+        test.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
         test.equal(metricsObject.eventsNumberOfEventUncaughtException, 1);
         test.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 0);
         test.equal(metricsObject.eventsTotalOfStringEvents, 4);
@@ -79,6 +85,8 @@ module.exports = testCase({
         test.equal(metricsObject.eventsNumberOfEventOnLines, 4);
         test.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
         test.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
+        test.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
+        test.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
         test.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
         test.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 0);
         test.equal(metricsObject.eventsTotalOfStringEvents, 3);
@@ -99,6 +107,8 @@ module.exports = testCase({
         test.equal(metricsObject.eventsNumberOfEventOnLines, 9);
         test.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
         test.equal(metricsObject.eventsNumberOfEventEmitLines, 4);
+        test.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
+        test.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
         test.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
         test.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 0);
         test.equal(metricsObject.eventsTotalOfStringEvents, 3);
@@ -120,6 +130,8 @@ module.exports = testCase({
         test.equal(metricsObject.eventsNumberOfEventOnLines, 6);
         test.equal(metricsObject.eventsNumberOfEventOnceLines, 7);
         test.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
+        test.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
+        test.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
         test.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
         test.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 0);
         test.equal(metricsObject.eventsTotalOfStringEvents, 3);
@@ -140,10 +152,56 @@ module.exports = testCase({
         test.equal(metricsObject.eventsNumberOfEventOnLines, 9);
         test.equal(metricsObject.eventsNumberOfEventOnceLines, 7);
         test.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
+        test.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
+        test.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
         test.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
         test.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 1);
         test.equal(metricsObject.eventsTotalOfStringEvents, 4);
         test.equal(metricsObject.eventsTotalOfEventsExceptStringType, 2);
+
+        test.done();
+    },
+
+    "TC09": function (test) {
+        const filename = suiteCasePath + 'event9.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
+
+        const metricsObject = metrics[0];
+
+        test.equal(metricsObject.eventsNumberOfEventMethodsOn, 1);
+        test.equal(metricsObject.eventsNumberOfEventMethodsOnce, 0);
+        test.equal(metricsObject.eventsNumberOfEventMethodsEmit, 0);
+        test.equal(metricsObject.eventsNumberOfEventOnLines, 1);
+        test.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
+        test.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
+        test.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 1);
+        test.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
+        test.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
+        test.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 0);
+        test.equal(metricsObject.eventsTotalOfStringEvents, 1);
+        test.equal(metricsObject.eventsTotalOfEventsExceptStringType, 0);
+
+        test.done();
+    },
+
+    "TC10": function (test) {
+        const filename = suiteCasePath + 'event10.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
+
+        const metricsObject = metrics[0];
+
+        test.equal(metricsObject.eventsNumberOfEventMethodsOn, 1);
+        test.equal(metricsObject.eventsNumberOfEventMethodsOnce, 0);
+        test.equal(metricsObject.eventsNumberOfEventMethodsEmit, 0);
+        test.equal(metricsObject.eventsNumberOfEventOnLines, 1);
+        test.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
+        test.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
+        test.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 1);
+        test.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 1);
+        test.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
+        test.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 0);
+        test.equal(metricsObject.eventsTotalOfStringEvents, 1);
+        test.equal(metricsObject.eventsTotalOfEventsExceptStringType, 0);
 
         test.done();
     }

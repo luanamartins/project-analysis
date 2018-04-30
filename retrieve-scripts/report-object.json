@@ -87,6 +87,8 @@
   "eventsNumberOfEventEmitLines": 0,
   "eventsNumberOfEventEmitLinesStart": [],
   "eventsNumberOfEventEmitLinesEnd": [],
+  "eventsNumberOfThrowErrorsOnCatches": 0,
+  "eventsNumberOfRethrowsOnCatches": 0,
   "eventsNumberOfEventUncaughtException": 0,
   "eventsNumberOfEventUnhandledRejection": 0,
   "eventsTotalOfStringEvents": 0,
