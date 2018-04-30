@@ -72,10 +72,6 @@ function handleCatchClause(reportObject, catchClause) {
                 if (utils.isConsoleStatement(uniqueStatement)) {
                     reportObject.tryCatchNumberOfCatchesWithUniqueConsole++;
                 }
-
-                if (utils.isThrowStatement(uniqueStatement)) {
-                    reportObject.tryCatchNumberOfCatchesThrowError++;
-                }
             }
 
             // When any error argument is ever used, then this block is basically empty
@@ -83,6 +79,18 @@ function handleCatchClause(reportObject, catchClause) {
             if (!utils.useAnyArguments(nodeBody, catchClauseError)) {
                 reportObject.tryCatchNumberOfEmptyCatches++;
             }
+
+            // Number of throws on catches
+            const throwStatements = utils.getStatementsByType(nodeBody, 'ThrowStatement');
+            reportObject.tryCatchNumberOfThrowErrorsOnCatches += throwStatements.length;
+
+            // Number of rethrow an error argument
+            throwStatements.forEach(throwStatement => {
+                const argument = utils.getIdentifiersNames(throwStatement.argument);
+                if(utils.containsAnyErrorArgument(catchClauseError, argument)) {
+                    reportObject.tryCatchNumberOfRethrowsOnCatches++;
+                }
+            });
         }
 
         const continueStatements = utils.getNodeTypes(catchClause, 'ContinueStatement');
