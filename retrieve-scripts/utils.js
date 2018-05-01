@@ -23,7 +23,7 @@ function containsAnyErrorArgument(errArgs, array) {
 }
 
 function isStrictMode(node) {
-    if(node && node.type === 'ExpressionStatement' &&
+    if (node && node.type === 'ExpressionStatement' &&
         node.directive && node.directive === 'use strict') {
         return true;
     }
@@ -208,14 +208,13 @@ function calculateIntersections(startList, endList) {
     let i = 0;
     let lines = 0;
     let startValues = [startList[i]];
-
     let endValues = [endList[i]];
+
     for (let i = 1; i < startSize; i++) {
         if (notIntersectAny(startValues, endValues, startList[i], endList[i])) {
             startValues.push(startList[i]);
             endValues.push(endList[i]);
         }
-
     }
 
     startValues.forEach(function (item, index) {

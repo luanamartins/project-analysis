@@ -106,6 +106,20 @@ function handleCatchClause(reportObject, catchClause) {
                     }
                 }
             });
+
+            const returnStatements = utils.getStatementsByType(nodeBody, 'ReturnStatement');
+            reportObject.tryCatchNumberOfReturnsOnCatches += returnStatements.length;
+
+            returnStatements.forEach((statement) => {
+                const returnArgument = statement.argument;
+                if (utils.useAnyArguments(returnArgument, catchClauseArguments)) {
+                    reportObject.tryCatchNumberOfReturnsAnErrorOnCatches++;
+                }
+            });
+
+            const breakStatements = utils.getStatementsByType(nodeBody, 'BreakStatement');
+            reportObject.tryCatchNumberOfBreaksOnCatches += breakStatements.length;
+
         }
 
         const continueStatements = utils.getNodeTypes(catchClause, 'ContinueStatement');
