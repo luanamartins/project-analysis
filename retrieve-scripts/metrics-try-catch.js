@@ -41,12 +41,12 @@ function handleFinallyClause(reportObject, finallyNode) {
 function handleTryStatement(reportObject, tryNode) {
     reportObject.tryCatchNumberOfTries++;
     const tryNodeBlock = tryNode.block;
+    const numberOfLines = utils.getNumberOfLines(tryNodeBlock);
+    reportObject.tryCatchNumberOfTriesLines += numberOfLines;
+
     if (tryNodeBlock.body.length === 0) {
         reportObject.tryCatchNumberOfEmptyTries++;
     } else {
-        const numberOfLines = utils.getNumberOfLines(tryNodeBlock);
-        reportObject.tryCatchNumberOfTriesLines += numberOfLines;
-
         if (numberOfLines === 1) {
             reportObject.tryCatchNumberOfTriesWithUniqueStatement++;
         }
@@ -60,78 +60,76 @@ function handleTryStatement(reportObject, tryNode) {
 function handleCatchClause(reportObject, catchClause) {
     reportObject.tryCatchNumberOfCatches++;
     const nodeBody = catchClause.body.body;
-    reportObject.tryCatchNumberOfCatchesLines += utils.getNumberOfLines(catchClause);
+    const lines = utils.getNumberOfLines(catchClause);
+    reportObject.tryCatchNumberOfCatchesLines += lines;
+
     if (nodeBody) {
-        if (nodeBody.length === 0) {
+        const catchClauseArguments = utils.getIdentifiersNames(catchClause.param);
+
+        if (utils.isEmptyHandler(nodeBody, catchClauseArguments, lines)) {
             reportObject.tryCatchNumberOfEmptyCatches++;
-        } else {
-            if (nodeBody.length === 1) {
-                reportObject.tryCatchNumberOfCatchesWithUniqueStatement++;
-
-                const uniqueStatement = nodeBody[0];
-                if (utils.isConsoleStatement(uniqueStatement)) {
-                    reportObject.tryCatchNumberOfCatchesWithUniqueConsole++;
-                }
-            }
-
-            // When any error argument is ever used, then this block is basically empty
-            const catchClauseArguments = utils.getIdentifiersNames(catchClause.param);
-            if (!utils.useAnyArguments(nodeBody, catchClauseArguments)) {
-                reportObject.tryCatchNumberOfEmptyCatches++;
-            }
-
-            // Number of throws on catches
-            const throwStatements = utils.getStatementsByType(nodeBody, 'ThrowStatement');
-            reportObject.tryCatchNumberOfThrowErrorsOnCatches += throwStatements.length;
-
-            // Number of rethrows an error argument
-            throwStatements.forEach(throwStatement => {
-                const argument = utils.getIdentifiersNames(throwStatement.argument);
-
-                // Checks if the throw uses an error argument
-                if(utils.containsAnyErrorArgument(catchClauseArguments, argument)) {
-                    reportObject.tryCatchNumberOfRethrowsOnCatches++;
-                }
-
-                // Checks if the throw wrap an error on Error object
-                const throwStatementArg = throwStatement.argument;
-                if (throwStatementArg && throwStatementArg.type === 'NewExpression') {
-                    if (throwStatementArg.callee && throwStatementArg.callee.name === 'Error') {
-                        const arguments = throwStatementArg.arguments;
-                        arguments.forEach((arg) => {
-                            if (utils.useAnyArguments(arg, catchClauseArguments)) {
-                                reportObject.tryCatchNumberOfRethrowsOnCatches++;
-                            }
-                        });
-                    }
-                }
-            });
-
-            // Counts number of returns
-            const returnStatements = utils.getStatementsByType(nodeBody, 'ReturnStatement');
-            reportObject.tryCatchNumberOfReturnsOnCatches += returnStatements.length;
-
-            // Counts number of returns that uses an error argument
-            returnStatements.forEach((statement) => {
-                const returnArgument = statement.argument;
-                if (utils.useAnyArguments(returnArgument, catchClauseArguments)) {
-                    reportObject.tryCatchNumberOfReturnsAnErrorOnCatches++;
-                }
-            });
-
-            // Counts number of breaks
-            const breakStatements = utils.getStatementsByType(nodeBody, 'BreakStatement');
-            reportObject.tryCatchNumberOfBreaksOnCatches += breakStatements.length;
-
         }
 
-        const continueStatements = utils.getNodeTypes(catchClause, 'ContinueStatement');
-        reportObject.tryCatchNumberOfContinuesOnCatches += continueStatements.length;
+        if (nodeBody.length === 1) {
+            reportObject.tryCatchNumberOfCatchesWithUniqueStatement++;
 
-        const location = catchClause.loc;
-        reportObject.tryCatchNumberOfCatchesLinesStart.push(location.start.line);
-        reportObject.tryCatchNumberOfCatchesLinesEnd.push(location.end.line);
+            const uniqueStatement = nodeBody[0];
+            if (utils.isConsoleStatement(uniqueStatement)) {
+                reportObject.tryCatchNumberOfCatchesWithUniqueConsole++;
+            }
+        }
+
+        // Number of throws on catches
+        const throwStatements = utils.getStatementsByType(nodeBody, 'ThrowStatement');
+        reportObject.tryCatchNumberOfThrowErrorsOnCatches += throwStatements.length;
+
+        // Number of rethrows an error argument
+        throwStatements.forEach(throwStatement => {
+            const argument = utils.getIdentifiersNames(throwStatement.argument);
+
+            // Checks if the throw uses an error argument
+            if (utils.containsAnyErrorArgument(catchClauseArguments, argument)) {
+                reportObject.tryCatchNumberOfRethrowsOnCatches++;
+            }
+
+            // Checks if the throw wrap an error on Error object
+            const throwStatementArg = throwStatement.argument;
+            if (throwStatementArg && throwStatementArg.type === 'NewExpression') {
+                if (throwStatementArg.callee && throwStatementArg.callee.name === 'Error') {
+                    const arguments = throwStatementArg.arguments;
+                    arguments.forEach((arg) => {
+                        if (utils.useAnyArguments(arg, catchClauseArguments)) {
+                            reportObject.tryCatchNumberOfRethrowsOnCatches++;
+                        }
+                    });
+                }
+            }
+        });
+
+        // Counts number of returns
+        const returnStatements = utils.getStatementsByType(nodeBody, 'ReturnStatement');
+        reportObject.tryCatchNumberOfReturnsOnCatches += returnStatements.length;
+
+        // Counts number of returns that uses an error argument
+        returnStatements.forEach((statement) => {
+            const returnArgument = statement.argument;
+            if (utils.useAnyArguments(returnArgument, catchClauseArguments)) {
+                reportObject.tryCatchNumberOfReturnsAnErrorOnCatches++;
+            }
+        });
+
+        // Counts number of breaks
+        const breakStatements = utils.getStatementsByType(nodeBody, 'BreakStatement');
+        reportObject.tryCatchNumberOfBreaksOnCatches += breakStatements.length;
+
     }
+
+    const continueStatements = utils.getNodeTypes(catchClause, 'ContinueStatement');
+    reportObject.tryCatchNumberOfContinuesOnCatches += continueStatements.length;
+
+    const location = catchClause.loc;
+    reportObject.tryCatchNumberOfCatchesLinesStart.push(location.start.line);
+    reportObject.tryCatchNumberOfCatchesLinesEnd.push(location.end.line);
 
 }
 

@@ -31,20 +31,21 @@ function handleAnalysis(node, reportObject) {
 function handleCatchClauses(errorArgs, catchClause, reportObject) {
     const catchClauseErrorArgs = utils.getIdentifiersNames(catchClause.param);
     const catchClauseBody = catchClause.body;
-    const numberStatementsOfBody = utils.getNumberOfLines(catchClauseBody);
 
-    reportObject.asyncAwaitNumberOfCatchesLines += numberStatementsOfBody;
+    const numberOfLines = utils.getNumberOfLines(catchClauseBody);
+    reportObject.asyncAwaitNumberOfCatchesLines += numberOfLines;
+
     const location = catchClause.loc;
     reportObject.asyncAwaitNumberOfCatchesLinesStart.push(location.start.line);
     reportObject.asyncAwaitNumberOfCatchesLinesEnd.push(location.end.line);
 
     // Left the catch block empty
-    if (numberStatementsOfBody === 0) {
+    if (utils.isEmptyHandler(catchClauseBody, catchClauseErrorArgs, numberOfLines)) {
         reportObject.asyncAwaitNumberOfEmptyCatches++;
     }
 
     // Catch clause has one statement only
-    if (numberStatementsOfBody === 1) {
+    if (numberOfLines === 1) {
         reportObject.asyncAwaitNumberOfCatchesWithUniqueStatement++;
         // Handles errors on console only
         const uniqueStatement = catchClauseBody.body[0];

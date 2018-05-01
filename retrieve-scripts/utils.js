@@ -160,11 +160,13 @@ function getNodeTypes(functionDeclaration, type) {
 
 function useAnyArguments(body, args) {
     let hasErrorArgs = false;
-    traverse(body, function (bodyFunctionNode) {
-        if (!hasErrorArgs && typeof(bodyFunctionNode) === 'string' && args.includes(bodyFunctionNode)) {
-            hasErrorArgs = true;
-        }
-    });
+    if(Array.isArray(args) && args.length > 0) {
+        traverse(body, function (bodyFunctionNode) {
+            if (!hasErrorArgs && typeof(bodyFunctionNode) === 'string' && args.includes(bodyFunctionNode)) {
+                hasErrorArgs = true;
+            }
+        });
+    }
     return hasErrorArgs;
 }
 
@@ -221,6 +223,10 @@ function calculateIntersections(startList, endList) {
         lines += endValues[index] - startValues[index];
     });
     return lines;
+}
+
+function isEmptyHandler(body, args, numberOfLines) {
+    return (numberOfLines === 0) ? true : !useAnyArguments(body, args);
 }
 
 function notIntersectAny(startList, endList, start2, end2) {
@@ -286,5 +292,6 @@ module.exports = {
     hasAnErrorArgument,
     getStatementsByType,
     isStrictMode,
-    useAnyArguments
+    useAnyArguments,
+    isEmptyHandler
 };

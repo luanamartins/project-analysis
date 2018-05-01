@@ -26,7 +26,7 @@ function handleAnalysis(node, reportObject) {
                 reportObject.callbacksNumberOfFunctionsWithUniqueStatement++;
 
                 // callback has only one argument and an error argument and also is empty
-                if(isEmptyCallback(node, errorArguments, numberOfLines)) {
+                if(utils.isEmptyHandler(node.body, errorArguments, numberOfLines)) {
                     reportObject.callbacksNumberOfEmptyFunctionsWithUniqueErrorArg++;
                 }
 
@@ -53,7 +53,7 @@ function handleAnalysis(node, reportObject) {
             // Empty callback functions:
             // (i) its body might be empty
             // (ii) It is not using any error argument in any part of the body
-            if (isEmptyCallback(node, errorArguments, numberOfLines)) {
+            if (utils.isEmptyHandler(node.body, errorArguments, numberOfLines)) {
                 reportObject.callbacksNumberOfEmptyCallbacks++;
             }
 
@@ -93,15 +93,6 @@ function handleAnalysis(node, reportObject) {
                 }
             });
         }
-    }
-}
-
-function isEmptyCallback(node, errorArguments, numberOfLines) {
-    if (numberOfLines === 0) {
-        return true;
-    } else {
-        const bodyFunction = node.body;
-        return !utils.useAnyArguments(bodyFunction, errorArguments);
     }
 }
 

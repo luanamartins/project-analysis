@@ -19,9 +19,11 @@ function handleCatches(reportObject, node) {
             const functionBody = firstArgument.body;
             const functionParams = utils.getIdentifiersNames(firstArgument.params);
 
-            if (lines === 0) {
+            if (utils.isEmptyHandler(functionBody, functionParams, lines)) {
                 reportObject.promiseNumberOfEmptyFunctionsOnPromiseCatches++;
-            } else if (lines === 1) {
+            }
+
+            if (lines === 1) {
                 reportObject.promiseNumberOfCatchesWithUniqueStatement++;
 
                 const statement = functionBody.body[0];
