@@ -23,10 +23,15 @@ function handleAnalysis(node, reportObject) {
             if (errorArguments.length === 1 && params.length === 1) {
                 // callback has only one argument and it is an error argument
                 reportObject.callbacksNumberOfFunctionsWithUniqueErrorArg++;
-                reportObject.callbacksNumberOfFunctionsWithUniqueStatement++;
+                reportObject.callbacksNumberOfLinesOfFunctionsWithUniqueErrorArg += numberOfLines;
+
+                if (numberOfLines === 1) {
+                    reportObject.callbacksNumberOfFunctionsWithUniqueStatement++;
+                    reportObject.callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueStatement++;
+                }
 
                 // callback has only one argument and an error argument and also is empty
-                if(utils.isEmptyHandler(node.body, errorArguments, numberOfLines)) {
+                if (utils.isEmptyHandler(node.body, errorArguments, numberOfLines)) {
                     reportObject.callbacksNumberOfEmptyFunctionsWithUniqueErrorArg++;
                 }
 
@@ -36,7 +41,12 @@ function handleAnalysis(node, reportObject) {
                 const statement = functionBody[0];
                 if (utils.isConsoleStatement(statement)) {
                     reportObject.callbacksNumberOfFunctionsWithUniqueConsole++;
+                    reportObject.callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueConsole++;
                 }
+
+                // callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueConsole
+                // callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueStatement
+                // callbacksNumberOfLinesOfFunctionsWithUniqueErrorArg
             }
 
             reportObject.callbacksNumberOfCallbackErrorFunctions++;

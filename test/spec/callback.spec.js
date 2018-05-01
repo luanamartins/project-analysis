@@ -15,10 +15,15 @@ module.exports = testCase({
         test.equal(metricsObject.callbacksNumberOfCallbackErrorFunctions, 1);
         test.equal(metricsObject.callbacksNumberOfFirstErrorArgFunctions, 1);
         test.equal(metricsObject.callbacksNumberOfEmptyCallbacks, 0);
+
         test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueStatement, 1);
         test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueConsole, 1);
         test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueErrorArg, 0);
+
         test.equal(metricsObject.callbacksNumberOfEmptyFunctionsWithUniqueErrorArg, 0);
+        test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueConsole, 0);
+        test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueStatement, 0);
+        test.equal(metricsObject.callbacksNumberOfLinesOfFunctionsWithUniqueErrorArg, 0);
 
         test.equal(metricsObject.callbacksNumberOfReturnsOnCatches, 0);
         test.equal(metricsObject.callbacksNumberOfReturnsAnErrorOnCatches, 0);
@@ -38,10 +43,15 @@ module.exports = testCase({
         test.equal(metricsObject.callbacksNumberOfCallbackErrorFunctions, 1);
         test.equal(metricsObject.callbacksNumberOfFirstErrorArgFunctions, 1);
         test.equal(metricsObject.callbacksNumberOfEmptyCallbacks, 1);
+
         test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueStatement, 0);
         test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueConsole, 0);
         test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueErrorArg, 0);
+
         test.equal(metricsObject.callbacksNumberOfEmptyFunctionsWithUniqueErrorArg, 0);
+        test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueConsole, 0);
+        test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueStatement, 0);
+        test.equal(metricsObject.callbacksNumberOfLinesOfFunctionsWithUniqueErrorArg, 0);
 
         test.equal(metricsObject.callbacksNumberOfReturnsOnCatches, 0);
         test.equal(metricsObject.callbacksNumberOfReturnsAnErrorOnCatches, 0);
@@ -61,10 +71,15 @@ module.exports = testCase({
         test.equal(metricsObject.callbacksNumberOfCallbackErrorFunctions, 1);
         test.equal(metricsObject.callbacksNumberOfFirstErrorArgFunctions, 1);
         test.equal(metricsObject.callbacksNumberOfEmptyCallbacks, 0);
+
         test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueStatement, 1);
         test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueConsole, 1);
         test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueErrorArg, 1);
+
         test.equal(metricsObject.callbacksNumberOfEmptyFunctionsWithUniqueErrorArg, 0);
+        test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueConsole, 1);
+        test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueStatement, 1);
+        test.equal(metricsObject.callbacksNumberOfLinesOfFunctionsWithUniqueErrorArg, 1);
 
         test.equal(metricsObject.callbacksNumberOfReturnsOnCatches, 0);
         test.equal(metricsObject.callbacksNumberOfReturnsAnErrorOnCatches, 0);
@@ -84,10 +99,15 @@ module.exports = testCase({
         test.equal(metricsObject.callbacksNumberOfCallbackErrorFunctions, 3);
         test.equal(metricsObject.callbacksNumberOfFirstErrorArgFunctions, 3);
         test.equal(metricsObject.callbacksNumberOfEmptyCallbacks, 0);
+
         test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueStatement, 3);
         test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueConsole, 3);
         test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueErrorArg, 0);
+
         test.equal(metricsObject.callbacksNumberOfEmptyFunctionsWithUniqueErrorArg, 0);
+        test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueConsole, 0);
+        test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueStatement, 0);
+        test.equal(metricsObject.callbacksNumberOfLinesOfFunctionsWithUniqueErrorArg, 0);
 
         test.equal(metricsObject.callbacksNumberOfReturnsOnCatches, 0);
         test.equal(metricsObject.callbacksNumberOfReturnsAnErrorOnCatches, 0);
@@ -107,10 +127,15 @@ module.exports = testCase({
         test.equal(metricsObject.callbacksNumberOfCallbackErrorFunctions, 1);
         test.equal(metricsObject.callbacksNumberOfFirstErrorArgFunctions, 1);
         test.equal(metricsObject.callbacksNumberOfEmptyCallbacks, 0);
+
         test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueStatement, 1);
         test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueConsole, 1);
         test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueErrorArg, 0);
+
         test.equal(metricsObject.callbacksNumberOfEmptyFunctionsWithUniqueErrorArg, 0);
+        test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueConsole, 0);
+        test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueStatement, 0);
+        test.equal(metricsObject.callbacksNumberOfLinesOfFunctionsWithUniqueErrorArg, 0);
 
         test.equal(metricsObject.callbacksNumberOfReturnsOnCatches, 0);
         test.equal(metricsObject.callbacksNumberOfReturnsAnErrorOnCatches, 0);
@@ -130,10 +155,15 @@ module.exports = testCase({
         test.equal(metricsObject.callbacksNumberOfCallbackErrorFunctions, 1);
         test.equal(metricsObject.callbacksNumberOfFirstErrorArgFunctions, 1);
         test.equal(metricsObject.callbacksNumberOfEmptyCallbacks, 1);
+
         test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueStatement, 1);
         test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueConsole, 1);
         test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueErrorArg, 1);
+
         test.equal(metricsObject.callbacksNumberOfEmptyFunctionsWithUniqueErrorArg, 1);
+        test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueConsole, 1);
+        test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueStatement, 1);
+        test.equal(metricsObject.callbacksNumberOfLinesOfFunctionsWithUniqueErrorArg, 1);
 
         test.equal(metricsObject.callbacksNumberOfReturnsOnCatches, 0);
         test.equal(metricsObject.callbacksNumberOfReturnsAnErrorOnCatches, 0);
@@ -156,7 +186,11 @@ module.exports = testCase({
         test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueStatement, 1);
         test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueConsole, 0);
         test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueErrorArg, 0);
+
         test.equal(metricsObject.callbacksNumberOfEmptyFunctionsWithUniqueErrorArg, 0);
+        test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueConsole, 0);
+        test.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueStatement, 0);
+        test.equal(metricsObject.callbacksNumberOfLinesOfFunctionsWithUniqueErrorArg, 0);
 
         test.equal(metricsObject.callbacksNumberOfReturnsOnCatches, 1);
         test.equal(metricsObject.callbacksNumberOfReturnsAnErrorOnCatches, 1);
