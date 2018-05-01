@@ -25,8 +25,13 @@ module.exports = testCase({
         test.equal(metricsObject.asyncAwaitNumberOfAwaitErrorArgsOnCatches, 0);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueStatement, 0);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueConsole, 0);
+
         test.equal(metricsObject.asyncAwaitNumberOfThrowErrorsOnCatches, 0);
         test.equal(metricsObject.asyncAwaitNumberOfRethrowsOnCatches, 0);
+
+        test.equal(metricsObject.asyncAwaitNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfBreaksOnCatches, 0);
 
         test.equal(metricsObject.asyncAwaitNumberOfFinallies, 0);
         test.equal(metricsObject.asyncAwaitNumberOfFinalliesLines, 0);
@@ -54,8 +59,13 @@ module.exports = testCase({
         test.equal(metricsObject.asyncAwaitNumberOfAwaitErrorArgsOnCatches, 0);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueStatement, 1);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueConsole, 1);
+
         test.equal(metricsObject.asyncAwaitNumberOfThrowErrorsOnCatches, 0);
         test.equal(metricsObject.asyncAwaitNumberOfRethrowsOnCatches, 0);
+
+        test.equal(metricsObject.asyncAwaitNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfBreaksOnCatches, 0);
 
         test.equal(metricsObject.asyncAwaitNumberOfFinallies, 0);
         test.equal(metricsObject.asyncAwaitNumberOfFinalliesLines, 0);
@@ -82,8 +92,13 @@ module.exports = testCase({
         test.equal(metricsObject.asyncAwaitNumberOfAwaitErrorArgsOnCatches, 0);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueStatement, 1);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueConsole, 1);
+
         test.equal(metricsObject.asyncAwaitNumberOfThrowErrorsOnCatches, 0);
         test.equal(metricsObject.asyncAwaitNumberOfRethrowsOnCatches, 0);
+
+        test.equal(metricsObject.asyncAwaitNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfBreaksOnCatches, 0);
 
         test.equal(metricsObject.asyncAwaitNumberOfFinallies, 1);
         test.equal(metricsObject.asyncAwaitNumberOfFinalliesLines, 1);
@@ -110,8 +125,13 @@ module.exports = testCase({
         test.equal(metricsObject.asyncAwaitNumberOfAwaitErrorArgsOnCatches, 0);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueStatement, 1);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueConsole, 1);
+
         test.equal(metricsObject.asyncAwaitNumberOfThrowErrorsOnCatches, 0);
         test.equal(metricsObject.asyncAwaitNumberOfRethrowsOnCatches, 0);
+
+        test.equal(metricsObject.asyncAwaitNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfBreaksOnCatches, 0);
 
         test.equal(metricsObject.asyncAwaitNumberOfFinallies, 1);
         test.equal(metricsObject.asyncAwaitNumberOfFinalliesLines, 3);
@@ -138,8 +158,13 @@ module.exports = testCase({
         test.equal(metricsObject.asyncAwaitNumberOfAwaitErrorArgsOnCatches, 1);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueStatement, 0);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueConsole, 0);
+
         test.equal(metricsObject.asyncAwaitNumberOfThrowErrorsOnCatches, 0);
         test.equal(metricsObject.asyncAwaitNumberOfRethrowsOnCatches, 0);
+
+        test.equal(metricsObject.asyncAwaitNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfBreaksOnCatches, 0);
 
         test.equal(metricsObject.asyncAwaitNumberOfFinallies, 1);
         test.equal(metricsObject.asyncAwaitNumberOfFinalliesLines, 3);
@@ -167,8 +192,13 @@ module.exports = testCase({
         test.equal(metricsObject.asyncAwaitNumberOfAwaitErrorArgsOnCatches, 1);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueStatement, 0);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueConsole, 0);
+
         test.equal(metricsObject.asyncAwaitNumberOfThrowErrorsOnCatches, 0);
         test.equal(metricsObject.asyncAwaitNumberOfRethrowsOnCatches, 0);
+
+        test.equal(metricsObject.asyncAwaitNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfBreaksOnCatches, 0);
 
         test.equal(metricsObject.asyncAwaitNumberOfFinallies, 1);
         test.equal(metricsObject.asyncAwaitNumberOfFinalliesLines, 3);
@@ -196,8 +226,13 @@ module.exports = testCase({
         test.equal(metricsObject.asyncAwaitNumberOfAwaitErrorArgsOnCatches, 1);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueStatement, 0);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueConsole, 0);
+
         test.equal(metricsObject.asyncAwaitNumberOfThrowErrorsOnCatches, 0);
         test.equal(metricsObject.asyncAwaitNumberOfRethrowsOnCatches, 0);
+
+        test.equal(metricsObject.asyncAwaitNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfBreaksOnCatches, 0);
 
         test.equal(metricsObject.asyncAwaitNumberOfFinallies, 1);
         test.equal(metricsObject.asyncAwaitNumberOfFinalliesLines, 3);
@@ -225,8 +260,13 @@ module.exports = testCase({
         test.equal(metricsObject.asyncAwaitNumberOfAwaitErrorArgsOnCatches, 1);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueStatement, 0);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueConsole, 0);
+
         test.equal(metricsObject.asyncAwaitNumberOfThrowErrorsOnCatches, 1);
         test.equal(metricsObject.asyncAwaitNumberOfRethrowsOnCatches, 0);
+
+        test.equal(metricsObject.asyncAwaitNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfBreaksOnCatches, 0);
 
         test.equal(metricsObject.asyncAwaitNumberOfFinallies, 1);
         test.equal(metricsObject.asyncAwaitNumberOfFinalliesLines, 3);
@@ -254,8 +294,13 @@ module.exports = testCase({
         test.equal(metricsObject.asyncAwaitNumberOfAwaitErrorArgsOnCatches, 1);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueStatement, 0);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueConsole, 0);
+
         test.equal(metricsObject.asyncAwaitNumberOfThrowErrorsOnCatches, 1);
         test.equal(metricsObject.asyncAwaitNumberOfRethrowsOnCatches, 1);
+
+        test.equal(metricsObject.asyncAwaitNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfBreaksOnCatches, 0);
 
         test.equal(metricsObject.asyncAwaitNumberOfFinallies, 1);
         test.equal(metricsObject.asyncAwaitNumberOfFinalliesLines, 3);
@@ -283,12 +328,86 @@ module.exports = testCase({
         test.equal(metricsObject.asyncAwaitNumberOfAwaitErrorArgsOnCatches, 1);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueStatement, 0);
         test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueConsole, 0);
+
         test.equal(metricsObject.asyncAwaitNumberOfThrowErrorsOnCatches, 1);
         test.equal(metricsObject.asyncAwaitNumberOfRethrowsOnCatches, 1);
+
+        test.equal(metricsObject.asyncAwaitNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfBreaksOnCatches, 0);
+
+        test.equal(metricsObject.asyncAwaitNumberOfFinallies, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfFinalliesLines, 3);
+
+        test.done();
+    },
+
+    "TC11": function (test) {
+        const filename = suiteCasePath + 'async-await11.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
+
+        const metricsObject = metrics[0];
+
+        test.equal(metricsObject.numberOfStrictModeGlobal, 0);
+        test.equal(metricsObject.numberOfStrictModeLocal, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfAsyncs, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfAwaits, 2);
+
+        test.equal(metricsObject.asyncAwaitNumberOfTries, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfTriesLines, 2);
+
+        test.equal(metricsObject.asyncAwaitNumberOfCatches, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfEmptyCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfCatchesLines, 6);
+        test.equal(metricsObject.asyncAwaitNumberOfAwaitErrorArgsOnCatches, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueStatement, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueConsole, 0);
+
+        test.equal(metricsObject.asyncAwaitNumberOfThrowErrorsOnCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfRethrowsOnCatches, 0);
+
+        test.equal(metricsObject.asyncAwaitNumberOfReturnsOnCatches, 2);
+        test.equal(metricsObject.asyncAwaitNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfBreaksOnCatches, 0);
+
+        test.equal(metricsObject.asyncAwaitNumberOfFinallies, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfFinalliesLines, 3);
+
+        test.done();
+    },
+
+    "TC12": function (test) {
+        const filename = suiteCasePath + 'async-await12.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
+
+        const metricsObject = metrics[0];
+
+        test.equal(metricsObject.numberOfStrictModeGlobal, 0);
+        test.equal(metricsObject.numberOfStrictModeLocal, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfAsyncs, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfAwaits, 2);
+
+        test.equal(metricsObject.asyncAwaitNumberOfTries, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfTriesLines, 2);
+
+        test.equal(metricsObject.asyncAwaitNumberOfCatches, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfEmptyCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfCatchesLines, 6);
+        test.equal(metricsObject.asyncAwaitNumberOfAwaitErrorArgsOnCatches, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueStatement, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueConsole, 0);
+
+        test.equal(metricsObject.asyncAwaitNumberOfThrowErrorsOnCatches, 0);
+        test.equal(metricsObject.asyncAwaitNumberOfRethrowsOnCatches, 0);
+
+        test.equal(metricsObject.asyncAwaitNumberOfReturnsOnCatches, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfReturnsAnErrorOnCatches, 1);
+        test.equal(metricsObject.asyncAwaitNumberOfBreaksOnCatches, 1);
 
         test.equal(metricsObject.asyncAwaitNumberOfFinallies, 1);
         test.equal(metricsObject.asyncAwaitNumberOfFinalliesLines, 3);
 
         test.done();
     }
+
 });

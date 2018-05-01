@@ -18,6 +18,8 @@ function handleAnalysis(node, reportObject) {
             const numberOfLines = utils.getNumberOfLines(node);
             reportObject.callbacksNumberOfLines += numberOfLines;
 
+            const functionBody = node.body.body;
+
             if (errorArguments.length === 1 && params.length === 1) {
                 // callback has only one argument and it is an error argument
                 reportObject.callbacksNumberOfFunctionsWithUniqueErrorArg++;
@@ -31,7 +33,7 @@ function handleAnalysis(node, reportObject) {
                 // Callback features:
                 //  (i) has only one error argument
                 //  (ii) has only one statement and it is a console.log
-                const statement = node.body.body[0];
+                const statement = functionBody[0];
                 if (utils.isConsoleStatement(statement)) {
                     reportObject.callbacksNumberOfFunctionsWithUniqueConsole++;
                 }
@@ -54,6 +56,19 @@ function handleAnalysis(node, reportObject) {
             if (isEmptyCallback(node, errorArguments, numberOfLines)) {
                 reportObject.callbacksNumberOfEmptyCallbacks++;
             }
+
+            const returnStatements = utils.getStatementsByType(functionBody, 'ReturnStatement');
+            reportObject.callbacksNumberOfReturnsOnCatches += returnStatements.length;
+
+            returnStatements.forEach((statement) => {
+                const returnArgument = statement.argument;
+                if (utils.useAnyArguments(returnArgument, errorArguments)) {
+                    reportObject.callbacksNumberOfReturnsAnErrorOnCatches++;
+                }
+            });
+
+            const breakStatements = utils.getStatementsByType(functionBody, 'BreakStatement');
+            reportObject.callbacksNumberOfBreaksOnCatches += breakStatements.length;
 
 
             const bodyFunction = node.body.body;

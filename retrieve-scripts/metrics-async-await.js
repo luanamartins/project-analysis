@@ -96,6 +96,20 @@ function handleCatchClauses(errorArgs, catchClause, reportObject) {
             }
         }
     });
+
+    const returnStatements = utils.getStatementsByType(catchClauseBody, 'ReturnStatement');
+    reportObject.asyncAwaitNumberOfReturnsOnCatches += returnStatements.length;
+
+    returnStatements.forEach((statement) => {
+        const returnArgument = statement.argument;
+        if (utils.useAnyArguments(returnArgument, catchClauseErrorArgs)) {
+            reportObject.asyncAwaitNumberOfReturnsAnErrorOnCatches++;
+        }
+    });
+
+    const breakStatements = utils.getStatementsByType(catchClauseBody, 'BreakStatement');
+    reportObject.asyncAwaitNumberOfBreaksOnCatches += breakStatements.length;
+
 }
 
 function handleFinallyClauses(finallyStatement, reportObject) {
