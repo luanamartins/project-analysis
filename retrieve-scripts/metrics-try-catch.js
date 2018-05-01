@@ -75,8 +75,8 @@ function handleCatchClause(reportObject, catchClause) {
             }
 
             // When any error argument is ever used, then this block is basically empty
-            const catchClauseError = utils.getIdentifiersNames(catchClause.param);
-            if (!utils.useAnyArguments(nodeBody, catchClauseError)) {
+            const catchClauseArguments = utils.getIdentifiersNames(catchClause.param);
+            if (!utils.useAnyArguments(nodeBody, catchClauseArguments)) {
                 reportObject.tryCatchNumberOfEmptyCatches++;
             }
 
@@ -84,11 +84,26 @@ function handleCatchClause(reportObject, catchClause) {
             const throwStatements = utils.getStatementsByType(nodeBody, 'ThrowStatement');
             reportObject.tryCatchNumberOfThrowErrorsOnCatches += throwStatements.length;
 
-            // Number of rethrow an error argument
+            // Number of rethrows an error argument
             throwStatements.forEach(throwStatement => {
                 const argument = utils.getIdentifiersNames(throwStatement.argument);
-                if(utils.containsAnyErrorArgument(catchClauseError, argument)) {
+
+                // Checks if the throw uses an error argument
+                if(utils.containsAnyErrorArgument(catchClauseArguments, argument)) {
                     reportObject.tryCatchNumberOfRethrowsOnCatches++;
+                }
+
+                // Checks if the throw wrap an error on Error object
+                const throwStatementArg = throwStatement.argument;
+                if (throwStatementArg && throwStatementArg.type === 'NewExpression') {
+                    if (throwStatementArg.callee && throwStatementArg.callee.name === 'Error') {
+                        const arguments = throwStatementArg.arguments;
+                        arguments.forEach((arg) => {
+                            if (utils.useAnyArguments(arg, catchClauseArguments)) {
+                                reportObject.tryCatchNumberOfRethrowsOnCatches++;
+                            }
+                        });
+                    }
                 }
             });
         }

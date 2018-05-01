@@ -17,7 +17,7 @@ function handleCatches(reportObject, node) {
             firstArgument.type === 'FunctionExpression') {
 
             const functionBody = firstArgument.body;
-            const args = utils.getIdentifiersNames(firstArgument.params);
+            const functionParams = utils.getIdentifiersNames(firstArgument.params);
 
             if (lines === 0) {
                 reportObject.promiseNumberOfEmptyFunctionsOnPromiseCatches++;
@@ -34,11 +34,26 @@ function handleCatches(reportObject, node) {
             const throwStatements = utils.getStatementsByType(functionBody, 'ThrowStatement');
             reportObject.promiseNumberOfThrowErrorsOnCatches += throwStatements.length;
 
-            // Number of rethrow an error argument
+
             throwStatements.forEach(throwStatement => {
                 const throwArgument = utils.getIdentifiersNames(throwStatement.argument);
-                if(utils.containsAnyErrorArgument(args, throwArgument)) {
+
+                // Number of rethrow an error argument
+                if(utils.containsAnyErrorArgument(functionParams, throwArgument)) {
                     reportObject.promiseNumberOfRethrowsOnCatches++;
+                }
+
+                // Checks if the throw wrap an error on Error object
+                const throwStatementArg = throwStatement.argument;
+                if (throwStatementArg && throwStatementArg.type === 'NewExpression') {
+                    if (throwStatementArg.callee && throwStatementArg.callee.name === 'Error') {
+                        const arguments = throwStatementArg.arguments;
+                        arguments.forEach((arg) => {
+                            if (utils.useAnyArguments(arg, functionParams)) {
+                                reportObject.promiseNumberOfRethrowsOnCatches++;
+                            }
+                        });
+                    }
                 }
             });
         }
@@ -50,7 +65,6 @@ function handleCatches(reportObject, node) {
 }
 
 function handleThens(reportObject, node) {
-    reportObject.promiseNumberOfPromises++;
     reportObject.promiseNumberOfPromiseThens++;
     let numberOfLines = utils.getNumberOfLines(node);
     const numberOfArgumentsOnThen = node.arguments.length;
@@ -94,6 +108,7 @@ function handlePromiseObjects(reportObject, callee) {
 
 function handleAnalysis(node, reportObject) {
 
+    // Promises are created on NewExpression or CallExpression of Promise (resolve, reject, all, race)
     if (node.type === 'NewExpression' && node.callee.name === 'Promise') {
         reportObject.promiseNumberOfPromises++;
     }
