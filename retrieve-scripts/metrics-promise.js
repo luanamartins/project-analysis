@@ -41,7 +41,7 @@ function handleCatches(reportObject, node) {
                 const throwArgument = utils.getIdentifiersNames(throwStatement.argument);
 
                 // Number of rethrow an error argument
-                if(utils.containsAnyErrorArgument(functionParams, throwArgument)) {
+                if (utils.containsAnyErrorArgument(functionParams, throwArgument)) {
                     reportObject.promiseNumberOfRethrowsOnCatches++;
                 }
 
@@ -149,6 +149,16 @@ function handleAnalysis(node, reportObject) {
 
             if (callee.name === 'catch' || (callee.property && callee.property.name === 'catch')) {
                 handleCatches(reportObject, node);
+            }
+
+            // Encadeamento de thens e catches
+            if (callee.property && (callee.property.name === 'then' || callee.property.name === 'catch')) {
+                const callExpressions = utils.getStatementsByType(callee, 'CallExpression');
+                const result = callExpressions.filter((callExpression) => callExpression.callee.property.name === 'catch');
+                if(result.length > 0) {
+                    reportObject.promiseNumberOfChainingCatches++;
+                }
+
             }
         }
 
