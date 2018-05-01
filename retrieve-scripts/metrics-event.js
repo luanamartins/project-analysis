@@ -5,88 +5,107 @@ function handleAnalysis(node, reportObject) {
     const eventListeningMethods = ['on', 'once'];
     const eventRaisingMethods = ['emit'];
 
+    // eventsNumberOfEventOnWithUniqueConsole
+    // eventsNumberOfEventOnWithUniqueStatement
+    //
+    // eventsNumberOfEventOnceWithUniqueConsole
+    // eventsNumberOfEventOnceWithUniqueStatement
+
     if (node.type === 'CallExpression') {
         if (node.callee.property) {
 
             const methodName = node.callee.property.name;
-            const numberOfArguments = node.arguments.length;
+            const callExpressionArguments = node.arguments.length;
             const firstArgObject = node.arguments[0];
             const isFirstArgErrorHandling = firstArgObject &&
             firstArgObject.value ? utils.isAnErrorArgument(firstArgObject.value) : false;
 
-            if (numberOfArguments > 1 && eventListeningMethods.includes(methodName)) {
+            if (callExpressionArguments > 1 && eventListeningMethods.includes(methodName)) {
 
-                const errorHandlingFunction = node.arguments[1];
+                const handlerFunction = node.arguments[1];
 
                 if (isFirstArgErrorHandling) {
-                    if (methodName === 'on') {
-                        reportObject.eventsNumberOfEventMethodsOn++;
-                        if (errorHandlingFunction) {
-                            reportObject.eventsNumberOfEventOnLines += utils.getNumberOfLines(errorHandlingFunction);
-                            const location = errorHandlingFunction.loc;
+
+                    const handlerParams = utils.getIdentifiersNames(handlerFunction.params);
+                    const lines = utils.getNumberOfLines(handlerFunction);
+                    if (handlerFunction && handlerFunction.type === 'FunctionExpression') {
+                        if (methodName === 'on') {
+                            reportObject.eventsNumberOfEventMethodsOn++;
+
+
+                            reportObject.eventsNumberOfEventOnLines += lines;
+                            const location = handlerFunction.loc;
                             reportObject.eventsNumberOfEventOnLinesStart.push(location.start.line);
                             reportObject.eventsNumberOfEventOnLinesEnd.push(location.end.line);
-                        }
 
-                    } else if (methodName === 'once') {
+                            if (utils.isEmptyHandler(handlerFunction.body, handlerParams, lines)) {
+                                reportObject.eventsNumberOfEventOnEmptyFunctions++;
+                            }
 
-                        reportObject.eventsNumberOfEventMethodsOnce++;
-                        if (errorHandlingFunction) {
-                            reportObject.eventsNumberOfEventOnceLines += utils.getNumberOfLines(errorHandlingFunction);
-                            const location = errorHandlingFunction.loc;
+                        } else if (methodName === 'once') {
+
+                            reportObject.eventsNumberOfEventMethodsOnce++;
+
+
+                            reportObject.eventsNumberOfEventOnceLines += utils.getNumberOfLines(handlerFunction);
+                            const location = handlerFunction.loc;
                             reportObject.eventsNumberOfEventOnceLinesStart.push(location.start.line);
                             reportObject.eventsNumberOfEventOnceLinesEnd.push(location.end.line);
-                        }
-                    }
 
-                    const handlerBody = errorHandlingFunction.body;
-                    const handlerArgs = utils.getIdentifiersNames(errorHandlingFunction.params);
-
-                    // Throw an error
-                    const throwStatements = utils.getStatementsByType(handlerBody, 'ThrowStatement');
-                    reportObject.eventsNumberOfThrowErrorsOnCatches += throwStatements.length;
-
-
-                    // Number of rethrow an error argument
-                    throwStatements.forEach(throwStatement => {
-                        const argument = utils.getIdentifiersNames(throwStatement.argument);
-                        if(utils.containsAnyErrorArgument(handlerArgs, argument)) {
-                            reportObject.eventsNumberOfRethrowsOnCatches++;
-                        }
-
-                        // Checks if the throw wrap an error on Error object
-                        const throwStatementArg = throwStatement.argument;
-                        if (throwStatementArg && throwStatementArg.type === 'NewExpression') {
-                            if (throwStatementArg.callee && throwStatementArg.callee.name === 'Error') {
-                                const arguments = throwStatementArg.arguments;
-                                arguments.forEach((arg) => {
-                                    if (utils.useAnyArguments(arg, handlerArgs)) {
-                                        reportObject.eventsNumberOfRethrowsOnCatches++;
-                                    }
-                                });
+                            if (utils.isEmptyHandler(handlerFunction.body, handlerParams, lines)) {
+                                reportObject.eventsNumberOfEventOnceEmptyFunctions++;
                             }
                         }
-                    });
 
-                    // Counts number of returns
-                    const returnStatements = utils.getStatementsByType(handlerBody, 'ReturnStatement');
-                    reportObject.eventsNumberOfReturnsOnCatches += returnStatements.length;
+                        const handlerBody = handlerFunction.body;
+                        const handlerArgs = utils.getIdentifiersNames(handlerFunction.params);
 
-                    // Counts number of returns that uses an error argument
-                    returnStatements.forEach((statement) => {
-                        const returnArgument = statement.argument;
-                        if (utils.useAnyArguments(returnArgument, handlerArgs)) {
-                            reportObject.eventsNumberOfReturnsAnErrorOnCatches++;
-                        }
-                    });
+                        // Throw an error
+                        const throwStatements = utils.getStatementsByType(handlerBody, 'ThrowStatement');
+                        reportObject.eventsNumberOfThrowErrorsOnCatches += throwStatements.length;
 
-                    // Counts number of breaks
-                    const breakStatements = utils.getStatementsByType(handlerBody, 'BreakStatement');
-                    reportObject.eventsNumberOfBreaksOnCatches += breakStatements.length;
+
+                        // Number of rethrow an error argument
+                        throwStatements.forEach(throwStatement => {
+                            const argument = utils.getIdentifiersNames(throwStatement.argument);
+                            if (utils.containsAnyErrorArgument(handlerArgs, argument)) {
+                                reportObject.eventsNumberOfRethrowsOnCatches++;
+                            }
+
+                            // Checks if the throw wrap an error on Error object
+                            const throwStatementArg = throwStatement.argument;
+                            if (throwStatementArg && throwStatementArg.type === 'NewExpression') {
+                                if (throwStatementArg.callee && throwStatementArg.callee.name === 'Error') {
+                                    const arguments = throwStatementArg.arguments;
+                                    arguments.forEach((arg) => {
+                                        if (utils.useAnyArguments(arg, handlerArgs)) {
+                                            reportObject.eventsNumberOfRethrowsOnCatches++;
+                                        }
+                                    });
+                                }
+                            }
+                        });
+
+                        // Counts number of returns
+                        const returnStatements = utils.getStatementsByType(handlerBody, 'ReturnStatement');
+                        reportObject.eventsNumberOfReturnsOnCatches += returnStatements.length;
+
+                        // Counts number of returns that uses an error argument
+                        returnStatements.forEach((statement) => {
+                            const returnArgument = statement.argument;
+                            if (utils.useAnyArguments(returnArgument, handlerArgs)) {
+                                reportObject.eventsNumberOfReturnsAnErrorOnCatches++;
+                            }
+                        });
+
+                        // Counts number of breaks
+                        const breakStatements = utils.getStatementsByType(handlerBody, 'BreakStatement');
+                        reportObject.eventsNumberOfBreaksOnCatches += breakStatements.length;
+                    }
                 }
             }
 
-            if (numberOfArguments >= 2 && eventRaisingMethods.includes(methodName)) {
+            if (callExpressionArguments >= 2 && eventRaisingMethods.includes(methodName)) {
 
                 const errorHandlingFunction = node.arguments[1];
 
@@ -103,7 +122,7 @@ function handleAnalysis(node, reportObject) {
                 }
             }
 
-            if (numberOfArguments > 0 && (eventListeningMethods.includes(methodName) || eventRaisingMethods.includes(methodName))) {
+            if (callExpressionArguments > 0 && (eventListeningMethods.includes(methodName) || eventRaisingMethods.includes(methodName))) {
                 const typeOfFirstArg = typeof(firstArgObject.value);
                 if (firstArgObject.type === 'Literal') {
                     const literalValue = node.arguments[0].raw;

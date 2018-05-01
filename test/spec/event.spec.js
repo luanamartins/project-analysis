@@ -13,13 +13,16 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.eventsNumberOfEventMethodsOn, 1);
+        test.equal(metricsObject.eventsNumberOfEventMethodsOn, 0);
         test.equal(metricsObject.eventsNumberOfEventMethodsOnce, 0);
         test.equal(metricsObject.eventsNumberOfEventMethodsEmit, 0);
 
         test.equal(metricsObject.eventsNumberOfEventOnLines, 0);
         test.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
         test.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
+
+        test.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 0);
+        test.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
         test.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
         test.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
@@ -43,13 +46,16 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.eventsNumberOfEventMethodsOn, 2);
+        test.equal(metricsObject.eventsNumberOfEventMethodsOn, 1);
         test.equal(metricsObject.eventsNumberOfEventMethodsOnce, 0);
         test.equal(metricsObject.eventsNumberOfEventMethodsEmit, 0);
 
-        test.equal(metricsObject.eventsNumberOfEventOnLines, 2);
+        test.equal(metricsObject.eventsNumberOfEventOnLines, 1);
         test.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
         test.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
+
+        test.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 0);
+        test.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
         test.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
         test.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
@@ -73,13 +79,16 @@ module.exports = testCase({
 
         const metricsObject = metrics[0];
 
-        test.equal(metricsObject.eventsNumberOfEventMethodsOn, 3);
+        test.equal(metricsObject.eventsNumberOfEventMethodsOn, 2);
         test.equal(metricsObject.eventsNumberOfEventMethodsOnce, 0);
         test.equal(metricsObject.eventsNumberOfEventMethodsEmit, 0);
 
         test.equal(metricsObject.eventsNumberOfEventOnLines, 4);
         test.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
         test.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
+
+        test.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 1);
+        test.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
         test.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
         test.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
@@ -111,6 +120,12 @@ module.exports = testCase({
         test.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
         test.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
 
+        test.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 2);
+        test.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
+
+        test.equal(metricsObject.eventsNumberOfEventOnceWithUniqueStatement, 0);
+        test.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
+
         test.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
         test.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
 
@@ -140,6 +155,9 @@ module.exports = testCase({
         test.equal(metricsObject.eventsNumberOfEventOnLines, 9);
         test.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
         test.equal(metricsObject.eventsNumberOfEventEmitLines, 4);
+
+        test.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 2);
+        test.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
         test.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
         test.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
@@ -172,6 +190,9 @@ module.exports = testCase({
         test.equal(metricsObject.eventsNumberOfEventOnceLines, 7);
         test.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
 
+        test.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 1);
+        test.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 2);
+
         test.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
         test.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
 
@@ -201,6 +222,9 @@ module.exports = testCase({
         test.equal(metricsObject.eventsNumberOfEventOnLines, 9);
         test.equal(metricsObject.eventsNumberOfEventOnceLines, 7);
         test.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
+
+        test.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 2);
+        test.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 2);
 
         test.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
         test.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
@@ -232,6 +256,9 @@ module.exports = testCase({
         test.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
         test.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
 
+        test.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 1);
+        test.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
+
         test.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 1);
         test.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
 
@@ -261,6 +288,9 @@ module.exports = testCase({
         test.equal(metricsObject.eventsNumberOfEventOnLines, 1);
         test.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
         test.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
+
+        test.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 0);
+        test.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
         test.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 1);
         test.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 1);
@@ -292,6 +322,9 @@ module.exports = testCase({
         test.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
         test.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
 
+        test.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 0);
+        test.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
+
         test.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 1);
         test.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 1);
 
@@ -321,6 +354,9 @@ module.exports = testCase({
         test.equal(metricsObject.eventsNumberOfEventOnLines, 11);
         test.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
         test.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
+
+        test.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 2);
+        test.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
         test.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
         test.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
