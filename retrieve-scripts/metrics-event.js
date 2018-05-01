@@ -60,14 +60,26 @@ function handleAnalysis(node, reportObject) {
                             if (throwStatementArg.callee && throwStatementArg.callee.name === 'Error') {
                                 const arguments = throwStatementArg.arguments;
                                 arguments.forEach((arg) => {
-                                    if (utils.useAnyArguments(arg, catchClauseErrorArgs)) {
-                                        reportObject.asyncAwaitNumberOfRethrowsOnCatches++;
+                                    if (utils.useAnyArguments(arg, handlerArgs)) {
+                                        reportObject.eventsNumberOfRethrowsOnCatches++;
                                     }
                                 });
                             }
                         }
                     });
 
+                    const returnStatements = utils.getStatementsByType(handlerBody, 'ReturnStatement');
+                    reportObject.eventsNumberOfReturnsOnCatches += returnStatements.length;
+
+                    returnStatements.forEach((statement) => {
+                        const returnArgument = statement.argument;
+                        if (utils.useAnyArguments(returnArgument, handlerArgs)) {
+                            reportObject.eventsNumberOfReturnsAnErrorOnCatches++;
+                        }
+                    });
+
+                    const breakStatements = utils.getStatementsByType(handlerBody, 'BreakStatement');
+                    reportObject.eventsNumberOfBreaksOnCatches += breakStatements.length;
                 }
             }
 

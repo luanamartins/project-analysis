@@ -1,5 +1,7 @@
 const io = require("socket.io")(http);
 
-io.on("reason", connection => {
-    socket.on("reason", data => socket.broadcast.emit("reason_failure", handleReasonFailure));
+io.on("reason", function(connection) {
+    socket.on("reason", function(data) {
+        return socket.broadcast.emit("reason_failure", handleReasonFailure);
+    });
 });

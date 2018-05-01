@@ -1,11 +1,11 @@
 const io = require("socket.io")(http);
 
-io.once("reason", function(connection) {
+io.once("reason", function (connection) {
     console.log("things");
 });
 
-socket.on("reason", function(data) {
-    return socket.broadcast.once("reason_failure", function(err) {
+socket.on("reason", function (data) {
+    return socket.broadcast.once("reason_failure", function (err) {
         console.log("things");
         console.log("things");
         console.log("things");
@@ -13,14 +13,14 @@ socket.on("reason", function(data) {
     });
 });
 
-io.once(45, function(connection) {
+io.once(45, function (connection) {
     console.log("things");
 });
 
-io.once({}, function(connection) {
+io.once({}, function (connection) {
     console.log("things");
 });
 
-io.on("unhandledRejection", function(connection) {
+io.on("unhandledRejection", function (connection) {
     console.log("things");
 });
