@@ -56,6 +56,20 @@ function handleCatches(reportObject, node) {
                     }
                 }
             });
+
+            const returnStatements = utils.getStatementsByType(functionBody, 'ReturnStatement');
+            reportObject.promiseNumberOfReturnsOnCatches += returnStatements.length;
+
+            returnStatements.forEach((statement) => {
+                const returnArgument = statement.argument;
+                if (utils.useAnyArguments(returnArgument, functionParams)) {
+                    reportObject.promiseNumberOfReturnsAnErrorOnCatches++;
+                }
+            });
+
+            const breakStatements = utils.getStatementsByType(functionBody, 'BreakStatement');
+            reportObject.promiseNumberOfBreaksOnCatches += breakStatements.length;
+
         }
     }
 

@@ -47,6 +47,9 @@
   "promiseNumberOfCatchesWithUniqueStatement": 0,
   "promiseNumberOfThrowErrorsOnCatches": 0,
   "promiseNumberOfRethrowsOnCatches": 0,
+  "promiseNumberOfReturnsOnCatches": 0,
+  "promiseNumberOfReturnsAnErrorOnCatches": 0,
+  "promiseNumberOfBreaksOnCatches": 0,
   "promiseNumberOfPromiseRaces": 0,
   "promiseNumberOfPromiseAll": 0,
 

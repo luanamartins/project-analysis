@@ -28,6 +28,13 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
 
+        test.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+
+        test.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+
         test.equal(metricsObject.promiseNumberOfPromiseRaces, 0);
         test.equal(metricsObject.promiseNumberOfPromiseAll, 0);
 
@@ -54,6 +61,13 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 0);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
+
+        test.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+
+        test.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
 
         test.equal(metricsObject.promiseNumberOfPromiseRaces, 0);
         test.equal(metricsObject.promiseNumberOfPromiseAll, 0);
@@ -82,6 +96,13 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
 
+        test.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+
+        test.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+
         test.equal(metricsObject.promiseNumberOfPromiseRaces, 0);
         test.equal(metricsObject.promiseNumberOfPromiseAll, 0);
 
@@ -108,6 +129,13 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 0);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
+
+        test.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+
+        test.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
 
         test.equal(metricsObject.promiseNumberOfPromiseRaces, 0);
         test.equal(metricsObject.promiseNumberOfPromiseAll, 0);
@@ -136,6 +164,13 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
 
+        test.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+
+        test.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+
         test.equal(metricsObject.promiseNumberOfPromiseRaces, 1);
         test.equal(metricsObject.promiseNumberOfPromiseAll, 0);
 
@@ -162,6 +197,13 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 0);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
+
+        test.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+
+        test.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
 
         test.equal(metricsObject.promiseNumberOfPromiseRaces, 0);
         test.equal(metricsObject.promiseNumberOfPromiseAll, 0);
@@ -192,6 +234,13 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
 
+        test.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+
+        test.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+
         test.equal(metricsObject.promiseNumberOfPromiseRaces, 0);
         test.equal(metricsObject.promiseNumberOfPromiseAll, 0);
 
@@ -218,6 +267,13 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 0);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
+
+        test.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+
+        test.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
 
         test.equal(metricsObject.promiseNumberOfPromiseRaces, 0);
         test.equal(metricsObject.promiseNumberOfPromiseAll, 0);
@@ -246,6 +302,13 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
 
+        test.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+
+        test.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+
         test.equal(metricsObject.promiseNumberOfPromiseRaces, 0);
         test.equal(metricsObject.promiseNumberOfPromiseAll, 0);
 
@@ -272,6 +335,13 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 1);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
+
+        test.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+
+        test.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
 
         test.equal(metricsObject.promiseNumberOfPromiseRaces, 0);
         test.equal(metricsObject.promiseNumberOfPromiseAll, 0);
@@ -300,6 +370,13 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 1);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 1);
 
+        test.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+
+        test.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+
         test.equal(metricsObject.promiseNumberOfPromiseRaces, 0);
         test.equal(metricsObject.promiseNumberOfPromiseAll, 0);
 
@@ -327,6 +404,13 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 2);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 2);
 
+        test.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+
+        test.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+
         test.equal(metricsObject.promiseNumberOfPromiseRaces, 0);
         test.equal(metricsObject.promiseNumberOfPromiseAll, 0);
 
@@ -353,6 +437,10 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 0);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 1);
+
+        test.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
 
         test.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 1);
         test.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
@@ -384,6 +472,10 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 1);
 
+        test.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+
         test.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 1);
         test.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 1);
 
@@ -412,6 +504,10 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 0);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 1);
+
+        test.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
 
         test.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 1);
         test.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 1);
@@ -443,7 +539,45 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 1);
 
+        test.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+
         test.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 1);
+        test.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+
+        test.equal(metricsObject.promiseNumberOfPromiseRaces, 0);
+        test.equal(metricsObject.promiseNumberOfPromiseAll, 0);
+
+        test.done();
+    },
+
+    "TC17": function (test) {
+        const filename = suiteCasePath + 'promise17.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
+
+        const metricsObject = metrics[0];
+
+        test.equal(metricsObject.promiseNumberOfPromises, 1);
+
+        test.equal(metricsObject.promiseNumberOfResolves, 0);
+        test.equal(metricsObject.promiseNumberOfRejects, 1);
+
+        test.equal(metricsObject.promiseNumberOfPromiseThens, 1);
+        test.equal(metricsObject.promiseNumberOfPromiseThenFulfilledLines, 1);
+        test.equal(metricsObject.promiseNumberOfPromiseThenRejectedLines, 0);
+
+        test.equal(metricsObject.promiseNumberOfPromiseCatches, 2);
+        test.equal(metricsObject.promiseNumberOfPromiseCatchesLines, 8);
+        test.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 0);
+        test.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
+        test.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 1);
+
+        test.equal(metricsObject.promiseNumberOfReturnsOnCatches, 1);
+        test.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 1);
+        test.equal(metricsObject.promiseNumberOfBreaksOnCatches, 1);
+
+        test.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
         test.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
 
         test.equal(metricsObject.promiseNumberOfPromiseRaces, 0);
