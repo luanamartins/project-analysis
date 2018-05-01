@@ -1,0 +1,1 @@
+p.then(function(){}).catch(function(){}).catch(function(){}).then(function(){});

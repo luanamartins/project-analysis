@@ -1,3 +1,1 @@
-p.then(function(){
-}).catch(function(){
-}).then(function(){});
+p.then(function(){}).catch(function(){}).then(function(){});
