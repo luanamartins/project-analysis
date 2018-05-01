@@ -97,9 +97,11 @@ function handleCatchClauses(errorArgs, catchClause, reportObject) {
         }
     });
 
+    // Counts number of returns
     const returnStatements = utils.getStatementsByType(catchClauseBody, 'ReturnStatement');
     reportObject.asyncAwaitNumberOfReturnsOnCatches += returnStatements.length;
 
+    // Counts number of returns that uses an error argument
     returnStatements.forEach((statement) => {
         const returnArgument = statement.argument;
         if (utils.useAnyArguments(returnArgument, catchClauseErrorArgs)) {
@@ -107,6 +109,7 @@ function handleCatchClauses(errorArgs, catchClause, reportObject) {
         }
     });
 
+    // Counts number of breaks
     const breakStatements = utils.getStatementsByType(catchClauseBody, 'BreakStatement');
     reportObject.asyncAwaitNumberOfBreaksOnCatches += breakStatements.length;
 

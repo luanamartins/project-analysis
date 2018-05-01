@@ -57,9 +57,11 @@ function handleAnalysis(node, reportObject) {
                 reportObject.callbacksNumberOfEmptyCallbacks++;
             }
 
+            // Counts number of returns
             const returnStatements = utils.getStatementsByType(functionBody, 'ReturnStatement');
             reportObject.callbacksNumberOfReturnsOnCatches += returnStatements.length;
 
+            // Counts number of returns that uses an error argument
             returnStatements.forEach((statement) => {
                 const returnArgument = statement.argument;
                 if (utils.useAnyArguments(returnArgument, errorArguments)) {
@@ -67,6 +69,7 @@ function handleAnalysis(node, reportObject) {
                 }
             });
 
+            // Counts number of breaks
             const breakStatements = utils.getStatementsByType(functionBody, 'BreakStatement');
             reportObject.callbacksNumberOfBreaksOnCatches += breakStatements.length;
 

@@ -540,12 +540,12 @@ module.exports = testCase({
 
         test.equal(metricsObject.tryCatchNumberOfTries, 2);
         test.equal(metricsObject.tryCatchNumberOfEmptyTries, 0);
-        test.equal(metricsObject.tryCatchNumberOfTriesLines, 4);
+        test.equal(metricsObject.tryCatchNumberOfTriesLines, 6);
         test.equal(metricsObject.tryCatchNumberOfTriesWithUniqueStatement, 0);
 
         test.equal(metricsObject.tryCatchNumberOfCatches, 2);
         test.equal(metricsObject.tryCatchNumberOfEmptyCatches, 2);
-        test.equal(metricsObject.tryCatchNumberOfCatchesLines, 2);
+        test.equal(metricsObject.tryCatchNumberOfCatchesLines, 4);
         test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         test.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 2);
 

@@ -197,12 +197,12 @@ function calculateIntersections(startList, endList) {
     const startSize = startList.length;
     const endSize = endList.length;
 
+    let result = 0;
     if (startSize === 0 || endSize === 0) {
-        return 0;
+        return result;
     } else if (startSize === 1 || endSize === 1) {
-        const result = endList[0] - startList[0];
-        if (result === 0) return 0;
-        return result - 1;
+        result = endList[0] - startList[0];
+        return (result === 0) ? result : result - 1;
     }
 
     let i = 0;

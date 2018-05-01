@@ -57,9 +57,11 @@ function handleCatches(reportObject, node) {
                 }
             });
 
+            // Counts number of returns
             const returnStatements = utils.getStatementsByType(functionBody, 'ReturnStatement');
             reportObject.promiseNumberOfReturnsOnCatches += returnStatements.length;
 
+            // Counts number of returns that uses an error argument
             returnStatements.forEach((statement) => {
                 const returnArgument = statement.argument;
                 if (utils.useAnyArguments(returnArgument, functionParams)) {
@@ -67,6 +69,7 @@ function handleCatches(reportObject, node) {
                 }
             });
 
+            // Counts number of breaks
             const breakStatements = utils.getStatementsByType(functionBody, 'BreakStatement');
             reportObject.promiseNumberOfBreaksOnCatches += breakStatements.length;
 
