@@ -9,7 +9,7 @@ function isGlobalStrictMode(ast, reportObject) {
     }
 }
 
-function isLocalStrictMode(node, reportObject) {
+function handleAnalysis(node, reportObject) {
     if (utils.isStrictMode(node)) {
         reportObject.numberOfStrictModeLocal++;
     }
@@ -23,6 +23,6 @@ function fixStrictMode(repoObject) {
 
 module.exports = {
     isGlobalStrictMode,
-    isLocalStrictMode,
+    handleAnalysis,
     fixStrictMode
 };

@@ -9,7 +9,7 @@ const asyncAwaitModule = require('./metrics-async-await.js');
 const callbackModule = require('./metrics-callback.js');
 const eventModule = require('./metrics-event.js');
 const strictModeModule = require('./metrics-strictmode');
-const windowOnErrorModule = require('./metrics-windowonerror');
+const globalEventHandlerModule = require('./metrics-globaleventhandler');
 const utils = require('./utils.js');
 
 function calculateArrayLines(repoObject) {
@@ -124,8 +124,8 @@ function getMetrics(ast, filepath, reportObject) {
 
         utils.traverse(ast, function (node) {
 
-            strictModeModule.isLocalStrictMode(node, reportObject);
-            windowOnErrorModule.isWindowOnError(node, reportObject);
+            strictModeModule.handleAnalysis(node, reportObject);
+            globalEventHandlerModule.handleAnalysis(node, reportObject);
             tryCatchModule.handleAnalysis(node, reportObject);
             promiseModule.handleAnalysis(node, reportObject);
             asyncAwaitModule.handleAnalysis(node, reportObject);

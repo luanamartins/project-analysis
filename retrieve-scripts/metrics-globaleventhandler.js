@@ -1,4 +1,5 @@
-function isWindowOnError(node, reportObject) {
+function handleAnalysis(node, reportObject) {
+    // window.onerror
     if (node && node.type === 'AssignmentExpression') {
         const leftSide = node.left;
         if (leftSide.object && leftSide.object.name === 'window' &&
@@ -9,5 +10,5 @@ function isWindowOnError(node, reportObject) {
 }
 
 module.exports = {
-    isWindowOnError
+    handleAnalysis
 };
