@@ -3,6 +3,7 @@
   "numberOfPhysicalLines": 0,
   "numberOfStrictModeGlobal": 0,
   "numberOfStrictModeLocal": 0,
+  "numberOfWindowOnError": 0,
 
   "tryCatchNumberOfTries": 0,
   "tryCatchNumberOfEmptyTries": 0,

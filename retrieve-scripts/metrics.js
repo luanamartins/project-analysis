@@ -8,6 +8,8 @@ const promiseModule = require('./metrics-promise.js');
 const asyncAwaitModule = require('./metrics-async-await.js');
 const callbackModule = require('./metrics-callback.js');
 const eventModule = require('./metrics-event.js');
+const strictModeModule = require('./metrics-strictmode');
+const windowOnErrorModule = require('./metrics-windowonerror');
 const utils = require('./utils.js');
 
 function calculateArrayLines(repoObject) {
@@ -92,15 +94,9 @@ function extractMetricsForFilepath(repoObject, filepath) {
 
     calculateArrayLines(repoObject);
 
-    fixStrictMode(repoObject);
+    strictModeModule.fixStrictMode(repoObject);
 
     return repoObject;
-}
-
-function fixStrictMode(repoObject) {
-    if(repoObject.numberOfStrictModeGlobal > 0) {
-        repoObject.numberOfStrictModeLocal -= 1;
-    }
 }
 
 function handleMetrics(files, projectPath) {
@@ -124,19 +120,12 @@ function handleMetrics(files, projectPath) {
 function getMetrics(ast, filepath, reportObject) {
     try {
 
-        if (ast.body) {
-            const firstStatement = ast.body[0];
-            if (utils.isStrictMode(firstStatement)) {
-                reportObject.numberOfStrictModeGlobal++;
-            }
-        }
+        strictModeModule.isGlobalStrictMode(ast, reportObject);
 
         utils.traverse(ast, function (node) {
 
-            if (utils.isStrictMode(node)) {
-                reportObject.numberOfStrictModeLocal++;
-            }
-
+            strictModeModule.isLocalStrictMode(node, reportObject);
+            windowOnErrorModule.isWindowOnError(node, reportObject);
             tryCatchModule.handleAnalysis(node, reportObject);
             promiseModule.handleAnalysis(node, reportObject);
             asyncAwaitModule.handleAnalysis(node, reportObject);

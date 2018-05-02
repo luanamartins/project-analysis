@@ -1,3 +1,8 @@
+window.onerror = function(message, source, lineno, colno, error) {
+    console.log('myerror ', error);
+    return true;
+};
+
 function calling() {
     try {} catch (error) {
         console.log("Error");

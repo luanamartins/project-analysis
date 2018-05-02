@@ -160,7 +160,7 @@ function getNodeTypes(functionDeclaration, type) {
 
 function useAnyArguments(body, args) {
     let hasErrorArgs = false;
-    if(Array.isArray(args) && args.length > 0) {
+    if (Array.isArray(args) && args.length > 0) {
         traverse(body, function (bodyFunctionNode) {
             if (!hasErrorArgs && typeof(bodyFunctionNode) === 'string' && args.includes(bodyFunctionNode)) {
                 hasErrorArgs = true;

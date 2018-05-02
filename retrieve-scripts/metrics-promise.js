@@ -158,7 +158,6 @@ function handleAnalysis(node, reportObject) {
                 if(result.length > 0) {
                     reportObject.promiseNumberOfChainingCatches++;
                 }
-
             }
         }
 

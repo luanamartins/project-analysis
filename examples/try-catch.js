@@ -1,8 +1,3 @@
-window.onerror = function(message, source, lineno, colno, error) {
-    console.log('myerror ', error);
-    return true;
-}
-
 function t1() {
     try{
         console.log('first');
