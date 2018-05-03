@@ -1,10 +1,33 @@
 function handleAnalysis(node, reportObject) {
-    // window.onerror
+
     if (node && node.type === 'AssignmentExpression') {
-        const leftSide = node.left;
-        if (leftSide.object && leftSide.object.name === 'window' &&
-            leftSide.property && leftSide.property.name === 'onerror') {
-            reportObject.numberOfWindowOnError++;
+        const leftSideObject = node.left.object;
+        const leftSideProperty = node.left.property;
+
+        if(leftSideObject && leftSideProperty && leftSideProperty.name === 'onerror') {
+            // window.onerror
+            if (leftSideObject.name === 'window') {
+                reportObject.numberOfWindowOnError++;
+            }
+
+            // TO TEST
+            // element.onerror
+            if (leftSideObject.name === 'element') {
+                reportObject.numberOfElementOnError++;
+            }
+        }
+    }
+
+    // TO TEST
+    // window.addEventListener('error')
+    if (node.type === 'CallExpression') {
+        const objectName = node.callee.object.name;
+        const propertyName = node.callee.property.name;
+        const firstArg = node.arguments[0];
+
+        if (objectName === 'window' && propertyName === 'addEventListener' &&
+            firstArg && firstArg.value === 'error') {
+            reportObject.numberOfWindowAddEventListener++;
         }
     }
 }
