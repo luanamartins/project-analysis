@@ -4,6 +4,7 @@
   "numberOfStrictModeGlobal": 0,
   "numberOfStrictModeLocal": 0,
   "numberOfWindowOnError": 0,
+  "numberOfWindowOnErrorEmptyHandler": 0,
   "numberOfWindowAddEventListener": 0,
   "numberOfElementOnError": 0,
 

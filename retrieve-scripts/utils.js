@@ -15,6 +15,14 @@ function hasAnErrorArgument(array) {
     return false;
 }
 
+function getAllErrorArgs(args) {
+    let result = [];
+    if(args) {
+        result = args.filter(arg => isAnErrorArgument(arg));
+    }
+    return result;
+}
+
 function containsAnyErrorArgument(errArgs, array) {
     if (errArgs && errArgs.length > 0 && array && array.length > 0) {
         return array.some((item) => errArgs.includes(item));
@@ -293,5 +301,6 @@ module.exports = {
     getStatementsByType,
     isStrictMode,
     useAnyArguments,
-    isEmptyHandler
+    isEmptyHandler,
+    getAllErrorArgs,
 };
