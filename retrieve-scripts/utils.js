@@ -9,10 +9,7 @@ function isAnErrorArgument(argument) {
 }
 
 function hasAnErrorArgument(array) {
-    if (array) {
-        return array.some((item) => isAnErrorArgument(item));
-    }
-    return false;
+    return array && array.some((item) => isAnErrorArgument(item));
 }
 
 function getAllErrorArgs(args) {
@@ -41,7 +38,7 @@ function getIdentifiersNames(args) {
     if (args) {
         if (Array.isArray(args)) {
             return args.filter(arg => arg.type === 'Identifier').map((arg) => {
-                return arg.name
+                return arg.name;
             });
         } else {
             return [args.name];
