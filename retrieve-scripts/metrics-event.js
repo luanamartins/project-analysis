@@ -64,27 +64,8 @@ function handleAnalysis(node, reportObject) {
                         const throwStatements = utils.getStatementsByType(handlerBody, 'ThrowStatement');
                         reportObject.eventsNumberOfThrowErrorsOnCatches += throwStatements.length;
 
-
                         // Number of rethrow an error argument
-                        throwStatements.forEach(throwStatement => {
-                            const argument = utils.getIdentifiersNames(throwStatement.argument);
-                            if (utils.containsAnyErrorArgument(handlerArgs, argument)) {
-                                reportObject.eventsNumberOfRethrowsOnCatches++;
-                            }
-
-                            // Checks if the throw wrap an error on Error object
-                            const throwStatementArg = throwStatement.argument;
-                            if (throwStatementArg && throwStatementArg.type === 'NewExpression') {
-                                if (throwStatementArg.callee && throwStatementArg.callee.name === 'Error') {
-                                    const arguments = throwStatementArg.arguments;
-                                    arguments.forEach((arg) => {
-                                        if (utils.useAnyArguments(arg, handlerArgs)) {
-                                            reportObject.eventsNumberOfRethrowsOnCatches++;
-                                        }
-                                    });
-                                }
-                            }
-                        });
+                        reportObject.eventsNumberOfRethrowsOnCatches += utils.handleThrowStatements(throwStatements, handlerArgs);
 
                         // Counts number of returns
                         const returnStatements = utils.getStatementsByType(handlerBody, 'ReturnStatement');

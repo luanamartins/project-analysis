@@ -84,27 +84,7 @@ function handleCatchClause(reportObject, catchClause) {
         reportObject.tryCatchNumberOfThrowErrorsOnCatches += throwStatements.length;
 
         // Number of rethrows an error argument
-        throwStatements.forEach(throwStatement => {
-            const argument = utils.getIdentifiersNames(throwStatement.argument);
-
-            // Checks if the throw uses an error argument
-            if (utils.containsAnyErrorArgument(catchClauseArguments, argument)) {
-                reportObject.tryCatchNumberOfRethrowsOnCatches++;
-            }
-
-            // Checks if the throw wrap an error on Error object
-            const throwStatementArg = throwStatement.argument;
-            if (throwStatementArg && throwStatementArg.type === 'NewExpression') {
-                if (throwStatementArg.callee && throwStatementArg.callee.name === 'Error') {
-                    const arguments = throwStatementArg.arguments;
-                    arguments.forEach((arg) => {
-                        if (utils.useAnyArguments(arg, catchClauseArguments)) {
-                            reportObject.tryCatchNumberOfRethrowsOnCatches++;
-                        }
-                    });
-                }
-            }
-        });
+        reportObject.tryCatchNumberOfRethrowsOnCatches += utils.handleThrowStatements(throwStatements, catchClauseArguments);
 
         // Counts number of returns
         const returnStatements = utils.getStatementsByType(nodeBody, 'ReturnStatement');
