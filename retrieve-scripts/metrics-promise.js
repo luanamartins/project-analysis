@@ -35,29 +35,7 @@ function handleCatches(reportObject, node) {
             // Number of throws on catches
             const throwStatements = utils.getStatementsByType(functionBody, 'ThrowStatement');
             reportObject.promiseNumberOfThrowErrorsOnCatches += throwStatements.length;
-
-
-            throwStatements.forEach(throwStatement => {
-                const throwArgument = utils.getIdentifiersNames(throwStatement.argument);
-
-                // Number of rethrow an error argument
-                if (utils.containsAnyErrorArgument(functionParams, throwArgument)) {
-                    reportObject.promiseNumberOfRethrowsOnCatches++;
-                }
-
-                // Checks if the throw wrap an error on Error object
-                const throwStatementArg = throwStatement.argument;
-                if (throwStatementArg && throwStatementArg.type === 'NewExpression') {
-                    if (throwStatementArg.callee && throwStatementArg.callee.name === 'Error') {
-                        const arguments = throwStatementArg.arguments;
-                        arguments.forEach((arg) => {
-                            if (utils.useAnyArguments(arg, functionParams)) {
-                                reportObject.promiseNumberOfRethrowsOnCatches++;
-                            }
-                        });
-                    }
-                }
-            });
+            reportObject.promiseNumberOfRethrowsOnCatches += utils.handleThrowStatements(throwStatements, functionParams);
 
             // Counts number of returns
             const returnStatements = utils.getStatementsByType(functionBody, 'ReturnStatement');

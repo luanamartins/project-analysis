@@ -237,6 +237,38 @@ function isEmptyHandler(body, args, numberOfLines) {
     return (numberOfLines === 0) ? true : !useAnyArguments(body, args);
 }
 
+function handleThrowStatements(throwStatements, errorArguments) {
+    let result = 0;
+
+    if(!throwStatements) {
+        return result;
+    }
+
+    throwStatements.forEach((throwStatement) => {
+        const argument = getIdentifiersNames(throwStatement.argument);
+
+        // Checks if the throw uses an error argument
+        if (containsAnyErrorArgument(errorArguments, argument)) {
+            result++;
+        }
+
+        // Checks if the throw wrap an error on Error object
+        const throwStatementArg = throwStatement.argument;
+        if (throwStatementArg && throwStatementArg.type === 'NewExpression') {
+            if (throwStatementArg.callee && throwStatementArg.callee.name === 'Error') {
+                const arguments = throwStatementArg.arguments;
+                arguments.forEach((arg) => {
+                    if (useAnyArguments(arg, errorArguments)) {
+                        result++;
+                    }
+                });
+            }
+        }
+    });
+
+    return result;
+}
+
 function notIntersectAny(startList, endList, start2, end2) {
     const list = [];
     startList.forEach(function (item, index) {
@@ -303,4 +335,5 @@ module.exports = {
     useAnyArguments,
     isEmptyHandler,
     getAllErrorArgs,
+    handleThrowStatements
 };
