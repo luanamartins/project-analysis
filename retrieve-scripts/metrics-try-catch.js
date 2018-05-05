@@ -91,12 +91,7 @@ function handleCatchClause(reportObject, catchClause) {
         reportObject.tryCatchNumberOfReturnsOnCatches += returnStatements.length;
 
         // Counts number of returns that uses an error argument
-        returnStatements.forEach((statement) => {
-            const returnArgument = statement.argument;
-            if (utils.useAnyArguments(returnArgument, catchClauseArguments)) {
-                reportObject.tryCatchNumberOfReturnsAnErrorOnCatches++;
-            }
-        });
+        reportObject.tryCatchNumberOfReturnsAnErrorOnCatches += utils.getNumberOfReturnUsingErrors(returnStatements, catchClauseArguments);
 
         // Counts number of breaks
         const breakStatements = utils.getStatementsByType(nodeBody, 'BreakStatement');

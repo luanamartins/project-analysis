@@ -280,13 +280,26 @@ function isConsoleStatement(statement) {
     if (statement.type === 'ExpressionStatement' && statement.expression.type === 'CallExpression') {
         const callee = statement.expression.callee;
 
-        // This is necessary because some functions are not called by a object
-        // or is a recursive function
-        if (callee.object && callee.object.name === 'console') {
-            return true;
-        }
+        // This is necessary because some functions are not called by a object or is a recursive function
+        return callee.object && callee.object.name === 'console';
     }
     return false;
+}
+
+function getNumberOfReturnUsingErrors(returnStatements, errors) {
+    let result = 0;
+    if(!returnStatements || !errors) {
+        return 0;
+    }
+
+    returnStatements.forEach((statement) => {
+        const returnArgument = statement.argument;
+        if (useAnyArguments(returnArgument, errors)) {
+            result++;
+        }
+    });
+
+    return result;
 }
 
 function guid() {
@@ -325,5 +338,6 @@ module.exports = {
     useAnyArguments,
     isEmptyHandler,
     getAllErrorArgs,
-    handleRethrowStatements
+    handleRethrowStatements,
+    getNumberOfReturnUsingErrors
 };

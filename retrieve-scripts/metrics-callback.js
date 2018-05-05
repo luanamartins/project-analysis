@@ -44,6 +44,7 @@ function handleAnalysis(node, reportObject) {
                     reportObject.callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueConsole++;
                 }
 
+                // DONE
                 // callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueConsole
                 // callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueStatement
                 // callbacksNumberOfLinesOfFunctionsWithUniqueErrorArg
@@ -72,12 +73,7 @@ function handleAnalysis(node, reportObject) {
             reportObject.callbacksNumberOfReturnsOnCatches += returnStatements.length;
 
             // Counts number of returns that uses an error argument
-            returnStatements.forEach((statement) => {
-                const returnArgument = statement.argument;
-                if (utils.useAnyArguments(returnArgument, errorArguments)) {
-                    reportObject.callbacksNumberOfReturnsAnErrorOnCatches++;
-                }
-            });
+            reportObject.callbacksNumberOfReturnsAnErrorOnCatches += utils.getNumberOfReturnUsingErrors(returnStatements, errorArguments);
 
             // Counts number of breaks
             const breakStatements = utils.getStatementsByType(functionBody, 'BreakStatement');

@@ -49,10 +49,8 @@ function handleCatchClauses(errorArgs, catchClause, reportObject) {
         reportObject.asyncAwaitNumberOfCatchesWithUniqueStatement++;
         // Handles errors on console only
         const uniqueStatement = catchClauseBody.body[0];
-        if (uniqueStatement.type === 'ExpressionStatement' && uniqueStatement.expression.type === 'CallExpression') {
-            if (uniqueStatement.expression.callee.object.name === 'console') {
-                reportObject.asyncAwaitNumberOfCatchesWithUniqueConsole++;
-            }
+        if (utils.isConsoleStatement(uniqueStatement)) {
+            reportObject.asyncAwaitNumberOfCatchesWithUniqueConsole++;
         }
     }
 
@@ -63,8 +61,7 @@ function handleCatchClauses(errorArgs, catchClause, reportObject) {
         const awaitArgument = awaitExpression.argument;
         if (awaitArgument.type === 'CallExpression') {
             const awaitArgs = utils.getIdentifiersNames(awaitArgument.arguments);
-            const args = utils.containsAnyErrorArgument(catchClauseErrorArgs, awaitArgs);
-            if (args) {
+            if (utils.containsAnyErrorArgument(catchClauseErrorArgs, awaitArgs)) {
                 reportObject.asyncAwaitNumberOfAwaitErrorArgsOnCatches++;
             }
         }
@@ -82,12 +79,7 @@ function handleCatchClauses(errorArgs, catchClause, reportObject) {
     reportObject.asyncAwaitNumberOfReturnsOnCatches += returnStatements.length;
 
     // Counts number of returns that uses an error argument
-    returnStatements.forEach((statement) => {
-        const returnArgument = statement.argument;
-        if (utils.useAnyArguments(returnArgument, catchClauseErrorArgs)) {
-            reportObject.asyncAwaitNumberOfReturnsAnErrorOnCatches++;
-        }
-    });
+    reportObject.asyncAwaitNumberOfReturnsAnErrorOnCatches += utils.getNumberOfReturnUsingErrors(returnStatements, catchClauseErrorArgs);
 
     // Counts number of breaks
     const breakStatements = utils.getStatementsByType(catchClauseBody, 'BreakStatement');

@@ -32,7 +32,6 @@ function handleAnalysis(node, reportObject) {
                         if (methodName === 'on') {
                             reportObject.eventsNumberOfEventMethodsOn++;
 
-
                             reportObject.eventsNumberOfEventOnLines += lines;
                             const location = handlerFunction.loc;
                             reportObject.eventsNumberOfEventOnLinesStart.push(location.start.line);
@@ -45,7 +44,6 @@ function handleAnalysis(node, reportObject) {
                         } else if (methodName === 'once') {
 
                             reportObject.eventsNumberOfEventMethodsOnce++;
-
 
                             reportObject.eventsNumberOfEventOnceLines += utils.getNumberOfLines(handlerFunction);
                             const location = handlerFunction.loc;
@@ -72,12 +70,7 @@ function handleAnalysis(node, reportObject) {
                         reportObject.eventsNumberOfReturnsOnCatches += returnStatements.length;
 
                         // Counts number of returns that uses an error argument
-                        returnStatements.forEach((statement) => {
-                            const returnArgument = statement.argument;
-                            if (utils.useAnyArguments(returnArgument, handlerArgs)) {
-                                reportObject.eventsNumberOfReturnsAnErrorOnCatches++;
-                            }
-                        });
+                        reportObject.eventsNumberOfReturnsAnErrorOnCatches += utils.getNumberOfReturnUsingErrors(returnStatements, handlerArgs);
 
                         // Counts number of breaks
                         const breakStatements = utils.getStatementsByType(handlerBody, 'BreakStatement');
