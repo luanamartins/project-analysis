@@ -292,12 +292,6 @@ function isConsoleStatement(statement) {
     return false;
 }
 
-function isThrowStatement(statement) {
-    if (statement.type === 'ThrowStatement') {
-        return true;
-    }
-}
-
 function guid() {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
         s4() + '-' + s4() + s4() + s4();
@@ -326,7 +320,6 @@ module.exports = {
     isAnErrorArgument,
     isString,
     isConsoleStatement,
-    isThrowStatement,
     containsAnyErrorArgument,
     getIdentifiersNames,
     hasAnErrorArgument,
