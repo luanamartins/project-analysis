@@ -10,7 +10,6 @@ function handleAnalysis(node, reportObject) {
                 reportObject.numberOfWindowOnError++;
             }
 
-            // TO TEST
             // element.onerror
             if (leftSideObject.name === 'element') {
                 reportObject.numberOfElementOnError++;
@@ -18,7 +17,6 @@ function handleAnalysis(node, reportObject) {
         }
     }
 
-    // TO TEST
     // window.addEventListener('error')
     if (node.type === 'CallExpression') {
         const objectName = node.callee.object.name;
