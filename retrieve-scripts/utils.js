@@ -237,7 +237,7 @@ function isEmptyHandler(body, args, numberOfLines) {
     return (numberOfLines === 0) ? true : !useAnyArguments(body, args);
 }
 
-function handleThrowStatements(throwStatements, errorArguments) {
+function handleRethrowStatements(throwStatements, errorArguments) {
     let result = 0;
 
     if(!throwStatements) {
@@ -335,5 +335,5 @@ module.exports = {
     useAnyArguments,
     isEmptyHandler,
     getAllErrorArgs,
-    handleThrowStatements
+    handleRethrowStatements
 };

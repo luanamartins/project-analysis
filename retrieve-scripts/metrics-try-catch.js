@@ -84,7 +84,7 @@ function handleCatchClause(reportObject, catchClause) {
         reportObject.tryCatchNumberOfThrowErrorsOnCatches += throwStatements.length;
 
         // Number of rethrows an error argument
-        reportObject.tryCatchNumberOfRethrowsOnCatches += utils.handleThrowStatements(throwStatements, catchClauseArguments);
+        reportObject.tryCatchNumberOfRethrowsOnCatches += utils.handleRethrowStatements(throwStatements, catchClauseArguments);
 
         // Counts number of returns
         const returnStatements = utils.getStatementsByType(nodeBody, 'ReturnStatement');

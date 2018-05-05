@@ -37,7 +37,7 @@ function handleCatches(reportObject, node) {
             reportObject.promiseNumberOfThrowErrorsOnCatches += throwStatements.length;
             
             // Number of rethrows on catches
-            reportObject.promiseNumberOfRethrowsOnCatches += utils.handleThrowStatements(throwStatements, functionParams);
+            reportObject.promiseNumberOfRethrowsOnCatches += utils.handleRethrowStatements(throwStatements, functionParams);
 
             // Counts number of returns
             const returnStatements = utils.getStatementsByType(functionBody, 'ReturnStatement');

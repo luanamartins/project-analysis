@@ -65,7 +65,7 @@ function handleAnalysis(node, reportObject) {
                         reportObject.eventsNumberOfThrowErrorsOnCatches += throwStatements.length;
 
                         // Number of rethrow an error argument
-                        reportObject.eventsNumberOfRethrowsOnCatches += utils.handleThrowStatements(throwStatements, handlerArgs);
+                        reportObject.eventsNumberOfRethrowsOnCatches += utils.handleRethrowStatements(throwStatements, handlerArgs);
 
                         // Counts number of returns
                         const returnStatements = utils.getStatementsByType(handlerBody, 'ReturnStatement');
