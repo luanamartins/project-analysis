@@ -3,10 +3,24 @@
   "numberOfPhysicalLines": 0,
   "numberOfStrictModeGlobal": 0,
   "numberOfStrictModeLocal": 0,
+
   "numberOfWindowOnError": 0,
+  "numberOfWindowOnErrorLines": 0,
   "numberOfWindowOnErrorEmptyHandler": 0,
+  "numberOfWindowOnErrorUniqueStatement": 0,
+  "numberOfWindowOnErrorUniqueConsole": 0,
+
   "numberOfWindowAddEventListener": 0,
+  "numberOfWindowAddEventListenerLines": 0,
+  "numberOfWindowAddEventListenerEmptyHandler": 0,
+  "numberOfWindowAddEventListenerUniqueStatement": 0,
+  "numberOfWindowAddEventListenerUniqueConsole": 0,
+
   "numberOfElementOnError": 0,
+  "numberOfElementOnErrorLines": 0,
+  "numberOfElementOnErrorEmptyHandler": 0,
+  "numberOfElementOnErrorUniqueStatement": 0,
+  "numberOfElementOnErrorUniqueConsole": 0,
 
   "tryCatchNumberOfTries": 0,
   "tryCatchNumberOfEmptyTries": 0,

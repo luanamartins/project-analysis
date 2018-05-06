@@ -10,21 +10,23 @@ function handleAnalysis(node, reportObject) {
             // window.onerror
             if (leftSideObject.name === 'window') {
                 reportObject.numberOfWindowOnError++;
-                if (node.right && node.right.body) {
-                    const rightSideBlockStatement = node.right.body;
+                const rightSide = node.right;
+                if (rightSide && rightSide.body) {
+                    const rightSideBlockStatement = rightSide.body;
                     const numberOfLines = utils.getNumberOfLines(rightSideBlockStatement);
-                    const errors = utils.getAllErrorArgs(utils.getIdentifiersNames(node.params));
+                    reportObject.numberOfWindowOnErrorLines += numberOfLines;
+                    const errors = utils.getAllErrorArgs(utils.getIdentifiersNames(rightSide.params));
 
                     // empty handler
                     if (utils.isEmptyHandler(rightSideBlockStatement, errors, numberOfLines)) {
                         reportObject.numberOfWindowOnErrorEmptyHandler++;
                     }
 
-                    if(numberOfLines === 1) {
+                    if (numberOfLines === 1) {
                         // Handler has only one statement
                         reportObject.numberOfWindowOnErrorUniqueStatement++;
 
-                        if(utils.isConsoleStatement(rightSideBlockStatement.body[0])) {
+                        if (utils.isConsoleStatement(rightSideBlockStatement.body[0])) {
                             // Handler's unique statement is console.log
                             reportObject.numberOfWindowOnErrorUniqueConsole++;
                         }
@@ -35,6 +37,29 @@ function handleAnalysis(node, reportObject) {
             // element.onerror
             if (leftSideObject.name === 'element') {
                 reportObject.numberOfElementOnError++;
+
+                const functionRightSide = node.right;
+                if (functionRightSide && functionRightSide.body) {
+                    const rightSideBlockStatement = functionRightSide.body;
+                    const numberOfLines = utils.getNumberOfLines(rightSideBlockStatement);
+                    reportObject.numberOfElementOnErrorLines += numberOfLines;
+                    const errors = utils.getAllErrorArgs(utils.getIdentifiersNames(functionRightSide.params));
+
+                    // empty handler
+                    if (utils.isEmptyHandler(rightSideBlockStatement, errors, numberOfLines)) {
+                        reportObject.numberOfElementOnErrorEmptyHandler++;
+                    }
+
+                    if (numberOfLines === 1) {
+                        // Handler has only one statement
+                        reportObject.numberOfElementOnErrorUniqueStatement++;
+
+                        if (utils.isConsoleStatement(rightSideBlockStatement.body[0])) {
+                            // Handler's unique statement is console.log
+                            reportObject.numberOfElementOnErrorUniqueConsole++;
+                        }
+                    }
+                }
             }
         }
     }
@@ -48,6 +73,28 @@ function handleAnalysis(node, reportObject) {
         if (objectName === 'window' && propertyName === 'addEventListener' &&
             firstArg && firstArg.value === 'error') {
             reportObject.numberOfWindowAddEventListener++;
+
+            const arguments = node.arguments;
+            const functionHandler = arguments[1];
+            if (functionHandler && functionHandler.type === 'FunctionExpression') {
+
+                const functionBody = functionHandler.body;
+                const args = utils.getAllErrorArgs(utils.getIdentifiersNames(functionHandler.params));
+                const numberOfLines = utils.getNumberOfLines(functionBody);
+                reportObject.numberOfWindowAddEventListenerLines += numberOfLines;
+
+                if(utils.isEmptyHandler(functionBody, args, numberOfLines)) {
+                    reportObject.numberOfWindowAddEventListenerEmptyHandler++;
+                }
+
+                if(numberOfLines === 1) {
+                    reportObject.numberOfWindowAddEventListenerUniqueStatement++;
+                    const body = functionBody.body[0];
+                    if(utils.isConsoleStatement(body)) {
+                        reportObject.numberOfWindowAddEventListenerUniqueConsole++;
+                    }
+                }
+            }
         }
     }
 }
