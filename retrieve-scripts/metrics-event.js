@@ -27,17 +27,17 @@ function handleAnalysis(node, reportObject) {
                 if (isFirstArgErrorHandling) {
 
                     const handlerParams = utils.getIdentifiersNames(handlerFunction.params);
-                    const lines = utils.getNumberOfLines(handlerFunction);
+                    const numberOfLines = utils.getNumberOfLines(handlerFunction);
                     if (handlerFunction && handlerFunction.type === 'FunctionExpression') {
                         if (methodName === 'on') {
                             reportObject.eventsNumberOfEventMethodsOn++;
 
-                            reportObject.eventsNumberOfEventOnLines += lines;
+                            reportObject.eventsNumberOfEventOnLines += numberOfLines;
                             const location = handlerFunction.loc;
                             reportObject.eventsNumberOfEventOnLinesStart.push(location.start.line);
                             reportObject.eventsNumberOfEventOnLinesEnd.push(location.end.line);
 
-                            if (utils.isEmptyHandler(handlerFunction.body, handlerParams, lines)) {
+                            if (utils.isEmptyHandler(handlerFunction.body, handlerParams, numberOfLines)) {
                                 reportObject.eventsNumberOfEventOnEmptyFunctions++;
                             }
 
@@ -50,7 +50,7 @@ function handleAnalysis(node, reportObject) {
                             reportObject.eventsNumberOfEventOnceLinesStart.push(location.start.line);
                             reportObject.eventsNumberOfEventOnceLinesEnd.push(location.end.line);
 
-                            if (utils.isEmptyHandler(handlerFunction.body, handlerParams, lines)) {
+                            if (utils.isEmptyHandler(handlerFunction.body, handlerParams, numberOfLines)) {
                                 reportObject.eventsNumberOfEventOnceEmptyFunctions++;
                             }
                         }
@@ -75,6 +75,7 @@ function handleAnalysis(node, reportObject) {
                         // Counts number of breaks
                         const breakStatements = utils.getStatementsByType(handlerBody, 'BreakStatement');
                         reportObject.eventsNumberOfBreaksOnCatches += breakStatements.length;
+
                     }
                 }
             }

@@ -79,7 +79,6 @@ function handleAnalysis(node, reportObject) {
             const breakStatements = utils.getStatementsByType(functionBody, 'BreakStatement');
             reportObject.callbacksNumberOfBreaksOnCatches += breakStatements.length;
 
-
             const bodyFunction = node.body.body;
             const ifStatements = getIfStatementsWithErrorArgs(bodyFunction, errorArguments);
 
