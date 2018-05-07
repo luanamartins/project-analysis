@@ -85,6 +85,11 @@ function handleCatchClauses(errorArgs, catchClause, reportObject) {
     const breakStatements = utils.getStatementsByType(catchClauseBody, 'BreakStatement');
     reportObject.asyncAwaitNumberOfBreaksOnCatches += breakStatements.length;
 
+    // Add unique break in all constructions
+    if (utils.hasOneStatementAndIsBreak(breakStatements, numberOfLines)) {
+        reportObject.asyncAwaitNumberOfBreaksOnCatchesUniqueStatement++;
+    }
+
 }
 
 function handleFinallyClauses(finallyStatement, reportObject) {

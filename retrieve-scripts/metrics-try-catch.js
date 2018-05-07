@@ -65,6 +65,7 @@ function handleCatchClause(reportObject, catchClause) {
 
     if (nodeBody) {
         const catchClauseArguments = utils.getIdentifiersNames(catchClause.param);
+        const numberOfLines = utils.getNumberOfLines(nodeBody);
 
         if (utils.isEmptyHandler(nodeBody, catchClauseArguments, lines)) {
             reportObject.tryCatchNumberOfEmptyCatches++;
@@ -96,6 +97,11 @@ function handleCatchClause(reportObject, catchClause) {
         // Counts number of breaks
         const breakStatements = utils.getStatementsByType(nodeBody, 'BreakStatement');
         reportObject.tryCatchNumberOfBreaksOnCatches += breakStatements.length;
+
+        // Add unique break in all constructions
+        if(utils.hasOneStatementAndIsBreak(breakStatements, lines)){
+            reportObject.tryCatchNumberOfBreaksOnCatchesUniqueStatement++;
+        }
 
     }
 

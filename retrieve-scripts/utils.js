@@ -14,7 +14,7 @@ function hasAnErrorArgument(array) {
 
 function getAllErrorArgs(args) {
     let result = [];
-    if(args) {
+    if (args) {
         result = args.filter(arg => isAnErrorArgument(arg));
     }
     return result;
@@ -234,10 +234,14 @@ function isEmptyHandler(body, args, numberOfLines) {
     return (numberOfLines === 0) ? true : !useAnyArguments(body, args);
 }
 
+function hasOneStatementAndIsBreak(breakStatements, numberOfLines) {
+    return (breakStatements.length === 1 && numberOfLines === 1);
+}
+
 function handleRethrowStatements(throwStatements, errorArguments) {
     let result = 0;
 
-    if(!throwStatements) {
+    if (!throwStatements) {
         return result;
     }
 
@@ -288,7 +292,7 @@ function isConsoleStatement(statement) {
 
 function getNumberOfReturnUsingErrors(returnStatements, errors) {
     let result = 0;
-    if(!returnStatements || !errors) {
+    if (!returnStatements || !errors) {
         return 0;
     }
 
@@ -339,5 +343,6 @@ module.exports = {
     isEmptyHandler,
     getAllErrorArgs,
     handleRethrowStatements,
-    getNumberOfReturnUsingErrors
+    getNumberOfReturnUsingErrors,
+    hasOneStatementAndIsBreak
 };
