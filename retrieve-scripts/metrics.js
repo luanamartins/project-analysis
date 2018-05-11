@@ -2,6 +2,7 @@ const esprima = require('esprima');
 const exec = require('sync-exec');
 const fs = require('fs');
 const temp = require('fs-temp');
+const estraverse = require('estraverse');
 
 const tryCatchModule = require('./metrics-try-catch.js');
 const promiseModule = require('./metrics-promise.js');
@@ -122,16 +123,18 @@ function getMetrics(ast, filepath, reportObject) {
 
         strictModeModule.isGlobalStrictMode(ast, reportObject);
 
-        utils.traverse(ast, function (node) {
-
-            strictModeModule.handleAnalysis(node, reportObject);
-            globalEventHandlerModule.handleAnalysis(node, reportObject);
-            tryCatchModule.handleAnalysis(node, reportObject);
-            promiseModule.handleAnalysis(node, reportObject);
-            asyncAwaitModule.handleAnalysis(node, reportObject);
-            callbackModule.handleAnalysis(node, reportObject);
-            eventModule.handleAnalysis(node, reportObject);
+        estraverse.traverse(ast, {
+            enter: function (node) {
+                strictModeModule.handleAnalysis(node, reportObject);
+                globalEventHandlerModule.handleAnalysis(node, reportObject);
+                tryCatchModule.handleAnalysis(node, reportObject);
+                promiseModule.handleAnalysis(node, reportObject);
+                asyncAwaitModule.handleAnalysis(node, reportObject);
+                callbackModule.handleAnalysis(node, reportObject);
+                eventModule.handleAnalysis(node, reportObject);
+            }
         });
+
     } catch (err) {
         console.log(filepath, ' ', err);
     }

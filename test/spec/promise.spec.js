@@ -684,7 +684,7 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
         test.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
 
-        test.equal(metricsObject.promiseNumberOfChainingCatches, 2);
+        test.equal(metricsObject.promiseNumberOfChainingCatches, 1);
 
         test.equal(metricsObject.promiseNumberOfPromiseRaces, 0);
         test.equal(metricsObject.promiseNumberOfPromiseAll, 0);
@@ -726,5 +726,18 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfPromiseAll, 0);
 
         test.done();
+    },
+
+    "TC21": function (test) {
+        const filename = suiteCasePath + 'promise21.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
+        const metricsObject = metrics[0];
+
+        test.equal(metricsObject.promiseNumberOfChainingCatches, 2);
+        test.equal(metricsObject.promiseNumberOfNonCaughtPromises, 1);
+
+        test.done();
     }
+
+
 });

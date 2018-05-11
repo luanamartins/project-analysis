@@ -73,6 +73,7 @@
   "promiseNumberOfReturnsAnErrorOnCatches": 0,
   "promiseNumberOfBreaksOnCatches": 0,
   "promiseNumberOfChainingCatches": 0,
+  "promiseNumberOfNonCaughtPromises": 0,
   "promiseNumberOfPromiseRaces": 0,
   "promiseNumberOfPromiseAll": 0,
 

@@ -35,7 +35,7 @@ function handleCatches(reportObject, node) {
             // Number of throws on catches
             const throwStatements = utils.getStatementsByType(functionBody, 'ThrowStatement');
             reportObject.promiseNumberOfThrowErrorsOnCatches += throwStatements.length;
-            
+
             // Number of rethrows on catches
             reportObject.promiseNumberOfRethrowsOnCatches += utils.handleRethrowStatements(throwStatements, functionParams);
 
@@ -126,18 +126,37 @@ function handleAnalysis(node, reportObject) {
                 handleCatches(reportObject, node);
             }
 
-            // Encadeamento de thens e catches
-            if (callee.property && (callee.property.name === 'then' || callee.property.name === 'catch')) {
-                const callExpressions = utils.getStatementsByType(callee, 'CallExpression');
-                const result = callExpressions.filter((callExpression) => callExpression.callee.property.name === 'catch');
-                if(result.length > 0) {
-                    reportObject.promiseNumberOfChainingCatches++;
-                }
-            }
         }
 
         if (callee.object && callee.object.name === 'Promise') {
             handlePromiseObjects(reportObject, callee);
+        }
+    }
+
+    // Add a metric for counting the number of declared promises which has no catches
+    if(node.type === 'ExpressionStatement' && node.expression.type === 'CallExpression') {
+        const callee = node.expression.callee;
+        if(callee.property) {
+            const propertyName = callee.property.name;
+
+            // The method name called is not catch
+            if (propertyName === 'then') {
+                reportObject.promiseNumberOfNonCaughtPromises++;
+            }
+
+            const handlesError = propertyName === 'catch';
+
+            // Chaining thens e catches
+            if (propertyName === 'then' || propertyName === 'catch') {
+                const callExpressions = utils.getStatementsByType(node, 'CallExpression');
+                const result = callExpressions.filter((callExpression) =>
+                    callExpression.callee.property && callExpression.callee.property.name === 'catch');
+
+                const numberOfChainingCatches = (handlesError) ? result.length - 1 : result.length;
+                if (numberOfChainingCatches > 0) {
+                    reportObject.promiseNumberOfChainingCatches++;
+                }
+            }
         }
     }
 }
