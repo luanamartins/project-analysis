@@ -71,12 +71,7 @@ function calculateArrayLines(repoObject) {
 function extractMetricsForFilepath(repoObject, filepath) {
     // let contents = fileModule.readFileSync(filepath, 'utf-8');
 
-    let fileContents = exec('babel --plugins transform-es2015-arrow-functions ' + filepath).stdout;
-
-    const tempFilepath = temp.writeFileSync(fileContents);
-
-    fileContents = exec('uglifyjs --beautify bracketize=true ' + tempFilepath).stdout;
-    fs.unlinkSync(tempFilepath);
+    const fileContents = executeBabelAndUglify(filepath);
 
     const stats = utils.getGeneralStats(fileContents);
 
@@ -98,6 +93,17 @@ function extractMetricsForFilepath(repoObject, filepath) {
     strictModeModule.fixStrictMode(repoObject);
 
     return repoObject;
+}
+
+function executeBabelAndUglify(filepath) {
+    let fileContents = exec('babel --plugins transform-es2015-arrow-functions ' + filepath).stdout;
+
+    const tempFilepath = temp.writeFileSync(fileContents);
+
+    fileContents = exec('uglifyjs --beautify bracketize=true ' + tempFilepath).stdout;
+    fs.unlinkSync(tempFilepath);
+
+    return fileContents;
 }
 
 function handleMetrics(files, projectPath) {
