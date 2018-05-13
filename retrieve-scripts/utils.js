@@ -97,6 +97,19 @@ function traverse(obj, fn) {
     }
 }
 
+function getThrowPrimitiveTypes(throwStatements) {
+    let result = 0;
+    if(Array.isArray(throwStatements) && throwStatements.length > 0) {
+        throwStatements.forEach(function(throwStatement) {
+           const argument = throwStatement.argument;
+           if(argument.type === 'Literal' || (argument.type === 'NewExpression' && argument.callee.name === 'RegExp')) {
+               result++;
+           }
+        });
+    }
+    return result;
+}
+
 function isString(literalValue) {
     const hasDoubleQuotes = literalValue.startsWith("\"") && literalValue.endsWith("\"");
     const hasSingleQuotes = literalValue.startsWith("'") && literalValue.endsWith("'");
@@ -246,7 +259,7 @@ function handleRethrowStatements(throwStatements, errorArguments) {
     }
 
     throwStatements.forEach((throwStatement) => {
-        const argument = getIdentifiersNames(throwStatement.argument);
+        const argument = getIdentifiersNames([throwStatement.argument]);
 
         // Checks if the throw uses an error argument
         if (containsAnyErrorArgument(errorArguments, argument)) {
@@ -344,5 +357,6 @@ module.exports = {
     getAllErrorArgs,
     handleRethrowStatements,
     getNumberOfReturnUsingErrors,
-    hasOneStatementAndIsBreak
+    hasOneStatementAndIsBreak,
+    getThrowPrimitiveTypes
 };

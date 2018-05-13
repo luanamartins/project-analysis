@@ -737,6 +737,43 @@ module.exports = testCase({
         test.equal(metricsObject.promiseNumberOfNonCaughtPromises, 1);
 
         test.done();
+    },
+
+    "TC22": function (test) {
+        const filename = suiteCasePath + 'promise22.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
+
+        const metricsObject = metrics[0];
+
+        test.equal(metricsObject.promiseNumberOfPromises, 0);
+
+        test.equal(metricsObject.promiseNumberOfResolves, 0);
+        test.equal(metricsObject.promiseNumberOfRejects, 0);
+
+        test.equal(metricsObject.promiseNumberOfPromiseThens, 2);
+        test.equal(metricsObject.promiseNumberOfPromiseThenFulfilledLines, 0);
+        test.equal(metricsObject.promiseNumberOfPromiseThenRejectedLines, 0);
+
+        test.equal(metricsObject.promiseNumberOfPromiseCatches, 1);
+        test.equal(metricsObject.promiseNumberOfPromiseCatchesLines, 2);
+        test.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 1);
+        test.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
+        test.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
+
+        test.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+
+        test.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 2);
+        test.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+        test.equal(metricsObject.promiseNumberOfThrowPrimitiveTypesOnCatches, 2);
+
+        test.equal(metricsObject.promiseNumberOfChainingCatches, 1);
+
+        test.equal(metricsObject.promiseNumberOfPromiseRaces, 0);
+        test.equal(metricsObject.promiseNumberOfPromiseAll, 0);
+
+        test.done();
     }
 
 

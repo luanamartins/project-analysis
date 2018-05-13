@@ -372,6 +372,40 @@ module.exports = testCase({
         test.equal(metricsObject.eventsTotalOfEventsExceptStringType, 0);
 
         test.done();
+    },
+
+    "TC13": function (test) {
+        const filename = suiteCasePath + 'event13.js';
+        const metrics = metricsModule.handleMetrics([filename], projectPath);
+
+        const metricsObject = metrics[0];
+
+        test.equal(metricsObject.eventsNumberOfEventMethodsOn, 3);
+        test.equal(metricsObject.eventsNumberOfEventMethodsOnce, 0);
+        test.equal(metricsObject.eventsNumberOfEventMethodsEmit, 0);
+
+        test.equal(metricsObject.eventsNumberOfEventOnLines, 11);
+        test.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
+        test.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
+
+        test.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 3);
+        test.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
+
+        test.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 2);
+        test.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
+        test.equal(metricsObject.eventsNumberOfThrowPrimitiveTypesOnCatches, 2);
+
+        test.equal(metricsObject.eventsNumberOfReturnsOnCatches, 0);
+        test.equal(metricsObject.eventsNumberOfReturnsAnErrorOnCatches, 0);
+        test.equal(metricsObject.eventsNumberOfBreaksOnCatches, 1);
+
+        test.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
+        test.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 0);
+
+        test.equal(metricsObject.eventsTotalOfStringEvents, 3);
+        test.equal(metricsObject.eventsTotalOfEventsExceptStringType, 0);
+
+        test.done();
     }
 
 });

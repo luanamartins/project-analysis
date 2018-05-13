@@ -36,6 +36,9 @@ function handleCatches(reportObject, node) {
             const throwStatements = utils.getStatementsByType(functionBody, 'ThrowStatement');
             reportObject.promiseNumberOfThrowErrorsOnCatches += throwStatements.length;
 
+            // Number of throws primitive types
+            reportObject.promiseNumberOfThrowPrimitiveTypesOnCatches += utils.getThrowPrimitiveTypes(throwStatements);
+
             // Number of rethrows on catches
             reportObject.promiseNumberOfRethrowsOnCatches += utils.handleRethrowStatements(throwStatements, functionParams);
 

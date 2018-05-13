@@ -71,6 +71,10 @@ function handleCatchClauses(errorArgs, catchClause, reportObject) {
     const throwStatements = utils.getStatementsByType(catchClauseBody, 'ThrowStatement');
     reportObject.asyncAwaitNumberOfThrowErrorsOnCatches += throwStatements.length;
 
+    // Number of throws primitive types
+    reportObject.asyncAwaitNumberOfThrowPrimitiveTypesOnCatches += utils.getThrowPrimitiveTypes(throwStatements);
+
+
     // Number of rethrows an error argument
     reportObject.asyncAwaitNumberOfRethrowsOnCatches += utils.handleRethrowStatements(throwStatements, catchClauseErrorArgs);
 

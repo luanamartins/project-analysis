@@ -62,6 +62,9 @@ function handleAnalysis(node, reportObject) {
                         const throwStatements = utils.getStatementsByType(handlerBody, 'ThrowStatement');
                         reportObject.eventsNumberOfThrowErrorsOnCatches += throwStatements.length;
 
+                        // Number of throws primitive types
+                        reportObject.eventsNumberOfThrowPrimitiveTypesOnCatches += utils.getThrowPrimitiveTypes(throwStatements);
+
                         // Number of rethrow an error argument
                         reportObject.eventsNumberOfRethrowsOnCatches += utils.handleRethrowStatements(throwStatements, handlerArgs);
 
