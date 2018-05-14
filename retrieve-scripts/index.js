@@ -4,11 +4,11 @@ const path = require('path');
 const async = require('async');
 
 const repoModule = require('./repository.js');
-const metricsModule = require('./metrics.js');
+const metricsModule = require('./metrics/metrics.js');
 const filesModule = require('./files.js');
 const utils = require('./utils.js');
 
-const projectPath = '/Users/luizvasconcelos/Desktop/Luana/project-analysis/retrieve-scripts';
+const projectPath = process.env.RETRIEVE_SCRIPTS_ROOT_PATH;
 console.log(projectPath);
 
 const repositoriesDirectory = path.join(projectPath, 'repos');

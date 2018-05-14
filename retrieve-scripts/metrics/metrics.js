@@ -11,7 +11,7 @@ const callbackModule = require('./metrics-callback.js');
 const eventModule = require('./metrics-event.js');
 const strictModeModule = require('./metrics-strictmode');
 const globalEventHandlerModule = require('./metrics-globaleventhandler');
-const utils = require('./utils.js');
+const utils = require('../utils.js');
 
 function calculateArrayLines(repoObject) {
 

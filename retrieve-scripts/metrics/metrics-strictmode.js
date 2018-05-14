@@ -1,4 +1,4 @@
-const utils = require('./utils');
+const utils = require('../utils');
 
 function isGlobalStrictMode(ast, reportObject) {
     if (ast.body) {
