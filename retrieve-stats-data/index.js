@@ -7,7 +7,7 @@ const utils = require('./utils.js');
 function getAllRepositories(filepath) {
     const projectPath = process.env.PROJECT_PATH;
     const path = projectPath + '/' + filepath;
-    var repositories = fs.readFileSync(path).toString().split('\n');
+    let repositories = fs.readFileSync(path).toString().split('\n');
     repositories = repositories.map((repository) => repository.replace('https://github.com/', ''));
     console.log('Got repositories');
     return repositories
@@ -34,7 +34,7 @@ function getClosedPullRequests(repository) {
 }
 
 function getRequest(githubApiUrl) {
-    var options = {
+    const options = {
         url: githubApiUrl,
         headers: {
             'user-agent': 'node.js',
@@ -127,28 +127,6 @@ Promise.all(prom)
         filesModule.writeCsvFile(filename, headers, deleteFromArray(values, {}))
     })
     .catch(console.log);
-
-
-// const filename = 'retrieve-stats-data/results.csv'
-// filesModule.writeCsvFile(filename, headers, data)
-
-
-// getGithubData('nodejs/node').then(console.log)
-
-// var actions = repositories.map(function (repo) {
-//     getGithubData(repo)
-// })
-//
-// Promise.all(actions).then(function (results) {
-//     console.log(results)
-// })
-
-// const repositories = getAllRepositories('data/teste.txt').map((repo) => getGithubData(repo))
-// Promise.all(repositories).then((data) => {
-//     // const filepath = projectPath + '/data/client.csv'
-//     // filesModule.writeCsvFile(filepath, null, data)
-//     console.log('Data: ', data)
-// }).catch(console.log)
 
 
 

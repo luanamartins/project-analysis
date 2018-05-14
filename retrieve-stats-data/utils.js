@@ -144,8 +144,6 @@ function calculate(startList, endList) {
 
     }
 
-    // console.log(startValues);
-    // console.log(endValues);
     startValues.forEach(function (item, index) {
         lines += endValues[index] - startValues[index];
     });
@@ -177,14 +175,13 @@ console.log(calculate([17, 21], [19, 26]));
 // console.log(calculate([2, 4], [12, 9]));
 
 module.exports = {
-    getNumberOfLinesOld: getNumberOfLinesOld,
-    traverse: traverse,
-    getNumberOfLines: getNumberOfLines,
-    getNodeTypes: getNodeTypes,
-    getGeneralStats: getGeneralStats,
-    getAllProperties: getAllProperties,
-    listPropertiesOf: listPropertiesOf,
-    createRepoObject: createRepoObject,
+    getNumberOfLinesOld,
+    traverse,
+    getNumberOfLines,
+    getNodeTypes,
+    getAllProperties,
+    listPropertiesOf,
+    createRepoObject,
     calculateIntersections: calculate,
-    guid: guid
+    guid
 };
