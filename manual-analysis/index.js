@@ -28,17 +28,14 @@ const lodash = require('lodash');
 
 const repoModule = require('./repository.js');
 const fileModule = require('./files.js');
-const nodegit = require('nodegit');
 
 var projectPath = process.env.MANUAL_ANALYSIS_ROOT_PATH;
 
-var inputGithubFilepath = path.join(projectPath, 'github.txt');
 var clientReposPath = path.join(projectPath, 'repo-clients.txt');
 var serverReposPath = path.join(projectPath, 'repo-servers.txt');
 var outputGithubFilepath = path.join(projectPath, 'repos');
 
 function main() {
-    //var repos = repoModule.getRepos(inputGithubFilepath);
     var clientRepos = repoModule.getRepos(clientReposPath);
     var serverRepos = repoModule.getRepos(serverReposPath);
 
@@ -62,12 +59,6 @@ function main() {
 
     for (var i = 0, len = repos.length; i < len; i++) {
 
-        // nodegit.Clone(repos[i], outputGithubFilepath)
-        //     .then(function (repo) {
-        //         console.log(repo);
-        //     })
-        //     .catch(console.log);
-
         var filesToAnalyze = [];
         var failedOnFiles = [];
 
@@ -86,7 +77,6 @@ function main() {
                     filesToAnalyze.push(jsFiles[j]);
                 }
             } catch (err) {
-                //console.log('Failed to tokenize this file: ', fullFilepath);
                 failedOnFiles.push(fullFilepath);
             }
         }
@@ -101,8 +91,6 @@ function main() {
 
     workbook.write('manual-analysis/manual-analysis.xlsx');
 
-    //console.log(filesToAnalyze);
-    // console.log('Total of files: ', filesToAnalyze.length);
 }
 
 function randomElements(array, count) {
