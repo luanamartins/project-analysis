@@ -8,23 +8,30 @@ const metricsModule = require('./metrics.js');
 const filesModule = require('./files.js');
 const utils = require('./utils.js');
 
-const projectPath = process.env.RETRIEVE_SCRIPTS_ROOT_PATH;
+const projectPath = '/Users/luizvasconcelos/Desktop/Luana/project-analysis/retrieve-scripts';
 console.log(projectPath);
 
-const inputGithubFilepath = path.join(projectPath, 'github.txt');
-const outputGithubFilepath = path.join(projectPath, 'repos');
+const repositoriesDirectory = path.join(projectPath, 'repos');
 
+const failedClientFilepath = './statistics/data/failed-files-client.txt';
+const failedServerFilepath = './statistics/data/failed-files-server.txt';
+
+const clientRepoFilepath = './statistics/data/client.txt';
+const serverRepoFilepath = './statistics/data/server.txt';
+
+const resultClientDirectory = './statistics/data/client2/';
+const resultServerDirectory = './statistics/data/server2/';
+
+// TODO
+// Quais os arquivos que não conseguimos processar?
+// Qual o número de arquivos por projeto? E no total?
 
 function main() {
-
-    const reposToCheckout = repoModule.getRepos(inputGithubFilepath);
-    const repositoriesName = checkoutRepos(reposToCheckout, false);
     const start = new Date();
     const hrstart = process.hrtime();
 
-    async.each(repositoriesName, shouldRunParallel, function (err) {
-        console.log(err);
-    });
+    processRepos(clientRepoFilepath, resultClientDirectory, failedClientFilepath);
+    processRepos(serverRepoFilepath, resultServerDirectory, failedServerFilepath);
 
     console.log('Finished');
     const end = new Date() - start, hrend = process.hrtime(hrstart);
@@ -33,26 +40,46 @@ function main() {
     console.info("Execution time (hr): %ds %dms", hrend[0], hrend[1]/1000000);
 }
 
-function shouldRunParallel(repositoryName) {
+
+function processRepos(repoDataFilepath, dataFilepath, failedFilepath) {
+
+    const reposToCheckout = repoModule.getRepos(repoDataFilepath);
+    const repositoriesName = checkoutRepos(reposToCheckout, true);
+
+    async.each(repositoriesName,
+        function (repositoryName) {
+            shouldRunParallel(repositoryName, dataFilepath, failedFilepath)
+        }, function (err) {
+        console.log(err);
+    });
+}
+
+function shouldRunParallel(repositoryName, dataFilepath, failedFilepath) {
     async.waterfall(
         [
-            async.apply(getFilesOfRepository, repositoryName),
+            async.apply(getFilesOfRepository, repositoryName, dataFilepath, failedFilepath),
             extractMetricsFromFiles
         ]
     );
 }
 
-function getFilesOfRepository(repositoryName, callback) {
+function getFilesOfRepository(repositoryName, dataFilepath, failedFilepath, callback) {
     const files = getFilesFromDirectory(repositoryName);
-    callback(null, repositoryName, files);
+    callback(null, repositoryName, files, dataFilepath, failedFilepath);
 }
 
-function extractMetricsFromFiles(repositoryName, files, callback) {
-    const metrics = metricsModule.handleMetrics(files, projectPath);
+function extractMetricsFromFiles(repositoryName, files, dataFilepath, failedFilepath, callback) {
+    const metricsData = metricsModule.handleMetrics(files, projectPath);
 
     const repoObject = utils.createRepoObject(projectPath);
     const headers = utils.listPropertiesOf(repoObject);
-    filesModule.writeCsvFile('./statistics/data/' + repositoryName + '.csv', headers, metrics);
+
+    filesModule.writeCsvFile(dataFilepath + repositoryName + '.csv', headers, metricsData.metrics);
+
+    if(metricsData.failedFiles) {
+        const failedFilesData = metricsData.failedFiles.join('\n');
+        filesModule.appendDataToFile(failedFilepath, failedFilesData);
+    }
 
     callback(null);
 }
@@ -61,7 +88,7 @@ function checkoutRepos(reposToCheckout, checkoutEverything) {
     let repositoriesName = [];
     if (checkoutEverything) {
         reposToCheckout.forEach(function (repo) {
-            repoModule.checkoutRepoTo(repo, outputGithubFilepath);
+            repoModule.checkoutRepoTo(repo, repositoriesDirectory);
             let repoName = repoModule.getRepoProjectName(repo);
             repositoriesName.push(repoName.replace("/", ""));
         });
@@ -72,7 +99,7 @@ function checkoutRepos(reposToCheckout, checkoutEverything) {
 }
 
 function getFilesFromDirectory(repositoryName) {
-    const repoOutputDirectory = path.join(outputGithubFilepath, repositoryName);
+    const repoOutputDirectory = path.join(repositoriesDirectory, repositoryName);
     // const repoOutputDirectory = path.join(projectPath, 'test-parallel');
     const filenames = repoModule.getFilesFromDir(repoOutputDirectory, ['.js'], ['.min.js']);
 
@@ -94,4 +121,4 @@ function test() {
     console.log(metrics);
 }
 
-test();
+main();

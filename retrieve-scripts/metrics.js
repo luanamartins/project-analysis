@@ -108,6 +108,7 @@ function executeBabelAndUglify(filepath) {
 
 function handleMetrics(files, projectPath) {
     let metrics = [];
+    const failedFiles = [];
     if (files) {
         let i = 0;
         files.forEach(function (filepath) {
@@ -118,10 +119,14 @@ function handleMetrics(files, projectPath) {
                 metrics.push(extractMetricsForFilepath(repoObject, filepath));
             } catch (err) {
                 console.log(err);
+                failedFiles.push(filepath);
             }
         });
     }
-    return metrics;
+    return {
+        'metrics': metrics,
+        'failedFiles': failedFiles
+    };
 }
 
 function getMetrics(ast, filepath, reportObject) {
