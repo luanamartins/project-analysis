@@ -1,4 +1,6 @@
-require('dotenv').config();
+'use strict';
+
+// require('dotenv').config();
 
 const path = require('path');
 const async = require('async');
@@ -11,16 +13,18 @@ const utils = require('./utils.js');
 const projectPath = process.env.RETRIEVE_SCRIPTS_ROOT_PATH;
 console.log(projectPath);
 
-const repositoriesDirectory = path.join(projectPath, 'repos');
+const repoDir = '/data/repo';
+const clientDirectory = path.join(repoDir, 'client');
+const serverDirectory = path.join(repoDir, 'server');
 
-const failedClientFilepath = './statistics/data/failed-files-client.txt';
-const failedServerFilepath = './statistics/data/failed-files-server.txt';
+const failedClientFilepath = '/data/failed-files-client.txt';
+const failedServerFilepath = '/data/failed-files-server.txt';
 
-const clientRepoFilepath = './statistics/data/client.txt';
-const serverRepoFilepath = './statistics/data/server.txt';
+const clientRepoFilepath = '/data/client.txt';
+const serverRepoFilepath = '/data/server.txt';
 
-const resultClientDirectory = './statistics/data/client2/';
-const resultServerDirectory = './statistics/data/server2/';
+const resultClientDirectory = '/data/client/';
+const resultServerDirectory = '/data/server/';
 
 // TODO
 // Quais os arquivos que não conseguimos processar?
@@ -29,9 +33,24 @@ const resultServerDirectory = './statistics/data/server2/';
 function main() {
     const start = new Date();
     const hrstart = process.hrtime();
+    
+    const clientOptions = {
+    	repoDirectory: clientDirectory,
+		repoFilepath: clientRepoFilepath,
+		resultDirectory: resultClientDirectory,
+		failedFilepath: failedClientFilepath
+    };
 
-    processRepos(clientRepoFilepath, resultClientDirectory, failedClientFilepath);
-    processRepos(serverRepoFilepath, resultServerDirectory, failedServerFilepath);
+    processRepos(clientOptions);
+    
+	 const serverOptions = {
+    	repoDirectory: serverDirectory,
+		repoFilepath: serverRepoFilepath,
+		resultDirectory: resultServerDirectory,
+		failedFilepath: failedServerFilepath
+    };
+    
+    processRepos(serverOptions);
 
     console.log('Finished');
     const end = new Date() - start, hrend = process.hrtime(hrstart);
@@ -41,14 +60,14 @@ function main() {
 }
 
 
-function processRepos(repoDataFilepath, dataFilepath, failedFilepath) {
+function processRepos(options) {
 
-    const reposToCheckout = repoModule.getRepos(repoDataFilepath);
+    const reposToCheckout = repoModule.getRepos(options.repoFilepath);
     const repositoriesName = checkoutRepos(reposToCheckout, true);
 
     async.each(repositoriesName,
         function (repositoryName) {
-            shouldRunParallel(repositoryName, dataFilepath, failedFilepath)
+            shouldRunParallel(repositoryName, options.repoFilepath, options.failedFilepath)
         }, function (err) {
         console.log(err);
     });
