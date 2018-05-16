@@ -10,21 +10,20 @@ const metricsModule = require('./metrics/metrics.js');
 const filesModule = require('./files.js');
 const utils = require('./utils.js');
 
-const projectPath = process.env.RETRIEVE_SCRIPTS_ROOT_PATH;
+const projectPath = '';
 console.log(projectPath);
 
-const repoDir = '/data/repo';
-const clientDirectory = path.join(repoDir, 'client');
-const serverDirectory = path.join(repoDir, 'server');
+const clientDirectory = 'data/repo/client/';
+const serverDirectory = 'data/repo/server/';
 
-const failedClientFilepath = '/data/failed-files-client.txt';
-const failedServerFilepath = '/data/failed-files-server.txt';
+const failedClientFilepath = 'data/failed-files-client.txt';
+const failedServerFilepath = 'data/failed-files-server.txt';
 
-const clientRepoFilepath = '/data/client.txt';
-const serverRepoFilepath = '/data/server.txt';
+const clientRepoFilepath = 'data/client.txt';
+const serverRepoFilepath = 'data/server.txt';
 
-const resultClientDirectory = '/data/client/';
-const resultServerDirectory = '/data/server/';
+const resultClientDirectory = 'data/client/';
+const resultServerDirectory = 'data/server/';
 
 // TODO
 // Quais os arquivos que não conseguimos processar?
@@ -34,14 +33,14 @@ function main() {
     const start = new Date();
     const hrstart = process.hrtime();
     
-    const clientOptions = {
-    	repoDirectory: clientDirectory,
-		repoFilepath: clientRepoFilepath,
-		resultDirectory: resultClientDirectory,
-		failedFilepath: failedClientFilepath
-    };
+    // const clientOptions = {
+    // 	repoDirectory: clientDirectory,
+	// 	repoFilepath: clientRepoFilepath,
+	// 	resultDirectory: resultClientDirectory,
+	// 	failedFilepath: failedClientFilepath
+    // };
 
-    processRepos(clientOptions);
+    // processRepos(clientOptions);
     
 	 const serverOptions = {
     	repoDirectory: serverDirectory,
@@ -63,51 +62,51 @@ function main() {
 function processRepos(options) {
 
     const reposToCheckout = repoModule.getRepos(options.repoFilepath);
-    const repositoriesName = checkoutRepos(reposToCheckout, true);
+    const repositoriesName = checkoutRepos(reposToCheckout, true, options);
 
     async.each(repositoriesName,
         function (repositoryName) {
-            shouldRunParallel(repositoryName, options.repoFilepath, options.failedFilepath)
+            shouldRunParallel(repositoryName, options)
         }, function (err) {
         console.log(err);
     });
 }
 
-function shouldRunParallel(repositoryName, dataFilepath, failedFilepath) {
+function shouldRunParallel(repositoryName, options) {
     async.waterfall(
         [
-            async.apply(getFilesOfRepository, repositoryName, dataFilepath, failedFilepath),
+            async.apply(getFilesOfRepository, repositoryName, options),
             extractMetricsFromFiles
         ]
     );
 }
 
-function getFilesOfRepository(repositoryName, dataFilepath, failedFilepath, callback) {
-    const files = getFilesFromDirectory(repositoryName);
-    callback(null, repositoryName, files, dataFilepath, failedFilepath);
+function getFilesOfRepository(repositoryName, options, callback) {
+    const files = getFilesFromDirectory(repositoryName, options.repoDirectory);
+    callback(null, repositoryName, options, files);
 }
 
-function extractMetricsFromFiles(repositoryName, files, dataFilepath, failedFilepath, callback) {
+function extractMetricsFromFiles(repositoryName, options, files, callback) {
     const metricsData = metricsModule.handleMetrics(files, projectPath);
 
     const repoObject = utils.createRepoObject(projectPath);
     const headers = utils.listPropertiesOf(repoObject);
 
-    filesModule.writeCsvFile(dataFilepath + repositoryName + '.csv', headers, metricsData.metrics);
+    filesModule.writeCsvFile(options.resultDirectory + repositoryName + '.csv', headers, metricsData.metrics);
 
     if(metricsData.failedFiles) {
         const failedFilesData = metricsData.failedFiles.join('\n');
-        filesModule.appendDataToFile(failedFilepath, failedFilesData);
+        filesModule.appendDataToFile(options.failedFilepath, failedFilesData);
     }
 
     callback(null);
 }
 
-function checkoutRepos(reposToCheckout, checkoutEverything) {
+function checkoutRepos(reposToCheckout, checkoutEverything, options) {
     let repositoriesName = [];
     if (checkoutEverything) {
         reposToCheckout.forEach(function (repo) {
-            repoModule.checkoutRepoTo(repo, repositoriesDirectory);
+            repoModule.checkoutRepoTo(repo, options.repoDirectory);
             let repoName = repoModule.getRepoProjectName(repo);
             repositoriesName.push(repoName.replace("/", ""));
         });
@@ -117,7 +116,7 @@ function checkoutRepos(reposToCheckout, checkoutEverything) {
     return repositoriesName;
 }
 
-function getFilesFromDirectory(repositoryName) {
+function getFilesFromDirectory(repositoryName, repositoriesDirectory) {
     const repoOutputDirectory = path.join(repositoriesDirectory, repositoryName);
     // const repoOutputDirectory = path.join(projectPath, 'test-parallel');
     const filenames = repoModule.getFilesFromDir(repoOutputDirectory, ['.js'], ['.min.js']);
