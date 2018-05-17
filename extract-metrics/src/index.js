@@ -10,7 +10,7 @@ const metricsModule = require('./metrics/metrics.js');
 const filesModule = require('./files.js');
 const utils = require('./utils.js');
 
-const projectPath = '../retrieve-scripts/';
+const projectPath = '../extract-metrics/src/';
 console.log(projectPath);
 
 const clientDirectory = projectPath + 'data/repo/client/';

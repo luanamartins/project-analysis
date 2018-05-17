@@ -44,7 +44,7 @@ function getRequest(githubApiUrl) {
 
     return new Promise(function (resolve, reject) {
         request(options, function (error, response, body) {
-            if (!error && response.statusCode == 200) {
+            if (!error && response.statusCode === 200) {
                 resolve(body)
             } else {
                 reject(error)
@@ -89,7 +89,7 @@ function getGithubData(repo) {
 function deleteFromArray(array, deleteValue) {
     const result = [];
     array.forEach(function (item) {
-        if (item != deleteValue) {
+        if (item !== deleteValue) {
             result.push(item)
         }
     });
@@ -100,7 +100,7 @@ function deleteFromArray(array, deleteValue) {
 
 const projectPath = process.env.PROJECT_PATH;
 
-const repositories = getAllRepositories('data/teste.txt');
+const repositories = getAllRepositories('retrieve-stats-data/data/teste.txt');
 console.log(repositories);
 
 let prom = [];
