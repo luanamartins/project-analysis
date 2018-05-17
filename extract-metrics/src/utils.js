@@ -251,6 +251,15 @@ function hasOneStatementAndIsBreak(breakStatements, numberOfLines) {
     return (breakStatements.length === 1 && numberOfLines === 1);
 }
 
+function getDirectoriesNameFrom(directory) {
+    const { readdirSync, statSync } = require('fs');
+    const { join } = require('path');
+
+    const dirs = p => readdirSync(p).filter(f => statSync(join(p, f)).isDirectory())
+
+    return dirs(directory);
+}
+
 function handleRethrowStatements(throwStatements, errorArguments) {
     let result = 0;
 
@@ -358,5 +367,6 @@ module.exports = {
     handleRethrowStatements,
     getNumberOfReturnUsingErrors,
     hasOneStatementAndIsBreak,
-    getThrowPrimitiveTypes
+    getThrowPrimitiveTypes,
+    getDirectoriesNameFrom
 };
