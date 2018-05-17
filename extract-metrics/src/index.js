@@ -10,20 +10,17 @@ const metricsModule = require('./metrics/metrics.js');
 const filesModule = require('./files.js');
 const utils = require('./utils.js');
 
-const projectPath = '../extract-metrics/src/';
-console.log(projectPath);
+const clientDirectory = path.join(__dirname, 'data/repo/client/');
+const serverDirectory = path.join(__dirname, 'data/repo/server/');
 
-const clientDirectory = projectPath + 'data/repo/client/';
-const serverDirectory = projectPath + 'data/repo/server/';
+const failedClientFilepath = path.join(__dirname, 'data/failed-files-client.txt');
+const failedServerFilepath = path.join(__dirname, 'data/failed-files-server.txt');
 
-const failedClientFilepath = projectPath + 'data/failed-files-client.txt';
-const failedServerFilepath = projectPath + 'data/failed-files-server.txt';
+const clientRepoFilepath = path.join(__dirname, 'data/client.txt');
+const serverRepoFilepath = path.join(__dirname, 'data/server.txt');
 
-const clientRepoFilepath = projectPath + 'data/client.txt';
-const serverRepoFilepath = projectPath + 'data/server.txt';
-
-const resultClientDirectory = projectPath + 'data/result/client/';
-const resultServerDirectory = projectPath + 'data/result/server/';
+const resultClientDirectory = path.join(__dirname, 'data/result/client/');
+const resultServerDirectory = path.join(__dirname, 'data/result/server/');
 
 // TODO
 // Quais os arquivos que não conseguimos processar?
@@ -61,8 +58,7 @@ function main() {
 
 function processRepos(options) {
 
-    const reposToCheckout = repoModule.getRepos(options.repoFilepath);
-    const repositoriesName = checkoutRepos(reposToCheckout, true, options);
+    const repositoriesName = utils.getDirectoriesNameFrom(options.repoDirectory);
 
     async.each(repositoriesName,
         function (repositoryName) {
@@ -87,9 +83,9 @@ function getFilesOfRepository(repositoryName, options, callback) {
 }
 
 function extractMetricsFromFiles(repositoryName, options, files, callback) {
-    const metricsData = metricsModule.handleMetrics(files, projectPath);
+    const metricsData = metricsModule.handleMetrics(files, __dirname);
 
-    const repoObject = utils.createRepoObject(projectPath);
+    const repoObject = utils.createRepoObject(__dirname);
     const headers = utils.listPropertiesOf(repoObject);
 
     filesModule.writeCsvFile(options.resultDirectory + repositoryName + '.csv', headers, metricsData.metrics);
@@ -100,20 +96,6 @@ function extractMetricsFromFiles(repositoryName, options, files, callback) {
     }
 
     callback(null);
-}
-
-function checkoutRepos(reposToCheckout, checkoutEverything, options) {
-    let repositoriesName = [];
-    if (checkoutEverything) {
-        reposToCheckout.forEach(function (repo) {
-            repoModule.checkoutRepoTo(repo, options.repoDirectory);
-            let repoName = repoModule.getRepoProjectName(repo);
-            repositoriesName.push(repoName.replace("/", ""));
-        });
-    } else {
-        repositoriesName = ['teste'];
-    }
-    return repositoriesName;
 }
 
 function getFilesFromDirectory(repositoryName, repositoriesDirectory) {
