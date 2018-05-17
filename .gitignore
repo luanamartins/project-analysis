@@ -63,3 +63,5 @@ statistics/\.idea/
 statistics/src/__pycache__/
 
 \.DS_Store
+
+\.idea/
