@@ -10,7 +10,7 @@ function main() {
 function checkout(type) {
     const filepath = path.join(__dirname, 'data/' + type +'.txt');
     const reposUrl = repoModule.getRepos(filepath);
-    const targetDirectory = path.join(__dirname, 'data/repo' + type);
+    const targetDirectory = path.join(__dirname, 'data', 'repo', type);
     checkoutRepos(reposUrl, targetDirectory);
 }
 

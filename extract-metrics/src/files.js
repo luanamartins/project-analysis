@@ -25,7 +25,7 @@ function appendDataToFile(filepath, data) {
 }
 
 function writeCsvFile(filepath, headers, data) {
-    var json2csv = require('json2csv');
+    var json2csv = require('json2csv').parse;
     const extension = '.csv';
     // var fields = ['field1', 'field2', 'field3'];
     //
@@ -37,7 +37,9 @@ function writeCsvFile(filepath, headers, data) {
     //     }
     // ];
 
-    var csv = json2csv({data: data, fields: headers});
+    const fields = headers;
+    const opts = { fields };   
+    var csv = json2csv(data, opts);
     try {
         fs.writeFileSync(filepath, csv, 'utf8');
         console.log('file saved');
