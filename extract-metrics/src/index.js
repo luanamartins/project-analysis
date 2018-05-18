@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 
 // require('dotenv').config();
 
@@ -10,17 +10,17 @@ const metricsModule = require('./metrics/metrics.js');
 const filesModule = require('./files.js');
 const utils = require('./utils.js');
 
-const clientDirectory = path.join(__dirname, 'data/repo/client/');
-const serverDirectory = path.join(__dirname, 'data/repo/server/');
+const clientDirectory = path.join(__dirname, 'data', 'repo', 'client');
+const serverDirectory = path.join(__dirname, 'data', 'repo', 'server');
 
-const failedClientFilepath = path.join(__dirname, 'data/failed-files-client.txt');
-const failedServerFilepath = path.join(__dirname, 'data/failed-files-server.txt');
+const failedClientFilepath = path.join(__dirname, 'data', 'failed-files-client.txt');
+const failedServerFilepath = path.join(__dirname, 'data', 'failed-files-server.txt');
 
-const clientRepoFilepath = path.join(__dirname, 'data/client.txt');
-const serverRepoFilepath = path.join(__dirname, 'data/server.txt');
+const clientRepoFilepath = path.join(__dirname, 'data', 'client.txt');
+const serverRepoFilepath = path.join(__dirname, 'data', 'server.txt');
 
-const resultClientDirectory = path.join(__dirname, 'data/result/client/');
-const resultServerDirectory = path.join(__dirname, 'data/result/server/');
+const resultClientDirectory = path.join(__dirname, 'data', 'result', 'client/');
+const resultServerDirectory = path.join(__dirname, 'data', 'result', 'server/');
 
 // TODO
 // Quais os arquivos que não conseguimos processar?
