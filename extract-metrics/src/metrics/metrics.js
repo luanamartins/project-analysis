@@ -1,6 +1,7 @@
 const esprima = require('esprima');
 const exec = require('sync-exec');
 const fs = require('fs');
+const path = require('path');
 const temp = require('fs-temp');
 const estraverse = require('estraverse');
 
@@ -97,7 +98,7 @@ function extractMetricsForFilepath(repoObject, filepath) {
 
 function executeBabelAndUglify(filepath) {
 
-    const babelpath = __dirname + '/../../node_modules/.bin/babel';
+    const babelpath = path.join(__dirname , '..', '..', 'node_modules', '.bin', 'babel');
     const babelCmd = babelpath + ' --plugins transform-es2015-arrow-functions ' + filepath;
     let fileContents = exec(babelCmd).stdout;
 
@@ -114,11 +115,10 @@ function handleMetrics(files, projectPath) {
     let metrics = [];
     const failedFiles = [];
     if (files) {
-        let i = 0;
+        let i = 1;
         files.forEach(function (filepath) {
             try {
-                console.log(i + ': ' + filepath);
-                i += 1;
+                console.log(i++ + ': ' + filepath);
                 const repoObject = utils.createRepoObject(projectPath);
                 metrics.push(extractMetricsForFilepath(repoObject, filepath));
             } catch (err) {
