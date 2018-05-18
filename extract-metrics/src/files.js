@@ -1,17 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 
-function copyFile(src, dest) {
-    let readStream = fs.createReadStream(src);
-    readStream.once('error', (err) => {
-        console.log(err);
-    });
-    readStream.once('end', () => {
-        console.log('done copying');
-    });
-    readStream.pipe(fs.createWriteStream(dest));
-}
-
 function readFileSync(filepath) {
     return fs.readFileSync(filepath, 'utf8');
 }
@@ -46,14 +35,9 @@ function writeCsvFile(filepath, headers, data) {
     } catch (error) {
         console.log(error);
     }
-    // fs.writeFileSync(filepath, csv, function (err) {
-    //     if (err) throw err;
-    //     console.log('file saved');
-    // });
 }
 
 module.exports = {
-    copyFile,
     readFileSync,
     writeCsvFile,
     countLinesOnFile,
