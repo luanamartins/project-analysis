@@ -96,13 +96,14 @@ function extractMetricsForFilepath(repoObject, filepath) {
 
 function executeBabelAndUglify(filepath) {
 
-    const babelpath = path.join(__dirname , '..', '..', 'node_modules', '.bin', 'babel');
-    const babelCmd = babelpath + ' --plugins transform-es2015-arrow-functions ' + filepath;
+    const babelPath = path.join(__dirname , '..', '..', 'node_modules', '.bin', 'babel');
+    const babelCmd = babelPath + ' --plugins transform-es2015-arrow-functions ' + filepath;
     let fileContents = exec(babelCmd).stdout;
 
     const tempFilepath = temp.writeFileSync(fileContents);
 
-    const uglifyCmd = 'uglifyjs --beautify bracketize=true ' + tempFilepath;
+    const uglifyPath = path.join(__dirname , '..', '..', 'node_modules', 'uglify-js', 'bin', 'uglifyjs');
+    const uglifyCmd = uglifyPath + ' --beautify bracketize=true ' + tempFilepath;
     fileContents = exec(uglifyCmd).stdout;
     fs.unlinkSync(tempFilepath);
 
