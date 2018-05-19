@@ -70,10 +70,8 @@ function calculateArrayLines(repoObject) {
 }
 
 function extractMetricsForFilepath(repoObject, filepath) {
-    // let contents = fileModule.readFileSync(filepath, 'utf-8');
 
     const fileContents = executeBabelAndUglify(filepath);
-
     const stats = utils.getGeneralStats(fileContents);
 
     repoObject.numberOfLogicalLines = stats.source;
