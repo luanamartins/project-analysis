@@ -10,11 +10,13 @@ function main() {
 function checkout(type) {
     const filepath = path.join(__dirname, '..', 'data', type +'.txt');
     const reposUrl = repoModule.getRepos(filepath);
-    let directory = path.join(__dirname, 'data', 'repo', type);
+    const directory = path.join(__dirname, 'data', 'repo', type);
 
+    let repoName;
+    let filedir;
     reposUrl.forEach(function (repo) {
-        const repoName = repo.substring(repo.lastIndexOf('/'));
-        const filedir = path.join(directory, repoName);
+        repoName = repo.substring(repo.lastIndexOf('/'));
+        filedir = path.join(directory, repoName);
         clone(repo, filedir, null, () => { console.log('Checkout: ', filedir) });
     });
 }
