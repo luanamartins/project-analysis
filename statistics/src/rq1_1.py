@@ -2,9 +2,9 @@ from numpy import *
 from os import listdir
 from os.path import isfile, join
 
-from src.stats import *
-from src.plot import *
-from src.files import *
+from application.app.folder.file import func_name
+from stats import *
+from plot import *
 
 client_path = 'data/client-reviewed'
 client_files = sorted([f for f in listdir(client_path) if isfile(join(client_path, f))], key=lambda s: s.lower())
