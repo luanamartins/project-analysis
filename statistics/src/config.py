@@ -1,0 +1,5 @@
+DATA = {
+    'extractMetricsResultDir': '',
+    'statisticDataDir': '',
+    'statisticResultDir': ''
+}
