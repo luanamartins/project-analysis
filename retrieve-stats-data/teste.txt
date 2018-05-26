@@ -1,9 +1,2 @@
-https://github.com/BonsaiDen/JavaScript-Garden
-https://github.com/riot/riot
-https://github.com/mrdoob/three.js
-https://github.com/jsdoc3/jsdoc
-https://github.com/liammclennan/JavaScript-Koans
-https://github.com/bevacqua/dragula
-https://github.com/browserstate/history.js
-https://github.com/RocketChat/Rocket.Chat
-https://github.com/ethereum/web3.js
+https://github.com/ajenti/ajenti
+https://github.com/gdi2290/angular-starter

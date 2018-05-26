@@ -1,133 +1,115 @@
-require('dotenv').config();
 const request = require('request');
-const filesModule = require('./files');
 const fs = require('fs');
-const utils = require('./utils.js');
+const filesModule = require('./files');
 
-function getAllRepositories(filepath) {
-    const projectPath = process.env.PROJECT_PATH;
-    const path = projectPath + '/' + filepath;
-    let repositories = fs.readFileSync(path).toString().split('\n');
-    repositories = repositories.map((repository) => repository.replace('https://github.com/', ''));
-    console.log('Got repositories');
-    return repositories
-}
+const filepath = '';
+const csvFilename = '';
+const token = '';
 
-function getRepoDataRequest(repository) {
-    const url = 'http://api.github.com/repos/' + repository;
-    return getRequest(url)
-}
-
-function getClosedIssuesRequest(repository) {
-    const url = 'http://api.github.com/search/issues?q=repo:' + repository + '+type:issues+state:closed';
-    return getRequest(url)
-}
-
-function getOpenPullRequests(repository) {
-    const url = 'http://api.github.com/search/issues?q=repo:' + repository + '+type:pr+state:open';
-    return getRequest(url)
-}
-
-function getClosedPullRequests(repository) {
-    const url = 'http://api.github.com/search/issues?q=repo:' + repository + '+type:pr+state:closed';
-    return getRequest(url)
-}
-
-function getRequest(githubApiUrl) {
+function getRequest(url) {
     const options = {
-        url: githubApiUrl,
+        url: url,
         headers: {
             'user-agent': 'node.js',
-            'Authorization': 'token ' + process.env.GITHUB_TOKEN
+            'Authorization': 'token ' + token
         }
     };
 
     return new Promise(function (resolve, reject) {
-        request(options, function (error, response, body) {
+        request(options, function (error, response, body, headers) {
             if (!error && response.statusCode === 200) {
-                resolve(body)
+                resolve(body);
             } else {
-                reject(error)
+                reject(error);
             }
         })
     })
 }
 
-function getGithubData(repo) {
-    let promises = [
-        getRepoDataRequest(repo),
-        getClosedIssuesRequest(repo),
-        getOpenPullRequests(repo),
-        getClosedPullRequests(repo)
+async function run(repository) {
+    try {
+        const repoUrl = 'http://api.github.com/repos/' + repository;
+        const contributorsUrl = 'http://api.github.com/repos/' + repository + '/contributors';
+        const closedIssuesUrl = 'http://api.github.com/search/issues?q=repo:' + repository + '+type:issues+state:closed';
+        const openIssuesUrl = 'http://api.github.com/search/issues?q=repo:' + repository + '+type:pr+state:open';
+        const closedPullRequestsUrl = 'http://api.github.com/search/issues?q=repo:' + repository + '+type:pr+state:closed';
+        const openPullRequestsUrl = 'http://api.github.com/search/issues?q=repo:' + repository + '+type:pr+state:open';
+        
+        const data1 = await getRequest(repoUrl);
+        const jsonData = JSON.parse(data1);
+        const forks = jsonData.forks_count;
+        const stars = jsonData.stargazers_count;
+        const watchers = jsonData.subscribers_count;
+
+        const data2 = await getRequest(openPullRequestsUrl);
+        const jsonData2 = JSON.parse(data2);
+        const open_issues = jsonData.open_issues_count - jsonData2.total_count;
+
+        const data3 = await getRequest(closedIssuesUrl);
+        const closed_issues = JSON.parse(data3).total_count;
+
+        const data4 = await getRequest(openPullRequestsUrl);
+        const open_pull_requests = JSON.parse(data4).total_count;
+
+        const data5 = await getRequest(closedPullRequestsUrl);
+        const closed_pull_requests = JSON.parse(data5).total_count;
+
+        const data6 = await getRequest(contributorsUrl);
+        const contributors = JSON.parse(data6).length;
+
+        const result = {
+            repo_name: repository,
+            forks, 
+            stars, 
+            watchers, 
+            open_issues, 
+            closed_issues, 
+            open_pull_requests, 
+            closed_pull_requests, 
+            contributors
+        };
+
+        console.log(result);
+        return result;
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+function getAllRepositories(filepath) {
+
+    let repositories = fs.readFileSync(filepath).toString().split('\n');
+    repositories = repositories.map((repository) => repository.replace('https://github.com/', ''));
+    console.log('Got repositories');
+    return repositories;
+}
+
+function createPromise(repository) {
+    return new Promise(function(res, rej){
+        return run(repository);
+    });
+}
+ 
+async function main() {
+    const repositories = getAllRepositories(filepath);
+
+    const data = [];
+    for(let repo of repositories) {
+        const result = await run(repo);
+        data.push(result);
+    }
+
+    writeFile(data);
+    console.log('done');
+}
+
+function writeFile(data) {
+    const headers = [
+        'repo_name', 'forks', 'stars', 'watchers', 'open_issues',
+        'closed_issues', 'open_pull_requests', 'closed_pull_requests', 'contributors'
     ];
 
-    return Promise.all(promises).then((responses) => {
-        var generalResponse = JSON.parse(responses[0]);
-        var closedIssuesResponse = JSON.parse(responses[1]);
-        var openPullResponse = JSON.parse(responses[2]);
-        var closedPullResponse = JSON.parse(responses[3]);
-
-        return new Promise(function (resolve, reject) {
-            try {
-                resolve({
-                    repo_name: repo,
-                    forks: generalResponse.forks,
-                    stars: generalResponse.stargazers_count,
-                    watchers: generalResponse.subscribers_count,
-                    open_issues: generalResponse.open_issues_count - openPullResponse.total_count,
-                    closed_issues: closedIssuesResponse.total_count,
-                    open_pull_requests: openPullResponse.total_count,
-                    closed_pull_requests: closedPullResponse.total_count
-                })
-            } catch (error) {
-                reject(error)
-            }
-        })
-    })
+    filesModule.writeCsvFile(csvFilename, headers, data);
 }
 
-function deleteFromArray(array, deleteValue) {
-    const result = [];
-    array.forEach(function (item) {
-        if (item !== deleteValue) {
-            result.push(item)
-        }
-    });
-
-    return result
-}
-
-
-const projectPath = process.env.PROJECT_PATH;
-
-const repositories = getAllRepositories('retrieve-stats-data/data/teste.txt');
-console.log(repositories);
-
-let prom = [];
-repositories.forEach(function (repo) {
-    prom.push(new Promise(function (resolve, reject) {
-        getGithubData(repo)
-            .then(function (data) {
-                resolve(data)
-            })
-            .catch(function (err) {
-                resolve({});
-                console.log('https://github.com/' + repo)
-            })
-    }))
-});
-
-Promise.all(prom)
-    .then(function (values) {
-        //console.log('values ', values)
-        const filename = 'retrieve-stats-data/results.csv';
-        const headers = ['repo_name', 'forks', 'stars', 'watchers', 'open_issues',
-            'closed_issues', 'open_pull_requests', 'closed_pull_requests'];
-
-        filesModule.writeCsvFile(filename, headers, deleteFromArray(values, {}))
-    })
-    .catch(console.log);
-
-
-
-
+main();
