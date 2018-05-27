@@ -65,3 +65,5 @@ statistics/src/__pycache__/
 \.DS_Store
 
 \.idea/
+
+*.pyc
