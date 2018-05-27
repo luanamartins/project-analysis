@@ -1,21 +1,16 @@
 from numpy import *
-from os import listdir
-from os.path import isfile, join
 
 from stats import *
 from files import *
+from matrix import *
 
 
 def main():
     client_path = '../data/client-reviewed'
-    client_files = sorted([f for f in listdir(client_path) if isfile(join(client_path, f))], key=lambda s: s.lower())
-    client_matrices = [genfromtxt(client_path + '/' + filename, delimiter=',', skip_header=1) for filename in
-                       client_files]
+    client_matrices = get_matrix_from_file(client_path)
 
     server_path = '../data/server-reviewed'
-    server_files = sorted([f for f in listdir(server_path) if isfile(join(server_path, f))], key=lambda s: s.lower())
-    server_matrices = [genfromtxt(server_path + '/' + filename, delimiter=',', skip_header=1) for filename in
-                       server_files]
+    server_matrices = get_matrix_from_file(server_path)
 
     client_lines = total_lines(client_matrices)
     server_lines = total_lines(server_matrices)

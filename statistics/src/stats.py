@@ -1,38 +1,6 @@
 import numpy as np
-from scipy.stats import mannwhitneyu
 from scipy import stats
-
-from functools import reduce
-
-def get_column_as_array(matrix, index):
-    # return [row[index] for row in matrix]
-
-    if matrix.ndim == 1:
-        return [matrix[index]]
-    else:
-        return [row[index] for row in matrix]
-
-
-
-def get_column_as_one_array(matrices, index):
-    result = []
-    for matrix in matrices:
-        result.append(matrix[:,index])
-    return result
-
-
-def total_lines(matrices):
-    lines = 0
-    for matrix in matrices:
-        lines += sum(get_column_as_array(matrix, 0))
-    return lines
-
-
-def total_files(matrices):
-    files = 0
-    for matrix in matrices:
-        files += len(matrix)
-    return files
+from matrix import *
 
 
 def total_category_repositories(matrices, indices):
@@ -45,63 +13,6 @@ def total_category_repositories(matrices, indices):
             if sum(get_column_as_array(matrix, index)) > 0:
                 total += 1
                 break
-    return total
-
-
-def get_value_of_metric(matrices, indices):
-    total = 0
-    for matrix in matrices:
-        if matrix.ndim == 1:
-            for index in indices:
-                if matrix[index] > 0:
-                    total += 1
-        else:
-            for row in matrix:
-                for index in indices:
-                    if row[index] > 0:
-                        total += 1
-                        break
-    return total
-
-
-def get_value_of_metric_event_empty(matrices):
-    total = 0
-    for matrix in matrices:
-        if matrix.ndim == 1:
-            if (matrix[38] == 1 and matrix[41] == 0) or (matrix[37] == 1 and matrix[40] == 0):
-                total += 1
-        else:
-            for row in matrix:
-                if (row[38] == 1 and row[41] == 0) or (row[37] == 1 and row[40] == 0):
-                    total += 1
-    return total
-
-
-def get_value_equals_to(matrices, index, value):
-    total = 0
-    for matrix in matrices:
-        if matrix.ndim == 1:
-            if matrix[index] == value:
-                total += 1
-        else:
-            for row in matrix:
-                if row[index] == value:
-                    total += 1
-    return total
-
-
-def get_array(matrices, indices):
-    total = []
-    for matrix in matrices:
-        if matrix.ndim == 1:
-            for index in indices:
-                if matrix[index] > 0:
-                    total.append(matrix[index])
-        else:
-            for row in matrix:
-                for index in indices:
-                    if row[index] > 0:
-                        total.append(row[index])
     return total
 
 
@@ -121,32 +32,6 @@ def rescale(values, new_min=0, new_max=100):
         output.append(new_v)
 
     return output
-
-
-def get_metrics(matrix, index_metric, index_loc):
-    loc = np.sum(get_column_as_array(matrix, index_loc))
-    print('LOC: ', loc)
-
-    data = get_column_as_array(matrix, index_metric)
-    print('data: ', data)
-
-    data_values = list(filter(lambda x: x != 0.0, data))
-
-    if data_values: data_values = normalize(data_values, loc)
-
-    print('normalized: ', data_values)
-    print('rescaled:', rescale(data_values))
-
-    return data_values
-
-
-def convert_matrix_to_array(matrix):
-    result = []
-    for row in matrix:
-        if type(row) is np.ndarray:
-            row_metrics = row[2:]
-            result = [a for a in row_metrics if a != 0] + result
-    return result
 
 
 def calculate_factor_for_matrix(matrix):
@@ -252,14 +137,6 @@ def empty_block_per_file(matrices, loc_indices):
     return answer
 
 
-# def get_array_empty_block_per_file(matrices, loc_index):
-#     answer = []
-#     for matrix in matrices:
-#         array = [i for i in get_column_as_array(matrix, loc_index) if i == 0]
-#         answer.append(len(array))
-#     return answer
-
-
 def has_only_one_statement(matrices, loc_indices):
     answer = 0
     for matrix in matrices:
@@ -291,8 +168,10 @@ def normalize_array(array, objects, metric_index, loc_index):
 def summary(data):
     print(stats.describe(data))
 
+
 def ztest(sample1, sample2):
     return stats.ttest_ind(sample1, sample2)
+
 
 def execute_tests(client_matrices, server_matrices, factor, loc_index, metrics_labels, alternative):
     # alternative => less, greater, two-sided

@@ -1,6 +1,4 @@
 from numpy import *
-from os import listdir
-from os.path import isfile, join
 import csv
 from stats import *
 import config

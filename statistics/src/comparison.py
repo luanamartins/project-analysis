@@ -2,7 +2,7 @@ from numpy import *
 from os import listdir
 from os.path import isfile, join
 
-from src.files import *
+from files import *
 
 metrics_labels = read_file('src/notes/metrics.txt')
 client_path = 'data/client-reviewed'

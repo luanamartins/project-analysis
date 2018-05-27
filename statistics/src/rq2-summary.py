@@ -2,7 +2,7 @@ from numpy import *
 from os import listdir
 from os.path import isfile, join
 
-from src.stats import *
+from stats import *
 
 
 def norm(value, total):
