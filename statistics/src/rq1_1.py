@@ -1,8 +1,7 @@
 from files import get_matrix_from_file
-from metrics import get_number_of_try_catch_handlers, get_number_of_catch_promises, get_number_of_async_await_catches, \
-    get_number_of_event_handlers, get_number_of_callbacks
+from metrics import get_number_of_try_catch_handlers, get_number_of_catch_promises, \
+    get_number_of_async_await_catches, get_number_of_event_handlers, get_number_of_callbacks
 from stats import *
-from plot import *
 from matrix import *
 
 client_path = 'data/client-reviewed'
@@ -38,8 +37,6 @@ print(np.var(events))
 #
 print('shapiro - promises: ', stats.anderson(promises))
 print('shapiro - events: ', stats.anderson(events))
-#
-# print(stats.ttest_ind(promises, events, equal_var = False))
 
 
 throws = get_array(all_matrices, [11])

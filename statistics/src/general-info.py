@@ -2,6 +2,7 @@ from numpy import *
 import csv
 from stats import *
 import config
+from matrix import *
 
 filename = config.DATA['statisticDataDir'] + 'general-info.csv'
 matrix = genfromtxt(filename, delimiter=',', skip_header=1)

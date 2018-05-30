@@ -1,4 +1,5 @@
 import numpy as np
+from scipy.stats import mannwhitneyu
 from scipy import stats
 from matrix import *
 
