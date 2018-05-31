@@ -1,21 +1,29 @@
 const fs = require('fs');
 const csv = require('csvtojson');
 const json2csv = require('json2csv').parse;
+const fileModule = require('./files');
 
 const folder = '';
 const headerFile = '';
 const writeResultFilepath = '';
-const writeClassResultFilepath = '';
+const writeClassResultFilepath = '/Users/luizvasconcelos/Desktop/Luana/project-analysis/retrieve-stats-data/results/result-server.csv';
 
-const files = fs.readdirSync(folder);
-const headers = getHeaders();
+// const files = fs.readdirSync(folder);
+// const headers = getHeaders();
 
-run();
+// run();
+transpose(writeClassResultFilepath);
+
+async function transpose(filepath) {
+    const rows = await csv().fromFile(filepath);
+    const transpose = fileModule.transpose(rows);
+    fs.writeFileSync(filepath, transpose);
+}
 
 async function run() {
     const repositoriesData = [];
     const classData = getEmptyData();
-    classData['repository'] = 'Client';
+    classData['Type class'] = 'Client';
     classData['numberOfFiles'] = 0;
 
     for (let file of files) {

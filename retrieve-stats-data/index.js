@@ -2,9 +2,10 @@ const request = require('request');
 const fs = require('fs');
 const filesModule = require('./files');
 
-const filepath = '';
-const csvFilename = '';
-const token = '';
+//const filepath = '/Users/luizvasconcelos/Desktop/Luana/project-analysis/extract-metrics/data/client.txt';
+const filepath = '/Users/luizvasconcelos/Desktop/Luana/project-analysis/retrieve-stats-data/teste.txt';
+const csvFilename = '/Users/luizvasconcelos/Desktop/Luana/project-analysis/statistics/result/github-data.csv';
+const token = 'fd7df266860188e5b4c5bd79c0883fb590753f7c';
 
 function getRequest(url) {
     const options = {
