@@ -4,14 +4,18 @@ const fs = require('fs');
 const path = require('path');
 const temp = require('fs-temp');
 const estraverse = require('estraverse');
+const UglifyJS = require('uglify-es');
+const removeEmptyLines = require('remove-blank-lines');
 
-const tryCatchModule = require('./metrics-try-catch.js');
-const promiseModule = require('./metrics-promise.js');
-const asyncAwaitModule = require('./metrics-async-await.js');
-const callbackModule = require('./metrics-callback.js');
-const eventModule = require('./metrics-event.js');
-const strictModeModule = require('./metrics-strictmode');
-const globalEventHandlerModule = require('./metrics-globaleventhandler');
+const CONFIG = require("../../config");
+
+const tryCatchModule = require(CONFIG["srcPath"] + 'metrics/metrics-try-catch.js');
+const promiseModule = require(CONFIG["srcPath"] + 'metrics/metrics-promise.js');
+const asyncAwaitModule = require(CONFIG["srcPath"] + 'metrics/metrics-async-await.js');
+const callbackModule = require(CONFIG["srcPath"] + 'metrics/metrics-callback.js');
+const eventModule = require(CONFIG["srcPath"] + 'metrics/metrics-event.js');
+const strictModeModule = require(CONFIG["srcPath"] + 'metrics/metrics-strictmode');
+const globalEventHandlerModule = require(CONFIG["srcPath"] + 'metrics/metrics-globaleventhandler');
 const utils = require('../utils.js');
 
 function calculateArrayLines(repoObject) {
@@ -97,20 +101,39 @@ function extractMetricsForFilepath(repoObject, filepath) {
 function executeBabelAndUglify(filepath) {
 
     const babelPath = path.join(__dirname , '..', '..', 'node_modules', '.bin', 'babel');
-    const babelCmd = babelPath + ' --plugins transform-es2015-arrow-functions ' + filepath;
+    const babelCmd = babelPath + ' --plugins transform-es2015-arrow-functions --no-comments ' + filepath;
     let fileContents = exec(babelCmd).stdout;
 
     const tempFilepath = temp.writeFileSync(fileContents);
 
-    const uglifyPath = path.join(__dirname , '..', '..', 'node_modules', 'uglify-js', 'bin', 'uglifyjs');
-    const uglifyCmd = uglifyPath + ' --beautify bracketize=true ' + tempFilepath;
-    fileContents = exec(uglifyCmd).stdout;
-    fs.unlinkSync(tempFilepath);
+    const code = fs.readFileSync(tempFilepath, 'utf-8');
+    const options = {
+        // to prevent changes to your variable and function names
+        mangle: false,
+        output: { 
+            // whether to actually beautify the output. 
+            // Passing -b will set this to true, but you might need to 
+            // pass -b even when you want to generate minified code, 
+            // in order to specify additional arguments, 
+            // so you can use -b beautify=false to override it.
+            beautify: true, 
+            // always insert brackets in if, for, do, while or with statements, 
+            // even if their body is a single statement.
+            bracketize: true 
+        },
+        compress: false
+    };
 
-    return fileContents;
+    const result = UglifyJS.minify(code, options);
+
+    if (result.error) {
+        throw result.error;
+    }
+    
+    return removeEmptyLines(result.code);
 }
 
-function handleMetrics(files, projectPath) {
+function handleMetrics(files) {
     let metrics = [];
     const failedFiles = [];
     if (files) {
@@ -118,7 +141,7 @@ function handleMetrics(files, projectPath) {
         files.forEach(function (filepath) {
             try {
                 console.log(i++ + ': ' + filepath);
-                const repoObject = utils.createRepoObject(projectPath);
+                const repoObject = utils.getEmptyRepoObject();
                 metrics.push(extractMetricsForFilepath(repoObject, filepath));
             } catch (err) {
                 console.log(err);

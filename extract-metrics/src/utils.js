@@ -2,6 +2,7 @@ const sloc = require('sloc');
 const path = require('path');
 const jsonfile = require('jsonfile');
 
+const CONFIG = require("../config");
 
 function isAnErrorArgument(argument) {
     const keywords = ['error', 'exception', 'reason', 'reject', 'err'];
@@ -208,8 +209,12 @@ function getGeneralStats(fileContents) {
     return sloc(fileContents, "js");
 }
 
-function createRepoObject(projectPath) {
-    const jsonFilepath = path.join(projectPath, 'report-object.json');
+function trailLastSlash(str) {
+    return str.endsWith('/')? str.slice(0, -1) : str;
+}
+
+function getEmptyRepoObject() {
+    const jsonFilepath = path.join(CONFIG["srcPath"], 'report-object.json');
     return jsonfile.readFileSync(jsonFilepath);
 }
 
@@ -350,7 +355,7 @@ module.exports = {
     getGeneralStats,
     getAllProperties,
     listPropertiesOf,
-    createRepoObject,
+    getEmptyRepoObject,
     calculateIntersections,
     guid,
     isAnErrorArgument,
@@ -368,5 +373,6 @@ module.exports = {
     getNumberOfReturnUsingErrors,
     hasOneStatementAndIsBreak,
     getThrowPrimitiveTypes,
-    getDirectoriesNameFrom
+    getDirectoriesNameFrom,
+    trailLastSlash
 };

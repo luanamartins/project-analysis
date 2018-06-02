@@ -1,4 +1,5 @@
-const utils = require('../utils');
+const CONFIG = require("../../config");
+const utils = require(CONFIG["srcPath"] + 'utils');
 
 function handleCatches(reportObject, node) {
     reportObject.promiseNumberOfPromiseCatches++;

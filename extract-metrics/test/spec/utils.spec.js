@@ -1,31 +1,27 @@
-require('dotenv').load();
-const testCase = require('nodeunit').testCase;
-const projectPath = process.env.RETRIEVE_SCRIPTS_ROOT_PATH;
-const utilsModule = require(projectPath + '/utils');
+const assert = require("assert");
+const CONFIG = require("../../config");
 
-module.exports = testCase({
+const utilsModule = require(CONFIG["srcPath"] + "utils");
 
-    "TC01": function (test) {
+describe("Utils tests", function() {
+    it("assert01", function() {
         const args = [{type: 'Identifier', name: 'error'}];
         const actual = utilsModule.getIdentifiersNames(args);
         const expected = ['error'];
-        test.deepEqual(actual, expected);
-        test.done();
-    },
+        assert.deepEqual(actual, expected);
+    });
 
-    "TC02": function (test) {
+    it("assert02", function() {
         const actual = utilsModule.hasAnErrorArgument(['argName1', 'argName2']);
-        test.equal(actual, false);
-        test.done();
-    },
+        assert.equal(actual, false);
+    });
 
-    "TC03": function (test) {
-        const actual = utilsModule.hasAnErrorArgument(['argName1', 'error']);
-        test.equal(actual, true);
-        test.done();
-    },
+    it("assert03", function() {
+         const actual = utilsModule.hasAnErrorArgument(['argName1', 'error']);
+        assert.equal(actual, true);
+    });
 
-    "TC04": function (test) {
+    it("assert04", function() {
         const body = {
             "type": "MemberExpression",
             "computed": false,
@@ -40,11 +36,10 @@ module.exports = testCase({
         };
         const args = ["e"];
         const actual = utilsModule.useAnyArguments(body, args);
-        test.ok(actual);
-        test.done();
-    },
+        assert.ok(actual);
+    });
 
-    "TC05": function (test) {
+    it("assert05", function() {
         const body = {
             "type": "MemberExpression",
             "computed": false,
@@ -59,12 +54,10 @@ module.exports = testCase({
         };
         const args = ["error"];
         const actual = utilsModule.useAnyArguments(body, args);
-        test.equal(actual, false);
-        test.done();
-    },
+        assert.equal(actual, false);
+    });
 
-
-    "TC06": function (test) {
+    it("assert06", function() {
         const body = {
             "type": "CallExpression",
             "callee": {
@@ -80,8 +73,7 @@ module.exports = testCase({
         };
         const args = ["e"];
         const actual = utilsModule.useAnyArguments(body, args);
-        test.ok(actual);
-        test.done();
-    }
+        assert.ok(actual);
+    });
 
 });

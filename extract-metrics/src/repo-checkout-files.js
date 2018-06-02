@@ -1,4 +1,6 @@
-const repoModule = require('./repository.js');
+const CONFIG = require("../config");
+
+const repoModule = require(CONFIG['srcPath'] + '/repository.js');
 const clone = require('git-clone');
 const path = require('path');
 

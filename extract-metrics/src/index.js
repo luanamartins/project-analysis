@@ -1,10 +1,12 @@
 const path = require('path');
 const async = require('async');
 
-const repoModule = require('./repository.js');
-const metricsModule = require('./metrics/metrics.js');
-const filesModule = require('./files.js');
-const utils = require('./utils.js');
+const CONFIG = require("../../config");
+
+const repoModule = require(CONFIG["srcPath"] + 'repository.js');
+const metricsModule = require(CONFIG["srcPath"] + 'metrics/metrics.js');
+const filesModule = require(CONFIG["srcPath"] + 'files.js');
+const utils = require(CONFIG["srcPath"] + 'utils.js');
 
 const clientDirectory = path.join(__dirname, '..', 'data', 'repo', 'client');
 const serverDirectory = path.join(__dirname, '..', 'data', 'repo', 'server');
@@ -77,7 +79,7 @@ function getFilesOfRepository(repositoryName, options, callback) {
 function extractMetricsFromFiles(repositoryName, options, files, callback) {
     const metricsData = metricsModule.handleMetrics(files, __dirname);
 
-    const repoObject = utils.createRepoObject(__dirname);
+    const repoObject = utils.getEmptyRepoObject();
     const headers = utils.listPropertiesOf(repoObject);
 
     filesModule.writeCsvFile(options.resultDirectory + repositoryName + '.csv', headers, metricsData.metrics);

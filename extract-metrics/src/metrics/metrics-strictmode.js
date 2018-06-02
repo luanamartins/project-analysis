@@ -1,4 +1,5 @@
-const utils = require('../utils');
+const CONFIG = require("../../config");
+const utils = require(CONFIG["srcPath"] + 'utils');
 
 function isGlobalStrictMode(ast, reportObject) {
     if (ast.body) {
