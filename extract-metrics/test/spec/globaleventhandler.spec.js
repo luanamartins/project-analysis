@@ -5,7 +5,7 @@ const projectPath = CONFIG["projectPath"];
 const suiteCasePath = CONFIG["dataTestPath"] + "globaleventhandler/";
 const metricsModule = require(CONFIG["srcPath"] + "metrics/metrics");
 
-describe("Events tests", function() {
+describe("Global event handler tests", function() {
     it("assert01", function() {
         const filename = suiteCasePath + 'globaleventhandler1.js';
         const data = metricsModule.handleMetrics([filename], projectPath);
@@ -77,5 +77,27 @@ describe("Events tests", function() {
         assert.equal(metricsObject.numberOfWindowAddEventListenerEmptyHandler, 0);
         assert.equal(metricsObject.numberOfWindowAddEventListenerUniqueStatement, 0);
         assert.equal(metricsObject.numberOfWindowAddEventListenerUniqueConsole, 0);
+    });
+
+    it("assert04", function() {
+        const filename = suiteCasePath + 'globaleventhandler4.js';
+        const data = metricsModule.handleMetrics([filename], projectPath);
+
+        const metricsObject = data.metrics[0];
+
+        assert.equal(metricsObject.numberOfWindowOnErrorThrows, 2);
+        assert.equal(metricsObject.numberOfWindowOnErrorReturns, 1);
+
+    });
+
+    it("assert05", function() {
+        const filename = suiteCasePath + 'globaleventhandler5.js';
+        const data = metricsModule.handleMetrics([filename], projectPath);
+
+        const metricsObject = data.metrics[0];
+
+        assert.equal(metricsObject.numberOfElementOnErrorThrows, 2);
+        assert.equal(metricsObject.numberOfElementOnErrorReturns, 2);
+
     });
 });

@@ -32,6 +32,16 @@ function handleAnalysis(node, reportObject) {
                             reportObject.numberOfWindowOnErrorUniqueConsole++;
                         }
                     }
+
+                    const throwStatements = utils.getStatementsByType(rightSideBlockStatement, 'ThrowStatement');
+                    if (throwStatements.length > 0) {
+                        reportObject.numberOfWindowOnErrorThrows++;
+                    }
+
+                    const returnStatements = utils.getStatementsByType(rightSideBlockStatement, 'ReturnStatement');
+                    if (returnStatements.length > 0) {
+                        reportObject.numberOfWindowOnErrorReturns++;
+                    }
                 }
             }
 
@@ -59,6 +69,16 @@ function handleAnalysis(node, reportObject) {
                             // Handler's unique statement is console.log
                             reportObject.numberOfElementOnErrorUniqueConsole++;
                         }
+                    }
+
+                    const throwStatements = utils.getStatementsByType(rightSideBlockStatement, 'ThrowStatement');
+                    if (throwStatements.length > 0) {
+                        reportObject.numberOfElementOnErrorThrows++;
+                    }
+
+                    const returnStatements = utils.getStatementsByType(rightSideBlockStatement, 'ReturnStatement');
+                    if (returnStatements.length > 0) {
+                        reportObject.numberOfElementOnErrorReturns++;
                     }
                 }
             }
