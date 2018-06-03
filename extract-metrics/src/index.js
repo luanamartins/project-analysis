@@ -1,24 +1,24 @@
 const path = require('path');
 const async = require('async');
 
-const CONFIG = require("../../config");
+const CONFIG = require("../config");
 
 const repoModule = require(CONFIG["srcPath"] + 'repository.js');
 const metricsModule = require(CONFIG["srcPath"] + 'metrics/metrics.js');
 const filesModule = require(CONFIG["srcPath"] + 'files.js');
 const utils = require(CONFIG["srcPath"] + 'utils.js');
 
-const clientDirectory = path.join(__dirname, '..', 'data', 'repo', 'client');
-const serverDirectory = path.join(__dirname, '..', 'data', 'repo', 'server');
+const clientDirectory = CONFIG['dataProjectPath'] + 'repo/client';
+const serverDirectory = CONFIG['dataProjectPath'] + 'repo/server';
 
-const failedClientFilepath = path.join(__dirname, '..', 'data', 'result', 'failed-files-client.txt');
-const failedServerFilepath = path.join(__dirname, '..', 'data', 'result', 'failed-files-server.txt');
+const failedClientFilepath = CONFIG['dataProjectPath'] + 'result/failed-files-client.txt';
+const failedServerFilepath = CONFIG['dataProjectPath'] + 'result/failed-files-server.txt';
 
-const resultClientDirectory = path.join(__dirname, '..', 'data', 'result', 'client/');
-const resultServerDirectory = path.join(__dirname, '..', 'data', 'result', 'server/');
+const resultClientDirectory = CONFIG['dataProjectPath'] + 'result/client/';
+const resultServerDirectory = CONFIG['dataProjectPath'] + 'result/server/';
 
-const clientRepoFilepath = path.join(__dirname, '..', 'data', 'client.txt');
-const serverRepoFilepath = path.join(__dirname, '..', 'data', 'server.txt');
+const clientRepoFilepath = CONFIG['dataProjectPath'] + 'client.txt';
+const serverRepoFilepath = CONFIG['dataProjectPath'] + 'server.txt';
 
 function main() {
     const start = new Date();

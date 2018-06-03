@@ -10,9 +10,9 @@ function main() {
 }
 
 function checkout(type) {
-    const filepath = path.join(__dirname, '..', 'data', type +'.txt');
+    const filepath = CONFIG['dataProjectPath'] + type + '.txt';
     const reposUrl = repoModule.getRepos(filepath);
-    const directory = path.join(__dirname, 'data', 'repo', type);
+    const directory = CONFIG['dataProjectPath'] + 'repo/' + type;
 
     let repoName;
     let filedir;
