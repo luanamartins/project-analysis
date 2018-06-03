@@ -104,7 +104,7 @@ function handleAnalysis(node, reportObject) {
             if (callExpressionArguments > 0 && (eventListeningMethods.includes(methodName) || eventRaisingMethods.includes(methodName))) {
                 const typeOfFirstArg = typeof(firstArgObject.value);
                 if (firstArgObject.type === 'Literal') {
-                    const literalValue = node.arguments[0].raw;
+                    const literalValue = node.arguments[0].value;
 
                     // the method is an event listener or emitter and is listing/raising a string as event
                     if (utils.isString(literalValue)) {
@@ -113,6 +113,35 @@ function handleAnalysis(node, reportObject) {
 
                     if (firstArgObject && firstArgObject.value === 'uncaughtException') {
                         reportObject.eventsNumberOfEventUncaughtException++;
+                        const secondArgument = node.arguments[1];
+                        if(secondArgument && secondArgument.type === 'FunctionExpression') {
+                            const bodyStatement = secondArgument.body;
+                            const numberOfLines = utils.getNumberOfLines(bodyStatement);
+                            const params = utils.getIdentifiersNames(secondArgument.params);
+
+                            // UncaughtException has an empty body or does not use the arguments
+                            if (utils.isEmptyHandler(bodyStatement, params, numberOfLines)) {
+                                reportObject.eventsNumberOfUncaughtExceptionEmpty++;
+                            }
+
+                            // UncaughtException body has only one statement
+                            if (numberOfLines === 1) {
+                                reportObject.eventsNumberOfUncaughtExceptionWithUniqueStatement++;
+                                if (utils.isConsoleStatement(bodyStatement.body[0])) {
+                                    reportObject.eventsNumberOfUncaughtExceptionWithUniqueConsole++;
+                                }
+                            }
+
+                            const returnStatements = utils.getStatementsByType(bodyStatement, 'ReturnStatement');
+                            if (returnStatements.length > 0) {
+                                reportObject.eventsNumberOfUncaughtExceptionReturns++;
+                            }
+
+                            const throwsStatements = utils.getStatementsByType(bodyStatement, 'ThrowStatement');
+                            if (throwsStatements.length > 0) {
+                                reportObject.eventsNumberOfUncaughtExceptionThrows++;
+                            }
+                        }
                     }
 
                     if (firstArgObject && firstArgObject.value === 'unhandledRejection') {

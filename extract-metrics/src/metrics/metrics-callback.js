@@ -40,7 +40,7 @@ function handleAnalysis(node, reportObject) {
                 //  (i) has only one error argument
                 //  (ii) has only one statement and it is a console.log
                 const statement = functionBody[0];
-                if (utils.isConsoleStatement(statement)) {
+                if (numberOfLines === 1 && utils.isConsoleStatement(statement)) {
                     reportObject.callbacksNumberOfFunctionsWithUniqueConsole++;
                     reportObject.callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueConsole++;
                 }

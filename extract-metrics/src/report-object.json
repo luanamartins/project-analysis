@@ -3,25 +3,21 @@
   "numberOfPhysicalLines": 0,
   "numberOfStrictModeGlobal": 0,
   "numberOfStrictModeLocal": 0,
-
   "numberOfWindowOnError": 0,
   "numberOfWindowOnErrorLines": 0,
   "numberOfWindowOnErrorEmptyHandler": 0,
   "numberOfWindowOnErrorUniqueStatement": 0,
   "numberOfWindowOnErrorUniqueConsole": 0,
-
   "numberOfWindowAddEventListener": 0,
   "numberOfWindowAddEventListenerLines": 0,
   "numberOfWindowAddEventListenerEmptyHandler": 0,
   "numberOfWindowAddEventListenerUniqueStatement": 0,
   "numberOfWindowAddEventListenerUniqueConsole": 0,
-
   "numberOfElementOnError": 0,
   "numberOfElementOnErrorLines": 0,
   "numberOfElementOnErrorEmptyHandler": 0,
   "numberOfElementOnErrorUniqueStatement": 0,
   "numberOfElementOnErrorUniqueConsole": 0,
-
   "tryCatchNumberOfTries": 0,
   "tryCatchNumberOfEmptyTries": 0,
   "tryCatchNumberOfTriesLines": 0,
@@ -50,7 +46,6 @@
   "tryCatchNumberOfFinalliesLines": 0,
   "tryCatchNumberOfFinalliesLinesStart": [],
   "tryCatchNumberOfFinalliesLinesEnd": [],
-
   "promiseNumberOfPromises": 0,
   "promiseNumberOfResolves": 0,
   "promiseNumberOfRejects": 0,
@@ -78,7 +73,6 @@
   "promiseNumberOfNonCaughtPromises": 0,
   "promiseNumberOfPromiseRaces": 0,
   "promiseNumberOfPromiseAll": 0,
-
   "asyncAwaitNumberOfAsyncs": 0,
   "asyncAwaitNumberOfAwaits": 0,
   "asyncAwaitNumberOfTries": 0,
@@ -106,7 +100,6 @@
   "asyncAwaitNumberOfFinalliesLines": 0,
   "asyncAwaitNumberOfFinalliesLinesStart": [],
   "asyncAwaitNumberOfFinalliesLinesEnd": [],
-
   "eventsNumberOfEventMethodsOn": 0,
   "eventsNumberOfEventMethodsOnce": 0,
   "eventsNumberOfEventMethodsEmit": 0,
@@ -132,10 +125,14 @@
   "eventsNumberOfBreaksOnCatches": 0,
   "eventsNumberOfRethrowsOnCatches": 0,
   "eventsNumberOfEventUncaughtException": 0,
+  "eventsNumberOfUncaughtExceptionEmpty": 0,
+  "eventsNumberOfUncaughtExceptionWithUniqueStatement": 0,
+  "eventsNumberOfUncaughtExceptionWithUniqueConsole": 0,
+  "eventsNumberOfUncaughtExceptionReturns": 0,
+  "eventsNumberOfUncaughtExceptionThrows": 0,
   "eventsNumberOfEventUnhandledRejection": 0,
   "eventsTotalOfStringEvents": 0,
   "eventsTotalOfEventsExceptStringType": 0,
-
   "callbacksNumberOfCallbackErrorFunctions": 0,
   "callbacksNumberOfFirstErrorArgFunctions": 0,
   "callbacksNumberOfEmptyCallbacks": 0,

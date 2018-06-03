@@ -112,9 +112,7 @@ function getThrowPrimitiveTypes(throwStatements) {
 }
 
 function isString(literalValue) {
-    const hasDoubleQuotes = literalValue.startsWith("\"") && literalValue.endsWith("\"");
-    const hasSingleQuotes = literalValue.startsWith("'") && literalValue.endsWith("'");
-    return hasDoubleQuotes || hasSingleQuotes;
+    return typeof literalValue === 'string';
 }
 
 function listPropertiesOf(object) {
@@ -252,6 +250,10 @@ function isEmptyHandler(body, args, numberOfLines) {
     return (numberOfLines === 0) ? true : !useAnyArguments(body, args);
 }
 
+function isEventEmptyHandler(body, numberOfLines) {
+    return (numberOfLines === 0);
+}
+
 function hasOneStatementAndIsBreak(breakStatements, numberOfLines) {
     return (breakStatements.length === 1 && numberOfLines === 1);
 }
@@ -368,6 +370,7 @@ module.exports = {
     isStrictMode,
     useAnyArguments,
     isEmptyHandler,
+    isEventEmptyHandler,
     getAllErrorArgs,
     handleRethrowStatements,
     getNumberOfReturnUsingErrors,

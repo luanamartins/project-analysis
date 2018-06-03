@@ -412,5 +412,19 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsTotalOfStringEvents, 3);
         assert.equal(metricsObject.eventsTotalOfEventsExceptStringType, 0);
     });
+
+    it("assert14", function() {
+        const filename = suiteCasePath + 'event14.js';
+        const data = metricsModule.handleMetrics([filename], projectPath);
+
+        const metricsObject = data.metrics[0];
+
+        assert.equal(metricsObject.eventsNumberOfEventUncaughtException, 5);
+        assert.equal(metricsObject.eventsNumberOfUncaughtExceptionEmpty, 3);
+        assert.equal(metricsObject.eventsNumberOfUncaughtExceptionWithUniqueStatement, 3);
+        assert.equal(metricsObject.eventsNumberOfUncaughtExceptionWithUniqueConsole, 1);
+        assert.equal(metricsObject.eventsNumberOfUncaughtExceptionReturns, 1);
+        assert.equal(metricsObject.eventsNumberOfUncaughtExceptionThrows, 2);
+    });
     
 });
