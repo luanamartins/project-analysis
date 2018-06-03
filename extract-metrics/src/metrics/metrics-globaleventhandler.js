@@ -115,6 +115,16 @@ function handleAnalysis(node, reportObject) {
                         reportObject.numberOfWindowAddEventListenerUniqueConsole++;
                     }
                 }
+
+                const throwStatements = utils.getStatementsByType(functionBody, 'ThrowStatement');
+                    if (throwStatements.length > 0) {
+                        reportObject.numberOfWindowAddEventListenerThrows++;
+                    }
+
+                    const returnStatements = utils.getStatementsByType(functionBody, 'ReturnStatement');
+                    if (returnStatements.length > 0) {
+                        reportObject.numberOfWindowAddEventListenerReturns++;
+                    }
             }
         }
     }

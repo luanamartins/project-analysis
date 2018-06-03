@@ -100,4 +100,16 @@ describe("Global event handler tests", function() {
         assert.equal(metricsObject.numberOfElementOnErrorReturns, 2);
 
     });
+
+    it("assert06", function() {
+        const filename = suiteCasePath + 'globaleventhandler6.js';
+        const data = metricsModule.handleMetrics([filename], projectPath);
+
+        const metricsObject = data.metrics[0];
+
+        assert.equal(metricsObject.numberOfWindowAddEventListenerThrows, 2);
+        assert.equal(metricsObject.numberOfWindowAddEventListenerReturns, 1);
+
+    });
+
 });

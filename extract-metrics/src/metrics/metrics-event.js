@@ -117,6 +117,7 @@ function handleAnalysis(node, reportObject) {
                         if(secondArgument && secondArgument.type === 'FunctionExpression') {
                             const bodyStatement = secondArgument.body;
                             const numberOfLines = utils.getNumberOfLines(bodyStatement);
+                            reportObject.eventsNumberOfEventUncaughtExceptionLines += numberOfLines; 
                             const params = utils.getIdentifiersNames(secondArgument.params);
 
                             // UncaughtException has an empty body or does not use the arguments
