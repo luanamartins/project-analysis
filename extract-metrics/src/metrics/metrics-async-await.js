@@ -41,9 +41,14 @@ function handleCatchClauses(errorArgs, catchClause, reportObject) {
     reportObject.asyncAwaitNumberOfCatchesLinesEnd.push(location.end.line);
 
     // Left the catch block empty
-    if (utils.isEmptyHandler(catchClauseBody, catchClauseErrorArgs, numberOfLines)) {
+    if (numberOfLines === 0) {
         reportObject.asyncAwaitNumberOfEmptyCatches++;
+    } else if (!utils.useAnyArguments(catchClauseBody, catchClauseErrorArgs)) {
+        reportObject.asyncAwaitNumberOfCatchesNoUsageOfErrorArgument++;
     }
+    // if (utils.isEmptyHandler(catchClauseBody, catchClauseErrorArgs, numberOfLines)) {
+    //     reportObject.asyncAwaitNumberOfEmptyCatches++;
+    // }
 
     // Catch clause has one statement only
     if (numberOfLines === 1) {
@@ -68,23 +73,53 @@ function handleCatchClauses(errorArgs, catchClause, reportObject) {
         }
     });
 
-    // Number of throws on catches
     const throwStatements = utils.getStatementsByType(catchClauseBody, 'ThrowStatement');
-    reportObject.asyncAwaitNumberOfThrowErrorsOnCatches += throwStatements.length;
+    const numberOfThrowStatements = throwStatements.length;
 
-    // Number of throws primitive types
-    reportObject.asyncAwaitNumberOfThrowPrimitiveTypesOnCatches += utils.getThrowPrimitiveTypes(throwStatements);
+    // Number of throws on catches
+    reportObject.asyncAwaitNumberOfThrowErrorsOnCatches += numberOfThrowStatements;
 
+    // Number of catches throwing an error
+    if (numberOfThrowStatements > 0) {
+        reportObject.asyncAwaitNumberOfCatchesThatThrows++;
+    }
+
+    // Number of throws non error arguments
+    const numberOfThrowNonErrorArgs = utils.isNotThrowingErrorArg(throwStatements, catchClauseErrorArgs);
+    reportObject.asyncAwaitNumberOfThrowsNonErrorArg += numberOfThrowNonErrorArgs;
+
+    // Number of catches throwing primitive types
+    if (numberOfThrowNonErrorArgs > 0) {
+        reportObject.asyncAwaitNumberOfCatchesThatThrowsNonErrorArg++;
+    }
 
     // Number of rethrows an error argument
-    reportObject.asyncAwaitNumberOfRethrowsOnCatches += utils.handleRethrowStatements(throwStatements, catchClauseErrorArgs);
+    const numberOfRethrowsOnCatches = utils.handleRethrowStatements(throwStatements, catchClauseErrorArgs);
+    reportObject.asyncAwaitNumberOfRethrowsOnCatches += numberOfRethrowsOnCatches;
+
+    // Number of catches rethrowing an error
+    if (numberOfRethrowsOnCatches > 0) {
+        reportObject.asyncAwaitNumberOfCatchesThatRethrows++;
+    }
 
     // Counts number of returns
     const returnStatements = utils.getStatementsByType(catchClauseBody, 'ReturnStatement');
-    reportObject.asyncAwaitNumberOfReturnsOnCatches += returnStatements.length;
+    const numberOfReturnStatements = returnStatements.length;
+    reportObject.asyncAwaitNumberOfReturnsOnCatches += numberOfReturnStatements;
+
+    // Number of catches having at least one return statement
+    if (numberOfReturnStatements > 0) {
+        reportObject.asyncAwaitNumberOfCatchesThatReturns++;
+    }
 
     // Counts number of returns that uses an error argument
-    reportObject.asyncAwaitNumberOfReturnsAnErrorOnCatches += utils.getNumberOfReturnUsingErrors(returnStatements, catchClauseErrorArgs);
+    const numberOfReturnsAnError = utils.getNumberOfReturnUsingErrors(returnStatements, catchClauseErrorArgs);
+    reportObject.asyncAwaitNumberOfReturnsAnErrorOnCatches += numberOfReturnsAnError;
+
+    // Number of catches that returns an error argument
+    if (numberOfReturnsAnError > 0) {
+        reportObject.asyncAwaitNumberOfCatchesThatReturnsAnError++;
+    }
 
     // Counts number of breaks
     const breakStatements = utils.getStatementsByType(catchClauseBody, 'BreakStatement');

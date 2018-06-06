@@ -408,7 +408,7 @@ describe("Async-await", function() {
       assert.equal(metricsObject.asyncAwaitNumberOfTriesLines, 2);
 
       assert.equal(metricsObject.asyncAwaitNumberOfCatches, 1);
-      assert.equal(metricsObject.asyncAwaitNumberOfEmptyCatches, 1);
+      assert.equal(metricsObject.asyncAwaitNumberOfEmptyCatches, 0);
       assert.equal(metricsObject.asyncAwaitNumberOfCatchesLines, 1);
       assert.equal(metricsObject.asyncAwaitNumberOfAwaitErrorArgsOnCatches, 0);
       assert.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueStatement, 1);
@@ -439,7 +439,7 @@ describe("Async-await", function() {
       assert.equal(metricsObject.asyncAwaitNumberOfTriesLines, 1);
 
       assert.equal(metricsObject.asyncAwaitNumberOfCatches, 1);
-      assert.equal(metricsObject.asyncAwaitNumberOfEmptyCatches, 1);
+      assert.equal(metricsObject.asyncAwaitNumberOfEmptyCatches, 0);
       assert.equal(metricsObject.asyncAwaitNumberOfCatchesLines, 1);
       assert.equal(metricsObject.asyncAwaitNumberOfAwaitErrorArgsOnCatches, 0);
       assert.equal(metricsObject.asyncAwaitNumberOfCatchesWithUniqueStatement, 1);
@@ -483,10 +483,7 @@ describe("Async-await", function() {
 
       assert.equal(metricsObject.asyncAwaitNumberOfThrowErrorsOnCatches, 2);
       assert.equal(metricsObject.asyncAwaitNumberOfRethrowsOnCatches, 0);
-      assert.equal(
-        metricsObject.asyncAwaitNumberOfThrowPrimitiveTypesOnCatches,
-        2
-      );
+      assert.equal(metricsObject.asyncAwaitNumberOfThrowsNonErrorArg, 2);
 
       assert.equal(metricsObject.asyncAwaitNumberOfReturnsOnCatches, 0);
       assert.equal(metricsObject.asyncAwaitNumberOfReturnsAnErrorOnCatches, 0);
@@ -494,6 +491,20 @@ describe("Async-await", function() {
 
       assert.equal(metricsObject.asyncAwaitNumberOfFinallies, 1);
       assert.equal(metricsObject.asyncAwaitNumberOfFinalliesLines, 3);
+    });
+
+    it("assert16", function() {
+      const filename = suiteCasePath + "async-await16.js";
+      const data = metricsModule.handleMetrics([filename], projectPath);
+
+      const metricsObject = data.metrics[0];
+
+      assert.equal(metricsObject.asyncAwaitNumberOfCatchesThatThrows, 5);
+      assert.equal(metricsObject.asyncAwaitNumberOfCatchesThatThrowsNonErrorArg, 4);
+      assert.equal(metricsObject.asyncAwaitNumberOfCatchesThatRethrows, 1);
+      assert.equal(metricsObject.asyncAwaitNumberOfCatchesThatReturnsAnError, 1);
+      assert.equal(metricsObject.asyncAwaitNumberOfEmptyCatches, 1);
+      assert.equal(metricsObject.asyncAwaitNumberOfCatchesNoUsageOfErrorArgument, 2);
     });
   });
 });

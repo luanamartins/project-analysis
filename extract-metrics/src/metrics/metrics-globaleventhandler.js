@@ -38,9 +38,13 @@ function handleAnalysis(node, reportObject) {
                         reportObject.numberOfWindowOnErrorThrows++;
                     }
 
+                    // Counts number of returns
                     const returnStatements = utils.getStatementsByType(rightSideBlockStatement, 'ReturnStatement');
                     if (returnStatements.length > 0) {
                         reportObject.numberOfWindowOnErrorReturns++;
+
+                        // Counts number of returns that uses an error argument (so called rethrow)
+                        // TODO
                     }
                 }
             }

@@ -98,6 +98,22 @@ function traverse(obj, fn) {
     }
 }
 
+function isNotThrowingErrorArg(statements, errorArgs) {
+    let result = 0;
+    if (!statements || !errorArgs) {
+        return 0;
+    }
+
+    statements.forEach((statement) => {
+        const arg = statement.argument;
+        if (!useAnyArguments(arg, errorArgs)) {
+            result++;
+        }
+    });
+
+    return result;
+}
+
 function getThrowPrimitiveTypes(throwStatements) {
     let result = 0;
     if(Array.isArray(throwStatements) && throwStatements.length > 0) {
@@ -377,5 +393,6 @@ module.exports = {
     hasOneStatementAndIsBreak,
     getThrowPrimitiveTypes,
     getDirectoriesNameFrom,
-    trailLastSlash
+    trailLastSlash,
+    isNotThrowingErrorArg
 };
