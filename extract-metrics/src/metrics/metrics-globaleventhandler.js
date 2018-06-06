@@ -19,9 +19,16 @@ function handleAnalysis(node, reportObject) {
                     const errors = utils.getAllErrorArgs(utils.getIdentifiersNames(rightSide.params));
 
                     // empty handler
-                    if (utils.isEmptyHandler(rightSideBlockStatement, errors, numberOfLines)) {
+                    // if (utils.isEmptyHandler(rightSideBlockStatement, errors, numberOfLines)) {
+                    //     reportObject.numberOfWindowOnErrorEmptyHandler++;
+                    // }
+
+                    if (numberOfLines === 0) {
                         reportObject.numberOfWindowOnErrorEmptyHandler++;
+                    } else if (!utils.useAnyArguments(rightSideBlockStatement, errors)) {
+                        reportObject.numberOfWindowOnErrorOnNoUsageOfErrorArgument++;
                     }
+
 
                     if (numberOfLines === 1) {
                         // Handler has only one statement
@@ -34,8 +41,17 @@ function handleAnalysis(node, reportObject) {
                     }
 
                     const throwStatements = utils.getStatementsByType(rightSideBlockStatement, 'ThrowStatement');
+                    reportObject.numberOfWindowOnErrorThrows += throwStatements.length;
                     if (throwStatements.length > 0) {
-                        reportObject.numberOfWindowOnErrorThrows++;
+                        reportObject.numberOfWindowOnErrorThatThrows++;
+                    }
+
+                    // Number of rethrow an error argument
+                    const numberOfRethrowStatements = utils.handleRethrowStatements(throwStatements, errors);
+                    reportObject.numberOfWindowOnErrorRethrows += numberOfRethrowStatements;
+
+                    if(numberOfRethrowStatements > 0) {
+                        reportObject.numberOfWindowOnErrorThatRethrows++;
                     }
 
                     // Counts number of returns
@@ -61,8 +77,10 @@ function handleAnalysis(node, reportObject) {
                     const errors = utils.getAllErrorArgs(utils.getIdentifiersNames(functionRightSide.params));
 
                     // empty handler
-                    if (utils.isEmptyHandler(rightSideBlockStatement, errors, numberOfLines)) {
+                    if (numberOfLines === 0) {
                         reportObject.numberOfElementOnErrorEmptyHandler++;
+                    } else if (!utils.useAnyArguments(rightSideBlockStatement, errors)) {
+                        reportObject.numberOfElementOnErrorOnNoUsageOfErrorArgument++;
                     }
 
                     if (numberOfLines === 1) {
@@ -76,8 +94,17 @@ function handleAnalysis(node, reportObject) {
                     }
 
                     const throwStatements = utils.getStatementsByType(rightSideBlockStatement, 'ThrowStatement');
+                    reportObject.numberOfElementOnErrorThrows += throwStatements.length;
                     if (throwStatements.length > 0) {
-                        reportObject.numberOfElementOnErrorThrows++;
+                        reportObject.numberOfElementOnErrorThatThrows++;
+                    }
+
+                    // Number of rethrow an error argument
+                    const numberOfRethrowStatements = utils.handleRethrowStatements(throwStatements, errors);
+                    reportObject.numberOfElementOnErrorRethrows += numberOfRethrowStatements;
+
+                    if(numberOfRethrowStatements > 0) {
+                        reportObject.numberOfElementOnErrorThatRethrows++;
                     }
 
                     const returnStatements = utils.getStatementsByType(rightSideBlockStatement, 'ReturnStatement');
@@ -108,8 +135,10 @@ function handleAnalysis(node, reportObject) {
                 const numberOfLines = utils.getNumberOfLines(functionBody);
                 reportObject.numberOfWindowAddEventListenerLines += numberOfLines;
 
-                if(utils.isEmptyHandler(functionBody, args, numberOfLines)) {
+                if (numberOfLines === 0) {
                     reportObject.numberOfWindowAddEventListenerEmptyHandler++;
+                } else if (!utils.useAnyArguments(functionBody, args)) {
+                    reportObject.numberOfWindowAddEventListenerNoUsageOfErrorArgument++;
                 }
 
                 if(numberOfLines === 1) {
@@ -121,14 +150,23 @@ function handleAnalysis(node, reportObject) {
                 }
 
                 const throwStatements = utils.getStatementsByType(functionBody, 'ThrowStatement');
-                    if (throwStatements.length > 0) {
-                        reportObject.numberOfWindowAddEventListenerThrows++;
-                    }
+                reportObject.numberOfWindowAddEventListenerThrows += throwStatements.length;
+                if (throwStatements.length > 0) {
+                    reportObject.numberOfWindowAddEventListenerThatThrows++;
+                }
 
-                    const returnStatements = utils.getStatementsByType(functionBody, 'ReturnStatement');
-                    if (returnStatements.length > 0) {
-                        reportObject.numberOfWindowAddEventListenerReturns++;
-                    }
+                // Number of rethrow an error argument
+                const numberOfRethrowStatements = utils.handleRethrowStatements(throwStatements, errors);
+                reportObject.numberOfWindowAddEventListenerRethrows += numberOfRethrowStatements;
+
+                if(numberOfRethrowStatements > 0) {
+                    reportObject.numberOfWindowAddEventListenerThatRethrows++;
+                }
+
+                const returnStatements = utils.getStatementsByType(functionBody, 'ReturnStatement');
+                if (returnStatements.length > 0) {
+                    reportObject.numberOfWindowAddEventListenerReturns++;
+                }
             }
         }
     }

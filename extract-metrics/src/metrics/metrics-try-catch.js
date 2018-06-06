@@ -66,10 +66,15 @@ function handleCatchClause(reportObject, catchClause) {
 
     if (nodeBody) {
         const catchClauseArguments = utils.getIdentifiersNames(catchClause.param);
-        const numberOfLines = utils.getNumberOfLines(nodeBody);
+        const numberOfLines = utils.getNumberOfLines(catchClause.body);
 
-        if (utils.isEmptyHandler(nodeBody, catchClauseArguments, lines)) {
+        // if (utils.isEmptyHandler(nodeBody, catchClauseArguments, lines)) {
+        //     reportObject.tryCatchNumberOfEmptyCatches++;
+        // }
+        if (numberOfLines === 0) {
             reportObject.tryCatchNumberOfEmptyCatches++;
+        } else if (!utils.useAnyArguments(nodeBody, catchClauseArguments)) {
+            reportObject.tryCatchNumberOfCatchesNoUsageOfErrorArgument++;
         }
 
         if (nodeBody.length === 1) {
@@ -83,13 +88,23 @@ function handleCatchClause(reportObject, catchClause) {
 
         // Number of throws on catches
         const throwStatements = utils.getStatementsByType(nodeBody, 'ThrowStatement');
-        reportObject.tryCatchNumberOfThrowErrorsOnCatches += throwStatements.length;
+        const numberOfThrowStatements = throwStatements.length;
 
+        reportObject.tryCatchNumberOfThrowErrorsOnCatches += numberOfThrowStatements;
+        if(numberOfThrowStatements > 0) {
+            reportObject.tryCatchNumberOfCatchesThatThrows++;
+        }
+        
         // Number of throws primitive types
         reportObject.tryCatchNumberOfThrowPrimitiveTypesOnCatches += utils.getThrowPrimitiveTypes(throwStatements);
 
         // Number of rethrows an error argument
-        reportObject.tryCatchNumberOfRethrowsOnCatches += utils.handleRethrowStatements(throwStatements, catchClauseArguments);
+        const numberOfRethrows = utils.handleRethrowStatements(throwStatements, catchClauseArguments);
+        reportObject.tryCatchNumberOfRethrowsOnCatches += numberOfRethrows;
+        
+        if(numberOfRethrows > 0){
+            reportObject.tryCatchNumberOfCatchesThatRethrows++;
+        }
 
         // Counts number of returns
         const returnStatements = utils.getStatementsByType(nodeBody, 'ReturnStatement');

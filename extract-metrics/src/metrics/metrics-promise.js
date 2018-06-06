@@ -20,8 +20,10 @@ function handleCatches(reportObject, node) {
             const functionBody = firstArgument.body;
             const functionParams = utils.getIdentifiersNames(firstArgument.params);
 
-            if (utils.isEmptyHandler(functionBody, functionParams, lines)) {
+            if (lines === 0) {
                 reportObject.promiseNumberOfEmptyFunctionsOnPromiseCatches++;
+            } else if (!utils.useAnyArguments(functionBody, args)) {
+                reportObject.promiseNumberOfFunctionsOnCatchesNoUsageOfErrorArgument++;
             }
 
             if (lines === 1) {
@@ -35,13 +37,22 @@ function handleCatches(reportObject, node) {
 
             // Number of throws on catches
             const throwStatements = utils.getStatementsByType(functionBody, 'ThrowStatement');
-            reportObject.promiseNumberOfThrowErrorsOnCatches += throwStatements.length;
+            const numberOfThrowStatements = throwStatements.length;
+            reportObject.promiseNumberOfThrowErrorsOnCatches += numberOfThrowStatements;
+
+            if(numberOfThrowStatements > 0) {
+                reportObject.promiseNumberOfPromisesThatThrows++;
+            }
 
             // Number of throws primitive types
             reportObject.promiseNumberOfThrowPrimitiveTypesOnCatches += utils.getThrowPrimitiveTypes(throwStatements);
 
             // Number of rethrows on catches
-            reportObject.promiseNumberOfRethrowsOnCatches += utils.handleRethrowStatements(throwStatements, functionParams);
+            const numberOfRethrows = utils.handleRethrowStatements(throwStatements, functionParams);
+            reportObject.promiseNumberOfRethrowsOnCatches += numberOfRethrows;
+            if(numberOfRethrows > 0){
+                reportObject.promiseNumberOfPromisesThatRethrows++;
+            }
 
             // Counts number of returns
             const returnStatements = utils.getStatementsByType(functionBody, 'ReturnStatement');
@@ -58,7 +69,7 @@ function handleCatches(reportObject, node) {
     }
 
     if (numberOfArgumentsOnCatch === 0) {
-        reportObject.promiseNumberOfEmptyFunctionsOnPromiseCatches++;
+        reportObject.promiseNumberOfCatchesWithNoArg++;
     }
 }
 

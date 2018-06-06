@@ -148,13 +148,15 @@ describe("Callback tests", function() {
 
         assert.equal(metricsObject.callbacksNumberOfCallbackErrorFunctions, 1);
         assert.equal(metricsObject.callbacksNumberOfFirstErrorArgFunctions, 1);
-        assert.equal(metricsObject.callbacksNumberOfEmptyCallbacks, 1);
+        assert.equal(metricsObject.callbacksNumberOfEmptyCallbacks, 0);
+        assert.equal(metricsObject.callbacksNumberOfFunctionsNoUsageOfErrorArgument, 1);
+        assert.equal(metricsObject.callbacksNumberOfFunctionsNoUsageOfErrorArgumentWithUniqueErrorArg, 1);
 
         assert.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueStatement, 1);
         assert.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueConsole, 1);
         assert.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueErrorArg, 1);
 
-        assert.equal(metricsObject.callbacksNumberOfEmptyFunctionsWithUniqueErrorArg, 1);
+        assert.equal(metricsObject.callbacksNumberOfEmptyFunctionsWithUniqueErrorArg, 0);
         assert.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueConsole, 1);
         assert.equal(metricsObject.callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueStatement, 1);
         assert.equal(metricsObject.callbacksNumberOfLinesOfFunctionsWithUniqueErrorArg, 1);
@@ -189,6 +191,20 @@ describe("Callback tests", function() {
         assert.equal(metricsObject.callbacksNumberOfBreaksOnCatches, 0);
 
         assert.equal(metricsObject.callbacksNumberOfLines, 4);
+    });
+
+    it("assert08", function(){
+        const filename = suiteCasePath + 'callback8.js';
+        const data = metricsModule.handleMetrics([filename], projectPath);
+
+        const metricsObject = data.metrics[0];
+
+        assert.equal(metricsObject.callbacksNumberOfThrows, 1);        
+        assert.equal(metricsObject.callbacksNumberOfCallbacksThatThrows, 1); 
+        assert.equal(metricsObject.callbacksNumberOfRethrows, 1); 
+        assert.equal(metricsObject.callbacksNumberOfCallbacksThatRethrows, 1); 
+        assert.equal(metricsObject.callbacksNumberOfCatchesThatReturns, 1); 
+        assert.equal(metricsObject.callbacksNumberOfCatchesThatReturnsAnErrorOnCatches, 1);     
     });
 
 });

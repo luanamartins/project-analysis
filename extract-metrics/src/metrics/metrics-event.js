@@ -38,8 +38,10 @@ function handleAnalysis(node, reportObject) {
                             reportObject.eventsNumberOfEventOnLinesStart.push(location.start.line);
                             reportObject.eventsNumberOfEventOnLinesEnd.push(location.end.line);
 
-                            if (utils.isEmptyHandler(handlerFunction.body, handlerParams, numberOfLines)) {
+                            if (numberOfLines === 0) {
                                 reportObject.eventsNumberOfEventOnEmptyFunctions++;
+                            } else if (!utils.useAnyArguments(handlerFunction.body, handlerParams)) {
+                                reportObject.eventsNumberOfEventOnNoUsageOfErrorArgument++;
                             }
 
                         } else if (methodName === 'once') {
@@ -51,8 +53,10 @@ function handleAnalysis(node, reportObject) {
                             reportObject.eventsNumberOfEventOnceLinesStart.push(location.start.line);
                             reportObject.eventsNumberOfEventOnceLinesEnd.push(location.end.line);
 
-                            if (utils.isEmptyHandler(handlerFunction.body, handlerParams, numberOfLines)) {
+                            if (numberOfLines === 0) {
                                 reportObject.eventsNumberOfEventOnceEmptyFunctions++;
+                            } else if (!utils.useAnyArguments(handlerFunction.body, handlerParams)) {
+                                reportObject.eventsNumberOfEventOnceNoUsageOfErrorArgument++;
                             }
                         }
 
@@ -61,13 +65,23 @@ function handleAnalysis(node, reportObject) {
 
                         // Throw an error
                         const throwStatements = utils.getStatementsByType(handlerBody, 'ThrowStatement');
-                        reportObject.eventsNumberOfThrowErrorsOnCatches += throwStatements.length;
+                        const numberOfThrowStatements = throwStatements.length;
+                        reportObject.eventsNumberOfThrowErrorsOnCatches += numberOfThrowStatements;
+
+                        if(throwStatements.length > 0){
+                            reportObject.eventsNumberOfEventsThatThrows++;
+                        }
 
                         // Number of throws primitive types
                         reportObject.eventsNumberOfThrowPrimitiveTypesOnCatches += utils.getThrowPrimitiveTypes(throwStatements);
 
                         // Number of rethrow an error argument
-                        reportObject.eventsNumberOfRethrowsOnCatches += utils.handleRethrowStatements(throwStatements, handlerArgs);
+                        const numberOfRethrowStatements = utils.handleRethrowStatements(throwStatements, handlerArgs);
+                        reportObject.eventsNumberOfRethrowsOnCatches += numberOfRethrowStatements
+
+                        if(numberOfRethrowStatements > 0) {
+                            reportObject.eventsNumberOfEventsThatRethrows++;
+                        }
 
                         // Counts number of returns
                         const returnStatements = utils.getStatementsByType(handlerBody, 'ReturnStatement');
@@ -120,9 +134,10 @@ function handleAnalysis(node, reportObject) {
                             reportObject.eventsNumberOfEventUncaughtExceptionLines += numberOfLines; 
                             const params = utils.getIdentifiersNames(secondArgument.params);
 
-                            // UncaughtException has an empty body or does not use the arguments
-                            if (utils.isEmptyHandler(bodyStatement, params, numberOfLines)) {
+                            if (numberOfLines === 0) {
                                 reportObject.eventsNumberOfUncaughtExceptionEmpty++;
+                            } else if (!utils.useAnyArguments(bodyStatement, params)) {
+                                reportObject.eventsNumberOfUncaughtExceptionNoUsageOfErrorArgument++;
                             }
 
                             // UncaughtException body has only one statement
