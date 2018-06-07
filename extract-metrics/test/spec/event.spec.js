@@ -82,7 +82,7 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
         assert.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
 
-        assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 1);
+        assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 0);
         assert.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
         assert.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
@@ -113,7 +113,7 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
         assert.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
 
-        assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 2);
+        assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 0);
         assert.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
         assert.equal(metricsObject.eventsNumberOfEventOnceWithUniqueStatement, 0);
@@ -147,7 +147,7 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
         assert.equal(metricsObject.eventsNumberOfEventEmitLines, 4);
 
-        assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 2);
+        assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 0);
         assert.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
         assert.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
@@ -178,7 +178,7 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
         assert.equal(metricsObject.eventsNumberOfEventEmitLines, 4);
 
-        assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 2);
+        assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 0);
         assert.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
         assert.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
@@ -209,8 +209,8 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsNumberOfEventOnceLines, 7);
         assert.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
 
-        assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 1);
-        assert.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 2);
+        assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 0);
+        assert.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
         assert.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
         assert.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
@@ -240,8 +240,8 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsNumberOfEventOnceLines, 7);
         assert.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
 
-        assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 2);
-        assert.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 2);
+        assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 0);
+        assert.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
         assert.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
         assert.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
@@ -271,7 +271,7 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
         assert.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
 
-        assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 1);
+        assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 0);
         assert.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
         assert.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 1);
@@ -364,7 +364,7 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
         assert.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
 
-        assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 2);
+        assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 0);
         assert.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
         assert.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
@@ -395,7 +395,7 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsNumberOfEventOnceLines, 0);
         assert.equal(metricsObject.eventsNumberOfEventEmitLines, 0);
 
-        assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 3);
+        assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 0);
         assert.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
         assert.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 2);
@@ -420,11 +420,25 @@ describe("Events tests", function() {
         const metricsObject = data.metrics[0];
 
         assert.equal(metricsObject.eventsNumberOfEventUncaughtException, 5);
-        assert.equal(metricsObject.eventsNumberOfUncaughtExceptionEmpty, 3);
+        assert.equal(metricsObject.eventsNumberOfUncaughtExceptionEmpty, 1);
         assert.equal(metricsObject.eventsNumberOfUncaughtExceptionWithUniqueStatement, 3);
         assert.equal(metricsObject.eventsNumberOfUncaughtExceptionWithUniqueConsole, 1);
         assert.equal(metricsObject.eventsNumberOfUncaughtExceptionReturns, 1);
         assert.equal(metricsObject.eventsNumberOfUncaughtExceptionThrows, 2);
+    });
+
+    it("assert15", function() {
+        const filename = suiteCasePath + 'event15.js';
+        const data = metricsModule.handleMetrics([filename], projectPath);
+
+        const metricsObject = data.metrics[0];
+
+        assert.equal(metricsObject.eventsNumberOfEventOnNoUsageOfErrorArgument, 2);
+        assert.equal(metricsObject.eventsNumberOfEventOnceNoUsageOfErrorArgument, 1);
+        assert.equal(metricsObject.eventsNumberOfUncaughtExceptionNoUsageOfErrorArgument, 1);
+        assert.equal(metricsObject.eventsNumberOfEventsThatThrows, 4);
+        assert.equal(metricsObject.eventsNumberOfEventsThatRethrows, 2);
+
     });
     
 });
