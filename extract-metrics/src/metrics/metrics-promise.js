@@ -20,9 +20,13 @@ function handleCatches(reportObject, node) {
             const functionBody = firstArgument.body;
             const functionParams = utils.getIdentifiersNames(firstArgument.params);
 
+            if(functionParams.length === 0) {
+                reportObject.promiseNumberOfCatchesFunctionWithNoArg++;
+            }
+
             if (lines === 0) {
                 reportObject.promiseNumberOfEmptyFunctionsOnPromiseCatches++;
-            } else if (!utils.useAnyArguments(functionBody, args)) {
+            } else if (functionParams.length > 0 && !utils.useAnyArguments(functionBody, functionParams)) {
                 reportObject.promiseNumberOfFunctionsOnCatchesNoUsageOfErrorArgument++;
             }
 

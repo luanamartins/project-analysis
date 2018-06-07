@@ -299,7 +299,7 @@ describe("Promises tests", function() {
 
         assert.equal(metricsObject.promiseNumberOfPromiseCatches, 1);
         assert.equal(metricsObject.promiseNumberOfPromiseCatchesLines, 0);
-        assert.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 1);
+        assert.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
 
@@ -367,7 +367,7 @@ describe("Promises tests", function() {
 
         assert.equal(metricsObject.promiseNumberOfPromiseCatches, 2);
         assert.equal(metricsObject.promiseNumberOfPromiseCatchesLines, 2);
-        assert.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 1);
+        assert.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 1);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 1);
 
@@ -401,7 +401,7 @@ describe("Promises tests", function() {
 
         assert.equal(metricsObject.promiseNumberOfPromiseCatches, 2);
         assert.equal(metricsObject.promiseNumberOfPromiseCatchesLines, 4);
-        assert.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 2);
+        assert.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 2);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 2);
 
@@ -435,7 +435,7 @@ describe("Promises tests", function() {
 
         assert.equal(metricsObject.promiseNumberOfPromiseCatches, 1);
         assert.equal(metricsObject.promiseNumberOfPromiseCatchesLines, 1);
-        assert.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 1);
+        assert.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 1);
 
@@ -537,7 +537,7 @@ describe("Promises tests", function() {
 
         assert.equal(metricsObject.promiseNumberOfPromiseCatches, 1);
         assert.equal(metricsObject.promiseNumberOfPromiseCatchesLines, 1);
-        assert.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 1);
+        assert.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 1);
 
@@ -572,7 +572,7 @@ describe("Promises tests", function() {
 
         assert.equal(metricsObject.promiseNumberOfPromiseCatches, 2);
         assert.equal(metricsObject.promiseNumberOfPromiseCatchesLines, 8);
-        assert.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 1);
+        assert.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 1);
 
@@ -719,7 +719,7 @@ describe("Promises tests", function() {
 
         assert.equal(metricsObject.promiseNumberOfPromiseCatches, 1);
         assert.equal(metricsObject.promiseNumberOfPromiseCatchesLines, 2);
-        assert.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 1);
+        assert.equal(metricsObject.promiseNumberOfEmptyFunctionsOnPromiseCatches, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
 
@@ -735,6 +735,19 @@ describe("Promises tests", function() {
 
         assert.equal(metricsObject.promiseNumberOfPromiseRaces, 0);
         assert.equal(metricsObject.promiseNumberOfPromiseAll, 0);
+    });
+
+    it("assert23", function() {
+        const filename = suiteCasePath + 'promise23.js';
+        const data = metricsModule.handleMetrics([filename], projectPath);
+
+        const metricsObject = data.metrics[0];
+
+        assert.equal(metricsObject.promiseNumberOfFunctionsOnCatchesNoUsageOfErrorArgument, 1);
+        assert.equal(metricsObject.promiseNumberOfCatchesWithNoArg, 2);
+        assert.equal(metricsObject.promiseNumberOfCatchesFunctionWithNoArg, 3);
+        assert.equal(metricsObject.promiseNumberOfPromisesThatThrows, 5);
+        assert.equal(metricsObject.promiseNumberOfPromisesThatRethrows, 1);
     });
 
 });
