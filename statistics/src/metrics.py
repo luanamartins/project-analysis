@@ -1,6 +1,5 @@
 from matrix import get_value_of_metric
 
-
 def get_number_of_try_catch_handlers(matrices):
     index = [6]  # tryCatchNumberOfCatches(6)
     return get_value_of_metric(matrices, index)
@@ -12,7 +11,7 @@ def get_number_of_catch_promises(matrices):
 
 
 def get_number_of_async_await_catches(matrices):
-    index = [31]  # asyncAwaitNumberOfCatches(31)
+    index = [76]  # asyncAwaitNumberOfCatches(31)
     return get_value_of_metric(matrices, index)
 
 

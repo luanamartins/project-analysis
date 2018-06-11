@@ -1,13 +1,13 @@
 from files import get_matrix_from_file
-from metrics import get_number_of_try_catch_handlers, get_number_of_catch_promises, \
-    get_number_of_async_await_catches, get_number_of_event_handlers, get_number_of_callbacks
+from metrics import *
 from stats import *
 from matrix import *
 
-client_path = 'data/client-reviewed'
+client_path = '/Users/luizvasconcelos/Desktop/Luana/project-analysis/extract-metrics/data/result/client'
 client_matrices = get_matrix_from_file(client_path)
 
-server_path = 'data/server-reviewed'
+server_path = '/Users/luizvasconcelos/Desktop/Luana/project-analysis/extract-metrics/data/result/server'
+# server_path = '/Users/luizvasconcelos/Desktop/Luana/project-analysis/statistics/data/server-reviewed'
 server_matrices = get_matrix_from_file(server_path)
 
 all_matrices = client_matrices + server_matrices

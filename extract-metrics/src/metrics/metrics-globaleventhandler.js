@@ -156,7 +156,7 @@ function handleAnalysis(node, reportObject) {
                 }
 
                 // Number of rethrow an error argument
-                const numberOfRethrowStatements = utils.handleRethrowStatements(throwStatements, errors);
+                const numberOfRethrowStatements = utils.handleRethrowStatements(throwStatements, args);
                 reportObject.numberOfWindowAddEventListenerRethrows += numberOfRethrowStatements;
 
                 if(numberOfRethrowStatements > 0) {

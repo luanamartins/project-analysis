@@ -62,7 +62,7 @@ describe("Global event handler tests", function() {
 
         assert.equal(metricsObject.numberOfWindowOnError, 1);
         assert.equal(metricsObject.numberOfWindowOnErrorLines, 8);
-        assert.equal(metricsObject.numberOfWindowOnErrorEmptyHandler, 1);
+        assert.equal(metricsObject.numberOfWindowOnErrorEmptyHandler, 0);
         assert.equal(metricsObject.numberOfWindowOnErrorUniqueStatement, 0);
         assert.equal(metricsObject.numberOfWindowOnErrorUniqueConsole, 0);
 
@@ -109,6 +109,29 @@ describe("Global event handler tests", function() {
 
         assert.equal(metricsObject.numberOfWindowAddEventListenerThrows, 2);
         assert.equal(metricsObject.numberOfWindowAddEventListenerReturns, 1);
+
+    });
+
+    it("assert07", function() {
+        const filename = suiteCasePath + 'globaleventhandler7.js';
+        const data = metricsModule.handleMetrics([filename], projectPath);
+
+        const metricsObject = data.metrics[0];
+
+        assert.equal(metricsObject.numberOfWindowOnErrorOnNoUsageOfErrorArgument, 4);
+        assert.equal(metricsObject.numberOfWindowOnErrorThatThrows, 6);
+        assert.equal(metricsObject.numberOfWindowOnErrorRethrows, 4);
+        assert.equal(metricsObject.numberOfWindowOnErrorThatRethrows, 4);
+
+        assert.equal(metricsObject.numberOfElementOnErrorOnNoUsageOfErrorArgument, 0);
+        assert.equal(metricsObject.numberOfElementOnErrorThatThrows, 0);
+        assert.equal(metricsObject.numberOfElementOnErrorRethrows, 0);
+        assert.equal(metricsObject.numberOfElementOnErrorThatRethrows, 0);
+        
+        assert.equal(metricsObject.numberOfWindowAddEventListenerNoUsageOfErrorArgument, 1);
+        assert.equal(metricsObject.numberOfWindowAddEventListenerThatThrows, 3);
+        assert.equal(metricsObject.numberOfWindowAddEventListenerRethrows, 2);
+        assert.equal(metricsObject.numberOfWindowAddEventListenerThatRethrows, 2);
 
     });
 

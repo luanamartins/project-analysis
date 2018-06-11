@@ -1,11 +1,12 @@
 const request = require('request');
 const fs = require('fs');
 const filesModule = require('./files');
+const config = require('./config.json');
 
-//const filepath = '/Users/luizvasconcelos/Desktop/Luana/project-analysis/extract-metrics/data/client.txt';
-const filepath = '/Users/luizvasconcelos/Desktop/Luana/project-analysis/retrieve-stats-data/teste.txt';
-const csvFilename = '/Users/luizvasconcelos/Desktop/Luana/project-analysis/statistics/result/github-data.csv';
-const token = 'fd7df266860188e5b4c5bd79c0883fb590753f7c';
+//const filepath = config['projectPath'] + 'extract-metrics/data/client.txt';
+const filepath = config['retrieveStatsPath'] + 'teste.txt';
+const csvFilename = config['projectPath'] + 'statistics/result/github-data.csv';
+const token = config['token'];
 
 function getRequest(url) {
     const options = {
