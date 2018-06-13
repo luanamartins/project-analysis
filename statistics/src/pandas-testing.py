@@ -46,9 +46,9 @@ get_total_and_mean_handlers(file_paths, result, number_repos)
 directory = config.DATA['extractMetricsResultDir'] + 'server/'
 file_paths = glob.glob(directory + '*.csv')
 
-
 get_total_and_mean_handlers(file_paths, result, number_repos)
 
-dataf = pd.DataFrame(data=result)
 result_path = config.DATA['result'] + 'mean-total-error-handling.csv'
+dataf = pd.DataFrame(data=result)
+dataf.set_index('info', inplace=True)
 dataf.to_csv(result_path, encoding='utf-8', index=False)
