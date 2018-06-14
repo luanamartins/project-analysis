@@ -1,6 +1,7 @@
 import pandas as pd
 import config
 
+
 def sum_metrics(metrics, data_frame):
     total = 0
     for metric in metrics:
@@ -48,13 +49,14 @@ def perc_one_statement_handlers(csv_file_path):
 def perc_throw_statement(csv_file_path):
     df = pd.read_csv(csv_file_path)
     total = sum_metrics(['tryCatchNumberOfCatches', 'promiseNumberOfPromiseCatches',
-                         'asyncAwaitNumberOfCatches', 'eventsNumberOfEventMethodsOn',
-                         'eventsNumberOfEventMethodsOnce'], df)
+                         'asyncAwaitNumberOfCatches', 'callbacksNumberOfCallbackErrorFunctions', 
+                         'eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'], df)
 
-    partial = sum_metrics(['tryCatchNumberOfThrows', 'promiseNumberOfCatchesWithUniqueStatement',
-                           'asyncAwaitNumberOfCatchesWithUniqueStatement', 'eventsNumberOfEventOnWithUniqueStatement',
-                           'eventsNumberOfEventOnceWithUniqueStatement'], df)
+    partial = sum_metrics(['tryCatchNumberOfCatchesThatThrows', 'promiseNumberOfPromisesThatThrows',
+                           'asyncAwaitNumberOfCatchesThatThrows', 'callbacksNumberOfCallbacksThatThrows',
+                           'eventsNumberOfEventsThatThrows'], df)
     return (partial * 100) / float(total)
+
 
 filepath = config.DATA['result'] + 'results-20180607/result-classes.csv'
 print('Empty: ' + str(perc_empty_handlers(filepath)))
