@@ -21,21 +21,21 @@ callbacks_number = df['callbacksNumberOfCallbackErrorFunctions'].sum()
 
 error_handling_total_lines = try_catch_lines + async_await_lines + events_lines + promises_lines + callbacks_lines
 
-print(total_lines)
-print(100*try_catch_lines/total_lines)
-print(100*async_await_lines/total_lines)
-print(100*events_lines/total_lines)
-print(100*promises_lines/total_lines)
-print(100 * callbacks_lines / total_lines)
+print('total_lines: ' + str(total_lines))
+print('try_catch_lines ' + str(100*try_catch_lines/total_lines))
+print('async_await ' + str(100*async_await_lines/total_lines))
+print('events ' + str(100*events_lines/total_lines))
+print('promises ' + str(100*promises_lines/total_lines))
+print('callbacks ' + str(100 * callbacks_lines / total_lines))
 
 print('----')
 
-print(error_handling_total_lines)
-print(100*try_catch_lines/error_handling_total_lines)
-print(100*async_await_lines/error_handling_total_lines)
-print(100*events_lines/error_handling_total_lines)
-print(100*promises_lines/error_handling_total_lines)
-print(100 * callbacks_lines / error_handling_total_lines)
+print('error handling total lines: ' + str(error_handling_total_lines))
+print('try_catch_lines ' + str(100*try_catch_lines/error_handling_total_lines))
+print('async-await ' + str(100*async_await_lines/error_handling_total_lines))
+print('events ' + str(100*events_lines/error_handling_total_lines))
+print('promises ' + str(100*promises_lines/error_handling_total_lines))
+print('callbacks ' + str(100 * callbacks_lines / error_handling_total_lines))
 
 print('----')
 
@@ -51,5 +51,18 @@ print('----')
 # First error argument
 
 first_error_arg = df['callbacksNumberOfFirstErrorArgFunctions'].sum()
-print(str(first_error_arg))
+print('first-error')
+print(str(callbacks_number) + ' ' + str(first_error_arg) + ' ' + str(100*first_error_arg/callbacks_number))
+print('---------')
+
+total = df['callbacksNumberOfCallbackErrorFunctions'].sum()
+partial = df['callbacksNumberOfFunctionsNoUsageOfErrorArgumentWithUniqueErrorArg'].sum()
+print('Unique error arg no usage ' + str((100 * partial)/total))
+
+print('----------')
+# window.onerror, element etc...
+total_window_onerror = df['numberOfWindowOnError'].sum()
+
+print('----------')
+
 
