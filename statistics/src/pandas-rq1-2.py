@@ -1,5 +1,4 @@
 import pandas as pd
-import seaborn as sns
 import config
 
 
@@ -214,55 +213,26 @@ print('Throws')
 perc_throws(df)
 print('--------------------------------')
 
+def percentage(partial, total):
+    return (100*partial)/total
 
 
-# def save_vioplot():
-#     import seaborn as sns
-#     sns.set_style("whitegrid")
-#     tips = sns.load_dataset("tips")
-#     ax = sns.violinplot(x="day", y="total_bill", hue="smoker", data = tips, palette = "muted")
-#     ax.figure.savefig('output.png')
-# save_vioplot()
+# UncaughtException
+total = df['eventsNumberOfEventUncaughtException'].sum()
+empty = df['eventsNumberOfUncaughtExceptionEmpty'].sum()
+no_usage = df['eventsNumberOfUncaughtExceptionNoUsageOfErrorArgument'].sum()
+unique_stmt = df['eventsNumberOfUncaughtExceptionWithUniqueStatement'].sum()
+unique_console = df['eventsNumberOfUncaughtExceptionWithUniqueConsole'].sum()
+throws = df['eventsNumberOfUncaughtExceptionThrows']
 
-# def build_dataset(df):
-#     print(df)
-#     def do(row, row_acc):
-#         row_acc.append({
-#             'error_handling_mec': 'try-catch',
-#             'repo': row['tryCatchNumberOfCatches']
-#         })
-#         row_acc.append({
-#             'error_handling_mec': 'async-await',
-#             'repo': row['asyncAwaitNumberOfCatches']
-#         })
-#         row_acc.append({
-#             'error_handling_mec': 'callbacks',
-#             'repo': row['callbacksNumberOfCallbackErrorFunctions']
-#         })
-#         row_acc.append({
-#             'error_handling_mec': 'events',
-#             'repo': row['eventsNumberOfEventMethodsOn'] + row['eventsNumberOfEventMethodsOnce']
-#         })
-#         row_acc.append({
-#             'error_handling_mec': 'promises',
-#             'repo': row['promiseNumberOfPromiseCatches']
-#         })
-#     row_acc = []
-#     df.apply(lambda row: do(row, row_acc))
-#     return pd.Dataframe(row_acc)
-#
-#
-#
-# def save_vioplot():
-#     import seaborn as sns
-#     sns.set_style("whitegrid")
-#
-#     # tips = sns.load_dataset("tips")
-#     client_df = pd.read_csv(config.DATA['result'] + 'result-repo-client.csv')
-#     server_df = pd.read_csv(config.DATA['result'] + 'result-repo-server.csv')
-#     set = pd.concat([client_df, server_df])
-#     n_df = build_dataset(set)
-#
-#     ax = sns.violinplot(x="error_handling_mec", y="repo", data=n_df, palette="muted")
-#     ax.figure.savefig('output.png')
-# save_vioplot()
+print('empty: ' + str(percentage(empty, total)))
+print('no_usage: ' + str(percentage(no_usage, total)))
+print('unique_stmt: ' + str(percentage(unique_stmt, total)))
+print('unique_console: ' + str(percentage(unique_console, total)))
+print('throws: ' + str(percentage(throws, total)))
+
+
+unique_error_callback = df['callbacksNumberOfFunctionsWithUniqueErrorArg'].sum()
+no_usage_callback = df['callbacksNumberOfFunctionsNoUsageOfErrorArgumentWithUniqueErrorArg'].sum()
+print('no usage unique error argument callback')
+print(percentage(no_usage_callback, unique_error_callback))
