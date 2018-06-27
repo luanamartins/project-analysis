@@ -15,7 +15,7 @@ numberOfWindowOnErrorThatThrows,0,0
 numberOfWindowOnErrorRethrows,0,0
 numberOfWindowOnErrorThatRethrows,0,0
 numberOfWindowOnErrorReturns,13,2
-numberOfWindowAddEventListener,1,3
+numberOfWindowAddEventListener,1,1
 numberOfWindowAddEventListenerLines,12,1
 numberOfWindowAddEventListenerEmptyHandler,0,0
 numberOfWindowAddEventListenerNoUsageOfErrorArgument,0,0

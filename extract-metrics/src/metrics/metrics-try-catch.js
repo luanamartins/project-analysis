@@ -24,8 +24,8 @@ function handleAnalysis(node, reportObject) {
 
         const nodes = tryStatementNodes.concat(catchClauseNodes).concat(finallyStatements);
 
-        const throwStatementNodes = getThrowStatementNodes(nodes);
-        throwStatementNodes.map((throwNode) => handleThrowStatement(reportObject, throwNode));
+        // const throwStatementNodes = getThrowStatementNodes(nodes);
+        // throwStatementNodes.map((throwNode) => handleThrowStatement(reportObject, throwNode));
 
     }
 }
@@ -61,16 +61,12 @@ function handleTryStatement(reportObject, tryNode) {
 function handleCatchClause(reportObject, catchClause) {
     reportObject.tryCatchNumberOfCatches++;
     const nodeBody = catchClause.body.body;
-    const lines = utils.getNumberOfLines(catchClause);
-    reportObject.tryCatchNumberOfCatchesLines += lines;
+    reportObject.tryCatchNumberOfCatchesLines += utils.getNumberOfLines(catchClause);
 
     if (nodeBody) {
         const catchClauseArguments = utils.getIdentifiersNames(catchClause.param);
         const numberOfLines = utils.getNumberOfLines(catchClause.body);
 
-        // if (utils.isEmptyHandler(nodeBody, catchClauseArguments, lines)) {
-        //     reportObject.tryCatchNumberOfEmptyCatches++;
-        // }
         if (numberOfLines === 0) {
             reportObject.tryCatchNumberOfEmptyCatches++;
         } else if (!utils.useAnyArguments(nodeBody, catchClauseArguments)) {
@@ -84,68 +80,123 @@ function handleCatchClause(reportObject, catchClause) {
             if (utils.isConsoleStatement(uniqueStatement)) {
                 reportObject.tryCatchNumberOfCatchesWithUniqueConsole++;
             }
+
+            if(utils.isAlertCallExpression(uniqueStatement)) {
+                reportObject.tryCatchNumberOfCatchesAlertOnly++;
+            }
+        }
+
+        if (utils.hasErrorReassignment(nodeBody, catchClauseArguments)) {
+            reportObject.tryCatchNumberOfErrorReassigning++;
         }
 
         // Number of throws on catches
         const throwStatements = utils.getStatementsByType(nodeBody, 'ThrowStatement');
         const numberOfThrowStatements = throwStatements.length;
+        reportObject.tryCatchNumberOfCatchesThrows += numberOfThrowStatements;
 
-        reportObject.tryCatchNumberOfThrowErrorsOnCatches += numberOfThrowStatements;
         if(numberOfThrowStatements > 0) {
             reportObject.tryCatchNumberOfCatchesThatThrows++;
         }
-        
-        // Number of throws primitive types
-        reportObject.tryCatchNumberOfThrowPrimitiveTypesOnCatches += utils.getThrowPrimitiveTypes(throwStatements);
+
+        // Throws literal types
+        if (utils.hasLiteral(throwStatements)) {
+            reportObject.tryCatchNumberOfCatchesThatThrowsLiteral++;
+
+            if (nodeBody.length === 1) {
+                reportObject.tryCatchNumberOfCatchesThatThrowsLiteralOnly++;
+            }
+        }
+
+        if (utils.hasUndefined(throwStatements)) {
+            reportObject.tryCatchNumberOfCatchesThatThrowsUndefined++;
+            if (nodeBody.length === 1) {
+                reportObject.tryCatchNumberOfCatchesThatThrowsUndefinedOnly++;
+            }
+        }
+
+        if (utils.hasNull(throwStatements)) {
+            reportObject.tryCatchNumberOfCatchesThatThrowsNull++;
+            if (nodeBody.length === 1) {
+                reportObject.tryCatchNumberOfCatchesThatThrowsNullOnly++;
+            }
+        }
+
+        if (utils.hasErrorObject(throwStatements)) {
+            reportObject.tryCatchNumberOfCatchesThatThrowsErrorObject++;
+        }
+
+        // Throws Error objects
+        const params = utils.getPropertyFrom(throwStatements, 'argument');
+        if(utils.hasErrorObject(params)) {
+            reportObject.tryCatchNumberOfCatchesThrowsErrorObject++;
+        }
 
         // Number of rethrows an error argument
-        const numberOfRethrows = utils.handleRethrowStatements(throwStatements, catchClauseArguments);
-        reportObject.tryCatchNumberOfRethrowsOnCatches += numberOfRethrows;
-        
+        const numberOfRethrows = utils.reuseAnErrorStatements(throwStatements, catchClauseArguments);
+        reportObject.tryCatchNumberOfCatchesRethrows += numberOfRethrows;
+
         if(numberOfRethrows > 0){
             reportObject.tryCatchNumberOfCatchesThatRethrows++;
         }
 
         // Counts number of returns
         const returnStatements = utils.getStatementsByType(nodeBody, 'ReturnStatement');
-        reportObject.tryCatchNumberOfReturnsOnCatches += returnStatements.length;
+        reportObject.tryCatchNumberOfCatchesReturns += returnStatements.length;
+        reportObject.tryCatchNumberOfCatchesReturnsLiteral += utils.numberOfLiterals(returnStatements);
+        reportObject.tryCatchNumberOfCatchesReturnsErrorObject += utils.reuseAnErrorStatements(returnStatements);
+        reportObject.tryCatchNumberOfCatchesThatRereturns += utils.reuseAnErrorStatements(returnStatements, catchClauseArguments);
 
-        // Counts number of returns that uses an error argument
-        reportObject.tryCatchNumberOfReturnsAnErrorOnCatches += utils.getNumberOfReturnUsingErrors(returnStatements, catchClauseArguments);
+        if (returnStatements.length > 0) {
+            // Counts number of returns that uses an error argument (so called rethrow)
+            reportObject.tryCatchNumberOfCatchesThatReturns++;
+            if (utils.hasLiteral(returnStatements)) {
+                reportObject.tryCatchNumberOfCatchesThatReturnsLiteral++;
+            }
+
+            if(utils.hasUndefined(returnStatements)) {
+                reportObject.tryCatchNumberOfCatchesThatReturnsUndefined++;
+            }
+
+            if (utils.hasNull(returnStatements)) {
+                reportObject.tryCatchNumberOfCatchesThatReturnsNull++;
+            }
+
+            if (utils.hasErrorObject(returnStatements)) {
+                reportObject.tryCatchNumberOfCatchesThatReturnsErrorObject++;
+            }
+
+        }
+
+
+        // Counts number of continues
+        const continueStatements = utils.getStatementsByType(nodeBody, 'ContinueStatement');
+        reportObject.tryCatchNumberOfCatchesContinues += continueStatements.length;
+        if(continueStatements.length > 0) {
+            reportObject.tryCatchNumberOfCatchesThatContinues++;
+        }
 
         // Counts number of breaks
         const breakStatements = utils.getStatementsByType(nodeBody, 'BreakStatement');
-        reportObject.tryCatchNumberOfBreaksOnCatches += breakStatements.length;
+        reportObject.tryCatchNumberOfCatchesBreaks += breakStatements.length;
+        if(breakStatements.length > 0) {
+            reportObject.tryCatchNumberOfCatchesThatBreaks++;
 
-        // Add unique break in all constructions
-        if(utils.hasOneStatementAndIsBreak(breakStatements, lines)){
-            reportObject.tryCatchNumberOfBreaksOnCatchesUniqueStatement++;
+            if (nodeBody.length === 1) {
+                reportObject.tryCatchNumberOfCatchesBreaksOnly++;
+            }
         }
 
     }
 
     const continueStatements = utils.getNodeTypes(catchClause, 'ContinueStatement');
-    reportObject.tryCatchNumberOfContinuesOnCatches += continueStatements.length;
+    reportObject.tryCatchNumberOfCatchesContinues += continueStatements.length;
 
     const location = catchClause.loc;
     reportObject.tryCatchNumberOfCatchesLinesStart.push(location.start.line);
     reportObject.tryCatchNumberOfCatchesLinesEnd.push(location.end.line);
 
 }
-
-function handleThrowStatement(reportObject, throwNode) {
-    reportObject.tryCatchNumberOfThrows++;
-
-    if (throwNode.argument.type === 'Literal') {
-        // Throwing a string, number or something else
-        reportObject.tryCatchNumberOfThrowsLiteral++;
-
-    } else if (throwNode.argument.type === 'NewExpression' && throwNode.argument.callee.name === 'Error') {
-        // Creation of new Error object
-        reportObject.tryCatchNumberOfThrowsErrorObjects++;
-    }
-}
-
 
 function getTryStatementNodes(functionBodyNode) {
 

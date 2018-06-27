@@ -47,7 +47,7 @@ function handleAnalysis(node, reportObject) {
                     }
 
                     // Number of rethrow an error argument
-                    const numberOfRethrowStatements = utils.handleRethrowStatements(throwStatements, errors);
+                    const numberOfRethrowStatements = utils.reuseAnErrorStatements(throwStatements, errors);
                     reportObject.numberOfWindowOnErrorRethrows += numberOfRethrowStatements;
 
                     if(numberOfRethrowStatements > 0) {
@@ -56,11 +56,24 @@ function handleAnalysis(node, reportObject) {
 
                     // Counts number of returns
                     const returnStatements = utils.getStatementsByType(rightSideBlockStatement, 'ReturnStatement');
+                    reportObject.numberOfWindowOnErrorReturns += returnStatements.length;
                     if (returnStatements.length > 0) {
-                        reportObject.numberOfWindowOnErrorReturns++;
-
                         // Counts number of returns that uses an error argument (so called rethrow)
-                        // TODO
+                        reportObject.numberOfWindowOnErrorThatReturns++;
+                        reportObject.numberOfWindowOnErrorThatReturnsLiteral += utils.hasLiteral(returnStatements);
+                    }
+
+                    // Counts number of continues
+                    const continueStatements = utils.getStatementsByType(rightSideBlockStatement, 'ContinueStatement');
+                    reportObject.numberOfWindowOnErrorContinues += continueStatements.length;
+                    if(continueStatements.length > 0) {
+                        reportObject.numberOfWindowOnErrorThatContinues++;
+                    }
+
+                    const breakStatements = utils.getStatementsByType(rightSideBlockStatement, 'BreakStatement');
+                    reportObject.numberOfWindowOnErrorBreaks += breakStatements.length;
+                    if(breakStatements.length > 0) {
+                        reportObject.numberOfWindowOnErrorThatBreaks++;
                     }
                 }
             }
@@ -100,16 +113,33 @@ function handleAnalysis(node, reportObject) {
                     }
 
                     // Number of rethrow an error argument
-                    const numberOfRethrowStatements = utils.handleRethrowStatements(throwStatements, errors);
+                    const numberOfRethrowStatements = utils.reuseAnErrorStatements(throwStatements, errors);
                     reportObject.numberOfElementOnErrorRethrows += numberOfRethrowStatements;
 
                     if(numberOfRethrowStatements > 0) {
                         reportObject.numberOfElementOnErrorThatRethrows++;
                     }
 
+                    // Counts number of returns
                     const returnStatements = utils.getStatementsByType(rightSideBlockStatement, 'ReturnStatement');
+                    reportObject.numberOfElementOnErrorReturns += returnStatements.length;
                     if (returnStatements.length > 0) {
-                        reportObject.numberOfElementOnErrorReturns++;
+                        // Counts number of returns that uses an error argument (so called rethrow)
+                        reportObject.numberOfElementOnErrorThatReturns++;
+                        reportObject.numberOfElementOnErrorThatReturnsLiteral += utils.hasLiteral(returnStatements);
+                    }
+
+                    // Counts number of continues
+                    const continueStatements = utils.getStatementsByType(rightSideBlockStatement, 'ContinueStatement');
+                    reportObject.numberOfElementOnErrorContinues += continueStatements.length;
+                    if(continueStatements.length > 0) {
+                        reportObject.numberOfElementOnErrorThatContinues++;
+                    }
+
+                    const breakStatements = utils.getStatementsByType(rightSideBlockStatement, 'BreakStatement');
+                    reportObject.numberOfElementOnErrorBreaks += breakStatements.length;
+                    if(breakStatements.length > 0) {
+                        reportObject.numberOfElementOnErrorThatBreaks++;
                     }
                 }
             }
@@ -163,9 +193,26 @@ function handleAnalysis(node, reportObject) {
                     reportObject.numberOfWindowAddEventListenerThatRethrows++;
                 }
 
+                // Counts number of returns
                 const returnStatements = utils.getStatementsByType(functionBody, 'ReturnStatement');
+                reportObject.numberOfWindowAddEventListenerReturns += returnStatements.length;
                 if (returnStatements.length > 0) {
-                    reportObject.numberOfWindowAddEventListenerReturns++;
+                    // Counts number of returns that uses an error argument (so called rethrow)
+                    reportObject.numberOfWindowAddEventListenerThatReturns++;
+                    reportObject.numberOfWindowAddEventListenerThatReturnsLiteral += utils.hasLiteral(returnStatements);
+                }
+
+                // Counts number of continues
+                const continueStatements = utils.getStatementsByType(functionBody, 'ContinueStatement');
+                reportObject.numberOfWindowAddEventListenerContinues += continueStatements.length;
+                if(continueStatements.length > 0) {
+                    reportObject.numberOfWindowAddEventListenerThatContinues++;
+                }
+
+                const breakStatements = utils.getStatementsByType(functionBody, 'BreakStatement');
+                reportObject.numberOfWindowAddEventListenerBreaks += breakStatements.length;
+                if(breakStatements.length > 0) {
+                    reportObject.numberOfWindowAddEventListenerThatBreaks++;
                 }
             }
         }

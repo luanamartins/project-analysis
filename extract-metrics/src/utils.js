@@ -49,6 +49,11 @@ function getIdentifiersNames(args) {
     return [];
 }
 
+function isAlertCallExpression(statement) {
+    return statement && statement.type === 'ExpressionStatement' && statement.expression.type === 'CallExpression' &&
+        statement.expression.callee.name === 'alert';
+}
+
 function getStatementsByType(body, type) {
     const result = [];
     if (body) {
@@ -59,6 +64,95 @@ function getStatementsByType(body, type) {
         });
     }
     return result;
+}
+
+function getPropertyFrom(array, property) {
+    if (array) {
+        const result = [];
+        array.forEach(function(item) {
+            if (item[property]) {
+                result.push(item[property]);
+            }
+        });
+        return result;
+    }
+
+    return [];
+}
+
+function hasLiteral(statements) {
+    if (statements) {
+        return statements.some(function(item) {
+            return item.argument && item.argument.type === 'Literal';
+        });
+    }
+    return false;
+}
+
+function hasNull(statements) {
+    if (statements) {
+        return statements.some(function(item) {
+            return item.argument && item.argument.type === 'Literal' && item.argument.value === null;
+        });
+    }
+    return false;
+}
+
+function hasUndefined(statements) {
+    if (statements) {
+        return statements.some(function(item) {
+            return item.argument && item.argument.type === 'Identifier' && item.argument.name === 'undefined';
+        });
+    }
+    return false;
+}
+
+function hasAnyLiteral(array) {
+    if (array) {
+        return array.some(function(item) {
+            return item.type === 'Literal';
+        });
+    }
+    return false;
+}
+
+function hasErrorObject(array) {
+    if (array) {
+        return array.some(function(item) {
+            const arg = item.argument;
+            return arg && arg.type === 'NewExpression' && arg.callee && arg.callee.name === 'Error';
+        });
+    }
+    return false;
+}
+
+function numberOfLiterals(array) {
+    if (array) {
+        let result = 0;
+        array.forEach(function(item) {
+            if (item['argument'] && item['argument'].type === 'Literal') {
+                result++;
+            }
+        });
+        return result;
+    }
+
+    return 0;
+}
+
+function numberOfErrorObjects(array) {
+    if (array) {
+        let result = 0;
+        array.forEach(function(item) {
+            const arg = item['argument'];
+            if (arg.type === 'NewExpression' && arg.callee.name === 'Error') {
+                result++;
+            }
+        });
+        return result;
+    }
+
+    return 0;
 }
 
 function containsSubstring(array, item) {
@@ -126,6 +220,7 @@ function getThrowPrimitiveTypes(throwStatements) {
     }
     return result;
 }
+
 
 function isString(literalValue) {
     return typeof literalValue === 'string';
@@ -283,15 +378,15 @@ function getDirectoriesNameFrom(directory) {
     return dirs(directory);
 }
 
-function handleRethrowStatements(throwStatements, errorArguments) {
+function reuseAnErrorStatements(statements, errorArguments) {
     let result = 0;
 
-    if (!throwStatements) {
+    if (!statements) {
         return result;
     }
 
-    throwStatements.forEach((throwStatement) => {
-        const argument = getIdentifiersNames([throwStatement.argument]);
+    statements.forEach((statement) => {
+        const argument = getIdentifiersNames([statement.argument]);
 
         // Checks if the throw uses an error argument
         if (containsAnyErrorArgument(errorArguments, argument)) {
@@ -299,10 +394,10 @@ function handleRethrowStatements(throwStatements, errorArguments) {
         }
 
         // Checks if the throw wrap an error on Error object
-        const throwStatementArg = throwStatement.argument;
-        if (throwStatementArg && throwStatementArg.type === 'NewExpression') {
-            if (throwStatementArg.callee && throwStatementArg.callee.name === 'Error') {
-                const arguments = throwStatementArg.arguments;
+        const statementArg = statement.argument;
+        if (statementArg && statementArg.type === 'NewExpression') {
+            if (statementArg.callee && statementArg.callee.name === 'Error') {
+                const arguments = statementArg.arguments;
                 arguments.forEach((arg) => {
                     if (useAnyArguments(arg, errorArguments)) {
                         result++;
@@ -351,6 +446,18 @@ function getNumberOfReturnUsingErrors(returnStatements, errors) {
     return result;
 }
 
+function hasErrorReassignment(body, errors) {
+    const assignments = getStatementsByType(body, 'AssignmentExpression');
+    for (let i = 0; i < assignments.length; i++) {
+        const left = assignments[i].left;
+        if (left.type === 'Identifier' && isAnErrorArgument(left.name)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 function guid() {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
         s4() + '-' + s4() + s4() + s4();
@@ -388,11 +495,21 @@ module.exports = {
     isEmptyHandler,
     isEventEmptyHandler,
     getAllErrorArgs,
-    handleRethrowStatements,
+    reuseAnErrorStatements,
     getNumberOfReturnUsingErrors,
     hasOneStatementAndIsBreak,
     getThrowPrimitiveTypes,
     getDirectoriesNameFrom,
     trailLastSlash,
-    isNotThrowingErrorArg
+    hasLiteral,
+    hasUndefined,
+    hasNull,
+    hasAnyLiteral,
+    hasErrorObject,
+    getPropertyFrom,
+    numberOfLiterals,
+    numberOfErrorObjects,
+    isNotThrowingErrorArg,
+    isAlertCallExpression,
+    hasErrorReassignment
 };

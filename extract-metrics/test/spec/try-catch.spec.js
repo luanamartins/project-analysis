@@ -22,18 +22,18 @@ describe("Try-catch tests", function() {
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesRethrows, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfContinuesOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesContinues, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesReturns, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrows, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsLiteral, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsErrorObjects, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesBreaks, 0);
+
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatThrowsLiteral, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrowsErrorObject, 0);
 
         assert.equal(metricsObject.tryCatchNumberOfFinallies, 1);
         assert.equal(metricsObject.tryCatchNumberOfFinalliesLines, 4);
@@ -57,18 +57,18 @@ describe("Try-catch tests", function() {
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesRethrows, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfContinuesOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesContinues, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesReturns, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrows, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsLiteral, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsErrorObjects, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesBreaks, 0);
+
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatThrowsLiteral, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrowsErrorObject, 0);
 
         assert.equal(metricsObject.tryCatchNumberOfFinallies, 1);
         assert.equal(metricsObject.tryCatchNumberOfFinalliesLines, 6);
@@ -91,18 +91,18 @@ describe("Try-catch tests", function() {
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesRethrows, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfContinuesOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesContinues, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesReturns, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrows, 1);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsLiteral, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsErrorObjects, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesBreaks, 0);
+
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatThrowsLiteral, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrowsErrorObject, 0);
 
         assert.equal(metricsObject.tryCatchNumberOfFinallies, 1);
         assert.equal(metricsObject.tryCatchNumberOfFinalliesLines, 4);
@@ -124,18 +124,18 @@ describe("Try-catch tests", function() {
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 1);
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 1);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesRethrows, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfContinuesOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesContinues, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesReturns, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrows, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsLiteral, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsErrorObjects, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesBreaks, 0);
+
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatThrowsLiteral, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrowsErrorObject, 0);
 
         assert.equal(metricsObject.tryCatchNumberOfFinallies, 1);
         assert.equal(metricsObject.tryCatchNumberOfFinalliesLines, 3);
@@ -157,18 +157,18 @@ describe("Try-catch tests", function() {
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesRethrows, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfContinuesOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesContinues, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesReturns, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrows, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsLiteral, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsErrorObjects, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesBreaks, 0);
+
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatThrowsLiteral, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrowsErrorObject, 0);
 
         assert.equal(metricsObject.tryCatchNumberOfFinallies, 0);
         assert.equal(metricsObject.tryCatchNumberOfFinalliesLines, 0);
@@ -191,18 +191,18 @@ describe("Try-catch tests", function() {
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesRethrows, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfContinuesOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesContinues, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesReturns, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrows, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsLiteral, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsErrorObjects, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesBreaks, 0);
+
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatThrowsLiteral, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrowsErrorObject, 0);
 
         assert.equal(metricsObject.tryCatchNumberOfFinallies, 0);
         assert.equal(metricsObject.tryCatchNumberOfFinalliesLines, 0);
@@ -224,18 +224,18 @@ describe("Try-catch tests", function() {
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesRethrows, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfContinuesOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesContinues, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesReturns, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrows, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsLiteral, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsErrorObjects, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesBreaks, 0);
+
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatThrowsLiteral, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrowsErrorObject, 0);
 
         assert.equal(metricsObject.tryCatchNumberOfFinallies, 0);
         assert.equal(metricsObject.tryCatchNumberOfFinalliesLines, 0);
@@ -257,18 +257,18 @@ describe("Try-catch tests", function() {
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesRethrows, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfContinuesOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesContinues, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesReturns, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrows, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsLiteral, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsErrorObjects, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesBreaks, 0);
+
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatThrowsLiteral, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrowsErrorObject, 0);
 
         assert.equal(metricsObject.tryCatchNumberOfFinallies, 1);
         assert.equal(metricsObject.tryCatchNumberOfFinalliesLines, 0);
@@ -290,18 +290,18 @@ describe("Try-catch tests", function() {
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 1);
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 1);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesRethrows, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfContinuesOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesContinues, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesReturns, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrows, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsLiteral, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsErrorObjects, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesBreaks, 0);
+
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatThrowsLiteral, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrowsErrorObject, 0);
 
         assert.equal(metricsObject.tryCatchNumberOfFinallies, 0);
         assert.equal(metricsObject.tryCatchNumberOfFinalliesLines, 0);
@@ -323,18 +323,18 @@ describe("Try-catch tests", function() {
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 1);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrowErrorsOnCatches, 1);
-        assert.equal(metricsObject.tryCatchNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesRethrows, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfContinuesOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesContinues, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesReturns, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrows, 1);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsLiteral, 1);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsErrorObjects, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesBreaks, 0);
+
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatThrowsLiteral, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrowsErrorObject, 0);
 
         assert.equal(metricsObject.tryCatchNumberOfFinallies, 1);
         assert.equal(metricsObject.tryCatchNumberOfFinalliesLines, 4);
@@ -356,18 +356,18 @@ describe("Try-catch tests", function() {
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 1);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesRethrows, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfContinuesOnCatches, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesContinues, 1);
 
-        assert.equal(metricsObject.tryCatchNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesReturns, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrows, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsLiteral, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsErrorObjects, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesBreaks, 0);
+
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatThrowsLiteral, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrowsErrorObject, 0);
 
         assert.equal(metricsObject.tryCatchNumberOfFinallies, 0);
         assert.equal(metricsObject.tryCatchNumberOfFinalliesLines, 0);
@@ -389,18 +389,18 @@ describe("Try-catch tests", function() {
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 1);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrowErrorsOnCatches, 1);
-        assert.equal(metricsObject.tryCatchNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesRethrows, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfContinuesOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesContinues, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesReturns, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrows, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsLiteral, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsErrorObjects, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesBreaks, 0);
+
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatThrowsLiteral, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrowsErrorObject, 0);
 
         assert.equal(metricsObject.tryCatchNumberOfFinallies, 0);
         assert.equal(metricsObject.tryCatchNumberOfFinalliesLines, 0);
@@ -422,18 +422,18 @@ describe("Try-catch tests", function() {
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 1);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrowErrorsOnCatches, 1);
-        assert.equal(metricsObject.tryCatchNumberOfRethrowsOnCatches, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesRethrows, 1);
 
-        assert.equal(metricsObject.tryCatchNumberOfContinuesOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesContinues, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesReturns, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrows, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsLiteral, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsErrorObjects, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesBreaks, 0);
+
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatThrowsLiteral, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrowsErrorObject, 0);
 
         assert.equal(metricsObject.tryCatchNumberOfFinallies, 0);
         assert.equal(metricsObject.tryCatchNumberOfFinalliesLines, 0);
@@ -455,18 +455,18 @@ describe("Try-catch tests", function() {
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 1);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrowErrorsOnCatches, 1);
-        assert.equal(metricsObject.tryCatchNumberOfRethrowsOnCatches, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesRethrows, 1);
 
-        assert.equal(metricsObject.tryCatchNumberOfContinuesOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesContinues, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesReturns, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrows, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsLiteral, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsErrorObjects, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesBreaks, 0);
+
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatThrowsLiteral, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrowsErrorObject, 1);
 
         assert.equal(metricsObject.tryCatchNumberOfFinallies, 0);
         assert.equal(metricsObject.tryCatchNumberOfFinalliesLines, 0);
@@ -488,18 +488,18 @@ describe("Try-catch tests", function() {
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 1);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrowErrorsOnCatches, 1);
-        assert.equal(metricsObject.tryCatchNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesRethrows, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfContinuesOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesContinues, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesReturns, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrows, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsLiteral, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsErrorObjects, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesBreaks, 0);
+
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatThrowsLiteral, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrowsErrorObject, 1);
 
         assert.equal(metricsObject.tryCatchNumberOfFinallies, 0);
         assert.equal(metricsObject.tryCatchNumberOfFinalliesLines, 0);
@@ -521,18 +521,18 @@ describe("Try-catch tests", function() {
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 2);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesRethrows, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfContinuesOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesContinues, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfReturnsOnCatches, 1);
-        assert.equal(metricsObject.tryCatchNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfBreaksOnCatches, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesReturns, 1);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrows, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsLiteral, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsErrorObjects, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesBreaks, 1);
+
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatThrowsLiteral, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrowsErrorObject, 0);
 
         assert.equal(metricsObject.tryCatchNumberOfFinallies, 0);
         assert.equal(metricsObject.tryCatchNumberOfFinalliesLines, 0);
@@ -554,19 +554,18 @@ describe("Try-catch tests", function() {
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 1);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesRethrows, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfContinuesOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesContinues, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfBreaksOnCatches, 1);
-        assert.equal(metricsObject.tryCatchNumberOfBreaksOnCatchesUniqueStatement, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesReturns, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrows, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsLiteral, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsErrorObjects, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesBreaks, 1);
+
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatThrowsLiteral, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrowsErrorObject, 0);
 
         assert.equal(metricsObject.tryCatchNumberOfFinallies, 0);
         assert.equal(metricsObject.tryCatchNumberOfFinalliesLines, 0);
@@ -588,19 +587,20 @@ describe("Try-catch tests", function() {
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.tryCatchNumberOfCatchesWithUniqueStatement, 1);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrowErrorsOnCatches, 2);
-        assert.equal(metricsObject.tryCatchNumberOfRethrowsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowPrimitiveTypesOnCatches, 2);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 2);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesRethrows, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfContinuesOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrows, 2);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatThrowsLiteral, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThrowsErrorObject, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.tryCatchNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesContinues, 0);
 
-        assert.equal(metricsObject.tryCatchNumberOfThrows, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsLiteral, 0);
-        assert.equal(metricsObject.tryCatchNumberOfThrowsErrorObjects, 0);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesReturns, 0);
+
+        assert.equal(metricsObject.tryCatchNumberOfCatchesBreaks, 0);
+
+
 
         assert.equal(metricsObject.tryCatchNumberOfFinallies, 0);
         assert.equal(metricsObject.tryCatchNumberOfFinalliesLines, 0);
@@ -615,5 +615,38 @@ describe("Try-catch tests", function() {
         assert.equal(metricsObject.tryCatchNumberOfCatchesThatThrows, 3);
         assert.equal(metricsObject.tryCatchNumberOfCatchesThatRethrows, 2);
     });
+
+    it("assert16", function() {
+        const filename = suiteCasePath + 'try-catch16.js';
+        const data = metricsModule.handleMetrics([filename], projectPath);
+        const metricsObject = data.metrics[0];
+
+        assert.equal(metricsObject.tryCatchNumberOfCatchesAlertOnly, 1);
+        assert.equal(metricsObject.tryCatchNumberOfErrorReassigning, 1);
+
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatThrowsLiteralOnly, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatThrowsUndefined, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatThrowsUndefinedOnly, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatThrowsNull, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatThrowsNullOnly, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatThrowsErrorObject, 1);
+
+    });
+
+    it("assert17", function() {
+        const filename = suiteCasePath + 'try-catch17.js';
+        const data = metricsModule.handleMetrics([filename], projectPath);
+        const metricsObject = data.metrics[0];
+
+        assert.equal(metricsObject.tryCatchNumberOfCatchesReturnsLiteral, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesReturnsErrorObject, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatReturnsUndefined, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatReturnsNull, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatReturnsErrorObject, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatRereturns, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesBreaksOnly, 1);
+
+    });
+
 
 });

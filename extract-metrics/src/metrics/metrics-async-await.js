@@ -46,9 +46,6 @@ function handleCatchClauses(errorArgs, catchClause, reportObject) {
     } else if (!utils.useAnyArguments(catchClauseBody, catchClauseErrorArgs)) {
         reportObject.asyncAwaitNumberOfCatchesNoUsageOfErrorArgument++;
     }
-    // if (utils.isEmptyHandler(catchClauseBody, catchClauseErrorArgs, numberOfLines)) {
-    //     reportObject.asyncAwaitNumberOfEmptyCatches++;
-    // }
 
     // Catch clause has one statement only
     if (numberOfLines === 1) {
@@ -94,7 +91,7 @@ function handleCatchClauses(errorArgs, catchClause, reportObject) {
     }
 
     // Number of rethrows an error argument
-    const numberOfRethrowsOnCatches = utils.handleRethrowStatements(throwStatements, catchClauseErrorArgs);
+    const numberOfRethrowsOnCatches = utils.reuseAnErrorStatements(throwStatements, catchClauseErrorArgs);
     reportObject.asyncAwaitNumberOfRethrowsOnCatches += numberOfRethrowsOnCatches;
 
     // Number of catches rethrowing an error

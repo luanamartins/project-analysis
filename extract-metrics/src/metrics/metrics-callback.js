@@ -117,7 +117,7 @@ function handleThrowStatement(functionBody, reportObject, errorArguments) {
         reportObject.callbacksNumberOfCallbacksThatThrows++;
     }
     // Get number of rethrows on the callback
-    const rethrowStatements = utils.handleRethrowStatements(throwStatements, errorArguments);
+    const rethrowStatements = utils.reuseAnErrorStatements(throwStatements, errorArguments);
     reportObject.callbacksNumberOfRethrows += rethrowStatements;
     // Save the number of callbacks that rethrows
     if (rethrowStatements > 0) {

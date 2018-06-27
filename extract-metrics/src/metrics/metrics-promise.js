@@ -1,6 +1,19 @@
 const CONFIG = require("../../config");
 const utils = require(CONFIG["srcPath"] + 'utils');
 
+
+function handleRejects(reportObject, node) {
+    reportObject.promiseNumberOfRejects++;
+    const nodeArgs = node.arguments;
+    if (utils.hasAnyLiteral(nodeArgs)) {
+        reportObject.promiseNumberOfCatchesRejectsLiteral++;
+    }
+
+    if (!utils.hasErrorObject(nodeArgs)) {
+        reportObject.promiseNumberOfCatchesNonAnErrorObject++;
+    }
+}
+
 function handleCatches(reportObject, node) {
     reportObject.promiseNumberOfPromiseCatches++;
     const numberOfArgumentsOnCatch = node.arguments.length;
@@ -37,38 +50,122 @@ function handleCatches(reportObject, node) {
                 if (utils.isConsoleStatement(statement)) {
                     reportObject.promiseNumberOfCatchesWithUniqueConsole++;
                 }
+
+                if(utils.isAlertCallExpression(statement)) {
+                    reportObject.promiseNumberOfCatchesAlertOnly++;
+                }
+            }
+
+            if (utils.hasErrorReassignment(functionBody, functionParams)) {
+                reportObject.promiseNumberOfErrorReassigning++;
             }
 
             // Number of throws on catches
             const throwStatements = utils.getStatementsByType(functionBody, 'ThrowStatement');
             const numberOfThrowStatements = throwStatements.length;
-            reportObject.promiseNumberOfThrowErrorsOnCatches += numberOfThrowStatements;
+            reportObject.promiseNumberOfCatchesThrows += numberOfThrowStatements;
 
             if(numberOfThrowStatements > 0) {
-                reportObject.promiseNumberOfPromisesThatThrows++;
+                reportObject.promiseNumberOfCatchesThatThrows++;
+
+                const numberOfLiterals = utils.numberOfLiterals(throwStatements);
+                const numberOfErrorObjects = utils.numberOfErrorObjects(throwStatements);
+
+                reportObject.promiseNumberOfCatchesThrowsLiteral += numberOfLiterals;
+                reportObject.promiseNumberOfCatchesThrowsErrorObject += numberOfErrorObjects;
+
+                if (numberOfLiterals > 0) {
+                    reportObject.promiseNumberOfCatchesThatThrowsLiteral++;
+
+                    if (lines === 1) {
+                        reportObject.promiseNumberOfCatchesThatThrowsLiteralOnly++;
+                    }
+                }
+
+                if(utils.hasUndefined(throwStatements)) {
+                    reportObject.promiseNumberOfCatchesThatThrowsUndefined++;
+
+                    if (lines === 1) {
+                        reportObject.promiseNumberOfCatchesThatThrowsUndefinedOnly++;
+                    }
+                }
+
+                if (utils.hasNull(throwStatements)) {
+                    reportObject.promiseNumberOfCatchesThatThrowsNull++;
+                    if (lines === 1) {
+                        reportObject.promiseNumberOfCatchesThatThrowsNullOnly++;
+                    }
+                }
+
+                if(utils.hasErrorObject(throwStatements)) {
+                    reportObject.promiseNumberOfCatchesThatThrowsErrorObject++;
+                }
             }
 
             // Number of throws primitive types
             reportObject.promiseNumberOfThrowPrimitiveTypesOnCatches += utils.getThrowPrimitiveTypes(throwStatements);
 
             // Number of rethrows on catches
-            const numberOfRethrows = utils.handleRethrowStatements(throwStatements, functionParams);
-            reportObject.promiseNumberOfRethrowsOnCatches += numberOfRethrows;
+            const numberOfRethrows = utils.reuseAnErrorStatements(throwStatements, functionParams);
+            reportObject.promiseNumberOfCatchesRethrows += numberOfRethrows;
             if(numberOfRethrows > 0){
-                reportObject.promiseNumberOfPromisesThatRethrows++;
+                reportObject.promiseNumberOfCatchesThatRethrows++;
             }
 
             // Counts number of returns
             const returnStatements = utils.getStatementsByType(functionBody, 'ReturnStatement');
-            reportObject.promiseNumberOfReturnsOnCatches += returnStatements.length;
+            reportObject.promiseNumberOfCatchesReturns += returnStatements.length;
 
-            // Counts number of returns that uses an error argument
-            reportObject.promiseNumberOfReturnsAnErrorOnCatches += utils.getNumberOfReturnUsingErrors(returnStatements, functionParams);
+            const numberOfLiterals = utils.numberOfLiterals(returnStatements);
+            const numberOfErrorObjects = utils.numberOfErrorObjects(returnStatements);
+            reportObject.promiseNumberOfCatchesReturnsLiteral += numberOfLiterals;
+            reportObject.promiseNumberOfCatchesReturnsErrorObject += numberOfErrorObjects;
+            reportObject.promiseNumberOfCatchesThatRereturns += utils.reuseAnErrorStatements(returnStatements, functionParams);
+
+            if(returnStatements.length > 0){
+                reportObject.promiseNumberOfCatchesThatReturns++;
+            }
+
+            if (numberOfLiterals > 0) {
+                reportObject.promiseNumberOfCatchesThatReturnsLiteral++;
+
+                if (lines === 1) {
+                    reportObject.promiseNumberOfCatchesThatReturnsLiteralOnly++;
+                }
+            }
+
+            if(utils.hasUndefined(returnStatements)) {
+                reportObject.promiseNumberOfCatchesThatReturnsUndefined++;
+
+                if (lines === 1) {
+                    reportObject.promiseNumberOfCatchesThatReturnsUndefinedOnly++;
+                }
+            }
+
+            if (utils.hasNull(returnStatements)) {
+                reportObject.promiseNumberOfCatchesThatReturnsNull++;
+                if (lines === 1) {
+                    reportObject.promiseNumberOfCatchesThatReturnsNullOnly++;
+                }
+            }
+
+            if(utils.hasErrorObject(returnStatements)) {
+                reportObject.promiseNumberOfCatchesThatReturnsErrorObject++;
+            }
+
+            // Counts number of continues
+            const continueStatements = utils.getStatementsByType(functionBody, 'ContinueStatement');
+            reportObject.promiseNumberOfCatchesContinues += continueStatements.length;
+            if(continueStatements.length > 0) {
+                reportObject.promiseNumberOfCatchesThatContinues++;
+            }
 
             // Counts number of breaks
             const breakStatements = utils.getStatementsByType(functionBody, 'BreakStatement');
-            reportObject.promiseNumberOfBreaksOnCatches += breakStatements.length;
-
+            reportObject.promiseNumberOfCatchesBreaks += breakStatements.length;
+            if(breakStatements.length > 0) {
+                reportObject.promiseNumberOfCatchesThatBreaks++;
+            }
         }
     }
 
@@ -134,7 +231,7 @@ function handleAnalysis(node, reportObject) {
             }
 
             if (callee.name === 'reject' || (callee.property && callee.property.name === 'reject')) {
-                reportObject.promiseNumberOfRejects++;
+                handleRejects(reportObject, node);
             }
 
             if (callee.name === 'then' || (callee.property && callee.property.name === 'then')) {

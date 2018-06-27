@@ -27,12 +27,12 @@ describe("Promises tests", function() {
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
 
-        assert.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesReturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatRereturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesBreaks, 0);
 
-        assert.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesRethrows, 0);
 
         assert.equal(metricsObject.promiseNumberOfChainingCatches, 0);
 
@@ -61,12 +61,12 @@ describe("Promises tests", function() {
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
 
-        assert.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesReturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatRereturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesBreaks, 0);
 
-        assert.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesRethrows, 0);
 
         assert.equal(metricsObject.promiseNumberOfChainingCatches, 0);
 
@@ -95,12 +95,12 @@ describe("Promises tests", function() {
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
 
-        assert.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesReturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatRereturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesBreaks, 0);
 
-        assert.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesRethrows, 0);
 
         assert.equal(metricsObject.promiseNumberOfChainingCatches, 0);
 
@@ -129,12 +129,12 @@ describe("Promises tests", function() {
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
 
-        assert.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesReturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatRereturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesBreaks, 0);
 
-        assert.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesRethrows, 0);
 
         assert.equal(metricsObject.promiseNumberOfChainingCatches, 0);
 
@@ -163,12 +163,12 @@ describe("Promises tests", function() {
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
 
-        assert.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesReturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatRereturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesBreaks, 0);
 
-        assert.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesRethrows, 0);
 
         assert.equal(metricsObject.promiseNumberOfChainingCatches, 0);
 
@@ -198,12 +198,12 @@ describe("Promises tests", function() {
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
 
-        assert.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesReturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatRereturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesBreaks, 0);
 
-        assert.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesRethrows, 0);
 
         assert.equal(metricsObject.promiseNumberOfChainingCatches, 0);
 
@@ -234,12 +234,12 @@ describe("Promises tests", function() {
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
 
-        assert.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesReturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatRereturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesBreaks, 0);
 
-        assert.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesRethrows, 0);
 
         assert.equal(metricsObject.promiseNumberOfChainingCatches, 0);
 
@@ -268,12 +268,12 @@ describe("Promises tests", function() {
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
 
-        assert.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesReturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatRereturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesBreaks, 0);
 
-        assert.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesRethrows, 0);
 
         assert.equal(metricsObject.promiseNumberOfChainingCatches, 0);
 
@@ -303,12 +303,12 @@ describe("Promises tests", function() {
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
 
-        assert.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesReturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatRereturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesBreaks, 0);
 
-        assert.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesRethrows, 0);
 
         assert.equal(metricsObject.promiseNumberOfChainingCatches, 0);
 
@@ -337,12 +337,12 @@ describe("Promises tests", function() {
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
 
-        assert.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesReturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatRereturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesBreaks, 0);
 
-        assert.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesRethrows, 0);
 
         assert.equal(metricsObject.promiseNumberOfChainingCatches, 0);
 
@@ -371,12 +371,12 @@ describe("Promises tests", function() {
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 1);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 1);
 
-        assert.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesReturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatRereturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesBreaks, 0);
 
-        assert.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesRethrows, 0);
 
         assert.equal(metricsObject.promiseNumberOfChainingCatches, 0);
 
@@ -405,12 +405,12 @@ describe("Promises tests", function() {
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 2);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 2);
 
-        assert.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesReturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatRereturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesBreaks, 0);
 
-        assert.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesRethrows, 0);
 
         assert.equal(metricsObject.promiseNumberOfChainingCatches, 0);
 
@@ -439,12 +439,12 @@ describe("Promises tests", function() {
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 1);
 
-        assert.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesReturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatRereturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesBreaks, 0);
 
-        assert.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 1);
-        assert.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThrows, 1);
+        assert.equal(metricsObject.promiseNumberOfCatchesRethrows, 0);
 
         assert.equal(metricsObject.promiseNumberOfChainingCatches, 0);
 
@@ -473,12 +473,12 @@ describe("Promises tests", function() {
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 1);
 
-        assert.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesReturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatRereturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesBreaks, 0);
 
-        assert.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 1);
-        assert.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 1);
+        assert.equal(metricsObject.promiseNumberOfCatchesThrows, 1);
+        assert.equal(metricsObject.promiseNumberOfCatchesRethrows, 1);
 
         assert.equal(metricsObject.promiseNumberOfChainingCatches, 0);
 
@@ -507,12 +507,12 @@ describe("Promises tests", function() {
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 1);
 
-        assert.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesReturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatRereturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesBreaks, 0);
 
-        assert.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 1);
-        assert.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 1);
+        assert.equal(metricsObject.promiseNumberOfCatchesThrows, 1);
+        assert.equal(metricsObject.promiseNumberOfCatchesRethrows, 1);
 
         assert.equal(metricsObject.promiseNumberOfChainingCatches, 0);
 
@@ -541,12 +541,12 @@ describe("Promises tests", function() {
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 1);
 
-        assert.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesReturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatRereturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesBreaks, 0);
 
-        assert.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 1);
-        assert.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThrows, 1);
+        assert.equal(metricsObject.promiseNumberOfCatchesRethrows, 0);
 
         assert.equal(metricsObject.promiseNumberOfChainingCatches, 0);
 
@@ -576,12 +576,12 @@ describe("Promises tests", function() {
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 1);
 
-        assert.equal(metricsObject.promiseNumberOfReturnsOnCatches, 1);
-        assert.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 1);
-        assert.equal(metricsObject.promiseNumberOfBreaksOnCatches, 1);
+        assert.equal(metricsObject.promiseNumberOfCatchesReturns, 1);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatRereturns, 1);
+        assert.equal(metricsObject.promiseNumberOfCatchesBreaks, 1);
 
-        assert.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesRethrows, 0);
 
         assert.equal(metricsObject.promiseNumberOfChainingCatches, 0);
 
@@ -610,12 +610,12 @@ describe("Promises tests", function() {
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
 
-        assert.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesReturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatRereturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesBreaks, 0);
 
-        assert.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesRethrows, 0);
 
         assert.equal(metricsObject.promiseNumberOfChainingCatches, 1);
 
@@ -644,12 +644,12 @@ describe("Promises tests", function() {
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
 
-        assert.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesReturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatRereturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesBreaks, 0);
 
-        assert.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesRethrows, 0);
 
         assert.equal(metricsObject.promiseNumberOfChainingCatches, 1);
 
@@ -678,12 +678,12 @@ describe("Promises tests", function() {
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 1);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 1);
 
-        assert.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesReturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatRereturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesBreaks, 0);
 
-        assert.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThrows, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesRethrows, 0);
 
         assert.equal(metricsObject.promiseNumberOfChainingCatches, 0);
 
@@ -723,13 +723,12 @@ describe("Promises tests", function() {
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueConsole, 0);
         assert.equal(metricsObject.promiseNumberOfCatchesWithUniqueStatement, 0);
 
-        assert.equal(metricsObject.promiseNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesReturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatRereturns, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesBreaks, 0);
 
-        assert.equal(metricsObject.promiseNumberOfThrowErrorsOnCatches, 2);
-        assert.equal(metricsObject.promiseNumberOfRethrowsOnCatches, 0);
-        assert.equal(metricsObject.promiseNumberOfThrowPrimitiveTypesOnCatches, 2);
+        assert.equal(metricsObject.promiseNumberOfCatchesThrows, 2);
+        assert.equal(metricsObject.promiseNumberOfCatchesRethrows, 0);
 
         assert.equal(metricsObject.promiseNumberOfChainingCatches, 1);
 
@@ -746,8 +745,47 @@ describe("Promises tests", function() {
         assert.equal(metricsObject.promiseNumberOfFunctionsOnCatchesNoUsageOfErrorArgument, 1);
         assert.equal(metricsObject.promiseNumberOfCatchesWithNoArg, 2);
         assert.equal(metricsObject.promiseNumberOfCatchesFunctionWithNoArg, 3);
-        assert.equal(metricsObject.promiseNumberOfPromisesThatThrows, 5);
-        assert.equal(metricsObject.promiseNumberOfPromisesThatRethrows, 1);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatThrows, 5);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatRethrows, 1);
     });
+
+    it("assert24", function() {
+        const filename = suiteCasePath + 'promise24.js';
+        const data = metricsModule.handleMetrics([filename], projectPath);
+
+        const metricsObject = data.metrics[0];
+
+        assert.equal(metricsObject.promiseNumberOfCatchesAlertOnly, 1);
+        assert.equal(metricsObject.promiseNumberOfErrorReassigning, 1);
+        assert.equal(metricsObject.promiseNumberOfCatchesThrowsLiteral, 2);
+        assert.equal(metricsObject.promiseNumberOfCatchesThrowsErrorObject, 1);
+
+    });
+
+    it("assert25", function() {
+        const filename = suiteCasePath + 'promise25.js';
+        const data = metricsModule.handleMetrics([filename], projectPath);
+
+        const metricsObject = data.metrics[0];
+
+        assert.equal(metricsObject.promiseNumberOfCatchesReturnsLiteral, 2);
+        assert.equal(metricsObject.promiseNumberOfCatchesReturnsErrorObject, 2);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatReturns, 7);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatReturnsLiteral, 2);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatReturnsLiteralOnly, 2);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatReturnsUndefined, 2);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatReturnsUndefinedOnly, 1);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatReturnsNull, 1);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatReturnsNullOnly, 1);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatReturnsErrorObject, 2);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatRereturns, 1);
+        assert.equal(metricsObject.promiseNumberOfCatchesContinues, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatContinues, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesBreaks, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatBreaks, 0);
+        assert.equal(metricsObject.promiseNumberOfCatchesNonAnErrorObject, 1);
+
+    });
+
 
 });

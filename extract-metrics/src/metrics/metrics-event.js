@@ -76,7 +76,7 @@ function handleAnalysis(node, reportObject) {
                         reportObject.eventsNumberOfThrowPrimitiveTypesOnCatches += utils.getThrowPrimitiveTypes(throwStatements);
 
                         // Number of rethrow an error argument
-                        const numberOfRethrowStatements = utils.handleRethrowStatements(throwStatements, handlerArgs);
+                        const numberOfRethrowStatements = utils.reuseAnErrorStatements(throwStatements, handlerArgs);
                         reportObject.eventsNumberOfRethrowsOnCatches += numberOfRethrowStatements
 
                         if(numberOfRethrowStatements > 0) {
