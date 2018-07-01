@@ -67,4 +67,4 @@ statistics/src/__pycache__/
 \.idea/
 
 **/**/*.pyc
-extract-metrics/data/repo/**
+/extract-metrics/data/repo/**
