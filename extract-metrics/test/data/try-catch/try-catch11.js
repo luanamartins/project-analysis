@@ -4,7 +4,7 @@ function e() {
             var finaldoc = Jsoup.connect(fin[f]).get();
             out.println(finaldoc.title());
         } catch (reason) {
-            while(true) {
+            if (true) {
                 throw new Error(f(e.message));
             }
         }

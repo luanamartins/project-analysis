@@ -3,13 +3,50 @@ function printFile(callback) {
 }
 
 printFile(function(err, data) {
-    alert('error');
+    throw true;
+});
+
+printFile(function(err, data) {
+    err = null;
+    if (err) {
+        throw true;
+    }
+    console.log(data);
 });
 
 printFile(function(err, data) {
     err = null;
     if (err) {
         throw err;
+    }
+    console.log(data);
+});
+
+printFile(function(err, data) {
+    err = null;
+    if (err) {
+        throw new Error(data);
+    }
+    console.log(data);
+});
+
+printFile(function(err, data) {
+    err = null;
+    if (err) {
+        throw undefined;
+    }
+    console.log(data);
+});
+
+printFile(function(err, data) {
+    throw null;
+});
+
+
+printFile(function(err, data) {
+    err = null;
+    if (err) {
+        throw null;
     }
     console.log(data);
 });

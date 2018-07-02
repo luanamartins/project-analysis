@@ -16,8 +16,8 @@ function handleAnalysis(node, reportObject) {
 
         if (errorArguments.length > 0) { // it has at least one error argument
 
-            const numberOfLines = utils.getNumberOfLines(node);
-            reportObject.callbacksNumberOfLines += numberOfLines;
+            const lines = utils.getNumberOfLines(node);
+            reportObject.callbacksNumberOfLines += lines;
 
             const functionBody = node.body.body;
 
@@ -25,15 +25,15 @@ function handleAnalysis(node, reportObject) {
 
                 // callback has only one argument and it is an error argument
                 reportObject.callbacksNumberOfFunctionsWithUniqueErrorArg++;
-                reportObject.callbacksNumberOfLinesOfFunctionsWithUniqueErrorArg += numberOfLines;
+                reportObject.callbacksNumberOfLinesOfFunctionsWithUniqueErrorArg += lines;
 
-                if (numberOfLines === 1) {
+                if (lines === 1) {
                     reportObject.callbacksNumberOfFunctionsWithUniqueStatement++;
                     reportObject.callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueStatement++;
                 }
 
                 // callback has only one argument and an error argument and also is empty
-                if (numberOfLines === 0) {
+                if (lines === 0) {
                     reportObject.callbacksNumberOfEmptyFunctionsWithUniqueErrorArg++;
                 } else if(!utils.useAnyArguments(node.body, errorArguments)) {
                     reportObject.callbacksNumberOfFunctionsNoUsageOfErrorArgumentWithUniqueErrorArg++;
@@ -43,7 +43,7 @@ function handleAnalysis(node, reportObject) {
                 //  (i) has only one error argument
                 //  (ii) has only one statement and it is a console.log
                 const statement = functionBody[0];
-                if (numberOfLines === 1 && utils.isConsoleStatement(statement)) {
+                if (lines === 1 && utils.isConsoleStatement(statement)) {
                     reportObject.callbacksNumberOfFunctionsWithUniqueConsole++;
                     reportObject.callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueConsole++;
                 }
@@ -54,8 +54,16 @@ function handleAnalysis(node, reportObject) {
                 // callbacksNumberOfLinesOfFunctionsWithUniqueErrorArg
             }
 
+            if(lines === 1 && utils.isAlertCallExpression(functionBody[0])) {
+                reportObject.callbacksNumberOfHandlersAlertOnly++;
+            }
+
+            if (utils.hasErrorReassignment(functionBody, errorArguments)) {
+                reportObject.callbacksNumberOfErrorReassigning++;
+            }
+
             // Get number of throws on the callback
-            handleThrowStatement(functionBody, reportObject, errorArguments);
+            handleThrowStatement(functionBody, reportObject, errorArguments, lines);
 
             reportObject.callbacksNumberOfCallbackErrorFunctions++;
 
@@ -75,7 +83,7 @@ function handleAnalysis(node, reportObject) {
             //     reportObject.callbacksNumberOfEmptyCallbacks++;
             // }
 
-            if (numberOfLines === 0) {
+            if (lines === 0) {
                 reportObject.callbacksNumberOfEmptyCallbacks++;
             } else if(!utils.useAnyArguments(node.body, errorArguments)) {
                 reportObject.callbacksNumberOfFunctionsNoUsageOfErrorArgument++;
@@ -85,43 +93,123 @@ function handleAnalysis(node, reportObject) {
             // Counts number of returns
             const returnStatements = utils.getStatementsByType(functionBody, 'ReturnStatement');
             const numberOfReturnStatements = returnStatements.length;
-            reportObject.callbacksNumberOfReturnsOnCatches += numberOfReturnStatements;
+            reportObject.callbacksNumberOfHandlersReturns += numberOfReturnStatements;
+
+            const numberOfLiterals = utils.numberOfLiterals(returnStatements);
+            const numberOfErrorObjects = utils.numberOfErrorObjects(returnStatements);
+            reportObject.callbacksNumberOfHandlersReturnsLiteral += numberOfLiterals;
+            reportObject.callbacksNumberOfHandlersReturnsErrorObject += numberOfErrorObjects;
+            reportObject.callbacksNumberOfHandlersThatRereturns += utils.reuseAnErrorStatements(returnStatements, errorArguments);
 
             // Number of callbacks having at least one return statement
             if (numberOfReturnStatements > 0) {
-                reportObject.callbacksNumberOfCatchesThatReturns++;
+                reportObject.callbacksNumberOfHandlersThatReturns++;
             }
 
-            // Counts number of returns that uses an error argument
-            const numberOfReturnUsingErrors = utils.getNumberOfReturnUsingErrors(returnStatements, errorArguments);
-            reportObject.callbacksNumberOfReturnsAnErrorOnCatches += numberOfReturnUsingErrors;
-
-            if (numberOfReturnUsingErrors > 0) {
-                reportObject.callbacksNumberOfCatchesThatReturnsAnErrorOnCatches++;
+            if (numberOfErrorObjects > 0) {
+                reportObject.callbacksNumberOfHandlersThatReturnsErrorObject++;
             }
+
+            if(returnStatements.length > 0){
+                reportObject.callbacksNumberOfHandlersThatReturns++;
+            }
+
+            if (numberOfLiterals > 0) {
+                reportObject.callbacksNumberOfHandlersThatReturnsLiteral++;
+
+                if (lines === 1) {
+                    reportObject.callbacksNumberOfHandlersThatReturnsLiteralOnly++;
+                }
+            }
+
+            if(utils.hasUndefined(returnStatements)) {
+                reportObject.callbacksNumberOfHandlersThatReturnsUndefined++;
+
+                if (lines === 1) {
+                    reportObject.callbacksNumberOfHandlersThatReturnsUndefinedOnly++;
+                }
+            }
+
+            if (utils.hasNull(returnStatements)) {
+                reportObject.callbacksNumberOfHandlersThatReturnsNull++;
+                if (lines === 1) {
+                    reportObject.callbacksNumberOfHandlersThatReturnsNullOnly++;
+                }
+            }
+
+            // Counts number of continues
+            const continueStatements = utils.getStatementsByType(functionBody, 'ContinueStatement');
+            reportObject.callbacksNumberOfHandlersContinues += continueStatements.length;
+            if(continueStatements.length > 0) {
+                reportObject.callbacksNumberOfHandlersThatContinues++;
+            }
+
 
             // Counts number of breaks
             const breakStatements = utils.getStatementsByType(functionBody, 'BreakStatement');
-            reportObject.callbacksNumberOfBreaksOnCatches += breakStatements.length;
+            reportObject.callbacksNumberOfHandlersBreaks += breakStatements.length;
+
+            if(breakStatements.length > 0) {
+                reportObject.callbacksNumberOfHandlersThatBreaks++;
+
+                if (lines === 1) {
+                    reportObject.callbacksNumberOfHandlersBreaksOnly++;
+                }
+            }
+
 
             handleIfStatements(node, errorArguments, reportObject);
         }
     }
 }
 
-function handleThrowStatement(functionBody, reportObject, errorArguments) {
+function handleThrowStatement(functionBody, reportObject, errorArguments, lines) {
+
     const throwStatements = utils.getStatementsByType(functionBody, 'ThrowStatement');
-    reportObject.callbacksNumberOfThrows += throwStatements.length;
+    reportObject.callbacksNumberOfHandlersThrows += throwStatements.length;
+
+    const numberOfLiterals = utils.numberOfLiterals(throwStatements);
+    reportObject.callbacksNumberOfHandlersThrowsLiteral += numberOfLiterals;
+    reportObject.callbacksNumberOfHandlersThrowsErrorObject += utils.numberOfErrorObjects(throwStatements);
+
     // Save the number of callbacks that throws
     if (throwStatements.length > 0) {
-        reportObject.callbacksNumberOfCallbacksThatThrows++;
+        reportObject.callbacksNumberOfHandlersThatThrows++;
+
+        if (numberOfLiterals > 0) {
+            reportObject.callbacksNumberOfHandlersThatThrowsLiteral++;
+
+            if (lines === 1) {
+                reportObject.callbacksNumberOfHandlersThatThrowsLiteralOnly++;
+            }
+        }
+
+        if(utils.hasUndefined(throwStatements)) {
+            reportObject.callbacksNumberOfHandlersThatThrowsUndefined++;
+
+            if (lines === 1) {
+                reportObject.callbacksNumberOfHandlersThatThrowsUndefinedOnly++;
+            }
+        }
+
+        if (utils.hasNull(throwStatements)) {
+            reportObject.callbacksNumberOfHandlersThatThrowsNull++;
+            if (lines === 1) {
+                reportObject.callbacksNumberOfHandlersThatThrowsNullOnly++;
+            }
+        }
+
+        if(utils.hasErrorObject(throwStatements)) {
+            reportObject.callbacksNumberOfHandlersThatThrowsErrorObject++;
+        }
     }
+
     // Get number of rethrows on the callback
     const rethrowStatements = utils.reuseAnErrorStatements(throwStatements, errorArguments);
-    reportObject.callbacksNumberOfRethrows += rethrowStatements;
+    reportObject.callbacksNumberOfHandlersRethrows += rethrowStatements;
     // Save the number of callbacks that rethrows
     if (rethrowStatements > 0) {
-        reportObject.callbacksNumberOfCallbacksThatRethrows++;
+        reportObject.callbacksNumberOfHandlersThatRethrows++;
     }
 }
 

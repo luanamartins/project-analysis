@@ -1,0 +1,16 @@
+/home/temp/Desktop/Archive/data/repo/client/babel/packages/babel-cli/bin/babel-external-helpers.js
+/home/temp/Desktop/Archive/data/repo/client/babel/packages/babel-cli/bin/babel.js
+/home/temp/Desktop/Archive/data/repo/client/babel/packages/babel-core/test/fixtures/transformation/misc/shebang/input.js
+/home/temp/Desktop/Archive/data/repo/client/babel/packages/babel-core/test/fixtures/transformation/misc/shebang/output.js
+/home/temp/Desktop/Archive/data/repo/client/babel/packages/babel-node/bin/babel-node.js
+/home/temp/Desktop/Archive/data/repo/client/babel/packages/babel-parser/bin/babel-parser.js
+/home/temp/Desktop/Archive/data/repo/client/babel/packages/babel-parser/test/fixtures/es2015/identifiers/invalid-escape-seq-export/input.js
+/home/temp/Desktop/Archive/data/repo/client/babel/packages/babel-parser/test/fixtures/es2015/identifiers/invalid-escape-seq-import/input.js
+/home/temp/Desktop/Archive/data/repo/client/babel/packages/babel-parser/test/fixtures/es2015/statements/label-invalid-const/input.js
+/home/temp/Desktop/Archive/data/repo/client/babel/packages/babel-plugin-transform-destructuring/test/fixtures/destructuring/for-let/input.js/home/temp/Desktop/Archive/data/repo/client/create-react-app/packages/create-react-app/index.js
+/home/temp/Desktop/Archive/data/repo/client/create-react-app/packages/react-scripts/bin/react-scripts.js/home/temp/Desktop/Archive/data/repo/client/jQuery-File-Upload/bower-version-update.js/home/temp/Desktop/Archive/data/repo/client/jsdoc/jsdoc.js/home/temp/Desktop/Archive/data/repo/client/meteor/scripts/doctool.js/home/temp/Desktop/Archive/data/repo/client/mithril.js/docs/lint.js/home/temp/Desktop/Archive/data/repo/client/pdf.js/test/chromium/test-telemetry.js/home/temp/Desktop/Archive/data/repo/client/prettier/bin/prettier.js
+/home/temp/Desktop/Archive/data/repo/client/prettier/tests/comments/trailing_space.js
+/home/temp/Desktop/Archive/data/repo/client/prettier/tests/shebang/shebang-newline.js
+/home/temp/Desktop/Archive/data/repo/client/prettier/tests/shebang/shebang.js
+/home/temp/Desktop/Archive/data/repo/client/prettier/tests_integration/cli/with-shebang/issue1890.js/home/temp/Desktop/Archive/data/repo/client/progressbar.js/tools/release.js/home/temp/Desktop/Archive/data/repo/client/sinon/build.js/home/temp/Desktop/Archive/data/repo/client/web3.js/example/node-app.js
+/home/temp/Desktop/Archive/data/repo/client/web3.js/gulpfile.js

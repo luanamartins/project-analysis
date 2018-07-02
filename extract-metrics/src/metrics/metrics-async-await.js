@@ -33,22 +33,22 @@ function handleCatchClauses(errorArgs, catchClause, reportObject) {
     const catchClauseErrorArgs = utils.getIdentifiersNames(catchClause.param);
     const catchClauseBody = catchClause.body;
 
-    const numberOfLines = utils.getNumberOfLines(catchClauseBody);
-    reportObject.asyncAwaitNumberOfCatchesLines += numberOfLines;
+    const lines = utils.getNumberOfLines(catchClauseBody);
+    reportObject.asyncAwaitNumberOfCatchesLines += lines;
 
     const location = catchClause.loc;
     reportObject.asyncAwaitNumberOfCatchesLinesStart.push(location.start.line);
     reportObject.asyncAwaitNumberOfCatchesLinesEnd.push(location.end.line);
 
     // Left the catch block empty
-    if (numberOfLines === 0) {
+    if (lines === 0) {
         reportObject.asyncAwaitNumberOfEmptyCatches++;
     } else if (!utils.useAnyArguments(catchClauseBody, catchClauseErrorArgs)) {
         reportObject.asyncAwaitNumberOfCatchesNoUsageOfErrorArgument++;
     }
 
     // Catch clause has one statement only
-    if (numberOfLines === 1) {
+    if (lines === 1) {
         reportObject.asyncAwaitNumberOfCatchesWithUniqueStatement++;
         // Handles errors on console only
         const uniqueStatement = catchClauseBody.body[0];
@@ -74,59 +74,120 @@ function handleCatchClauses(errorArgs, catchClause, reportObject) {
     const numberOfThrowStatements = throwStatements.length;
 
     // Number of throws on catches
-    reportObject.asyncAwaitNumberOfThrowErrorsOnCatches += numberOfThrowStatements;
+    reportObject.asyncAwaitNumberOfHandlersThrows += numberOfThrowStatements;
+    reportObject.asyncAwaitNumberOfHandlersThrowsLiteral += utils.numberOfLiterals(throwStatements);
+    reportObject.asyncAwaitNumberOfHandlersThrowsErrorObject += utils.numberOfErrorObjects(throwStatements);
 
-    // Number of catches throwing an error
-    if (numberOfThrowStatements > 0) {
-        reportObject.asyncAwaitNumberOfCatchesThatThrows++;
+    if(numberOfThrowStatements > 0) {
+        reportObject.asyncAwaitNumberOfHandlersThatThrows++;
     }
 
-    // Number of throws non error arguments
-    const numberOfThrowNonErrorArgs = utils.isNotThrowingErrorArg(throwStatements, catchClauseErrorArgs);
-    reportObject.asyncAwaitNumberOfThrowsNonErrorArg += numberOfThrowNonErrorArgs;
+    // Throws literal types
+    if (utils.hasLiteral(throwStatements)) {
+        reportObject.asyncAwaitNumberOfHandlersThatThrowsLiteral++;
 
-    // Number of catches throwing primitive types
-    if (numberOfThrowNonErrorArgs > 0) {
-        reportObject.asyncAwaitNumberOfCatchesThatThrowsNonErrorArg++;
+        if (lines === 1) {
+            reportObject.asyncAwaitNumberOfHandlersThatThrowsLiteralOnly++;
+        }
+    }
+
+    if (utils.hasUndefined(throwStatements)) {
+        reportObject.asyncAwaitNumberOfHandlersThatThrowsUndefined++;
+        if (lines === 1) {
+            reportObject.asyncAwaitNumberOfHandlersThatThrowsUndefinedOnly++;
+        }
+    }
+
+    if (utils.hasNull(throwStatements)) {
+        reportObject.asyncAwaitNumberOfHandlersThatThrowsNull++;
+        if (lines === 1) {
+            reportObject.asyncAwaitNumberOfHandlersThatThrowsNullOnly++;
+        }
+    }
+
+    if (utils.hasErrorObject(throwStatements)) {
+        reportObject.asyncAwaitNumberOfHandlersThatThrowsErrorObject++;
+    }
+
+    // Throws Error objects
+    const params = utils.getPropertyFrom(throwStatements, 'argument');
+    if(utils.hasErrorObject(params)) {
+        reportObject.asyncAwaitNumberOfHandlersThrowsErrorObject++;
     }
 
     // Number of rethrows an error argument
-    const numberOfRethrowsOnCatches = utils.reuseAnErrorStatements(throwStatements, catchClauseErrorArgs);
-    reportObject.asyncAwaitNumberOfRethrowsOnCatches += numberOfRethrowsOnCatches;
+    const numberOfRethrows = utils.reuseAnErrorStatements(throwStatements, catchClauseErrorArgs);
+    reportObject.asyncAwaitNumberOfHandlersRethrows += numberOfRethrows;
 
-    // Number of catches rethrowing an error
-    if (numberOfRethrowsOnCatches > 0) {
-        reportObject.asyncAwaitNumberOfCatchesThatRethrows++;
+    if(numberOfRethrows > 0){
+        reportObject.asyncAwaitNumberOfHandlersThatRethrows++;
     }
 
     // Counts number of returns
     const returnStatements = utils.getStatementsByType(catchClauseBody, 'ReturnStatement');
     const numberOfReturnStatements = returnStatements.length;
-    reportObject.asyncAwaitNumberOfReturnsOnCatches += numberOfReturnStatements;
+    const numberOfLiterals = utils.numberOfLiterals(returnStatements);
+    const numberOfErrorObjects = utils.numberOfErrorObjects(returnStatements);
+
+    reportObject.asyncAwaitNumberOfHandlersReturns += numberOfReturnStatements;
+    reportObject.asyncAwaitNumberOfHandlersReturnsLiteral += numberOfLiterals;
+    reportObject.asyncAwaitNumberOfHandlersReturnsErrorObject += numberOfErrorObjects;
+    reportObject.asyncAwaitNumberOfHandlersThatRereturns += utils.reuseAnErrorStatements(returnStatements, catchClauseErrorArgs);
 
     // Number of catches having at least one return statement
     if (numberOfReturnStatements > 0) {
-        reportObject.asyncAwaitNumberOfCatchesThatReturns++;
+        reportObject.asyncAwaitNumberOfHandlersThatReturns++;
     }
 
-    // Counts number of returns that uses an error argument
-    const numberOfReturnsAnError = utils.getNumberOfReturnUsingErrors(returnStatements, catchClauseErrorArgs);
-    reportObject.asyncAwaitNumberOfReturnsAnErrorOnCatches += numberOfReturnsAnError;
+    if (numberOfLiterals > 0) {
+        reportObject.asyncAwaitNumberOfHandlersThatReturnsLiteral++;
 
-    // Number of catches that returns an error argument
-    if (numberOfReturnsAnError > 0) {
-        reportObject.asyncAwaitNumberOfCatchesThatReturnsAnError++;
+        if (lines === 1) {
+            reportObject.asyncAwaitNumberOfHandlersThatReturnsLiteralOnly++;
+        }
+    }
+
+    if(utils.hasUndefined(returnStatements)) {
+        reportObject.asyncAwaitNumberOfHandlersThatReturnsUndefined++;
+
+        if (lines === 1) {
+            reportObject.asyncAwaitNumberOfHandlersThatReturnsUndefinedOnly++;
+        }
+    }
+
+    if (utils.hasNull(returnStatements)) {
+        reportObject.asyncAwaitNumberOfHandlersThatReturnsNull++;
+        if (lines === 1) {
+            reportObject.asyncAwaitNumberOfHandlersThatReturnsNullOnly++;
+        }
+    }
+
+    if(utils.hasErrorObject(returnStatements)) {
+        reportObject.asyncAwaitNumberOfHandlersThatReturnsErrorObject++;
+    }
+
+    // Counts number of continues
+    const continueStatements = utils.getStatementsByType(catchClauseBody, 'ContinueStatement');
+    reportObject.asyncAwaitNumberOfHandlersContinues += continueStatements.length;
+    if(continueStatements.length > 0) {
+        reportObject.asyncAwaitNumberOfHandlersThatContinues++;
     }
 
     // Counts number of breaks
     const breakStatements = utils.getStatementsByType(catchClauseBody, 'BreakStatement');
-    reportObject.asyncAwaitNumberOfBreaksOnCatches += breakStatements.length;
+    reportObject.asyncAwaitNumberOfHandlersBreaks += breakStatements.length;
+    if(breakStatements.length > 0) {
+        reportObject.asyncAwaitNumberOfHandlersThatBreaks++;
 
-    // Add unique break in all constructions
-    if (utils.hasOneStatementAndIsBreak(breakStatements, numberOfLines)) {
-        reportObject.asyncAwaitNumberOfBreaksOnCatchesUniqueStatement++;
+        if (lines === 1) {
+            reportObject.asyncAwaitNumberOfHandlersBreaksOnly++;
+        }
     }
 
+    if (utils.hasOneStatementAndIsBreak(breakStatements, lines)) {
+        reportObject.asyncAwaitNumberOfBreaksOnCatchesUniqueStatement++;
+
+    }
 }
 
 function handleFinallyClauses(finallyStatement, reportObject) {

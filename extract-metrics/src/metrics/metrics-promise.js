@@ -67,12 +67,10 @@ function handleCatches(reportObject, node) {
 
             if(numberOfThrowStatements > 0) {
                 reportObject.promiseNumberOfCatchesThatThrows++;
-
                 const numberOfLiterals = utils.numberOfLiterals(throwStatements);
-                const numberOfErrorObjects = utils.numberOfErrorObjects(throwStatements);
 
                 reportObject.promiseNumberOfCatchesThrowsLiteral += numberOfLiterals;
-                reportObject.promiseNumberOfCatchesThrowsErrorObject += numberOfErrorObjects;
+                reportObject.promiseNumberOfCatchesThrowsErrorObject += utils.numberOfErrorObjects(throwStatements);
 
                 if (numberOfLiterals > 0) {
                     reportObject.promiseNumberOfCatchesThatThrowsLiteral++;

@@ -25,20 +25,31 @@ function handleAnalysis(node, reportObject) {
 
                 const handlerFunction = node.arguments[1];
 
-                if (isFirstArgErrorHandling) {
+                if (isFirstArgErrorHandling && handlerFunction.type === 'FunctionExpression') {
 
                     const handlerParams = utils.getIdentifiersNames(handlerFunction.params);
-                    const numberOfLines = utils.getNumberOfLines(handlerFunction);
+                    const lines = utils.getNumberOfLines(handlerFunction);
+                    const handlerFunctionBody = handlerFunction.body.body;
+
                     if (handlerFunction && handlerFunction.type === 'FunctionExpression') {
+
+                        if (lines === 1 && utils.isAlertCallExpression(handlerFunctionBody[0])) {
+                            reportObject.eventsNumberOfCatchesAlertOnly++;
+                        }
+
+                        if (utils.reuseAnErrorStatements(handlerFunctionBody, handlerParams)) {
+                            reportObject.eventsNumberOfErrorReassigning++;
+                        }
+
                         if (methodName === 'on') {
                             reportObject.eventsNumberOfEventMethodsOn++;
 
-                            reportObject.eventsNumberOfEventOnLines += numberOfLines;
+                            reportObject.eventsNumberOfEventOnLines += lines;
                             const location = handlerFunction.loc;
                             reportObject.eventsNumberOfEventOnLinesStart.push(location.start.line);
                             reportObject.eventsNumberOfEventOnLinesEnd.push(location.end.line);
 
-                            if (numberOfLines === 0) {
+                            if (lines === 0) {
                                 reportObject.eventsNumberOfEventOnEmptyFunctions++;
                             } else if (!utils.useAnyArguments(handlerFunction.body, handlerParams)) {
                                 reportObject.eventsNumberOfEventOnNoUsageOfErrorArgument++;
@@ -53,46 +64,115 @@ function handleAnalysis(node, reportObject) {
                             reportObject.eventsNumberOfEventOnceLinesStart.push(location.start.line);
                             reportObject.eventsNumberOfEventOnceLinesEnd.push(location.end.line);
 
-                            if (numberOfLines === 0) {
+                            if (lines === 0) {
                                 reportObject.eventsNumberOfEventOnceEmptyFunctions++;
                             } else if (!utils.useAnyArguments(handlerFunction.body, handlerParams)) {
                                 reportObject.eventsNumberOfEventOnceNoUsageOfErrorArgument++;
                             }
                         }
 
-                        const handlerBody = handlerFunction.body;
-                        const handlerArgs = utils.getIdentifiersNames(handlerFunction.params);
+                        const functionBody = handlerFunction.body;
+                        const handleArgs = utils.getIdentifiersNames(handlerFunction.params);
 
-                        // Throw an error
-                        const throwStatements = utils.getStatementsByType(handlerBody, 'ThrowStatement');
+                        // Number of throws on catches
+                        const throwStatements = utils.getStatementsByType(functionBody, 'ThrowStatement');
                         const numberOfThrowStatements = throwStatements.length;
-                        reportObject.eventsNumberOfThrowErrorsOnCatches += numberOfThrowStatements;
+                        reportObject.eventsNumberOfHandlersThrows += numberOfThrowStatements;
+                        reportObject.eventsNumberOfHandlersThrowsLiteral += utils.numberOfLiterals(throwStatements);
+                        reportObject.eventsNumberOfHandlersThrowsErrorObject += utils.numberOfErrorObjects(throwStatements);
 
-                        if(throwStatements.length > 0){
-                            reportObject.eventsNumberOfEventsThatThrows++;
+                        if(numberOfThrowStatements > 0) {
+                            reportObject.eventsNumberOfHandlersThatThrows++;
                         }
 
-                        // Number of throws primitive types
-                        reportObject.eventsNumberOfThrowPrimitiveTypesOnCatches += utils.getThrowPrimitiveTypes(throwStatements);
+                        // Throws literal types
+                        if (utils.hasLiteral(throwStatements)) {
+                            reportObject.eventsNumberOfHandlersThatThrowsLiteral++;
 
-                        // Number of rethrow an error argument
-                        const numberOfRethrowStatements = utils.reuseAnErrorStatements(throwStatements, handlerArgs);
-                        reportObject.eventsNumberOfRethrowsOnCatches += numberOfRethrowStatements
+                            if (lines === 1) {
+                                reportObject.eventsNumberOfHandlersThatThrowsLiteralOnly++;
+                            }
+                        }
 
-                        if(numberOfRethrowStatements > 0) {
-                            reportObject.eventsNumberOfEventsThatRethrows++;
+                        if (utils.hasUndefined(throwStatements)) {
+                            reportObject.eventsNumberOfHandlersThatThrowsUndefined++;
+                            if (lines === 1) {
+                                reportObject.eventsNumberOfHandlersThatThrowsUndefinedOnly++;
+                            }
+                        }
+
+                        if (utils.hasNull(throwStatements)) {
+                            reportObject.eventsNumberOfHandlersThatThrowsNull++;
+                            if (lines === 1) {
+                                reportObject.eventsNumberOfHandlersThatThrowsNullOnly++;
+                            }
+                        }
+
+                        if (utils.hasErrorObject(throwStatements)) {
+                            reportObject.eventsNumberOfHandlersThatThrowsErrorObject++;
+                        }
+
+                        // Throws Error objects
+                        const params = utils.getPropertyFrom(throwStatements, 'argument');
+                        if(utils.hasErrorObject(params)) {
+                            reportObject.eventsNumberOfHandlersThrowsErrorObject++;
+                        }
+
+                        // Number of rethrows an error argument
+                        const numberOfRethrows = utils.reuseAnErrorStatements(throwStatements, handleArgs);
+                        reportObject.eventsNumberOfHandlersRethrows += numberOfRethrows;
+
+                        if(numberOfRethrows > 0){
+                            reportObject.eventsNumberOfHandlersThatRethrows++;
                         }
 
                         // Counts number of returns
-                        const returnStatements = utils.getStatementsByType(handlerBody, 'ReturnStatement');
-                        reportObject.eventsNumberOfReturnsOnCatches += returnStatements.length;
+                        const returnStatements = utils.getStatementsByType(functionBody, 'ReturnStatement');
+                        const numberOfLiterals = utils.numberOfLiterals(returnStatements);
+                        const numberOfErrorObjects = utils.numberOfErrorObjects(returnStatements);
+                        reportObject.eventsNumberOfHandlersReturns += returnStatements.length;
+                        reportObject.eventsNumberOfHandlersReturnsLiteral += numberOfLiterals;
+                        reportObject.eventsNumberOfHandlersReturnsErrorObject += numberOfErrorObjects;
+                        reportObject.eventsNumberOfHandlersThatRereturns += utils.reuseAnErrorStatements(returnStatements, handleArgs);
 
-                        // Counts number of returns that uses an error argument
-                        reportObject.eventsNumberOfReturnsAnErrorOnCatches += utils.getNumberOfReturnUsingErrors(returnStatements, handlerArgs);
+                        if (returnStatements.length > 0) {
+                            // Counts number of returns that uses an error argument (so called rethrow)
+                            reportObject.eventsNumberOfHandlersThatReturns++;
+                            if (utils.hasLiteral(returnStatements)) {
+                                reportObject.eventsNumberOfHandlersThatReturnsLiteral++;
+                            }
+
+                            if(utils.hasUndefined(returnStatements)) {
+                                reportObject.eventsNumberOfHandlersThatReturnsUndefined++;
+                            }
+
+                            if (utils.hasNull(returnStatements)) {
+                                reportObject.eventsNumberOfHandlersThatReturnsNull++;
+                            }
+
+                            if (utils.hasErrorObject(returnStatements)) {
+                                reportObject.eventsNumberOfHandlersThatReturnsErrorObject++;
+                            }
+
+                        }
+
+                        // Counts number of continues
+                        const continueStatements = utils.getStatementsByType(functionBody, 'ContinueStatement');
+                        reportObject.eventsNumberOfHandlersContinues += continueStatements.length;
+                        if(continueStatements.length > 0) {
+                            reportObject.eventsNumberOfHandlersThatContinues++;
+                        }
 
                         // Counts number of breaks
-                        const breakStatements = utils.getStatementsByType(handlerBody, 'BreakStatement');
-                        reportObject.eventsNumberOfBreaksOnCatches += breakStatements.length;
+                        const breakStatements = utils.getStatementsByType(functionBody, 'BreakStatement');
+                        reportObject.eventsNumberOfHandlersBreaks += breakStatements.length;
+                        if(breakStatements.length > 0) {
+                            reportObject.eventsNumberOfHandlersThatBreaks++;
+
+                            if (lines === 1) {
+                                reportObject.eventsNumberOfHandlersBreaksOnly++;
+                            }
+                        }
 
                     }
                 }

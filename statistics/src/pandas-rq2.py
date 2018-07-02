@@ -12,10 +12,10 @@ def test_normality(x):
     # False -> The null hypothesis cannot be rejected
 
 
-def variance(x, y, normality):
+def variance(x, y, normal_dist):
     # alpha = 1e-3
     alpha = 0.05
-    if normality:
+    if normal_dist:
         k, p = stats.bartlett(x, y)
         return p < alpha
     else:
@@ -36,9 +36,11 @@ client_factor = 1000/client_kloc
 server_kloc = server_sample['numberOfLogicalLines'].sum()
 server_factor = 1000/server_kloc
 
+result_file = open(config.DATA['result'] + 'rq2-results.txt', 'w')
+
 for column in client_sample.columns:
     try:
-        print(column)
+        result_file.write(column + '\n')
         client_column = client[column]
         client_data = client_column.multiply(client_factor, fill_value=0)
 
@@ -53,13 +55,17 @@ for column in client_sample.columns:
         if normality:
             k, p_value = stats.ttest_ind(client_data, server_data, equal_var=same_variance)
             p_value = p_value/2 # get half of p-value for one-tailed test
-            print('ttest')
+            result_file.write('ttest\n')
         else:
             k, p_value = stats.mannwhitneyu(client_data, server_data) # performs one tailed test by default
-            print('mannwhitneyu')
-        print(str(k) + ' ' + str(p_value))
-        print('Mean - client: ' + str(stats.describe(client_data)))
-        print('Mean - server: ' + str(stats.describe(server_data)))
+            result_file.write('mannwhitneyu\n')
+        result_file.write('statistic: ' + str(k) + '\n')
+        result_file.write('p-value: ' + str(p_value) + '\n')
+        if p_value <= 0.05:
+            result_file.write('Mean - client: ' + str(stats.describe(client_data)) + '\n')
+            result_file.write('Mean - server: ' + str(stats.describe(server_data)) + '\n')
+        else:
+            result_file.write('Inconclusive under 5% confidence\n')
     except Exception as err:
-        print(err)
-    print('--')
+        result_file.write(str(err) + '\n')
+    result_file.write('--\n')

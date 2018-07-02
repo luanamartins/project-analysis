@@ -144,7 +144,7 @@ function handleCatchClause(reportObject, catchClause) {
         const returnStatements = utils.getStatementsByType(nodeBody, 'ReturnStatement');
         reportObject.tryCatchNumberOfCatchesReturns += returnStatements.length;
         reportObject.tryCatchNumberOfCatchesReturnsLiteral += utils.numberOfLiterals(returnStatements);
-        reportObject.tryCatchNumberOfCatchesReturnsErrorObject += utils.reuseAnErrorStatements(returnStatements);
+        reportObject.tryCatchNumberOfCatchesReturnsErrorObject += utils.numberOfErrorObjects(returnStatements);
         reportObject.tryCatchNumberOfCatchesThatRereturns += utils.reuseAnErrorStatements(returnStatements, catchClauseArguments);
 
         if (returnStatements.length > 0) {
@@ -154,7 +154,7 @@ function handleCatchClause(reportObject, catchClause) {
                 reportObject.tryCatchNumberOfCatchesThatReturnsLiteral++;
             }
 
-            if(utils.hasUndefined(returnStatements)) {
+            if (utils.hasUndefined(returnStatements)) {
                 reportObject.tryCatchNumberOfCatchesThatReturnsUndefined++;
             }
 
@@ -188,9 +188,6 @@ function handleCatchClause(reportObject, catchClause) {
         }
 
     }
-
-    const continueStatements = utils.getNodeTypes(catchClause, 'ContinueStatement');
-    reportObject.tryCatchNumberOfCatchesContinues += continueStatements.length;
 
     const location = catchClause.loc;
     reportObject.tryCatchNumberOfCatchesLinesStart.push(location.start.line);

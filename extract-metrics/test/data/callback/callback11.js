@@ -3,13 +3,13 @@ function printFile(callback) {
 }
 
 printFile(function(err, data) {
-    throw true;
+    return 3.4;
 });
 
 printFile(function(err, data) {
     err = null;
     if (err) {
-        throw true;
+        return undefined;
     }
     console.log(data);
 });
@@ -17,7 +17,7 @@ printFile(function(err, data) {
 printFile(function(err, data) {
     err = null;
     if (err) {
-        throw err;
+        return null;
     }
     console.log(data);
 });
@@ -25,7 +25,7 @@ printFile(function(err, data) {
 printFile(function(err, data) {
     err = null;
     if (err) {
-        throw new Error(data);
+        return new Error(data);
     }
     console.log(data);
 });
@@ -33,13 +33,15 @@ printFile(function(err, data) {
 printFile(function(err, data) {
     err = null;
     if (err) {
-        throw undefined;
+        return new Error(err);
     }
     console.log(data);
 });
 
 printFile(function(err, data) {
-    throw null;
+    while(i > 10) {
+        continue;
+    }
 });
 
 
@@ -48,7 +50,9 @@ printFile(function(err, data) {
     if (err) {
         throw null;
     }
-    console.log(data);
+    while(i > 10) {
+        break;
+    }
 });
 
 

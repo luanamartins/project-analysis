@@ -1,43 +1,46 @@
-try {
+function a () {
+    try {
 
-} catch(e) {
-  alert('An error occurred!')
-}
+    } catch (e) {
+        alert('An error occurred!')
+    }
 
-try {
-    console.log('trying...')
-} catch(e) {
-    e = null;
-    console.log('ok');
-}
 
-try {
+    try {
+        console.log('trying...')
+    } catch (e) {
+        e = null;
+        console.log('ok');
+    }
 
-} catch(e) {
-    throw 2;
-}
+    try {
 
-try {
+    } catch (e) {
+        throw 2;
+    }
 
-} catch(e) {
-    throw undefined;
-}
+    try {
 
-try {
+    } catch (e) {
+        throw undefined;
+    }
 
-} catch(e) {
-    throw null;
-}
+    try {
 
-try {
+    } catch (e) {
+        throw null;
+    }
 
-} catch(e) {
-    alert('An error occurred!');
-    throw null;
-}
+    try {
 
-try {
+    } catch (e) {
+        alert('An error occurred!');
+        throw null;
+    }
 
-} catch(e) {
-    throw new Error('new error thrown here')
+    try {
+
+    } catch (e) {
+        throw new Error('new error thrown here')
+    }
 }

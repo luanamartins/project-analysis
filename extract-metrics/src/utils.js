@@ -38,7 +38,7 @@ function isStrictMode(node) {
 function getIdentifiersNames(args) {
     if (args) {
         if (Array.isArray(args)) {
-            return args.filter(arg => arg.type === 'Identifier').map((arg) => {
+            return args.filter(arg => arg && arg.type === 'Identifier').map((arg) => {
                 return arg.name;
             });
         } else {
@@ -83,7 +83,7 @@ function getPropertyFrom(array, property) {
 function hasLiteral(statements) {
     if (statements) {
         return statements.some(function(item) {
-            return item.argument && item.argument.type === 'Literal';
+            return item.argument && item.argument.type === 'Literal' && item.argument.value !== null;
         });
     }
     return false;
@@ -110,7 +110,7 @@ function hasUndefined(statements) {
 function hasAnyLiteral(array) {
     if (array) {
         return array.some(function(item) {
-            return item.type === 'Literal';
+            return item.type === 'Literal' && item.value != null;
         });
     }
     return false;
@@ -130,7 +130,7 @@ function numberOfLiterals(array) {
     if (array) {
         let result = 0;
         array.forEach(function(item) {
-            if (item['argument'] && item['argument'].type === 'Literal') {
+            if (item.argument && item.argument.type === 'Literal' && item.argument.value != null) {
                 result++;
             }
         });
@@ -144,12 +144,20 @@ function numberOfErrorObjects(array) {
     if (array) {
         let result = 0;
         array.forEach(function(item) {
-            const arg = item['argument'];
-            if (arg.type === 'NewExpression' && arg.callee.name === 'Error') {
+            const arg = item.argument;
+            if (arg && arg.type === 'NewExpression' && arg.callee.name === 'Error') {
                 result++;
             }
         });
         return result;
+    }
+
+    if (array) {
+        traverse(array, function (node) {
+            if (node.type === type) {
+                nodeTypes.push(node);
+            }
+        });
     }
 
     return 0;

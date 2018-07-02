@@ -182,11 +182,11 @@ def perc_throws(df):
 # Nesses dois casos, dependendo do quão frequentes são, pode valer a pena olhar na mão se há tratadores específicos
 
 
-def vioplots(data, filepath):
-        sns.set_style("whitegrid")
-        tips = sns.load_dataset("tips")
-        ax = sns.violinplot(x="day", y="total_bill", hue="smoker", data = tips, palette = "muted")
-        ax.figure.savefig(filepath)
+# def vioplots(data, filepath):
+#         sns.set_style("whitegrid")
+#         tips = sns.load_dataset("tips")
+#         ax = sns.violinplot(x="day", y="total_bill", hue="smoker", data = tips, palette = "muted")
+#         ax.figure.savefig(filepath)
 
 
 

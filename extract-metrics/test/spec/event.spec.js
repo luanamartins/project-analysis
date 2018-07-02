@@ -5,8 +5,8 @@ const projectPath = CONFIG["projectPath"];
 const suiteCasePath = CONFIG["dataTestPath"] + "event/";
 const metricsModule = require(CONFIG["srcPath"] + "metrics/metrics");
 
-describe("Events tests", function() {
-    it("assert01", function() {
+describe("Events tests", function () {
+    it("assert01", function () {
         const filename = suiteCasePath + 'event1.js';
         const data = metricsModule.handleMetrics([filename], projectPath);
 
@@ -23,12 +23,10 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 0);
         assert.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
-        assert.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersRethrows, 0);
 
-        assert.equal(metricsObject.eventsNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.eventsNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.eventsNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturns, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturnsErrorObject, 0);
 
         assert.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
         assert.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 0);
@@ -37,7 +35,7 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsTotalOfEventsExceptStringType, 0);
     });
 
-    it("assert02", function() {
+    it("assert02", function () {
         const filename = suiteCasePath + 'event2.js';
         const data = metricsModule.handleMetrics([filename], projectPath);
 
@@ -54,12 +52,10 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 0);
         assert.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
-        assert.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersRethrows, 0);
 
-        assert.equal(metricsObject.eventsNumberOfReturnsOnCatches, 1);
-        assert.equal(metricsObject.eventsNumberOfReturnsAnErrorOnCatches, 1);
-        assert.equal(metricsObject.eventsNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturns, 1);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturnsErrorObject, 0);
 
         assert.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
         assert.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 0);
@@ -68,7 +64,7 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsTotalOfEventsExceptStringType, 0);
     });
 
-    it("assert03", function() {
+    it("assert03", function () {
         const filename = suiteCasePath + 'event3.js';
         const data = metricsModule.handleMetrics([filename], projectPath);
 
@@ -85,12 +81,10 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 0);
         assert.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
-        assert.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersRethrows, 0);
 
-        assert.equal(metricsObject.eventsNumberOfReturnsOnCatches, 1);
-        assert.equal(metricsObject.eventsNumberOfReturnsAnErrorOnCatches, 1);
-        assert.equal(metricsObject.eventsNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturns, 1);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturnsErrorObject, 0);
 
         assert.equal(metricsObject.eventsNumberOfEventUncaughtException, 1);
         assert.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 0);
@@ -99,7 +93,7 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsTotalOfEventsExceptStringType, 0);
     });
 
-    it("assert04", function() {
+    it("assert04", function () {
         const filename = suiteCasePath + 'event4.js';
         const data = metricsModule.handleMetrics([filename], projectPath);
 
@@ -119,12 +113,10 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsNumberOfEventOnceWithUniqueStatement, 0);
         assert.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
-        assert.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersRethrows, 0);
 
-        assert.equal(metricsObject.eventsNumberOfReturnsOnCatches, 2);
-        assert.equal(metricsObject.eventsNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.eventsNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturns, 2);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturnsErrorObject, 0);
 
         assert.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
         assert.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 0);
@@ -133,7 +125,7 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsTotalOfEventsExceptStringType, 0);
     });
 
-    it("assert05", function() {
+    it("assert05", function () {
         const filename = suiteCasePath + 'event5.js';
         const data = metricsModule.handleMetrics([filename], projectPath);
 
@@ -150,12 +142,10 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 0);
         assert.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
-        assert.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersRethrows, 0);
 
-        assert.equal(metricsObject.eventsNumberOfReturnsOnCatches, 1);
-        assert.equal(metricsObject.eventsNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.eventsNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturns, 1);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturnsErrorObject, 0);
 
         assert.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
         assert.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 0);
@@ -164,7 +154,7 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsTotalOfEventsExceptStringType, 0);
     });
 
-    it("assert06", function() {
+    it("assert06", function () {
         const filename = suiteCasePath + 'event5.js';
         const data = metricsModule.handleMetrics([filename], projectPath);
 
@@ -181,12 +171,10 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 0);
         assert.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
-        assert.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersRethrows, 0);
 
-        assert.equal(metricsObject.eventsNumberOfReturnsOnCatches, 1);
-        assert.equal(metricsObject.eventsNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.eventsNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturns, 1);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturnsErrorObject, 0);
 
         assert.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
         assert.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 0);
@@ -195,7 +183,7 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsTotalOfEventsExceptStringType, 0);
     });
 
-    it("assert07", function() {
+    it("assert07", function () {
         const filename = suiteCasePath + 'event7.js';
         const data = metricsModule.handleMetrics([filename], projectPath);
 
@@ -212,12 +200,10 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 0);
         assert.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
-        assert.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersRethrows, 0);
 
-        assert.equal(metricsObject.eventsNumberOfReturnsOnCatches, 1);
-        assert.equal(metricsObject.eventsNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.eventsNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturns, 1);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturnsErrorObject, 0);
 
         assert.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
         assert.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 0);
@@ -226,7 +212,7 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsTotalOfEventsExceptStringType, 2);
     });
 
-    it("assert08", function() {
+    it("assert08", function () {
         const filename = suiteCasePath + 'event8.js';
         const data = metricsModule.handleMetrics([filename], projectPath);
 
@@ -243,12 +229,10 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 0);
         assert.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
-        assert.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersRethrows, 0);
 
-        assert.equal(metricsObject.eventsNumberOfReturnsOnCatches, 1);
-        assert.equal(metricsObject.eventsNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.eventsNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturns, 1);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturnsErrorObject, 0);
 
         assert.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
         assert.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 1);
@@ -257,7 +241,7 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsTotalOfEventsExceptStringType, 2);
     });
 
-    it("assert09", function() {
+    it("assert09", function () {
         const filename = suiteCasePath + 'event9.js';
         const data = metricsModule.handleMetrics([filename], projectPath);
 
@@ -274,12 +258,10 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 0);
         assert.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
-        assert.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 1);
-        assert.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersRethrows, 0);
 
-        assert.equal(metricsObject.eventsNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.eventsNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.eventsNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturns, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturnsErrorObject, 0);
 
         assert.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
         assert.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 0);
@@ -288,7 +270,7 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsTotalOfEventsExceptStringType, 0);
     });
 
-    it("assert10", function() {
+    it("assert10", function () {
         const filename = suiteCasePath + 'event10.js';
         const data = metricsModule.handleMetrics([filename], projectPath);
 
@@ -305,12 +287,10 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 0);
         assert.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
-        assert.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 1);
-        assert.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 1);
+        assert.equal(metricsObject.eventsNumberOfHandlersRethrows, 1);
 
-        assert.equal(metricsObject.eventsNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.eventsNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.eventsNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturns, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturnsErrorObject, 0);
 
         assert.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
         assert.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 0);
@@ -319,7 +299,7 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsTotalOfEventsExceptStringType, 0);
     });
 
-    it("assert11", function() {
+    it("assert11", function () {
         const filename = suiteCasePath + 'event11.js';
         const data = metricsModule.handleMetrics([filename], projectPath);
 
@@ -336,12 +316,10 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 0);
         assert.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
-        assert.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 1);
-        assert.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 1);
+        assert.equal(metricsObject.eventsNumberOfHandlersRethrows, 1);
 
-        assert.equal(metricsObject.eventsNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.eventsNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.eventsNumberOfBreaksOnCatches, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturns, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturnsErrorObject, 0);
 
         assert.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
         assert.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 0);
@@ -350,7 +328,7 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsTotalOfEventsExceptStringType, 0);
     });
 
-    it("assert12", function() {
+    it("assert12", function () {
         const filename = suiteCasePath + 'event12.js';
         const data = metricsModule.handleMetrics([filename], projectPath);
 
@@ -367,12 +345,10 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 0);
         assert.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
-        assert.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 0);
-        assert.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersRethrows, 0);
 
-        assert.equal(metricsObject.eventsNumberOfReturnsOnCatches, 2);
-        assert.equal(metricsObject.eventsNumberOfReturnsAnErrorOnCatches, 1);
-        assert.equal(metricsObject.eventsNumberOfBreaksOnCatches, 1);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturns, 2);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturnsErrorObject, 1);
 
         assert.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
         assert.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 0);
@@ -380,8 +356,8 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsTotalOfStringEvents, 3);
         assert.equal(metricsObject.eventsTotalOfEventsExceptStringType, 0);
     });
-    
-    it("assert13", function() {
+
+    it("assert13", function () {
         const filename = suiteCasePath + 'event13.js';
         const data = metricsModule.handleMetrics([filename], projectPath);
 
@@ -398,13 +374,10 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsNumberOfEventOnEmptyFunctions, 0);
         assert.equal(metricsObject.eventsNumberOfEventOnceEmptyFunctions, 0);
 
-        assert.equal(metricsObject.eventsNumberOfThrowErrorsOnCatches, 2);
-        assert.equal(metricsObject.eventsNumberOfRethrowsOnCatches, 0);
-        assert.equal(metricsObject.eventsNumberOfThrowPrimitiveTypesOnCatches, 2);
+        assert.equal(metricsObject.eventsNumberOfHandlersRethrows, 0);
 
-        assert.equal(metricsObject.eventsNumberOfReturnsOnCatches, 0);
-        assert.equal(metricsObject.eventsNumberOfReturnsAnErrorOnCatches, 0);
-        assert.equal(metricsObject.eventsNumberOfBreaksOnCatches, 1);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturns, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturnsErrorObject, 0);
 
         assert.equal(metricsObject.eventsNumberOfEventUncaughtException, 0);
         assert.equal(metricsObject.eventsNumberOfEventUnhandledRejection, 0);
@@ -413,7 +386,7 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsTotalOfEventsExceptStringType, 0);
     });
 
-    it("assert14", function() {
+    it("assert14", function () {
         const filename = suiteCasePath + 'event14.js';
         const data = metricsModule.handleMetrics([filename], projectPath);
 
@@ -427,7 +400,7 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsNumberOfUncaughtExceptionThrows, 2);
     });
 
-    it("assert15", function() {
+    it("assert15", function () {
         const filename = suiteCasePath + 'event15.js';
         const data = metricsModule.handleMetrics([filename], projectPath);
 
@@ -436,9 +409,63 @@ describe("Events tests", function() {
         assert.equal(metricsObject.eventsNumberOfEventOnNoUsageOfErrorArgument, 2);
         assert.equal(metricsObject.eventsNumberOfEventOnceNoUsageOfErrorArgument, 1);
         assert.equal(metricsObject.eventsNumberOfUncaughtExceptionNoUsageOfErrorArgument, 1);
-        assert.equal(metricsObject.eventsNumberOfEventsThatThrows, 4);
-        assert.equal(metricsObject.eventsNumberOfEventsThatRethrows, 2);
+        assert.equal(metricsObject.eventsNumberOfHandlersThatThrows, 4);
+        assert.equal(metricsObject.eventsNumberOfHandlersThatRethrows, 2);
 
     });
-    
+
+    it("assert16", function () {
+        const filename = suiteCasePath + "event16.js";
+        const data = metricsModule.handleMetrics([filename], projectPath);
+
+        const metricsObject = data.metrics[0];
+
+        assert.equal(metricsObject.eventsNumberOfCatchesAlertOnly, 1);
+        assert.equal(metricsObject.eventsNumberOfErrorReassigning, 1);
+        assert.equal(metricsObject.eventsNumberOfHandlersThrows, 6);
+        assert.equal(metricsObject.eventsNumberOfHandlersThrowsLiteral, 1);
+        assert.equal(metricsObject.eventsNumberOfHandlersThrowsErrorObject, 1);
+        assert.equal(metricsObject.eventsNumberOfHandlersThatThrows, 6);
+        assert.equal(metricsObject.eventsNumberOfHandlersThatThrowsLiteral, 1);
+        assert.equal(metricsObject.eventsNumberOfHandlersThatThrowsLiteralOnly, 1);
+        assert.equal(metricsObject.eventsNumberOfHandlersThatThrowsUndefined, 1);
+        assert.equal(metricsObject.eventsNumberOfHandlersThatThrowsUndefinedOnly, 0);
+        assert.equal(metricsObject.eventsNumberOfHandlersThatThrowsNull, 1);
+        assert.equal(metricsObject.eventsNumberOfHandlersThatThrowsNullOnly, 1);
+        assert.equal(metricsObject.eventsNumberOfHandlersThatThrowsErrorObject, 1);
+        assert.equal(metricsObject.eventsNumberOfHandlersRethrows, 2);
+        assert.equal(metricsObject.eventsNumberOfHandlersThatRethrows, 2);
+    });
+
+    it("assert17", function () {
+        const filename = suiteCasePath + "event17.js";
+        const data = metricsModule.handleMetrics([filename], projectPath);
+
+        const metricsObject = data.metrics[0];
+
+        assert.equal(metricsObject.eventsNumberOfHandlersReturns, 6);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturnsLiteral, 1);
+        assert.equal(metricsObject.eventsNumberOfHandlersReturnsErrorObject, 1);
+        assert.equal(metricsObject.eventsNumberOfHandlersThatReturns, 6);
+        assert.equal(metricsObject.eventsNumberOfHandlersThatReturnsLiteral, 1);
+        assert.equal(metricsObject.eventsNumberOfHandlersThatReturnsUndefined, 1);
+        assert.equal(metricsObject.eventsNumberOfHandlersThatReturnsNull, 1);
+        assert.equal(metricsObject.eventsNumberOfHandlersThatReturnsErrorObject, 1);
+        assert.equal(metricsObject.eventsNumberOfHandlersThatRereturns, 2);
+
+    });
+
+    it("assert18", function () {
+        const filename = suiteCasePath + "event18.js";
+        const data = metricsModule.handleMetrics([filename], projectPath);
+
+        const metricsObject = data.metrics[0];
+
+        assert.equal(metricsObject.eventsNumberOfHandlersContinues, 2);
+        assert.equal(metricsObject.eventsNumberOfHandlersThatContinues, 2);
+        assert.equal(metricsObject.eventsNumberOfHandlersBreaks, 2);
+        assert.equal(metricsObject.eventsNumberOfHandlersThatBreaks, 2);
+        assert.equal(metricsObject.eventsNumberOfHandlersBreaksOnly, 0);
+    });
+
 });

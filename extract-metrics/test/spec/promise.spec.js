@@ -757,7 +757,7 @@ describe("Promises tests", function() {
 
         assert.equal(metricsObject.promiseNumberOfCatchesAlertOnly, 1);
         assert.equal(metricsObject.promiseNumberOfErrorReassigning, 1);
-        assert.equal(metricsObject.promiseNumberOfCatchesThrowsLiteral, 2);
+        assert.equal(metricsObject.promiseNumberOfCatchesThrowsLiteral, 1);
         assert.equal(metricsObject.promiseNumberOfCatchesThrowsErrorObject, 1);
 
     });
@@ -768,11 +768,11 @@ describe("Promises tests", function() {
 
         const metricsObject = data.metrics[0];
 
-        assert.equal(metricsObject.promiseNumberOfCatchesReturnsLiteral, 2);
+        assert.equal(metricsObject.promiseNumberOfCatchesReturnsLiteral, 1);
         assert.equal(metricsObject.promiseNumberOfCatchesReturnsErrorObject, 2);
         assert.equal(metricsObject.promiseNumberOfCatchesThatReturns, 7);
-        assert.equal(metricsObject.promiseNumberOfCatchesThatReturnsLiteral, 2);
-        assert.equal(metricsObject.promiseNumberOfCatchesThatReturnsLiteralOnly, 2);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatReturnsLiteral, 1);
+        assert.equal(metricsObject.promiseNumberOfCatchesThatReturnsLiteralOnly, 1);
         assert.equal(metricsObject.promiseNumberOfCatchesThatReturnsUndefined, 2);
         assert.equal(metricsObject.promiseNumberOfCatchesThatReturnsUndefinedOnly, 1);
         assert.equal(metricsObject.promiseNumberOfCatchesThatReturnsNull, 1);

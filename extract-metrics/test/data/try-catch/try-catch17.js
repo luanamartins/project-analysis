@@ -31,5 +31,11 @@ function a() {
         }
     }
 
+    try {
+
+    } catch (e) {
+        return undefined
+    }
+
 }
 
