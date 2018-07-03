@@ -1,0 +1,50 @@
+--------------------------------
+Percentage of handlers:
+Empty: 23.4885137798803
+No usage parameters: 34.585886822205495
+Logging only: 0.904920617854711
+One statement only: 57.89341647851486
+That throws a parameter: 9.656192359460942
+--------------------------------
+Empty handlers per total of handlers (%):
+try-catch: 25.153769550700016
+promises: 4.031287605294826
+async-await: 5.128205128205129
+events: 7.317073170731708
+callback: 0.8861073243276738
+--------------------------------
+Logging on console per total handlers (%):
+try-catch: 0.8806357760724816
+promises: 1.6245487364620939
+async-await: 0.0
+events: 0.0
+callback: 0.4569959102738877
+--------------------------------
+No usage of error parameter per total handlers (%):
+try-catch: 26.76273602405639
+promises: 0.9626955475330926
+async-await: 41.02564102564103
+events: 12.601626016260163
+callback: 8.35295575659933
+--------------------------------
+Throws an error parameter per total handlers (%):
+try-catch: 11.387733583269872
+promises: 5.084235860409145
+async-await: 61.53846153846154
+events: 7.8861788617886175
+callback: 5.6435122072127895
+--------------------------------
+UncaughtException approaches:
+Empty block: 1.4388489208633093
+No usage of error parameter: 6.474820143884892
+One statement only: 16.546762589928058
+Logging on console only: 1.4388489208633093
+Throws an error: 10.79136690647482
+Returns an error: 10.79136690647482
+--------------------------------
+Callbacks that no use error parameter (has only one error parameter)
+3.7926586955763937
+--------------------------------
+UncaughtException percentage that throws an error parameter
+3.597122302158273
+--------------------------------

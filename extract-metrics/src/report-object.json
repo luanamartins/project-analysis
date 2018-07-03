@@ -305,7 +305,6 @@
   "callbacksNumberOfHandlersThatRethrows": 0,
   "callbacksNumberOfHandlersReturns": 0,
   "callbacksNumberOfHandlersReturnsLiteral": 0,
-
   "callbacksNumberOfHandlersReturnsErrorObject": 0,
   "callbacksNumberOfHandlersThatReturns": 0,
 

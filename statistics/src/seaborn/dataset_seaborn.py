@@ -18,15 +18,15 @@ def read_data(df):
 def get_metrics(df, metric, name):
     types_df = df[metric]
     types_df = types_df.fillna(0.0)
-    types_df = types_df[types_df >= 0.0]
+    types_df = types_df[types_df > 0.0]
     size = types_df.shape[0]
     types_df.rename(columns={metric: 'values'}, inplace=True)
     types = pd.DataFrame(data=np.repeat(name, size))
     return pd.concat([types_df, types], axis=1)
 
 
-results_path = ''
-path = ''
+results_path = '/Users/luanamartins/Documents/Mestrado/project-analysis/results/results-2018-06-29/'
+path = '/Users/luanamartins/Documents/Mestrado/project-analysis/statistics/src/seaborn/'
 file_df = pd.read_csv(results_path + 'result-repo-client.csv')
 # print(file_df[file_df['tryCatchNumberOfCatches'] < 0].head(10))
 df = read_data(file_df)

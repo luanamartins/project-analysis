@@ -1,6 +1,7 @@
 import pandas as pd
 import config
 
+output_file = open(config.DATA['result'] + 'result-rq1-2.txt', 'w')
 
 def sum_metrics(metrics, data_frame):
     total = 0
@@ -60,117 +61,125 @@ def perc_throw_statement(df):
                          'asyncAwaitNumberOfCatches', 'callbacksNumberOfCallbackErrorFunctions', 
                          'eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce']
 
-    partial = ['tryCatchNumberOfCatchesThatThrows', 'promiseNumberOfPromisesThatThrows',
-                           'asyncAwaitNumberOfCatchesThatThrows', 'callbacksNumberOfCallbacksThatThrows',
-                           'eventsNumberOfEventsThatThrows']
+    partial = ['tryCatchNumberOfCatchesThatThrows', 'promiseNumberOfCatchesThatThrows',
+                           'asyncAwaitNumberOfHandlersThatThrows', 'callbacksNumberOfHandlersThrows',
+                           'eventsNumberOfHandlersThatThrows']
     return get_percentage(df, total, partial)
 
 
 def perc_empty_handlers_per_handler(df):
+    output_file.write('Empty handlers per total of handlers (%):' + '\n')
+
     # Empty try-catch
     total = ['tryCatchNumberOfCatches']
     empty = ['tryCatchNumberOfEmptyCatches']
-    print('Empty try-catch perc: ' + str(get_percentage(df, total, empty)))
+    output_file.write('try-catch: ' + str(get_percentage(df, total, empty)) + '\n')
 
     # Empty promises
     total = ['promiseNumberOfPromiseCatches']
     empty = ['promiseNumberOfEmptyFunctionsOnPromiseCatches']
-    print('Empty promises perc: ' + str(get_percentage(df, total, empty)))
+    output_file.write('promises: ' + str(get_percentage(df, total, empty)) + '\n')
 
     # Async-await
     total = ['asyncAwaitNumberOfCatches']
     empty = ['asyncAwaitNumberOfEmptyCatches']
-    print('Empty async-await perc: ' + str(get_percentage(df, total, empty)))
+    output_file.write('async-await: ' + str(get_percentage(df, total, empty)) + '\n')
 
     # Events
     total = ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce']
     empty = ['eventsNumberOfEventOnEmptyFunctions', 'eventsNumberOfEventOnceEmptyFunctions']
-    print('Empty events perc: ' + str(get_percentage(df, total, empty)))
+    output_file.write('events: ' + str(get_percentage(df, total, empty)) + '\n')
 
     # Callback functions
     total = ['callbacksNumberOfCallbackErrorFunctions']
     empty = ['callbacksNumberOfEmptyCallbacks']
-    print('Empty callback perc: ' + str(get_percentage(df, total, empty)))
+    output_file.write('callback: ' + str(get_percentage(df, total, empty)) + '\n')
 
 def perc_unique_console(df):
+    output_file.write('Logging on console per total handlers (%):' + '\n')
+
     # try-catch
     total = ['tryCatchNumberOfCatches']
     empty = ['tryCatchNumberOfCatchesWithUniqueConsole']
-    print('Unique console try-catch perc: ' + str(get_percentage(df, total, empty)))
+    output_file.write('try-catch: ' + str(get_percentage(df, total, empty)) + '\n')
 
     # promises
     total = ['promiseNumberOfPromiseCatches']
     empty = ['promiseNumberOfCatchesWithUniqueConsole']
-    print('Unique console promises perc: ' + str(get_percentage(df, total, empty)))
+    output_file.write('promises: ' + str(get_percentage(df, total, empty)) + '\n')
 
     # Async-await
     total = ['asyncAwaitNumberOfCatches']
     empty = ['asyncAwaitNumberOfCatchesWithUniqueConsole']
-    print('Unique console async-await perc: ' + str(get_percentage(df, total, empty)))
+    output_file.write('async-await: ' + str(get_percentage(df, total, empty)) + '\n')
 
     # Events
     total = ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce']
     empty = ['eventsNumberOfEventOnWithUniqueConsole', 'eventsNumberOfEventOnceWithUniqueConsole']
-    print('Unique console events perc: ' + str(get_percentage(df, total, empty)))
+    output_file.write('events: ' + str(get_percentage(df, total, empty)) + '\n')
 
     # Callback functions
     total = ['callbacksNumberOfCallbackErrorFunctions']
     empty = ['callbacksNumberOfFunctionsWithUniqueConsole']
-    print('Unique console callback perc: ' + str(get_percentage(df, total, empty)))
+    output_file.write('callback: ' + str(get_percentage(df, total, empty)) + '\n')
 
 
 def perc_no_usage_arg(df):
+    output_file.write('No usage of error parameter per total handlers (%):' + '\n')
+
     # try-catch
     total = ['tryCatchNumberOfCatches']
     empty = ['tryCatchNumberOfCatchesNoUsageOfErrorArgument']
-    print('NoUsageOfErrorArgument try-catch perc: ' + str(get_percentage(df, total, empty)))
+    output_file.write('try-catch: ' + str(get_percentage(df, total, empty)) + '\n')
 
     # promises
     total = ['promiseNumberOfPromiseCatches']
     empty = ['promiseNumberOfFunctionsOnCatchesNoUsageOfErrorArgument']
-    print('NoUsageOfErrorArgument promises perc: ' + str(get_percentage(df, total, empty)))
+    output_file.write('promises: ' + str(get_percentage(df, total, empty)) + '\n')
 
     # Async-await
     total = ['asyncAwaitNumberOfCatches']
     empty = ['asyncAwaitNumberOfCatchesNoUsageOfErrorArgument']
-    print('NoUsageOfErrorArgument async-await perc: ' + str(get_percentage(df, total, empty)))
+    output_file.write('async-await: ' + str(get_percentage(df, total, empty)) + '\n')
 
     # Events
     total = ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce']
     empty = ['eventsNumberOfEventOnNoUsageOfErrorArgument', 'eventsNumberOfEventOnceNoUsageOfErrorArgument']
-    print('NoUsageOfErrorArgument events perc: ' + str(get_percentage(df, total, empty)))
+    output_file.write('events: ' + str(get_percentage(df, total, empty)) + '\n')
 
     # Callback functions
     total = ['callbacksNumberOfCallbackErrorFunctions']
     empty = ['callbacksNumberOfFunctionsNoUsageOfErrorArgument']
-    print('NoUsageOfErrorArgument callback perc: ' + str(get_percentage(df, total, empty)))
+    output_file.write('callback: ' + str(get_percentage(df, total, empty)) + '\n')
 
 
 def perc_throws(df):
+    output_file.write('Throws an error parameter per total handlers (%):' + '\n')
+
     # try-catch
     total = ['tryCatchNumberOfCatches']
     empty = ['tryCatchNumberOfCatchesThatThrows']
-    print('thatThrows try-catch perc: ' + str(get_percentage(df, total, empty)))
+    output_file.write('try-catch: ' + str(get_percentage(df, total, empty)) + '\n')
 
     # promises
     total = ['promiseNumberOfPromiseCatches']
-    empty = ['promiseNumberOfPromisesThatThrows']
-    print('thatThrows promises perc: ' + str(get_percentage(df, total, empty)))
+    empty = ['promiseNumberOfCatchesThatThrows']
+    output_file.write('promises: ' + str(get_percentage(df, total, empty)) + '\n')
 
     # Async-await
     total = ['asyncAwaitNumberOfCatches']
-    empty = ['asyncAwaitNumberOfCatchesThatThrows']
-    print('thatThrows async-await perc: ' + str(get_percentage(df, total, empty)))
+    empty = ['asyncAwaitNumberOfHandlersThatThrows']
+    output_file.write('async-await: ' + str(get_percentage(df, total, empty)) + '\n')
 
     # Events
     total = ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce']
-    empty = ['eventsNumberOfEventsThatThrows']
-    print('thatThrows events perc: ' + str(get_percentage(df, total, empty)))
+    empty = ['eventsNumberOfHandlersThatThrows']
+    output_file.write('events: ' + str(get_percentage(df, total, empty)) + '\n')
 
     # Callback functions
     total = ['callbacksNumberOfCallbackErrorFunctions']
-    empty = ['callbacksNumberOfCallbacksThatThrows']
-    print('thatThrows callback perc: ' + str(get_percentage(df, total, empty)))
+    empty = ['callbacksNumberOfHandlersThatThrows']
+    output_file.write('callback: ' + str(get_percentage(df, total, empty)) + '\n')
 
 
 # def triangulation():
@@ -182,36 +191,24 @@ def perc_throws(df):
 # Nesses dois casos, dependendo do quão frequentes são, pode valer a pena olhar na mão se há tratadores específicos
 
 
-# def vioplots(data, filepath):
-#         sns.set_style("whitegrid")
-#         tips = sns.load_dataset("tips")
-#         ax = sns.violinplot(x="day", y="total_bill", hue="smoker", data = tips, palette = "muted")
-#         ax.figure.savefig(filepath)
-
-
-
-
-filepath = config.DATA['result'] + 'result-classes-trans.csv'
-print(filepath)
+filepath = config.DATA['result'] + 'result-class.csv'
 df = pd.read_csv(filepath, sep=',')
-print('Empty: ' + str(perc_empty_handlers(df)))
-print('No usage: ' + str(perc_no_usage_arg_overall(df)))
-print('Logs: ' + str(perc_log_handlers(df)))
-print('One statement: ' + str(perc_one_statement_handlers(df)))
-print('Throws: ' + str(perc_throw_statement(df)))
-print('--------------------------------')
-print('Empty handlers')
+output_file.write('--------------------------------' + '\n')
+output_file.write('Percentage of handlers:' + '\n')
+output_file.write('Empty: ' + str(perc_empty_handlers(df)) + '\n')
+output_file.write('No usage parameters: ' + str(perc_no_usage_arg_overall(df)) + '\n')
+output_file.write('Logging only: ' + str(perc_log_handlers(df)) + '\n')
+output_file.write('One statement only: ' + str(perc_one_statement_handlers(df)) + '\n')
+output_file.write('That throws a parameter: ' + str(perc_throw_statement(df)) + '\n')
+output_file.write('--------------------------------' + '\n')
 perc_empty_handlers_per_handler(df)
-print('--------------------------------')
-print('Console only')
+output_file.write('--------------------------------' + '\n')
 perc_unique_console(df)
-print('--------------------------------')
-print('No usage of error arguments')
+output_file.write('--------------------------------' + '\n')
 perc_no_usage_arg(df)
-print('--------------------------------')
-print('Throws')
+output_file.write('--------------------------------' + '\n')
 perc_throws(df)
-print('--------------------------------')
+output_file.write('--------------------------------' + '\n')
 
 def percentage(partial, total):
     return (100*partial)/total
@@ -223,16 +220,27 @@ empty = df['eventsNumberOfUncaughtExceptionEmpty'].sum()
 no_usage = df['eventsNumberOfUncaughtExceptionNoUsageOfErrorArgument'].sum()
 unique_stmt = df['eventsNumberOfUncaughtExceptionWithUniqueStatement'].sum()
 unique_console = df['eventsNumberOfUncaughtExceptionWithUniqueConsole'].sum()
-throws = df['eventsNumberOfUncaughtExceptionThrows']
+returns = df['eventsNumberOfUncaughtExceptionReturns'].sum()
+throws = df['eventsNumberOfUncaughtExceptionThrows'].sum()
 
-print('empty: ' + str(percentage(empty, total)))
-print('no_usage: ' + str(percentage(no_usage, total)))
-print('unique_stmt: ' + str(percentage(unique_stmt, total)))
-print('unique_console: ' + str(percentage(unique_console, total)))
-print('throws: ' + str(percentage(throws, total)))
+output_file.write('UncaughtException approaches:' + '\n')
+output_file.write('Empty block: ' + str(percentage(empty, total)) + '\n')
+output_file.write('No usage of error parameter: ' + str(percentage(no_usage, total)) + '\n')
+output_file.write('One statement only: ' + str(percentage(unique_stmt, total)) + '\n')
+output_file.write('Logging on console only: ' + str(percentage(unique_console, total)) + '\n')
+output_file.write('Throws an error: ' + str(percentage(throws, total)) + '\n')
+output_file.write('Returns an error: ' + str(percentage(throws, total)) + '\n')
 
-
+output_file.write('--------------------------------' + '\n')
 unique_error_callback = df['callbacksNumberOfFunctionsWithUniqueErrorArg'].sum()
 no_usage_callback = df['callbacksNumberOfFunctionsNoUsageOfErrorArgumentWithUniqueErrorArg'].sum()
-print('no usage unique error argument callback')
-print(percentage(no_usage_callback, unique_error_callback))
+output_file.write('Callbacks that no use error parameter (has only one error parameter)' + '\n')
+output_file.write(str(percentage(no_usage_callback, unique_error_callback)) + '\n')
+
+output_file.write('--------------------------------' + '\n')
+metric_df = df['eventsNumberOfUncaughtExceptionReturns'].sum()
+total_df = df['eventsNumberOfEventUncaughtException'].sum()
+output_file.write('UncaughtException percentage that throws an error parameter' + '\n')
+output_file.write(str(percentage(metric_df, total_df)) + '\n')
+output_file.write('--------------------------------' + '\n')
+
