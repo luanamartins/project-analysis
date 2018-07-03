@@ -87,14 +87,15 @@ def run(client, server, remove_zeroes, output_file):
             p_value = 0
 
             if normality:
-                k, p_value = stats.ttest_ind(client_data, server_data, equal_var=same_variance)
-                p_value = p_value/2 # get half of p-value for one-tailed test
+                k, p = stats.ttest_ind(client_data, server_data, equal_var=same_variance)
+                p_value = p/2 # get half of p-value for one-tailed test
                 output_file.write('ttest\n')
             else:
-                k, p_value = stats.mannwhitneyu(client_data, server_data) # performs one tailed test by default
+                k, p = stats.mannwhitneyu(client_data, server_data) # performs one tailed test by default
                 output_file.write('mannwhitneyu\n')
+                p_value = p
             output_file.write('statistic: ' + str(k) + '\n')
-            output_file.write('p-value: ' + str(p_value) + '\n')
+            output_file.write('p-value: ' + str(p) + '\n')
             if p_value <= 0.05:
                 output_file.write('Mean - client: ' + str(stats.describe(client_data)) + '\n')
                 output_file.write('Mean - server: ' + str(stats.describe(server_data)) + '\n')
