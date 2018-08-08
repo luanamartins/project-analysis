@@ -68,3 +68,4 @@ statistics/src/__pycache__/
 
 **/**/*.pyc
 /extract-metrics/data/repo/**
+extract-metrics/data/repo/client/**

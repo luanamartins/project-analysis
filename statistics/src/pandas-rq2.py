@@ -50,7 +50,7 @@ def calc_factor(file):
     return 1000 / kloc
 
 
-def get_headers():
+def get_metrics():
     json_data = open(config.DATA['extractMetricsSrc'] + 'report-object.json')
     jdata = json.load(json_data)
     columns = ['repo']
@@ -60,23 +60,27 @@ def get_headers():
     return columns
 
 
-def run(client, server, remove_zeroes, output_file):
+def run_tests(client, server, remove_zeroes, type_analysis, output_file):
 
-    headers = get_headers()
-    client_folder = config.DATA['result'] + 'result-repo-client.csv'
-    server_folder = config.DATA['result'] + 'result-repo-server.csv'
+    metrics = get_metrics()
+    client_folder = config.DATA['result_info'] + 'result-repo-client.csv'
+    server_folder = config.DATA['result_info'] + 'result-repo-server.csv'
     client_factor = calc_factor(client_folder)
     server_factor = calc_factor(server_folder)
 
-    for column in headers:
+    rows = []
+
+    for metric in metrics:
+        row = {}
         try:
-            output_file.write(column + '\n')
-            client_column = client[column]
+            output_file.write(metric + '\n')
+            row['metric'] = metric
+            client_column = client[metric]
             client_data = client_column.multiply(client_factor, fill_value=0)
             if remove_zeroes:
                 client_data = client_data[client_data != 0]
 
-            server_column = server[column]
+            server_column = server[metric]
             server_data = server_column.multiply(server_factor, fill_value=0)
             if remove_zeroes:
                 server_data = server_data[server_data != 0]
@@ -89,35 +93,70 @@ def run(client, server, remove_zeroes, output_file):
             if normality:
                 k, p = stats.ttest_ind(client_data, server_data, equal_var=same_variance)
                 p_value = p/2 # get half of p-value for one-tailed test
-                output_file.write('ttest\n')
+                row['hypothesis_test'] = 'ttest_ind'
             else:
                 k, p = stats.mannwhitneyu(client_data, server_data) # performs one tailed test by default
-                output_file.write('mannwhitneyu\n')
+                row['hypothesis_test'] = 'mannwhitneyu'
                 p_value = p
-            output_file.write('statistic: ' + str(k) + '\n')
-            output_file.write('p-value: ' + str(p) + '\n')
+            row['statistic'] = k
+            row['p_value'] = p
             if p_value <= 0.05:
+                summary_client = stats.describe(client_data)
+                summary_server = stats.describe(server_data)
+
+                row['nobs_client'] = summary_client.nobs
+                row['nobs_server'] = summary_server.nobs
+
+                tuple_min_max_client = summary_client.minmax
+                tuple_min_max_server = summary_server.minmax
+                row['min_client'] = tuple_min_max_client[0]
+                row['min_server'] = tuple_min_max_server[0]
+                row['max_client'] = tuple_min_max_client[1]
+                row['max_server'] = tuple_min_max_server[1]
+
+                row['mean_client'] = summary_client.mean
+                row['mean_server'] = summary_server.mean
+
+                row['variance_client'] = summary_client.variance
+                row['variance_server'] = summary_server.variance
+
+                row['skewness_client'] = summary_client.skewness
+                row['skewness_server'] = summary_server.skewness
+
+                row['kurtosis_client'] = summary_client.kurtosis
+                row['kurtosis_server'] = summary_server.kurtosis
+
                 output_file.write('Mean - client: ' + str(stats.describe(client_data)) + '\n')
                 output_file.write('Mean - server: ' + str(stats.describe(server_data)) + '\n')
             else:
                 output_file.write('Inconclusive under 5% confidence\n')
+
         except Exception as err:
+            row['err'] = err
             output_file.write(str(err) + '\n')
-        output_file.write('---------------------------------------------------------\n')
+        output_file.write('---------------------------------------------------\n')
+        rows.append(row)
+
+    output_file.close()
+    df = pd.DataFrame(rows)
+    has_zeroes_sample = '-no-zeroes' if remove_zeroes else ''
+    file_name = 'rq2-results-' + type_analysis + has_zeroes_sample + '.csv'
+    df.to_csv(config.DATA['result_rq_2'] + file_name)
 
 
-result_file = open(config.DATA['result'] + 'rq2-results.txt', 'w')
+
+result_file = open(config.DATA['result_info'] + 'rq2-results.txt', 'w')
 
 client_file = get_sample_by_file(config.DATA['result'] + 'client/')
 server_file = get_sample_by_file(config.DATA['result'] + 'server/')
-rq2_file_no_zeroes = open(config.DATA['result'] + 'rq2-file-no-zeroes.txt', 'w')
-rq2_file = open(config.DATA['result'] + 'rq2-file.txt', 'w')
-run(client_file, server_file, True, rq2_file_no_zeroes)
-run(client_file, server_file, False, rq2_file)
+rq2_file_no_zeroes = open(config.DATA['result_rq_2'] + 'rq2-file-no-zeroes.txt', 'w')
+rq2_file = open(config.DATA['result_rq_2'] + 'rq2-file.txt', 'w')
+run_tests(client_file, server_file, True, 'script', rq2_file_no_zeroes)
+run_tests(client_file, server_file, False, 'script', rq2_file)
 
-client_repo = get_sample_by_repo(config.DATA['result'] + 'result-repo-client.csv')
-server_repo = get_sample_by_repo(config.DATA['result'] + 'result-repo-server.csv')
-rq2_repo_no_zeroes = open(config.DATA['result'] + 'rq2-repo-no-zeroes.txt', 'w')
-rq2_repo = open(config.DATA['result'] + 'rq2-repo.txt', 'w')
-run(client_repo, server_repo, True, rq2_repo_no_zeroes)
-run(client_repo, server_repo, False, rq2_repo)
+client_repo = get_sample_by_repo(config.DATA['result_info'] + 'result-repo-client.csv')
+server_repo = get_sample_by_repo(config.DATA['result_info'] + 'result-repo-server.csv')
+rq2_repo_no_zeroes = open(config.DATA['result_rq_2'] + 'rq2-repo-no-zeroes.txt', 'w')
+rq2_repo = open(config.DATA['result_rq_2'] + 'rq2-repo.txt', 'w')
+run_tests(client_repo, server_repo, True, 'repo', rq2_repo_no_zeroes)
+run_tests(client_repo, server_repo, False, 'repo', rq2_repo)

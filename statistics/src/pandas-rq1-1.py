@@ -1,9 +1,9 @@
 import pandas as pd
 import config
+import viz.piechart as piechart
 
-output_file = open(config.DATA['result'] + 'result-rq1-1.txt', 'w')
 
-result_classes = config.DATA['result'] + 'result-class.csv'
+result_classes = config.DATA['result_info'] + 'result-class.csv'
 df = pd.read_csv(result_classes)
 
 total_lines = df['numberOfLogicalLines'].sum()
@@ -21,33 +21,53 @@ promises_number = df['promiseNumberOfPromiseCatches'].sum()
 callbacks_number = df['callbacksNumberOfCallbackErrorFunctions'].sum()
 
 error_handling_total_lines = try_catch_lines + async_await_lines + events_lines + promises_lines + callbacks_lines
-
-output_file.write('--------------------------' + '\n')
-output_file.write('Total of lines (in all files): ' + str(total_lines) + '\n')
-output_file.write('try-catch blocks: ' + str(100*try_catch_lines/total_lines) + '\n')
-output_file.write('async_await: ' + str(100*async_await_lines/total_lines) + '\n')
-output_file.write('events: ' + str(100*events_lines/total_lines) + '\n')
-output_file.write('promises: ' + str(100*promises_lines/total_lines) + '\n')
-output_file.write('callbacks: ' + str(100 * callbacks_lines / total_lines) + '\n')
-
-output_file.write('--------------------------------------' + '\n')
-output_file.write('Total of lines (in code handlers): ' + str(error_handling_total_lines) + '\n')
-output_file.write('try-catch: ' + str(100*try_catch_lines/error_handling_total_lines) + '\n')
-output_file.write('async-await: ' + str(100*async_await_lines/error_handling_total_lines) + '\n')
-output_file.write('events: ' + str(100*events_lines/error_handling_total_lines) + '\n')
-output_file.write('promises: ' + str(100*promises_lines/error_handling_total_lines) + '\n')
-output_file.write('callbacks: ' + str(100 * callbacks_lines / error_handling_total_lines) + '\n')
-
-output_file.write('--------------------------------------' + '\n')
 total = try_catch_number + async_await_number + events_number + promises_number+callbacks_number
-output_file.write('Total of constructions (in raw numbers): ' + str(total) + '\n')
-output_file.write('try-catch: ' + str(try_catch_number) + ' ' + str(100*try_catch_number/total) + '\n')
-output_file.write('async-await: ' + str(async_await_number) + ' ' + str(100*async_await_number/total) + '\n')
-output_file.write('events: ' + str(events_number) + ' ' + str(100*events_number/total) + '\n')
-output_file.write('promises: ' + str(promises_number) + ' ' + str(100*promises_number/total) + '\n')
-output_file.write('callbacks: ' + str(callbacks_number) + ' ' + str(100*callbacks_number/total) + '\n')
 
-output_file.write('--------------------------------------' + '\n')
+labels = ['try_catch', 'async_await', 'events', 'promises', 'callbacks']
+data = {
+    'mech': labels,
+    'total_lines': [
+        100*try_catch_lines/total_lines,
+        100*async_await_lines/total_lines,
+        100*events_lines/total_lines,
+        100*promises_lines/total_lines,
+        100*callbacks_lines/total_lines,
+        # total_lines
+    ],
+    'total_lines_code_handlers': [
+        100*try_catch_lines/error_handling_total_lines,
+        100*async_await_lines/error_handling_total_lines,
+        100*events_lines/error_handling_total_lines,
+        100*promises_lines/error_handling_total_lines,
+        100*callbacks_lines/error_handling_total_lines,
+        # error_handling_total_lines
+    ],
+    'constructions': [
+        100*try_catch_number/total,
+        100*async_await_number/total,
+        100*events_number/total,
+        100*promises_number/total,
+        100*callbacks_number/total,
+        # total
+    ],
+    'number_handlers': [
+        try_catch_number,
+        async_await_number,
+        events_number,
+        promises_number,
+        callbacks_number
+    ]
+}
+df = pd.DataFrame(data=data)
+print(config.DATA['result'])
+
+df.to_csv(config.DATA['result_rq_1_1'] + 'result-rq1-1.csv')
+
+piechart.plot_pie_chart(data=df['constructions'], labels=labels)
+piechart.donut(df['constructions'], labels=labels)
+piechart.piechart_legend(df['constructions'], df['mech'])
+
+
 
 # print('----')
 #
