@@ -162,9 +162,14 @@ data2 = {
                        ['eventsNumberOfEventOnEmptyFunctions', 'eventsNumberOfEventOnceEmptyFunctions']),
         get_percentage(df, ['callbacksNumberOfCallbackErrorFunctions'], ['callbacksNumberOfEmptyCallbacks'])
     ],
-    # 'logging': [
-    #
-    # ],
+    'logging': [
+        get_percentage(df, ['tryCatchNumberOfCatches'], ['tryCatchNumberOfCatchesWithUniqueConsole']),
+        get_percentage(df, ['promiseNumberOfPromiseCatches'], ['promiseNumberOfCatchesWithUniqueConsole']),
+        get_percentage(df, ['asyncAwaitNumberOfCatches'], ['asyncAwaitNumberOfCatchesWithUniqueConsole']),
+        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'],
+                       ['eventsNumberOfEventOnWithUniqueConsole', 'eventsNumberOfEventOnceWithUniqueConsole']),
+        get_percentage(df, ['callbacksNumberOfCallbackErrorFunctions'], ['callbacksNumberOfFunctionsWithUniqueConsole'])
+    ],
     'no_usage_param': [ # No usage of error parameter per total handlers (%)
         get_percentage(df, ['tryCatchNumberOfCatches'], ['tryCatchNumberOfCatchesNoUsageOfErrorArgument']),
         get_percentage(df, ['promiseNumberOfPromiseCatches'], ['promiseNumberOfFunctionsOnCatchesNoUsageOfErrorArgument']),
@@ -184,50 +189,177 @@ data2 = {
         get_percentage(df, ['tryCatchNumberOfCatches'], ['tryCatchNumberOfCatchesThatThrowsLiteral']),
         get_percentage(df, ['promiseNumberOfPromiseCatches'], ['promiseNumberOfCatchesThatThrowsLiteral']),
         get_percentage(df, ['asyncAwaitNumberOfCatches'], ['asyncAwaitNumberOfHandlersThatThrowsLiteral']),
-        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'], ['eventsNumberOfHandlersThatThrowsLiteral']),
+        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'],
+                       ['eventsNumberOfHandlersThatThrowsLiteral']),
         get_percentage(df, ['callbacksNumberOfCallbackErrorFunctions'], ['callbacksNumberOfHandlersThatThrowsLiteral'])
     ],
     'throws_literal_only': [
         get_percentage(df, ['tryCatchNumberOfCatches'], ['tryCatchNumberOfCatchesThatThrowsLiteralOnly']),
         get_percentage(df, ['promiseNumberOfPromiseCatches'], ['promiseNumberOfCatchesThatThrowsLiteralOnly']),
         get_percentage(df, ['asyncAwaitNumberOfCatches'], ['asyncAwaitNumberOfHandlersThatThrowsLiteralOnly']),
-        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'], ['eventsNumberOfHandlersThatThrowsLiteralOnly']),
+        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'],
+                       ['eventsNumberOfHandlersThatThrowsLiteralOnly']),
         get_percentage(df, ['callbacksNumberOfCallbackErrorFunctions'], ['callbacksNumberOfHandlersThatThrowsLiteralOnly'])
     ],
     'throws_undefined': [
         get_percentage(df, ['tryCatchNumberOfCatches'], ['tryCatchNumberOfCatchesThatThrowsUndefined']),
         get_percentage(df, ['promiseNumberOfPromiseCatches'], ['promiseNumberOfCatchesThatThrowsUndefined']),
         get_percentage(df, ['asyncAwaitNumberOfCatches'], ['asyncAwaitNumberOfHandlersThatThrowsUndefined']),
-        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'], ['eventsNumberOfHandlersThatThrowsUndefined']),
+        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'],
+                       ['eventsNumberOfHandlersThatThrowsUndefined']),
         get_percentage(df, ['callbacksNumberOfCallbackErrorFunctions'], ['callbacksNumberOfHandlersThatThrowsUndefined'])
     ],
     'throws_undefined_only': [
         get_percentage(df, ['tryCatchNumberOfCatches'], ['tryCatchNumberOfCatchesThatThrowsUndefinedOnly']),
         get_percentage(df, ['promiseNumberOfPromiseCatches'], ['promiseNumberOfCatchesThatThrowsUndefinedOnly']),
         get_percentage(df, ['asyncAwaitNumberOfCatches'], ['asyncAwaitNumberOfHandlersThatThrowsUndefinedOnly']),
-        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'], ['eventsNumberOfHandlersThatThrowsUndefinedOnly']),
+        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'],
+                       ['eventsNumberOfHandlersThatThrowsUndefinedOnly']),
         get_percentage(df, ['callbacksNumberOfCallbackErrorFunctions'], ['callbacksNumberOfHandlersThatThrowsUndefinedOnly'])
     ],
     'throws_null': [
         get_percentage(df, ['tryCatchNumberOfCatches'], ['tryCatchNumberOfCatchesThatThrowsNull']),
         get_percentage(df, ['promiseNumberOfPromiseCatches'], ['promiseNumberOfCatchesThatThrowsNull']),
         get_percentage(df, ['asyncAwaitNumberOfCatches'], ['asyncAwaitNumberOfHandlersThatThrowsNull']),
-        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'], ['eventsNumberOfHandlersThatThrowsNull']),
+        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'],
+                       ['eventsNumberOfHandlersThatThrowsNull']),
         get_percentage(df, ['callbacksNumberOfCallbackErrorFunctions'], ['callbacksNumberOfHandlersThatThrowsNull'])
     ],
     'throws_null_only': [
         get_percentage(df, ['tryCatchNumberOfCatches'], ['tryCatchNumberOfCatchesThatThrowsNullOnly']),
         get_percentage(df, ['promiseNumberOfPromiseCatches'], ['promiseNumberOfCatchesThatThrowsNullOnly']),
         get_percentage(df, ['asyncAwaitNumberOfCatches'], ['asyncAwaitNumberOfHandlersThatThrowsNullOnly']),
-        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'], ['eventsNumberOfHandlersThatThrowsNullOnly']),
+        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'],
+                       ['eventsNumberOfHandlersThatThrowsNullOnly']),
         get_percentage(df, ['callbacksNumberOfCallbackErrorFunctions'], ['callbacksNumberOfHandlersThatThrowsNullOnly'])
     ],
     'throws_error_object': [
         get_percentage(df, ['tryCatchNumberOfCatches'], ['tryCatchNumberOfCatchesThatThrowsErrorObject']),
         get_percentage(df, ['promiseNumberOfPromiseCatches'], ['promiseNumberOfCatchesThatThrowsErrorObject']),
         get_percentage(df, ['asyncAwaitNumberOfCatches'], ['asyncAwaitNumberOfHandlersThatThrowsErrorObject']),
-        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'], ['eventsNumberOfHandlersThatThrowsErrorObject']),
+        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'],
+                       ['eventsNumberOfHandlersThatThrowsErrorObject']),
         get_percentage(df, ['callbacksNumberOfCallbackErrorFunctions'], ['callbacksNumberOfHandlersThatThrowsErrorObject'])
+    ],
+    'rethrows': [
+        get_percentage(df, ['tryCatchNumberOfCatches'], ['tryCatchNumberOfCatchesRethrows']),
+        get_percentage(df, ['promiseNumberOfPromiseCatches'], ['promiseNumberOfCatchesRethrows']),
+        get_percentage(df, ['asyncAwaitNumberOfCatches'], ['asyncAwaitNumberOfHandlersRethrows']),
+        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'],
+                       ['eventsNumberOfHandlersRethrows']),
+        get_percentage(df, ['callbacksNumberOfCallbackErrorFunctions'], ['callbacksNumberOfHandlersRethrows'])
+    ],
+    'rethrows_only': [
+        get_percentage(df, ['tryCatchNumberOfCatches'], ['tryCatchNumberOfCatchesThatRethrows']),
+        get_percentage(df, ['promiseNumberOfPromiseCatches'], ['promiseNumberOfCatchesThatRethrows']),
+        get_percentage(df, ['asyncAwaitNumberOfCatches'], ['asyncAwaitNumberOfHandlersThatRethrows']),
+        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'],
+                       ['eventsNumberOfHandlersThatRethrows']),
+        get_percentage(df, ['callbacksNumberOfCallbackErrorFunctions'], ['callbacksNumberOfHandlersThatRethrows'])
+    ],
+    'returns': [
+        get_percentage(df, ['tryCatchNumberOfCatches'], ['tryCatchNumberOfCatchesReturns']),
+        get_percentage(df, ['promiseNumberOfPromiseCatches'], ['promiseNumberOfCatchesReturns']),
+        get_percentage(df, ['asyncAwaitNumberOfCatches'], ['asyncAwaitNumberOfHandlersReturns']),
+        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'],
+                       ['eventsNumberOfHandlersReturns']),
+        get_percentage(df, ['callbacksNumberOfCallbackErrorFunctions'], ['callbacksNumberOfHandlersReturns'])
+    ],
+    'returns_literal': [
+        get_percentage(df, ['tryCatchNumberOfCatches'], ['tryCatchNumberOfCatchesReturnsLiteral']),
+        get_percentage(df, ['promiseNumberOfPromiseCatches'], ['promiseNumberOfCatchesReturnsLiteral']),
+        get_percentage(df, ['asyncAwaitNumberOfCatches'], ['asyncAwaitNumberOfHandlersReturnsLiteral']),
+        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'],
+                       ['eventsNumberOfHandlersReturnsLiteral']),
+        get_percentage(df, ['callbacksNumberOfCallbackErrorFunctions'], ['callbacksNumberOfHandlersReturnsLiteral'])
+    ],
+    'returns_error_object': [
+        get_percentage(df, ['tryCatchNumberOfCatches'], ['tryCatchNumberOfCatchesReturnsErrorObject']),
+        get_percentage(df, ['promiseNumberOfPromiseCatches'], ['promiseNumberOfCatchesReturnsErrorObject']),
+        get_percentage(df, ['asyncAwaitNumberOfCatches'], ['asyncAwaitNumberOfHandlersReturnsErrorObject']),
+        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'],
+                       ['eventsNumberOfHandlersReturnsErrorObject']),
+        get_percentage(df, ['callbacksNumberOfCallbackErrorFunctions'], ['callbacksNumberOfHandlersReturnsErrorObject'])
+    ],
+    'returns_only': [
+        get_percentage(df, ['tryCatchNumberOfCatches'], ['tryCatchNumberOfCatchesReturns']),
+        get_percentage(df, ['promiseNumberOfPromiseCatches'], ['promiseNumberOfCatchesReturns']),
+        get_percentage(df, ['asyncAwaitNumberOfCatches'], ['asyncAwaitNumberOfHandlersReturns']),
+        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'],
+                       ['eventsNumberOfHandlersReturns']),
+        get_percentage(df, ['callbacksNumberOfCallbackErrorFunctions'], ['callbacksNumberOfHandlersReturns'])
+    ],
+    'returns_literal_only': [
+        get_percentage(df, ['tryCatchNumberOfCatches'], ['tryCatchNumberOfCatchesThatReturnsLiteral']),
+        get_percentage(df, ['promiseNumberOfPromiseCatches'], ['promiseNumberOfCatchesThatReturnsLiteral']),
+        get_percentage(df, ['asyncAwaitNumberOfCatches'], ['asyncAwaitNumberOfHandlersThatReturnsLiteral']),
+        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'],
+                       ['eventsNumberOfHandlersThatReturnsLiteral']),
+        get_percentage(df, ['callbacksNumberOfCallbackErrorFunctions'], ['callbacksNumberOfHandlersThatReturnsLiteral'])
+    ],
+    'returns_undefined_only': [
+        get_percentage(df, ['tryCatchNumberOfCatches'], ['tryCatchNumberOfCatchesThatReturnsUndefined']),
+        get_percentage(df, ['promiseNumberOfPromiseCatches'], ['promiseNumberOfCatchesThatReturnsUndefined']),
+        get_percentage(df, ['asyncAwaitNumberOfCatches'], ['asyncAwaitNumberOfHandlersThatReturnsUndefined']),
+        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'],
+                       ['eventsNumberOfHandlersThatReturnsUndefined']),
+        get_percentage(df, ['callbacksNumberOfCallbackErrorFunctions'], ['callbacksNumberOfHandlersThatReturnsUndefined'])
+    ],
+    'returns_null_only': [
+        get_percentage(df, ['tryCatchNumberOfCatches'], ['tryCatchNumberOfCatchesThatReturnsNull']),
+        get_percentage(df, ['promiseNumberOfPromiseCatches'], ['promiseNumberOfCatchesThatReturnsNull']),
+        get_percentage(df, ['asyncAwaitNumberOfCatches'], ['asyncAwaitNumberOfHandlersThatReturnsNull']),
+        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'],
+                       ['eventsNumberOfHandlersThatReturnsNull']),
+        get_percentage(df, ['callbacksNumberOfCallbackErrorFunctions'], ['callbacksNumberOfHandlersThatReturnsNull'])
+    ],
+    'returns_error_object_only': [
+        get_percentage(df, ['tryCatchNumberOfCatches'], ['tryCatchNumberOfCatchesThatReturnsErrorObject']),
+        get_percentage(df, ['promiseNumberOfPromiseCatches'], ['promiseNumberOfCatchesThatReturnsErrorObject']),
+        get_percentage(df, ['asyncAwaitNumberOfCatches'], ['asyncAwaitNumberOfHandlersThatReturnsErrorObject']),
+        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'],
+                       ['eventsNumberOfHandlersThatReturnsErrorObject']),
+        get_percentage(df, ['callbacksNumberOfCallbackErrorFunctions'], ['callbacksNumberOfHandlersThatReturnsErrorObject'])
+    ],
+    'rereturn_only': [
+        get_percentage(df, ['tryCatchNumberOfCatches'], ['tryCatchNumberOfCatchesThatRereturns']),
+        get_percentage(df, ['promiseNumberOfPromiseCatches'], ['promiseNumberOfCatchesThatRereturns']),
+        get_percentage(df, ['asyncAwaitNumberOfCatches'], ['asyncAwaitNumberOfHandlersThatRereturns']),
+        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'],
+                       ['eventsNumberOfHandlersThatRereturns']),
+        get_percentage(df, ['callbacksNumberOfCallbackErrorFunctions'], ['callbacksNumberOfHandlersThatRereturns'])
+    ],
+    'continues': [
+        get_percentage(df, ['tryCatchNumberOfCatches'], ['tryCatchNumberOfCatchesContinues']),
+        get_percentage(df, ['promiseNumberOfPromiseCatches'], ['promiseNumberOfCatchesContinues']),
+        get_percentage(df, ['asyncAwaitNumberOfCatches'], ['asyncAwaitNumberOfHandlersContinues']),
+        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'],
+                       ['eventsNumberOfHandlersContinues']),
+        get_percentage(df, ['callbacksNumberOfCallbackErrorFunctions'], ['callbacksNumberOfHandlersContinues'])
+    ],
+    'continues_only': [
+        get_percentage(df, ['tryCatchNumberOfCatches'], ['tryCatchNumberOfCatchesThatContinues']),
+        get_percentage(df, ['promiseNumberOfPromiseCatches'], ['promiseNumberOfCatchesThatContinues']),
+        get_percentage(df, ['asyncAwaitNumberOfCatches'], ['asyncAwaitNumberOfHandlersThatContinues']),
+        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'],
+                       ['eventsNumberOfHandlersThatContinues']),
+        get_percentage(df, ['callbacksNumberOfCallbackErrorFunctions'], ['callbacksNumberOfHandlersThatContinues'])
+    ],
+    'breaks': [
+        get_percentage(df, ['tryCatchNumberOfCatches'], ['tryCatchNumberOfCatchesBreaks']),
+        get_percentage(df, ['promiseNumberOfPromiseCatches'], ['promiseNumberOfCatchesBreaks']),
+        get_percentage(df, ['asyncAwaitNumberOfCatches'], ['asyncAwaitNumberOfHandlersBreaks']),
+        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'],
+                       ['eventsNumberOfHandlersBreaks']),
+        get_percentage(df, ['callbacksNumberOfCallbackErrorFunctions'], ['callbacksNumberOfHandlersBreaks'])
+    ],
+    'breaks_only': [
+        get_percentage(df, ['tryCatchNumberOfCatches'], ['tryCatchNumberOfCatchesThatBreaks']),
+        get_percentage(df, ['promiseNumberOfPromiseCatches'], ['promiseNumberOfCatchesThatBreaks']),
+        get_percentage(df, ['asyncAwaitNumberOfCatches'], ['asyncAwaitNumberOfHandlersThatBreaks']),
+        get_percentage(df, ['eventsNumberOfEventMethodsOn', 'eventsNumberOfEventMethodsOnce'],
+                       ['eventsNumberOfHandlersThatBreaks']),
+        get_percentage(df, ['callbacksNumberOfCallbackErrorFunctions'], ['callbacksNumberOfHandlersThatBreaks'])
     ],
     'one_stmt': [  # Logging on console per total handlers (%)
         get_percentage(df, ['tryCatchNumberOfCatches'], ['tryCatchNumberOfCatchesWithUniqueConsole']),
@@ -256,6 +388,10 @@ data2 = {
 
     ]
 }
+
+
+print(df['callbacksNumberOfCallbackErrorFunctions'].sum())
+print(df['callbacksNumberOfHandlersReturns'].sum())
 
 file_name_strat = config.DATA['result_rq_1_2'] + 'result-strategies2-rq1-2.csv'
 df_strategies2 = pd.DataFrame(data=data2)
