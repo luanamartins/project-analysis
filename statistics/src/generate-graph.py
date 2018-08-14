@@ -1,6 +1,6 @@
 import pandas as pd
 import seaborn as sns
-import config
+import statistics.src.config as config
 
 # def save_vioplot():
 #     sns.set_style("whitegrid")
@@ -43,8 +43,8 @@ def save_vioplot():
     sns.set_style("whitegrid")
 
     # tips = sns.load_dataset("tips")
-    client_df = pd.read_csv(config.DATA['result'] + 'result-repo-client.csv')
-    server_df = pd.read_csv(config.DATA['result'] + 'result-repo-server.csv')
+    client_df = pd.read_csv(config.RESULT + 'result-repo-client.csv')
+    server_df = pd.read_csv(config.RESULT + 'result-repo-server.csv')
     set = pd.concat([client_df, server_df])
     # print(set)
     n_df = build_dataset(set)

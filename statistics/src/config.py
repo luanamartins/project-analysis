@@ -1,7 +1,10 @@
-DATA = {
-    'result': '',
-    'extractMetricsResultDir': '',
-    'extractMetricsRepoDir': '',
-    'statisticDataDir': '',
-    'statisticResultDir': ''
-}
+
+RESULT = ''
+RESULT_RQ_1_1 = ''
+RESULT_RQ_1_2 = ''
+RESULT_RQ_2 = ''
+RESULT_INFO = ''
+EXTRACT_METRICS_RESULT_DIR = ''
+EXTRACT_METRICS_SRC = ''
+EXTRACT_METRICS_REPO_DIR = ''
+STATS_SRC_PATH = ''

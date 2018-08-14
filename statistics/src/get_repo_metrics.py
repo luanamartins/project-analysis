@@ -1,7 +1,7 @@
 import pandas as pd
 import glob
 import os
-import config
+import statistics.src.config as config
 import json
 
 
@@ -22,9 +22,9 @@ def group_by_repo(repo_filename, folder):
     df_total.to_csv(repo_filename)
 
 
-client_folder = config.DATA['result'] + 'client/'
-server_folder = config.DATA['result'] + 'server/'
-json_data = open(config.DATA['extractMetricsSrc'] + 'report-object.json')
+client_folder = config.RESULT + 'client/'
+server_folder = config.RESULT + 'server/'
+json_data = open(config.EXTRACT_METRICS_SRC + 'report-object.json')
 jdata = json.load(json_data)
 
 columns = ['repo']
@@ -34,7 +34,7 @@ for key, value in jdata.items():
 
 print(columns)
 
-client_repo = config.DATA['result'] + 'result-repo-client.csv'
-server_repo = config.DATA['result'] + 'result-repo-server.csv'
-group_by_repo(client_repo, config.DATA['result'] + 'client')
-group_by_repo(server_repo, config.DATA['result'] + 'server')
+client_repo = config.RESULT + 'result-repo-client.csv'
+server_repo = config.RESULT + 'result-repo-server.csv'
+group_by_repo(client_repo, config.RESULT + 'client')
+group_by_repo(server_repo, config.RESULT + 'server')

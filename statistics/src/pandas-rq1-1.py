@@ -1,9 +1,9 @@
 import pandas as pd
-import config
-import viz.piechart as piechart
+import statistics.src.config as config
+import statistics.src.viz.piechart as piechart
 
 
-result_classes = config.DATA['result_info'] + 'result-class.csv'
+result_classes = config.RESULT_INFO + 'result-class.csv'
 df = pd.read_csv(result_classes)
 
 total_lines = df['numberOfLogicalLines'].sum()
@@ -59,9 +59,9 @@ data = {
     ]
 }
 df = pd.DataFrame(data=data)
-print(config.DATA['result'])
+print(config.RESULT)
 
-df.to_csv(config.DATA['result_rq_1_1'] + 'result-rq1-1.csv')
+df.to_csv(config.RESULT_RQ_1_1 + 'result-rq1-1.csv')
 
 piechart.plot_pie_chart(data=df['constructions'], labels=labels)
 piechart.donut(df['constructions'], labels=labels)

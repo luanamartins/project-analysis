@@ -4,10 +4,10 @@ const json2csv = require('json2csv').parse;
 const fileModule = require('./files');
 const config = require('./config.json');
 
-const folder = config['resultsPath'] + 'client/';
+const folder = config['resultsPath'] + 'server/';
 const headerFile = config['retrieveStatsPath'] + 'headers.json';
 const writeResultFilepath = config['resultsPath'] + 'result.csv';
-const writeClassResultFilepath = config['resultsPath'] + 'result-client.csv';
+const writeClassResultFilepath = config['resultsPath'] + 'result-server.csv';
 
 const files = fs.readdirSync(folder);
 const headers = getHeaders();
@@ -17,7 +17,7 @@ run();
 async function run() {
     const repositoriesData = [];
     const classData = getEmptyData();
-    classData['Type class'] = 'Client';
+    classData['Type class'] = 'Server';
     classData['numberOfFiles'] = 0;
 
     for (let file of files) {

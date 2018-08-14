@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-import seaborn as sns; sns.set()
+import seaborn as sns
 import matplotlib.pyplot as plt
 
 import statistics.src.config as config
@@ -19,6 +19,8 @@ def get_number_lines_handlers(df):
     data = [df_callback, df_promise, df_event_on, df_event_once, df_async_await, df_try_catch]
     df = pd.concat(data, ignore_index=True)
 
+    return df
+
 
 def get_number_of_handlers_by_mech(df):
     # Save data on number of catches
@@ -32,6 +34,7 @@ def get_number_of_handlers_by_mech(df):
     # Get number of handlers by mechanism
     # data = [df_async_await, df_try_catch]
     # data = [df_callback, df_promise, df_event_on, df_event_once]
+    # data = [df_callback, df_try_catch]
     data = [df_callback, df_promise, df_event_on, df_event_once, df_async_await, df_try_catch]
 
     df = pd.concat(data, ignore_index=True)
@@ -72,11 +75,11 @@ def get_metrics(df, metric, name):
 
 def get_data():
     # Read client data
-    df_file_client = pd.read_csv(config.DATA['result_info'] + 'result-repo-client.csv')
+    df_file_client = pd.read_csv(config.RESULT_INFO + 'result-repo-client.csv')
     df_client = get_number_of_handlers_by_mech(df_file_client)
 
     # Read server data
-    df_file_server = pd.read_csv(config.DATA['result_info'] + 'result-repo-server.csv')
+    df_file_server = pd.read_csv(config.RESULT_INFO + 'result-repo-server.csv')
     df_server = get_number_of_handlers_by_mech(df_file_server)
 
     # Join all data and set columns
@@ -127,20 +130,15 @@ def save_violinplot(df, image_path, xlabel, ylabel):
 
 # TODO
 def save_lineplot(df, image_path):
-    # df = pd.DataFrame(dict(time=np.arange(500),
-    #                        value=np.random.randn(500).cumsum()))
-    # g = sns.relplot(x="time", y="value", kind="line", data=df)
-    # g.fig.autofmt_xdate()
-
     # Start a new figure
     plt.figure()
 
-    # Set grid style
-    sns.set(style="darkgrid")
+    # Create plot and set labels
+    df = pd.DataFrame(dict(time=np.arange(500), value=np.random.randn(500).cumsum()))
+    sns.relplot(x='time', y='value', kind='line', data=df)
 
-    # Plot figure
-    tips = sns.load_dataset("tips")
-    tips.plot(x="time", y="total_bill")
+    # Set grid style
+    sns.set(style='darkgrid')
 
     # Save figure
     plt.savefig(image_path)
@@ -155,11 +153,11 @@ def remove_outliers(df, name):
     return df_new
 
 
-def outliers_iqr(df, column):
+def remove_outliers_iqr(df, column):
 
     quartile_1, quartile_3 = np.percentile(df[column], [25, 75])
 
-    # Save interquartile range
+    # Save inter quartile range
     iqr = quartile_3 - quartile_1
 
     # Calculate bounds
@@ -175,9 +173,9 @@ def outliers_iqr(df, column):
 df = get_data()
 # df['values'] = df['values'].apply(np.log)
 
-df_removed_outliers = outliers_iqr(df, 'values')
+df_removed_outliers = remove_outliers_iqr(df, 'values')
 
-image_path = config.DATA['stats_src_path'] + 'seaborn/images/'
+image_path = config.STATS_SRC_PATH + 'seaborn/images/'
 
 save_boxplot(df, image_path + 'boxplot.png', 'abstractions', '# of handlers (log scale)')
 save_boxplot(df_removed_outliers, image_path + 'boxplot-without-outliers.png', 'abstractions', '# of handlers (log scale)')
