@@ -38,9 +38,7 @@ def build_dataset(df):
     return pd.Dataframe(row_acc)
 
 
-
 def save_vioplot():
-    sns.set_style("whitegrid")
 
     # tips = sns.load_dataset("tips")
     client_df = pd.read_csv(config.RESULT + 'result-repo-client.csv')
@@ -50,6 +48,4 @@ def save_vioplot():
     n_df = build_dataset(set)
     print(n_df)
 
-    # ax = sns.violinplot(x="error_handling_mec", y="repo", data=n_df, palette="muted")
-    # ax.figure.savefig('output.png')
 save_vioplot()

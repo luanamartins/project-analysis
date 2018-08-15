@@ -129,13 +129,14 @@ def save_violinplot(df, image_path, xlabel, ylabel):
 
 
 # TODO
-def save_lineplot(df, image_path):
+def save_lineplot(df, image_path, xlabel, ylabel):
     # Start a new figure
     plt.figure()
 
     # Create plot and set labels
-    df = pd.DataFrame(dict(time=np.arange(500), value=np.random.randn(500).cumsum()))
-    sns.relplot(x='time', y='value', kind='line', data=df)
+    # df = pd.DataFrame(dict(time=np.arange(500), value=np.random.randn(500).cumsum()))
+    # sns.relplot(x='time', y='value', kind='line', data=df)
+    sns.relplot(x=xlabel, y=ylabel, kind='line', data=df)
 
     # Set grid style
     sns.set(style='darkgrid')
@@ -183,5 +184,5 @@ save_boxplot(df_removed_outliers, image_path + 'boxplot-without-outliers.png', '
 save_violinplot(df, image_path + 'violinplot.png', 'abstractions', '# of handlers (log scale)')
 save_violinplot(df_removed_outliers, image_path + 'violinplot-without-outliers.png', 'abstractions', '# of handlers (log scale)')
 
-save_lineplot(df, image_path + 'lineplot.png')
+save_lineplot(df, image_path + 'lineplot.png', 'types', 'values')
 

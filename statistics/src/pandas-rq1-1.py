@@ -21,7 +21,8 @@ promises_number = df['promiseNumberOfPromiseCatches'].sum()
 callbacks_number = df['callbacksNumberOfCallbackErrorFunctions'].sum()
 
 error_handling_total_lines = try_catch_lines + async_await_lines + events_lines + promises_lines + callbacks_lines
-total = try_catch_number + async_await_number + events_number + promises_number+callbacks_number
+total = try_catch_number + async_await_number + events_number + promises_number + callbacks_number
+
 
 labels = ['try_catch', 'async_await', 'events', 'promises', 'callbacks']
 data = {
@@ -63,9 +64,9 @@ print(config.RESULT)
 
 df.to_csv(config.RESULT_RQ_1_1 + 'result-rq1-1.csv')
 
-piechart.plot_pie_chart(data=df['constructions'], labels=labels)
-piechart.donut(df['constructions'], labels=labels)
-piechart.piechart_legend(df['constructions'], df['mech'])
+piechart.plot_pie_chart(data=df['constructions'], labels=labels, path=config.RESULT_RQ_1_1 + 'piechart.png')
+piechart.donut(df['constructions'], labels=labels, path=config.RESULT_RQ_1_1 + 'donut.png')
+piechart.piechart_legend(df['constructions'], df['mech'], path=config.RESULT_RQ_1_1 + 'piechart_legend.png')
 
 
 
