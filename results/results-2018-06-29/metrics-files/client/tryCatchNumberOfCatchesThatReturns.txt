@@ -1,0 +1,5 @@
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/client/ajenti/ajenti/plugins/codemirror/content/js/codemirror.m.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/client/ajenti/ajenti/plugins/main/content/js/_lib/00_jquery.m.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/client/ajenti/ajenti/plugins/main/content/js/_lib/10_socketio.m.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/client/ajenti/ajenti/plugins/main/content/js/_lib/feedback.m.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/client/angular-starter/config/build-utils.js

@@ -1,0 +1,12 @@
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/atom/spec/project-spec.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/atom/src/atom-environment.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/atom/src/buffered-process.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/atom/src/config-file.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/aws-sdk-js/dist/aws-sdk-core-react-native.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/aws-sdk-js/dist/aws-sdk-react-native.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/aws-sdk-js/dist/aws-sdk.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/aws-sdk-js/lib/request.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/node/test/parallel/test-event-emitter-errors.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/node-mongodb-native/lib/gridfs/grid_store.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/pm2/lib/God/ForkMode.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/sequelize/test/integration/dialects/mssql/connection-manager.test.js

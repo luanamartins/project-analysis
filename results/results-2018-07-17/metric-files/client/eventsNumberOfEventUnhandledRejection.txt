@@ -1,0 +1,10 @@
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/OS.js/src/server/node/server.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/create-react-app/packages/react-scripts/scripts/build.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/create-react-app/packages/react-scripts/scripts/eject.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/create-react-app/packages/react-scripts/scripts/init.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/create-react-app/packages/react-scripts/scripts/start.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/create-react-app/packages/react-scripts/scripts/test.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/hospitalrun-frontend/prod/assets/vendor-d8042eae6c7c66fd59f343eb1b260d51.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/plyr/dist/plyr.polyfilled.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/prettier/scripts/build/build.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/three.js/examples/js/libs/draco/gltf/draco_wasm_wrapper.js

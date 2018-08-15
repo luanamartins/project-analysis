@@ -1,0 +1,5 @@
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/apidoc/template/vendor/prettify/prettify.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/apidoc/template/vendor/prettify/run_prettify.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/example/web-requirejs/require.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/example/web-test-speed/js/highcharts.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/lib/template-web.js

@@ -1,0 +1,11 @@
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/Rocket.Chat/packages/rocketchat-ldap/server/sync.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/brackets/test/thirdparty/jquery.mockjax.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/closure-library/closure/goog/storage/storage.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/openui5/src/sap.ui.core/src/sap/ui/model/analytics/AnalyticalBinding.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/openui5/src/sap.ui.core/src/sap/ui/thirdparty/qunit-2.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/openui5/src/sap.ui.fl/src/sap/ui/fl/registry/ChangeRegistry.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/steal/main.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/steal/src/extension-stack-trace.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/steal/steal-sans-promises.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/steal/steal.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/underscore/test/vendor/qunit.js

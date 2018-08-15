@@ -1,0 +1,15 @@
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/Rocket.Chat/packages/rocketchat-lib/server/lib/interceptDirectReplyEmails.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/Rocket.Chat/packages/rocketchat-user-data-download/server/cronProcessDownloads.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/brackets/src/extensions/default/StaticServer/node/StaticServerDomain.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/create-react-app/packages/react-scripts/scripts/build.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/create-react-app/packages/react-scripts/scripts/eject.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/create-react-app/packages/react-scripts/scripts/init.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/create-react-app/packages/react-scripts/scripts/start.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/create-react-app/packages/react-scripts/scripts/test.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/markdown-here/utils/build.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/meteor/tools/tests/apps/dynamic-import/packages/meteor-phantomjs-tests/server.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/mithril.js/test-utils/tests/test-domMock.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/pdf.js/src/display/api.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/sinon/test/es2015/check-esm-bundle-is-runnable.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/three.js/examples/js/libs/draco/draco_wasm_wrapper.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/three.js/examples/js/libs/draco/gltf/draco_wasm_wrapper.js

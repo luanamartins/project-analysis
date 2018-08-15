@@ -1,0 +1,16 @@
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/OS.js/src/packages/default/MusicPlayer/main.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/OS.js/src/server/node/modules.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/Rocket.Chat/packages/rocketchat-importer-hipchat-enterprise/server/importer.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/Rocket.Chat/packages/rocketchat-ldap/server/ldap.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/Rocket.Chat/packages/rocketchat-oembed/server/server.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/Rocket.Chat/packages/rocketchat-tutum/startup.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/brackets/src/extensibility/node/npm-installer.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/brackets/src/extensibility/node/package-validator.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/hospitalrun-frontend/prod/assets/vendor-d8042eae6c7c66fd59f343eb1b260d51.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/mapbox-gl-js/test/unit/style/style.test.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/meteor/packages/webapp/webapp_server.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/meteor/tools/runners/run-app.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/meteor/tools/runners/run-mongo.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/openui5/src/sap.ui.codeeditor/src/sap/ui/codeeditor/js/ace/ext-language_tools.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/pdf.js/src/display/api.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/pdf.js/test/downloadutils.js

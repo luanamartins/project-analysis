@@ -1,0 +1,6 @@
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/NodeBB/public/vendor/jquery/js/jquery-ui.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/node/deps/v8/test/debugger/debug/regress/regress-crbug-323936.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/node/deps/v8/test/mjsunit/stack-traces.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/node-opencv/examples/matrix-ref-count.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/pouchdb/tests/integration/deps/pouchdb-3.2.0-postfixed.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/pouchdb/tests/integration/deps/pouchdb-3.6.0-postfixed.js

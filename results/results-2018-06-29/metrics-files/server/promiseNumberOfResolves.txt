@@ -1,0 +1,13 @@
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/example/node-include/index.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/example/node-layout/index.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/example/node-layout/nested-block/index.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/lib/compile/adapter/resolve-filename.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/lib/extension.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/lib/precompile.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/lib/template-web.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/src/compile/adapter/resolve-filename.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/src/extension.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/src/precompile.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/test/compile/adapter/loader.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/test/compile/index.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/webpack.config.js

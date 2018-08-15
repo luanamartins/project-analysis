@@ -1,0 +1,3 @@
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/loopback/test/model.application.test.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/nightwatch/lib/runner/global-reporter.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/sequelize/test/integration/model.test.js

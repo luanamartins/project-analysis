@@ -1,0 +1,9 @@
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/UglifyJS2/tools/exit.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/atom/src/main-process/start.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/electron/spec/fixtures/api/mixed-sandbox-app/main.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/electron/spec/fixtures/api/relaunch/main.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/node/test/parallel/test-domain-uncaught-exception.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/node/test/parallel/test-domain-with-abort-on-uncaught-exception.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/node/test/parallel/test-next-tick-errors.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/node/test/parallel/test-timers-immediate-queue-throw.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/node-mongodb-native/test/functional/error_tests.js

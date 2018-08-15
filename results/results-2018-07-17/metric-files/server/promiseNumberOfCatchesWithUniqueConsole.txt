@@ -1,0 +1,8 @@
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/NodeBB/public/src/client/chats.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/docsify/build/build.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/docsify/build/ssr.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/electron/script/ci-release-build.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/iD/modules/services/mapillary.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/immutable-js/resources/bench.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/nightwatch/lib/runner/test-runners/mocha.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/pouchdb/tests/integration/test.close.js

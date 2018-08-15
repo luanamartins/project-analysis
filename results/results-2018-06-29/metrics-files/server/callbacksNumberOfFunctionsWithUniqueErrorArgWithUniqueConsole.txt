@@ -1,0 +1,3 @@
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/lib/compile/adapter/onerror.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/lib/template-web.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/src/compile/adapter/onerror.js

@@ -1,0 +1,1 @@
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/closure-compiler/test/com/google/javascript/jscomp/runtime_tests/polyfill_tests/promise/promise_all_test.js

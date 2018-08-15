@@ -1,0 +1,5 @@
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/apidoc/test/apidoc_test.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/apidoc/test/custom_markdown_parser_test.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/apidoc/test/multi_input_folder_test.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/example/web-requirejs/require.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/lib/template-web.js

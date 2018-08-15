@@ -1,0 +1,16 @@
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/atom/src/task-bootstrap.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/electron/spec/fixtures/api/mixed-sandbox-app/main.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/electron/spec/fixtures/api/relaunch/main.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/electron/spec/fixtures/module/fork_ping.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/electron/spec/fixtures/module/runas.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/mysql/test/unit/connection/test-callback-errors-are-not-caught.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/mysql/test/unit/connection/test-callback-primitive-errors-are-not-caught.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/mysql/test/unit/connection/test-exception-safety.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/nightwatch/lib/runner/process-listener.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/nightwatch/test/src/runner/testRunWithMultipleSources.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/node/test/parallel/test-domain-uncaught-exception.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/node/test/parallel/test-domain-with-abort-on-uncaught-exception.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/node/test/parallel/test-exception-handler2.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/node/test/parallel/test-timers-immediate-queue-throw.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/node-restify/test/plugins/metrics.test.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/node-restify/test/server.test.js

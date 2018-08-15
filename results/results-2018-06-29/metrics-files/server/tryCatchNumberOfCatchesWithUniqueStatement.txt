@@ -1,0 +1,10 @@
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/apidoc/lib/package_info.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/apidoc/template/utils/send_sample_request.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/apidoc/template/vendor/prettify/prettify.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/apidoc/template/vendor/prettify/run_prettify.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/example/web-requirejs/require.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/example/web-test-speed/js/highcharts.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/lib/compile/compiler.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/lib/template-web.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/src/compile/compiler.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/art-template/test/compile/index.js

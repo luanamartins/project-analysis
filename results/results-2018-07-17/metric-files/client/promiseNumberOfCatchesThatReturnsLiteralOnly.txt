@@ -1,0 +1,3 @@
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/hospitalrun-frontend/prod/service-worker-28ddbc7ef7a575da0539a0f05f4bfdae.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/hospitalrun-frontend/vendor/pouchdb-for-sw.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/openui5/src/sap.ui.rta/src/sap/ui/rta/RuntimeAuthoring.js

@@ -1,0 +1,2 @@
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/node/test/parallel/test-vm-module-errors.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/node/test/sequential/test-inspector-ip-detection.js

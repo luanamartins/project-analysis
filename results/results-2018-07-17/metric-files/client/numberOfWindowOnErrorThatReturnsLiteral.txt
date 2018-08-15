@@ -1,0 +1,11 @@
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/JavaScript-Koans/support/qunit.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/backbone/test/vendor/qunit.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/brackets/src/extensions/default/DebugCommands/ErrorNotification.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/closure-library/closure/goog/net/jsonp_test.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/closure-library/closure/goog/testing/asynctestcase.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/engine/tests/qunit/qunit.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/history.js/vendor/qunit/qunit/qunit.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/openui5/src/sap.ui.core/src/sap/ui/thirdparty/qunit.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/openui5/src/sap.ui.core/test/sap/ui/core/qunit/opa/opa5TestFiles/launchers.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/raven-js/test/vendor/tracekit.test.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/reveal.js/test/qunit-1.12.0.js

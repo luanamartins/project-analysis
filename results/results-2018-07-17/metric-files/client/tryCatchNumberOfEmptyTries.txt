@@ -1,0 +1,5 @@
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/babel/packages/babel-preset-es2015/test/fixtures/traceur/Yield/StatementTestGenerator.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/closure-library/closure/goog/editor/field_test.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/closure-library/closure/goog/editor/plugins/undoredo_test.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/prettier/tests/flow/try/abnormals.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/riot/riot.csp.js

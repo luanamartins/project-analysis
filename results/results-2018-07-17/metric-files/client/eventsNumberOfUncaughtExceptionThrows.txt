@@ -1,0 +1,3 @@
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/mithril.js/test-utils/tests/test-domMock.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/three.js/examples/js/libs/draco/draco_wasm_wrapper.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/three.js/examples/js/libs/draco/gltf/draco_wasm_wrapper.js

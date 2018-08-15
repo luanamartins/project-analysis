@@ -1,0 +1,8 @@
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/NodeBB/public/vendor/jquery/js/jquery-ui.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/UglifyJS2/test/compress/ie8.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/UglifyJS2/test/compress/issue-1733.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/UglifyJS2/test/compress/rename.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/aws-sdk-js/test/browser/sample/js/jquery-ui-1.10.1.custom.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/closure-compiler/test/com/google/javascript/jscomp/runtime_tests/generator_test.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/node/deps/v8/test/message/try-catch-finally-no-message.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/node/deps/v8/test/mjsunit/try.js

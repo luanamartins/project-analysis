@@ -1,0 +1,9 @@
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/Semantic-UI/tasks/admin/components/update.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/Semantic-UI/tasks/admin/distributions/update.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/hospitalrun-frontend/app/adapters/application.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/mapbox-gl-js/test/unit/style/style.test.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/mapbox-gl-js/test/unit/ui/map.test.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/meteor/tools/runners/run-app.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/pdf.js/src/display/api.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/prettier/tests/flow/node_tests/stream/stream.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/zeroclipboard/test/client/api.tests.js

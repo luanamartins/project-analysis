@@ -1,0 +1,1 @@
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/openui5/src/sap.ui.core/test/sap/ui/core/qunit/ODataAnnotationsV2Test.qunit.js

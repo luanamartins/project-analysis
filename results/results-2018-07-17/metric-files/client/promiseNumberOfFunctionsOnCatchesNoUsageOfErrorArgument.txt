@@ -1,0 +1,11 @@
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/OS.js/src/client/javascript/dialogs/fileinfo.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/democracyos/lib/api/topic/index.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/meteor/tools/cli/dev-bundle.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/openui5/src/sap.ui.core/test/sap/ui/core/qunit/ODataAnnotationsTest.qunit.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/openui5/src/sap.ui.core/test/sap/ui/core/qunit/ODataAnnotationsV2Test.qunit.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/openui5/src/sap.ui.core/test/sap/ui/core/qunit/component/Component.qunit.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/openui5/src/sap.ui.dt/test/sap/ui/dt/qunit/DesignTime.qunit.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/openui5/src/sap.ui.rta/src/sap/ui/rta/RuntimeAuthoring.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/pdf.js/src/core/evaluator.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/pdf.js/test/unit/api_spec.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/steal/src/base/base_test.js

@@ -1,0 +1,7 @@
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/mysql/test/unit/pool/test-connection-release-after-error.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/mysql/test/unit/pool/test-query-end-after-error.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/mysql/test/unit/query/test-query-end-after-error.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/node/deps/npm/test/tap/00-check-mock-dep.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/node/test/parallel/test-repl-pretty-custom-stack.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/node/test/sequential/test-fs-readfile-tostring-fail.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/server/sequelize/test/support.js

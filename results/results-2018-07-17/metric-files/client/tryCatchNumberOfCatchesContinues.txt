@@ -1,0 +1,12 @@
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/Rocket.Chat/packages/rocketchat-importer-csv/server/importer.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/closure-library/closure/goog/debug/enhanceerror_test.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/closure-library/closure/goog/dom/browserrange/ierange.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/closure-library/closure/goog/transpile.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/hospitalrun-frontend/prod/assets/vendor-d8042eae6c7c66fd59f343eb1b260d51.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/meteor/packages/shell-server/shell-server.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/meteor/tools/meteor-services/auth.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/meteor/tools/tool-testing/test-utils.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/openui5/src/sap.ui.core/src/sap/ui/core/Component.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/openui5/src/sap.ui.table/src/sap/ui/table/Column.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/pdf.js/src/core/cmap.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/steal/ext/babel.js

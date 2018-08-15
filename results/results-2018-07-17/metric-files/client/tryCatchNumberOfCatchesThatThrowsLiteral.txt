@@ -1,0 +1,4 @@
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/babel/packages/babel-preset-es2015/test/fixtures/traceur/Yield/ThrowInCatch.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/babel/packages/babel-preset-es2015/test/fixtures/traceur/Yield/TryCatchGenerator.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/brackets/src/extensions/default/JavaScriptQuickEdit/unittest-files/jquery-ui/ui/jquery.ui.datepicker.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/openui5/src/sap.ui.core/src/sap/ui/thirdparty/jqueryui/jquery-ui-datepicker.js

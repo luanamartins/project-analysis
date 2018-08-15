@@ -1,0 +1,1 @@
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/OS.js/src/templates/distro/electron/main.js

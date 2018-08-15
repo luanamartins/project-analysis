@@ -1,0 +1,2 @@
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/apidoc/template/vendor/prettify/prettify.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/server/apidoc/template/vendor/prettify/run_prettify.js

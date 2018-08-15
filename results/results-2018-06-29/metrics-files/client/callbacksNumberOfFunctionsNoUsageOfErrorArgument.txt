@@ -1,0 +1,3 @@
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/client/ajenti/ajenti/plugins/main/content/js/_lib/00_jquery.m.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/client/ajenti/ajenti/plugins/main/content/js/_lib/01_jquery.ui.m.js
+/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo-test/client/ajenti/ajenti/plugins/main/content/js/_lib/10_select2.m.js

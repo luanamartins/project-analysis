@@ -1,0 +1,3 @@
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/babel/packages/babel-plugin-proposal-async-generator-functions/test/fixtures/for-await/async-function-no-transform/output.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/babel/packages/babel-preset-es2015/test/fixtures/traceur/AsyncFunctions/Finally.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/babel/packages/babel-preset-es2015/test/fixtures/traceur/AsyncFunctions/Finally2.js

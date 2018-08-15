@@ -1,0 +1,11 @@
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/JavaScript-Load-Image/test/vendor/mocha.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/OS.js/src/server/node/server.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/Rocket.Chat/packages/rocketchat-error-handler/server/lib/RocketChat.ErrorHandler.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/Rocket.Chat/packages/rocketchat-lib/server/lib/bugsnag.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/hospitalrun-frontend/ember-electron/main.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/markdown-here/src/common/test/mocha.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/mithril.js/test-utils/tests/test-domMock.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/mousetrap/tests/libs/mocha-1.9.0.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/svg.js/spec/lib/jasmine-2.6.0/jasmine.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/three.js/examples/js/libs/draco/draco_wasm_wrapper.js
+/home/local/CIN/lms7/project/extract-metrics/data/repo/client/three.js/examples/js/libs/draco/gltf/draco_wasm_wrapper.js
