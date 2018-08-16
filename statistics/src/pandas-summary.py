@@ -63,6 +63,9 @@ def list_metrics():
 client_repo = config.RESULT_SUMMARY + 'result-repo-client.csv'
 server_repo = config.RESULT_SUMMARY + 'result-repo-server.csv'
 
+# df_client = pd.read_csv(client_repo)
+# df_server = pd.read_csv(server_repo)
+
 df_client = group_by_repo(config.RESULT + 'client')
 df_client.to_csv(client_repo)
 
@@ -80,3 +83,17 @@ df_subject_systems_data = {
 
 df_subject_systems = pd.DataFrame(data=df_subject_systems_data)
 df_subject_systems.to_csv(config.RESULT_SUMMARY + 'result-subject-systems.csv')
+
+
+df_class_client = df_client.sum()
+df_class_client['repo'] = 'Client'
+
+df_class_server = df_server.sum()
+df_class_server['repo'] = 'Server'
+
+df_class = pd.concat([df_class_client, df_class_server], axis=1, sort=False)
+df_class = df_class.transpose()
+df_class = df_class.reindex(columns=['repo', 'numberOfLogicalLines', 'total_files'] + list(df_class.columns[:-3]))
+df_class.set_index('repo')
+
+df_class.to_csv(config.RESULT_SUMMARY + 'result-class.csv')
