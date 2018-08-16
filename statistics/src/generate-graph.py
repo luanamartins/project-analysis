@@ -35,7 +35,7 @@ def build_dataset(df):
         })
     row_acc = []
     df.apply(do, args=(row_acc))
-    return pd.Dataframe(row_acc)
+    return pd.DataFrame(row_acc)
 
 
 def save_vioplot():
