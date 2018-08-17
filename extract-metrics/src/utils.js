@@ -335,6 +335,18 @@ function getEmptyRepoObject() {
     return jsonfile.readFileSync(jsonFilepath);
 }
 
+function getMetricsOnFileObject() {
+    const repoObject = getEmptyRepoObject();
+    const metrics = listPropertiesOf(repoObject);
+    const result = {};
+
+    metrics.forEach((metric) => {
+        result[metric] = [];
+    });
+
+    return result;
+}
+
 function calculateIntersections(startList, endList) {
     const startSize = startList.length;
     const endSize = endList.length;
@@ -519,5 +531,6 @@ module.exports = {
     numberOfErrorObjects,
     isNotThrowingErrorArg,
     isAlertCallExpression,
-    hasErrorReassignment
+    hasErrorReassignment,
+    getMetricsOnFileObject
 };

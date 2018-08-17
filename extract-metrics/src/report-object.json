@@ -27,12 +27,12 @@
   "numberOfWindowAddEventListenerLines": 0,
   "numberOfWindowAddEventListenerEmptyHandler": 0,
   "numberOfWindowAddEventListenerNoUsageOfErrorArgument": 0,
-  "numberOfWindowAddEventListenerThatThrows": 0,
-  "numberOfWindowAddEventListenerRethrows": 0,
-  "numberOfWindowAddEventListenerThatRethrows": 0,
   "numberOfWindowAddEventListenerUniqueStatement": 0,
   "numberOfWindowAddEventListenerUniqueConsole": 0,
   "numberOfWindowAddEventListenerThrows": 0,
+  "numberOfWindowAddEventListenerThatThrows": 0,
+  "numberOfWindowAddEventListenerRethrows": 0,
+  "numberOfWindowAddEventListenerThatRethrows": 0,
   "numberOfWindowAddEventListenerReturns": 0,
   "numberOfWindowAddEventListenerThatReturns": 0,
   "numberOfWindowAddEventListenerThatReturnsLiteral": 0,
@@ -318,7 +318,6 @@
   "callbacksNumberOfHandlersThatContinues": 0,
 
   "callbacksNumberOfHandlersBreaks": 0,
-
 
   "callbacksNumberOfHandlersThatBreaks": 0,
   "callbacksNumberOfHandlersBreaksOnly": 0,

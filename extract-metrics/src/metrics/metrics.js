@@ -91,6 +91,8 @@ function extractMetricsForFilepath(repoObject, filepath) {
 
     getMetrics(ast, filepath, repoObject);
 
+
+
     calculateArrayLines(repoObject);
 
     strictModeModule.fixStrictMode(repoObject);
@@ -133,7 +135,7 @@ function executeBabelAndUglify(filepath) {
     return removeEmptyLines(result.code);
 }
 
-function handleMetrics(files) {
+function handleMetrics(files, saveObject) {
     let metrics = [];
     const failedFiles = [];
     if (files) {
@@ -143,6 +145,7 @@ function handleMetrics(files) {
                 console.log(i++ + ': ' + filepath);
                 const repoObject = utils.getEmptyRepoObject();
                 metrics.push(extractMetricsForFilepath(repoObject, filepath));
+                saveMetricsOnArray(repoObject, saveObject, filepath);
             } catch (err) {
                 console.log(err);
                 failedFiles.push(filepath);
@@ -153,6 +156,16 @@ function handleMetrics(files) {
         'metrics': metrics,
         'failedFiles': failedFiles
     };
+}
+
+
+function saveMetricsOnArray(repoObject, saveObject, filepath) {
+    const metrics = utils.listPropertiesOf(repoObject);
+    metrics.forEach((metric) => {
+        if(repoObject[metric] > 0) {
+            saveObject[metric].push(filepath);
+        }
+    });
 }
 
 function getMetrics(ast, filepath, reportObject) {
