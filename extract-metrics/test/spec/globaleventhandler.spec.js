@@ -142,4 +142,17 @@ describe("Global event handler tests", function() {
 
     });
 
+    it("assert08", function() {
+        const filename = suiteCasePath + 'globaleventhandler8.js';
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
+
+        const metricsObject = data.metrics[0];
+
+        assert.equal(metricsObject.numberOfWindowOnErrorReassigning, 2);
+        assert.equal(metricsObject.numberOfWindowAddEventListenerReassigning, 2);
+        assert.equal(metricsObject.numberOfElementOnErrorReassigning, 2);
+
+    });
+
 });

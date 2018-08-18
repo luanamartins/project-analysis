@@ -23,6 +23,11 @@ function handleAnalysis(node, reportObject) {
                     //     reportObject.numberOfWindowOnErrorEmptyHandler++;
                     // }
 
+                    // reasigning an error
+                    if (utils.hasErrorReassignment(rightSideBlockStatement, errors)) {
+                        reportObject.numberOfWindowOnErrorReassigning++;
+                    }
+
                     if (numberOfLines === 0) {
                         reportObject.numberOfWindowOnErrorEmptyHandler++;
                     } else if (!utils.useAnyArguments(rightSideBlockStatement, errors)) {
@@ -96,6 +101,11 @@ function handleAnalysis(node, reportObject) {
                         reportObject.numberOfElementOnErrorOnNoUsageOfErrorArgument++;
                     }
 
+                    // reassigning an error
+                    if (utils.hasErrorReassignment(rightSideBlockStatement, errors)) {
+                        reportObject.numberOfElementOnErrorReassigning++;
+                    }
+
                     if (numberOfLines === 1) {
                         // Handler has only one statement
                         reportObject.numberOfElementOnErrorUniqueStatement++;
@@ -161,13 +171,18 @@ function handleAnalysis(node, reportObject) {
             if (functionHandler && functionHandler.type === 'FunctionExpression') {
 
                 const functionBody = functionHandler.body;
-                const args = utils.getAllErrorArgs(utils.getIdentifiersNames(functionHandler.params));
+                const errors = utils.getAllErrorArgs(utils.getIdentifiersNames(functionHandler.params));
                 const numberOfLines = utils.getNumberOfLines(functionBody);
                 reportObject.numberOfWindowAddEventListenerLines += numberOfLines;
 
+                // reassigning an error
+                if (utils.hasErrorReassignment(functionBody, errors)) {
+                    reportObject.numberOfWindowAddEventListenerReassigning++;
+                }
+
                 if (numberOfLines === 0) {
                     reportObject.numberOfWindowAddEventListenerEmptyHandler++;
-                } else if (!utils.useAnyArguments(functionBody, args)) {
+                } else if (!utils.useAnyArguments(functionBody, errors)) {
                     reportObject.numberOfWindowAddEventListenerNoUsageOfErrorArgument++;
                 }
 
@@ -186,7 +201,7 @@ function handleAnalysis(node, reportObject) {
                 }
 
                 // Number of rethrow an error argument
-                const numberOfRethrowStatements = utils.reuseAnErrorStatements(throwStatements, args);
+                const numberOfRethrowStatements = utils.reuseAnErrorStatements(throwStatements, errors);
                 reportObject.numberOfWindowAddEventListenerRethrows += numberOfRethrowStatements;
 
                 if(numberOfRethrowStatements > 0) {

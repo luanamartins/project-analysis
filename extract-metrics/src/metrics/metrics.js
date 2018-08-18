@@ -91,8 +91,6 @@ function extractMetricsForFilepath(repoObject, filepath) {
 
     getMetrics(ast, filepath, repoObject);
 
-
-
     calculateArrayLines(repoObject);
 
     strictModeModule.fixStrictMode(repoObject);

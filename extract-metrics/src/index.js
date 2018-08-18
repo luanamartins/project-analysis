@@ -117,7 +117,9 @@ function extractMetricsFromFiles(repositoryName, saveObject, options, files, cal
 
 function getFilesFromDirectory(repositoryName, repositoriesDirectory) {
     const repoOutputDirectory = path.join(repositoriesDirectory, repositoryName);
-    const filenames = repoModule.getFilesFromDir(repoOutputDirectory, ['.js'], ['.min.js']);
+    const extensionsToInclude = ['.js'];
+    const extensionsToExclude = ['.min.js'];
+    const filenames = repoModule.getFilesFromDir(repoOutputDirectory, extensionsToInclude, extensionsToExclude);
 
     let files = [];
     filenames.forEach(file => {
