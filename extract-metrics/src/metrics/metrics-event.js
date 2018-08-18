@@ -74,6 +74,10 @@ function handleAnalysis(node, reportObject) {
                         const functionBody = handlerFunction.body;
                         const handleArgs = utils.getIdentifiersNames(handlerFunction.params);
 
+                        if (utils.hasErrorReassignment(functionBody, handleArgs)) {
+                            reportObject.eventsNumberOfUncaughtExceptionReassignment++;
+                        }
+
                         // Number of throws on catches
                         const throwStatements = utils.getStatementsByType(functionBody, 'ThrowStatement');
                         const numberOfThrowStatements = throwStatements.length;
@@ -138,16 +142,29 @@ function handleAnalysis(node, reportObject) {
                         if (returnStatements.length > 0) {
                             // Counts number of returns that uses an error argument (so called rethrow)
                             reportObject.eventsNumberOfHandlersThatReturns++;
+
                             if (utils.hasLiteral(returnStatements)) {
                                 reportObject.eventsNumberOfHandlersThatReturnsLiteral++;
+
+                                if (lines === 1) {
+                                    reportObject.eventsNumberOfHandlersThatReturnsLiteralOnly++;
+                                }
                             }
 
                             if(utils.hasUndefined(returnStatements)) {
                                 reportObject.eventsNumberOfHandlersThatReturnsUndefined++;
+
+                                if (lines === 1) {
+                                    reportObject.eventsNumberOfHandlersThatReturnsUndefinedOnly++;
+                                }
                             }
 
                             if (utils.hasNull(returnStatements)) {
                                 reportObject.eventsNumberOfHandlersThatReturnsNull++;
+
+                                if (lines === 1) {
+                                    reportObject.eventsNumberOfHandlersThatReturnsNullOnly++;
+                                }
                             }
 
                             if (utils.hasErrorObject(returnStatements)) {

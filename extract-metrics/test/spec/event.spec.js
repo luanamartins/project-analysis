@@ -487,4 +487,17 @@ describe("Events tests", function () {
         assert.equal(metricsObject.eventsNumberOfHandlersBreaksOnly, 0);
     });
 
+    it("assert19", function () {
+        const filename = suiteCasePath + "event19.js";
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
+
+        const metricsObject = data.metrics[0];
+
+        assert.equal(metricsObject.eventsNumberOfHandlersThatReturnsLiteralOnly, 2);
+        assert.equal(metricsObject.eventsNumberOfHandlersThatReturnsUndefinedOnly, 1);
+        assert.equal(metricsObject.eventsNumberOfHandlersThatReturnsNullOnly, 1);
+        assert.equal(metricsObject.eventsNumberOfUncaughtExceptionReassignment, 2);
+    });
+
 });
