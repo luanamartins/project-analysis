@@ -321,18 +321,18 @@
   "callbacksNumberOfHandlersReturnsLiteral": 0,
   "callbacksNumberOfHandlersReturnsErrorObject": 0,
   "callbacksNumberOfHandlersThatReturns": 0,
-
-
   "callbacksNumberOfHandlersThatReturnsLiteral": 0,
+  "callbacksNumberOfHandlersThatReturnsLiteralOnly": 0,
   "callbacksNumberOfHandlersThatReturnsUndefined": 0,
+  "callbacksNumberOfHandlersThatReturnsUndefinedOnly": 0,
   "callbacksNumberOfHandlersThatReturnsNull": 0,
+  "callbacksNumberOfHandlersThatReturnsNullOnly": 0,
   "callbacksNumberOfHandlersThatReturnsErrorObject": 0,
   "callbacksNumberOfHandlersThatRereturns": 0,
   "callbacksNumberOfHandlersContinues": 0,
   "callbacksNumberOfHandlersThatContinues": 0,
 
   "callbacksNumberOfHandlersBreaks": 0,
-
   "callbacksNumberOfHandlersThatBreaks": 0,
   "callbacksNumberOfHandlersBreaksOnly": 0,
 

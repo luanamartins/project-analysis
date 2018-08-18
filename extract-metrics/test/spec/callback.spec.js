@@ -253,4 +253,16 @@ describe("Callback tests", function() {
         assert.equal(metricsObject.callbacksNumberOfHandlersBreaksOnly, 0);
 
     });
+
+    it("assert12", function(){
+        const filename = suiteCasePath + 'callback12.js';
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
+
+        const metricsObject = data.metrics[0];
+        assert.equal(metricsObject.callbacksNumberOfHandlersReturnsLiteral, 1);
+        assert.equal(metricsObject.callbacksNumberOfHandlersThatReturnsUndefined, 1);
+        assert.equal(metricsObject.callbacksNumberOfHandlersThatReturnsNull, 1);
+
+    });
 });
