@@ -670,5 +670,16 @@ describe("Try-catch tests", function() {
 
     });
 
+    it("assert18", function() {
+        const filename = suiteCasePath + 'try-catch18.js';
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
+        const metricsObject = data.metrics[0];
+
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatReturnsLiteralOnly, 2);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatReturnsUndefinedOnly, 1);
+        assert.equal(metricsObject.tryCatchNumberOfCatchesThatReturnsNullOnly, 1);
+
+    });
 
 });

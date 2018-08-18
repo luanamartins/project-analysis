@@ -152,14 +152,26 @@ function handleCatchClause(reportObject, catchClause) {
             reportObject.tryCatchNumberOfCatchesThatReturns++;
             if (utils.hasLiteral(returnStatements)) {
                 reportObject.tryCatchNumberOfCatchesThatReturnsLiteral++;
+
+                if (numberOfLines === 1) {
+                    reportObject.tryCatchNumberOfCatchesThatReturnsLiteralOnly++;
+                }
             }
 
             if (utils.hasUndefined(returnStatements)) {
                 reportObject.tryCatchNumberOfCatchesThatReturnsUndefined++;
+
+                if (numberOfLines === 1) {
+                    reportObject.tryCatchNumberOfCatchesThatReturnsUndefinedOnly++;
+                }
             }
 
             if (utils.hasNull(returnStatements)) {
                 reportObject.tryCatchNumberOfCatchesThatReturnsNull++;
+
+                if (numberOfLines === 1) {
+                    reportObject.tryCatchNumberOfCatchesThatReturnsNullOnly++;
+                }
             }
 
             if (utils.hasErrorObject(returnStatements)) {
@@ -167,7 +179,6 @@ function handleCatchClause(reportObject, catchClause) {
             }
 
         }
-
 
         // Counts number of continues
         const continueStatements = utils.getStatementsByType(nodeBody, 'ContinueStatement');
