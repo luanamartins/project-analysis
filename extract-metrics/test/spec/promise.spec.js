@@ -4,11 +4,13 @@ const CONFIG = require("../../config");
 const projectPath = CONFIG["projectPath"];
 const suiteCasePath = CONFIG["dataTestPath"] + "promise/";
 const metricsModule = require(CONFIG["srcPath"] + "metrics/metrics");
+const utilsModule = require(CONFIG["srcPath"] + "utils");
 
 describe("Promises tests", function() {
     it("assert01", function() {
         const filename = suiteCasePath + 'promise1.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -42,7 +44,8 @@ describe("Promises tests", function() {
 
     it("assert02", function() {
         const filename = suiteCasePath + 'promise2.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -76,7 +79,7 @@ describe("Promises tests", function() {
 
     it("assert03", function() {
         const filename = suiteCasePath + 'promise3.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();             const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -110,7 +113,8 @@ describe("Promises tests", function() {
 
     it("assert04", function() {
         const filename = suiteCasePath + 'promise4.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -144,7 +148,8 @@ describe("Promises tests", function() {
 
     it("assert05", function() {
         const filename = suiteCasePath + 'promise5.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -179,7 +184,8 @@ describe("Promises tests", function() {
 
     it("assert06", function() {
         const filename = suiteCasePath + 'promise6.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -213,7 +219,8 @@ describe("Promises tests", function() {
 
     it("assert07", function() {
         const filename = suiteCasePath + 'promise7.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -249,7 +256,8 @@ describe("Promises tests", function() {
 
     it("assert08", function() {
         const filename = suiteCasePath + 'promise8.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -284,7 +292,8 @@ describe("Promises tests", function() {
 
     it("assert09", function() {
         const filename = suiteCasePath + 'promise9.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -318,7 +327,8 @@ describe("Promises tests", function() {
 
     it("assert10", function() {
         const filename = suiteCasePath + 'promise10.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -352,7 +362,8 @@ describe("Promises tests", function() {
 
     it("assert11", function() {
         const filename = suiteCasePath + 'promise11.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -386,7 +397,8 @@ describe("Promises tests", function() {
 
     it("assert12", function() {
         const filename = suiteCasePath + 'promise12.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -420,7 +432,8 @@ describe("Promises tests", function() {
 
     it("assert13", function() {
         const filename = suiteCasePath + 'promise13.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -454,7 +467,8 @@ describe("Promises tests", function() {
 
     it("assert14", function() {
         const filename = suiteCasePath + 'promise14.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -488,7 +502,8 @@ describe("Promises tests", function() {
 
     it("assert15", function() {
         const filename = suiteCasePath + 'promise15.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -522,7 +537,7 @@ describe("Promises tests", function() {
 
     it("assert16", function() {
         const filename = suiteCasePath + 'promise16.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();             const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -557,7 +572,8 @@ describe("Promises tests", function() {
 
     it("assert17", function() {
         const filename = suiteCasePath + 'promise17.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -591,7 +607,8 @@ describe("Promises tests", function() {
 
     it("assert18", function() {
         const filename = suiteCasePath + 'promise18.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -625,7 +642,8 @@ describe("Promises tests", function() {
 
     it("assert19", function() {
         const filename = suiteCasePath + 'promise19.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -659,7 +677,8 @@ describe("Promises tests", function() {
 
     it("assert20", function() {
         const filename = suiteCasePath + 'promise20.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -694,7 +713,7 @@ describe("Promises tests", function() {
 
     it("assert21", function() {
         const filename = suiteCasePath + 'promise21.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();             const data = metricsModule.handleMetrics([filename], saveObject);
         const metricsObject = data.metrics[0];
 
         assert.equal(metricsObject.promiseNumberOfChainingCatches, 2);
@@ -704,7 +723,8 @@ describe("Promises tests", function() {
 
     it("assert22", function() {
         const filename = suiteCasePath + 'promise22.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -738,7 +758,8 @@ describe("Promises tests", function() {
 
     it("assert23", function() {
         const filename = suiteCasePath + 'promise23.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -751,7 +772,8 @@ describe("Promises tests", function() {
 
     it("assert24", function() {
         const filename = suiteCasePath + 'promise24.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -764,7 +786,8 @@ describe("Promises tests", function() {
 
     it("assert25", function() {
         const filename = suiteCasePath + 'promise25.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 

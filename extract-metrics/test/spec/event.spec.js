@@ -4,11 +4,13 @@ const CONFIG = require("../../config");
 const projectPath = CONFIG["projectPath"];
 const suiteCasePath = CONFIG["dataTestPath"] + "event/";
 const metricsModule = require(CONFIG["srcPath"] + "metrics/metrics");
+const utilsModule = require(CONFIG["srcPath"] + "utils");
 
 describe("Events tests", function () {
     it("assert01", function () {
         const filename = suiteCasePath + 'event1.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -37,7 +39,8 @@ describe("Events tests", function () {
 
     it("assert02", function () {
         const filename = suiteCasePath + 'event2.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -66,7 +69,8 @@ describe("Events tests", function () {
 
     it("assert03", function () {
         const filename = suiteCasePath + 'event3.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -95,7 +99,8 @@ describe("Events tests", function () {
 
     it("assert04", function () {
         const filename = suiteCasePath + 'event4.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -127,7 +132,8 @@ describe("Events tests", function () {
 
     it("assert05", function () {
         const filename = suiteCasePath + 'event5.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -156,7 +162,8 @@ describe("Events tests", function () {
 
     it("assert06", function () {
         const filename = suiteCasePath + 'event5.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -185,7 +192,8 @@ describe("Events tests", function () {
 
     it("assert07", function () {
         const filename = suiteCasePath + 'event7.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -214,7 +222,8 @@ describe("Events tests", function () {
 
     it("assert08", function () {
         const filename = suiteCasePath + 'event8.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -243,7 +252,8 @@ describe("Events tests", function () {
 
     it("assert09", function () {
         const filename = suiteCasePath + 'event9.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -272,7 +282,8 @@ describe("Events tests", function () {
 
     it("assert10", function () {
         const filename = suiteCasePath + 'event10.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -301,7 +312,8 @@ describe("Events tests", function () {
 
     it("assert11", function () {
         const filename = suiteCasePath + 'event11.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -330,7 +342,8 @@ describe("Events tests", function () {
 
     it("assert12", function () {
         const filename = suiteCasePath + 'event12.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -359,7 +372,8 @@ describe("Events tests", function () {
 
     it("assert13", function () {
         const filename = suiteCasePath + 'event13.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -388,7 +402,8 @@ describe("Events tests", function () {
 
     it("assert14", function () {
         const filename = suiteCasePath + 'event14.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -402,7 +417,8 @@ describe("Events tests", function () {
 
     it("assert15", function () {
         const filename = suiteCasePath + 'event15.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -416,7 +432,8 @@ describe("Events tests", function () {
 
     it("assert16", function () {
         const filename = suiteCasePath + "event16.js";
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -439,7 +456,8 @@ describe("Events tests", function () {
 
     it("assert17", function () {
         const filename = suiteCasePath + "event17.js";
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -457,7 +475,8 @@ describe("Events tests", function () {
 
     it("assert18", function () {
         const filename = suiteCasePath + "event18.js";
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 

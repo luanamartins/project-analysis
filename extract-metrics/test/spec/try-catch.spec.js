@@ -4,11 +4,13 @@ const CONFIG = require("../../config");
 const projectPath = CONFIG["projectPath"];
 const suiteCasePath = CONFIG["dataTestPath"] + "try-catch/";
 const metricsModule = require(CONFIG["srcPath"] + "metrics/metrics");
+const utilsModule = require(CONFIG["srcPath"] + "utils");
 
 describe("Try-catch tests", function() {
     it("assert01", function() {
         const filename = suiteCasePath + 'try-catch1.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
         const metricsObject = data.metrics[0];
 
         assert.equal(metricsObject.tryCatchNumberOfTries, 1);
@@ -43,7 +45,8 @@ describe("Try-catch tests", function() {
 
     it("assert02", function() {
         const filename = suiteCasePath + 'try-catch2.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
         const metricsObject = data.metrics[0];
 
         assert.equal(metricsObject.tryCatchNumberOfTries, 1);
@@ -77,7 +80,8 @@ describe("Try-catch tests", function() {
     it("assert03", function() {
         const filename = suiteCasePath + 'try-catch3.js';
 
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
         const metricsObject = data.metrics[0];
 
         assert.equal(metricsObject.tryCatchNumberOfTries, 1);
@@ -110,7 +114,8 @@ describe("Try-catch tests", function() {
 
     it("assert04", function() {
         const filename = suiteCasePath + 'try-catch4.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
         const metricsObject = data.metrics[0];
 
         assert.equal(metricsObject.tryCatchNumberOfTries, 1);
@@ -143,7 +148,8 @@ describe("Try-catch tests", function() {
 
     it("TCObjectModel", function() {
         const filename = suiteCasePath + 'ObjectModel.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
         const metricsObject = data.metrics[0];
 
         assert.equal(metricsObject.tryCatchNumberOfTries, 0);
@@ -177,7 +183,8 @@ describe("Try-catch tests", function() {
 
     it("TCTransformationOff", function() {
         const filename = suiteCasePath + 'TransformationOff.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
         const metricsObject = data.metrics[0];
 
         assert.equal(metricsObject.tryCatchNumberOfTries, 0);
@@ -210,7 +217,8 @@ describe("Try-catch tests", function() {
 
     it("TCObject", function() {
         const filename = suiteCasePath + 'Object.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
         const metricsObject = data.metrics[0];
 
         assert.equal(metricsObject.tryCatchNumberOfTries, 0);
@@ -243,7 +251,8 @@ describe("Try-catch tests", function() {
 
     it("TCStatementTestGenerator", function() {
         const filename = suiteCasePath + 'StatementTestGenerator.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
         const metricsObject = data.metrics[0];
 
         assert.equal(metricsObject.tryCatchNumberOfTries, 2);
@@ -276,7 +285,8 @@ describe("Try-catch tests", function() {
 
     it("assert05", function() {
         const filename = suiteCasePath + 'try-catch5.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
         const metricsObject = data.metrics[0];
 
         assert.equal(metricsObject.tryCatchNumberOfTries, 2);
@@ -309,7 +319,8 @@ describe("Try-catch tests", function() {
 
     it("assert06", function() {
         const filename = suiteCasePath + 'try-catch6.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
         const metricsObject = data.metrics[0];
 
         assert.equal(metricsObject.tryCatchNumberOfTries, 1);
@@ -342,7 +353,8 @@ describe("Try-catch tests", function() {
 
     it("assert07", function() {
         const filename = suiteCasePath + 'try-catch7.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
         const metricsObject = data.metrics[0];
 
         assert.equal(metricsObject.tryCatchNumberOfTries, 1);
@@ -375,7 +387,8 @@ describe("Try-catch tests", function() {
 
     it("assert08", function() {
         const filename = suiteCasePath + 'try-catch8.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
         const metricsObject = data.metrics[0];
 
         assert.equal(metricsObject.tryCatchNumberOfTries, 1);
@@ -408,7 +421,8 @@ describe("Try-catch tests", function() {
 
     it("assert09", function() {
         const filename = suiteCasePath + 'try-catch9.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
         const metricsObject = data.metrics[0];
 
         assert.equal(metricsObject.tryCatchNumberOfTries, 1);
@@ -441,7 +455,8 @@ describe("Try-catch tests", function() {
 
     it("assert10", function() {
         const filename = suiteCasePath + 'try-catch10.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
         const metricsObject = data.metrics[0];
 
         assert.equal(metricsObject.tryCatchNumberOfTries, 1);
@@ -474,7 +489,8 @@ describe("Try-catch tests", function() {
 
     it("assert11", function() {
         const filename = suiteCasePath + 'try-catch11.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
         const metricsObject = data.metrics[0];
 
         assert.equal(metricsObject.tryCatchNumberOfTries, 1);
@@ -507,7 +523,8 @@ describe("Try-catch tests", function() {
 
     it("assert12", function() {
         const filename = suiteCasePath + 'try-catch12.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
         const metricsObject = data.metrics[0];
 
         assert.equal(metricsObject.tryCatchNumberOfTries, 2);
@@ -540,7 +557,8 @@ describe("Try-catch tests", function() {
 
     it("assert13", function() {
         const filename = suiteCasePath + 'try-catch13.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
         const metricsObject = data.metrics[0];
 
         assert.equal(metricsObject.tryCatchNumberOfTries, 1);
@@ -573,7 +591,8 @@ describe("Try-catch tests", function() {
 
     it("assert14", function() {
         const filename = suiteCasePath + 'try-catch14.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
         const metricsObject = data.metrics[0];
 
         assert.equal(metricsObject.tryCatchNumberOfTries, 1);
@@ -608,7 +627,8 @@ describe("Try-catch tests", function() {
 
     it("assert15", function() {
         const filename = suiteCasePath + 'try-catch15.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
         const metricsObject = data.metrics[0];
 
         assert.equal(metricsObject.tryCatchNumberOfCatchesNoUsageOfErrorArgument, 1);
@@ -618,7 +638,8 @@ describe("Try-catch tests", function() {
 
     it("assert16", function() {
         const filename = suiteCasePath + 'try-catch16.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
         const metricsObject = data.metrics[0];
 
         assert.equal(metricsObject.tryCatchNumberOfCatchesAlertOnly, 1);
@@ -635,7 +656,8 @@ describe("Try-catch tests", function() {
 
     it("assert17", function() {
         const filename = suiteCasePath + 'try-catch17.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
         const metricsObject = data.metrics[0];
 
         assert.equal(metricsObject.tryCatchNumberOfCatchesReturnsLiteral, 1);

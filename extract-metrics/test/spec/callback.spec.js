@@ -4,11 +4,14 @@ const CONFIG = require("../../config");
 const projectPath = CONFIG["projectPath"];
 const suiteCasePath = CONFIG["dataTestPath"] + "callback/";
 const metricsModule = require(CONFIG["srcPath"] + "metrics/metrics");
+const utilsModule = require(CONFIG["srcPath"] + "utils");
 
 describe("Callback tests", function() {
+
     it("assert01", function() {
         const filename = suiteCasePath + 'callback1.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -29,13 +32,12 @@ describe("Callback tests", function() {
         assert.equal(metricsObject.callbacksNumberOfHandlersBreaks, 0);
 
         assert.equal(metricsObject.callbacksNumberOfLines, 4);
-
-        
     });
 
     it("assert02", function(){
         const filename = suiteCasePath + 'callback2.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -56,13 +58,12 @@ describe("Callback tests", function() {
         assert.equal(metricsObject.callbacksNumberOfHandlersBreaks, 0);
 
         assert.equal(metricsObject.callbacksNumberOfLines, 0);
-
-        
     });
 
     it("assert03", function(){
         const filename = suiteCasePath + 'callback3.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -87,7 +88,8 @@ describe("Callback tests", function() {
 
     it("assert04", function(){
         const filename = suiteCasePath + 'callback4.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -112,7 +114,8 @@ describe("Callback tests", function() {
 
     it("assert05", function(){
         const filename = suiteCasePath + 'callback5.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -137,7 +140,8 @@ describe("Callback tests", function() {
 
     it("assert06", function(){
         const filename = suiteCasePath + 'callback6.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -164,7 +168,8 @@ describe("Callback tests", function() {
 
     it("assert07", function(){
         const filename = suiteCasePath + 'callback7.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -188,7 +193,8 @@ describe("Callback tests", function() {
 
     it("assert08", function(){
         const filename = suiteCasePath + 'callback8.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -202,7 +208,8 @@ describe("Callback tests", function() {
 
     it("assert09", function(){
         const filename = suiteCasePath + 'callback9.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -212,7 +219,8 @@ describe("Callback tests", function() {
 
     it("assert10", function(){
         const filename = suiteCasePath + 'callback10.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -230,7 +238,8 @@ describe("Callback tests", function() {
 
     it("assert11", function(){
         const filename = suiteCasePath + 'callback11.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
         assert.equal(metricsObject.callbacksNumberOfHandlersReturnsLiteral, 1);
@@ -244,6 +253,4 @@ describe("Callback tests", function() {
         assert.equal(metricsObject.callbacksNumberOfHandlersBreaksOnly, 0);
 
     });
-
-
 });

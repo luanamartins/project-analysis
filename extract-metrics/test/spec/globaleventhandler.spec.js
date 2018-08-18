@@ -4,11 +4,13 @@ const CONFIG = require("../../config");
 const projectPath = CONFIG["projectPath"];
 const suiteCasePath = CONFIG["dataTestPath"] + "globaleventhandler/";
 const metricsModule = require(CONFIG["srcPath"] + "metrics/metrics");
+const utilsModule = require(CONFIG["srcPath"] + "utils");
 
 describe("Global event handler tests", function() {
     it("assert01", function() {
         const filename = suiteCasePath + 'globaleventhandler1.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -28,10 +30,11 @@ describe("Global event handler tests", function() {
         assert.equal(metricsObject.numberOfWindowAddEventListenerUniqueConsole, 1);
     });
 
-    it("assert02", function() { 
+    it("assert02", function() {
 
         const filename = suiteCasePath + 'globaleventhandler2.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -56,7 +59,8 @@ describe("Global event handler tests", function() {
 
     it("assert03", function() {
         const filename = suiteCasePath + 'globaleventhandler3.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -81,7 +85,7 @@ describe("Global event handler tests", function() {
 
     it("assert04", function() {
         const filename = suiteCasePath + 'globaleventhandler4.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();             const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -92,7 +96,8 @@ describe("Global event handler tests", function() {
 
     it("assert05", function() {
         const filename = suiteCasePath + 'globaleventhandler5.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -103,7 +108,8 @@ describe("Global event handler tests", function() {
 
     it("assert06", function() {
         const filename = suiteCasePath + 'globaleventhandler6.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -114,7 +120,8 @@ describe("Global event handler tests", function() {
 
     it("assert07", function() {
         const filename = suiteCasePath + 'globaleventhandler7.js';
-        const data = metricsModule.handleMetrics([filename], projectPath);
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
 
         const metricsObject = data.metrics[0];
 
@@ -127,7 +134,7 @@ describe("Global event handler tests", function() {
         assert.equal(metricsObject.numberOfElementOnErrorThatThrows, 0);
         assert.equal(metricsObject.numberOfElementOnErrorRethrows, 0);
         assert.equal(metricsObject.numberOfElementOnErrorThatRethrows, 0);
-        
+
         assert.equal(metricsObject.numberOfWindowAddEventListenerNoUsageOfErrorArgument, 1);
         assert.equal(metricsObject.numberOfWindowAddEventListenerThatThrows, 3);
         assert.equal(metricsObject.numberOfWindowAddEventListenerRethrows, 2);

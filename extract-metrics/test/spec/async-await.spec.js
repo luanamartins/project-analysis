@@ -4,13 +4,15 @@ const CONFIG = require("../../config");
 const projectPath = CONFIG["projectPath"];
 const suiteCasePath = CONFIG["dataTestPath"] + "async-await/";
 const metricsModule = require(CONFIG["srcPath"] + "metrics/metrics");
+const utilsModule = require(CONFIG["srcPath"] + "utils");
 
 describe("Async-await", function () {
 
     describe("Async-await tests", function () {
         it("assert01", function () {
             const filename = suiteCasePath + "async-await1.js";
-            const data = metricsModule.handleMetrics([filename], projectPath);
+            const saveObject = utilsModule.getMetricsOnFileObject();
+            const data = metricsModule.handleMetrics([filename], saveObject);
 
             const metricsObject = data.metrics[0];
 
@@ -42,7 +44,8 @@ describe("Async-await", function () {
 
         it("assert02", function () {
             const filename = suiteCasePath + "async-await2.js";
-            const data = metricsModule.handleMetrics([filename], projectPath);
+            const saveObject = utilsModule.getMetricsOnFileObject();
+            const data = metricsModule.handleMetrics([filename], saveObject);
 
             const metricsObject = data.metrics[0];
 
@@ -72,7 +75,8 @@ describe("Async-await", function () {
 
         it("assert03", function () {
             const filename = suiteCasePath + "async-await3.js";
-            const data = metricsModule.handleMetrics([filename], projectPath);
+            const saveObject = utilsModule.getMetricsOnFileObject();
+            const data = metricsModule.handleMetrics([filename], saveObject);
 
             const metricsObject = data.metrics[0];
 
@@ -99,7 +103,8 @@ describe("Async-await", function () {
 
         it("assert04", function () {
             const filename = suiteCasePath + "async-await4.js";
-            const data = metricsModule.handleMetrics([filename], projectPath);
+            const saveObject = utilsModule.getMetricsOnFileObject();
+            const data = metricsModule.handleMetrics([filename], saveObject);
 
             const metricsObject = data.metrics[0];
 
@@ -126,7 +131,8 @@ describe("Async-await", function () {
 
         it("assert05", function () {
             const filename = suiteCasePath + "async-await5.js";
-            const data = metricsModule.handleMetrics([filename], projectPath);
+            const saveObject = utilsModule.getMetricsOnFileObject();
+            const data = metricsModule.handleMetrics([filename], saveObject);
 
             const metricsObject = data.metrics[0];
 
@@ -154,7 +160,8 @@ describe("Async-await", function () {
 
         it("assert06", function () {
             const filename = suiteCasePath + "async-await6.js";
-            const data = metricsModule.handleMetrics([filename], projectPath);
+            const saveObject = utilsModule.getMetricsOnFileObject();
+            const data = metricsModule.handleMetrics([filename], saveObject);
 
             const metricsObject = data.metrics[0];
 
@@ -182,7 +189,8 @@ describe("Async-await", function () {
 
         it("assert07", function () {
             const filename = suiteCasePath + "async-await7.js";
-            const data = metricsModule.handleMetrics([filename], projectPath);
+            const saveObject = utilsModule.getMetricsOnFileObject();
+            const data = metricsModule.handleMetrics([filename], saveObject);
 
             const metricsObject = data.metrics[0];
 
@@ -210,7 +218,8 @@ describe("Async-await", function () {
 
         it("assert08", function () {
             const filename = suiteCasePath + "async-await8.js";
-            const data = metricsModule.handleMetrics([filename], projectPath);
+            const saveObject = utilsModule.getMetricsOnFileObject();
+            const data = metricsModule.handleMetrics([filename], saveObject);
 
             const metricsObject = data.metrics[0];
 
@@ -238,7 +247,8 @@ describe("Async-await", function () {
 
         it("assert09", function () {
             const filename = suiteCasePath + "async-await9.js";
-            const data = metricsModule.handleMetrics([filename], projectPath);
+            const saveObject = utilsModule.getMetricsOnFileObject();
+            const data = metricsModule.handleMetrics([filename], saveObject);
 
             const metricsObject = data.metrics[0];
 
@@ -268,7 +278,8 @@ describe("Async-await", function () {
 
         it("assert10", function () {
             const filename = suiteCasePath + "async-await10.js";
-            const data = metricsModule.handleMetrics([filename], projectPath);
+            const saveObject = utilsModule.getMetricsOnFileObject();
+            const data = metricsModule.handleMetrics([filename], saveObject);
 
             const metricsObject = data.metrics[0];
 
@@ -296,7 +307,8 @@ describe("Async-await", function () {
 
         it("assert11", function () {
             const filename = suiteCasePath + "async-await11.js";
-            const data = metricsModule.handleMetrics([filename], projectPath);
+            const saveObject = utilsModule.getMetricsOnFileObject();
+            const data = metricsModule.handleMetrics([filename], saveObject);
 
             const metricsObject = data.metrics[0];
 
@@ -324,7 +336,8 @@ describe("Async-await", function () {
 
         it("assert12", function () {
             const filename = suiteCasePath + "async-await12.js";
-            const data = metricsModule.handleMetrics([filename], projectPath);
+            const saveObject = utilsModule.getMetricsOnFileObject();
+            const data = metricsModule.handleMetrics([filename], saveObject);
 
             const metricsObject = data.metrics[0];
 
@@ -351,7 +364,8 @@ describe("Async-await", function () {
 
         it("assert13", function () {
             const filename = suiteCasePath + "async-await13.js";
-            const data = metricsModule.handleMetrics([filename], projectPath);
+            const saveObject = utilsModule.getMetricsOnFileObject();
+            const data = metricsModule.handleMetrics([filename], saveObject);
 
             const metricsObject = data.metrics[0];
 
@@ -378,7 +392,8 @@ describe("Async-await", function () {
 
         it("assert14", function () {
             const filename = suiteCasePath + "async-await14.js";
-            const data = metricsModule.handleMetrics([filename], projectPath);
+            const saveObject = utilsModule.getMetricsOnFileObject();
+            const data = metricsModule.handleMetrics([filename], saveObject);
 
             const metricsObject = data.metrics[0];
 
@@ -408,7 +423,8 @@ describe("Async-await", function () {
 
         it("assert15", function () {
             const filename = suiteCasePath + "async-await15.js";
-            const data = metricsModule.handleMetrics([filename], projectPath);
+            const saveObject = utilsModule.getMetricsOnFileObject();
+            const data = metricsModule.handleMetrics([filename], saveObject);
 
             const metricsObject = data.metrics[0];
 
@@ -437,7 +453,8 @@ describe("Async-await", function () {
 
         it("assert16", function () {
             const filename = suiteCasePath + "async-await16.js";
-            const data = metricsModule.handleMetrics([filename], projectPath);
+            const saveObject = utilsModule.getMetricsOnFileObject();
+            const data = metricsModule.handleMetrics([filename], saveObject);
 
             const metricsObject = data.metrics[0];
 
@@ -450,7 +467,8 @@ describe("Async-await", function () {
 
         it("assert17", function () {
             const filename = suiteCasePath + "async-await17.js";
-            const data = metricsModule.handleMetrics([filename], projectPath);
+            const saveObject = utilsModule.getMetricsOnFileObject();
+            const data = metricsModule.handleMetrics([filename], saveObject);
 
             const metricsObject = data.metrics[0];
 
@@ -471,7 +489,8 @@ describe("Async-await", function () {
 
         it("assert18", function () {
             const filename = suiteCasePath + "async-await18.js";
-            const data = metricsModule.handleMetrics([filename], projectPath);
+            const saveObject = utilsModule.getMetricsOnFileObject();
+            const data = metricsModule.handleMetrics([filename], saveObject);
 
             const metricsObject = data.metrics[0];
 
@@ -490,7 +509,8 @@ describe("Async-await", function () {
 
         it("assert19", function () {
             const filename = suiteCasePath + "async-await19.js";
-            const data = metricsModule.handleMetrics([filename], projectPath);
+            const saveObject = utilsModule.getMetricsOnFileObject();
+            const data = metricsModule.handleMetrics([filename], saveObject);
 
             const metricsObject = data.metrics[0];
 
