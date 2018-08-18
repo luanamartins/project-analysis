@@ -1,0 +1,4 @@
+,global_methods,total,lines,empty,no_usage_error_arg,one_stmt,logging,throws,throws_only,rethrows,rethrows_only,returns,returns_only,returns_literal,continues,continues_only,breaks,breaks_only
+0,window.onerror,61,343,0.00000,0.24590,0.16393,0.00000,0.00000,0.00000,0.00000,0.00000,0.55738,0.24590,0.21311,0.00000,0.00000,0.00000,0.00000
+1,window.addEventListener,4,13,0.00000,0.00000,0.25000,0.00000,0.00000,0.00000,0.00000,0.00000,0.25000,0.25000,0.25000,0.00000,0.00000,0.00000,0.00000
+2,element.onerror,0,0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
