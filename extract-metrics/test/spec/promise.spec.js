@@ -809,6 +809,4 @@ describe("Promises tests", function() {
         assert.equal(metricsObject.promiseNumberOfCatchesNonAnErrorObject, 1);
 
     });
-
-
 });
