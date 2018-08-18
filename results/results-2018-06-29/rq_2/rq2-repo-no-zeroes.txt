@@ -1,0 +1,870 @@
+repo
+'numpy.float64' object cannot be interpreted as an integer
+---------------------------------------------------
+numberOfLogicalLines
+Inconclusive under 5% confidence
+---------------------------------------------------
+numberOfPhysicalLines
+Inconclusive under 5% confidence
+---------------------------------------------------
+numberOfStrictModeGlobal
+Inconclusive under 5% confidence
+---------------------------------------------------
+numberOfStrictModeLocal
+Inconclusive under 5% confidence
+---------------------------------------------------
+numberOfWindowOnError
+skewtest is not valid with less than 8 samples; 6 samples were given.
+---------------------------------------------------
+numberOfWindowOnErrorLines
+skewtest is not valid with less than 8 samples; 3 samples were given.
+---------------------------------------------------
+numberOfWindowOnErrorEmptyHandler
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfWindowOnErrorOnNoUsageOfErrorArgument
+skewtest is not valid with less than 8 samples; 7 samples were given.
+---------------------------------------------------
+numberOfWindowOnErrorUniqueStatement
+skewtest is not valid with less than 8 samples; 5 samples were given.
+---------------------------------------------------
+numberOfWindowOnErrorUniqueConsole
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfWindowOnErrorThrows
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfWindowOnErrorThatThrows
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfWindowOnErrorRethrows
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfWindowOnErrorThatRethrows
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfWindowOnErrorReturns
+Inconclusive under 5% confidence
+---------------------------------------------------
+numberOfWindowOnErrorThatReturns
+skewtest is not valid with less than 8 samples; 2 samples were given.
+---------------------------------------------------
+numberOfWindowOnErrorThatReturnsLiteral
+Inconclusive under 5% confidence
+---------------------------------------------------
+numberOfWindowOnErrorContinues
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfWindowOnErrorThatContinues
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfWindowOnErrorBreaks
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfWindowOnErrorThatBreaks
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfWindowAddEventListener
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+numberOfWindowAddEventListenerLines
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+numberOfWindowAddEventListenerEmptyHandler
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfWindowAddEventListenerNoUsageOfErrorArgument
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfWindowAddEventListenerThatThrows
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfWindowAddEventListenerRethrows
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfWindowAddEventListenerThatRethrows
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfWindowAddEventListenerUniqueStatement
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfWindowAddEventListenerUniqueConsole
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfWindowAddEventListenerThrows
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfWindowAddEventListenerReturns
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+numberOfWindowAddEventListenerThatReturns
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+numberOfWindowAddEventListenerThatReturnsLiteral
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+numberOfWindowAddEventListenerContinues
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfWindowAddEventListenerThatContinues
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfWindowAddEventListenerBreaks
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfWindowAddEventListenerThatBreaks
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfElementOnError
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfElementOnErrorLines
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfElementOnErrorEmptyHandler
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfElementOnErrorOnNoUsageOfErrorArgument
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfElementOnErrorUniqueStatement
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfElementOnErrorUniqueConsole
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfElementOnErrorThrows
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfElementOnErrorThatThrows
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfElementOnErrorRethrows
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfElementOnErrorThatRethrows
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfElementOnErrorReturns
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfElementOnErrorThatReturns
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfElementOnErrorThatReturnsLiteral
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfElementOnErrorContinues
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfElementOnErrorThatContinues
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfElementOnErrorBreaks
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+numberOfElementOnErrorThatBreaks
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+tryCatchNumberOfTries
+Inconclusive under 5% confidence
+---------------------------------------------------
+tryCatchNumberOfEmptyTries
+skewtest is not valid with less than 8 samples; 4 samples were given.
+---------------------------------------------------
+tryCatchNumberOfTriesLines
+Inconclusive under 5% confidence
+---------------------------------------------------
+tryCatchNumberOfTriesWithUniqueStatement
+Inconclusive under 5% confidence
+---------------------------------------------------
+tryCatchNumberOfCatches
+Inconclusive under 5% confidence
+---------------------------------------------------
+tryCatchNumberOfEmptyCatches
+Inconclusive under 5% confidence
+---------------------------------------------------
+tryCatchNumberOfCatchesNoUsageOfErrorArgument
+Inconclusive under 5% confidence
+---------------------------------------------------
+tryCatchNumberOfCatchesLines
+Inconclusive under 5% confidence
+---------------------------------------------------
+tryCatchNumberOfCatchesWithUniqueConsole
+Inconclusive under 5% confidence
+---------------------------------------------------
+tryCatchNumberOfCatchesWithUniqueStatement
+Inconclusive under 5% confidence
+---------------------------------------------------
+tryCatchNumberOfCatchesAlertOnly
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+tryCatchNumberOfErrorReassigning
+Inconclusive under 5% confidence
+---------------------------------------------------
+tryCatchNumberOfCatchesThrows
+Inconclusive under 5% confidence
+---------------------------------------------------
+tryCatchNumberOfCatchesThrowsLiteral
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+tryCatchNumberOfCatchesThrowsErrorObject
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+tryCatchNumberOfCatchesThatThrows
+Mean - client: DescribeResult(nobs=40, minmax=(0.00016800095827746602, 0.1256647167915446), mean=0.015199886700153736, variance=0.0008038011713376106, skewness=2.547300166911444, kurtosis=5.926950976634746)
+Mean - server: DescribeResult(nobs=58, minmax=(0.00018231833072253483, 0.11176113673291385), mean=0.006956387342913269, variance=0.00037406843718570704, skewness=4.454836390844312, kurtosis=19.698563955688453)
+---------------------------------------------------
+tryCatchNumberOfCatchesThatThrowsLiteral
+skewtest is not valid with less than 8 samples; 3 samples were given.
+---------------------------------------------------
+tryCatchNumberOfCatchesThatThrowsLiteralOnly
+skewtest is not valid with less than 8 samples; 3 samples were given.
+---------------------------------------------------
+tryCatchNumberOfCatchesThatThrowsUndefined
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+tryCatchNumberOfCatchesThatThrowsUndefinedOnly
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+tryCatchNumberOfCatchesThatThrowsNull
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+tryCatchNumberOfCatchesThatThrowsNullOnly
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+tryCatchNumberOfCatchesThatThrowsErrorObject
+Inconclusive under 5% confidence
+---------------------------------------------------
+tryCatchNumberOfCatchesRethrows
+Inconclusive under 5% confidence
+---------------------------------------------------
+tryCatchNumberOfCatchesThatRethrows
+Inconclusive under 5% confidence
+---------------------------------------------------
+tryCatchNumberOfCatchesReturns
+Inconclusive under 5% confidence
+---------------------------------------------------
+tryCatchNumberOfCatchesReturnsLiteral
+Inconclusive under 5% confidence
+---------------------------------------------------
+tryCatchNumberOfCatchesReturnsErrorObject
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+tryCatchNumberOfCatchesThatReturns
+Inconclusive under 5% confidence
+---------------------------------------------------
+tryCatchNumberOfCatchesThatReturnsLiteral
+Inconclusive under 5% confidence
+---------------------------------------------------
+tryCatchNumberOfCatchesThatReturnsUndefined
+skewtest is not valid with less than 8 samples; 6 samples were given.
+---------------------------------------------------
+tryCatchNumberOfCatchesThatReturnsNull
+Inconclusive under 5% confidence
+---------------------------------------------------
+tryCatchNumberOfCatchesThatReturnsErrorObject
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+tryCatchNumberOfCatchesThatRereturns
+Inconclusive under 5% confidence
+---------------------------------------------------
+tryCatchNumberOfCatchesContinues
+skewtest is not valid with less than 8 samples; 7 samples were given.
+---------------------------------------------------
+tryCatchNumberOfCatchesThatContinues
+skewtest is not valid with less than 8 samples; 7 samples were given.
+---------------------------------------------------
+tryCatchNumberOfCatchesBreaks
+Inconclusive under 5% confidence
+---------------------------------------------------
+tryCatchNumberOfCatchesThatBreaks
+Inconclusive under 5% confidence
+---------------------------------------------------
+tryCatchNumberOfCatchesBreaksOnly
+skewtest is not valid with less than 8 samples; 4 samples were given.
+---------------------------------------------------
+tryCatchNumberOfFinallies
+Inconclusive under 5% confidence
+---------------------------------------------------
+tryCatchNumberOfFinalliesLines
+Inconclusive under 5% confidence
+---------------------------------------------------
+promiseNumberOfPromises
+Inconclusive under 5% confidence
+---------------------------------------------------
+promiseNumberOfResolves
+Inconclusive under 5% confidence
+---------------------------------------------------
+promiseNumberOfRejects
+Mean - client: DescribeResult(nobs=33, minmax=(0.00016800095827746602, 0.08366447722217808), mean=0.012330252149940083, variance=0.0003526839644981013, skewness=2.1087125359684924, kurtosis=4.585119538813387)
+Mean - server: DescribeResult(nobs=49, minmax=(0.00018231833072253483, 0.040839306081847805), mean=0.005060263873115253, variance=7.121599358811325e-05, skewness=2.694565409509347, kurtosis=7.289086032205924)
+---------------------------------------------------
+promiseNumberOfPromiseThens
+Inconclusive under 5% confidence
+---------------------------------------------------
+promiseNumberOfPromiseThenFulfilledLines
+Inconclusive under 5% confidence
+---------------------------------------------------
+promiseNumberOfPromiseThenRejectedLines
+Inconclusive under 5% confidence
+---------------------------------------------------
+promiseNumberOfPromiseCatches
+Inconclusive under 5% confidence
+---------------------------------------------------
+promiseNumberOfPromiseCatchesLines
+Inconclusive under 5% confidence
+---------------------------------------------------
+promiseNumberOfEmptyFunctionsOnPromiseCatches
+skewtest is not valid with less than 8 samples; 6 samples were given.
+---------------------------------------------------
+promiseNumberOfFunctionsOnCatchesNoUsageOfErrorArgument
+skewtest is not valid with less than 8 samples; 6 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesWithNoArg
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesFunctionWithNoArg
+Mean - client: DescribeResult(nobs=18, minmax=(0.00016800095827746602, 0.011928068037700088), mean=0.0021560122978941474, variance=1.2681851968272292e-05, skewness=1.9188941180082801, kurtosis=2.2975658311745732)
+Mean - server: DescribeResult(nobs=24, minmax=(0.00018231833072253483, 0.004375639937340836), mean=0.0007976426969110899, variance=1.0053285529218373e-06, skewness=2.2683716952648094, kurtosis=5.033865781271567)
+---------------------------------------------------
+promiseNumberOfCatchesWithUniqueConsole
+skewtest is not valid with less than 8 samples; 7 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesWithUniqueStatement
+Inconclusive under 5% confidence
+---------------------------------------------------
+promiseNumberOfCatchesAlertOnly
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+promiseNumberOfErrorReassigning
+skewtest is not valid with less than 8 samples; 3 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesThrows
+Inconclusive under 5% confidence
+---------------------------------------------------
+promiseNumberOfCatchesThrowsLiteral
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesThrowsErrorObject
+skewtest is not valid with less than 8 samples; 4 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesThatThrows
+Inconclusive under 5% confidence
+---------------------------------------------------
+promiseNumberOfCatchesThatThrowsLiteral
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesThatThrowsLiteralOnly
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesThatThrowsUndefined
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesThatThrowsUndefinedOnly
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesThatThrowsNull
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesThatThrowsNullOnly
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesThatThrowsErrorObject
+skewtest is not valid with less than 8 samples; 4 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesRethrows
+Inconclusive under 5% confidence
+---------------------------------------------------
+promiseNumberOfCatchesThatRethrows
+Inconclusive under 5% confidence
+---------------------------------------------------
+promiseNumberOfCatchesReturns
+Inconclusive under 5% confidence
+---------------------------------------------------
+promiseNumberOfCatchesReturnsLiteral
+skewtest is not valid with less than 8 samples; 3 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesReturnsErrorObject
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesThatReturns
+Inconclusive under 5% confidence
+---------------------------------------------------
+promiseNumberOfCatchesThatReturnsLiteral
+skewtest is not valid with less than 8 samples; 3 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesThatReturnsLiteralOnly
+skewtest is not valid with less than 8 samples; 2 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesThatReturnsUndefined
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesThatReturnsUndefinedOnly
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesThatReturnsNull
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesThatReturnsNullOnly
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesThatReturnsErrorObject
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesThatRereturns
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesContinues
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesThatContinues
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesBreaks
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesThatBreaks
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+promiseNumberOfCatchesRejectsLiteral
+Inconclusive under 5% confidence
+---------------------------------------------------
+promiseNumberOfCatchesNonAnErrorObject
+Mean - client: DescribeResult(nobs=33, minmax=(0.00016800095827746602, 0.08366447722217808), mean=0.012330252149940083, variance=0.0003526839644981013, skewness=2.1087125359684924, kurtosis=4.585119538813387)
+Mean - server: DescribeResult(nobs=49, minmax=(0.00018231833072253483, 0.040839306081847805), mean=0.005060263873115253, variance=7.121599358811325e-05, skewness=2.694565409509347, kurtosis=7.289086032205924)
+---------------------------------------------------
+promiseNumberOfChainingCatches
+Inconclusive under 5% confidence
+---------------------------------------------------
+promiseNumberOfNonCaughtPromises
+Inconclusive under 5% confidence
+---------------------------------------------------
+promiseNumberOfPromiseRaces
+skewtest is not valid with less than 8 samples; 4 samples were given.
+---------------------------------------------------
+promiseNumberOfPromiseAll
+Inconclusive under 5% confidence
+---------------------------------------------------
+asyncAwaitNumberOfAsyncs
+Inconclusive under 5% confidence
+---------------------------------------------------
+asyncAwaitNumberOfAwaits
+Inconclusive under 5% confidence
+---------------------------------------------------
+asyncAwaitNumberOfTries
+skewtest is not valid with less than 8 samples; 3 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfTriesLines
+skewtest is not valid with less than 8 samples; 3 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfCatches
+skewtest is not valid with less than 8 samples; 3 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfEmptyCatches
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfCatchesNoUsageOfErrorArgument
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfCatchesLines
+skewtest is not valid with less than 8 samples; 3 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfCatchesWithUniqueConsole
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfCatchesWithUniqueStatement
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfAwaitErrorArgsOnCatches
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersThrows
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersThrowsLiteral
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersThrowsErrorObject
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersThatThrows
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersThatThrowsLiteral
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersThatThrowsLiteralOnly
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersThatThrowsUndefined
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersThatThrowsUndefinedOnly
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersThatThrowsNull
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersThatThrowsNullOnly
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersThatThrowsErrorObject
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersRethrows
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersThatRethrows
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersReturns
+skewtest is not valid with less than 8 samples; 2 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersReturnsLiteral
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersReturnsErrorObject
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersThatReturns
+skewtest is not valid with less than 8 samples; 2 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersThatReturnsLiteral
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersThatReturnsLiteralOnly
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersThatReturnsUndefined
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersThatReturnsNull
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersThatReturnsErrorObject
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersThatRereturns
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersContinues
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersThatContinues
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersBreaks
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersThatBreaks
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfHandlersBreaksOnly
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfBreaksOnCatchesUniqueStatement
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfFinallies
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+asyncAwaitNumberOfFinalliesLines
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+eventsNumberOfEventMethodsOn
+Inconclusive under 5% confidence
+---------------------------------------------------
+eventsNumberOfEventMethodsOnce
+skewtest is not valid with less than 8 samples; 4 samples were given.
+---------------------------------------------------
+eventsNumberOfEventMethodsEmit
+Inconclusive under 5% confidence
+---------------------------------------------------
+eventsNumberOfEventOnLines
+Inconclusive under 5% confidence
+---------------------------------------------------
+eventsNumberOfEventOnEmptyFunctions
+skewtest is not valid with less than 8 samples; 7 samples were given.
+---------------------------------------------------
+eventsNumberOfEventOnNoUsageOfErrorArgument
+Inconclusive under 5% confidence
+---------------------------------------------------
+eventsNumberOfEventOnWithUniqueConsole
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfEventOnWithUniqueStatement
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfEventOnceLines
+skewtest is not valid with less than 8 samples; 4 samples were given.
+---------------------------------------------------
+eventsNumberOfEventOnceEmptyFunctions
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfEventOnceNoUsageOfErrorArgument
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+eventsNumberOfEventOnceWithUniqueConsole
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfEventOnceWithUniqueStatement
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfEventEmitLines
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+eventsNumberOfCatchesAlertOnly
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfErrorReassigning
+skewtest is not valid with less than 8 samples; 5 samples were given.
+---------------------------------------------------
+eventsNumberOfHandlersThrows
+Inconclusive under 5% confidence
+---------------------------------------------------
+eventsNumberOfHandlersThrowsLiteral
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfHandlersThrowsErrorObject
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+eventsNumberOfHandlersThatThrows
+Inconclusive under 5% confidence
+---------------------------------------------------
+eventsNumberOfHandlersThatThrowsLiteral
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfHandlersThatThrowsLiteralOnly
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfHandlersThatThrowsUndefined
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfHandlersThatThrowsUndefinedOnly
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfHandlersThatThrowsNull
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfHandlersThatThrowsNullOnly
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfHandlersThatThrowsErrorObject
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+eventsNumberOfHandlersRethrows
+Inconclusive under 5% confidence
+---------------------------------------------------
+eventsNumberOfHandlersThatRethrows
+Inconclusive under 5% confidence
+---------------------------------------------------
+eventsNumberOfThrowPrimitiveTypesOnCatches
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfHandlersReturns
+Inconclusive under 5% confidence
+---------------------------------------------------
+eventsNumberOfHandlersReturnsLiteral
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfHandlersReturnsErrorObject
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfHandlersThatReturns
+Inconclusive under 5% confidence
+---------------------------------------------------
+eventsNumberOfHandlersThatReturnsLiteral
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfHandlersThatReturnsUndefined
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfHandlersThatReturnsNull
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfHandlersThatReturnsErrorObject
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfHandlersThatRereturns
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfHandlersContinues
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfHandlersThatContinues
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfHandlersBreaks
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+eventsNumberOfHandlersThatBreaks
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+eventsNumberOfHandlersBreaksOnly
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfEventUncaughtException
+Inconclusive under 5% confidence
+---------------------------------------------------
+eventsNumberOfEventUncaughtExceptionLines
+skewtest is not valid with less than 8 samples; 5 samples were given.
+---------------------------------------------------
+eventsNumberOfUncaughtExceptionEmpty
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfUncaughtExceptionNoUsageOfErrorArgument
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfUncaughtExceptionWithUniqueStatement
+skewtest is not valid with less than 8 samples; 2 samples were given.
+---------------------------------------------------
+eventsNumberOfUncaughtExceptionWithUniqueConsole
+skewtest is not valid with less than 8 samples; 1 samples were given.
+---------------------------------------------------
+eventsNumberOfUncaughtExceptionReturns
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+eventsNumberOfUncaughtExceptionThrows
+skewtest is not valid with less than 8 samples; 2 samples were given.
+---------------------------------------------------
+eventsNumberOfEventUnhandledRejection
+skewtest is not valid with less than 8 samples; 6 samples were given.
+---------------------------------------------------
+eventsTotalOfStringEvents
+Inconclusive under 5% confidence
+---------------------------------------------------
+eventsTotalOfEventsExceptStringType
+Mean - client: DescribeResult(nobs=53, minmax=(0.00016800095827746602, 0.0509042903580722), mean=0.005198520218397062, variance=7.23448156004811e-05, skewness=3.306717931911687, kurtosis=13.97350263958791)
+Mean - server: DescribeResult(nobs=49, minmax=(0.00018231833072253483, 0.01659096809575067), mean=0.0026082683640101414, variance=1.3559421931748195e-05, skewness=2.0448754398347275, kurtosis=3.772197075158643)
+---------------------------------------------------
+callbacksNumberOfCallbackErrorFunctions
+Inconclusive under 5% confidence
+---------------------------------------------------
+callbacksNumberOfFirstErrorArgFunctions
+Inconclusive under 5% confidence
+---------------------------------------------------
+callbacksNumberOfEmptyCallbacks
+Inconclusive under 5% confidence
+---------------------------------------------------
+callbacksNumberOfFunctionsNoUsageOfErrorArgument
+Inconclusive under 5% confidence
+---------------------------------------------------
+callbacksNumberOfFunctionsWithUniqueConsole
+Inconclusive under 5% confidence
+---------------------------------------------------
+callbacksNumberOfFunctionsWithUniqueStatement
+Inconclusive under 5% confidence
+---------------------------------------------------
+callbacksNumberOfFunctionsWithUniqueErrorArg
+Inconclusive under 5% confidence
+---------------------------------------------------
+callbacksNumberOfEmptyFunctionsWithUniqueErrorArg
+Inconclusive under 5% confidence
+---------------------------------------------------
+callbacksNumberOfFunctionsNoUsageOfErrorArgumentWithUniqueErrorArg
+Mean - client: DescribeResult(nobs=34, minmax=(0.00016800095827746602, 0.024696140866787505), mean=0.00397272854279655, variance=4.1253494105149556e-05, skewness=1.8970024079118846, kurtosis=2.43306673787173)
+Mean - server: DescribeResult(nobs=36, minmax=(0.00018231833072253483, 0.008386643213236603), mean=0.0014382890534777749, variance=3.534411681562932e-06, skewness=1.9369239867202177, kurtosis=3.694379137817558)
+---------------------------------------------------
+callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueConsole
+Inconclusive under 5% confidence
+---------------------------------------------------
+callbacksNumberOfFunctionsWithUniqueErrorArgWithUniqueStatement
+Inconclusive under 5% confidence
+---------------------------------------------------
+callbacksNumberOfLinesOfFunctionsWithUniqueErrorArg
+Inconclusive under 5% confidence
+---------------------------------------------------
+callbacksNumberOfHandlersAlertOnly
+skewtest is not valid with less than 8 samples; 2 samples were given.
+---------------------------------------------------
+callbacksNumberOfErrorReassigning
+Inconclusive under 5% confidence
+---------------------------------------------------
+callbacksNumberOfHandlersThrows
+Inconclusive under 5% confidence
+---------------------------------------------------
+callbacksNumberOfHandlersThrowsLiteral
+skewtest is not valid with less than 8 samples; 6 samples were given.
+---------------------------------------------------
+callbacksNumberOfHandlersThrowsErrorObject
+Inconclusive under 5% confidence
+---------------------------------------------------
+callbacksNumberOfHandlersThatThrows
+Inconclusive under 5% confidence
+---------------------------------------------------
+callbacksNumberOfHandlersThatThrowsLiteral
+skewtest is not valid with less than 8 samples; 6 samples were given.
+---------------------------------------------------
+callbacksNumberOfHandlersThatThrowsLiteralOnly
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+callbacksNumberOfHandlersThatThrowsUndefined
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+callbacksNumberOfHandlersThatThrowsUndefinedOnly
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+callbacksNumberOfHandlersThatThrowsNull
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+callbacksNumberOfHandlersThatThrowsNullOnly
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+callbacksNumberOfHandlersThatThrowsErrorObject
+Inconclusive under 5% confidence
+---------------------------------------------------
+callbacksNumberOfHandlersRethrows
+Inconclusive under 5% confidence
+---------------------------------------------------
+callbacksNumberOfHandlersThatRethrows
+Inconclusive under 5% confidence
+---------------------------------------------------
+callbacksNumberOfHandlersReturns
+Inconclusive under 5% confidence
+---------------------------------------------------
+callbacksNumberOfHandlersReturnsLiteral
+Mean - client: DescribeResult(nobs=40, minmax=(0.00016800095827746602, 0.07929645230696396), mean=0.00879065014186841, variance=0.0002961431737147675, skewness=2.666037894161146, kurtosis=6.686589502436908)
+Mean - server: DescribeResult(nobs=36, minmax=(0.00018231833072253483, 0.03044716123066332), mean=0.003266536758778749, variance=3.463866432580521e-05, skewness=3.1179010607733986, kurtosis=10.910751999342784)
+---------------------------------------------------
+callbacksNumberOfHandlersReturnsErrorObject
+skewtest is not valid with less than 8 samples; 6 samples were given.
+---------------------------------------------------
+callbacksNumberOfHandlersThatReturns
+Inconclusive under 5% confidence
+---------------------------------------------------
+callbacksNumberOfHandlersThatReturnsLiteral
+Inconclusive under 5% confidence
+---------------------------------------------------
+callbacksNumberOfHandlersThatReturnsUndefined
+skewtest is not valid with less than 8 samples; 4 samples were given.
+---------------------------------------------------
+callbacksNumberOfHandlersThatReturnsNull
+Inconclusive under 5% confidence
+---------------------------------------------------
+callbacksNumberOfHandlersThatReturnsErrorObject
+skewtest is not valid with less than 8 samples; 6 samples were given.
+---------------------------------------------------
+callbacksNumberOfHandlersThatRereturns
+Inconclusive under 5% confidence
+---------------------------------------------------
+callbacksNumberOfHandlersContinues
+Mean - client: DescribeResult(nobs=20, minmax=(0.00016800095827746602, 0.030072171531666417), mean=0.00488882788587426, variance=6.489781757324402e-05, skewness=1.9862714100996783, kurtosis=3.1101862508760405)
+Mean - server: DescribeResult(nobs=19, minmax=(0.00018231833072253483, 0.009845189859016881), mean=0.0013913767344614501, variance=4.93506697507989e-06, skewness=3.139928155664424, kurtosis=9.37006876065874)
+---------------------------------------------------
+callbacksNumberOfHandlersThatContinues
+Mean - client: DescribeResult(nobs=20, minmax=(0.00016800095827746602, 0.007392042164208505), mean=0.0017556100139995202, variance=5.530407343338618e-06, skewness=1.3810419923950952, kurtosis=0.4057857171876047)
+Mean - server: DescribeResult(nobs=19, minmax=(0.00018231833072253483, 0.005104913260230976), mean=0.0007292733228901394, variance=1.4145455481982174e-06, skewness=2.998954351817582, kurtosis=8.088762620237375)
+---------------------------------------------------
+callbacksNumberOfHandlersBreaks
+Inconclusive under 5% confidence
+---------------------------------------------------
+callbacksNumberOfHandlersThatBreaks
+Inconclusive under 5% confidence
+---------------------------------------------------
+callbacksNumberOfHandlersBreaksOnly
+skewtest is not valid with less than 8 samples; 0 samples were given.
+---------------------------------------------------
+callbacksNumberOfLines
+Inconclusive under 5% confidence
+---------------------------------------------------
