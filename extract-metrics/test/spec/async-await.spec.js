@@ -520,5 +520,18 @@ describe("Async-await", function () {
             assert.equal(metricsObject.asyncAwaitNumberOfHandlersThatBreaks, 3);
             assert.equal(metricsObject.asyncAwaitNumberOfHandlersBreaksOnly, 1);
         });
+
+        it("assert20", function () {
+            const filename = suiteCasePath + "async-await20.js";
+            const saveObject = utilsModule.getMetricsOnFileObject();
+            const data = metricsModule.handleMetrics([filename], saveObject);
+
+            const metricsObject = data.metrics[0];
+
+            assert.equal(metricsObject.asyncAwaitNumberOfCatchesAlertOnly, 1);
+            assert.equal(metricsObject.asyncAwaitNumberOfErrorReassigning, 2);
+            assert.equal(metricsObject.asyncAwaitNumberOfHandlersThatReturnsUndefinedOnly, 1);
+            assert.equal(metricsObject.asyncAwaitNumberOfHandlersThatReturnsNullOnly, 2);
+        });
     });
 });

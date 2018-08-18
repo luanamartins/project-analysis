@@ -52,9 +52,18 @@ function handleCatchClauses(errorArgs, catchClause, reportObject) {
         reportObject.asyncAwaitNumberOfCatchesWithUniqueStatement++;
         // Handles errors on console only
         const uniqueStatement = catchClauseBody.body[0];
+
         if (utils.isConsoleStatement(uniqueStatement)) {
             reportObject.asyncAwaitNumberOfCatchesWithUniqueConsole++;
         }
+
+        if(utils.isAlertCallExpression(uniqueStatement)) {
+            reportObject.asyncAwaitNumberOfCatchesAlertOnly++;
+        }
+    }
+
+    if (utils.hasErrorReassignment(catchClauseBody, catchClauseErrorArgs)) {
+        reportObject.asyncAwaitNumberOfErrorReassigning++;
     }
 
     // Catch clause has await expressions which receives an error argument
