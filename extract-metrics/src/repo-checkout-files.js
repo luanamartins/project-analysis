@@ -1,33 +1,36 @@
-const CONFIG = require("../config");
-
-const repoModule = require(CONFIG['srcPath'] + '/repository.js');
 const clone = require('git-clone');
 const path = require('path');
 
+const constants = require('./constants');
+const repoModule = require(constants.SRC_PATH + '/repository.js');
+
 function main() {
     // checkout('client');
-    checkout('server');
+    checkout('client');
 }
 
 function checkout(type) {
-    const filepath = CONFIG['dataProjectPath'] + type + '.txt';
-    const reposUrl = repoModule.getRepos(filepath);
-    const directory = CONFIG['dataProjectPath'] + 'repo2/' + type;
+    const filepath = constants.DATA_PROJECT_PATH + 'test.txt';
+    const files_url = repoModule.getRepos(filepath);
+    const directory = constants.DATA_PROJECT_PATH + 'repo3/' + type;
 
+    // Add SHA-commit to clone specific repository version
+    const checkout = '';
+    const options = null;
     console.log(directory);
 
     let repoName;
-    reposUrl.forEach(function (repo) {
-        repoName = repo.substring(repo.lastIndexOf('/'));
+    for (let file_url of files_url) {
+        repoName = file_url.substring(file_url.lastIndexOf('/'));
 
-        clone(repo, path.join(directory, repoName), null, (err) => {
+        clone(file_url, path.join(directory, repoName), options, (err) => {
             if (err) {
                 console.log('error: ', err)
             } else {
-                console.log('Checkout: ', repo);
+                console.log('Checkout: ', file_url);
             }
         });
-    });
+    }
 }
 
 main();
