@@ -5,19 +5,19 @@ const path = require('path');
 const fs = require('fs');
 
 const constants = require('../constants');
-const repoModule = require(constants.SRC_PATH + '/repository.js');
+const repoModule = require(constants.SRC_PATH + 'repository.js');
 
 function main() {
-    // checkout('client');
-    // checkout('server');
+    checkout('client');
+    checkout('server');
 
-    checkout('test');
+    // checkout('test');
 }
 
 function checkout(type) {
     const filepath = constants.DATA_PROJECT_PATH + type + '.txt';
     const files_url = repoModule.getRepos(filepath);
-    const root_directory = constants.DATA_PROJECT_PATH + 'repo3/' + type;
+    const root_directory = constants.DATA_PROJECT_PATH + 'repo-today/' + type;
 
     console.log(root_directory);
 
@@ -46,7 +46,7 @@ function checkout(type) {
         });
 
     Promise.all(promises).then((data) => {
-        fs.writeFileSync(constants.SRC_GIT_CHECKOUT_PATH + 'repo-hash.json', JSON.stringify(data), 'utf8');
+        fs.writeFileSync(constants.SRC_GIT_CHECKOUT_PATH + type + '-repo-hash.json', JSON.stringify(data), 'utf8');
     }).catch(console.log);
 }
 
