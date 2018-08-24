@@ -4,18 +4,19 @@ const fs = require('fs');
 const path = require('path');
 const temp = require('fs-temp');
 const estraverse = require('estraverse');
-const UglifyJS = require('uglify-es');
-const removeEmptyLines = require('remove-blank-lines');
+const uglify_es = require('uglify-es');
+const remove_empty_lines = require('remove-blank-lines');
 
-const CONFIG = require("../../config");
+const config = require("../../config");
+const constants = require('../constants');
 
-const tryCatchModule = require(CONFIG["srcPath"] + 'metrics/metrics-try-catch.js');
-const promiseModule = require(CONFIG["srcPath"] + 'metrics/metrics-promise.js');
-const asyncAwaitModule = require(CONFIG["srcPath"] + 'metrics/metrics-async-await.js');
-const callbackModule = require(CONFIG["srcPath"] + 'metrics/metrics-callback.js');
-const eventModule = require(CONFIG["srcPath"] + 'metrics/metrics-event.js');
-const strictModeModule = require(CONFIG["srcPath"] + 'metrics/metrics-strictmode');
-const globalEventHandlerModule = require(CONFIG["srcPath"] + 'metrics/metrics-globaleventhandler');
+const try_catch_module = require(config["srcPath"] + 'metrics/metrics-try-catch.js');
+const promise_module = require(config["srcPath"] + 'metrics/metrics-promise.js');
+const async_await_module = require(config["srcPath"] + 'metrics/metrics-async-await.js');
+const callback_module = require(config["srcPath"] + 'metrics/metrics-callback.js');
+const event_module = require(config["srcPath"] + 'metrics/metrics-event.js');
+const strict_mode_module = require(config["srcPath"] + 'metrics/metrics-strictmode');
+const global_event_handler_module = require(config["srcPath"] + 'metrics/metrics-globaleventhandler');
 const utils = require('../utils.js');
 
 function calculateArrayLines(repoObject) {
@@ -89,13 +90,19 @@ function extractMetricsForFilepath(repoObject, filepath) {
 
     let ast = esprima.parseScript(fileContents, options);
 
-    getMetrics(ast, filepath, repoObject);
+    const metric_handlers_size = getMetrics(ast, filepath, repoObject);
+    metric_handlers_size.map((handler_size) => {
+        handler_size.file = filepath
+    });
 
     calculateArrayLines(repoObject);
 
-    strictModeModule.fixStrictMode(repoObject);
+    strict_mode_module.fixStrictMode(repoObject);
 
-    return repoObject;
+    return {
+        'repoObject': repoObject,
+        'metric_handlers_size': metric_handlers_size
+    };
 }
 
 function executeBabelAndUglify(filepath) {
@@ -124,25 +131,34 @@ function executeBabelAndUglify(filepath) {
         compress: false
     };
 
-    const result = UglifyJS.minify(code, options);
+    const result = uglify_es.minify(code, options);
 
     if (result.error) {
         throw result.error;
     }
     
-    return removeEmptyLines(result.code);
+    return remove_empty_lines(result.code);
 }
 
 function handleMetrics(files, saveObject) {
-    let metrics = [];
+    const metrics = [];
     const failedFiles = [];
+    let metrics_handlers = [];
     if (files) {
-        let i = 1;
+        let file_counter = 1;
         files.forEach(function (filepath) {
             try {
-                console.log(i++ + ': ' + filepath);
+                let handler_object = { 'file': filepath };
+                console.log(file_counter++ + ': ' + filepath);
+
                 const repoObject = utils.getEmptyRepoObject();
-                metrics.push(extractMetricsForFilepath(repoObject, filepath));
+                const data = extractMetricsForFilepath(repoObject, filepath);
+
+                metrics.push(data.repoObject);
+
+                const metrics_handlers_recounting = handleRecountingMech(data.metric_handlers_size);
+                metrics_handlers = metrics_handlers.concat(metrics_handlers_recounting);
+
                 saveMetricsOnArray(repoObject, saveObject, filepath);
             } catch (err) {
                 console.log(err);
@@ -152,8 +168,80 @@ function handleMetrics(files, saveObject) {
     }
     return {
         'metrics': metrics,
-        'failedFiles': failedFiles
+        'failedFiles': failedFiles,
+        'metrics_handlers': metrics_handlers
     };
+}
+
+function handleRecountingMech(handlers) {
+
+    const try_catch_handlers = handlers.filter((handler) => {return handler.mech === constants.TRY_CATCH});
+    const async_await_handlers = handlers.filter((handler) => {return handler.mech === constants.ASYNC_AWAIT});
+
+
+    let try_catch_without_async = remove(try_catch_handlers, async_await_handlers);
+    const try_catches = try_catch_without_async[0];
+    const async_await_catches = try_catch_without_async[1];
+    const result_1 = try_catches.concat(async_await_catches);
+
+    const callback_handlers = handlers.filter((handler) => {return handler.mech === constants.CALLBACK});
+    const promise_handlers = handlers.filter((handler) => {return handler.mech === constants.PROMISE});
+    const events_handlers = handlers.filter((handler) => {return handler.mech === constants.EVENT});
+
+    const callback_handlers_without_promises = remove(callback_handlers, promise_handlers);
+    const callback_handlers_without_events = remove(callback_handlers_without_promises[0], events_handlers);
+
+    const callbacks = callback_handlers_without_events[0];
+    const promises = callback_handlers_without_promises[1];
+    const events = callback_handlers_without_events[1];
+
+    const result_2 = callbacks.concat(promises.concat(events));
+
+    let result = result_1.concat(result_2);
+    result = result.map((handler) => {
+        if(handler.hasOwnProperty(constants.HAS_ERROR_ARGUMENTS)) {
+            delete handler[constants.HAS_ERROR_ARGUMENTS];
+        }
+        return handler;
+    });
+
+    return result;
+
+}
+
+function remove(handlers, handlersToRemove) {
+    let handlersToRemoveResult = [];
+    let handlersResult = [];
+    for (let handler of handlers) {
+        const match = handlersToRemove.find(function(element) {
+            // For promises and events that has no error arguments
+            if (element.has_error_arguments === false) {
+                return false;
+            } else {
+                return element.lines === handler.lines &&
+                    element.stmts === handler.stmts;
+            }
+        });
+
+        if (match) {
+            handlersToRemove = removeFirstOccurrence(handlersToRemove, match);
+            handlersToRemoveResult.push(match);
+        } else {
+            handlersResult.push(handler);
+        }
+    }
+
+    if(handlersToRemove.length > 0) {
+        handlersToRemoveResult = handlersToRemoveResult.concat(handlersToRemove);
+    }
+
+    return [handlersResult, handlersToRemoveResult];
+}
+
+function removeFirstOccurrence(array, element) {
+    const index = array.indexOf(element);
+    array.splice(index, 1);
+    return array;
 }
 
 
@@ -169,19 +257,23 @@ function saveMetricsOnArray(repoObject, saveObject, filepath) {
 function getMetrics(ast, filepath, reportObject) {
     try {
 
-        strictModeModule.isGlobalStrictMode(ast, reportObject);
+        const metric_size_array = [];
+
+        strict_mode_module.isGlobalStrictMode(ast, reportObject);
 
         estraverse.traverse(ast, {
             enter: function (node) {
-                strictModeModule.handleAnalysis(node, reportObject);
-                globalEventHandlerModule.handleAnalysis(node, reportObject);
-                tryCatchModule.handleAnalysis(node, reportObject);
-                promiseModule.handleAnalysis(node, reportObject);
-                asyncAwaitModule.handleAnalysis(node, reportObject);
-                callbackModule.handleAnalysis(node, reportObject);
-                eventModule.handleAnalysis(node, reportObject);
+                strict_mode_module.handleAnalysis(node, reportObject);
+                global_event_handler_module.handleAnalysis(node, reportObject);
+                try_catch_module.handleAnalysis(node, reportObject, metric_size_array);
+                promise_module.handleAnalysis(node, reportObject, metric_size_array);
+                async_await_module.handleAnalysis(node, reportObject, metric_size_array);
+                callback_module.handleAnalysis(node, reportObject, metric_size_array);
+                event_module.handleAnalysis(node, reportObject, metric_size_array);
             }
         });
+
+        return metric_size_array;
 
     } catch (err) {
         console.log(filepath, ' ', err);

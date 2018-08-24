@@ -1,7 +1,8 @@
 const CONFIG = require("../../config");
+const constants = require('../constants');
 const utils = require(CONFIG["srcPath"] + 'utils');
 
-function handleAnalysis(node, reportObject) {
+function handleAnalysis(node, reportObject, metric_size_array) {
 
     if (node.type === 'FunctionDeclaration' ||
         node.type === 'FunctionExpression' ||
@@ -18,8 +19,13 @@ function handleAnalysis(node, reportObject) {
 
             const lines = utils.getNumberOfLines(node);
             reportObject.callbacksNumberOfLines += lines;
-
             const functionBody = node.body.body;
+
+            metric_size_array.push({
+                'mech': constants.CALLBACK,
+                'lines': lines,
+                'stmts': functionBody.length
+            });
 
             if (errorArguments.length === 1 && params.length === 1) {
 

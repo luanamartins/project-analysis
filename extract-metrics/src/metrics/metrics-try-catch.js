@@ -1,7 +1,7 @@
 const CONFIG = require("../../config");
 const utils = require(CONFIG["srcPath"] + 'utils');
 
-function handleAnalysis(node, reportObject) {
+function handleAnalysis(node, reportObject, metric_size_array) {
 
     if (node.type === 'FunctionDeclaration' || node.type === 'ArrowFunctionExpression' ||
         node.type === 'FunctionExpression' && !node.async) {
@@ -17,15 +17,10 @@ function handleAnalysis(node, reportObject) {
         tryStatementNodes.map((tryNode) => handleTryStatement(reportObject, tryNode));
 
         const catchClauseNodes = getCatchClauseNodes(tryStatementNodes);
-        catchClauseNodes.map((catchClause) => handleCatchClause(reportObject, catchClause));
+        catchClauseNodes.map((catchClause) => handleCatchClause(reportObject, catchClause, metric_size_array));
 
         const finallyStatements = getFinallyStatements(tryStatementNodes);
         finallyStatements.map((finallyNode) => handleFinallyClause(reportObject, finallyNode));
-
-        const nodes = tryStatementNodes.concat(catchClauseNodes).concat(finallyStatements);
-
-        // const throwStatementNodes = getThrowStatementNodes(nodes);
-        // throwStatementNodes.map((throwNode) => handleThrowStatement(reportObject, throwNode));
 
     }
 }
@@ -58,7 +53,7 @@ function handleTryStatement(reportObject, tryNode) {
     }
 }
 
-function handleCatchClause(reportObject, catchClause) {
+function handleCatchClause(reportObject, catchClause, metric_size_array) {
     reportObject.tryCatchNumberOfCatches++;
     const nodeBody = catchClause.body.body;
     reportObject.tryCatchNumberOfCatchesLines += utils.getNumberOfLines(catchClause);
@@ -66,6 +61,12 @@ function handleCatchClause(reportObject, catchClause) {
     if (nodeBody) {
         const catchClauseArguments = utils.getIdentifiersNames(catchClause.param);
         const numberOfLines = utils.getNumberOfLines(catchClause.body);
+
+        metric_size_array.push({
+            'mech': 'try-catch',
+            'lines': numberOfLines,
+            'stmts': nodeBody.length
+        });
 
         if (numberOfLines === 0) {
             reportObject.tryCatchNumberOfEmptyCatches++;

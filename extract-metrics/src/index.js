@@ -107,9 +107,15 @@ function extractMetricsFromFiles(repositoryName, saveObject, options, files, cal
 
     filesModule.writeCsvFile(options.resultDirectory + repositoryName + '.csv', headers, metricsData.metrics);
 
-    if(metricsData.failedFiles) {
+    if (metricsData.failedFiles) {
         const failedFilesData = metricsData.failedFiles.join('\n');
         filesModule.appendDataToFile(options.failedFilepath, failedFilesData);
+    }
+
+    if (metricsData.metrics_handlers) {
+        console.log(metrics_handlers);
+        const handlers_data = metricsData.metrics_handlers.join('\n');
+        // filesModule.appendDataToFile(options.failedFilepath, failedFilesData);
     }
 
     callback(null);

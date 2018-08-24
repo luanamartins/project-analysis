@@ -1,7 +1,8 @@
 const CONFIG = require("../../config");
+const constants = require('../constants');
 const utils = require(CONFIG["srcPath"] + 'utils');
 
-function handleAnalysis(node, reportObject) {
+function handleAnalysis(node, reportObject, metric_size_array) {
 
     const eventListeningMethods = ['on', 'once'];
     const eventRaisingMethods = ['emit'];
@@ -30,6 +31,12 @@ function handleAnalysis(node, reportObject) {
                     const handlerParams = utils.getIdentifiersNames(handlerFunction.params);
                     const lines = utils.getNumberOfLines(handlerFunction);
                     const handlerFunctionBody = handlerFunction.body.body;
+
+                    metric_size_array.push({
+                        'mech': constants.EVENT,
+                        'lines': lines,
+                        'stmts': handlerFunctionBody.length
+                    });
 
                     if (handlerFunction && handlerFunction.type === 'FunctionExpression') {
 

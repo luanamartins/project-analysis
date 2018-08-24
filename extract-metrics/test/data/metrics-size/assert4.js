@@ -1,0 +1,14 @@
+io.on('error_connection', (err) => {
+    throw 2;
+});
+
+promise.then().catch((err) => {
+    console.log('test');
+    console.log('again');
+    console.log('another test');
+    return 'last one'
+});
+
+function a(error){
+    console.log(error);
+}
