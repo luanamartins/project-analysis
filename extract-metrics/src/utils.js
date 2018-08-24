@@ -2,7 +2,7 @@ const sloc = require('sloc');
 const path = require('path');
 const jsonfile = require('jsonfile');
 
-const CONFIG = require("../config");
+const config = require("../config");
 
 function isAnErrorArgument(argument) {
     const keywords = ['error', 'exception', 'reason', 'reject', 'err'];
@@ -331,7 +331,7 @@ function trailLastSlash(str) {
 }
 
 function getEmptyRepoObject() {
-    const jsonFilepath = path.join(CONFIG["srcPath"], 'report-object.json');
+    const jsonFilepath = path.join(config["srcPath"], 'report-object.json');
     return jsonfile.readFileSync(jsonFilepath);
 }
 

@@ -1,4 +1,5 @@
 const CONFIG = require("../../config");
+const constants = require('../constants');
 const utils = require(CONFIG["srcPath"] + 'utils');
 
 
@@ -14,7 +15,7 @@ function handleRejects(reportObject, node) {
     }
 }
 
-function handleCatches(reportObject, node) {
+function handleCatches(reportObject, node, metric_size_array) {
     reportObject.promiseNumberOfPromiseCatches++;
     const numberOfArgumentsOnCatch = node.arguments.length;
     if (numberOfArgumentsOnCatch >= 1) {
@@ -32,8 +33,17 @@ function handleCatches(reportObject, node) {
 
             const functionBody = firstArgument.body;
             const functionParams = utils.getIdentifiersNames(firstArgument.params);
+            const hasErrorArguments = functionParams.length !== 0;
 
-            if(functionParams.length === 0) {
+            metric_size_array.push({
+                'mech': constants.PROMISE,
+                'lines': lines,
+                'stmts': functionBody.body.length,
+                'has_error_arguments': hasErrorArguments
+        });
+
+
+            if(hasErrorArguments === 0) {
                 reportObject.promiseNumberOfCatchesFunctionWithNoArg++;
             }
 
@@ -214,7 +224,7 @@ function handlePromiseObjects(reportObject, callee) {
     }
 }
 
-function handleAnalysis(node, reportObject) {
+function handleAnalysis(node, reportObject, metric_size_array) {
 
     // Promises are created on NewExpression or CallExpression of Promise (resolve, reject, all, race)
     if (node.type === 'NewExpression' && node.callee.name === 'Promise') {
@@ -237,7 +247,7 @@ function handleAnalysis(node, reportObject) {
             }
 
             if (callee.name === 'catch' || (callee.property && callee.property.name === 'catch')) {
-                handleCatches(reportObject, node);
+                handleCatches(reportObject, node, metric_size_array);
             }
 
         }
