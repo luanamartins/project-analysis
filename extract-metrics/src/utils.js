@@ -478,20 +478,6 @@ function hasErrorReassignment(body, errors) {
     return false;
 }
 
-function guid() {
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-        s4() + '-' + s4() + s4() + s4();
-}
-
-function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000)
-        .toString(16)
-        .substring(1);
-}
-
-// console.log(calculateIntersections([17, 21], [19, 26]));
-// console.log(calculateIntersections([2, 4], [12, 9]));
-
 module.exports = {
     getNumberOfLinesOld,
     traverse,
@@ -502,7 +488,6 @@ module.exports = {
     listPropertiesOf,
     getEmptyRepoObject,
     calculateIntersections,
-    guid,
     isAnErrorArgument,
     isString,
     isConsoleStatement,
