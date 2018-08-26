@@ -60,7 +60,7 @@ describe("Counting tests", function() {
         assert.equal(metricsObject.length, 2);
 
         const expected = [
-            { 'mech': 'promise', 'lines': 4, 'stmts': 4, 'file': filename },
+            { 'mech': 'promise', 'lines': 4, 'stmts': 4, 'has_error_arguments': false, 'file': filename },
             { 'mech': 'event', 'lines': 1, 'stmts': 1, 'file': filename }
         ];
 
@@ -80,11 +80,37 @@ describe("Counting tests", function() {
 
         const expected = [
             { 'mech': 'callback', 'lines': 1, 'stmts': 1, 'file': filename },
-            { 'mech': 'promise', 'lines': 4, 'stmts': 4, 'file': filename },
+            { 'mech': 'promise', 'lines': 4, 'stmts': 4, 'has_error_arguments': true, 'file': filename },
             { 'mech': 'event', 'lines': 1, 'stmts': 1, 'file': filename }
         ];
 
         assert.deepEqual(metricsObject, expected);
 
     });
+
+    it("assert5", function () {
+        const filename = suiteCasePath + 'assert5.js';
+
+        const saveObject = utilsModule.getMetricsOnFileObject();
+        const data = metricsModule.handleMetrics([filename], saveObject);
+        const metricsObject = data.metrics_handlers;
+
+        // console.log(metricsObject);
+
+        assert.notEqual(metricsObject, null);
+        assert.equal(metricsObject.length, 3);
+
+        const expected = [
+            { 'mech': constants.WINDOW_ADDEVENTLISTENER, 'lines': 7, 'stmts': 3, 
+                'has_error_arguments': true, 'file': filename },
+            { 'mech': constants.ELEMENT_ON_ERROR, 'lines': 1, 'stmts': 1, 
+                'has_error_arguments': true, 'file': filename },
+            { 'mech': constants.WINDOW_ON_ERROR, 'lines': 8, 'stmts': 5, 
+                'has_error_arguments': false, 'file': filename }
+        ];
+
+        assert.deepEqual(metricsObject, expected);
+
+    });
+
 });

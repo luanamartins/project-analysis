@@ -40,7 +40,7 @@ function handleCatches(reportObject, node, metric_size_array) {
                 'lines': lines,
                 'stmts': functionBody.body.length,
                 'has_error_arguments': hasErrorArguments
-        });
+            });
 
 
             if(hasErrorArguments === 0) {

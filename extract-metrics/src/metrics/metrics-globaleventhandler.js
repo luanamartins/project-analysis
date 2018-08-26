@@ -1,7 +1,8 @@
 const CONFIG = require("../../config");
+const constants = require('../constants')
 const utils = require(CONFIG["srcPath"] + 'utils');
 
-function handleAnalysis(node, reportObject) {
+function handleAnalysis(node, reportObject, metric_size_array) {
 
     if (node && node.type === 'AssignmentExpression') {
         const leftSideObject = node.left.object;
@@ -17,11 +18,14 @@ function handleAnalysis(node, reportObject) {
                     const numberOfLines = utils.getNumberOfLines(rightSideBlockStatement);
                     reportObject.numberOfWindowOnErrorLines += numberOfLines;
                     const errors = utils.getAllErrorArgs(utils.getIdentifiersNames(rightSide.params));
+                    const hasErrorArguments = errors.length !== 0;
 
-                    // empty handler
-                    // if (utils.isEmptyHandler(rightSideBlockStatement, errors, numberOfLines)) {
-                    //     reportObject.numberOfWindowOnErrorEmptyHandler++;
-                    // }
+                    metric_size_array.push({
+                        'mech': constants.WINDOW_ON_ERROR,
+                        'lines': numberOfLines,
+                        'stmts': rightSideBlockStatement.body.length,
+                        'has_error_arguments': hasErrorArguments
+                    });
 
                     // reasigning an error
                     if (utils.hasErrorReassignment(rightSideBlockStatement, errors)) {
@@ -93,6 +97,15 @@ function handleAnalysis(node, reportObject) {
                     const numberOfLines = utils.getNumberOfLines(rightSideBlockStatement);
                     reportObject.numberOfElementOnErrorLines += numberOfLines;
                     const errors = utils.getAllErrorArgs(utils.getIdentifiersNames(functionRightSide.params));
+
+                    const hasErrorArguments = errors.length !== 0;
+
+                    metric_size_array.push({
+                        'mech': constants.ELEMENT_ON_ERROR,
+                        'lines': numberOfLines,
+                        'stmts': rightSideBlockStatement.body.length,
+                        'has_error_arguments': hasErrorArguments
+                    });
 
                     // empty handler
                     if (numberOfLines === 0) {
@@ -168,12 +181,22 @@ function handleAnalysis(node, reportObject) {
 
             const arguments = node.arguments;
             const functionHandler = arguments[1];
+
             if (functionHandler && functionHandler.type === 'FunctionExpression') {
 
                 const functionBody = functionHandler.body;
                 const errors = utils.getAllErrorArgs(utils.getIdentifiersNames(functionHandler.params));
                 const numberOfLines = utils.getNumberOfLines(functionBody);
                 reportObject.numberOfWindowAddEventListenerLines += numberOfLines;
+
+                const hasErrorArguments = errors.length !== 0;
+
+                metric_size_array.push({
+                    'mech': constants.WINDOW_ADDEVENTLISTENER,
+                    'lines': numberOfLines,
+                    'stmts': functionBody.body.length,
+                    'has_error_arguments': hasErrorArguments
+                });
 
                 // reassigning an error
                 if (utils.hasErrorReassignment(functionBody, errors)) {

@@ -187,24 +187,25 @@ function handleRecountingMech(handlers) {
     const callback_handlers = handlers.filter((handler) => {return handler.mech === constants.CALLBACK});
     const promise_handlers = handlers.filter((handler) => {return handler.mech === constants.PROMISE});
     const events_handlers = handlers.filter((handler) => {return handler.mech === constants.EVENT});
+    const global_events_handlers = handlers.filter((handler) => {
+        return  handler.mech === constants.WINDOW_ON_ERROR ||
+                handler.mech === constants.ELEMENT_ON_ERROR ||
+                handler.mech === constants.WINDOW_ADDEVENTLISTENER;
+
+    });
 
     const callback_handlers_without_promises = remove(callback_handlers, promise_handlers);
     const callback_handlers_without_events = remove(callback_handlers_without_promises[0], events_handlers);
+    const callbacks_handlers_without_global = remove(callback_handlers_without_events[0], global_events_handlers);
 
-    const callbacks = callback_handlers_without_events[0];
+    const callbacks = callbacks_handlers_without_global[0];
     const promises = callback_handlers_without_promises[1];
     const events = callback_handlers_without_events[1];
+    const global = callbacks_handlers_without_global[1];
 
-    const result_2 = callbacks.concat(promises.concat(events));
+    const result_2 = callbacks.concat(promises.concat(events.concat(global)));
 
     let result = result_1.concat(result_2);
-    result = result.map((handler) => {
-        if(handler.hasOwnProperty(constants.HAS_ERROR_ARGUMENTS)) {
-            delete handler[constants.HAS_ERROR_ARGUMENTS];
-        }
-        return handler;
-    });
-
     return result;
 
 }
@@ -264,7 +265,7 @@ function getMetrics(ast, filepath, reportObject) {
         estraverse.traverse(ast, {
             enter: function (node) {
                 strict_mode_module.handleAnalysis(node, reportObject);
-                global_event_handler_module.handleAnalysis(node, reportObject);
+                global_event_handler_module.handleAnalysis(node, reportObject, metric_size_array);
                 try_catch_module.handleAnalysis(node, reportObject, metric_size_array);
                 promise_module.handleAnalysis(node, reportObject, metric_size_array);
                 async_await_module.handleAnalysis(node, reportObject, metric_size_array);

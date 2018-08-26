@@ -21,6 +21,9 @@ const resultServerDirectory = CONFIG['dataProjectPath'] + 'result/server/';
 const saveClientDirectory = CONFIG['saveMetricFilesPath'] + 'client/';
 const saveServerDirectory = CONFIG['saveMetricFilesPath'] + 'server/';
 
+const clientMetricSizeDirectory = CONFIG['dataProjectPath'] + 'result/metric-size/client/';
+const serverMetricSizeDirectory = CONFIG['dataProjectPath'] + 'result/metric-size/server/';
+
 const clientRepoFilepath = CONFIG['dataProjectPath'] + 'client.txt';
 const serverRepoFilepath = CONFIG['dataProjectPath'] + 'server.txt';
 
@@ -32,6 +35,7 @@ function main() {
     	repoDirectory: clientDirectory,
 		repoFilepath: clientRepoFilepath,
 		resultDirectory: resultClientDirectory,
+        metricSizeDirectory: clientMetricSizeDirectory,
 		failedFilepath: failedClientFilepath
     };
 
@@ -45,6 +49,7 @@ function main() {
     	repoDirectory: serverDirectory,
 		repoFilepath: serverRepoFilepath,
 		resultDirectory: resultServerDirectory,
+        metricSizeDirectory: serverMetricSizeDirectory,
 		failedFilepath: failedServerFilepath
     };
 
@@ -113,9 +118,9 @@ function extractMetricsFromFiles(repositoryName, saveObject, options, files, cal
     }
 
     if (metricsData.metrics_handlers) {
-        console.log(metrics_handlers);
-        const handlers_data = metricsData.metrics_handlers.join('\n');
-        // filesModule.appendDataToFile(options.failedFilepath, failedFilesData);
+        // console.log(metrics_handlers);
+        const handlersData = metricsData.metrics_handlers.join('\n');
+        filesModule.appendDataToFile(options.metricSizeDirectory, handlersData);
     }
 
     callback(null);

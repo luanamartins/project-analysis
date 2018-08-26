@@ -331,11 +331,9 @@
   "callbacksNumberOfHandlersThatRereturns": 0,
   "callbacksNumberOfHandlersContinues": 0,
   "callbacksNumberOfHandlersThatContinues": 0,
-
   "callbacksNumberOfHandlersBreaks": 0,
   "callbacksNumberOfHandlersThatBreaks": 0,
   "callbacksNumberOfHandlersBreaksOnly": 0,
-
   "callbacksNumberOfLines": 0,
   "callbacksNumberOfLinesStart": [],
   "callbacksNumberOfLinesEnd": []

@@ -117,12 +117,37 @@ def save_violinplot(df, image_path, xlabel, ylabel):
     # Present no lines in the grid
     sns.set(style='whitegrid')
 
+    # Apply log function to dataframe
+    df['values'] = df['values'].apply(np.log)
+
     # Create plot and set labels
-    g = sns.violinplot(x='types', y='values', data=df, cut=0)
+    g = sns.violinplot(x='types', y='values', data=df, cut=0, truncate=True)
     g.set(xlabel=xlabel, ylabel=ylabel)
 
     # Rescale y-axis to log function
-    g.set_yscale('log')
+    # g.set_yscale('log')
+
+    # Save figure
+    plt.savefig(image_path)
+
+
+def save_violinplot_hue(df, image_path, xlabel, ylabel):
+    # Start a new figure
+    plt.figure()
+
+    # Present no lines in the grid
+    sns.set(style='whitegrid')
+
+    # Apply log function to dataframe
+    df['values'] = df['values'].apply(np.log)
+
+    # Create plot and set labels
+    tips = sns.load_dataset('tips')
+    g = sns.violinplot(x='day', y='total_bill', hue='smoker', data=tips, palette='muted', split=True)
+    g.set(xlabel=xlabel, ylabel=ylabel)
+
+    # Rescale y-axis to log function
+    # g.set_yscale('log')
 
     # Save figure
     plt.savefig(image_path)
@@ -136,7 +161,7 @@ def save_lineplot(df, image_path, xlabel, ylabel):
     # Create plot and set labels
     # df = pd.DataFrame(dict(time=np.arange(500), value=np.random.randn(500).cumsum()))
     # sns.relplot(x='time', y='value', kind='line', data=df)
-    sns.relplot(x=xlabel, y=ylabel, kind='line', data=df)
+    sns.relplot(x=xlabel, y=ylabel, kind='line', estimator=None, data=df)
 
     # Set grid style
     sns.set(style='darkgrid')
@@ -184,5 +209,8 @@ save_boxplot(df_removed_outliers, image_path + 'boxplot-without-outliers.png', '
 save_violinplot(df, image_path + 'violinplot.png', 'abstractions', '# of handlers (log scale)')
 save_violinplot(df_removed_outliers, image_path + 'violinplot-without-outliers.png', 'abstractions', '# of handlers (log scale)')
 
+
+# df_handlers = get_handlers()
 save_lineplot(df, image_path + 'lineplot.png', 'types', 'values')
 
+save_violinplot_hue(df, image_path + 'violinplot-classes.png', '', '')
