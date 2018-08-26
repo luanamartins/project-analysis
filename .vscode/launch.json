@@ -7,7 +7,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Mocha Test Specific",
+            "name": "metrics-size.spec.js",
             "program": "${workspaceFolder}/extract-metrics/node_modules/mocha/bin/_mocha",
             "args": [
                 "-u",
@@ -15,7 +15,22 @@
                 "--timeout",
                 "999999",
                 "--colors",
-                "${workspaceFolder}/extract-metrics/test/spec/globaleventhandler.spec.js"
+                "${workspaceFolder}/extract-metrics/test/spec/metrics-size.spec.js"
+            ],
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug index.js",
+            "program": "${workspaceFolder}/extract-metrics/node_modules/mocha/bin/_mocha",
+            "args": [
+                "-u",
+                "tdd",
+                "--timeout",
+                "999999",
+                "--colors",
+                "${workspaceFolder}/extract-metrics/src/index.js"
             ],
             "internalConsoleOptions": "openOnSessionStart"
         },
