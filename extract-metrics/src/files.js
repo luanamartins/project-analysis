@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const json2csv = require('json2csv').parse;
 
 function readFileSync(filepath) {
     return fs.readFileSync(filepath, 'utf8');
@@ -13,22 +14,11 @@ function appendDataToFile(filepath, data) {
     fs.appendFileSync(filepath, data);
 }
 
-function writeCsvFile(filepath, headers, data) {
-    const json2csv = require('json2csv').parse;
-    const extension = '.csv';
-    // var fields = ['field1', 'field2', 'field3'];
-    //
-    // var data = [
-    //     {
-    //         "field1": "t",
-    //         "field2": "t",
-    //         "field3": "t"
-    //     }
-    // ];
-
-    const opts = { headers };
-    const csv = json2csv(data, opts);
+function writeCsvFile(filepath, data) {
     try {
+        const fields = ['mech', 'lines', 'stmts', 'has_error_arguments'];
+        const opts = { fields };
+        const csv = json2csv(data, opts);
         fs.writeFileSync(filepath, csv, 'utf8');
         console.log('file saved');
     } catch (error) {

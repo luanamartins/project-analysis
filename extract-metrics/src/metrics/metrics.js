@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const temp = require('fs-temp');
 const estraverse = require('estraverse');
-const uglify_es = require('uglify-es');
+const uglify = require('uglify-es');
 const remove_empty_lines = require('remove-blank-lines');
 
 const config = require("../../config");
@@ -131,7 +131,7 @@ function executeBabelAndUglify(filepath) {
         compress: false
     };
 
-    const result = uglify_es.minify(code, options);
+    const result = uglify.minify(code, options);
 
     if (result.error) {
         throw result.error;

@@ -32,10 +32,13 @@ function handleAnalysis(node, reportObject, metric_size_array) {
                     const lines = utils.getNumberOfLines(handlerFunction);
                     const handlerFunctionBody = handlerFunction.body.body;
 
+                    const hasErrorArguments = utils.hasAnErrorArgument(handlerParams);
+
                     metric_size_array.push({
                         'mech': constants.EVENT,
                         'lines': lines,
-                        'stmts': handlerFunctionBody.length
+                        'stmts': handlerFunctionBody.length,
+                        'has_error_arguments': hasErrorArguments
                     });
 
                     if (handlerFunction && handlerFunction.type === 'FunctionExpression') {

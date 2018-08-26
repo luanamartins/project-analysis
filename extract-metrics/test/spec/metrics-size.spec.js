@@ -17,13 +17,12 @@ describe("Counting tests", function() {
         assert.notEqual(metricsObject, null);
         assert.equal(metricsObject.length, 2);
 
-        const first_obj = metricsObject[0];
-        assert.equal(first_obj.lines, 1);
-        assert.equal(first_obj.stmts, 1);
+        const expected = [
+            { 'mech': constants.TRY_CATCH, 'lines': 1, 'stmts': 1, 'file': filename },
+            { 'mech': constants.TRY_CATCH, 'lines': 2, 'stmts': 2, 'file': filename }
+        ];
 
-        const second_obj = metricsObject[1];
-        assert.equal(second_obj.lines, 2);
-        assert.equal(second_obj.stmts, 2);
+        assert.deepEqual(metricsObject, expected);
 
     });
 
@@ -36,18 +35,14 @@ describe("Counting tests", function() {
         assert.notEqual(metricsObject, null);
         assert.equal(metricsObject.length, 4);
 
-        const async_data = metricsObject.filter((obj) => { return obj.mech === 'async-await'});
+        const expected = [
+            { 'mech': constants.TRY_CATCH, 'lines': 6, 'stmts': 6, 'file': filename },
+            { 'mech': constants.TRY_CATCH, 'lines': 1, 'stmts': 1, 'file': filename },
+            { 'mech': constants.ASYNC_AWAIT, 'lines': 1, 'stmts': 1, 'file': filename },
+            { 'mech': constants.ASYNC_AWAIT, 'lines': 2, 'stmts': 2, 'file': filename }
+        ];
 
-        const first_obj = async_data[0];
-        assert.equal(first_obj.mech, 'async-await');
-        assert.equal(first_obj.lines, 1);
-        assert.equal(first_obj.stmts, 1);
-
-        const second_obj = async_data[1];
-        assert.equal(second_obj.mech, 'async-await');
-        assert.equal(second_obj.lines, 2);
-        assert.equal(second_obj.stmts, 2);
-
+        assert.deepEqual(metricsObject, expected);
     });
 
     it("assert3", function () {
@@ -60,8 +55,8 @@ describe("Counting tests", function() {
         assert.equal(metricsObject.length, 2);
 
         const expected = [
-            { 'mech': 'promise', 'lines': 4, 'stmts': 4, 'has_error_arguments': false, 'file': filename },
-            { 'mech': 'event', 'lines': 1, 'stmts': 1, 'file': filename }
+            { 'mech': constants.PROMISE, 'lines': 4, 'stmts': 4, 'has_error_arguments': false, 'file': filename },
+            { 'mech': constants.EVENT, 'lines': 1, 'stmts': 1, 'has_error_arguments': true, 'file': filename }
         ];
 
         assert.deepEqual(metricsObject, expected);
@@ -79,9 +74,9 @@ describe("Counting tests", function() {
         assert.equal(metricsObject.length, 3);
 
         const expected = [
-            { 'mech': 'callback', 'lines': 1, 'stmts': 1, 'file': filename },
-            { 'mech': 'promise', 'lines': 4, 'stmts': 4, 'has_error_arguments': true, 'file': filename },
-            { 'mech': 'event', 'lines': 1, 'stmts': 1, 'file': filename }
+            { 'mech': constants.CALLBACK, 'lines': 1, 'stmts': 1, 'file': filename },
+            { 'mech': constants.PROMISE, 'lines': 4, 'stmts': 4, 'has_error_arguments': true, 'file': filename },
+            { 'mech': constants.EVENT, 'lines': 1, 'stmts': 1, 'has_error_arguments': true, 'file': filename }
         ];
 
         assert.deepEqual(metricsObject, expected);
@@ -94,8 +89,6 @@ describe("Counting tests", function() {
         const saveObject = utilsModule.getMetricsOnFileObject();
         const data = metricsModule.handleMetrics([filename], saveObject);
         const metricsObject = data.metrics_handlers;
-
-        // console.log(metricsObject);
 
         assert.notEqual(metricsObject, null);
         assert.equal(metricsObject.length, 3);

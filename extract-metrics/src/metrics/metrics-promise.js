@@ -33,7 +33,7 @@ function handleCatches(reportObject, node, metric_size_array) {
 
             const functionBody = firstArgument.body;
             const functionParams = utils.getIdentifiersNames(firstArgument.params);
-            const hasErrorArguments = functionParams.length !== 0;
+            const hasErrorArguments = utils.hasAnErrorArgument(functionParams);
 
             metric_size_array.push({
                 'mech': constants.PROMISE,

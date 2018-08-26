@@ -2,62 +2,79 @@ const path = require('path');
 const async = require('async');
 const fs = require('fs');
 
-const CONFIG = require("../config");
+const config = require("../config");
 
-const repoModule = require(CONFIG["srcPath"] + 'repository.js');
-const metricsModule = require(CONFIG["srcPath"] + 'metrics/metrics.js');
-const filesModule = require(CONFIG["srcPath"] + 'files.js');
-const utils = require(CONFIG["srcPath"] + 'utils.js');
+const repoModule = require(config["srcPath"] + 'repository.js');
+const metricsModule = require(config["srcPath"] + 'metrics/metrics.js');
+const filesModule = require(config["srcPath"] + 'files.js');
+const utils = require(config["srcPath"] + 'utils.js');
 
-const clientDirectory = CONFIG['dataProjectPath'] + 'repo/client';
-const serverDirectory = CONFIG['dataProjectPath'] + 'repo/server';
+const clientDirectory = config['dataProjectPath'] + 'repo/client';
+const serverDirectory = config['dataProjectPath'] + 'repo/server';
+const testDirectory = config['dataProjectPath'] + 'test-repo';
 
-const failedClientFilepath = CONFIG['dataProjectPath'] + 'result/failed-files-client.txt';
-const failedServerFilepath = CONFIG['dataProjectPath'] + 'result/failed-files-server.txt';
+const failedClientFilepath = config['dataProjectPath'] + 'result/failed-files-client.txt';
+const failedServerFilepath = config['dataProjectPath'] + 'result/failed-files-server.txt';
+const failedTestFilepath = config['dataProjectPath'] + 'test/test-result/failed-files.txt';
 
-const resultClientDirectory = CONFIG['dataProjectPath'] + 'result/client/';
-const resultServerDirectory = CONFIG['dataProjectPath'] + 'result/server/';
+const resultClientDirectory = config['dataProjectPath'] + 'result/client/';
+const resultServerDirectory = config['dataProjectPath'] + 'result/server/';
+const resultTestDirectory = config['dataProjectPath'] + 'test/test-result/';
 
-const saveClientDirectory = CONFIG['saveMetricFilesPath'] + 'client/';
-const saveServerDirectory = CONFIG['saveMetricFilesPath'] + 'server/';
+const saveClientDirectory = config['saveMetricFilesPath'] + 'client/';
+const saveServerDirectory = config['saveMetricFilesPath'] + 'server/';
+const saveTestDirectory = config['dataProjectPath'] + 'test/test-result/';
 
-const clientMetricSizeDirectory = CONFIG['dataProjectPath'] + 'result/metric-size/client/';
-const serverMetricSizeDirectory = CONFIG['dataProjectPath'] + 'result/metric-size/server/';
+const clientMetricSizeDirectory = config['dataProjectPath'] + 'result/metric-size/client/';
+const serverMetricSizeDirectory = config['dataProjectPath'] + 'result/metric-size/server/';
+const testMetricSizeDirectory = config['dataProjectPath'] + 'test/test-result/metric-size/';
 
-const clientRepoFilepath = CONFIG['dataProjectPath'] + 'client.txt';
-const serverRepoFilepath = CONFIG['dataProjectPath'] + 'server.txt';
+const clientRepoFilepath = config['dataProjectPath'] + 'client.txt';
+const serverRepoFilepath = config['dataProjectPath'] + 'server.txt';
+const testRepoFilepath = config['dataProjectPath'] + 'test.txt';
 
 function main() {
     const start = new Date();
     const hrstart = process.hrtime();
+
+    const testOptions = {
+        repoDirectory: testDirectory,
+        repoFilepath: testRepoFilepath,
+        resultDirectory: resultTestDirectory,
+        metricSizeDirectory: testMetricSizeDirectory,
+        failedFilepath: failedTestFilepath
+    };
+
+    const saveObject = utils.getMetricsOnFileObject();
+    processRepos(testOptions, saveObject);
     
-    const clientOptions = {
-    	repoDirectory: clientDirectory,
-		repoFilepath: clientRepoFilepath,
-		resultDirectory: resultClientDirectory,
-        metricSizeDirectory: clientMetricSizeDirectory,
-		failedFilepath: failedClientFilepath
-    };
+    // const clientOptions = {
+    // 	repoDirectory: clientDirectory,
+	// 	repoFilepath: clientRepoFilepath,
+	// 	resultDirectory: resultClientDirectory,
+    //     metricSizeDirectory: clientMetricSizeDirectory,
+	// 	failedFilepath: failedClientFilepath
+    // };
 
-    const saveObjectClient = utils.getMetricsOnFileObject();
-    processRepos(clientOptions, saveObjectClient);
+    // const saveObjectClient = utils.getMetricsOnFileObject();
+    // processRepos(clientOptions, saveObjectClient);
 
-    // save filenames
-    saveFilenames(saveClientDirectory, saveObjectClient);
+    // // save filenames
+    // saveFilenameOfMetrics(saveClientDirectory, saveObjectClient);
 
-    const serverOptions = {
-    	repoDirectory: serverDirectory,
-		repoFilepath: serverRepoFilepath,
-		resultDirectory: resultServerDirectory,
-        metricSizeDirectory: serverMetricSizeDirectory,
-		failedFilepath: failedServerFilepath
-    };
+    // const serverOptions = {
+    // 	repoDirectory: serverDirectory,
+	// 	repoFilepath: serverRepoFilepath,
+	// 	resultDirectory: resultServerDirectory,
+    //     metricSizeDirectory: serverMetricSizeDirectory,
+	// 	failedFilepath: failedServerFilepath
+    // };
 
-    const saveObjectServer = utils.getMetricsOnFileObject();
-    processRepos(serverOptions, saveObjectServer);
+    // const saveObjectServer = utils.getMetricsOnFileObject();
+    // processRepos(serverOptions, saveObjectServer);
 
-    // save filenames
-    saveFilenames(saveServerDirectory, saveObjectServer);
+    // // save filenames
+    // saveFilenameOfMetrics(saveServerDirectory, saveObjectServer);
 
     console.log('Finished');
     const end = new Date() - start, hrend = process.hrtime(hrstart);
@@ -66,7 +83,7 @@ function main() {
     console.info("Execution time (hr): %ds %dms", hrend[0], hrend[1]/1000000);
 }
 
-function saveFilenames(directory, saveObject) {
+function saveFilenameOfMetrics(directory, saveObject) {
     const metricList = utils.listPropertiesOf(saveObject);
 
     metricList.forEach((metric) => {
@@ -74,9 +91,7 @@ function saveFilenames(directory, saveObject) {
         const content = saveObject[metric].join('\n');
         fs.writeFileSync(toSaveFilepath, content, 'utf8');
     });
-
 }
-
 
 function processRepos(options, saveObject) {
 
@@ -119,8 +134,9 @@ function extractMetricsFromFiles(repositoryName, saveObject, options, files, cal
 
     if (metricsData.metrics_handlers) {
         // console.log(metrics_handlers);
-        const handlersData = metricsData.metrics_handlers.join('\n');
-        filesModule.appendDataToFile(options.metricSizeDirectory, handlersData);
+        // const handlersData = metricsData.metrics_handlers.join('\n');
+        const filepath = options.metricSizeDirectory + repositoryName + '.csv';
+        filesModule.writeCsvFile(filepath, metricsData.metrics_handlers);
     }
 
     callback(null);
