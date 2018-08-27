@@ -7,15 +7,8 @@ function handleAnalysis(node, reportObject, metric_size_array) {
     const eventListeningMethods = ['on', 'once'];
     const eventRaisingMethods = ['emit'];
 
-    // eventsNumberOfEventOnWithUniqueConsole
-    // eventsNumberOfEventOnWithUniqueStatement
-    //
-    // eventsNumberOfEventOnceWithUniqueConsole
-    // eventsNumberOfEventOnceWithUniqueStatement
-
     if (node.type === 'CallExpression') {
         if (node.callee.property) {
-
             const methodName = node.callee.property.name;
             const callExpressionArguments = node.arguments.length;
             const firstArgObject = node.arguments[0];
@@ -23,15 +16,12 @@ function handleAnalysis(node, reportObject, metric_size_array) {
             firstArgObject.value ? utils.isAnErrorArgument(firstArgObject.value) : false;
 
             if (callExpressionArguments > 1 && eventListeningMethods.includes(methodName)) {
-
                 const handlerFunction = node.arguments[1];
 
                 if (isFirstArgErrorHandling && handlerFunction.type === 'FunctionExpression') {
-
                     const handlerParams = utils.getIdentifiersNames(handlerFunction.params);
                     const lines = utils.getNumberOfLines(handlerFunction);
                     const handlerFunctionBody = handlerFunction.body.body;
-
                     const hasErrorArguments = utils.hasAnErrorArgument(handlerParams);
 
                     metric_size_array.push({
@@ -53,7 +43,6 @@ function handleAnalysis(node, reportObject, metric_size_array) {
 
                         if (methodName === 'on') {
                             reportObject.eventsNumberOfEventMethodsOn++;
-
                             reportObject.eventsNumberOfEventOnLines += lines;
                             const location = handlerFunction.loc;
                             reportObject.eventsNumberOfEventOnLinesStart.push(location.start.line);

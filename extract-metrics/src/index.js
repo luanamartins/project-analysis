@@ -124,8 +124,8 @@ function extractMetricsFromFiles(repositoryName, saveObject, options, files, cal
 
     const repoObject = utils.getEmptyRepoObject();
     const headers = utils.listPropertiesOf(repoObject);
-
-    filesModule.writeCsvFile(options.resultDirectory + repositoryName + '.csv', headers, metricsData.metrics);
+    const filepathToSave = options.resultDirectory + repositoryName + '.csv';
+    filesModule.writeCsvFile(filepathToSave, headers, metricsData.metrics);
 
     if (metricsData.failedFiles) {
         const failedFilesData = metricsData.failedFiles.join('\n');
@@ -133,8 +133,6 @@ function extractMetricsFromFiles(repositoryName, saveObject, options, files, cal
     }
 
     if (metricsData.metrics_handlers) {
-        // console.log(metrics_handlers);
-        // const handlersData = metricsData.metrics_handlers.join('\n');
         const filepath = options.metricSizeDirectory + repositoryName + '.csv';
         const fields = ['mech', 'lines', 'stmts', 'has_error_arguments'];
         filesModule.writeCsvFile(filepath, fields, metricsData.metrics_handlers);
