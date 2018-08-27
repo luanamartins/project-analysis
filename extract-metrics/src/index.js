@@ -136,7 +136,8 @@ function extractMetricsFromFiles(repositoryName, saveObject, options, files, cal
         // console.log(metrics_handlers);
         // const handlersData = metricsData.metrics_handlers.join('\n');
         const filepath = options.metricSizeDirectory + repositoryName + '.csv';
-        filesModule.writeCsvFile(filepath, metricsData.metrics_handlers);
+        const fields = ['mech', 'lines', 'stmts', 'has_error_arguments'];
+        filesModule.writeCsvFile(filepath, fields, metricsData.metrics_handlers);
     }
 
     callback(null);

@@ -14,10 +14,9 @@ function appendDataToFile(filepath, data) {
     fs.appendFileSync(filepath, data);
 }
 
-function writeCsvFile(filepath, data) {
+function writeCsvFile(filepath, headers, data) {
     try {
-        const fields = ['mech', 'lines', 'stmts', 'has_error_arguments'];
-        const opts = { fields };
+        const opts = { headers };
         const csv = json2csv(data, opts);
         fs.writeFileSync(filepath, csv, 'utf8');
         console.log('file saved');
