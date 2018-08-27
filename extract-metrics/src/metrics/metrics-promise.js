@@ -43,8 +43,8 @@ function handleCatches(reportObject, node, metric_size_array) {
             });
 
 
-            if(hasErrorArguments === 0) {
-                reportObject.promiseNumberOfCatchesFunctionWithNoArg++;
+            if(hasErrorArguments === false) {
+                reportObject.promiseNumberOfCatchesFunctionWithNoErrorArg++;
             }
 
             if (lines === 0) {

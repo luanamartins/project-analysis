@@ -130,7 +130,7 @@
   "promiseNumberOfEmptyFunctionsOnPromiseCatches": 0,
   "promiseNumberOfFunctionsOnCatchesNoUsageOfErrorArgument": 0,
   "promiseNumberOfCatchesWithNoArg": 0,
-  "promiseNumberOfCatchesFunctionWithNoArg": 0,
+  "promiseNumberOfCatchesFunctionWithNoErrorArg": 0,
   "promiseNumberOfCatchesWithUniqueConsole": 0,
   "promiseNumberOfCatchesWithUniqueStatement": 0,
   "promiseNumberOfCatchesAlertOnly": 0,

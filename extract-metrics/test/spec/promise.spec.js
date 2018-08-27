@@ -765,7 +765,7 @@ describe("Promises tests", function() {
 
         assert.equal(metricsObject.promiseNumberOfFunctionsOnCatchesNoUsageOfErrorArgument, 1);
         assert.equal(metricsObject.promiseNumberOfCatchesWithNoArg, 2);
-        assert.equal(metricsObject.promiseNumberOfCatchesFunctionWithNoArg, 3);
+        assert.equal(metricsObject.promiseNumberOfCatchesFunctionWithNoErrorArg, 3);
         assert.equal(metricsObject.promiseNumberOfCatchesThatThrows, 5);
         assert.equal(metricsObject.promiseNumberOfCatchesThatRethrows, 1);
     });
