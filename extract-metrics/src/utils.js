@@ -1,6 +1,7 @@
 const sloc = require('sloc');
 const path = require('path');
 const jsonfile = require('jsonfile');
+const _ = require('lodash');
 
 const config = require("../config");
 
@@ -294,6 +295,25 @@ function getNodeTypes(functionDeclaration, type) {
     return nodeTypes;
 }
 
+function isEqual(obj1, obj2, omitProperties) {
+    const result = _.isEqual(
+        _.omit(obj1, omitProperties),
+        _.omit(obj2, omitProperties)
+    );
+    return result;      
+}
+
+function deletePropertyFromAllItems(handlers, property) {
+    const result = handlers.map((handler) => {
+        if(handler.hasOwnProperty(property)) {
+            delete handler[property];
+        }
+        return handler;
+    });
+
+    return result;
+}
+
 function useAnyArguments(body, args) {
     let hasErrorArgs = false;
     if (Array.isArray(args) && args.length > 0) {
@@ -333,6 +353,11 @@ function trailLastSlash(str) {
 function getEmptyRepoObject() {
     const jsonFilepath = path.join(config["srcPath"], 'report-object.json');
     return jsonfile.readFileSync(jsonFilepath);
+}
+
+function getEmptyMetricSizeObject() {
+    const filepath = path.join(config["srcPath"], 'metric-size.json');
+    return jsonfile.readFileSync(filepath);
 }
 
 function getMetricsOnFileObject() {
@@ -466,6 +491,29 @@ function getNumberOfReturnUsingErrors(returnStatements, errors) {
     return result;
 }
 
+function hasAlertMethodCalling(body) {
+    const expressions = getStatementsByType(body, 'CallExpression');
+    for (let expression of expressions) {
+        const callee = expression.callee;
+        if(callee && callee.name === 'alert') {
+            return true;
+        }
+    }
+    return false;
+}
+
+function hasConsoleLog(body) {
+    const expressions = getStatementsByType(body, 'CallExpression');
+    for (let expression of expressions) {
+        const callee = expression.callee;
+        if(callee.object && callee.object.name === 'console' && 
+        callee.property && callee.property.name === 'log') {
+            return true;
+        }
+    }
+    return false;
+}
+
 function hasErrorReassignment(body, errors) {
     const assignments = getStatementsByType(body, 'AssignmentExpression');
     for (let i = 0; i < assignments.length; i++) {
@@ -517,5 +565,10 @@ module.exports = {
     isNotThrowingErrorArg,
     isAlertCallExpression,
     hasErrorReassignment,
-    getMetricsOnFileObject
+    getMetricsOnFileObject,
+    deletePropertyFromAllItems,
+    getEmptyMetricSizeObject,
+    hasAlertMethodCalling,
+    hasConsoleLog,
+    isEqual
 };

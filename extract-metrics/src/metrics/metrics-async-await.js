@@ -1,4 +1,5 @@
 const config = require("../../config");
+const constants = require('../constants');
 const utils = require(config["srcPath"] + 'utils');
 
 function handleAnalysis(node, reportObject, metric_size_array) {
@@ -17,7 +18,7 @@ function handleAnalysis(node, reportObject, metric_size_array) {
         const catchClauses = utils.getNodeTypes(node.body, 'CatchClause');
         reportObject.asyncAwaitNumberOfCatches += catchClauses.length;
 
-        catchClauses.map((catchClause) => handleCatchClauses(errorArgs, catchClause, reportObject, metric_size_array));
+        catchClauses.map((catchClause) => handleCatchClause(errorArgs, catchClause, reportObject, metric_size_array));
 
         const finallyStatements = getFinallyStatements(tryStatements);
         reportObject.asyncAwaitNumberOfFinallies = finallyStatements.length;
@@ -29,17 +30,17 @@ function handleAnalysis(node, reportObject, metric_size_array) {
     }
 }
 
-function handleCatchClauses(errorArgs, catchClause, reportObject, metric_size_array) {
-    const catchClauseErrorArgs = utils.getIdentifiersNames(catchClause.param);
+function handleCatchClause(errorArgs, catchClause, reportObject, metric_size_array) {
+    const catchClauseParameters = utils.getIdentifiersNames(catchClause.param);
     const catchClauseBody = catchClause.body;
 
     const numberOfLines = utils.getNumberOfLines(catchClauseBody);
 
-    metric_size_array.push({
-        'mech': 'async-await',
-        'lines': numberOfLines,
-        'stmts': catchClauseBody.body.length
-    });
+    const metricSizeObject = utils.getEmptyMetricSizeObject();
+    metricSizeObject.mech = constants.ASYNC_AWAIT;
+    metricSizeObject.lines = numberOfLines;
+    metricSizeObject.stmts = catchClauseBody.body.length;
+    metricSizeObject.has_error_arguments = catchClauseParameters.length > 0;
 
     reportObject.asyncAwaitNumberOfCatchesLines += numberOfLines;
 
@@ -50,8 +51,10 @@ function handleCatchClauses(errorArgs, catchClause, reportObject, metric_size_ar
     // Left the catch block empty
     if (numberOfLines === 0) {
         reportObject.asyncAwaitNumberOfEmptyCatches++;
-    } else if (!utils.useAnyArguments(catchClauseBody, catchClauseErrorArgs)) {
+        metricSizeObject.empty = true;
+    } else if (!utils.useAnyArguments(catchClauseBody, catchClauseParameters)) {
         reportObject.asyncAwaitNumberOfCatchesNoUsageOfErrorArgument++;
+        metricSizeObject.noUsageOfErrorArg = true;
     }
 
     // Catch clause has one statement only
@@ -69,8 +72,17 @@ function handleCatchClauses(errorArgs, catchClause, reportObject, metric_size_ar
         }
     }
 
-    if (utils.hasErrorReassignment(catchClauseBody, catchClauseErrorArgs)) {
+    if(utils.hasConsoleLog(catchClauseBody)) {
+        metricSizeObject.consoleLog = true;
+    }
+
+    if(utils.hasAlertMethodCalling(catchClauseBody)) {
+        metricSizeObject.alert = true;
+    }
+
+    if (utils.hasErrorReassignment(catchClauseBody, catchClauseParameters)) {
         reportObject.asyncAwaitNumberOfErrorReassigning++;
+        metricSizeObject.reassigningError = true;
     }
 
     // Catch clause has await expressions which receives an error argument
@@ -80,7 +92,7 @@ function handleCatchClauses(errorArgs, catchClause, reportObject, metric_size_ar
         const awaitArgument = awaitExpression.argument;
         if (awaitArgument.type === 'CallExpression') {
             const awaitArgs = utils.getIdentifiersNames(awaitArgument.arguments);
-            if (utils.containsAnyErrorArgument(catchClauseErrorArgs, awaitArgs)) {
+            if (utils.containsAnyErrorArgument(catchClauseParameters, awaitArgs)) {
                 reportObject.asyncAwaitNumberOfAwaitErrorArgsOnCatches++;
             }
         }
@@ -101,6 +113,7 @@ function handleCatchClauses(errorArgs, catchClause, reportObject, metric_size_ar
     // Throws literal types
     if (utils.hasLiteral(throwStatements)) {
         reportObject.asyncAwaitNumberOfHandlersThatThrowsLiteral++;
+        metricSizeObject.throwLiteral = true;
 
         if (numberOfLines === 1) {
             reportObject.asyncAwaitNumberOfHandlersThatThrowsLiteralOnly++;
@@ -109,6 +122,8 @@ function handleCatchClauses(errorArgs, catchClause, reportObject, metric_size_ar
 
     if (utils.hasUndefined(throwStatements)) {
         reportObject.asyncAwaitNumberOfHandlersThatThrowsUndefined++;
+        metricSizeObject.throwUndefined = true;
+
         if (numberOfLines === 1) {
             reportObject.asyncAwaitNumberOfHandlersThatThrowsUndefinedOnly++;
         }
@@ -116,6 +131,8 @@ function handleCatchClauses(errorArgs, catchClause, reportObject, metric_size_ar
 
     if (utils.hasNull(throwStatements)) {
         reportObject.asyncAwaitNumberOfHandlersThatThrowsNull++;
+        metricSizeObject.throwNull = true;
+
         if (numberOfLines === 1) {
             reportObject.asyncAwaitNumberOfHandlersThatThrowsNullOnly++;
         }
@@ -123,6 +140,7 @@ function handleCatchClauses(errorArgs, catchClause, reportObject, metric_size_ar
 
     if (utils.hasErrorObject(throwStatements)) {
         reportObject.asyncAwaitNumberOfHandlersThatThrowsErrorObject++;
+        metricSizeObject.throwErrorObject = true;
     }
 
     // Throws Error objects
@@ -132,11 +150,12 @@ function handleCatchClauses(errorArgs, catchClause, reportObject, metric_size_ar
     }
 
     // Number of rethrows an error argument
-    const numberOfRethrows = utils.reuseAnErrorStatements(throwStatements, catchClauseErrorArgs);
+    const numberOfRethrows = utils.reuseAnErrorStatements(throwStatements, catchClauseParameters);
     reportObject.asyncAwaitNumberOfHandlersRethrows += numberOfRethrows;
 
     if(numberOfRethrows > 0){
         reportObject.asyncAwaitNumberOfHandlersThatRethrows++;
+        metricSizeObject.rethrow = true;
     }
 
     // Counts number of returns
@@ -148,7 +167,7 @@ function handleCatchClauses(errorArgs, catchClause, reportObject, metric_size_ar
     reportObject.asyncAwaitNumberOfHandlersReturns += numberOfReturnStatements;
     reportObject.asyncAwaitNumberOfHandlersReturnsLiteral += numberOfLiterals;
     reportObject.asyncAwaitNumberOfHandlersReturnsErrorObject += numberOfErrorObjects;
-    reportObject.asyncAwaitNumberOfHandlersThatRereturns += utils.reuseAnErrorStatements(returnStatements, catchClauseErrorArgs);
+    reportObject.asyncAwaitNumberOfHandlersThatRereturns += utils.reuseAnErrorStatements(returnStatements, catchClauseParameters);
 
     // Number of catches having at least one return statement
     if (numberOfReturnStatements > 0) {
@@ -157,7 +176,7 @@ function handleCatchClauses(errorArgs, catchClause, reportObject, metric_size_ar
 
     if (numberOfLiterals > 0) {
         reportObject.asyncAwaitNumberOfHandlersThatReturnsLiteral++;
-
+        metricSizeObject.returnLiteral = true;
         if (numberOfLines === 1) {
             reportObject.asyncAwaitNumberOfHandlersThatReturnsLiteralOnly++;
         }
@@ -165,7 +184,7 @@ function handleCatchClauses(errorArgs, catchClause, reportObject, metric_size_ar
 
     if(utils.hasUndefined(returnStatements)) {
         reportObject.asyncAwaitNumberOfHandlersThatReturnsUndefined++;
-
+        metricSizeObject.returnUndefined = true;
         if (numberOfLines === 1) {
             reportObject.asyncAwaitNumberOfHandlersThatReturnsUndefinedOnly++;
         }
@@ -173,6 +192,7 @@ function handleCatchClauses(errorArgs, catchClause, reportObject, metric_size_ar
 
     if (utils.hasNull(returnStatements)) {
         reportObject.asyncAwaitNumberOfHandlersThatReturnsNull++;
+        metricSizeObject.returnNull = true;
         if (numberOfLines === 1) {
             reportObject.asyncAwaitNumberOfHandlersThatReturnsNullOnly++;
         }
@@ -180,6 +200,12 @@ function handleCatchClauses(errorArgs, catchClause, reportObject, metric_size_ar
 
     if(utils.hasErrorObject(returnStatements)) {
         reportObject.asyncAwaitNumberOfHandlersThatReturnsErrorObject++;
+        metricSizeObject.returnErrorObject = true;
+    }
+
+    const rereturns = utils.reuseAnErrorStatements(returnStatements, catchClauseParameters);
+    if(rereturns.length > 0){
+        metricSizeObject.rereturns = true;
     }
 
     // Counts number of continues
@@ -187,6 +213,7 @@ function handleCatchClauses(errorArgs, catchClause, reportObject, metric_size_ar
     reportObject.asyncAwaitNumberOfHandlersContinues += continueStatements.length;
     if(continueStatements.length > 0) {
         reportObject.asyncAwaitNumberOfHandlersThatContinues++;
+        metricSizeObject.continue = true;
     }
 
     // Counts number of breaks
@@ -194,7 +221,7 @@ function handleCatchClauses(errorArgs, catchClause, reportObject, metric_size_ar
     reportObject.asyncAwaitNumberOfHandlersBreaks += breakStatements.length;
     if(breakStatements.length > 0) {
         reportObject.asyncAwaitNumberOfHandlersThatBreaks++;
-
+        metricSizeObject.break = true;
         if (numberOfLines === 1) {
             reportObject.asyncAwaitNumberOfHandlersBreaksOnly++;
         }
@@ -204,6 +231,8 @@ function handleCatchClauses(errorArgs, catchClause, reportObject, metric_size_ar
         reportObject.asyncAwaitNumberOfBreaksOnCatchesUniqueStatement++;
 
     }
+
+    metric_size_array.push(metricSizeObject);
 }
 
 function handleFinallyClauses(finallyStatement, reportObject) {

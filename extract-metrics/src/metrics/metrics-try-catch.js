@@ -1,5 +1,6 @@
 const CONFIG = require("../../config");
 const utils = require(CONFIG["srcPath"] + 'utils');
+const constants = require('../constants');
 
 function handleAnalysis(node, reportObject, metric_size_array) {
 
@@ -59,19 +60,21 @@ function handleCatchClause(reportObject, catchClause, metric_size_array) {
     reportObject.tryCatchNumberOfCatchesLines += utils.getNumberOfLines(catchClause);
 
     if (nodeBody) {
-        const catchClauseArguments = utils.getIdentifiersNames(catchClause.param);
+        const catchClauseParams = utils.getIdentifiersNames(catchClause.param);
         const numberOfLines = utils.getNumberOfLines(catchClause.body);
+        const metricSizeObject = utils.getEmptyMetricSizeObject();
 
-        metric_size_array.push({
-            'mech': 'try-catch',
-            'lines': numberOfLines,
-            'stmts': nodeBody.length
-        });
+        metricSizeObject.mech = constants.TRY_CATCH;
+        metricSizeObject.lines = numberOfLines;
+        metricSizeObject.stmts = nodeBody.length;
+        metricSizeObject.has_error_arguments = catchClauseParams.length > 0;
 
         if (numberOfLines === 0) {
             reportObject.tryCatchNumberOfEmptyCatches++;
-        } else if (!utils.useAnyArguments(nodeBody, catchClauseArguments)) {
+            metricSizeObject.empty = true;
+        } else if (!utils.useAnyArguments(nodeBody, catchClauseParams)) {
             reportObject.tryCatchNumberOfCatchesNoUsageOfErrorArgument++;
+            metricSizeObject.noUsageOfErrorArg = true;
         }
 
         if (nodeBody.length === 1) {
@@ -87,8 +90,17 @@ function handleCatchClause(reportObject, catchClause, metric_size_array) {
             }
         }
 
-        if (utils.hasErrorReassignment(nodeBody, catchClauseArguments)) {
+        if(utils.hasConsoleLog(nodeBody)) {
+            metricSizeObject.consoleLog = true;
+        }
+
+        if(utils.hasAlertMethodCalling(nodeBody)) {
+            metricSizeObject.alert = true;
+        }
+
+        if (utils.hasErrorReassignment(nodeBody, catchClauseParams)) {
             reportObject.tryCatchNumberOfErrorReassigning++;
+            metricSizeObject.reassigningError = true;
         }
 
         // Number of throws on catches
@@ -103,6 +115,7 @@ function handleCatchClause(reportObject, catchClause, metric_size_array) {
         // Throws literal types
         if (utils.hasLiteral(throwStatements)) {
             reportObject.tryCatchNumberOfCatchesThatThrowsLiteral++;
+            metricSizeObject.throwLiteral = true;
 
             if (nodeBody.length === 1) {
                 reportObject.tryCatchNumberOfCatchesThatThrowsLiteralOnly++;
@@ -111,6 +124,8 @@ function handleCatchClause(reportObject, catchClause, metric_size_array) {
 
         if (utils.hasUndefined(throwStatements)) {
             reportObject.tryCatchNumberOfCatchesThatThrowsUndefined++;
+            metricSizeObject.throwUndefined = true;
+
             if (nodeBody.length === 1) {
                 reportObject.tryCatchNumberOfCatchesThatThrowsUndefinedOnly++;
             }
@@ -118,6 +133,8 @@ function handleCatchClause(reportObject, catchClause, metric_size_array) {
 
         if (utils.hasNull(throwStatements)) {
             reportObject.tryCatchNumberOfCatchesThatThrowsNull++;
+            metricSizeObject.throwNull = true;
+
             if (nodeBody.length === 1) {
                 reportObject.tryCatchNumberOfCatchesThatThrowsNullOnly++;
             }
@@ -125,6 +142,7 @@ function handleCatchClause(reportObject, catchClause, metric_size_array) {
 
         if (utils.hasErrorObject(throwStatements)) {
             reportObject.tryCatchNumberOfCatchesThatThrowsErrorObject++;
+            metricSizeObject.throwErrorObject = true;
         }
 
         // Throws Error objects
@@ -134,11 +152,12 @@ function handleCatchClause(reportObject, catchClause, metric_size_array) {
         }
 
         // Number of rethrows an error argument
-        const numberOfRethrows = utils.reuseAnErrorStatements(throwStatements, catchClauseArguments);
+        const numberOfRethrows = utils.reuseAnErrorStatements(throwStatements, catchClauseParams);
         reportObject.tryCatchNumberOfCatchesRethrows += numberOfRethrows;
 
         if(numberOfRethrows > 0){
             reportObject.tryCatchNumberOfCatchesThatRethrows++;
+            metricSizeObject.rethrow = true;
         }
 
         // Counts number of returns
@@ -146,14 +165,14 @@ function handleCatchClause(reportObject, catchClause, metric_size_array) {
         reportObject.tryCatchNumberOfCatchesReturns += returnStatements.length;
         reportObject.tryCatchNumberOfCatchesReturnsLiteral += utils.numberOfLiterals(returnStatements);
         reportObject.tryCatchNumberOfCatchesReturnsErrorObject += utils.numberOfErrorObjects(returnStatements);
-        reportObject.tryCatchNumberOfCatchesThatRereturns += utils.reuseAnErrorStatements(returnStatements, catchClauseArguments);
+        reportObject.tryCatchNumberOfCatchesThatRereturns += utils.reuseAnErrorStatements(returnStatements, catchClauseParams);
 
         if (returnStatements.length > 0) {
             // Counts number of returns that uses an error argument (so called rethrow)
             reportObject.tryCatchNumberOfCatchesThatReturns++;
             if (utils.hasLiteral(returnStatements)) {
                 reportObject.tryCatchNumberOfCatchesThatReturnsLiteral++;
-
+                metricSizeObject.returnLiteral = true;
                 if (numberOfLines === 1) {
                     reportObject.tryCatchNumberOfCatchesThatReturnsLiteralOnly++;
                 }
@@ -161,7 +180,7 @@ function handleCatchClause(reportObject, catchClause, metric_size_array) {
 
             if (utils.hasUndefined(returnStatements)) {
                 reportObject.tryCatchNumberOfCatchesThatReturnsUndefined++;
-
+                metricSizeObject.returnUndefined = true;
                 if (numberOfLines === 1) {
                     reportObject.tryCatchNumberOfCatchesThatReturnsUndefinedOnly++;
                 }
@@ -169,7 +188,7 @@ function handleCatchClause(reportObject, catchClause, metric_size_array) {
 
             if (utils.hasNull(returnStatements)) {
                 reportObject.tryCatchNumberOfCatchesThatReturnsNull++;
-
+                metricSizeObject.returnNull = true;
                 if (numberOfLines === 1) {
                     reportObject.tryCatchNumberOfCatchesThatReturnsNullOnly++;
                 }
@@ -177,6 +196,12 @@ function handleCatchClause(reportObject, catchClause, metric_size_array) {
 
             if (utils.hasErrorObject(returnStatements)) {
                 reportObject.tryCatchNumberOfCatchesThatReturnsErrorObject++;
+                metricSizeObject.returnErrorObject = true;
+            }
+
+            const rereturns = utils.reuseAnErrorStatements(returnStatements, catchClauseParams);
+            if(rereturns.length > 0){
+                metricSizeObject.rereturns = true;
             }
 
         }
@@ -186,6 +211,7 @@ function handleCatchClause(reportObject, catchClause, metric_size_array) {
         reportObject.tryCatchNumberOfCatchesContinues += continueStatements.length;
         if(continueStatements.length > 0) {
             reportObject.tryCatchNumberOfCatchesThatContinues++;
+            metricSizeObject.continue = true;
         }
 
         // Counts number of breaks
@@ -193,12 +219,14 @@ function handleCatchClause(reportObject, catchClause, metric_size_array) {
         reportObject.tryCatchNumberOfCatchesBreaks += breakStatements.length;
         if(breakStatements.length > 0) {
             reportObject.tryCatchNumberOfCatchesThatBreaks++;
+            metricSizeObject.break = true;
 
             if (nodeBody.length === 1) {
                 reportObject.tryCatchNumberOfCatchesBreaksOnly++;
             }
         }
 
+        metric_size_array.push(metricSizeObject);
     }
 
     const location = catchClause.loc;

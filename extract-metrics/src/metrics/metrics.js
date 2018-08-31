@@ -148,7 +148,6 @@ function handleMetrics(files, saveObject) {
         let file_counter = 1;
         files.forEach(function (filepath) {
             try {
-                let handler_object = { 'file': filepath };
                 console.log(file_counter++ + ': ' + filepath);
 
                 const repoObject = utils.getEmptyRepoObject();
@@ -194,14 +193,14 @@ function handleRecountingMech(handlers) {
 
     });
 
-    const callback_handlers_without_promises = remove(callback_handlers, promise_handlers);
-    const callback_handlers_without_events = remove(callback_handlers_without_promises[0], events_handlers);
-    const callbacks_handlers_without_global = remove(callback_handlers_without_events[0], global_events_handlers);
+    const callback_handlers_without_promises = removeCallbacks(promise_handlers, callback_handlers);
+    const callback_handlers_without_events = removeCallbacks(events_handlers, callback_handlers_without_promises[1]);
+    const callbacks_handlers_without_global = removeCallbacks(global_events_handlers, callback_handlers_without_events[1]);
 
-    const callbacks = callbacks_handlers_without_global[0];
-    const promises = callback_handlers_without_promises[1];
-    const events = callback_handlers_without_events[1];
-    const global = callbacks_handlers_without_global[1];
+    const callbacks = callbacks_handlers_without_global[1];
+    const promises = callback_handlers_without_promises[0];
+    const events = callback_handlers_without_events[0];
+    const global = callbacks_handlers_without_global[0];
 
     const result_2 = callbacks.concat(promises.concat(events.concat(global)));
 
@@ -210,17 +209,43 @@ function handleRecountingMech(handlers) {
 
 }
 
+function removeCallbacks(handlers, callbackHandlers) {
+    let callbacksWithErrorParams = callbackHandlers.filter(x => x.has_error_arguments);
+
+    for (let handler of handlers) {
+        const match = callbacksWithErrorParams.find((callbackHandler) => {
+            const omitProperties = [constants.MECH, constants.HAS_ERROR_ARGUMENTS];
+            return utils.isEqual(callbackHandler, handler, omitProperties);
+        });
+
+        if (match) {
+            callbacksWithErrorParams = removeFirstOccurrence(callbacksWithErrorParams, match);
+        }
+    }
+
+    const callbacksWithoutErrorParams = callbackHandlers.filter(x => x.has_error_arguments === false);
+    
+    // Add all callbacks that has no error args and it is not in promise or event mech
+    const result = callbacksWithoutErrorParams.concat(callbacksWithErrorParams);
+
+    return [handlers, result];
+}
+
 function remove(handlers, handlersToRemove) {
     let handlersToRemoveResult = [];
     let handlersResult = [];
     for (let handler of handlers) {
-        const match = handlersToRemove.find(function(element) {
+        const isPromiseOrEvent = handler.mech  == constants.PROMISE ||
+            handler.mech  == constants.EVENT;
+
+        const match = handlersToRemove.find(function(handlerToRemove) {
             // For promises and events that has no error arguments
-            if (element.has_error_arguments === false) {
+            if (isPromiseOrEvent && !handlerToRemove.has_error_arguments) {
                 return false;
             } else {
-                return element.lines === handler.lines &&
-                    element.stmts === handler.stmts;
+                // Async-await or promises (and events) with error param
+                const omitProperties = [constants.MECH, constants.HAS_ERROR_ARGUMENTS];
+                return utils.isEqual(handlerToRemove, handler, omitProperties);
             }
         });
 

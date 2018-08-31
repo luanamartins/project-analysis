@@ -1,0 +1,23 @@
+{
+    "mech": "",
+    "lines": 0,
+    "stmts": 0,
+    "has_error_arguments": false,
+    "empty": false,
+    "noUsageOfErrorArg": false,
+    "consoleLog": false,
+    "reassigningError": false,
+    "alert": false,
+    "throwLiteral": false,
+    "throwUndefined": false,
+    "throwNull": false,
+    "throwErrorObject": false,
+    "rethrow": false,
+    "returnLiteral": false,
+    "returnUndefined": false,
+    "returnNull": false,
+    "returnErrorObject": false,
+    "rereturn": false,
+    "continue": false,
+    "break": false
+}

@@ -1,6 +1,6 @@
-const CONFIG = require("../../config");
+const config = require('../../config');
 const constants = require('../constants');
-const utils = require(CONFIG["srcPath"] + 'utils');
+const utils = require(config["srcPath"] + 'utils');
 
 
 function handleRejects(reportObject, node) {
@@ -28,20 +28,36 @@ function handleCatches(reportObject, node, metric_size_array) {
         reportObject.promiseNumberOfPromiseCatchesLinesStart.push(location.start.line);
         reportObject.promiseNumberOfPromiseCatchesLinesEnd.push(location.end.line);
 
-        if (firstArgument.type === 'FunctionDeclaration' ||
-            firstArgument.type === 'FunctionExpression') {
+        if (firstArgument.type === constants.FUNCTION_DECLARATION  || 
+           firstArgument.type === constants.FUNCTION_EXPRESSION) {
 
             const functionBody = firstArgument.body;
             const functionParams = utils.getIdentifiersNames(firstArgument.params);
             const hasErrorArguments = utils.hasAnErrorArgument(functionParams);
 
-            metric_size_array.push({
-                'mech': constants.PROMISE,
-                'lines': lines,
-                'stmts': functionBody.body.length,
-                'has_error_arguments': hasErrorArguments
-            });
+            const metricSizeObject = utils.getEmptyMetricSizeObject();
+            metricSizeObject.mech = constants.PROMISE;
+            metricSizeObject.lines = lines;
+            metricSizeObject.stmts = functionBody.body.length;
+            metricSizeObject.has_error_arguments = hasErrorArguments;
+            metricSizeObject.empty = lines.length === 0;
 
+            const useAnyErrorParam = utils.useAnyArguments(functionBody, functionParams);
+            if (!useAnyErrorParam) {
+                metricSizeObject.noUsageOfErrorArg = true;
+            }
+
+            if(utils.hasConsoleLog(functionBody)) {
+                metricSizeObject.consoleLog = true;
+            }
+    
+            if(utils.hasAlertMethodCalling(functionBody)) {
+                metricSizeObject.alert = true;
+            }
+
+            if (utils.hasErrorReassignment(functionBody, functionParams)) {
+                metricSizeObject.reassigningError = true;
+            }
 
             if(hasErrorArguments === false) {
                 reportObject.promiseNumberOfCatchesFunctionWithNoErrorArg++;
@@ -71,114 +87,134 @@ function handleCatches(reportObject, node, metric_size_array) {
             }
 
             // Number of throws on catches
-            const throwStatements = utils.getStatementsByType(functionBody, 'ThrowStatement');
-            const numberOfThrowStatements = throwStatements.length;
-            reportObject.promiseNumberOfCatchesThrows += numberOfThrowStatements;
-
-            if(numberOfThrowStatements > 0) {
-                reportObject.promiseNumberOfCatchesThatThrows++;
-                const numberOfLiterals = utils.numberOfLiterals(throwStatements);
-
-                reportObject.promiseNumberOfCatchesThrowsLiteral += numberOfLiterals;
-                reportObject.promiseNumberOfCatchesThrowsErrorObject += utils.numberOfErrorObjects(throwStatements);
-
-                if (numberOfLiterals > 0) {
-                    reportObject.promiseNumberOfCatchesThatThrowsLiteral++;
-
-                    if (lines === 1) {
-                        reportObject.promiseNumberOfCatchesThatThrowsLiteralOnly++;
-                    }
-                }
-
-                if(utils.hasUndefined(throwStatements)) {
-                    reportObject.promiseNumberOfCatchesThatThrowsUndefined++;
-
-                    if (lines === 1) {
-                        reportObject.promiseNumberOfCatchesThatThrowsUndefinedOnly++;
-                    }
-                }
-
-                if (utils.hasNull(throwStatements)) {
-                    reportObject.promiseNumberOfCatchesThatThrowsNull++;
-                    if (lines === 1) {
-                        reportObject.promiseNumberOfCatchesThatThrowsNullOnly++;
-                    }
-                }
-
-                if(utils.hasErrorObject(throwStatements)) {
-                    reportObject.promiseNumberOfCatchesThatThrowsErrorObject++;
-                }
-            }
-
-            // Number of throws primitive types
-            reportObject.promiseNumberOfThrowPrimitiveTypesOnCatches += utils.getThrowPrimitiveTypes(throwStatements);
-
-            // Number of rethrows on catches
-            const numberOfRethrows = utils.reuseAnErrorStatements(throwStatements, functionParams);
-            reportObject.promiseNumberOfCatchesRethrows += numberOfRethrows;
-            if(numberOfRethrows > 0){
-                reportObject.promiseNumberOfCatchesThatRethrows++;
-            }
+            handleThrows(functionBody, reportObject, lines, functionParams, metricSizeObject);
 
             // Counts number of returns
-            const returnStatements = utils.getStatementsByType(functionBody, 'ReturnStatement');
-            reportObject.promiseNumberOfCatchesReturns += returnStatements.length;
-
-            const numberOfLiterals = utils.numberOfLiterals(returnStatements);
-            const numberOfErrorObjects = utils.numberOfErrorObjects(returnStatements);
-            reportObject.promiseNumberOfCatchesReturnsLiteral += numberOfLiterals;
-            reportObject.promiseNumberOfCatchesReturnsErrorObject += numberOfErrorObjects;
-            reportObject.promiseNumberOfCatchesThatRereturns += utils.reuseAnErrorStatements(returnStatements, functionParams);
-
-            if(returnStatements.length > 0){
-                reportObject.promiseNumberOfCatchesThatReturns++;
-            }
-
-            if (numberOfLiterals > 0) {
-                reportObject.promiseNumberOfCatchesThatReturnsLiteral++;
-
-                if (lines === 1) {
-                    reportObject.promiseNumberOfCatchesThatReturnsLiteralOnly++;
-                }
-            }
-
-            if(utils.hasUndefined(returnStatements)) {
-                reportObject.promiseNumberOfCatchesThatReturnsUndefined++;
-
-                if (lines === 1) {
-                    reportObject.promiseNumberOfCatchesThatReturnsUndefinedOnly++;
-                }
-            }
-
-            if (utils.hasNull(returnStatements)) {
-                reportObject.promiseNumberOfCatchesThatReturnsNull++;
-                if (lines === 1) {
-                    reportObject.promiseNumberOfCatchesThatReturnsNullOnly++;
-                }
-            }
-
-            if(utils.hasErrorObject(returnStatements)) {
-                reportObject.promiseNumberOfCatchesThatReturnsErrorObject++;
-            }
+            handleReturns(functionBody, reportObject, functionParams, lines, metricSizeObject);
 
             // Counts number of continues
-            const continueStatements = utils.getStatementsByType(functionBody, 'ContinueStatement');
-            reportObject.promiseNumberOfCatchesContinues += continueStatements.length;
-            if(continueStatements.length > 0) {
-                reportObject.promiseNumberOfCatchesThatContinues++;
-            }
+            handleContinueAndBreak(functionBody, reportObject, metricSizeObject);
 
-            // Counts number of breaks
-            const breakStatements = utils.getStatementsByType(functionBody, 'BreakStatement');
-            reportObject.promiseNumberOfCatchesBreaks += breakStatements.length;
-            if(breakStatements.length > 0) {
-                reportObject.promiseNumberOfCatchesThatBreaks++;
-            }
+            metric_size_array.push(metricSizeObject);
         }
     }
 
     if (numberOfArgumentsOnCatch === 0) {
         reportObject.promiseNumberOfCatchesWithNoArg++;
+    }
+}
+
+function handleThrows(functionBody, reportObject, lines, functionParams, metricSizeObject) {
+    const throwStatements = utils.getStatementsByType(functionBody, constants.THROW_STATEMENT);
+    const numberOfThrowStatements = throwStatements.length;
+    reportObject.promiseNumberOfCatchesThrows += numberOfThrowStatements;
+
+    if (numberOfThrowStatements > 0) {
+        reportObject.promiseNumberOfCatchesThatThrows++;
+        const numberOfLiterals = utils.numberOfLiterals(throwStatements);
+        reportObject.promiseNumberOfCatchesThrowsLiteral += numberOfLiterals;
+        reportObject.promiseNumberOfCatchesThrowsErrorObject += utils.numberOfErrorObjects(throwStatements);
+       
+        if (numberOfLiterals > 0) {
+            reportObject.promiseNumberOfCatchesThatThrowsLiteral++;
+            metricSizeObject.throwLiteral = true;
+            if (lines === 1) {
+                reportObject.promiseNumberOfCatchesThatThrowsLiteralOnly++;
+            }
+        }
+       
+        if (utils.hasUndefined(throwStatements)) {
+            reportObject.promiseNumberOfCatchesThatThrowsUndefined++;
+            metricSizeObject.throwUndefined = true;
+            if (lines === 1) {
+                reportObject.promiseNumberOfCatchesThatThrowsUndefinedOnly++;
+            }
+        }
+        if (utils.hasNull(throwStatements)) {
+            reportObject.promiseNumberOfCatchesThatThrowsNull++;
+            metricSizeObject.throwNull = true;
+            if (lines === 1) {
+                reportObject.promiseNumberOfCatchesThatThrowsNullOnly++;
+            }
+        }
+        if (utils.hasErrorObject(throwStatements)) {
+            reportObject.promiseNumberOfCatchesThatThrowsErrorObject++;
+            metricSizeObject.throwErrorObject = true;
+        }
+    }
+    
+    // Number of throws primitive types
+    reportObject.promiseNumberOfThrowPrimitiveTypesOnCatches += utils.getThrowPrimitiveTypes(throwStatements);
+    
+    // Number of rethrows on catches
+    const numberOfRethrows = utils.reuseAnErrorStatements(throwStatements, functionParams);
+    reportObject.promiseNumberOfCatchesRethrows += numberOfRethrows;
+    if (numberOfRethrows > 0) {
+        reportObject.promiseNumberOfCatchesThatRethrows++;
+        metricSizeObject.rethrow = true;
+    }
+}
+
+function handleReturns(functionBody, reportObject, functionParams, lines, metricSizeObject) {
+    const returnStatements = utils.getStatementsByType(functionBody, 'ReturnStatement');
+    reportObject.promiseNumberOfCatchesReturns += returnStatements.length;
+    
+    const numberOfLiterals = utils.numberOfLiterals(returnStatements);
+    const numberOfErrorObjects = utils.numberOfErrorObjects(returnStatements);
+    
+    reportObject.promiseNumberOfCatchesReturnsLiteral += numberOfLiterals;
+    reportObject.promiseNumberOfCatchesReturnsErrorObject += numberOfErrorObjects;
+    reportObject.promiseNumberOfCatchesThatRereturns += utils.reuseAnErrorStatements(returnStatements, functionParams);
+    
+    if (returnStatements.length > 0) {
+        reportObject.promiseNumberOfCatchesThatReturns++;
+    }
+
+    if (numberOfLiterals > 0) {
+        reportObject.promiseNumberOfCatchesThatReturnsLiteral++;
+        metricSizeObject.returnLiteral = true;
+        if (lines === 1) {
+            reportObject.promiseNumberOfCatchesThatReturnsLiteralOnly++;
+        }
+    }
+    if (utils.hasUndefined(returnStatements)) {
+        reportObject.promiseNumberOfCatchesThatReturnsUndefined++;
+        metricSizeObject.returnUndefined = true;
+        if (lines === 1) {
+            reportObject.promiseNumberOfCatchesThatReturnsUndefinedOnly++;
+        }
+    }
+    if (utils.hasNull(returnStatements)) {
+        reportObject.promiseNumberOfCatchesThatReturnsNull++;
+        metricSizeObject.returnNull = true;
+        if (lines === 1) {
+            reportObject.promiseNumberOfCatchesThatReturnsNullOnly++;
+        }
+    }
+    if (utils.hasErrorObject(returnStatements)) {
+        reportObject.promiseNumberOfCatchesThatReturnsErrorObject++;
+        metricSizeObject.returnErrorObject = true;
+    }
+
+    const rereturns = utils.reuseAnErrorStatements(returnStatements, functionParams);
+    if (rereturns.length > 0) {
+        metricSizeObject.rereturn = true;
+    }
+}
+
+function handleContinueAndBreak(functionBody, reportObject, metricSizeObject) {
+    const continueStatements = utils.getStatementsByType(functionBody, 'ContinueStatement');
+    reportObject.promiseNumberOfCatchesContinues += continueStatements.length;
+    if (continueStatements.length > 0) {
+        reportObject.promiseNumberOfCatchesThatContinues++;
+        metricSizeObject.continue = true;
+    }
+    // Counts number of breaks
+    const breakStatements = utils.getStatementsByType(functionBody, 'BreakStatement');
+    reportObject.promiseNumberOfCatchesBreaks += breakStatements.length;
+    if (breakStatements.length > 0) {
+        reportObject.promiseNumberOfCatchesThatBreaks++;
+        metricSizeObject.break = true;
     }
 }
 

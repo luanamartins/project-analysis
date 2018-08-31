@@ -23,3 +23,9 @@ exports.LINES = 'lines'
 exports.STMTS = 'stmts'
 exports.HAS_ERROR_ARGUMENTS = 'has_error_arguments'
 
+// Tokens esprima
+exports.FUNCTION_DECLARATION = 'FunctionDeclaration'
+exports.FUNCTION_EXPRESSION = 'FunctionExpression'
+exports.THROW_STATEMENT = 'ThrowStatement'
+exports.CALL_EXPRESSION = 'CallExpression'
+exports.ASSIGNMENT_EXPRESSION = 'AssignmentExpression'
