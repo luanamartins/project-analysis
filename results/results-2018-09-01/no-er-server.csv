@@ -1,0 +1,9 @@
+,repo,type
+0,json-server.csv,server
+1,yarn.csv,server
+2,locutus.csv,server
+3,art-template.csv,server
+4,mathjs.csv,server
+5,keystone.csv,server
+6,parse-server.csv,server
+7,next.js.csv,server

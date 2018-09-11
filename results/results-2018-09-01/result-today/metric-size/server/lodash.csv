@@ -1,0 +1,4 @@
+"mech","lines","stmts","has_error_arguments","empty","noUsageOfErrorArg","consoleLog","reassigningError","alert","throwLiteral","throwUndefined","throwNull","throwErrorObject","rethrow","returnLiteral","returnUndefined","returnNull","returnErrorObject","rereturn","continue","break","file"
+"try-catch",0,0,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,"/home/local/CIN/lms7/project/extract-metrics/data/repo-today/server/lodash/.internal/baseGetTag.js"
+"try-catch",0,0,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,"/home/local/CIN/lms7/project/extract-metrics/data/repo-today/server/lodash/.internal/nodeTypes.js"
+"try-catch",1,1,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,"/home/local/CIN/lms7/project/extract-metrics/data/repo-today/server/lodash/attempt.js"
