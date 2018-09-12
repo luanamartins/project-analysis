@@ -67,30 +67,3 @@ df.to_csv(config.RESULT_RQ_1_1 + 'result-rq1-1.csv')
 piechart.plot_pie_chart(data=df['constructions'], labels=labels, path=config.RESULT_RQ_1_1 + 'piechart.png')
 piechart.donut(df['constructions'], labels=labels, path=config.RESULT_RQ_1_1 + 'donut.png')
 piechart.piechart_legend(df['constructions'], df['mech'], path=config.RESULT_RQ_1_1 + 'piechart_legend.png')
-
-
-
-# print('----')
-#
-# # First error argument
-#
-# first_error_arg = df['callbacksNumberOfFirstErrorArgFunctions'].sum()
-# print('first-error')
-# print(str(callbacks_number) + ' ' + str(first_error_arg) + ' ' + str(100*first_error_arg/callbacks_number))
-# print('---------')
-#
-# total = df['callbacksNumberOfCallbackErrorFunctions'].sum()
-# partial = df['callbacksNumberOfFunctionsNoUsageOfErrorArgumentWithUniqueErrorArg'].sum()
-# print('Unique error arg no usage ' + str((100 * partial)/total))
-#
-# print('----------')
-# # window.onerror, element etc...
-# total_window_onerror = df['numberOfWindowOnError'].sum()
-#
-# print('----------')
-
-
-
-
-
-

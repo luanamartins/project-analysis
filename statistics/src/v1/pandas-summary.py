@@ -5,6 +5,9 @@ import statistics.src.config as config
 import json
 
 
+RESULT_PATH = config.RESULT + 'result-today/'
+
+
 def get_repo_name(path):
     # Normalize a pathname by collapsing redundant separators and up-level references
     norm = os.path.normpath(path)
@@ -48,7 +51,6 @@ def group_by_repo(folder):
 
 
 def list_metrics():
-    # Get report_object
     json_data = open(config.EXTRACT_METRICS_SRC + 'report-object.json')
     jdata = json.load(json_data)
 
@@ -60,16 +62,16 @@ def list_metrics():
     return columns
 
 
-client_repo = config.RESULT_SUMMARY + 'result-repo-client.csv'
-server_repo = config.RESULT_SUMMARY + 'result-repo-server.csv'
+client_repo = RESULT_PATH + 'summary-data/' + 'result-repo-client.csv'
+server_repo = RESULT_PATH + 'summary-data/' + 'result-repo-server.csv'
 
 # df_client = pd.read_csv(client_repo)
 # df_server = pd.read_csv(server_repo)
 
-df_client = group_by_repo(config.RESULT + 'client')
+df_client = group_by_repo(RESULT_PATH + 'client')
 df_client.to_csv(client_repo)
 
-df_server = group_by_repo(config.RESULT + 'server')
+df_server = group_by_repo(RESULT_PATH + 'server')
 df_server.to_csv(server_repo)
 
 df_subject_systems_data = {

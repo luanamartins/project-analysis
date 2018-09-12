@@ -1,12 +1,10 @@
+import os
 import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-import statistics.src.config as config
 
-
-# TODO
 def get_number_lines_handlers(df):
     # Save data on number of catches
     df_async_await = get_metrics(df, 'asyncAwaitNumberOfCatchesLines', 'async-await')
@@ -73,26 +71,7 @@ def get_metrics(df, metric, name):
     return df_res
 
 
-def get_data():
-    # Read client data
-    df_file_client = pd.read_csv(config.RESULT_INFO + 'result-repo-client.csv')
-    df_client = get_number_of_handlers_by_mech(df_file_client)
-
-    # Read server data
-    df_file_server = pd.read_csv(config.RESULT_INFO + 'result-repo-server.csv')
-    df_server = get_number_of_handlers_by_mech(df_file_server)
-
-    # Join all data and set columns
-    df = pd.concat([df_client, df_server], axis=0)
-    df.columns = ['values', 'types']
-
-    # Reset index
-    df.reset_index(drop=True, inplace=True)
-
-    return df
-
-
-def save_boxplot(df, image_path, xlabel, ylabel):
+def save_boxplot(df, image_path, x_col, y_col, xlabel, ylabel):
     # Start a new figure
     plt.figure()
 
@@ -100,7 +79,7 @@ def save_boxplot(df, image_path, xlabel, ylabel):
     sns.set(style='whitegrid')
 
     # Create plot and set labels
-    g = sns.boxplot(x='types', y='values', data=df)
+    g = sns.boxplot(x=x_col, y=y_col, data=df)
     g.set(xlabel=xlabel, ylabel=ylabel)
 
     # Rescale y-axis to log function
@@ -110,22 +89,19 @@ def save_boxplot(df, image_path, xlabel, ylabel):
     plt.savefig(image_path)
 
 
-def save_violinplot(df, image_path, xlabel, ylabel):
+def save_violinplot(df, image_path, x_col, y_col, xlabel, ylabel):
     # Start a new figure
     plt.figure()
 
     # Present no lines in the grid
     sns.set(style='whitegrid')
 
-    # Apply log function to dataframe
-    df['values'] = df['values'].apply(np.log)
-
     # Create plot and set labels
-    g = sns.violinplot(x='types', y='values', data=df, cut=0, truncate=True)
+    g = sns.violinplot(x=x_col, y=y_col, data=df, cut=0)
     g.set(xlabel=xlabel, ylabel=ylabel)
 
     # Rescale y-axis to log function
-    # g.set_yscale('log')
+    g.set_yscale('log')
 
     # Save figure
     plt.savefig(image_path)
@@ -139,7 +115,7 @@ def save_violinplot_hue(df, image_path, xlabel, ylabel):
     sns.set(style='whitegrid')
 
     # Apply log function to dataframe
-    df['values'] = df['values'].apply(np.log)
+    # df['values'] = df['values'].apply(np.log)
 
     # Create plot and set labels
     tips = sns.load_dataset('tips')
@@ -147,24 +123,29 @@ def save_violinplot_hue(df, image_path, xlabel, ylabel):
     g.set(xlabel=xlabel, ylabel=ylabel)
 
     # Rescale y-axis to log function
-    # g.set_yscale('log')
+    g.set_yscale('log')
 
     # Save figure
     plt.savefig(image_path)
 
 
 # TODO
-def save_lineplot(df, image_path, xlabel, ylabel):
+def save_lineplot(df, image_path, x_column_name, y_column_name, hue, xlabel, ylabel):
     # Start a new figure
     plt.figure()
 
     # Create plot and set labels
     # df = pd.DataFrame(dict(time=np.arange(500), value=np.random.randn(500).cumsum()))
     # sns.relplot(x='time', y='value', kind='line', data=df)
-    sns.relplot(x=xlabel, y=ylabel, kind='line', estimator=None, data=df)
+    # sns.relplot(x=xlabel, y=ylabel, kind='line', estimator=None, data=df)
+
+    ax = sns.lineplot(data=df, x=x_column_name, y=y_column_name, hue=hue)
+
+    ax.set(xlabel=xlabel, ylabel=ylabel)
+    ax.set_yscale('log')
 
     # Set grid style
-    sns.set(style='darkgrid')
+    # sns.set(style='darkgrid')
 
     # Save figure
     plt.savefig(image_path)
@@ -196,21 +177,6 @@ def remove_outliers_iqr(df, column):
     return df_new
 
 
-df = get_data()
-# df['values'] = df['values'].apply(np.log)
-
-df_removed_outliers = remove_outliers_iqr(df, 'values')
-
-image_path = config.STATS_SRC_PATH + 'seaborn/images/'
-
-save_boxplot(df, image_path + 'boxplot.png', 'abstractions', '# of handlers (log scale)')
-save_boxplot(df_removed_outliers, image_path + 'boxplot-without-outliers.png', 'abstractions', '# of handlers (log scale)')
-
-save_violinplot(df, image_path + 'violinplot.png', 'abstractions', '# of handlers (log scale)')
-save_violinplot(df_removed_outliers, image_path + 'violinplot-without-outliers.png', 'abstractions', '# of handlers (log scale)')
-
-
-# df_handlers = get_handlers()
-save_lineplot(df, image_path + 'lineplot.png', 'types', 'values')
-
-save_violinplot_hue(df, image_path + 'violinplot-classes.png', '', '')
+def create_dir_if_not_exists(directory):
+    if not os.path.exists(directory):
+        os.makedirs(directory)
