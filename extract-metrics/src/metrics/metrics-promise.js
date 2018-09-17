@@ -40,7 +40,7 @@ function handleCatches(reportObject, node, metric_size_array) {
             metricSizeObject.lines = lines;
             metricSizeObject.stmts = functionBody.body.length;
             metricSizeObject.has_error_arguments = hasErrorArguments;
-            metricSizeObject.empty = lines.length === 0;
+            metricSizeObject.empty = lines === 0;
 
             const useAnyErrorParam = utils.useAnyArguments(functionBody, functionParams);
             if (!useAnyErrorParam) {

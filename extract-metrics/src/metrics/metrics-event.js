@@ -29,7 +29,7 @@ function handleAnalysis(node, reportObject, metric_size_array) {
                     metricSizeObject.lines = lines;
                     metricSizeObject.stmts = handlerFunctionBody.length;
                     metricSizeObject.has_error_arguments = hasErrorArguments;
-                    metricSizeObject.empty = lines.length === 0;
+                    metricSizeObject.empty = lines === 0;
 
                     const useAnyErrorParam = utils.useAnyArguments(handlerFunctionBody, handlerParams);
 

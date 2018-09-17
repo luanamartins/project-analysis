@@ -26,7 +26,7 @@ function handleAnalysis(node, reportObject, metric_size_array) {
             metricSizeObject.lines = lines;
             metricSizeObject.stmts = functionBody.length;
             metricSizeObject.has_error_arguments = errorParams.length > 0;
-            metricSizeObject.empty = lines.length === 0;
+            metricSizeObject.empty = lines === 0;
             
             
 
