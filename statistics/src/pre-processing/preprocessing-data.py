@@ -1,6 +1,6 @@
-import pandas as pd
 import glob
 import re
+import pandas as pd
 import statistics.src.config as config
 import statistics.src.get_repo_metrics as repo
 
@@ -35,7 +35,8 @@ def save_data(type):
                 'repo': repo_name,
                 'strict_global': df_obj['numberOfStrictModeGlobal'].sum() > 0,
                 'strict_local': df_obj['numberOfStrictModeLocal'].sum() > 0,
-                'total_files': len(df.index)
+                'total_files': len(df.index),
+                'total_logical_lines': df_obj['numberOfLogicalLines'].sum()
             })
 
         except:
@@ -56,7 +57,6 @@ def save_data(type):
     df_res.reset_index(inplace=True)
     df_res.to_csv('{}er-{}.csv'.format(RESULTS_TO_SAVE, type))
     df_no_er.to_csv('{}no-er-{}.csv'.format(RESULTS_TO_SAVE, type))
-
 
 
 def failed_data(type):
@@ -84,9 +84,18 @@ def summary(type):
     df_group_stmts.to_csv('{}summary-mech-stmts-{}.csv'.format(RESULTS_TO_SAVE, type))
 
 
-save_data('client')
-save_data('server')
-failed_data('client')
-failed_data('server')
-summary('client')
-summary('server')
+def fix_empty_calc(type):
+    path = '{}er-{}.csv'.format(RESULTS_TO_SAVE, type)
+    df = pd.read_csv(path)
+    df['empty'].loc[df['lines'] == 0] = True
+    df.to_csv(path)
+
+
+# save_data('client')
+# save_data('server')
+# failed_data('client')
+# failed_data('server')
+# summary('client')
+# summary('server')
+# fix_empty_calc('client')
+# fix_empty_calc('server')
