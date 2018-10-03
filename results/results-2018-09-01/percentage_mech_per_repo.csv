@@ -202,14 +202,6 @@
 3,try-catch,59,client,babel.csv,0.42142857142857143
 0,callback,1,client,angular-starter.csv,0.5
 1,try-catch,1,client,angular-starter.csv,0.5
-0,callback,1593,client,sinon.csv,0.059837728194726165
-1,callback,1593,server,sinon.csv,0.059837728194726165
-2,event,1,client,sinon.csv,3.75629178874615e-05
-3,event,1,server,sinon.csv,3.75629178874615e-05
-4,promise,8,client,sinon.csv,0.000300503343099692
-5,promise,8,server,sinon.csv,0.000300503343099692
-6,try-catch,11709,client,sinon.csv,0.4398242055442867
-7,try-catch,11709,server,sinon.csv,0.4398242055442867
 0,callback,3,client,progressbar.js.csv,0.75
 1,try-catch,1,client,progressbar.js.csv,0.25
 0,callback,82,client,raven-js.csv,0.22527472527472528
@@ -489,6 +481,10 @@
 1,event,5,server,nodemon.csv,0.11627906976744186
 2,promise,6,server,nodemon.csv,0.13953488372093023
 3,try-catch,14,server,nodemon.csv,0.32558139534883723
+0,callback,1593,server,sinon.csv,0.11967545638945233
+1,event,1,server,sinon.csv,7.5125835774923e-05
+2,promise,8,server,sinon.csv,0.000601006686199384
+3,try-catch,11709,server,sinon.csv,0.8796484110885734
 0,async-await,1,server,nuxt.js.csv,0.02857142857142857
 1,callback,22,server,nuxt.js.csv,0.6285714285714286
 2,event,1,server,nuxt.js.csv,0.02857142857142857
