@@ -1,0 +1,6 @@
+,mech,lines,stmts,count
+0,async-await,142,76,49
+1,callback,1120562,240252,63271
+2,event,3022,2121,1231
+3,promise,4815,3176,1979
+4,try-catch,83980,46257,49237
