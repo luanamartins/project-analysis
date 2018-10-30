@@ -152,7 +152,7 @@
 150,callback,session.csv,98,706,239
 151,callback,showdown.csv,1,5,2
 152,callback,simditor.csv,216,1962,866
-153,callback,sinon.csv,3186,19312,9152
+153,callback,sinon.csv,1593,9656,4576
 154,callback,socket.io.csv,50,232,144
 155,callback,sockjs-client.csv,80,1020,316
 156,callback,sockjs-node.csv,1,7,1
@@ -253,7 +253,7 @@
 251,event,sails.csv,6,16,12
 252,event,sequelize.csv,3,9,5
 253,event,session.csv,3,9,9
-254,event,sinon.csv,2,2,2
+254,event,sinon.csv,1,1,1
 255,event,socket.io.csv,16,35,26
 256,event,sockjs-client.csv,1,2,2
 257,event,standard.csv,1,1,1
@@ -334,7 +334,7 @@
 332,promise,riot.csv,1,2,2
 333,promise,sails.csv,5,5,5
 334,promise,sequelize.csv,102,261,196
-335,promise,sinon.csv,16,20,20
+335,promise,sinon.csv,8,10,10
 336,promise,steal.csv,23,74,38
 337,promise,summernote.csv,1,1,1
 338,promise,superagent.csv,2,4,4
@@ -481,7 +481,7 @@
 479,try-catch,sequelize.csv,20,36,26
 480,try-catch,showdown.csv,8,11,11
 481,try-catch,simditor.csv,56,112,92
-482,try-catch,sinon.csv,23418,20854,15998
+482,try-catch,sinon.csv,11709,10427,7999
 483,try-catch,smooth-scroll.csv,20,20,20
 484,try-catch,socket.io.csv,5,4,4
 485,try-catch,sockjs-client.csv,336,446,446

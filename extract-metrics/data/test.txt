@@ -1,3 +1,2 @@
 https://github.com/jaz303/git-clone
 https://github.com/ajenti/ajenti
-https://github.com/gdi2290/angular-starter
