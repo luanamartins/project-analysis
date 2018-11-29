@@ -48,13 +48,13 @@ def save_data(type):
             }, ignore_index=True)
 
     df_repo = pd.DataFrame(df_repos)
-    df_repo.reset_index(inplace=True)
+    df_repo.reset_index(drop=True, inplace=True)
     df_repo.to_csv('{}repo-er-{}.csv'.format(RESULTS_TO_SAVE, type))
 
     print(df_res.shape)
     print(df_no_er.shape)
 
-    df_res.reset_index(inplace=True)
+    df_res.reset_index(drop=True, inplace=True)
     df_res.to_csv('{}er-{}.csv'.format(RESULTS_TO_SAVE, type))
     df_no_er.to_csv('{}no-er-{}.csv'.format(RESULTS_TO_SAVE, type))
 
@@ -64,7 +64,7 @@ def failed_data(type):
     df = pd.read_csv('{}failed-files-{}.txt'.format(path, type), names=['file'])
     df.reset_index(inplace=True)
     regex = '{}\/(.*?)\/'.format(type)
-    df['repo'] = df['file'].apply(lambda x: re.search(regex, x).group(1))
+    df[config.REPO] = df[config.FILE].apply(lambda x: re.search(regex, x).group(1))
     df.to_csv('{}failed-files-{}.csv'.format(RESULTS_TO_SAVE, type))
 
 
@@ -91,11 +91,24 @@ def fix_empty_calc(type):
     df.to_csv(path)
 
 
+def fix_sinon_csv():
+    path_client = config.RESULT + 'er-client.csv'
+    print(path_client)
+    df = pd.read_csv(path_client)
+    df = df[df[config.REPO] != 'sinon.csv']
+    df.to_csv(path_client)
+
+
 # save_data('client')
 # save_data('server')
+
 # failed_data('client')
 # failed_data('server')
-# summary('client')
-# summary('server')
+
+summary('client')
+summary('server')
+
 # fix_empty_calc('client')
 # fix_empty_calc('server')
+
+# fix_sinon_csv()

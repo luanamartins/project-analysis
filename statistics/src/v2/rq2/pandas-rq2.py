@@ -342,8 +342,8 @@ def save_image_perc_strategies():
     df_number_handlers = pd.read_csv(config.RESULT + 'number_of_handlers.csv')
     df_number_handlers = df_number_handlers[[config.MECH, config.TYPE, config.COUNT]]
     df_merge = df_data.merge(df_number_handlers, on=[config.MECH, config.TYPE])
-    df_merge.rename(columns={'count_x': 'number_handler', 'count_y': 'total_handlers_by_type'}, inplace=True)
-    df_merge[config.PERC] = (df_merge['number_handler'] / df_merge['total_handlers_by_type']) * 100
+    df_merge.rename(columns={'count_x': 'number_handler', 'count_y': 'total_handlers_by_mech'}, inplace=True)
+    df_merge[config.PERC] = (df_merge['number_handler'] / df_merge['total_handlers_by_mech']) * 100
     df_merge.to_csv(RESULTS_DATA_DIRECTORY + 'data_info.csv')
     print(df_merge.head())
 
@@ -409,59 +409,6 @@ def calculate_mean_median_std():
     df_stats.to_csv(RESULTS_DATA_DIRECTORY + 'percentage_mean_median.csv')
 
 
-def first_error_protocol():
-    df_c = pd.read_csv(config.RESULT_INFO + 'result-repo-client.csv')
-    df_c[config.TYPE] = config.CLIENT
-
-    df_s = pd.read_csv(config.RESULT_INFO + 'result-repo-server.csv')
-    df_s[config.TYPE] = config.SERVER
-
-    df_grouped = df_c.append(df_s, ignore_index=True)
-
-    CALLBACKS = 'callbacks'
-    FIRST_ERROR_ARG = 'first_error_arg'
-    df = pd.DataFrame()
-    df[config.REPO] = df_grouped[config.REPO]
-    df[FIRST_ERROR_ARG] = df_grouped[config.FIRST_ERROR_ARG_COLUMN]
-    df[CALLBACKS] = df_grouped[config.CALLBACK_ERROR_FUNCTIONS]
-    df[config.TYPE] = df_grouped[config.TYPE]
-    df[config.PERC_FIRST_ERROR_PROTOCOL] = (df[FIRST_ERROR_ARG] * 100) / df[CALLBACKS]
-    print(df[FIRST_ERROR_ARG].sum())
-    print(df[CALLBACKS].sum())
-
-    total_first_error = df[FIRST_ERROR_ARG].sum()
-
-    df_c = df[df[config.TYPE] == config.CLIENT]
-    df_s = df[df[config.TYPE] == config.SERVER]
-
-    print(df_c[FIRST_ERROR_ARG].sum() / total_first_error)
-    print(df_s[FIRST_ERROR_ARG].sum() / total_first_error)
-
-    df.fillna(0, inplace=True)
-
-    df.to_csv(RESULTS_DATA_DIRECTORY + 'first_error_protocol.csv')
-
-    df_info = pd.DataFrame()
-
-    df_group_info = df.groupby(config.TYPE)
-
-    df_info['mean_raw'] = df_group_info.mean()[config.FIRST_ERROR_ARG]
-    df_info['median_raw'] = df_group_info.median()[config.FIRST_ERROR_ARG]
-    df_info['std_raw'] = df_group_info.std()[config.FIRST_ERROR_ARG]
-    df_info['min_raw'] = df_group_info.min()[config.FIRST_ERROR_ARG]
-    df_info['max_raw'] = df_group_info.max()[config.FIRST_ERROR_ARG]
-    df_info['total_raw'] = df_group_info.sum()[config.FIRST_ERROR_ARG]
-
-    df_info['mean_perc'] = df_group_info.mean()[config.PERC_FIRST_ERROR_PROTOCOL]
-    df_info['median_perc'] = df_group_info.median()[config.PERC_FIRST_ERROR_PROTOCOL]
-    df_info['std_perc'] = df_group_info.std()[config.PERC_FIRST_ERROR_PROTOCOL]
-    df_info['min_perc'] = df_group_info.min()[config.PERC_FIRST_ERROR_PROTOCOL]
-    df_info['max_perc'] = df_group_info.max()[config.PERC_FIRST_ERROR_PROTOCOL]
-    df_info['total_perc'] = df_group_info.sum()[config.PERC_FIRST_ERROR_PROTOCOL]
-
-    df_info.to_csv(RESULTS_DATA_DIRECTORY + 'first_error_protocol_info.csv')
-
-
 def global_error_handlers(df):
     df_e = df[df[config.MECH] == config.WINDOW_ON_ERROR]
     print(df_e.head())
@@ -471,6 +418,13 @@ def global_error_handlers(df):
 
 
 if __name__ == '__main__':
+    df = pd.read_csv(RESULTS_DATA_DIRECTORY + 'data_info_edit.csv', index_col=False)
+    df.loc[df[config.TYPE] == config.SERVER, config.TYPE] = 'standalone'
+    df.loc[df[config.TYPE] == config.CLIENT, config.TYPE] = 'web'
+    df.to_csv(RESULTS_DATA_DIRECTORY + 'data_info_edit.csv')
+
+
+def t():
     ds.create_dir_if_not_exists(RESULTS_DATA_DIRECTORY)
     df_all = ds.read_dataset()
 
@@ -493,5 +447,5 @@ if __name__ == '__main__':
 
     # save_image_perc_strategies()
 
-    # df_whole = ds.read_whole_dataset()
-    # global_error_handlers(df_whole)
+    df_whole = ds.read_whole_dataset()
+    global_error_handlers(df_whole)

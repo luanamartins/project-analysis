@@ -1,9 +1,33 @@
 import glob
 import pandas as pd
 import statistics.src.config as config
+import statistics.src.seaborn.dataset_seaborn as ds
 
 
-def main():
+def number_of_handlers(df_w):
+    df = df_w.copy()
+    df[config.COUNT] = 1
+    df_g = df.groupby([config.MECH, config.TYPE], as_index=False).sum()
+    columns = [config.MECH, config.LINES, config.STMTS, config.TYPE, config.COUNT]
+    df_g = df_g[columns]
+    df_g.to_csv(config.RESULT + 'number_of_handlers.csv')
+    print(df_g.head())
+
+
+def get_general_info(type):
+    path = config.RESULT_TODAY + type + '/'
+
+    array = []
+    for file in glob.glob(path + '*.csv'):
+        array.append(pd.read_csv(file))
+
+    df = pd.concat(array)
+    df.reset_index(inplace=True)
+
+    return df
+
+
+def create_general_info():
     client_path = config.RESULT_TODAY + 'client/'
 
     array = []
@@ -71,4 +95,8 @@ def main():
     df.to_csv(config.RESULT + 'general-info.csv')
 
 
-main()
+if __name__ == '__main__':
+    # create_general_info()
+
+    df = ds.read_dataset()
+    number_of_handlers(df)

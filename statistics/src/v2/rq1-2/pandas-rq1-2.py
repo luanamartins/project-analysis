@@ -52,31 +52,31 @@ def handle_mech_strategies(df, filename):
     df_copy = df_copy.sort_values(by=config.PERC, ascending=False)
 
     # Save the percentages which strategy has more than 1%
-    df_copy = df_copy[df_copy[config.PERC] > 1]
+    # df_copy = df_copy[df_copy[config.PERC] > 1]
 
     df_copy.loc[df_copy[config.STRATEGY] == 'others', config.STRATEGY] = 'Others'
     df_copy.loc[df_copy[config.STRATEGY] == 'noUsageOfErrorArg', config.STRATEGY] = 'Ignore arg'
     df_copy.loc[df_copy[config.STRATEGY] == 'empty', config.STRATEGY] = 'Empty'
     df_copy.loc[df_copy[config.STRATEGY] == 'reassigningError', config.STRATEGY] = 'Reassign error'
     df_copy.loc[df_copy[config.STRATEGY] == 'rethrow', config.STRATEGY] = 'Re-throw'
-    df_copy.loc[df_copy[config.STRATEGY] == 'noUsageOfErrorArg,returnLiteral', config.STRATEGY] = 'Ignore arg, Return literal'
-    df_copy.loc[
-        df_copy[config.STRATEGY] == 'reassigningError,break', config.STRATEGY] = 'Reassign error, Break'
+    df_copy.loc[df_copy[config.STRATEGY] == 'noUsageOfErrorArg,returnLiteral', config.STRATEGY] = \
+        'Ignore arg, Return literal'
+    df_copy.loc[df_copy[config.STRATEGY] == 'reassigningError,break', config.STRATEGY] = 'Reassign error, Break'
 
-    # Save barplot
-    plt.figure()
-    sns.set_style('whitegrid')
-    ax = sns.barplot(x=config.STRATEGY, y=config.PERC, hue=config.STRATEGY, data=df_copy)
-    ax.set_xticklabels([])
-    # ax.set_xticklabels(ax.get_xticklabels(), rotation=90, ha='right')
-    # ax.legend(bbox_to_anchor=(1, 0.5))
-    ax.legend(loc='upper right')
-
-    plt.xlabel('')
-    plt.ylabel('% of strategies')
-    plt.tight_layout()
-    plt.bar(data.xcol, data.ycol, 4)
-    plt.savefig(RESULTS_DIRECTORY_IMAGES + filename)
+    # # Save barplot
+    # plt.figure()
+    # sns.set_style('whitegrid')
+    # ax = sns.barplot(x=config.STRATEGY, y=config.PERC, hue=config.STRATEGY, data=df_copy)
+    # ax.set_xticklabels([])
+    # # ax.set_xticklabels(ax.get_xticklabels(), rotation=90, ha='right')
+    # # ax.legend(bbox_to_anchor=(1, 0.5))
+    # ax.legend(loc='upper right')
+    #
+    # plt.xlabel('')
+    # plt.ylabel('% of strategies')
+    # plt.tight_layout()
+    # # plt.bar(data.xcol, data.ycol, 4)
+    # plt.savefig(RESULTS_DIRECTORY_IMAGES + filename)
 
     df_copy.to_csv(RESULTS_DIRECTORY + filename + '.csv', index=False)
     # print(df_copy)

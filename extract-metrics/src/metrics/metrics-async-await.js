@@ -1,4 +1,4 @@
-const config = require("../../config");
+ewconst config = require("../../config");
 const constants = require('../constants');
 const utils = require(config["srcPath"] + 'utils');
 
