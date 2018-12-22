@@ -63,7 +63,6 @@ def amount_code(df):
     df_resume['%EH LoC'] = (df_resume[config.LINES] / total_er_lines) * 100
     df_resume['%LoC'] = (df_resume[config.LINES] / total_lines) * 100
     df_resume.to_csv(RESULTS_DIRECTORY + 'resume.csv')
-    print(df_resume.head())
 
 
 def correlation(df):
@@ -78,8 +77,6 @@ def correlation(df):
 
     print(str(df_c[config.COUNT].corr(df_c[config.LINES], method='pearson')))
     print(str(df_c[config.COUNT].corr(df_c[config.TOTAL_LOGICAL_LINES], method='pearson')))
-
-    print(df_c[df_c[config.COUNT] > df_c[config.TOTAL_LOGICAL_LINES]])
 
     plt.figure()
     ax = sns.scatterplot(x=config.COUNT, y=config.TOTAL_LOGICAL_LINES, data=df_c)
