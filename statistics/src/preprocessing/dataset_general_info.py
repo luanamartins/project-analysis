@@ -19,9 +19,12 @@ def get_general_info(type):
 
     array = []
     for file in glob.glob(path + '*.csv'):
-        array.append(pd.read_csv(file))
+        df = pd.read_csv(file, index_col=0)
+        df[config.REPO] = file.rsplit('/', 1)[-1]
+        df[config.TYPE] = type
+        array.append(df)
 
-    df = pd.concat(array)
+    df = pd.concat(array, sort=False)
     df.reset_index(inplace=True)
 
     return df

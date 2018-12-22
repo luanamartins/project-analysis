@@ -48,6 +48,13 @@ def handle_mech_strategies(df, filename):
     df_copy = df.copy()
     total_c = df[config.COUNT].sum()
 
+    no_usage_number = df_copy.loc[df_copy[config.STRATEGY] == config.NO_USAGE_OF_ERROR_ARG][config.COUNT].values[0]
+    others = df_copy.loc[df_copy[config.STRATEGY] == config.OTHERS][config.COUNT].values[0]
+
+    # df_copy = df_copy.loc[df_copy[config.STRATEGY] == config.OTHERS]
+
+    df_copy.loc[df_copy[config.STRATEGY] == config.OTHERS, [config.COUNT]] = others - no_usage_number
+
     df_copy[config.PERC] = (df_copy[config.COUNT] / total_c) * 100
     df_copy = df_copy.sort_values(by=config.PERC, ascending=False)
 
@@ -78,7 +85,7 @@ def handle_mech_strategies(df, filename):
     # # plt.bar(data.xcol, data.ycol, 4)
     # plt.savefig(RESULTS_DIRECTORY_IMAGES + filename)
 
-    df_copy.to_csv(RESULTS_DIRECTORY + filename + '.csv', index=False)
+    df_copy.to_csv(RESULTS_DIRECTORY + filename + '2.csv', index=False)
     # print(df_copy)
     print(df_copy[config.PERC].sum())
 

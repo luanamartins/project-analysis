@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+import statistics.src.config as config
 
 
 def get_number_lines_handlers(df):
@@ -71,6 +72,96 @@ def get_metrics(df, metric, name):
     return df_res
 
 
+def read_data(type):
+    path = config.RESULT + 'er-{}.csv'.format(type)
+    df = pd.read_csv(path)
+
+    df = df[df[config.MECH] != config.WINDOW_EVENT_LISTENER]
+    df = df[df[config.MECH] != config.WINDOW_ON_ERROR]
+
+    df[config.COUNT] = 1
+    df[config.TYPE] = type
+
+    df.reset_index(inplace=True, drop=True)
+    return df
+
+
+def remove():
+    path_c = config.RESULT + 'er-client.csv'
+    df_c = pd.read_csv(path_c, index_col=0)
+    df_c = df_c.loc[:, ~df_c.columns.str.contains('^Unnamed')]
+    df_c.to_csv(path_c, index=False)
+
+    path_s = config.RESULT + 'er-server.csv'
+    df_s = pd.read_csv(path_s, index_col=0)
+    df_s = df_s.loc[:, ~df_s.columns.str.contains('^Unnamed')]
+    df_s.to_csv(path_s, index=False)
+
+
+def read_repo_er(type):
+    path = config.RESULT + 'repo-er-{}.csv'.format(type)
+    df = pd.read_csv(path)
+    df[config.TYPE] = type
+    df.reset_index(drop=True, inplace=True)
+    return df
+
+
+def read_repo_er_all():
+    read_repo_er_c = read_repo_er('client')
+    read_repo_er_s = read_repo_er('server')
+    df = read_repo_er_c.append(read_repo_er_s, ignore_index=True)
+    return df
+
+
+def read_percentage_mech_per_repo():
+    df = pd.read_csv(config.RESULT + 'percentage_mech_per_repo.csv')
+    return df
+
+
+def read_dataset():
+    df_c = read_data(config.CLIENT)
+    df_c[config.TYPE] = config.CLIENT
+
+    df_s = read_data(config.SERVER)
+    df_s[config.TYPE] = config.SERVER
+
+    df = pd.concat([df_c, df_s], ignore_index=True, sort=True)
+
+    df = df[df[config.MECH] != config.WINDOW_EVENT_LISTENER]
+    df = df[df[config.MECH] != config.WINDOW_ON_ERROR]
+
+    df[config.COUNT] = 1
+    df.reset_index(drop=True, inplace=True)
+
+    return df
+
+
+def read_whole_dataset():
+    df_c = read_whole_data(config.CLIENT)
+    df_c[config.TYPE] = config.CLIENT
+
+    df_s = read_whole_data(config.SERVER)
+    df_s[config.TYPE] = config.SERVER
+
+    df = pd.concat([df_c, df_s], ignore_index=True, sort=True)
+
+    df[config.COUNT] = 1
+    df.reset_index(drop=True, inplace=True)
+
+    return df
+
+
+def read_whole_data(type):
+    path = config.RESULT + 'er-{}.csv'.format(type)
+    df = pd.read_csv(path)
+
+    df[config.COUNT] = 1
+    df[config.TYPE] = type
+
+    df.reset_index(inplace=True, drop=True)
+    return df
+
+
 def save_boxplot(df, image_path, x_col, y_col, xlabel, ylabel):
     # Start a new figure
     plt.figure()
@@ -103,23 +194,22 @@ def save_violinplot(df, image_path, x_col, y_col, xlabel, ylabel):
     # Rescale y-axis to log function
     g.set_yscale('log')
 
+    directory = 'violinplot/'
+    create_dir_if_not_exists(directory)
+
     # Save figure
-    plt.savefig(image_path)
+    plt.savefig(directory + image_path)
 
 
-def save_violinplot_hue(df, image_path, xlabel, ylabel):
+def save_violinplot_hue(df, image_path, x_col, y_col, xlabel, ylabel, hue):
     # Start a new figure
     plt.figure()
 
     # Present no lines in the grid
     sns.set(style='whitegrid')
 
-    # Apply log function to dataframe
-    # df['values'] = df['values'].apply(np.log)
-
     # Create plot and set labels
-    tips = sns.load_dataset('tips')
-    g = sns.violinplot(x='day', y='total_bill', hue='smoker', data=tips, palette='muted', split=True)
+    g = sns.violinplot(x=x_col, y=y_col, hue=hue, data=df, palette='muted', split=True)
     g.set(xlabel=xlabel, ylabel=ylabel)
 
     # Rescale y-axis to log function
@@ -134,11 +224,6 @@ def save_lineplot(df, image_path, x_column_name, y_column_name, hue, xlabel, yla
     # Start a new figure
     plt.figure()
 
-    # Create plot and set labels
-    # df = pd.DataFrame(dict(time=np.arange(500), value=np.random.randn(500).cumsum()))
-    # sns.relplot(x='time', y='value', kind='line', data=df)
-    # sns.relplot(x=xlabel, y=ylabel, kind='line', estimator=None, data=df)
-
     ax = sns.lineplot(data=df, x=x_column_name, y=y_column_name, hue=hue)
 
     ax.set(xlabel=xlabel, ylabel=ylabel)
@@ -151,30 +236,46 @@ def save_lineplot(df, image_path, x_column_name, y_column_name, hue, xlabel, yla
     plt.savefig(image_path)
 
 
-def remove_outliers(df, name):
-    low = .05
-    high = .95
-    df_quant = df.quantile([low, high])
-    df_new = df[(df[name] > df_quant.loc[low, name]) & (df[name] < df_quant.loc[high, name])]
-    df_new.reset_index(drop=True, inplace=True)
-    return df_new
+def save_barplot(data, filename, x, y, hue, log):
+    plt.figure()
+    ax = sns.barplot(x=x, y=y, data=data, hue=hue)
+    # , orient = 'h'
+
+    # Remove labels from categories
+    # ax.set_xticklabels([])
+    # plt.tight_layout()
+
+    # ax.set_xticklabels(ax.get_xticklabels(), rotation=90, ha='right')
+    # plt.tight_layout()
+
+    if log:
+        ax.set_yscale('log')
+
+    # directory = 'barplot/'
+    # create_dir_if_not_exists(directory)
+    plt.ylim(0, 0.3)
+
+    plt.savefig(filename)
 
 
-def remove_outliers_iqr(df, column):
+def save_countplot(data, filename, x):
+    plt.figure()
+    sns.countplot(x=x, data=data)
 
-    quartile_1, quartile_3 = np.percentile(df[column], [25, 75])
+    directory = 'countplot/'
+    create_dir_if_not_exists(directory)
 
-    # Save inter quartile range
-    iqr = quartile_3 - quartile_1
+    plt.savefig(directory + filename)
 
-    # Calculate bounds
-    lower_bound = quartile_1 - (iqr * 1.5)
-    upper_bound = quartile_3 + (iqr * 1.5)
 
-    df_new = df[(df[column] > upper_bound) | (df[column] < lower_bound)]
-    df_new.reset_index(drop=True, inplace=True)
+def save_scatterplot(df, x, y):
 
-    return df_new
+    sns.catplot(data=df, x=x, y=y)
+
+    directory = 'scatterplot/'
+    create_dir_if_not_exists(directory)
+
+    plt.savefig(directory + 'scatterplot.png')
 
 
 def create_dir_if_not_exists(directory):

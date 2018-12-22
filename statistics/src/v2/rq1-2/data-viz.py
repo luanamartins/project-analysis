@@ -12,17 +12,34 @@ RESULTS_DIRECTORY = 'data/'
 RESULTS_DIRECTORY_IMAGES = 'images/'
 
 
-if __name__ == '__main__':
-    df_async = pd.read_csv(RESULTS_DIRECTORY + 'df_async_await.csv')
-    df_callback = pd.read_csv(RESULTS_DIRECTORY + 'df_callback.csv')
-    df_event = pd.read_csv(RESULTS_DIRECTORY + 'df_event.csv')
-    df_promise = pd.read_csv(RESULTS_DIRECTORY + 'df_promise.csv')
-    df_try_catch = pd.read_csv(RESULTS_DIRECTORY + 'df_try_catch.csv')
+def generate_barplot():
+    df = pd.read_csv(RESULTS_DIRECTORY + 'overall2.csv')
+    df = df[df[config.PERC] > 1]
+    df['joint_column'] = ''
+    plt.figure()
+    sns.set_style('whitegrid')
+    ax = sns.barplot(x='joint_column', y=config.PERC, hue=config.STRATEGY, data=df)
+    # plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05), ncol=3, fancybox=True, shadow=True)
+    plt.xlabel('')
+    plt.ylabel('% of strategies')
+    plt.tight_layout()
+    plt.savefig(RESULTS_DIRECTORY_IMAGES + 'overall2.png')
+
+
+def generate_barplot_overall_data():
+    df_async = pd.read_csv(RESULTS_DIRECTORY + 'df_async_await2.csv')
+    df_callback = pd.read_csv(RESULTS_DIRECTORY + 'df_callback2.csv')
+    df_event = pd.read_csv(RESULTS_DIRECTORY + 'df_event2.csv')
+    df_promise = pd.read_csv(RESULTS_DIRECTORY + 'df_promise2.csv')
+    df_try_catch = pd.read_csv(RESULTS_DIRECTORY + 'df_try_catch2.csv')
     # df_callback, df_event, df_promise,
     df_all = [df_async, df_callback, df_event, df_promise, df_try_catch]
     df_data = pd.concat(df_all, ignore_index=True)
 
-    plt.figure(figsize=(10,4))
+    df_data = df_data[df_data[config.PERC] > 1]
+
+    plt.figure(figsize=(10,6))
     # legend = False
     # kind = 'bar'
     sns.set_style('whitegrid')
@@ -51,9 +68,14 @@ if __name__ == '__main__':
 
     # plt.legend(loc='upper left', bbox_to_anchor=(1, 1), prop={'size': 6})
     # plt.legend(loc = 'upper left', bbox_to_anchor = (0.5, -0.25), ncol = 4, prop={'size':4.5})
-    plt.legend(loc = 'center left', bbox_to_anchor = (1, 0.5))
+    plt.legend(loc='center left', bbox_to_anchor=(0.1, -0.3), ncol=3, fancybox=True, shadow=True)
     plt.xlabel('')
     plt.ylabel('% of strategies')
     plt.tight_layout()
-    plt.savefig(RESULTS_DIRECTORY_IMAGES + 'overall-data.png')
+    plt.savefig(RESULTS_DIRECTORY_IMAGES + 'overall-data2.png')
     #dpi = 500
+
+
+if __name__ == '__main__':
+    generate_barplot_overall_data()
+    #generate_barplot()
