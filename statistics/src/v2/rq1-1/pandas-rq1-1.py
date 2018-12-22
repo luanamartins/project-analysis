@@ -71,10 +71,10 @@ def correlation(df):
     df_repo = ds.read_repo_er_all()
     df_merge = df_g.merge(df_repo, on=config.REPO)
 
-    df_merge.to_csv('df_merge.csv')
+    df_merge.to_csv(RESULTS_DIRECTORY + 'df_merge.csv')
 
     df_c = df_merge[[config.REPO, config.COUNT, config.LINES, config.TOTAL_LOGICAL_LINES]]
-    df_c.to_csv('df_c.csv')
+    df_c.to_csv(RESULTS_DIRECTORY + 'df_c.csv')
 
     print(str(df_c[config.COUNT].corr(df_c[config.LINES], method='pearson')))
     print(str(df_c[config.COUNT].corr(df_c[config.TOTAL_LOGICAL_LINES], method='pearson')))
