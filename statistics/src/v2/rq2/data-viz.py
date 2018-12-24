@@ -92,7 +92,6 @@ def lineplot_by_mech(df, type):
 
 
 def plot_handlers_vs_stmts(df_all):
-    # df_group = df_all[df_all[config.MECH] != config.CALLBACK]
     df_group = df_all.copy()
     df_group.loc[df_group[config.TYPE] == config.SERVER, config.TYPE] = 'Standalone'
     df_group.loc[df_group[config.TYPE] == config.CLIENT, config.TYPE] = 'Web'
@@ -106,8 +105,6 @@ def plot_handlers_vs_stmts(df_all):
     y_col = config.COUNT
     hue = 'Class'
     df_group.rename(index=str, columns={config.TYPE: 'Class'}, inplace=True)
-
-    df_group.to_csv('to_delete.csv')
 
     # ds.save_lineplot(df_group, FIGURE_TEMPLATE.format('stmts'), x_col, y_col, hue, x_label, y_label)
     # Start a new figure
@@ -141,9 +138,7 @@ def lineplot_all_by_lines(df_all):
     df_group = df_all[df_all[config.MECH] != config.CALLBACK]
     df_group = df_group.groupby([config.TYPE, config.LINES], as_index=False).sum()
     df_group = df_group[[config.TYPE, config.LINES, config.COUNT]]
-    df_test = df_all.groupby([config.LINES], as_index=False).sum()
     df_group.sort_values(by=config.LINES, inplace=True)
-    df_test.to_csv('out-lines.csv')
 
     x_label = '# of Lines'
     y_label = '# of Handlers'
@@ -154,7 +149,7 @@ def lineplot_all_by_lines(df_all):
     ds.save_lineplot(df_group, FIGURE_TEMPLATE.format('lines'), x_col, y_col, hue, x_label, y_label)
 
 
-def violinplot_mech(df):
+def violinplot_mech():
     df_g = pd.read_csv(config.PERCENTAGE_MECH_PER_REPO)
     df_g[config.PERC_PER_REPO] = df_g[config.PERC_PER_REPO] * 1
 
@@ -173,7 +168,7 @@ def violinplot_mech(df):
 
     # Create plot and set labels
     ax = sns.violinplot(x=config.MECH, y=config.PERC_PER_REPO,
-                        hue='Class', data=df,
+                        hue='Class', data=df_g,
                         cut=0, split=False, scale='count')
     x_label = ''
     y_label = '% of handlers'
@@ -188,16 +183,18 @@ def violinplot_mech(df):
     plt.savefig(RESULTS_IMAGES_DIR + 'violinplot.png')
 
 
-def barplot_strategies_percs(df_perc):
+def barplot_strategies_percs():
+    df = pd.read_csv(RESULTS_DATA_DIRECTORY + 'df_strategies.csv')
+
     plt.figure()
-    ax = sns.barplot(x='strategy', y='perc', data=df_perc)
+    ax = sns.barplot(x='strategy', y='perc', data=df)
 
     ax.set_xticklabels(ax.get_xticklabels(), rotation=90, ha='right')
     plt.tight_layout()
 
     ax.set_yscale('log')
 
-    plt.savefig(RESULTS_DIRECTORY + 'barplot_strategies_percs.png')
+    plt.savefig(RESULTS_IMAGES_DIR + 'barplot_strategies_percs.png')
 
 
 def save_strategies_from_mechs(df_data):
@@ -264,9 +261,16 @@ def save_image_strategies(df_data, figure_name):
 
 if __name__ == '__main__':
     ds.create_dir_if_not_exists(RESULTS_DATA_DIRECTORY)
-    df_all = ds.read_dataset()
+    df = ds.read_dataset()
 
-    # lineplot_all_by_lines(df_all)
-    # plot_handlers_vs_stmts(df_all)
-    # lineplot_by_mech(df_all, config.CLIENT)
-    # barplot(df_all)
+    # lineplot_all_by_lines(df)
+    # plot_handlers_vs_stmts(df)
+    # lineplot_by_mech(df, config.CLIENT)
+    # lineplot_by_mech(df, config.SERVER)
+    # barplot(df)
+
+    # barplot_strategies_percs()
+
+    # violinplot_mech()
+
+    save_strategies_from_mechs(df)

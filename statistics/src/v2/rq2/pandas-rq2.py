@@ -11,7 +11,7 @@ RESULTS_IMAGES_DIR = RESULTS_BASE_DIR + 'images/'
 FIGURE_TEMPLATE = RESULTS_IMAGES_DIR + '{}.png'
 
 
-def get_percs_from_strategies(df):
+def save_percs_from_strategies(df):
     total_handlers = df[config.COUNT].sum()
     percs = []
     for strategy in config.STRATEGIES:
@@ -23,35 +23,17 @@ def get_percs_from_strategies(df):
         percs.append(partial)
 
     print(1 - sum(percs))
-    return percs
 
-
-def build_data_for_perc(percs):
     strategies = config.STRATEGIES
     strategies.append('others')
     df_strategies = pd.DataFrame(data=strategies)
     percs.append(1 - sum(percs))
-    print(percs)
     df_strategies['perc'] = percs
     df_strategies.columns = ['strategy', 'perc']
-    print(df_strategies)
-    df_strategies['perc'] = df_strategies['perc']*100
-    return df_strategies
 
+    df_strategies['perc'] = df_strategies['perc'] * 100
 
-def calculate_strategy_others(df):
-    df_res = df.copy()
-
-    strategies_to_remove = [config.EMPTY, config.NO_USAGE_OF_ERROR_ARG, config.RETHROW, config.RERETURN]
-    strategies = list(filter(lambda s: s not in strategies_to_remove, config.STRATEGIES))
-
-    df_strategies = df_res[strategies].sum(axis=1)
-    df_res[config.OTHERS] = df_res[config.LINES].subtract(df_strategies)
-    df_res.loc[df_res[config.OTHERS] < 0, config.OTHERS] = 0
-    df_res.loc[df_res[config.OTHERS] > 0, config.OTHERS] = 1
-    df_res.to_csv(RESULTS_DATA_DIRECTORY + 'df_res.csv', index=False)
-
-    return df_res
+    df_strategies.to_csv(RESULTS_DATA_DIRECTORY + 'df_strategies.csv')
 
 
 def calculate_strategies_percentage(df):
@@ -103,8 +85,18 @@ def pre_processing_data():
     df_result.to_csv(RESULTS_DATA_DIRECTORY + 'data-file.csv', index=False)
 
 
-def get_data_strategies(df):
-    df_res = calculate_strategy_others(df)
+def save_strategies_of_mechanisms(df):
+
+    df_res = df.copy()
+
+    strategies_to_remove = [config.EMPTY, config.NO_USAGE_OF_ERROR_ARG, config.RETHROW, config.RERETURN]
+    strategies = list(filter(lambda s: s not in strategies_to_remove, config.STRATEGIES))
+
+    df_strategies = df_res[strategies].sum(axis=1)
+    df_res[config.OTHERS] = df_res[config.LINES].subtract(df_strategies)
+    df_res.loc[df_res[config.OTHERS] < 0, config.OTHERS] = 0
+    df_res.loc[df_res[config.OTHERS] > 0, config.OTHERS] = 1
+    df_res.to_csv(RESULTS_DATA_DIRECTORY + 'df_res.csv', index=False)
 
     labels = [config.REPO, config.TYPE, config.MECH]
     df_g = df_res.groupby(labels, as_index=False).sum()
@@ -162,14 +154,6 @@ def calculate_mean_median_std():
     df_stats.to_csv(RESULTS_DATA_DIRECTORY + 'percentage_mean_median.csv')
 
 
-def global_error_handlers(df):
-    df_e = df[df[config.MECH] == config.WINDOW_ON_ERROR]
-    print(df_e.head())
-
-    df_e = df[df[config.MECH] == config.WINDOW_EVENT_LISTENER]
-    print(df_e.head())
-
-
 def generate_data_info_edit():
     df = pd.read_csv(RESULTS_DATA_DIRECTORY + 'data_info_edit.csv', index_col=False)
     df.loc[df[config.TYPE] == config.SERVER, config.TYPE] = 'standalone'
@@ -181,17 +165,11 @@ if __name__ == '__main__':
     ds.create_dir_if_not_exists(RESULTS_DATA_DIRECTORY)
     df_all = ds.read_dataset()
 
-    # percs = get_percs_from_strategies(df_all)
-    # df_strat = build_data_for_perc(percs)
-    # barplot_strategies_percs(df_strat)
+    save_percs_from_strategies(df_all)
 
-    # violinplot_mech(df_all)
-
-    # get_data_strategies(df_all)
-
-    # preprocessing_data()
+    save_strategies_of_mechanisms(df_all)
 
     # save_image_perc_strategies()
 
-    df_whole = ds.read_whole_dataset()
-    global_error_handlers(df_whole)
+    # df_whole = ds.read_whole_dataset()
+    # global_error_handlers(df_whole)
