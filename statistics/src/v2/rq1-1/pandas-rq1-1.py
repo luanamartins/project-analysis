@@ -91,10 +91,15 @@ def number_of_stmts(df):
     print(df[config.STMTS].max())
 
 
+def global_handlers():
+    df_ = ds.read_global_handlers_dataset()
+    print(df_.shape)
+
+
 if __name__ == '__main__':
     ds.create_dir_if_not_exists(RESULTS_DIRECTORY)
 
-    df = ds.read_dataset()
+    # df = ds.read_dataset()
     # amount_code(df)
     # create_graph()
     # number_of_stmts(df)
@@ -102,8 +107,10 @@ if __name__ == '__main__':
     # lineplot(df)
     # lineplot_line_per_count(df)
 
-    df_perc = ds.read_percentage_mech_per_repo()
+    # df_perc = ds.read_percentage_mech_per_repo()
     # violinplot_per_mech(df_perc)
-    weighted_average(df_perc, [config.PROMISE, config.EVENT, config.CALLBACK, config.TRY_CATCH, config.ASYNC_AWAIT])
+    # weighted_average(df_perc, [config.PROMISE, config.EVENT, config.CALLBACK, config.TRY_CATCH, config.ASYNC_AWAIT])
 
-    correlation(df)
+    # correlation(df)
+
+    global_handlers()

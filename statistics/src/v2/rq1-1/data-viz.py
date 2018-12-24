@@ -53,7 +53,7 @@ def create_graph():
 
 def lineplot(df_raw):
     df_c = df_raw[[config.MECH, config.COUNT, config.TYPE, config.LINES, config.FILE, config.STMTS]]
-    df = df_c.groupby([config.MECH, config.FILE, config.LINES], as_index=False).sum()
+    df = df_c.groupby([config.MECH, config.STMTS], as_index=False).sum()
     df.to_csv(RESULTS_DIRECTORY + 'result-rq1-1.csv')
 
     df = df[df[config.MECH] != config.WINDOW_EVENT_LISTENER]
@@ -111,7 +111,8 @@ def lineplot_line_per_count(df_raw):
     plt.savefig(RESULTS_IMAGE_DIRECTORY + 'line-simple-stmts.png')
 
 
-def violinplot_per_mech(df):
+def violinplot_per_mech():
+    df = ds.read_percentage_mech_per_repo()
 
     xlabel = 'Error Handler Mechanisms'
     ylabel = 'Percentage'
@@ -145,5 +146,4 @@ if __name__ == '__main__':
     lineplot(df)
     lineplot_line_per_count(df)
 
-    df_perc = ds.read_percentage_mech_per_repo()
-    violinplot_per_mech(df_perc)
+    violinplot_per_mech()

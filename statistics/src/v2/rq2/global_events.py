@@ -15,6 +15,7 @@ TEMPLATE_PATH = RESULTS_DATA_DIRECTORY + 'global_events_{}.csv'
 NO_HANDLERS_FOR_TYPE_TEMPLATE_PATH = RESULTS_DATA_DIRECTORY + 'global_events_no_handlers_for_type_{}.csv'
 NO_HANDLERS_TEMPLATE_PATH = RESULTS_DATA_DIRECTORY + 'global_events_no_handlers.csv'
 
+
 def has_at_least_one_handler(type, df):
     df_grouped = df.groupby([config.REPO, config.TYPE]).sum()
     df_grouped = df_grouped[(df_grouped[NUMBER_UNCAUGHT_EXCEPTION] != 0) |

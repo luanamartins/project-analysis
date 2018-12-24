@@ -136,6 +136,27 @@ def read_dataset():
     return df
 
 
+def read_global_handlers_dataset():
+    path = config.RESULT + 'er-{}.csv'.format(config.CLIENT)
+    df_c = pd.read_csv(path)
+    df_c[config.TYPE] = config.CLIENT
+
+    path = config.RESULT + 'er-{}.csv'.format(config.SERVER)
+    df_s = pd.read_csv(path)
+    df_s[config.TYPE] = config.SERVER
+
+    df = pd.concat([df_c, df_s], ignore_index=True, sort=True)
+
+    df_ = df[
+        (df[config.MECH] == config.WINDOW_EVENT_LISTENER) |
+        (df[config.MECH] == config.WINDOW_ON_ERROR)
+    ]
+
+    df_[config.COUNT] = 1
+    df_.reset_index(drop=True, inplace=True)
+
+    return df_
+
 def read_whole_dataset():
     df_c = read_whole_data(config.CLIENT)
     df_c[config.TYPE] = config.CLIENT
