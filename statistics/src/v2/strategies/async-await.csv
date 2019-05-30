@@ -1,0 +1,11 @@
+repo,type,mech,count,files,lines
+Rocket.Chat,client,async-await,1,1751,113737
+aws-sdk-js,server,async-await,3,469,443471
+babel,client,async-await,5,7782,44421
+closure-compiler,server,async-await,1,533,74632
+closure-library,client,async-await,1,1609,424337
+node-mongodb-native,server,async-await,7,175,88381
+node,server,async-await,26,9201,932438
+nuxt.js,server,async-await,1,286,8671
+prettier,client,async-await,1,2690,20602
+react-native,server,async-await,3,907,48303

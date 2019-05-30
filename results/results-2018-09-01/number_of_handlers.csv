@@ -1,0 +1,11 @@
+,mech,lines,stmts,type,count
+0,async-await,27,17,client,8
+1,async-await,115,59,server,41
+2,callback,687116,127744,client,30200
+3,callback,423790,107932,server,31478
+4,event,761,481,client,234
+5,event,2260,1639,server,996
+6,promise,2120,1348,client,1007
+7,promise,2685,1818,server,964
+8,try-catch,41822,17424,client,15289
+9,try-catch,31731,20834,server,22239

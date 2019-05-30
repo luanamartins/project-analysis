@@ -1,0 +1,10 @@
+repo,type,eventsNumberOfEventUncaughtException,numberOfWindowOnError,numberOfWindowAddEventListener,global_events,global_events_for_class,callback_throws
+JavaScript-Load-Image,client,1,0,0,1,0,4.0
+Rocket.Chat,client,2,0,0,2,0,16.0
+hospitalrun-frontend,client,1,0,0,1,0,516.0
+jsdom,server,0,0,1,1,0,2.0
+meteor,server,0,2,0,2,0,33.0
+mithril.js,client,6,0,0,6,0,6.0
+react-native,server,0,0,2,2,0,3.0
+svg.js,client,2,0,0,2,0,2.0
+three.js,client,2,0,0,2,0,1.0

@@ -56,6 +56,27 @@ def error_first_protocol():
     df_info['max_perc'] = df_group_info.max()[config.PERC_FIRST_ERROR_PROTOCOL]
     df_info['total_perc'] = df_group_info.sum()[config.PERC_FIRST_ERROR_PROTOCOL]
 
+    overall_line = {
+        'type': 'overall',
+        'mean_raw': df[config.FIRST_ERROR_ARG].mean(),
+        'median_raw': df[config.FIRST_ERROR_ARG].median(),
+        'std_raw': df[config.FIRST_ERROR_ARG].std(),
+        'min_raw': df[config.FIRST_ERROR_ARG].min(),
+        'max_raw': df[config.FIRST_ERROR_ARG].max(),
+        'total_raw': df[config.FIRST_ERROR_ARG].sum(),
+
+        'mean_perc': df[config.PERC_FIRST_ERROR_PROTOCOL].mean(),
+        'median_perc': df[config.PERC_FIRST_ERROR_PROTOCOL].median(),
+        'std_perc': df[config.PERC_FIRST_ERROR_PROTOCOL].std(),
+        'min_perc': df[config.PERC_FIRST_ERROR_PROTOCOL].min(),
+        'max_perc': df[config.PERC_FIRST_ERROR_PROTOCOL].max(),
+        'total_perc': df[config.PERC_FIRST_ERROR_PROTOCOL].sum()
+    }
+
+    df_overall = pd.DataFrame(overall_line, index=[0])
+    df_info.reset_index(inplace=True)
+    df_info = pd.concat([df_info, df_overall], ignore_index=True)
+
     df_info.to_csv(RESULTS_DATA_DIRECTORY + 'error_first_protocol_info.csv')
 
 

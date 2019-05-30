@@ -86,6 +86,23 @@ def read_data(type):
     return df
 
 
+def get_all_strategies(df):
+    list_strategies = []
+    for index, row in df.iterrows():
+        list_in = get_strategies(row)
+        strat = ','.join(list_in)
+        list_strategies.append(strat)
+    return list_strategies
+
+
+def get_strategies(serie):
+    list_strategies = []
+    for strategy in config.STRATEGIES:
+        if serie[strategy]:
+            list_strategies.append(strategy)
+    return list_strategies
+
+
 def remove():
     path_c = config.RESULT + 'er-client.csv'
     df_c = pd.read_csv(path_c, index_col=0)

@@ -1,0 +1,11 @@
+,mech,repo,count,total_handlers,type
+45,async-await,closure-library.csv,1,1866,client
+171,async-await,prettier.csv,1,100,client
+197,async-await,babel.csv,5,140,client
+211,async-await,Rocket.Chat.csv,1,1041,client
+241,async-await,node-mongodb-native.csv,7,4626,server
+256,async-await,aws-sdk-js.csv,3,1499,server
+285,async-await,closure-compiler.csv,1,347,server
+312,async-await,react-native.csv,3,321,server
+407,async-await,node.csv,26,6495,server
+486,async-await,nuxt.js.csv,1,35,server

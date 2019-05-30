@@ -5,9 +5,9 @@ function copyFiles() {
 
     var repoName = 'brackets';
 
-    var toCopy = '/home/lulis/Documents/UFPE/Mestrado/Projeto/static-analysis/project-analysis/manual-analysis/to-copy.txt';
-    var inputFolder = '/home/lulis/Documents/UFPE/Mestrado/Projeto/static-analysis/project-analysis/manual-analysis/repos/' + repoName;
-    const outputFolder = '/home/lulis/Documents/UFPE/Mestrado/Projeto/static-analysis/project-analysis/manual-analysis/copiedFiles/' + repoName;
+    var toCopy = 'to-copy.txt';
+    var inputFolder = 'manual-analysis/repos/' + repoName;
+    const outputFolder = 'copiedFiles/' + repoName;
 
     var files = fs.readFileSync(toCopy).toString().split("\n");
 

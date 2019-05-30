@@ -74,6 +74,8 @@ def pre_processing_data():
     df_g = pd.DataFrame()
     df_g[config.REPO] = df[config.REPO]
     df_g[config.FILE] = df[config.FILE]
+    df_g[config.LINES] = df[config.LINES]
+    df_g[config.STMTS] = df[config.STMTS]
     df_g[config.TYPE] = df[config.TYPE]
     df_g[config.MECH] = df[config.MECH]
     df_g[config.STRATEGY] = pd.Series(data=strategies_dataset)
@@ -82,7 +84,7 @@ def pre_processing_data():
     df_g = df_g.replace('', config.OTHERS)
 
     df_result = df_g.groupby([config.REPO, config.FILE, config.TYPE, config.MECH, config.STRATEGY], as_index=False).sum()
-    df_result.to_csv(RESULTS_DATA_DIRECTORY + 'data-file.csv', index=False)
+    df_result.to_csv(RESULTS_DATA_DIRECTORY + 'data-file2.csv', index=False)
 
 
 def save_strategies_of_mechanisms(df):
@@ -96,11 +98,11 @@ def save_strategies_of_mechanisms(df):
     df_res[config.OTHERS] = df_res[config.LINES].subtract(df_strategies)
     df_res.loc[df_res[config.OTHERS] < 0, config.OTHERS] = 0
     df_res.loc[df_res[config.OTHERS] > 0, config.OTHERS] = 1
-    df_res.to_csv(RESULTS_DATA_DIRECTORY + 'df_res.csv', index=False)
+    # df_res.to_csv(RESULTS_DATA_DIRECTORY + 'df_res.csv', index=False)
 
     labels = [config.REPO, config.TYPE, config.MECH]
     df_g = df_res.groupby(labels, as_index=False).sum()
-    df_g.to_csv(RESULTS_DATA_DIRECTORY + 'df_g.csv', index=False)
+    # df_g.to_csv(RESULTS_DATA_DIRECTORY + 'df_g.csv', index=False)
 
     for mech in config.MECHS:
         df_transposed = transpose_dataframe(df_g, mech)
@@ -128,11 +130,17 @@ def transpose_dataframe(df_g, mech):
 
 def save_image_perc_strategies():
     df_data = pd.read_csv(RESULTS_DATA_DIRECTORY + 'data.csv', index_col=0)
+
     df_number_handlers = pd.read_csv(config.RESULT + 'number_of_handlers.csv')
     df_number_handlers = df_number_handlers[[config.MECH, config.TYPE, config.COUNT]]
+
     df_merge = df_data.merge(df_number_handlers, on=[config.MECH, config.TYPE])
     df_merge.rename(columns={'count_x': 'number_handler', 'count_y': 'total_handlers_by_mech'}, inplace=True)
     df_merge[config.PERC] = (df_merge['number_handler'] / df_merge['total_handlers_by_mech']) * 100
+
+    df_merge.loc[df_merge[config.TYPE] == config.SERVER, config.TYPE] = 'standalone'
+    df_merge.loc[df_merge[config.TYPE] == config.CLIENT, config.TYPE] = 'web'
+
     df_merge.to_csv(RESULTS_DATA_DIRECTORY + 'data_info.csv')
 
     df_merge_higher_one = df_merge[df_merge[config.PERC] > 1]
@@ -154,22 +162,30 @@ def calculate_mean_median_std():
     df_stats.to_csv(RESULTS_DATA_DIRECTORY + 'percentage_mean_median.csv')
 
 
-def generate_data_info_edit():
-    df = pd.read_csv(RESULTS_DATA_DIRECTORY + 'data_info_edit.csv', index_col=False)
-    df.loc[df[config.TYPE] == config.SERVER, config.TYPE] = 'standalone'
-    df.loc[df[config.TYPE] == config.CLIENT, config.TYPE] = 'web'
-    df.to_csv(RESULTS_DATA_DIRECTORY + 'data_info_edit.csv')
+# percentagem dos sistemas estudados que usa cada abstração? Seria legal. Por exemplo, async await é muito pouco usado
+# Isso significa que alguns apps usam e usam pouco ou que um ou dois apps fazem todos os usos?
+# Usos de promises e eventos que tratam erros estão distribuídos uniformemente entre os sistemas analisados?
+# Ha sistemas que não usam try-catch? Sim, não, por quê?
+
+def new_calc():
+    df = pd.read_csv(config.PERCENTAGE_MECH_PER_REPO)
+    df['#_projects'] = 1
+    df = df.groupby([config.MECH]).sum()
+    df.to_csv('test.csv')
 
 
 if __name__ == '__main__':
-    ds.create_dir_if_not_exists(RESULTS_DATA_DIRECTORY)
-    df_all = ds.read_dataset()
+    # ds.create_dir_if_not_exists(RESULTS_DATA_DIRECTORY)
+    # df_all = ds.read_dataset()
+    pre_processing_data()
 
-    save_percs_from_strategies(df_all)
+    # save_percs_from_strategies(df_all)
 
-    save_strategies_of_mechanisms(df_all)
+    # save_strategies_of_mechanisms(df_all)
 
     # save_image_perc_strategies()
 
     # df_whole = ds.read_whole_dataset()
     # global_error_handlers(df_whole)
+
+    # new_calc()

@@ -1,3 +1,4 @@
+require('dotenv').config()
 const path = require('path');
 const async = require('async');
 const fs = require('fs');

@@ -124,8 +124,24 @@ def plot_handlers_vs_stmts(df_all):
     sample1 = df_web[config.STMTS] / df_web[config.COUNT]
     sample2 = df_stand[config.STMTS] / df_stand[config.COUNT]
 
+    np.random.seed(314159)
+
     res = stats.ks_2samp(sample1, sample2)
     print(res)
+
+    print(stats.shapiro(sample1))
+    print(stats.shapiro(sample2))
+
+    # res = stats.kstest(sample1, sample2)
+    # print(res)
+
+    # res = stats.chisquare(sample1, f_exp=sample2)
+    # res = stats.chi2.cdf(sample1, sample2)
+    # print(res)
+
+    # np.random.seed(314159)
+    # res = stats.anderson_ksamp(sample1, sample2)
+    # print(res)
 
     # plt.figure()
     # df_g = df_group[df_group['Class'] == 'Web']
@@ -149,6 +165,29 @@ def lineplot_all_by_lines(df_all):
     ds.save_lineplot(df_group, FIGURE_TEMPLATE.format('lines'), x_col, y_col, hue, x_label, y_label)
 
 
+def draw_violinplot(x, y, hue, x_label, y_label, data, filename):
+    # Start a new figure
+    plt.figure()
+    # Present no lines in the grid
+    sns.set(style='whitegrid')
+
+    # Create plot and set labels
+    ax = sns.violinplot(x=x, y=y, hue=hue, data=data, cut=0, split=False, scale='count')
+
+    # Remove title on legend
+    handles, labels = ax.get_legend_handles_labels()
+    ax.legend(loc='upper right', handles=handles[:], labels=labels[:])
+
+    ax.set(xlabel=x_label, ylabel=y_label)
+
+    # Save figure
+    plt.savefig(filename)
+
+
+def draw_violinplot_strategy():
+    df_g = pd.read_csv(config.PERCENTAGE_MECH_PER_REPO)
+
+
 def violinplot_mech():
     df_g = pd.read_csv(config.PERCENTAGE_MECH_PER_REPO)
     df_g[config.PERC_PER_REPO] = df_g[config.PERC_PER_REPO] * 1
@@ -156,8 +195,8 @@ def violinplot_mech():
     df_means = df_g.groupby([config.MECH, config.TYPE], as_index=False).mean()
     df_means.to_csv(RESULTS_DATA_DIRECTORY + 'df_means.csv', index=False)
 
-    df_g.loc[df_g[config.TYPE] == config.CLIENT, config.TYPE] = 'Web'
-    df_g.loc[df_g[config.TYPE] == config.SERVER, config.TYPE] = 'Standalone'
+    df_g.loc[df_g[config.TYPE] == config.CLIENT, config.TYPE] = 'Web-based'
+    df_g.loc[df_g[config.TYPE] == config.SERVER, config.TYPE] = 'Node-based'
     df_g.rename(index=str, columns={config.TYPE: 'Class'}, inplace=True)
 
     # Start a new figure
@@ -208,7 +247,7 @@ def save_image_strategies(df_data, figure_name):
     plt.figure()
     sns.set_style('whitegrid')
     ax = sns.barplot(x=config.STRATEGY, y=config.STRATEGY_PERC, hue=config.TYPE,
-                        data=df_data, palette="muted")
+                     data=df_data, palette="muted")
     # ax.set_yscale('log')
     ax.set_xticklabels(ax.get_xticklabels(), rotation=90, ha='right')
     plt.tight_layout()
@@ -271,6 +310,6 @@ if __name__ == '__main__':
 
     # barplot_strategies_percs()
 
-    # violinplot_mech()
+    violinplot_mech()
 
-    save_strategies_from_mechs(df)
+    # save_strategies_from_mechs(df)

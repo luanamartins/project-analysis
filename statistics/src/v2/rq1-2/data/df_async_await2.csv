@@ -1,0 +1,11 @@
+mech,strategy,count,perc
+async-await,"noUsageOfErrorArg,throwErrorObject",14,28.57142857142857
+async-await,Others,9,18.367346938775512
+async-await,Re-throw,9,18.367346938775512
+async-await,"consoleLog,rethrow",4,8.16326530612245
+async-await,Empty,3,6.122448979591836
+async-await,Ignore arg,2,4.081632653061225
+async-await,"rethrow,returnLiteral",2,4.081632653061225
+async-await,"rethrow,returnNull",2,4.081632653061225
+async-await,Reassign error,1,2.0408163265306123
+async-await,returnLiteral,1,2.0408163265306123

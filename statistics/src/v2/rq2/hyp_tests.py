@@ -111,14 +111,19 @@ def run_test(sample, strategy, remove_zeroes):
     return test(serie_sample_one, serie_sample_two)
 
 
-def run_tests_for_mech(mech, sample, rows, rows_err):
+def run_tests_for_mech(mech, rows, rows_err, remove_zeroes):
+    sample = df[df[config.MECH] == mech]
     strategies = sample[config.STRATEGY].unique().tolist()
     for strategy in strategies:
-        result = run_test(sample, strategy, False)
+        result = run_test(sample, strategy, remove_zeroes)
 
         result[config.MECH] = mech
         result[config.STRATEGY] = strategy
-        rows.append(result)
+
+        if 'err' in result:
+            rows_err.append(result)
+        else:
+            rows.append(result)
 
 
 def reorder_df(df, columns):
@@ -146,32 +151,31 @@ if __name__ == '__main__':
     print(z_number(67, 124, 1.8386219458722493))
 
 
-if __name__ == '__main__':
-    df = pd.read_csv(RESULTS_DATA_DIR + 'data-repo.csv')
+def main():
+    df = pd.read_csv(RESULTS_DATA_DIR + 'data-file.csv')
 
     rows = []
     rows_err = []
-    sample = df[df[config.MECH] == config.TRY_CATCH]
-    run_tests_for_mech(config.TRY_CATCH, sample, rows, rows_err)
+    remove_zeroes = False
 
-    sample = df[df[config.MECH] == config.CALLBACK]
-    run_tests_for_mech(config.CALLBACK, sample, rows, rows_err)
+    run_tests_for_mech(config.TRY_CATCH, rows, rows_err, remove_zeroes)
 
-    sample = df[df[config.MECH] == config.EVENT]
-    run_tests_for_mech(config.EVENT, sample, rows, rows_err)
+    run_tests_for_mech(config.CALLBACK, rows, rows_err, remove_zeroes)
 
-    sample = df[df[config.MECH] == config.PROMISE]
-    run_tests_for_mech(config.PROMISE, sample, rows, rows_err)
+    run_tests_for_mech(config.EVENT, rows, rows_err, remove_zeroes)
 
-    sample = df[df[config.MECH] == config.ASYNC_AWAIT]
-    run_tests_for_mech(config.ASYNC_AWAIT, sample, rows, rows_err)
+    run_tests_for_mech(config.PROMISE, rows, rows_err, remove_zeroes)
 
-    df = pd.DataFrame(rows)
-    in_front_columns = [config.MECH, config.STRATEGY, 'p_value', 'statistic', 'mean_client', 'mean_server']
-    df_res = reorder_df(df, in_front_columns)
-    df_res.to_csv(RESULTS_DIR + 'repo-result.csv')
+    run_tests_for_mech(config.ASYNC_AWAIT, rows, rows_err, remove_zeroes)
 
-    df_err = pd.DataFrame(rows_err)
-    in_front_columns = [config.MECH, config.STRATEGY]
-    df_res = reorder_df(df_err, in_front_columns)
-    df_res.to_csv(RESULTS_DIR + 'repo-result-err.csv')
+    if rows:
+        df_rows = pd.DataFrame(rows)
+        in_front_columns = [config.MECH, config.STRATEGY, 'p_value', 'statistic', 'mean_client', 'mean_server']
+        df_res = reorder_df(df_rows, in_front_columns)
+        df_res.to_csv(RESULTS_DIR + 'file-result2.csv')
+
+    if rows_err:
+        df_err = pd.DataFrame(rows_err)
+        in_front_columns = [config.MECH, config.STRATEGY]
+        df_res = reorder_df(df_err, in_front_columns)
+        df_res.to_csv(RESULTS_DIR + 'file-result-err2.csv')

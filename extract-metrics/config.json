@@ -1,7 +1,8 @@
 {
-    "projectPath": "",
-    "dataProjectPath": "",
-    "srcPath": "",
-    "testPath": "",
-    "dataTestPath": ""
+    "projectPath": "/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/",
+    "dataProjectPath": "/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/",
+    "srcPath": "/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/src/",
+    "testPath": "/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/test/",
+    "dataTestPath": "/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/test/data/",
+    "saveMetricFilesPath": "/Users/luanamartins/Documents/Mestrado/project-analysis/results/results-2018-06-29/metrics-files/"
 }

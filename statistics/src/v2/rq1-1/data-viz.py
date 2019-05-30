@@ -78,9 +78,16 @@ def lineplot(df_raw):
     x_col = config.STMTS
     y_col = config.COUNT
     hue = config.MECH
+    new_hue = 'abstractions'
 
-    df_c = df[df[config.MECH] != config.CALLBACK]
-    ds.save_lineplot(df_c, RESULTS_IMAGE_DIRECTORY + 'line-rem-callback', x_col, y_col, hue, xlabel, ylabel)
+    # df_res = df[df[config.MECH] != config.CALLBACK]
+    df_res = df.copy()
+    df_res.columns = df_res.columns.str.replace(config.MECH, new_hue)
+
+    ds.save_lineplot(df_res, RESULTS_IMAGE_DIRECTORY + 'line-abstraction', x_col, y_col, new_hue, xlabel, ylabel)
+
+    df_res = df_res[df_res[new_hue] != config.CALLBACK]
+    ds.save_lineplot(df_res, RESULTS_IMAGE_DIRECTORY + 'line-rem-callback', x_col, y_col, new_hue, xlabel, ylabel)
 
 
 def lineplot_line_per_count(df_raw):
@@ -141,9 +148,9 @@ if __name__ == '__main__':
     ds.create_dir_if_not_exists(RESULTS_IMAGE_DIRECTORY)
 
     df = ds.read_dataset()
-    create_graph()
+    # create_graph()
 
     lineplot(df)
-    lineplot_line_per_count(df)
+    # lineplot_line_per_count(df)
 
-    violinplot_per_mech()
+    # violinplot_per_mech()

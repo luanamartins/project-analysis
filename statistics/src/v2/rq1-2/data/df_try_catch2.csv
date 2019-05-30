@@ -1,0 +1,49 @@
+mech,strategy,count,perc
+try-catch,Empty,8421,22.43924536346195
+try-catch,Others,6072,16.17991899381795
+try-catch,Ignore arg,5809,15.479108931997443
+try-catch,Reassign error,3627,9.664783628224258
+try-catch,Re-throw,2976,7.930078874440418
+try-catch,"Ignore arg, Return literal",2772,7.386484758047325
+try-catch,"noUsageOfErrorArg,returnNull",515,1.372308676188446
+try-catch,consoleLog,285,0.7594329567256449
+try-catch,returnLiteral,169,0.45033041995310175
+try-catch,"throwErrorObject,rethrow",162,0.43167768066510337
+try-catch,"noUsageOfErrorArg,reassigningError",138,0.3677254316776807
+try-catch,"reassigningError,rethrow",115,0.30643785973140053
+try-catch,"noUsageOfErrorArg,throwErrorObject",104,0.2771264122788318
+try-catch,returnNull,67,0.1785333617565551
+try-catch,"noUsageOfErrorArg,consoleLog",56,0.14922191430398635
+try-catch,"noUsageOfErrorArg,break",55,0.14655723726284375
+try-catch,"rethrow,returnLiteral",43,0.11458111276913237
+try-catch,"rethrow,break",40,0.10658708164570455
+try-catch,"noUsageOfErrorArg,returnUndefined",31,0.08260498827542101
+try-catch,"rethrow,returnNull",26,0.06928160306970794
+try-catch,"Reassign error, Break",24,0.06395224898742273
+try-catch,"noUsageOfErrorArg,continue",23,0.06128757194628011
+try-catch,continue,22,0.058622894905137495
+try-catch,"consoleLog,reassigningError",22,0.058622894905137495
+try-catch,"reassigningError,returnLiteral",22,0.058622894905137495
+try-catch,"noUsageOfErrorArg,throwLiteral",18,0.047964186740567044
+try-catch,returnUndefined,17,0.04529950969942443
+try-catch,"noUsageOfErrorArg,reassigningError,break",13,0.03464080153485397
+try-catch,"consoleLog,rethrow",12,0.031976124493711365
+try-catch,throwErrorObject,8,0.021317416329140908
+try-catch,alert,7,0.018652739287998293
+try-catch,throwLiteral,7,0.018652739287998293
+try-catch,"rethrow,continue",5,0.013323385205713068
+try-catch,"consoleLog,throwErrorObject,rethrow",5,0.013323385205713068
+try-catch,"consoleLog,returnLiteral",4,0.010658708164570454
+try-catch,"noUsageOfErrorArg,consoleLog,throwLiteral",4,0.010658708164570454
+try-catch,"reassigningError,continue,break",4,0.010658708164570454
+try-catch,"noUsageOfErrorArg,alert",3,0.007994031123427841
+try-catch,break,3,0.007994031123427841
+try-catch,"noUsageOfErrorArg,returnErrorObject",2,0.005329354082285227
+try-catch,returnErrorObject,2,0.005329354082285227
+try-catch,"consoleLog,returnNull",2,0.005329354082285227
+try-catch,"reassigningError,continue",2,0.005329354082285227
+try-catch,"rethrow,continue,break",1,0.0026646770411426135
+try-catch,"reassigningError,rethrow,returnLiteral",1,0.0026646770411426135
+try-catch,"rethrow,returnUndefined",1,0.0026646770411426135
+try-catch,"consoleLog,break",1,0.0026646770411426135
+try-catch,"noUsageOfErrorArg,consoleLog,returnLiteral",1,0.0026646770411426135

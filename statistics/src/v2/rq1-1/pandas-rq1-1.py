@@ -44,7 +44,7 @@ def weighted_average(df, handler_mechs):
     df_new.to_csv(RESULTS_DIRECTORY + 'weighted_average2.csv')
 
 
-def amount_code(df):
+def resume(df):
     df_g = df.groupby([config.MECH, config.REPO], as_index=False).sum()
     df_g = df_g[[config.MECH, config.REPO, config.COUNT, config.LINES, config.STMTS]]
     df_g.to_csv(RESULTS_DIRECTORY + 'output.csv')
@@ -91,26 +91,11 @@ def number_of_stmts(df):
     print(df[config.STMTS].max())
 
 
-def global_handlers():
-    df_ = ds.read_global_handlers_dataset()
-    print(df_.shape)
-
-
 if __name__ == '__main__':
     ds.create_dir_if_not_exists(RESULTS_DIRECTORY)
 
-    # df = ds.read_dataset()
-    # amount_code(df)
-    # create_graph()
+    df = ds.read_dataset()
+    resume(df)
     # number_of_stmts(df)
 
-    # lineplot(df)
-    # lineplot_line_per_count(df)
-
-    # df_perc = ds.read_percentage_mech_per_repo()
-    # violinplot_per_mech(df_perc)
-    # weighted_average(df_perc, [config.PROMISE, config.EVENT, config.CALLBACK, config.TRY_CATCH, config.ASYNC_AWAIT])
-
-    # correlation(df)
-
-    global_handlers()
+    correlation(df)

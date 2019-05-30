@@ -1,17 +1,18 @@
 
-RESULT = ''
-RESULT_RQ_1_1 = ''
-RESULT_RQ_1_2 = ''
-RESULT_RQ_2 = ''
-RESULT_INFO = ''
-EXTRACT_METRICS_RESULT_DIR = ''
-EXTRACT_METRICS_SRC = ''
-EXTRACT_METRICS_REPO_DIR = ''
-STATS_SRC_PATH = ''RESULT_SUMMARY = RESULT + 'summary-data/'
+RESULT = '/Users/luanamartins/Documents/Mestrado/project-analysis/results/results-2018-09-01/'
+RESULT_TODAY = '/Users/luanamartins/Documents/Mestrado/project-analysis/results/results-2018-09-01/result-today/'
+RESULT_SUMMARY = RESULT + 'summary-data/'
 RESULT_RQ_1_1 = RESULT + 'rq_1_1/'
 RESULT_RQ_1_2 = RESULT + 'rq_1_2/'
 RESULT_RQ_2 = RESULT + 'rq_2/'
 RESULT_INFO = RESULT + 'summary-data/'
+
+EXTRACT_METRICS_SRC = '/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/src/'
+EXTRACT_METRICS_DATA = '/home/local/CIN/lms7/project/extract-metrics/data/'
+EXTRACT_METRICS_RESULT_DIR = '/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/result/'
+EXTRACT_METRICS_REPO_DIR = '/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo/'
+STATS_SRC_PATH = '/Users/luanamartins/Documents/Mestrado/project-analysis/statistics/src/'
+
 PERCENTAGE_MECH_PER_REPO = RESULT + 'percentage_mech_per_repo.csv'
 
 # Mechanisms
@@ -23,6 +24,8 @@ PROMISE = 'promise'
 EVENT = 'event'
 CALLBACK = 'callback'
 TRY_CATCH = 'try-catch'
+
+FILES = 'files'
 
 # Column names
 MECH = 'mech'
@@ -44,6 +47,9 @@ STRATEGY_PERC = 'strategy_perc'
 OTHERS = 'others'
 PERC_PER_REPO = 'perc_per_repo'
 TOTAL_LOGICAL_LINES = 'total_logical_lines'
+TOTAL_FILES = 'total_files'
+NUMBER_OF_LOGICAL_LINES = 'numberOfLogicalLines'
+NUMBER_OF_PHYSICAL_LINES = 'numberOfPhysicalLines'
 PERC = 'perc'
 FIRST_ERROR_ARG = 'first_error_arg'
 PERC_FIRST_ERROR_PROTOCOL = 'perc_first_error_protocol'
@@ -51,6 +57,9 @@ PERC_FIRST_ERROR_PROTOCOL = 'perc_first_error_protocol'
 FIRST_ERROR_ARG_COLUMN = 'callbacksNumberOfFirstErrorArgFunctions'
 CALLBACK_ERROR_FUNCTIONS = 'callbacksNumberOfCallbackErrorFunctions'
 
+NUMBER_OF_WINDOW_ON_ERROR = 'numberOfWindowOnError'
+NUMBER_OF_WINDOW_ADD_EVENT_LISTENER = 'numberOfWindowAddEventListener'
+NUMBER_OF_UNCAUGHT_EXCEPTION = 'eventsNumberOfEventUncaughtException'
 
 # Strategies
 EMPTY = 'empty'

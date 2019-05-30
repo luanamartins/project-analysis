@@ -9,8 +9,6 @@ e analisar o quao comum elas sao (confianca da regra, interesse, lift).
 Os testes estatísticos variam bastante, fica mais facil de escolher quando tiver com a questão a ser analisada mais bem definida
 tu já tem essas informações dos repositórios organizadas?
 
-
-
 As secoes 6.1 e 6.2 tem toda a parte teorica pra entender como funciona essa parte de associacao e o algoritmo apriori (o mais famoso):
 
 http://infolab.stanford.edu/~ullman/mmds/ch6.pdf

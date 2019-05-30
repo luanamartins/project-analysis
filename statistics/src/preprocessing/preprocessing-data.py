@@ -1,5 +1,6 @@
 import glob
 import re
+import os
 import pandas as pd
 import statistics.src.config as config
 import statistics.src.get_repo_metrics as repo
@@ -59,6 +60,39 @@ def save_data(type):
     df_no_er.to_csv('{}no-er-{}.csv'.format(RESULTS_TO_SAVE, type))
 
 
+def retrieve_files_failed():
+    df_client = pd.read_csv('/Users/luanamartins/Documents/Mestrado/project-analysis/results/results-2018-09-01/no-er-client.csv')
+    df_server = pd.read_csv('/Users/luanamartins/Documents/Mestrado/project-analysis/results/results-2018-09-01/no-er-server.csv')
+
+    def calc_files(repos, filepath):
+        df_res_rows = []
+        for repo in repos:
+            repo_name = repo.replace('.csv', '')
+            dir = filepath + repo_name
+            onlyfiles = next(os.walk(dir))[2]  # dir is your directory path as string
+            total = 0
+            for file in onlyfiles:
+                if file.endswith('.js') and not file.endswith('.min.js'):
+                    # print(file)
+                    total += 1
+            df_res_rows.append({
+                'repo': repo,
+                'number_files': total
+            })
+        return df_res_rows
+
+    filepath = '/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo2/client/'
+    repos = df_client[config.REPO].tolist()
+    df_res = pd.DataFrame(data=calc_files(repos, filepath))
+    df_res.to_csv('/Users/luanamartins/Documents/Mestrado/project-analysis/results/results-2018-09-01/no-er-client-numbers.csv')
+
+    filepath = '/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo2/server/'
+    repos = df_server[config.REPO].tolist()
+    df_res = pd.DataFrame(data=calc_files(repos, filepath))
+    df_res.to_csv(
+        '/Users/luanamartins/Documents/Mestrado/project-analysis/results/results-2018-09-01/no-er-server-numbers.csv')
+
+
 def failed_data(type):
     path = config.RESULT + 'result-today/'
     df = pd.read_csv('{}failed-files-{}.txt'.format(path, type), names=['file'])
@@ -99,16 +133,19 @@ def fix_sinon_csv():
     df.to_csv(path_client)
 
 
-# save_data('client')
-# save_data('server')
+if __name__ == '__main__':
 
-# failed_data('client')
-# failed_data('server')
+    retrieve_files_failed()
+    # save_data('client')
+    # save_data('server')
 
-summary('client')
-summary('server')
+    # failed_data('client')
+    # failed_data('server')
 
-# fix_empty_calc('client')
-# fix_empty_calc('server')
+    # summary('client')
+    # summary('server')
 
-# fix_sinon_csv()
+    # fix_empty_calc('client')
+    # fix_empty_calc('server')
+
+    # fix_sinon_csv()

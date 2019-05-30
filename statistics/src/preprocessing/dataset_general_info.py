@@ -65,14 +65,38 @@ def create_general_info():
 
     files_c = pd.read_csv(config.RESULT + 'repo-er-client.csv')
     total_files_c = files_c['total_files'].sum()
+    median_files_c = files_c['total_files'].median()
+    min_files_c = files_c['total_files'].min()
+    max_files_c = files_c['total_files'].max()
 
     files_s = pd.read_csv(config.RESULT + 'repo-er-server.csv')
     total_files_s = files_s['total_files'].sum()
+    median_files_s = files_s['total_files'].median()
+    min_files_s = files_s['total_files'].min()
+    max_files_s = files_s['total_files'].max()
 
     total_files = {
         'client': total_files_c,
         'server': total_files_s,
         'overall': total_files_c + total_files_s
+    }
+
+    median_files = {
+        'client': median_files_c,
+        'server': median_files_s,
+        'overall': median_files_c + median_files_s
+    }
+
+    min_files = {
+        'client': min_files_c,
+        'server': min_files_s,
+        'overall': min_files_c + min_files_s
+    }
+
+    max_files = {
+        'client': max_files_c,
+        'server': max_files_s,
+        'overall': max_files_c + max_files_s
     }
 
     failed_files_c = pd.read_csv(config.RESULT + 'failed-files-client.csv')
@@ -91,15 +115,18 @@ def create_general_info():
         'number_logical_lines': loc_data,
         'number_physical_lines': physical_lines,
         'total_files': total_files,
-        'files_analyzed': files_analyzed
+        'files_analyzed': files_analyzed,
+        'median_files': median_files,
+        'min_files': min_files,
+        'max_files': max_files,
     }
 
     df = pd.DataFrame(data=data)
-    df.to_csv(config.RESULT + 'general-info.csv')
+    df.to_csv(config.RESULT + 'general-info2.csv')
 
 
 if __name__ == '__main__':
-    # create_general_info()
+    create_general_info()
 
-    df = ds.read_dataset()
-    number_of_handlers(df)
+    # df = ds.read_dataset()
+    # number_of_handlers(df)

@@ -1,0 +1,4 @@
+,number_logical_lines,number_physical_lines,total_files,files_analyzed,median_files,min_files,max_files
+client,6097966,6178620,46779,46661,82.0,1,14454
+overall,11576639,11675370,102501,102275,175.0,2,27765
+server,5478673,5496750,55722,55614,93.0,1,13311

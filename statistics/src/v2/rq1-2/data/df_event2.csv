@@ -1,0 +1,14 @@
+mech,strategy,count,perc
+event,Others,582,47.3170731707317
+event,Ignore arg,249,20.243902439024392
+event,Re-throw,64,5.203252032520325
+event,consoleLog,53,4.308943089430894
+event,"consoleLog,rethrow",10,0.8130081300813009
+event,"throwErrorObject,rethrow",6,0.4878048780487805
+event,"noUsageOfErrorArg,consoleLog",5,0.40650406504065045
+event,break,4,0.3252032520325203
+event,"noUsageOfErrorArg,throwErrorObject",4,0.3252032520325203
+event,"consoleLog,alert",1,0.08130081300813008
+event,"consoleLog,throwErrorObject",1,0.08130081300813008
+event,"noUsageOfErrorArg,alert",1,0.08130081300813008
+event,returnLiteral,1,0.08130081300813008

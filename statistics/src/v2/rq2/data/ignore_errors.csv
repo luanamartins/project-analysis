@@ -1,0 +1,2 @@
+,hypothesis_test,kurtosis_client,kurtosis_server,max_client,max_server,mean_client,mean_server,min_client,min_server,nobs_client,nobs_server,p_value,skewness_client,skewness_server,statistic,variance_client,variance_server
+0,ttest_ind,886.0431689664028,19.237036918551137,445,144,3.2028985507246377,8.74766355140187,1,1,1863,963,2.513231182415793e-28,26.4655622790553,3.2242465194227767,-11.151504286439962,153.44860598701723,158.76266345425222

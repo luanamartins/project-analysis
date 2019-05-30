@@ -11,7 +11,6 @@ def remove_outliers(df, column):
 
 
 def remove_outliers_iqr(df, column):
-
     quartile_1, quartile_3 = np.percentile(df[column], [25, 75])
 
     # Save inter quartile range

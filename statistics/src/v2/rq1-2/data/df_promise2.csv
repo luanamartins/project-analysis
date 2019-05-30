@@ -1,0 +1,23 @@
+mech,strategy,count,perc
+promise,Others,920,46.67681380010147
+promise,Ignore arg,378,19.17808219178082
+promise,Re-throw,148,7.508878741755454
+promise,consoleLog,63,3.1963470319634704
+promise,Reassign error,19,0.9639776763064434
+promise,"Ignore arg, Return literal",15,0.76103500761035
+promise,returnLiteral,7,0.35514967021816335
+promise,"noUsageOfErrorArg,consoleLog",7,0.35514967021816335
+promise,alert,5,0.2536783358701167
+promise,"noUsageOfErrorArg,returnNull",5,0.2536783358701167
+promise,throwErrorObject,4,0.20294266869609334
+promise,"noUsageOfErrorArg,throwLiteral",3,0.15220700152207
+promise,"rethrow,returnLiteral",3,0.15220700152207
+promise,returnNull,3,0.15220700152207
+promise,"noUsageOfErrorArg,throwErrorObject",2,0.10147133434804667
+promise,"noUsageOfErrorArg,reassigningError",2,0.10147133434804667
+promise,"rethrow,returnNull",2,0.10147133434804667
+promise,"consoleLog,rethrow",2,0.10147133434804667
+promise,"throwErrorObject,rethrow",2,0.10147133434804667
+promise,"reassigningError,rethrow",1,0.050735667174023336
+promise,"consoleLog,throwErrorObject",1,0.050735667174023336
+promise,returnErrorObject,1,0.050735667174023336

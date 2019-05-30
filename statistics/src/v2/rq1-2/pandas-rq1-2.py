@@ -1,6 +1,4 @@
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
 import statistics.src.seaborn.dataset_seaborn as ds
 import statistics.src.config as config
 
@@ -13,26 +11,9 @@ RESULTS_DIRECTORY = 'data/'
 RESULTS_DIRECTORY_IMAGES = 'images/'
 
 
-def get_all_strategies(df):
-    list_strategies = []
-    for index, row in df.iterrows():
-        list_in = get_strategies(row)
-        strat = ','.join(list_in)
-        list_strategies.append(strat)
-    return list_strategies
-
-
-def get_strategies(serie):
-    list_strategies = []
-    for strategy in config.STRATEGIES:
-        if serie[strategy]:
-            list_strategies.append(strategy)
-    return list_strategies
-
-
-def preprocessing_data():
+def pre_processing_data():
     df = ds.read_dataset()
-    strategies_dataset = get_all_strategies(df)
+    strategies_dataset = ds.get_all_strategies(df)
     df_g = pd.DataFrame()
     df_g[config.MECH] = df[config.MECH]
     df_g[config.STRATEGY] = pd.Series(data=strategies_dataset)
@@ -48,11 +29,10 @@ def handle_mech_strategies(df, filename):
     df_copy = df.copy()
     total_c = df[config.COUNT].sum()
 
+    # Remove number of no usage error parameter of Other strategy
     no_usage_number = df_copy.loc[df_copy[config.STRATEGY] == config.NO_USAGE_OF_ERROR_ARG][config.COUNT].values[0]
     others = df_copy.loc[df_copy[config.STRATEGY] == config.OTHERS][config.COUNT].values[0]
-
     # df_copy = df_copy.loc[df_copy[config.STRATEGY] == config.OTHERS]
-
     df_copy.loc[df_copy[config.STRATEGY] == config.OTHERS, [config.COUNT]] = others - no_usage_number
 
     df_copy[config.PERC] = (df_copy[config.COUNT] / total_c) * 100
@@ -69,21 +49,6 @@ def handle_mech_strategies(df, filename):
     df_copy.loc[df_copy[config.STRATEGY] == 'noUsageOfErrorArg,returnLiteral', config.STRATEGY] = \
         'Ignore arg, Return literal'
     df_copy.loc[df_copy[config.STRATEGY] == 'reassigningError,break', config.STRATEGY] = 'Reassign error, Break'
-
-    # # Save barplot
-    # plt.figure()
-    # sns.set_style('whitegrid')
-    # ax = sns.barplot(x=config.STRATEGY, y=config.PERC, hue=config.STRATEGY, data=df_copy)
-    # ax.set_xticklabels([])
-    # # ax.set_xticklabels(ax.get_xticklabels(), rotation=90, ha='right')
-    # # ax.legend(bbox_to_anchor=(1, 0.5))
-    # ax.legend(loc='upper right')
-    #
-    # plt.xlabel('')
-    # plt.ylabel('% of strategies')
-    # plt.tight_layout()
-    # # plt.bar(data.xcol, data.ycol, 4)
-    # plt.savefig(RESULTS_DIRECTORY_IMAGES + filename)
 
     df_copy.to_csv(RESULTS_DIRECTORY + filename + '2.csv', index=False)
     # print(df_copy)
