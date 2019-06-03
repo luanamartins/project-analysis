@@ -90,8 +90,8 @@ def get_all_strategies(df):
     list_strategies = []
     for index, row in df.iterrows():
         list_in = get_strategies(row)
-        strat = ','.join(list_in)
-        list_strategies.append(strat)
+        strategies_combination = ','.join(list_in)
+        list_strategies.append(strategies_combination)
     return list_strategies
 
 

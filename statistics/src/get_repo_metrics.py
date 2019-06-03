@@ -17,7 +17,7 @@ def group_by_repo(folder):
     # Get list of metrics
     columns = list_metrics()
 
-    # Create dataframe
+    # Create DataFrame
     df_total = pd.DataFrame(columns=columns)
 
     df_total.set_index('repo')

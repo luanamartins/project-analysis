@@ -1,11 +1,10 @@
 import glob
 import pandas as pd
 import statistics.src.config as config
-import statistics.src.seaborn.dataset_seaborn as ds
 
 
-def number_of_handlers(df_w):
-    df = df_w.copy()
+def number_of_handlers(df_raw):
+    df = df_raw.copy()
     df[config.COUNT] = 1
     df_g = df.groupby([config.MECH, config.TYPE], as_index=False).sum()
     columns = [config.MECH, config.LINES, config.STMTS, config.TYPE, config.COUNT]
