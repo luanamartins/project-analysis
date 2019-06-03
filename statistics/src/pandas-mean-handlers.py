@@ -48,7 +48,7 @@ file_paths = glob.glob(directory + '*.csv')
 
 get_total_and_mean_handlers(file_paths, result, number_repos)
 
-result_path = config.RESULT_SUMMARY + 'mean-total-error-handling.csv'
 dataf = pd.DataFrame(data=result)
 dataf.set_index('info', inplace=True)
+result_path = config.RESULT_SUMMARY + 'mean-total-error-handling.csv'
 dataf.to_csv(result_path, encoding='utf-8', index=False)

@@ -3,7 +3,7 @@ import re
 import os
 import pandas as pd
 import statistics.src.constants as config
-import statistics.src.get_repo_metrics as repo
+import statistics.src.preprocessing.get_repo_metrics as repo
 
 
 pd.set_option('display.max_columns', None)

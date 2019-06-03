@@ -3,8 +3,6 @@ import statistics.src.preprocessing.dataset_general_info as dgi
 import statistics.src.constants as config
 
 
-UNCAUGHT_EXCEPTION = 'UncaughtException'
-
 RESULTS_DIRECTORY = 'rq2/'
 RESULTS_BASE_DIR = config.STATS_SRC_PATH + 'v2/rq2/'
 RESULTS_DATA_DIRECTORY = RESULTS_BASE_DIR + 'data/'

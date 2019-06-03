@@ -3,30 +3,18 @@ import statistics.src.seaborn.dataset_seaborn as ds
 import statistics.src.constants as config
 
 
-NUMBER_HANDLERS = config.COUNT
-
-
 if __name__ == '__main__':
     df = ds.read_dataset()
 
     df_group = df.groupby([config.REPO, config.TYPE, config.MECH]).sum().reset_index()
-
-    df_res = pd.DataFrame()
-    df_res[config.REPO] = df_group[config.REPO]
-    df_res[config.TYPE] = df_group[config.TYPE]
-    df_res[config.MECH] = df_group[config.MECH]
-    df_res[NUMBER_HANDLERS] = df_group[config.COUNT]
-
+    df_res = df_group[[config.REPO, config.TYPE, config.MECH, config.COUNT]].copy()
     df_res.to_csv('df_res.csv', index=False)
 
-    df_res2 = pd.DataFrame()
-    df_res2[config.REPO] = df[config.REPO]
-    df_res2[config.TYPE] = df[config.TYPE]
-    df_res2[config.MECH] = df[config.MECH]
+    df_res2 = df[[config.REPO, config.TYPE, config.MECH]].copy()
     strategies_dataset = ds.get_all_strategies(df)
     df_res2[config.STRATEGY] = pd.Series(data=strategies_dataset)
     df_res2 = df_res2.replace('', config.OTHERS)
-    df_res2[NUMBER_HANDLERS] = 1
+    df_res2[config.COUNT] = 1
 
     df_res2 = df_res2.groupby([config.REPO, config.TYPE, config.MECH, config.STRATEGY]).sum().reset_index()
 

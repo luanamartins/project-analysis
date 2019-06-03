@@ -1,7 +1,7 @@
 import pandas as pd
 import glob
-import statistics.src.seaborn.dataset_seaborn as ds
 import statistics.src.constants as config
+import statistics.src.preprocessing.get_repo_metrics as repo
 
 DIR = '/Users/luanamartins/Documents/Mestrado/project-analysis/results/results-2018-09-01/result-today/'
 
@@ -10,11 +10,11 @@ def retrieve_general_data():
     rows = []
     for file in glob.glob(DIR + 'client' + '/*.csv'):
         df = pd.read_csv(file)
-        last_slash_index = file.rfind('/')
-        last_dot_index = file.rfind('.')
-        reponame = file[last_slash_index+1:last_dot_index]
+        # last_slash_index = file.rfind('/')
+        # last_dot_index = file.rfind('.')
+        # repo_name = file[last_slash_index+1:last_dot_index]
         rows.append({
-            config.REPO: reponame,
+            config.REPO: repo.get_repo_name(file),
             config.TYPE: 'client',
             config.FILES: df.shape[0],
             config.LINES: df['numberOfLogicalLines'].sum()
@@ -22,11 +22,11 @@ def retrieve_general_data():
 
     for file in glob.glob(DIR + 'server' + '/*.csv'):
         df = pd.read_csv(file)
-        last_slash_index = file.rfind('/')
-        last_dot_index = file.rfind('.')
-        reponame = file[last_slash_index+1:last_dot_index]
+        # last_slash_index = file.rfind('/')
+        # last_dot_index = file.rfind('.')
+        # repo_name = file[last_slash_index+1:last_dot_index]
         rows.append({
-            config.REPO: reponame,
+            config.REPO: repo.get_repo_name(file),
             config.TYPE: 'server',
             config.FILES: df.shape[0],
             config.LINES: df['numberOfLogicalLines'].sum()

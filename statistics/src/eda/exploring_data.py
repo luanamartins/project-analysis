@@ -176,7 +176,7 @@ def get_general_info(df):
 # violinplot_hue(df_client, df_server)
 
 # df = pd.concat([df_client, df_server])
-# barplot_g(df)
+# barplot(df)
 
 
 # lineplot(df)
