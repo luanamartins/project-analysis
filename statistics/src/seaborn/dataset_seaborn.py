@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-import statistics.src.config as config
+import statistics.src.constants as config
 
 
 def get_number_lines_handlers(df):

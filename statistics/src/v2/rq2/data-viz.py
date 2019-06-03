@@ -4,7 +4,7 @@ import scipy.stats as stats
 import seaborn as sns
 import matplotlib.pyplot as plt
 import statistics.src.seaborn.dataset_seaborn as ds
-import statistics.src.config as config
+import statistics.src.constants as config
 import statistics.src.stats.outliers as outliers
 
 pd.set_option('display.max_columns', 500)

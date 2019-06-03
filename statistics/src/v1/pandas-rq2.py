@@ -1,9 +1,9 @@
-import pandas as pd
-import scipy.stats as stats
-import statistics.src.config as config
 import glob
 import os
 import json
+import pandas as pd
+import scipy.stats as stats
+import statistics.src.constants as config
 
 
 def test_normality(x):

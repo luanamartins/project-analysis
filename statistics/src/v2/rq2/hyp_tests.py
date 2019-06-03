@@ -1,7 +1,7 @@
 import pandas as pd
 import math
 import scipy.stats as stats
-import statistics.src.config as config
+import statistics.src.constants as config
 
 
 RESULTS_DATA_DIR = config.STATS_SRC_PATH + 'v2/rq2/data/'

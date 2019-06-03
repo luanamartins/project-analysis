@@ -1,6 +1,6 @@
 import pandas as pd
 import statistics.src.seaborn.dataset_seaborn as ds
-import statistics.src.config as config
+import statistics.src.constants as config
 
 pd.set_option('display.max_columns', 500)
 

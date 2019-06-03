@@ -1,6 +1,6 @@
 import pandas as pd
 import statistics.src.seaborn.dataset_seaborn as ds
-import statistics.src.config as config
+import statistics.src.constants as config
 
 
 def create_dataframe(df, repo):

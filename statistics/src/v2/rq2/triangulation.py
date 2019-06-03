@@ -1,6 +1,6 @@
 import pandas as pd
 
-import statistics.src.config as config
+import statistics.src.constants as config
 
 RESULTS_DIRECTORY = config.STATS_SRC_PATH + 'v2/rq2/data/'
 TRIANGULATION_CLIENT_PATH = RESULTS_DIRECTORY + 'triangulation_client.csv'

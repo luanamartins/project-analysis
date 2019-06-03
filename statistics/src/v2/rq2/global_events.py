@@ -1,6 +1,6 @@
 import pandas as pd
 import statistics.src.preprocessing.dataset_general_info as dgi
-import statistics.src.config as config
+import statistics.src.constants as config
 
 
 UNCAUGHT_EXCEPTION = 'UncaughtException'

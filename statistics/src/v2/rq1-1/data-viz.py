@@ -2,7 +2,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import statistics.src.seaborn.dataset_seaborn as ds
-import statistics.src.config as config
+import statistics.src.constants as config
 
 
 RESULTS_BASE_DIR = config.STATS_SRC_PATH + 'v2/rq1-1/'

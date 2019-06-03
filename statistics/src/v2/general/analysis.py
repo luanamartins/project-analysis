@@ -1,7 +1,7 @@
 import pandas as pd
 import glob
 import statistics.src.seaborn.dataset_seaborn as ds
-import statistics.src.config as config
+import statistics.src.constants as config
 
 DIR = '/Users/luanamartins/Documents/Mestrado/project-analysis/results/results-2018-09-01/result-today/'
 

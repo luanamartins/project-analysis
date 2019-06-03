@@ -1,8 +1,8 @@
 import pandas as pd
 import glob
 import os
-import statistics.src.config as config
 import json
+import statistics.src.constants as config
 
 
 RESULT_PATH = config.RESULT + 'result-today/'

@@ -1,5 +1,5 @@
 import pandas as pd
-import statistics.src.config as config
+import statistics.src.constants as config
 
 
 def percentage(partial, total):

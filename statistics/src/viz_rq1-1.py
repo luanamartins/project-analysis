@@ -1,5 +1,5 @@
 import statistics.src.seaborn.dataset_seaborn as gg
-import statistics.src.config as config
+import statistics.src.constants as config
 import statistics.src.stats.outliers as out
 
 

@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import scipy.stats as stats
-import statistics.src.config as config
+import statistics.src.constants as config
 from statsmodels.stats.proportion import proportions_ztest, proportion_confint
 
 

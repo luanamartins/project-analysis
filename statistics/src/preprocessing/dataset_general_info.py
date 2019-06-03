@@ -1,6 +1,6 @@
 import glob
 import pandas as pd
-import statistics.src.config as config
+import statistics.src.constants as config
 
 
 def number_of_handlers(df_raw):

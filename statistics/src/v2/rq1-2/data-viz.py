@@ -1,7 +1,7 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-import statistics.src.config as config
+import statistics.src.constants as config
 
 
 pd.set_option('display.max_rows', 500)

@@ -1,5 +1,5 @@
 import pandas as pd
-import statistics.src.config as config
+import statistics.src.constants as config
 import statistics.src.v2.rq2.hyp_tests as tests
 
 RESULTS_TESTS_DIR = config.STATS_SRC_PATH + 'v2/rq2/tests/'

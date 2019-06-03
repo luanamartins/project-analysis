@@ -2,7 +2,7 @@ import glob
 import re
 import os
 import pandas as pd
-import statistics.src.config as config
+import statistics.src.constants as config
 import statistics.src.get_repo_metrics as repo
 
 

@@ -2,7 +2,7 @@ import glob
 import os
 import json
 import pandas as pd
-import statistics.src.config as config
+import statistics.src.constants as config
 
 
 def get_repo_name(path):
