@@ -174,6 +174,7 @@ def read_global_handlers_dataset():
 
     return df_
 
+
 def read_whole_dataset():
     df_c = read_whole_data(config.CLIENT)
     df_c[config.TYPE] = config.CLIENT

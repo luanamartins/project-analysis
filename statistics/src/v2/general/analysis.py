@@ -10,9 +10,6 @@ def retrieve_general_data():
     rows = []
     for file in glob.glob(DIR + 'client' + '/*.csv'):
         df = pd.read_csv(file)
-        # last_slash_index = file.rfind('/')
-        # last_dot_index = file.rfind('.')
-        # repo_name = file[last_slash_index+1:last_dot_index]
         rows.append({
             config.REPO: repo.get_repo_name(file),
             config.TYPE: 'client',
@@ -22,9 +19,6 @@ def retrieve_general_data():
 
     for file in glob.glob(DIR + 'server' + '/*.csv'):
         df = pd.read_csv(file)
-        # last_slash_index = file.rfind('/')
-        # last_dot_index = file.rfind('.')
-        # repo_name = file[last_slash_index+1:last_dot_index]
         rows.append({
             config.REPO: repo.get_repo_name(file),
             config.TYPE: 'server',
