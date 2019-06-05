@@ -39,10 +39,7 @@ def percentage(df):
     gg.save_barplot(df_perc, 'percentages.png', 'strategies', 'percentages', False)
 
 
-def main():
+if __name__ == '__main__':
     df = gg.read_dataset()
     # strategies_barplot(df)
     perc_try(df)
-
-
-main()

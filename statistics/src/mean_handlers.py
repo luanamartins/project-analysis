@@ -1,6 +1,6 @@
-import pandas as pd
-import statistics.src.constants as config
 import glob
+import pandas as pd
+import statistics.src.constants as constants
 
 
 def get_total_and_mean_handlers(file_paths, result, number_repos):
@@ -28,7 +28,7 @@ def get_total_and_mean_handlers(file_paths, result, number_repos):
         result['callback'][1] += total
 
 
-directory = config.EXTRACT_METRICS_RESULT_DIR + 'client/'
+directory = constants.EXTRACT_METRICS_RESULT_DIR + 'client/'
 file_paths = glob.glob(directory + '*.csv')
 number_repos = 192
 
@@ -43,12 +43,12 @@ result = {
 
 get_total_and_mean_handlers(file_paths, result, number_repos)
 
-directory = config.EXTRACT_METRICS_RESULT_DIR + 'server/'
+directory = constants.EXTRACT_METRICS_RESULT_DIR + 'server/'
 file_paths = glob.glob(directory + '*.csv')
 
 get_total_and_mean_handlers(file_paths, result, number_repos)
 
 dataf = pd.DataFrame(data=result)
 dataf.set_index('info', inplace=True)
-result_path = config.RESULT_SUMMARY + 'mean-total-error-handling.csv'
+result_path = constants.RESULT_SUMMARY + 'mean-total-error-handling.csv'
 dataf.to_csv(result_path, encoding='utf-8', index=False)

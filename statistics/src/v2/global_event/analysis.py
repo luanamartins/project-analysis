@@ -1,13 +1,9 @@
 import pandas as pd
-import glob
-
 import statistics.src.seaborn.dataset_seaborn as ds
 import statistics.src.constants as config
 
 
-dir = '/Users/luanamartins/Documents/Mestrado/project-analysis/statistics/src/v2/rq2/'
-GLOBAL_EVENT_DIR = dir + 'data/global_events.csv'
-
+GLOBAL_EVENT_DIR = config.STATS_SRC_PATH + 'v2/rq2/data/global_events.csv'
 UNCAUGHT_EXCEPTION_COLUMN = 'eventsNumberOfEventUncaughtException'
 WINDOW_ERROR = 'numberOfWindowOnError'
 WINDOW_ADD_EVENT_LISTENER = 'numberOfWindowAddEventListener'

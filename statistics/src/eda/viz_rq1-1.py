@@ -89,12 +89,9 @@ def lineplot(df_raw):
     gg.save_lineplot(df_mech, directory + 'line-async-await.png', x_col, y_col, hue, xlabel, ylabel)
 
 
-def main():
+if __name__ == '__main__':
     df = gg.read_dataset()
     # get_general_info(df)
     # barplot(df)
     # scatterplot(df)
     lineplot(df)
-
-
-main()

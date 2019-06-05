@@ -1,8 +1,6 @@
 import os
 import numpy as np
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
 import statistics.src.constants as config
 
 
@@ -31,9 +29,6 @@ def get_number_of_handlers_by_mech(df):
     df_event_once = get_metrics(df, 'eventsNumberOfEventMethodsOnce', 'event')
 
     # Get number of handlers by mechanism
-    # data = [df_async_await, df_try_catch]
-    # data = [df_callback, df_promise, df_event_on, df_event_once]
-    # data = [df_callback, df_try_catch]
     data = [df_callback, df_promise, df_event_on, df_event_once, df_async_await, df_try_catch]
 
     df = pd.concat(data, ignore_index=True)
@@ -42,7 +37,6 @@ def get_number_of_handlers_by_mech(df):
 
 
 def get_metrics(df, metric, name):
-
     # Fill nan on zeroes
     df_metric = df[metric].fillna(0.0)
 
@@ -167,7 +161,7 @@ def read_global_handlers_dataset():
     df_ = df[
         (df[config.MECH] == config.WINDOW_EVENT_LISTENER) |
         (df[config.MECH] == config.WINDOW_ON_ERROR)
-    ]
+        ]
 
     df_[config.COUNT] = 1
     df_.reset_index(drop=True, inplace=True)
@@ -199,122 +193,6 @@ def read_whole_data(type):
 
     df.reset_index(inplace=True, drop=True)
     return df
-
-
-def save_boxplot(df, image_path, x_col, y_col, xlabel, ylabel):
-    # Start a new figure
-    plt.figure()
-
-    # Present no lines in the grid
-    sns.set(style='whitegrid')
-
-    # Create plot and set labels
-    g = sns.boxplot(x=x_col, y=y_col, data=df)
-    g.set(xlabel=xlabel, ylabel=ylabel)
-
-    # Rescale y-axis to log function
-    g.set_yscale('log')
-
-    # Save figure
-    plt.savefig(image_path)
-
-
-def save_violinplot(df, image_path, x_col, y_col, xlabel, ylabel):
-    # Start a new figure
-    plt.figure()
-
-    # Present no lines in the grid
-    sns.set(style='whitegrid')
-
-    # Create plot and set labels
-    g = sns.violinplot(x=x_col, y=y_col, data=df, cut=0)
-    g.set(xlabel=xlabel, ylabel=ylabel)
-
-    # Rescale y-axis to log function
-    g.set_yscale('log')
-
-    directory = 'violinplot/'
-    create_dir_if_not_exists(directory)
-
-    # Save figure
-    plt.savefig(directory + image_path)
-
-
-def save_violinplot_hue(df, image_path, x_col, y_col, xlabel, ylabel, hue):
-    # Start a new figure
-    plt.figure()
-
-    # Present no lines in the grid
-    sns.set(style='whitegrid')
-
-    # Create plot and set labels
-    g = sns.violinplot(x=x_col, y=y_col, hue=hue, data=df, palette='muted', split=True)
-    g.set(xlabel=xlabel, ylabel=ylabel)
-
-    # Rescale y-axis to log function
-    g.set_yscale('log')
-
-    # Save figure
-    plt.savefig(image_path)
-
-
-# TODO
-def save_lineplot(df, image_path, x_column_name, y_column_name, hue, xlabel, ylabel):
-    # Start a new figure
-    plt.figure()
-
-    ax = sns.lineplot(data=df, x=x_column_name, y=y_column_name, hue=hue)
-
-    ax.set(xlabel=xlabel, ylabel=ylabel)
-    ax.set_yscale('log')
-
-    # Set grid style
-    # sns.set(style='darkgrid')
-
-    # Save figure
-    plt.savefig(image_path)
-
-
-def save_barplot(data, filename, x, y, hue, log):
-    plt.figure()
-    ax = sns.barplot(x=x, y=y, data=data, hue=hue)
-    # , orient = 'h'
-
-    # Remove labels from categories
-    # ax.set_xticklabels([])
-    # plt.tight_layout()
-
-    # ax.set_xticklabels(ax.get_xticklabels(), rotation=90, ha='right')
-    # plt.tight_layout()
-
-    if log:
-        ax.set_yscale('log')
-
-    # directory = 'barplot/'
-    # create_dir_if_not_exists(directory)
-    plt.ylim(0, 0.3)
-
-    plt.savefig(filename)
-
-
-def save_countplot(data, filename, x):
-    plt.figure()
-    sns.countplot(x=x, data=data)
-
-    directory = 'countplot/'
-    create_dir_if_not_exists(directory)
-
-    plt.savefig(directory + filename)
-
-
-def save_scatterplot(df, x, y):
-
-    sns.catplot(data=df, x=x, y=y)
-
-    directory = 'scatterplot/'
-    create_dir_if_not_exists(directory)
-
-    plt.savefig(directory + 'scatterplot.png')
 
 
 def create_dir_if_not_exists(directory):
