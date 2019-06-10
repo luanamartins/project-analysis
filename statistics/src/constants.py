@@ -61,6 +61,10 @@ NUMBER_OF_WINDOW_ON_ERROR = 'numberOfWindowOnError'
 NUMBER_OF_WINDOW_ADD_EVENT_LISTENER = 'numberOfWindowAddEventListener'
 NUMBER_OF_UNCAUGHT_EXCEPTION = 'eventsNumberOfEventUncaughtException'
 
+GLOBAL_EVENTS = 'global_events'
+GLOBAL_EVENTS_FOR_CLASS = 'global_events_for_class'
+CALLBACK_THROWS = 'callback_throws'
+
 # Strategies
 EMPTY = 'empty'
 NO_USAGE_OF_ERROR_ARG = 'noUsageOfErrorArg'

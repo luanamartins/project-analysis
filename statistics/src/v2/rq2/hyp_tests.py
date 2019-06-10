@@ -5,7 +5,7 @@ import statistics.src.constants as config
 
 
 RESULTS_DATA_DIR = config.STATS_SRC_PATH + 'v2/rq2/data/'
-RESULTS_DIR = config.STATS_SRC_PATH + 'v2/rq2/tests/'
+RESULTS_DIR = config.STATS_SRC_PATH + 'v2/rq2/stats_results/'
 
 
 def test_normality(x):

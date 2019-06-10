@@ -4,43 +4,46 @@ import scipy.stats as stats
 import seaborn as sns
 import matplotlib.pyplot as plt
 import statistics.src.seaborn.dataset_seaborn as ds
-import statistics.src.constants as config
+import statistics.src.constants as constants
 import statistics.src.stats.outliers as outliers
 
 pd.set_option('display.max_columns', 500)
 
 RESULTS_DIRECTORY = 'rq2/'
-RESULTS_BASE_DIR = config.STATS_SRC_PATH + 'v2/rq2/'
+RESULTS_BASE_DIR = constants.STATS_SRC_PATH + 'v2/rq2/'
 RESULTS_DATA_DIRECTORY = RESULTS_BASE_DIR + 'data/'
 RESULTS_IMAGES_DIR = RESULTS_BASE_DIR + 'images/'
 FIGURE_TEMPLATE = RESULTS_IMAGES_DIR + '{}.png'
 
 
-def barplot(df_all):
-    df_c = df_all[[config.MECH, config.TYPE, config.COUNT]]
-    df = df_c.groupby([config.MECH, config.TYPE], as_index=False).sum()
+def process_data_for_barplot(df_all):
+    df_c = df_all[[constants.MECH, constants.TYPE, constants.COUNT]]
+    df = df_c.groupby([constants.MECH, constants.TYPE], as_index=False).sum()
 
-    df_mech = df.groupby([config.MECH], as_index=False).sum()
-    df_mech.columns = [config.MECH, config.TOTAL_HANDLERS_PER_MECH]
+    df_mech = df.groupby([constants.MECH], as_index=False).sum()
+    df_mech.columns = [constants.MECH, constants.TOTAL_HANDLERS_PER_MECH]
 
-    df_merge = df.merge(df_mech, on=config.MECH)
+    df_merge = df.merge(df_mech, on=constants.MECH)
 
-    total_handlers = df_merge[config.COUNT].sum()
+    total_handlers = df_merge[constants.COUNT].sum()
 
-    df_merge['ratio_per_mech'] = df_merge[config.COUNT] / df_merge[config.TOTAL_HANDLERS_PER_MECH]
-    df_merge['ratio_handler'] = df_merge[config.COUNT] / total_handlers
+    df_merge['ratio_per_mech'] = df_merge[constants.COUNT] / df_merge[constants.TOTAL_HANDLERS_PER_MECH]
+    df_merge['ratio_handler'] = df_merge[constants.COUNT] / total_handlers
 
     print(df_merge['ratio_handler'].sum())
+    return df_merge
 
+
+def barplot(df_merge):
     plt.figure()
-    ax = sns.barplot(x=config.MECH, y='ratio_handler', data=df_merge, hue=config.TYPE)
+    ax = sns.barplot(x=constants.MECH, y='ratio_handler', data=df_merge, hue=constants.TYPE)
     ax.set_yscale('log')
     plt.ylim(0, 0.4)
     plt.savefig(FIGURE_TEMPLATE.format('barplot_total_handlers'))
 
     fig, ax = plt.subplots(2, 1)
-    create_barplot_per_mech(df_merge[df_merge[config.MECH] == config.ASYNC_AWAIT], ax[0], config.ASYNC_AWAIT)
-    create_barplot_per_mech(df_merge[df_merge[config.MECH] == config.TRY_CATCH], ax[1], config.TRY_CATCH)
+    create_barplot_per_mech(df_merge[df_merge[constants.MECH] == constants.ASYNC_AWAIT], ax[0], constants.ASYNC_AWAIT)
+    create_barplot_per_mech(df_merge[df_merge[constants.MECH] == constants.TRY_CATCH], ax[1], constants.TRY_CATCH)
 
     fig.show()
     fig.savefig(FIGURE_TEMPLATE.format('barplot_ratio_per_mech'))
@@ -67,44 +70,44 @@ def create_horizontal_barplot_example():
 
 def create_barplot_per_mech(df, ax, x_label):
     plt.figure()
-    sns.barplot(x='ratio_per_mech', y=config.TYPE, data=df, ax=ax)
+    sns.barplot(x='ratio_per_mech', y=constants.TYPE, data=df, ax=ax)
     ax.set_ylim(0, 1)
     ax.set(xlabel=x_label, ylabel='Class')
 
 
 def lineplot_by_mech(df, type):
-    df_c = df[[config.MECH, config.COUNT, config.TYPE, config.LINES, config.FILE, config.STMTS]]
-    df_c = df_c[df_c[config.TYPE] == type]
+    df_c = df[[constants.MECH, constants.COUNT, constants.TYPE, constants.LINES, constants.FILE, constants.STMTS]]
+    df_c = df_c[df_c[constants.TYPE] == type]
 
-    df = df_c.groupby([config.MECH, config.FILE, config.STMTS], as_index=False).sum()
+    df = df_c.groupby([constants.MECH, constants.FILE, constants.STMTS], as_index=False).sum()
 
     xlabel = '# of Statements'
     ylabel = '# of Handlers'
-    x_col = config.STMTS
-    y_col = config.COUNT
-    hue = config.MECH
+    x_col = constants.STMTS
+    y_col = constants.COUNT
+    hue = constants.MECH
     filename = 'mech-{}'.format(type)
 
     ds.save_lineplot(df, FIGURE_TEMPLATE.format(filename), x_col, y_col, hue, xlabel, ylabel)
 
-    df = df[df[config.MECH] != config.CALLBACK]
+    df = df[df[constants.MECH] != constants.CALLBACK]
     ds.save_lineplot(df, FIGURE_TEMPLATE.format(filename + '-without-callback'), x_col, y_col, hue, xlabel, ylabel)
 
 
 def plot_handlers_vs_stmts(df_all):
     df_group = df_all.copy()
-    df_group.loc[df_group[config.TYPE] == config.SERVER, config.TYPE] = 'Standalone'
-    df_group.loc[df_group[config.TYPE] == config.CLIENT, config.TYPE] = 'Web'
+    df_group.loc[df_group[constants.TYPE] == constants.SERVER, constants.TYPE] = 'Standalone'
+    df_group.loc[df_group[constants.TYPE] == constants.CLIENT, constants.TYPE] = 'Web'
 
-    df_group = df_group.groupby([config.TYPE, config.STMTS], as_index=False).sum()
-    df_group.sort_values(by=config.STMTS, inplace=True)
+    df_group = df_group.groupby([constants.TYPE, constants.STMTS], as_index=False).sum()
+    df_group.sort_values(by=constants.STMTS, inplace=True)
 
     x_label = '# of Statements'
     y_label = '# of Handlers'
-    x_col = config.STMTS
-    y_col = config.COUNT
+    x_col = constants.STMTS
+    y_col = constants.COUNT
     hue = 'Class'
-    df_group.rename(index=str, columns={config.TYPE: 'Class'}, inplace=True)
+    df_group.rename(index=str, columns={constants.TYPE: 'Class'}, inplace=True)
 
     # ds.save_lineplot(df_group, FIGURE_TEMPLATE.format('stmts'), x_col, y_col, hue, x_label, y_label)
     # Start a new figure
@@ -121,8 +124,8 @@ def plot_handlers_vs_stmts(df_all):
 
     df_web = df_group[df_group['Class'] == 'Web']
     df_stand = df_group[df_group['Class'] == 'Standalone']
-    sample1 = df_web[config.STMTS] / df_web[config.COUNT]
-    sample2 = df_stand[config.STMTS] / df_stand[config.COUNT]
+    sample1 = df_web[constants.STMTS] / df_web[constants.COUNT]
+    sample2 = df_stand[constants.STMTS] / df_stand[constants.COUNT]
 
     np.random.seed(314159)
 
@@ -151,16 +154,16 @@ def plot_handlers_vs_stmts(df_all):
 
 
 def lineplot_all_by_lines(df_all):
-    df_group = df_all[df_all[config.MECH] != config.CALLBACK]
-    df_group = df_group.groupby([config.TYPE, config.LINES], as_index=False).sum()
-    df_group = df_group[[config.TYPE, config.LINES, config.COUNT]]
-    df_group.sort_values(by=config.LINES, inplace=True)
+    df_group = df_all[df_all[constants.MECH] != constants.CALLBACK]
+    df_group = df_group.groupby([constants.TYPE, constants.LINES], as_index=False).sum()
+    df_group = df_group[[constants.TYPE, constants.LINES, constants.COUNT]]
+    df_group.sort_values(by=constants.LINES, inplace=True)
 
     x_label = '# of Lines'
     y_label = '# of Handlers'
-    x_col = config.LINES
-    y_col = config.COUNT
-    hue = config.TYPE
+    x_col = constants.LINES
+    y_col = constants.COUNT
+    hue = constants.TYPE
 
     ds.save_lineplot(df_group, FIGURE_TEMPLATE.format('lines'), x_col, y_col, hue, x_label, y_label)
 
@@ -184,20 +187,16 @@ def draw_violinplot(x, y, hue, x_label, y_label, data, filename):
     plt.savefig(filename)
 
 
-def draw_violinplot_strategy():
-    df_g = pd.read_csv(config.PERCENTAGE_MECH_PER_REPO)
-
-
 def violinplot_mech():
-    df_g = pd.read_csv(config.PERCENTAGE_MECH_PER_REPO)
-    df_g[config.PERC_PER_REPO] = df_g[config.PERC_PER_REPO] * 1
+    df_g = pd.read_csv(constants.PERCENTAGE_MECH_PER_REPO)
+    df_g[constants.PERC_PER_REPO] = df_g[constants.PERC_PER_REPO] * 1
 
-    df_means = df_g.groupby([config.MECH, config.TYPE], as_index=False).mean()
+    df_means = df_g.groupby([constants.MECH, constants.TYPE], as_index=False).mean()
     df_means.to_csv(RESULTS_DATA_DIRECTORY + 'df_means.csv', index=False)
 
-    df_g.loc[df_g[config.TYPE] == config.CLIENT, config.TYPE] = 'Web-based'
-    df_g.loc[df_g[config.TYPE] == config.SERVER, config.TYPE] = 'Node-based'
-    df_g.rename(index=str, columns={config.TYPE: 'Class'}, inplace=True)
+    df_g.loc[df_g[constants.TYPE] == constants.CLIENT, constants.TYPE] = 'Web-based'
+    df_g.loc[df_g[constants.TYPE] == constants.SERVER, constants.TYPE] = 'Node-based'
+    df_g.rename(index=str, columns={constants.TYPE: 'Class'}, inplace=True)
 
     # Start a new figure
     plt.figure()
@@ -206,7 +205,7 @@ def violinplot_mech():
     sns.set(style='whitegrid')
 
     # Create plot and set labels
-    ax = sns.violinplot(x=config.MECH, y=config.PERC_PER_REPO,
+    ax = sns.violinplot(x=constants.MECH, y=constants.PERC_PER_REPO,
                         hue='Class', data=df_g,
                         cut=0, split=False, scale='count')
     x_label = ''
@@ -237,8 +236,8 @@ def barplot_strategies_percs():
 
 
 def save_strategies_from_mechs(df_data):
-    for mech_name in config.MECHS:
-        df = outliers.remove_outliers_iqr(df_data, config.STRATEGY_COUNT)
+    for mech_name in constants.MECHS:
+        df = outliers.remove_outliers_iqr(df_data, constants.STRATEGY_COUNT)
         save_image_strategies(df, mech_name)
 
 
@@ -246,7 +245,7 @@ def save_strategies_from_mechs(df_data):
 def save_image_strategies(df_data, figure_name):
     plt.figure()
     sns.set_style('whitegrid')
-    ax = sns.barplot(x=config.STRATEGY, y=config.STRATEGY_PERC, hue=config.TYPE,
+    ax = sns.barplot(x=constants.STRATEGY, y=constants.STRATEGY_PERC, hue=constants.TYPE,
                      data=df_data, palette="muted")
     # ax.set_yscale('log')
     ax.set_xticklabels(ax.get_xticklabels(), rotation=90, ha='right')
@@ -256,34 +255,34 @@ def save_image_strategies(df_data, figure_name):
 
     df_merge_higher_one = pd.read_csv(RESULTS_DATA_DIRECTORY + 'data_info_higher_one.csv')
 
-    for mech in config.MECHS:
-        df_d = df_merge_higher_one[df_merge_higher_one[config.MECH] == mech]
-        df_d.loc[df_d[config.TYPE] == config.CLIENT, config.TYPE] = 'Web-based'
-        df_d.loc[df_d[config.TYPE] == config.SERVER, config.TYPE] = 'Standalone'
+    for abstraction in constants.MECHS:
+        df_d = df_merge_higher_one[df_merge_higher_one[constants.MECH] == abstraction]
+        df_d[constants.TYPE] = df_d[constants.TYPE].replace(constants.CLIENT, 'Web-based')
+        df_d[constants.TYPE] = df_d[constants.TYPE].replace(constants.SERVER, 'Node-based')
 
-        df_d.rename(index=str, columns={config.TYPE: 'Class'}, inplace=True)
+        df_d.rename(index=str, columns={constants.TYPE: 'Class'}, inplace=True)
 
         df_d.loc[df_d[
-                     config.STRATEGY] == 'noUsageOfErrorArg,throwErrorObject', config.STRATEGY] = 'Ignored arg, Throw object'
-        df_d.loc[df_d[config.STRATEGY] == 'others', config.STRATEGY] = 'Others'
-        df_d.loc[df_d[config.STRATEGY] == 'rethrow', config.STRATEGY] = 'Re-throw'
-        df_d.loc[df_d[config.STRATEGY] == 'consoleLog,rethrow', config.STRATEGY] = 'Log, Re-throw'
-        df_d.loc[df_d[config.STRATEGY] == 'empty', config.STRATEGY] = 'Empty'
-        df_d.loc[df_d[config.STRATEGY] == 'noUsageOfErrorArg', config.STRATEGY] = 'Ignored arg'
-        df_d.loc[df_d[config.STRATEGY] == 'rethrow,returnLiteral', config.STRATEGY] = 'Re-throw, Return literal'
-        df_d.loc[df_d[config.STRATEGY] == 'rethrow,returnNull', config.STRATEGY] = 'Re-throw, Return null'
-        df_d.loc[df_d[config.STRATEGY] == 'reassigningError', config.STRATEGY] = 'Reassign error'
-        df_d.loc[df_d[config.STRATEGY] == 'returnLiteral', config.STRATEGY] = 'Return literal'
-        df_d.loc[df_d[config.STRATEGY] == 'reassigningError,break', config.STRATEGY] = 'Reassign error, Break'
-        df_d.loc[df_d[config.STRATEGY] == 'consoleLog', config.STRATEGY] = 'Log'
+                     constants.STRATEGY] == 'noUsageOfErrorArg,throwErrorObject', constants.STRATEGY] = 'Ignored arg, Throw object'
+        df_d.loc[df_d[constants.STRATEGY] == 'others', constants.STRATEGY] = 'Others'
+        df_d.loc[df_d[constants.STRATEGY] == 'rethrow', constants.STRATEGY] = 'Re-throw'
+        df_d.loc[df_d[constants.STRATEGY] == 'consoleLog,rethrow', constants.STRATEGY] = 'Log, Re-throw'
+        df_d.loc[df_d[constants.STRATEGY] == 'empty', constants.STRATEGY] = 'Empty'
+        df_d.loc[df_d[constants.STRATEGY] == 'noUsageOfErrorArg', constants.STRATEGY] = 'Ignored arg'
+        df_d.loc[df_d[constants.STRATEGY] == 'rethrow,returnLiteral', constants.STRATEGY] = 'Re-throw, Return literal'
+        df_d.loc[df_d[constants.STRATEGY] == 'rethrow,returnNull', constants.STRATEGY] = 'Re-throw, Return null'
+        df_d.loc[df_d[constants.STRATEGY] == 'reassigningError', constants.STRATEGY] = 'Reassign error'
+        df_d.loc[df_d[constants.STRATEGY] == 'returnLiteral', constants.STRATEGY] = 'Return literal'
+        df_d.loc[df_d[constants.STRATEGY] == 'reassigningError,break', constants.STRATEGY] = 'Reassign error, Break'
+        df_d.loc[df_d[constants.STRATEGY] == 'consoleLog', constants.STRATEGY] = 'Log'
         df_d.loc[
-            df_d[config.STRATEGY] == 'noUsageOfErrorArg,returnLiteral', config.STRATEGY] = 'Ignored arg, Return literal'
-        df_d.loc[df_d[config.STRATEGY] == 'noUsageOfErrorArg,returnNull', config.STRATEGY] = 'Ignored arg, Return null'
-        df_d.loc[df_d[config.STRATEGY] == 'break', config.STRATEGY] = 'Break'
+            df_d[constants.STRATEGY] == 'noUsageOfErrorArg,returnLiteral', constants.STRATEGY] = 'Ignored arg, Return literal'
+        df_d.loc[df_d[constants.STRATEGY] == 'noUsageOfErrorArg,returnNull', constants.STRATEGY] = 'Ignored arg, Return null'
+        df_d.loc[df_d[constants.STRATEGY] == 'break', constants.STRATEGY] = 'Break'
 
         plt.figure()
         sns.set_style('whitegrid')
-        ax = sns.barplot(x=config.STRATEGY, y=config.PERC, hue='Class', data=df_d, palette='muted')
+        ax = sns.barplot(x=constants.STRATEGY, y=constants.PERC, hue='Class', data=df_d, palette='muted')
         # ax.set_yscale('log')
         ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
 
@@ -295,7 +294,7 @@ def save_image_strategies(df_data, figure_name):
         plt.ylabel('% of strategies')
         plt.tight_layout()
 
-        plt.savefig(RESULTS_IMAGES_DIR + 'strategy_perc_{}_barplot.png'.format(mech))
+        plt.savefig(RESULTS_IMAGES_DIR + 'strategy_perc_{}_barplot.png'.format(abstraction))
 
 
 if __name__ == '__main__':
@@ -306,7 +305,8 @@ if __name__ == '__main__':
     # plot_handlers_vs_stmts(df)
     # lineplot_by_mech(df, config.CLIENT)
     # lineplot_by_mech(df, config.SERVER)
-    # barplot(df)
+    # df_proc = process_data_for_barplot(df)
+    # barplot(df_proc)
 
     # barplot_strategies_percs()
 
