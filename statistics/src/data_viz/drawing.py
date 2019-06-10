@@ -60,7 +60,6 @@ def save_violinplot_hue(df, image_path, x_col, y_col, xlabel, ylabel, hue):
     plt.savefig(image_path)
 
 
-# TODO
 def save_lineplot(df, image_path, x_column_name, y_column_name, hue, x_label, y_label):
     # Start a new figure
     plt.figure()

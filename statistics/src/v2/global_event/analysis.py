@@ -13,6 +13,16 @@ def get_global_event_for_class(row):
         return row[constants.NUMBER_OF_WINDOW_ON_ERROR] + row[constants.NUMBER_OF_WINDOW_ADD_EVENT_LISTENER]
 
 
+def handlers_that_throws(dataframe):
+    return dataframe[
+        (dataframe[constants.THROW_UNDEFINED] > 0) |
+        (dataframe[constants.THROW_NULL] > 0) |
+        (dataframe[constants.THROW_LITERAL] > 0) |
+        (dataframe[constants.THROW_ERROR_OBJECT] > 0) |
+        (dataframe[constants.RETHROW] > 0)
+    ]
+
+
 def get_callback_throws():
     data = ds.read_dataset()
     data = data.groupby([constants.REPO, constants.TYPE, constants.MECH]).sum().reset_index()
@@ -21,13 +31,7 @@ def get_callback_throws():
     data = data[data[constants.MECH] == constants.CALLBACK]
 
     # Filtering all callback functions handlers that throws
-    data = data[
-        (data[constants.THROW_UNDEFINED] > 0) |
-        (data[constants.THROW_NULL] > 0) |
-        (data[constants.THROW_LITERAL] > 0) |
-        (data[constants.THROW_ERROR_OBJECT] > 0) |
-        (data[constants.RETHROW] > 0)
-        ]
+    data = handlers_that_throws(data)
 
     df_res = pd.DataFrame()
     df_res[constants.REPO] = data[constants.REPO]
@@ -36,6 +40,18 @@ def get_callback_throws():
                                         data[constants.THROW_LITERAL] + data[constants.THROW_ERROR_OBJECT] + \
                                         data[constants.RETHROW]
     return df_res
+
+
+def get_overview_information(class_value, raw_df):
+    data = {
+        constants.METRIC: [constants.LINES, constants.FILES],
+        constants.MEAN: [raw_df[constants.LINES].mean(), raw_df[constants.FILES].mean()],
+        constants.MIN: [raw_df[constants.LINES].min(), raw_df[constants.FILES].min()],
+        constants.MAX: [raw_df[constants.LINES].max(), raw_df[constants.FILES].max()],
+    }
+    df = pd.DataFrame(data)
+    df.insert(0, 'class', class_value)
+    return df
 
 
 if __name__ == '__main__':
@@ -53,53 +69,26 @@ if __name__ == '__main__':
     df_result[constants.REPO] = df_result[constants.REPO].str[:-4]
     df_res = pd.merge(df_result, df_repo, how='left', on=[constants.REPO, constants.TYPE])
 
-    # print(df_res['lines'].mean())
-    # print(df_res['lines'].min())
-    # print(df_res['lines'].max())
-    # print(df_res['files'].mean())
-    # print(df_res['files'].min())
-    # print(df_res['files'].max())
-
-    df_res.to_csv('test6.csv', index=False)
+    d2 = df_result[(df_result[constants.GLOBAL_EVENTS_FOR_CLASS] == 0) & (df_result[constants.GLOBAL_EVENTS] > 0)]
+    d2.to_csv('has_global_events_for_class_only.csv', index=False)
 
     d = df_result[df_result[constants.GLOBAL_EVENTS] == 0]
     d = pd.merge(d, df_repo, how='left', on=[constants.REPO, constants.TYPE])
-    d.to_csv('test4.csv', index=False)
+    # d.to_csv('test4.csv', index=False)
 
-    print('lines')
-    print('mean: ' + str(d['lines'].mean()))
-    print('min: ' + str(d['lines'].min()))
-    print('max: ' + str(d['lines'].max()))
-    print('files')
-    print('mean: ' + str(d['files'].mean()))
-    print('min: ' + str(d['files'].min()))
-    print('max: ' + str(d['files'].max()))
+    df_result_final = pd.DataFrame()
+    df_result_final['class'] = [constants.OVERALL, constants.CLIENT, constants.SERVER]
 
-    print('')
-    print('client')
+    df_overall = get_overview_information(constants.OVERALL, d)
+
     df_c = d[d[constants.TYPE] == constants.CLIENT]
-    print('lines')
-    print('mean: ' + str(df_c['lines'].mean()))
-    print('min: ' + str(df_c['lines'].min()))
-    print('max: ' + str(df_c['lines'].max()))
-    print('files')
-    print('mean: ' + str(df_c['files'].mean()))
-    print('min: ' + str(df_c['files'].min()))
-    print('max: ' + str(df_c['files'].max()))
+    df_client = get_overview_information(constants.CLIENT, df_c)
 
-    print('')
-    print('server')
-    df_c = d[d[constants.TYPE] == constants.SERVER]
-    print('lines')
-    print('mean: ' + str(df_c['lines'].mean()))
-    print('min: ' + str(df_c['lines'].min()))
-    print('max: ' + str(df_c['lines'].max()))
-    print('files')
-    print('mean: ' + str(df_c['files'].mean()))
-    print('min: ' + str(df_c['files'].min()))
-    print('max: ' + str(df_c['files'].max()))
+    df_s = d[d[constants.TYPE] == constants.SERVER]
+    df_server = get_overview_information(constants.SERVER, df_s)
+
+    df_result_final = pd.concat([df_overall, df_client, df_server])
+    df_result_final.to_csv('global_events_overview.csv', index=False)
 
     d2 = df_result[(df_result[constants.GLOBAL_EVENTS_FOR_CLASS] == 0) & (df_result[constants.GLOBAL_EVENTS] > 0)]
-    d2.to_csv('test 5.csv', index=False)
-
-
+    d2.to_csv('has_global_events_not_for_class.csv', index=False)

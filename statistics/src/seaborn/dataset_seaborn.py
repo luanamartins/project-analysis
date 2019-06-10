@@ -161,7 +161,7 @@ def read_global_handlers_dataset():
     df_ = df[
         (df[config.MECH] == config.WINDOW_EVENT_LISTENER) |
         (df[config.MECH] == config.WINDOW_ON_ERROR)
-        ]
+    ]
 
     df_[config.COUNT] = 1
     df_.reset_index(drop=True, inplace=True)
