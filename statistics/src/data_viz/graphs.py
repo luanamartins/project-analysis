@@ -42,7 +42,7 @@ def save_violinplot(df, image_path, x_col, y_col, x_label, y_label):
     plt.savefig(image_path)
 
 
-def save_violinplot_hue(df, image_path, x_col, y_col, xlabel, ylabel, hue):
+def save_violinplot_hue(df, image_path, x_col, y_col, x_label, y_label, hue):
     # Start a new figure
     plt.figure()
 
@@ -51,7 +51,7 @@ def save_violinplot_hue(df, image_path, x_col, y_col, xlabel, ylabel, hue):
 
     # Create plot and set labels
     g = sns.violinplot(x=x_col, y=y_col, hue=hue, data=df, palette='muted', split=True)
-    g.set(xlabel=xlabel, ylabel=ylabel)
+    g.set(xlabel=x_label, ylabel=y_label)
 
     # Rescale y-axis to log function
     g.set_yscale('log')
@@ -109,12 +109,13 @@ def save_countplot(data, filename, x):
     plt.savefig(filename)
 
 
-def save_scatterplot(df, x, y):
+def save_scatterplot(data, filename, x, y):
 
-    sns.catplot(data=df, x=x, y=y)
+    sns.catplot(data=data, x=x, y=y)
 
     # directory = 'scatterplot/'
     # create_dir_if_not_exists(directory)
     # filepath = directory + filename
+    # filename = 'scatterplot.png'
 
-    plt.savefig('scatterplot.png')
+    plt.savefig(filename)

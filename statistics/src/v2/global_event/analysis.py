@@ -74,7 +74,6 @@ if __name__ == '__main__':
 
     d = df_result[df_result[constants.GLOBAL_EVENTS] == 0]
     d = pd.merge(d, df_repo, how='left', on=[constants.REPO, constants.TYPE])
-    # d.to_csv('test4.csv', index=False)
 
     df_result_final = pd.DataFrame()
     df_result_final['class'] = [constants.OVERALL, constants.CLIENT, constants.SERVER]

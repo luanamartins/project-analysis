@@ -11,12 +11,9 @@ RESULTS_IMAGE_DIRECTORY = RESULTS_BASE_DIR + 'images/'
 
 
 def weighted_average(df, handler_mechs):
-
     df_total_counters = df.groupby(config.REPO, as_index=False)[config.COUNT].sum()
     df_total_counters.columns = [config.REPO, config.TOTAL_HANDLERS]
     df_total_counters.to_csv(RESULTS_DIRECTORY + 'df_total_counters.csv')
-
-    total_handlers = df_total_counters[config.TOTAL_HANDLERS].sum()
 
     df_merge = df.merge(df_total_counters, on=config.REPO)
     df_merge = df_merge[[config.MECH, config.REPO, config.COUNT, config.TOTAL_HANDLERS, config.TYPE]]
@@ -26,6 +23,7 @@ def weighted_average(df, handler_mechs):
     # df_merge['perc_total_handlers'] = df_merge[config.TOTAL_HANDLERS] / total_handlers
     # df_merge.to_csv(RESULTS_DIRECTORY + 'merge.csv')
 
+    total_handlers = df_total_counters[config.TOTAL_HANDLERS].sum()
     new_data = []
     for handler_mech in handler_mechs:
         df_c = df_merge[df_merge[config.MECH] == handler_mech]
