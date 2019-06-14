@@ -79,7 +79,6 @@ def save_lineplot(df, image_path, x_column_name, y_column_name, hue, x_label, y_
 def save_barplot(data, filename, x, y, hue, log):
     plt.figure()
     ax = sns.barplot(x=x, y=y, data=data, hue=hue)
-    # , orient = 'h'
 
     # Remove labels from categories
     # ax.set_xticklabels([])
@@ -96,6 +95,16 @@ def save_barplot(data, filename, x, y, hue, log):
     plt.ylim(0, 0.3)
 
     plt.savefig(filename)
+
+    plt.figure()
+    sns.set_style('whitegrid')
+    ax = sns.barplot(x='joint_column', y=config.PERC, hue=config.STRATEGY, data=df)
+    # plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05), ncol=3, fancybox=True, shadow=True)
+    plt.xlabel('')
+    plt.ylabel('% of strategies')
+    plt.tight_layout()
+    plt.savefig(RESULTS_DIRECTORY_IMAGES + 'overall2.png')
 
 
 def save_countplot(data, filename, x):
@@ -119,3 +128,14 @@ def save_scatterplot(data, filename, x, y):
     # filename = 'scatterplot.png'
 
     plt.savefig(filename)
+
+
+def save_multiple_barplot(filename, list_df, list_label_x, x, y):
+    num_dataframes = len(list_df)
+    fig, ax = plt.subplots(num_dataframes, 1)
+
+    for i in range(num_dataframes):
+        save_barplot(list_df[i], list_label_x[i], x, y, False, ax[i])
+
+    fig.show()
+    fig.savefig(filename)

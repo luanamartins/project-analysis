@@ -16,6 +16,7 @@ def generate_barplot():
     df = pd.read_csv(RESULTS_DIRECTORY + 'overall2.csv')
     df = df[df[config.PERC] > 1]
     df['joint_column'] = ''
+
     plt.figure()
     sns.set_style('whitegrid')
     ax = sns.barplot(x='joint_column', y=config.PERC, hue=config.STRATEGY, data=df)

@@ -1,46 +1,45 @@
+import statistics.src.data_viz.graphs as graphs
 import statistics.src.seaborn.dataset_seaborn as gg
-import statistics.src.constants as config
+import statistics.src.constants as constants
 import statistics.src.stats.outliers as out
 
 
 def get_general_info(df):
-    df_g = df[[config.MECH, config.FILE, config.LINES, config.STMTS, config.COUNT]]
-    df_group = df_g.groupby([config.MECH], as_index=False).sum()
+    df_g = df[[constants.MECH, constants.FILE, constants.LINES, constants.STMTS, constants.COUNT]]
+    df_group = df_g.groupby([constants.MECH], as_index=False).sum()
     df_group.to_csv('agg_er.csv')
 
 
 def barplot(df):
-    df_grouped = df.groupby(config.MECH, as_index=False).sum()
-    gg.save_barplot(df_grouped, 'barplot.png', config.MECH, config.COUNT, True)
+    df_grouped = df.groupby(constants.MECH, as_index=False).sum()
+    graphs.save_barplot(df_grouped, 'barplot.png', constants.MECH, constants.COUNT, True)
 
 
 def scatterplot(df):
-
-    df_g = df[[config.MECH, config.FILE, config.LINES, config.STMTS, config.COUNT]]
-
-    df_grouped = df_g.groupby([config.MECH, config.FILE], as_index=False).sum()
+    df_g = df[[constants.MECH, constants.FILE, constants.LINES, constants.STMTS, constants.COUNT]]
+    df_grouped = df_g.groupby([constants.MECH, constants.FILE], as_index=False).sum()
     df_grouped = out.remove_outlier_mean_std_method(df_grouped, 'count')
 
-    gg.save_scatterplot(df_grouped, config.MECH, config.COUNT)
+    graphs.save_scatterplot(df_grouped, constants.MECH, constants.COUNT)
 
 
 def boxplot(df):
 
-    df = df[[config.MECH, config.FILE, config.LINES, config.STMTS, config.COUNT]]
+    df = df[[constants.MECH, constants.FILE, constants.LINES, constants.STMTS, constants.COUNT]]
 
     directory = 'boxplot/'
     gg.create_dir_if_not_exists(directory)
 
-    xlabel = 'Abstractions'
-    ylabel = '# Handlers (log scale)'
-    x_col = config.MECH
-    y_col = config.COUNT
+    x_label = 'Abstractions'
+    y_label = '# Handlers (log scale)'
+    x_col = constants.MECH
+    y_col = constants.COUNT
 
-    df_grouped = df.groupby([config.MECH, config.FILE], as_index=False).sum()
-    df_removed_outliers = out.remove_outlier_mean_std_method(df_grouped, config.LINES)
+    df_grouped = df.groupby([constants.MECH, constants.FILE], as_index=False).sum()
+    df_removed_outliers = out.remove_outlier_mean_std_method(df_grouped, constants.LINES)
 
-    gg.save_boxplot(df_grouped, directory + 'boxplot.png', x_col, y_col, xlabel, ylabel)
-    gg.save_boxplot(df_removed_outliers, directory + 'boxplot-without-outliers.png', x_col, y_col, xlabel, ylabel)
+    graphs.save_boxplot(df_grouped, directory + 'boxplot.png', x_col, y_col, x_label, y_label)
+    graphs.save_boxplot(df_removed_outliers, directory + 'boxplot-without-outliers.png', x_col, y_col, x_label, y_label)
 
 
 def lineplot(df_raw):
@@ -48,45 +47,45 @@ def lineplot(df_raw):
     directory = 'lineplot/'
     gg.create_dir_if_not_exists(directory)
 
-    df_c = df_raw[[config.MECH, config.COUNT, config.TYPE, config.LINES, config.FILE, config.STMTS]]
-    df = df_c.groupby([config.MECH, config.STMTS], as_index=False).sum()
+    df_c = df_raw[[constants.MECH, constants.COUNT, constants.TYPE, constants.LINES, constants.FILE, constants.STMTS]]
+    df = df_c.groupby([constants.MECH, constants.STMTS], as_index=False).sum()
 
-    df = df[df[config.MECH] != config.WINDOW_EVENT_LISTENER]
-    df = df[df[config.MECH] != config.WINDOW_ON_ERROR]
+    df = df[df[constants.MECH] != constants.WINDOW_EVENT_LISTENER]
+    df = df[df[constants.MECH] != constants.WINDOW_ON_ERROR]
     # df = df[df['mech'] != config.CALLBACK]
 
     xlabel = '# of Statements'
     ylabel = '# of Handlers'
-    x_col = config.STMTS
-    y_col = config.COUNT
-    hue = config.MECH
-    dir_name = directory + '{}.png'
+    x_col = constants.STMTS
+    y_col = constants.COUNT
+    hue = constants.MECH
 
-    gg.save_lineplot(df, directory + 'line.png', x_col, y_col, hue, xlabel, ylabel)
+    graphs.save_lineplot(df, directory + 'line.png', x_col, y_col, hue, xlabel, ylabel)
 
     xlabel = '# of Statements'
     ylabel = '# of Handlers'
-    x_col = config.STMTS
-    y_col = config.COUNT
-    hue = config.MECH
+    x_col = constants.STMTS
+    y_col = constants.COUNT
+    hue = constants.MECH
 
-    df_c = df[df[config.MECH] != config.CALLBACK]
-    gg.save_lineplot(df_c, dir_name.format('line-rem-callback'), x_col, y_col, hue, xlabel, ylabel)
+    dir_name = directory + '{}.png'
+    df_c = df[df[constants.MECH] != constants.CALLBACK]
+    graphs.save_lineplot(df_c, dir_name.format('line-rem-callback'), x_col, y_col, hue, xlabel, ylabel)
 
-    df_mech = df[df['mech'] == config.PROMISE]
-    gg.save_lineplot(df_mech, directory + 'line-promise.png', x_col, y_col, hue, xlabel, ylabel)
+    df_mech = df[df[constants.MECH] == constants.PROMISE]
+    graphs.save_lineplot(df_mech, directory + 'line-promise.png', x_col, y_col, hue, xlabel, ylabel)
 
-    df_mech = df[df['mech'] == config.EVENT]
-    gg.save_lineplot(df_mech, directory + 'line-event.png', x_col, y_col, hue, xlabel, ylabel)
+    df_mech = df[df['mech'] == constants.EVENT]
+    graphs.save_lineplot(df_mech, directory + 'line-event.png', x_col, y_col, hue, xlabel, ylabel)
 
-    df_mech = df[df['mech'] == config.TRY_CATCH]
-    gg.save_lineplot(df_mech, directory + 'line-try-catch.png', x_col, y_col, hue, xlabel, ylabel)
+    df_mech = df[df['mech'] == constants.TRY_CATCH]
+    graphs.save_lineplot(df_mech, directory + 'line-try-catch.png', x_col, y_col, hue, xlabel, ylabel)
 
-    df_mech = df[df['mech'] == config.CALLBACK]
-    gg.save_lineplot(df_mech, directory + 'line-callback.png', x_col, y_col, hue, xlabel, ylabel)
+    df_mech = df[df['mech'] == constants.CALLBACK]
+    graphs.save_lineplot(df_mech, directory + 'line-callback.png', x_col, y_col, hue, xlabel, ylabel)
 
-    df_mech = df[df['mech'] == config.ASYNC_AWAIT]
-    gg.save_lineplot(df_mech, directory + 'line-async-await.png', x_col, y_col, hue, xlabel, ylabel)
+    df_mech = df[df['mech'] == constants.ASYNC_AWAIT]
+    graphs.save_lineplot(df_mech, directory + 'line-async-await.png', x_col, y_col, hue, xlabel, ylabel)
 
 
 if __name__ == '__main__':

@@ -19,10 +19,6 @@ def weighted_average(df, handler_mechs):
     df_merge = df_merge[[config.MECH, config.REPO, config.COUNT, config.TOTAL_HANDLERS, config.TYPE]]
     df_merge.to_csv(RESULTS_DIRECTORY + 'merge.csv')
 
-    # Ratio n_handlers_per_mech / n_total_handlers
-    # df_merge['perc_total_handlers'] = df_merge[config.TOTAL_HANDLERS] / total_handlers
-    # df_merge.to_csv(RESULTS_DIRECTORY + 'merge.csv')
-
     total_handlers = df_total_counters[config.TOTAL_HANDLERS].sum()
     new_data = []
     for handler_mech in handler_mechs:
@@ -82,18 +78,9 @@ def correlation(df):
     plt.show()
 
 
-def number_of_stmts(df):
-    df_sel = df[df[config.STMTS] <= 1]
-    print(df.shape)
-    print(df_sel.shape)
-    print(df[config.STMTS].max())
-
-
 if __name__ == '__main__':
     ds.create_dir_if_not_exists(RESULTS_DIRECTORY)
 
     df = ds.read_dataset()
     resume(df)
-    # number_of_stmts(df)
-
     correlation(df)
