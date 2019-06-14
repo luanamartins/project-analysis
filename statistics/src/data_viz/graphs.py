@@ -96,15 +96,20 @@ def save_barplot(data, filename, x, y, hue, log):
 
     plt.savefig(filename)
 
+
+def save_barplot_with_legend(filename, x, y, hue, data, xlabel, ylabel):
     plt.figure()
     sns.set_style('whitegrid')
-    ax = sns.barplot(x='joint_column', y=config.PERC, hue=config.STRATEGY, data=df)
+
+    sns.barplot(x, y, hue, data)
     # plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.05), ncol=3, fancybox=True, shadow=True)
-    plt.xlabel('')
-    plt.ylabel('% of strategies')
+
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+
     plt.tight_layout()
-    plt.savefig(RESULTS_DIRECTORY_IMAGES + 'overall2.png')
+    plt.savefig(filename)
 
 
 def save_countplot(data, filename, x):
