@@ -3,7 +3,7 @@ import numpy as np
 import scipy.stats as stats
 import seaborn as sns
 import matplotlib.pyplot as plt
-import statistics.src.processing.process ds
+import statistics.src.processing.process as ds
 import statistics.src.constants as constants
 import statistics.src.stats.outliers as outliers
 
@@ -310,6 +310,6 @@ if __name__ == '__main__':
 
     # barplot_strategies_percs()
 
-    violinplot_mech()
+    # violinplot_mech()
 
-    # save_strategies_from_mechs(df)
+    save_strategies_from_mechs(df)
