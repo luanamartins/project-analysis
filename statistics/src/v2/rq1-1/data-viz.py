@@ -1,7 +1,7 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-import statistics.src.seaborn.dataset_seaborn as ds
+import statistics.src.processing.process ds
 import statistics.src.constants as constants
 import statistics.src.data_viz.graphs as graphs
 

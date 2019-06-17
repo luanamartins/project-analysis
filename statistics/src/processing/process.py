@@ -1,7 +1,7 @@
 import os
 import numpy as np
 import pandas as pd
-import statistics.src.constants as config
+import statistics.src.constants as constants
 
 
 def get_number_lines_handlers(df):
@@ -67,14 +67,14 @@ def get_metrics(df, metric, name):
 
 
 def read_data(type):
-    path = config.RESULT + 'er-{}.csv'.format(type)
+    path = constants.RESULT + 'er-{}.csv'.format(type)
     df = pd.read_csv(path)
 
-    df = df[df[config.MECH] != config.WINDOW_EVENT_LISTENER]
-    df = df[df[config.MECH] != config.WINDOW_ON_ERROR]
+    df = df[df[constants.MECH] != constants.WINDOW_EVENT_LISTENER]
+    df = df[df[constants.MECH] != constants.WINDOW_ON_ERROR]
 
-    df[config.COUNT] = 1
-    df[config.TYPE] = type
+    df[constants.COUNT] = 1
+    df[constants.TYPE] = type
 
     df.reset_index(inplace=True, drop=True)
     return df
@@ -91,28 +91,28 @@ def get_all_strategies(df):
 
 def get_strategies(serie):
     list_strategies = []
-    for strategy in config.STRATEGIES:
+    for strategy in constants.STRATEGIES:
         if serie[strategy]:
             list_strategies.append(strategy)
     return list_strategies
 
 
 def remove():
-    path_c = config.RESULT + 'er-client.csv'
+    path_c = constants.RESULT + 'er-client.csv'
     df_c = pd.read_csv(path_c, index_col=0)
     df_c = df_c.loc[:, ~df_c.columns.str.contains('^Unnamed')]
     df_c.to_csv(path_c, index=False)
 
-    path_s = config.RESULT + 'er-server.csv'
+    path_s = constants.RESULT + 'er-server.csv'
     df_s = pd.read_csv(path_s, index_col=0)
     df_s = df_s.loc[:, ~df_s.columns.str.contains('^Unnamed')]
     df_s.to_csv(path_s, index=False)
 
 
 def read_repo_er(type):
-    path = config.RESULT + 'repo-er-{}.csv'.format(type)
+    path = constants.RESULT + 'repo-er-{}.csv'.format(type)
     df = pd.read_csv(path)
-    df[config.TYPE] = type
+    df[constants.TYPE] = type
     df.reset_index(drop=True, inplace=True)
     return df
 
@@ -125,71 +125,71 @@ def read_repo_er_all():
 
 
 def read_percentage_mech_per_repo():
-    df = pd.read_csv(config.RESULT + 'percentage_mech_per_repo.csv')
+    df = pd.read_csv(constants.RESULT + 'percentage_mech_per_repo.csv')
     return df
 
 
 def read_dataset():
-    df_c = read_data(config.CLIENT)
-    df_c[config.TYPE] = config.CLIENT
+    df_c = read_data(constants.CLIENT)
+    df_c[constants.TYPE] = constants.CLIENT
 
-    df_s = read_data(config.SERVER)
-    df_s[config.TYPE] = config.SERVER
+    df_s = read_data(constants.SERVER)
+    df_s[constants.TYPE] = constants.SERVER
 
     df = pd.concat([df_c, df_s], ignore_index=True, sort=True)
 
-    df = df[df[config.MECH] != config.WINDOW_EVENT_LISTENER]
-    df = df[df[config.MECH] != config.WINDOW_ON_ERROR]
+    df = df[df[constants.MECH] != constants.WINDOW_EVENT_LISTENER]
+    df = df[df[constants.MECH] != constants.WINDOW_ON_ERROR]
 
-    df[config.COUNT] = 1
+    df[constants.COUNT] = 1
     df.reset_index(drop=True, inplace=True)
 
     return df
 
 
 def read_global_handlers_dataset():
-    path = config.RESULT + 'er-{}.csv'.format(config.CLIENT)
+    path = constants.RESULT + 'er-{}.csv'.format(constants.CLIENT)
     df_c = pd.read_csv(path)
-    df_c[config.TYPE] = config.CLIENT
+    df_c[constants.TYPE] = constants.CLIENT
 
-    path = config.RESULT + 'er-{}.csv'.format(config.SERVER)
+    path = constants.RESULT + 'er-{}.csv'.format(constants.SERVER)
     df_s = pd.read_csv(path)
-    df_s[config.TYPE] = config.SERVER
+    df_s[constants.TYPE] = constants.SERVER
 
     df = pd.concat([df_c, df_s], ignore_index=True, sort=True)
 
     df_ = df[
-        (df[config.MECH] == config.WINDOW_EVENT_LISTENER) |
-        (df[config.MECH] == config.WINDOW_ON_ERROR)
-    ]
+        (df[constants.MECH] == constants.WINDOW_EVENT_LISTENER) |
+        (df[constants.MECH] == constants.WINDOW_ON_ERROR)
+        ]
 
-    df_[config.COUNT] = 1
+    df_[constants.COUNT] = 1
     df_.reset_index(drop=True, inplace=True)
 
     return df_
 
 
 def read_whole_dataset():
-    df_c = read_whole_data(config.CLIENT)
-    df_c[config.TYPE] = config.CLIENT
+    df_c = read_whole_data(constants.CLIENT)
+    df_c[constants.TYPE] = constants.CLIENT
 
-    df_s = read_whole_data(config.SERVER)
-    df_s[config.TYPE] = config.SERVER
+    df_s = read_whole_data(constants.SERVER)
+    df_s[constants.TYPE] = constants.SERVER
 
     df = pd.concat([df_c, df_s], ignore_index=True, sort=True)
 
-    df[config.COUNT] = 1
+    df[constants.COUNT] = 1
     df.reset_index(drop=True, inplace=True)
 
     return df
 
 
 def read_whole_data(type):
-    path = config.RESULT + 'er-{}.csv'.format(type)
+    path = constants.RESULT + 'er-{}.csv'.format(type)
     df = pd.read_csv(path)
 
-    df[config.COUNT] = 1
-    df[config.TYPE] = type
+    df[constants.COUNT] = 1
+    df[constants.TYPE] = type
 
     df.reset_index(inplace=True, drop=True)
     return df
