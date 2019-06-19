@@ -1,5 +1,5 @@
 import pandas as pd
-import statistics.src.constants as config
+import statistics.src.constants as constants
 
 
 def percentage(partial, total):
@@ -109,7 +109,7 @@ def perc_reassigning(df):
 # - In these cases,
 # - In these cases, depending on how frequent they are, it may be worth looking manually if there are specific handlers
 
-filepath = config.RESULT_INFO + 'result-class.csv'
+filepath = constants.RESULT_INFO + 'result-class.csv'
 df = pd.read_csv(filepath, sep=',')
 
 # UncaughtException
@@ -145,7 +145,7 @@ data = {
     ]
 }
 
-file_name_out = config.RESULT_RQ_1_2 + 'result-strategies-rq1-2.csv'
+file_name_out = constants.RESULT_RQ_1_2 + 'result-strategies-rq1-2.csv'
 df_strategies = pd.DataFrame(data=data)
 df_strategies.to_csv(file_name_out)
 
@@ -395,7 +395,7 @@ data2 = {
 print(df['callbacksNumberOfCallbackErrorFunctions'].sum())
 print(df['callbacksNumberOfHandlersReturns'].sum())
 
-file_name_strat = config.RESULT_RQ_1_2 + 'result-strategies2-rq1-2.csv'
+file_name_strat = constants.RESULT_RQ_1_2 + 'result-strategies2-rq1-2.csv'
 df_strategies2 = pd.DataFrame(data=data2)
 df_strategies2.to_csv(file_name_strat)
 
@@ -490,6 +490,6 @@ data = {
     ]
 }
 
-file_name_strat_global = config.RESULT_RQ_1_2 + 'result-strategies-global-rq1-2.csv'
+file_name_strat_global = constants.RESULT_RQ_1_2 + 'result-strategies-global-rq1-2.csv'
 df_strategies_global = pd.DataFrame(data=data)
 df_strategies_global.to_csv(file_name_strat_global)

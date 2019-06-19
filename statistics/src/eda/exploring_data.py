@@ -2,7 +2,7 @@ import os
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-import statistics.src.constants as config
+import statistics.src.constants as constants
 import statistics.src.data_viz.graphs as gg
 import statistics.src.stats.outliers as outliers
 
@@ -22,11 +22,11 @@ def boxplot():
 
     xlabel = 'Abstractions'
     ylabel = '# Handlers (log scale)'
-    x_col = config.MECH
-    y_col = config.COUNT
+    x_col = constants.MECH
+    y_col = constants.COUNT
 
-    df_grouped = df.groupby([config.MECH, config.FILE], as_index=False).sum()
-    df_removed_outliers = outliers.remove_outlier_mean_std_method(df_grouped, config.LINES)
+    df_grouped = df.groupby([constants.MECH, constants.FILE], as_index=False).sum()
+    df_removed_outliers = outliers.remove_outlier_mean_std_method(df_grouped, constants.LINES)
 
     gg.save_boxplot(df_grouped, directory + 'boxplot.png', x_col, y_col, xlabel, ylabel)
     gg.save_boxplot(df_removed_outliers, directory + 'boxplot-without-outliers.png', x_col, y_col, xlabel, ylabel)
@@ -63,9 +63,9 @@ def violinplot_hue(df_client_raw, df_server_raw):
 
     xlabel = 'Abstractions'
     ylabel = '# Handlers (log scale)'
-    x_col = config.MECH
-    y_col = config.COUNT
-    hue = config.TYPE
+    x_col = constants.MECH
+    y_col = constants.COUNT
+    hue = constants.TYPE
 
     gg.save_violinplot_hue(df_grouped, directory + 'violinplot-classes.png', x_col, y_col, xlabel, ylabel, hue)
 
@@ -80,44 +80,44 @@ def lineplot(df_raw):
     if not os.path.exists(directory):
         os.makedirs(directory)
 
-    df_c = df_raw[[config.MECH, config.COUNT, config.TYPE, config.LINES, config.FILE, config.STMTS]]
-    df = df_c.groupby([config.MECH, config.FILE, config.STMTS], as_index=False).sum()
+    df_c = df_raw[[constants.MECH, constants.COUNT, constants.TYPE, constants.LINES, constants.FILE, constants.STMTS]]
+    df = df_c.groupby([constants.MECH, constants.FILE, constants.STMTS], as_index=False).sum()
 
-    df = df[df[config.MECH] != config.WINDOW_EVENT_LISTENER]
-    df = df[df[config.MECH] != config.WINDOW_ON_ERROR]
+    df = df[df[constants.MECH] != constants.WINDOW_EVENT_LISTENER]
+    df = df[df[constants.MECH] != constants.WINDOW_ON_ERROR]
     # df = df[df['mech'] != config.CALLBACK]
 
     xlabel = '# of Statements'
     ylabel = '# of Handlers'
-    x_col = config.STMTS
-    y_col = config.COUNT
-    hue = config.MECH
+    x_col = constants.STMTS
+    y_col = constants.COUNT
+    hue = constants.MECH
     dir_name = directory + '{}.png'
 
     gg.save_lineplot(df, directory + 'line.png', x_col, y_col, hue, xlabel, ylabel)
 
     xlabel = '# of Statements'
     ylabel = '# of Handlers'
-    x_col = config.STMTS
-    y_col = config.COUNT
-    hue = config.MECH
+    x_col = constants.STMTS
+    y_col = constants.COUNT
+    hue = constants.MECH
 
-    df_c = df[df[config.MECH] != config.CALLBACK]
+    df_c = df[df[constants.MECH] != constants.CALLBACK]
     gg.save_lineplot(df_c, dir_name.format('line-rem-callback'), x_col, y_col, hue, xlabel, ylabel)
 
-    df_mech = df[df['mech'] == config.PROMISE]
+    df_mech = df[df['mech'] == constants.PROMISE]
     gg.save_lineplot(df_mech, directory + 'line-promise.png', x_col, y_col, hue, xlabel, ylabel)
 
-    df_mech = df[df['mech'] == config.EVENT]
+    df_mech = df[df['mech'] == constants.EVENT]
     gg.save_lineplot(df_mech, directory + 'line-event.png', x_col, y_col, hue, xlabel, ylabel)
 
-    df_mech = df[df['mech'] == config.TRY_CATCH]
+    df_mech = df[df['mech'] == constants.TRY_CATCH]
     gg.save_lineplot(df_mech, directory + 'line-try-catch.png', x_col, y_col, hue, xlabel, ylabel)
 
-    df_mech = df[df['mech'] == config.CALLBACK]
+    df_mech = df[df['mech'] == constants.CALLBACK]
     gg.save_lineplot(df_mech, directory + 'line-callback.png', x_col, y_col, hue, xlabel, ylabel)
 
-    df_mech = df[df['mech'] == config.ASYNC_AWAIT]
+    df_mech = df[df['mech'] == constants.ASYNC_AWAIT]
     gg.save_lineplot(df_mech, directory + 'line-async-await.png', x_col, y_col, hue, xlabel, ylabel)
 
 
@@ -156,7 +156,7 @@ def create_scatterplot(df):
 
 def get_general_info(df):
     df_g = df[['mech', 'count', 'lines', 'stmts']]
-    df_group = df_g.groupby([config.MECH]).sum()
+    df_group = df_g.groupby([constants.MECH]).sum()
     df_group.to_csv('agg_er.csv')
 
 

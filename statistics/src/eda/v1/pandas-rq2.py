@@ -3,7 +3,7 @@ import os
 import json
 import pandas as pd
 import scipy.stats as stats
-import statistics.src.constants as config
+import statistics.src.constants as constants
 
 
 def test_normality(x):
@@ -51,7 +51,7 @@ def calc_factor(file):
 
 
 def get_metrics():
-    json_data = open(config.EXTRACT_METRICS_SRC + 'report-object.json')
+    json_data = open(constants.EXTRACT_METRICS_SRC + 'report-object.json')
     jdata = json.load(json_data)
     columns = ['repo']
     for key, value in jdata.items():
@@ -63,8 +63,8 @@ def get_metrics():
 def run_tests(client, server, remove_zeroes, type_analysis, output_file):
 
     metrics = get_metrics()
-    client_folder = config.RESULT_INFO + 'result-repo-client.csv'
-    server_folder = config.RESULT_INFO + 'result-repo-server.csv'
+    client_folder = constants.RESULT_INFO + 'result-repo-client.csv'
+    server_folder = constants.RESULT_INFO + 'result-repo-server.csv'
     client_factor = calc_factor(client_folder)
     server_factor = calc_factor(server_folder)
 
@@ -141,21 +141,21 @@ def run_tests(client, server, remove_zeroes, type_analysis, output_file):
     df = pd.DataFrame(rows)
     has_zeroes_sample = '-no-zeroes' if remove_zeroes else ''
     file_name = 'rq2-results-' + type_analysis + has_zeroes_sample + '.csv'
-    df.to_csv(config.RESULT_RQ_2 + file_name)
+    df.to_csv(constants.RESULT_RQ_2 + file_name)
 
 
-result_file = open(config.RESULT_INFO + 'rq2-results.txt', 'w')
+result_file = open(constants.RESULT_INFO + 'rq2-results.txt', 'w')
 
-client_file = get_sample_by_file(config.RESULT + 'client/')
-server_file = get_sample_by_file(config.RESULT + 'server/')
-rq2_file_no_zeroes = open(config.RESULT_RQ_2 + 'rq2-file-no-zeroes.txt', 'w')
-rq2_file = open(config.RESULT_RQ_2 + 'rq2-file.txt', 'w')
+client_file = get_sample_by_file(constants.RESULT + 'client/')
+server_file = get_sample_by_file(constants.RESULT + 'server/')
+rq2_file_no_zeroes = open(constants.RESULT_RQ_2 + 'rq2-file-no-zeroes.txt', 'w')
+rq2_file = open(constants.RESULT_RQ_2 + 'rq2-file.txt', 'w')
 run_tests(client_file, server_file, True, 'script', rq2_file_no_zeroes)
 run_tests(client_file, server_file, False, 'script', rq2_file)
 
-client_repo = get_sample_by_repo(config.RESULT_INFO + 'result-repo-client.csv')
-server_repo = get_sample_by_repo(config.RESULT_INFO + 'result-repo-server.csv')
-rq2_repo_no_zeroes = open(config.RESULT_RQ_2 + 'rq2-repo-no-zeroes.txt', 'w')
-rq2_repo = open(config.RESULT_RQ_2 + 'rq2-repo.txt', 'w')
+client_repo = get_sample_by_repo(constants.RESULT_INFO + 'result-repo-client.csv')
+server_repo = get_sample_by_repo(constants.RESULT_INFO + 'result-repo-server.csv')
+rq2_repo_no_zeroes = open(constants.RESULT_RQ_2 + 'rq2-repo-no-zeroes.txt', 'w')
+rq2_repo = open(constants.RESULT_RQ_2 + 'rq2-repo.txt', 'w')
 run_tests(client_repo, server_repo, True, 'repo', rq2_repo_no_zeroes)
 run_tests(client_repo, server_repo, False, 'repo', rq2_repo)

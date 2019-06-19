@@ -2,10 +2,10 @@ import pandas as pd
 import glob
 import os
 import json
-import statistics.src.constants as config
+import statistics.src.constants as constants
 
 
-RESULT_PATH = config.RESULT + 'result-today/'
+RESULT_PATH = constants.RESULT + 'result-today/'
 
 
 def get_repo_name(path):
@@ -51,7 +51,7 @@ def group_by_repo(folder):
 
 
 def list_metrics():
-    json_data = open(config.EXTRACT_METRICS_SRC + 'report-object.json')
+    json_data = open(constants.EXTRACT_METRICS_SRC + 'report-object.json')
     jdata = json.load(json_data)
 
     columns = ['repo']
@@ -84,7 +84,7 @@ df_subject_systems_data = {
 }
 
 df_subject_systems = pd.DataFrame(data=df_subject_systems_data)
-df_subject_systems.to_csv(config.RESULT_SUMMARY + 'result-subject-systems.csv')
+df_subject_systems.to_csv(constants.RESULT_SUMMARY + 'result-subject-systems.csv')
 
 
 df_class_client = df_client.sum()
@@ -98,4 +98,4 @@ df_class = df_class.transpose()
 df_class = df_class.reindex(columns=['repo', 'numberOfLogicalLines', 'total_files'] + list(df_class.columns[:-3]))
 df_class.set_index('repo')
 
-df_class.to_csv(config.RESULT_SUMMARY + 'result-class.csv')
+df_class.to_csv(constants.RESULT_SUMMARY + 'result-class.csv')

@@ -2,7 +2,7 @@ import glob
 import os
 import json
 import pandas as pd
-import statistics.src.constants as config
+import statistics.src.constants as constants
 
 
 def get_repo_name(path):
@@ -41,7 +41,7 @@ def group_by_repo(folder):
 
 def list_metrics():
     # Get report_object
-    json_data = open(config.EXTRACT_METRICS_SRC + 'report-object.json')
+    json_data = open(constants.EXTRACT_METRICS_SRC + 'report-object.json')
     jdata = json.load(json_data)
 
     columns = ['repo']

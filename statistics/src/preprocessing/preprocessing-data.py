@@ -2,7 +2,7 @@ import glob
 import re
 import os
 import pandas as pd
-import statistics.src.constants as config
+import statistics.src.constants as constants
 import statistics.src.preprocessing.get_repo_metrics as repo
 
 
@@ -10,9 +10,9 @@ pd.set_option('display.max_columns', None)
 pd.set_option('display.expand_frame_repr', False)
 pd.set_option('max_colwidth', -1)
 
-RESULTS_TO_SAVE = config.RESULT
-TODAY = config.RESULT + 'result-today/{}/'
-TODAY_METRIC_SIZE = config.RESULT + 'result-today/metric-size/{}/'
+RESULTS_TO_SAVE = constants.RESULT
+TODAY = constants.RESULT + 'result-today/{}/'
+TODAY_METRIC_SIZE = constants.RESULT + 'result-today/metric-size/{}/'
 
 
 def save_data(type):
@@ -61,8 +61,8 @@ def save_data(type):
 
 
 def retrieve_files_failed():
-    df_client = pd.read_csv('/Users/luanamartins/Documents/Mestrado/project-analysis/results/results-2018-09-01/no-er-client.csv')
-    df_server = pd.read_csv('/Users/luanamartins/Documents/Mestrado/project-analysis/results/results-2018-09-01/no-er-server.csv')
+    df_client = pd.read_csv('/results/results-2018-09-01/no-er-client.csv')
+    df_server = pd.read_csv('/results/results-2018-09-01/no-er-server.csv')
 
     def calc_files(repos, filepath):
         df_res_rows = []
@@ -81,24 +81,23 @@ def retrieve_files_failed():
             })
         return df_res_rows
 
-    filepath = '/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo2/client/'
-    repos = df_client[config.REPO].tolist()
+    filepath = '/extract-metrics/data/repo2/client/'
+    repos = df_client[constants.REPO].tolist()
     df_res = pd.DataFrame(data=calc_files(repos, filepath))
-    df_res.to_csv('/Users/luanamartins/Documents/Mestrado/project-analysis/results/results-2018-09-01/no-er-client-numbers.csv')
+    df_res.to_csv('/results/results-2018-09-01/no-er-client-numbers.csv')
 
-    filepath = '/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo2/server/'
-    repos = df_server[config.REPO].tolist()
+    filepath = '/extract-metrics/data/repo2/server/'
+    repos = df_server[constants.REPO].tolist()
     df_res = pd.DataFrame(data=calc_files(repos, filepath))
-    df_res.to_csv(
-        '/Users/luanamartins/Documents/Mestrado/project-analysis/results/results-2018-09-01/no-er-server-numbers.csv')
+    df_res.to_csv('/results/results-2018-09-01/no-er-server-numbers.csv')
 
 
 def failed_data(type):
-    path = config.RESULT + 'result-today/'
+    path = constants.RESULT + 'result-today/'
     df = pd.read_csv('{}failed-files-{}.txt'.format(path, type), names=['file'])
     df.reset_index(inplace=True)
     regex = '{}\/(.*?)\/'.format(type)
-    df[config.REPO] = df[config.FILE].apply(lambda x: re.search(regex, x).group(1))
+    df[constants.REPO] = df[constants.FILE].apply(lambda x: re.search(regex, x).group(1))
     df.to_csv('{}failed-files-{}.csv'.format(RESULTS_TO_SAVE, type))
 
 
@@ -126,10 +125,10 @@ def fix_empty_calc(type):
 
 
 def fix_sinon_csv():
-    path_client = config.RESULT + 'er-client.csv'
+    path_client = constants.RESULT + 'er-client.csv'
     print(path_client)
     df = pd.read_csv(path_client)
-    df = df[df[config.REPO] != 'sinon.csv']
+    df = df[df[constants.REPO] != 'sinon.csv']
     df.to_csv(path_client)
 
 

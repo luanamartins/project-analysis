@@ -1,30 +1,30 @@
 import pandas as pd
 import statistics.src.processing.process as ds
-import statistics.src.constants as config
+import statistics.src.constants as constants
 
 pd.set_option('display.max_columns', 500)
 
 RESULTS_DIRECTORY = 'rq2/'
-RESULTS_BASE_DIR = config.STATS_SRC_PATH + 'v2/rq2/'
+RESULTS_BASE_DIR = constants.STATS_SRC_PATH + 'v2/rq2/'
 RESULTS_DATA_DIRECTORY = RESULTS_BASE_DIR + 'data/'
 RESULTS_IMAGES_DIR = RESULTS_BASE_DIR + 'images/'
 FIGURE_TEMPLATE = RESULTS_IMAGES_DIR + '{}.png'
 
 
 def save_percs_from_strategies(df):
-    total_handlers = df[config.COUNT].sum()
+    total_handlers = df[constants.COUNT].sum()
     percs = []
-    for strategy in config.STRATEGIES:
-        if strategy == config.EMPTY:
+    for strategy in constants.STRATEGIES:
+        if strategy == constants.EMPTY:
             partial = df[df[strategy] == True].shape[0]
         else:
-            partial = df[(df[strategy] == True) & (df[config.LINES] == 1)].shape[0]
+            partial = df[(df[strategy] == True) & (df[constants.LINES] == 1)].shape[0]
         partial = partial / total_handlers
         percs.append(partial)
 
     print(1 - sum(percs))
 
-    strategies = config.STRATEGIES
+    strategies = constants.STRATEGIES
     strategies.append('others')
     df_strategies = pd.DataFrame(data=strategies)
     percs.append(1 - sum(percs))
@@ -37,16 +37,16 @@ def save_percs_from_strategies(df):
 
 
 def calculate_strategies_percentage(df):
-    df_g = df[[config.REPO, config.TYPE, config.MECH, config.STRATEGY, config.STRATEGY_COUNT]]
+    df_g = df[[constants.REPO, constants.TYPE, constants.MECH, constants.STRATEGY, constants.STRATEGY_COUNT]]
 
-    labels = [config.REPO, config.TYPE, config.MECH]
+    labels = [constants.REPO, constants.TYPE, constants.MECH]
 
     df_sum_strategies = df_g.groupby(labels, as_index=False).sum()
-    df_sum_strategies.rename(columns={config.STRATEGY_COUNT: config.STRATEGY_TOTAL}, inplace=True)
+    df_sum_strategies.rename(columns={constants.STRATEGY_COUNT: constants.STRATEGY_TOTAL}, inplace=True)
     df_sum_strategies.to_csv(RESULTS_DATA_DIRECTORY + 'df_sum_strategies.csv')
 
     df_merge = df.merge(df_sum_strategies, on=labels)
-    df_merge[config.STRATEGY_PERC] = (df_merge[config.STRATEGY_COUNT] * 100) / df_merge[config.STRATEGY_TOTAL]
+    df_merge[constants.STRATEGY_PERC] = (df_merge[constants.STRATEGY_COUNT] * 100) / df_merge[constants.STRATEGY_TOTAL]
 
     return df_merge
 
@@ -62,7 +62,7 @@ def get_all_strategies(df):
 
 def get_strategies(serie):
     list_strategies = []
-    for strategy in config.STRATEGIES:
+    for strategy in constants.STRATEGIES:
         if serie[strategy]:
             list_strategies.append(strategy)
     return list_strategies
@@ -72,18 +72,18 @@ def pre_processing_data():
     df = ds.read_dataset()
     strategies_dataset = get_all_strategies(df)
     df_g = pd.DataFrame()
-    df_g[config.REPO] = df[config.REPO]
-    df_g[config.FILE] = df[config.FILE]
-    df_g[config.LINES] = df[config.LINES]
-    df_g[config.STMTS] = df[config.STMTS]
-    df_g[config.TYPE] = df[config.TYPE]
-    df_g[config.MECH] = df[config.MECH]
-    df_g[config.STRATEGY] = pd.Series(data=strategies_dataset)
+    df_g[constants.REPO] = df[constants.REPO]
+    df_g[constants.FILE] = df[constants.FILE]
+    df_g[constants.LINES] = df[constants.LINES]
+    df_g[constants.STMTS] = df[constants.STMTS]
+    df_g[constants.TYPE] = df[constants.TYPE]
+    df_g[constants.MECH] = df[constants.MECH]
+    df_g[constants.STRATEGY] = pd.Series(data=strategies_dataset)
     df_g = df_g.loc[:, ~df_g.columns.str.contains('^Unnamed')]
-    df_g[config.COUNT] = 1
-    df_g = df_g.replace('', config.OTHERS)
+    df_g[constants.COUNT] = 1
+    df_g = df_g.replace('', constants.OTHERS)
 
-    df_result = df_g.groupby([config.REPO, config.FILE, config.TYPE, config.MECH, config.STRATEGY], as_index=False).sum()
+    df_result = df_g.groupby([constants.REPO, constants.FILE, constants.TYPE, constants.MECH, constants.STRATEGY], as_index=False).sum()
     df_result.to_csv(RESULTS_DATA_DIRECTORY + 'data-file2.csv', index=False)
 
 
@@ -91,20 +91,20 @@ def save_strategies_of_mechanisms(df):
 
     df_res = df.copy()
 
-    strategies_to_remove = [config.EMPTY, config.NO_USAGE_OF_ERROR_ARG, config.RETHROW, config.RERETURN]
-    strategies = list(filter(lambda s: s not in strategies_to_remove, config.STRATEGIES))
+    strategies_to_remove = [constants.EMPTY, constants.NO_USAGE_OF_ERROR_ARG, constants.RETHROW, constants.RERETURN]
+    strategies = list(filter(lambda s: s not in strategies_to_remove, constants.STRATEGIES))
 
     df_strategies = df_res[strategies].sum(axis=1)
-    df_res[config.OTHERS] = df_res[config.LINES].subtract(df_strategies)
-    df_res.loc[df_res[config.OTHERS] < 0, config.OTHERS] = 0
-    df_res.loc[df_res[config.OTHERS] > 0, config.OTHERS] = 1
+    df_res[constants.OTHERS] = df_res[constants.LINES].subtract(df_strategies)
+    df_res.loc[df_res[constants.OTHERS] < 0, constants.OTHERS] = 0
+    df_res.loc[df_res[constants.OTHERS] > 0, constants.OTHERS] = 1
     # df_res.to_csv(RESULTS_DATA_DIRECTORY + 'df_res.csv', index=False)
 
-    labels = [config.REPO, config.TYPE, config.MECH]
+    labels = [constants.REPO, constants.TYPE, constants.MECH]
     df_g = df_res.groupby(labels, as_index=False).sum()
     # df_g.to_csv(RESULTS_DATA_DIRECTORY + 'df_g.csv', index=False)
 
-    for mech in config.MECHS:
+    for mech in constants.MECHS:
         df_transposed = transpose_dataframe(df_g, mech)
         calculate_mean_median_std()
         df_data = calculate_strategies_percentage(df_transposed)
@@ -112,18 +112,18 @@ def save_strategies_of_mechanisms(df):
 
 
 def transpose_dataframe(df_g, mech):
-    in_front = [config.REPO, config.TYPE, config.MECH, config.COUNT, config.LINES]
+    in_front = [constants.REPO, constants.TYPE, constants.MECH, constants.COUNT, constants.LINES]
     df_partial = df_g[in_front]
-    df_partial = df_partial[df_partial[config.MECH] == mech]
+    df_partial = df_partial[df_partial[constants.MECH] == mech]
 
-    all_strategies = config.STRATEGIES
-    all_strategies.append(config.OTHERS)
+    all_strategies = constants.STRATEGIES
+    all_strategies.append(constants.OTHERS)
 
     df_f = pd.DataFrame()
     for strategy in all_strategies:
         df_partial_copy = df_partial.copy()
-        df_partial_copy[config.STRATEGY] = strategy
-        df_partial_copy[config.STRATEGY_COUNT] = df_g[strategy]
+        df_partial_copy[constants.STRATEGY] = strategy
+        df_partial_copy[constants.STRATEGY_COUNT] = df_g[strategy]
         df_f = pd.concat([df_f, df_partial_copy], ignore_index=True)
     return df_f
 
@@ -131,34 +131,34 @@ def transpose_dataframe(df_g, mech):
 def save_image_perc_strategies():
     df_data = pd.read_csv(RESULTS_DATA_DIRECTORY + 'data.csv', index_col=0)
 
-    df_number_handlers = pd.read_csv(config.RESULT + 'number_of_handlers.csv')
-    df_number_handlers = df_number_handlers[[config.MECH, config.TYPE, config.COUNT]]
+    df_number_handlers = pd.read_csv(constants.RESULT + 'number_of_handlers.csv')
+    df_number_handlers = df_number_handlers[[constants.MECH, constants.TYPE, constants.COUNT]]
 
-    df_merge = df_data.merge(df_number_handlers, on=[config.MECH, config.TYPE])
+    df_merge = df_data.merge(df_number_handlers, on=[constants.MECH, constants.TYPE])
     df_merge.rename(columns={'count_x': 'number_handler', 'count_y': 'total_handlers_by_mech'}, inplace=True)
-    df_merge[config.PERC] = (df_merge['number_handler'] / df_merge['total_handlers_by_mech']) * 100
+    df_merge[constants.PERC] = (df_merge['number_handler'] / df_merge['total_handlers_by_mech']) * 100
 
-    df_merge.loc[df_merge[config.TYPE] == config.SERVER, config.TYPE] = 'standalone'
-    df_merge.loc[df_merge[config.TYPE] == config.CLIENT, config.TYPE] = 'web'
+    df_merge.loc[df_merge[constants.TYPE] == constants.SERVER, constants.TYPE] = 'standalone'
+    df_merge.loc[df_merge[constants.TYPE] == constants.CLIENT, constants.TYPE] = 'web'
 
     df_merge.to_csv(RESULTS_DATA_DIRECTORY + 'data_info.csv')
 
-    df_merge_higher_one = df_merge[df_merge[config.PERC] > 1]
+    df_merge_higher_one = df_merge[df_merge[constants.PERC] > 1]
     df_merge_higher_one.to_csv(RESULTS_DATA_DIRECTORY + 'data_info_higher_one.csv')
 
 
 def calculate_mean_median_std():
-    df_percent = pd.read_csv(config.PERCENTAGE_MECH_PER_REPO)
-    df_perc = df_percent[[config.MECH, config.TYPE, config.PERC_PER_REPO]]
+    df_percent = pd.read_csv(constants.PERCENTAGE_MECH_PER_REPO)
+    df_perc = df_percent[[constants.MECH, constants.TYPE, constants.PERC_PER_REPO]]
 
-    df_stats = df_perc.groupby([config.MECH, config.TYPE]).mean().reset_index()
-    df_stats['mean'] = df_stats[config.PERC_PER_REPO] * 100
+    df_stats = df_perc.groupby([constants.MECH, constants.TYPE]).mean().reset_index()
+    df_stats['mean'] = df_stats[constants.PERC_PER_REPO] * 100
 
-    df_median = df_perc.groupby([config.MECH, config.TYPE]).median().reset_index()
-    df_median['median'] = df_median[config.PERC_PER_REPO] * 100
+    df_median = df_perc.groupby([constants.MECH, constants.TYPE]).median().reset_index()
+    df_median['median'] = df_median[constants.PERC_PER_REPO] * 100
     df_stats['median'] = df_median['median']
 
-    df_stats.drop(config.PERC_PER_REPO, axis=1, inplace=True)
+    df_stats.drop(constants.PERC_PER_REPO, axis=1, inplace=True)
     df_stats.to_csv(RESULTS_DATA_DIRECTORY + 'percentage_mean_median.csv')
 
 
@@ -168,9 +168,9 @@ def calculate_mean_median_std():
 # Ha sistemas que não usam try-catch? Sim, não, por quê?
 
 def new_calc():
-    df = pd.read_csv(config.PERCENTAGE_MECH_PER_REPO)
+    df = pd.read_csv(constants.PERCENTAGE_MECH_PER_REPO)
     df['#_projects'] = 1
-    df = df.groupby([config.MECH]).sum()
+    df = df.groupby([constants.MECH]).sum()
     df.to_csv('test.csv')
 
 

@@ -1,9 +1,8 @@
 import pandas as pd
-import statistics.src.constants as config
-import statistics.src.viz.piechart as piechart
+import statistics.src.constants as constants
 
 
-result_classes = config.RESULT_INFO + 'result-class.csv'
+result_classes = constants.RESULT_INFO + 'result-class.csv'
 df = pd.read_csv(result_classes)
 
 total_lines = df['numberOfLogicalLines'].sum()
@@ -60,10 +59,6 @@ data = {
     ]
 }
 df = pd.DataFrame(data=data)
-print(config.RESULT)
+print(constants.RESULT)
 
-df.to_csv(config.RESULT_RQ_1_1 + 'result-rq1-1.csv')
-
-piechart.plot_pie_chart(data=df['constructions'], labels=labels, path=config.RESULT_RQ_1_1 + 'piechart.png')
-piechart.donut(df['constructions'], labels=labels, path=config.RESULT_RQ_1_1 + 'donut.png')
-piechart.piechart_legend(df['constructions'], df['mech'], path=config.RESULT_RQ_1_1 + 'piechart_legend.png')
+df.to_csv(constants.RESULT_RQ_1_1 + 'result-rq1-1.csv')

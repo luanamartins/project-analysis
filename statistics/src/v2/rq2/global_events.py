@@ -22,12 +22,11 @@ def has_at_least_one_handler(df):
 
 
 def has_no_handlers_for_type(df_all):
-
     df_client = df_all[df_all[constants.TYPE] == constants.CLIENT]
     df_client = df_client[
         (df_client[constants.NUMBER_OF_WINDOW_ON_ERROR] == 0) &
         (df_client[constants.NUMBER_OF_WINDOW_ADD_EVENT_LISTENER] == 0)
-        ]
+    ]
     df_client.drop_duplicates(inplace=True)
 
     df_server = df_all[df_all[constants.TYPE] == constants.SERVER]
@@ -46,7 +45,7 @@ def has_no_handlers_at_all(df):
         (df[constants.NUMBER_OF_UNCAUGHT_EXCEPTION] == 0) &
         (df[constants.NUMBER_OF_WINDOW_ON_ERROR] == 0) &
         (df[constants.NUMBER_OF_WINDOW_ADD_EVENT_LISTENER] == 0)
-        ]
+    ]
 
     print(len(df_grouped[constants.REPO].unique()))
     df_grouped.to_csv(NO_HANDLERS_TEMPLATE_PATH)

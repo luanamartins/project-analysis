@@ -1,5 +1,5 @@
 import statistics.src.data_viz.graphs as graphs
-import statistics.src.processing.process gg
+import statistics.src.processing.process as gg
 import statistics.src.constants as constants
 import statistics.src.stats.outliers as out
 

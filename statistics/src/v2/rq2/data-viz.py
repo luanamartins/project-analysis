@@ -4,6 +4,7 @@ import scipy.stats as stats
 import seaborn as sns
 import matplotlib.pyplot as plt
 import statistics.src.processing.process as ds
+import statistics.src.data_viz.graphs as graph
 import statistics.src.constants as constants
 import statistics.src.stats.outliers as outliers
 
@@ -88,10 +89,10 @@ def lineplot_by_mech(df, type):
     hue = constants.MECH
     filename = 'mech-{}'.format(type)
 
-    ds.save_lineplot(df, FIGURE_TEMPLATE.format(filename), x_col, y_col, hue, xlabel, ylabel)
+    graph.save_lineplot(df, FIGURE_TEMPLATE.format(filename), x_col, y_col, hue, xlabel, ylabel)
 
     df = df[df[constants.MECH] != constants.CALLBACK]
-    ds.save_lineplot(df, FIGURE_TEMPLATE.format(filename + '-without-callback'), x_col, y_col, hue, xlabel, ylabel)
+    graph.save_lineplot(df, FIGURE_TEMPLATE.format(filename + '-without-callback'), x_col, y_col, hue, xlabel, ylabel)
 
 
 def plot_handlers_vs_stmts(df_all):
@@ -165,7 +166,7 @@ def lineplot_all_by_lines(df_all):
     y_col = constants.COUNT
     hue = constants.TYPE
 
-    ds.save_lineplot(df_group, FIGURE_TEMPLATE.format('lines'), x_col, y_col, hue, x_label, y_label)
+    graph.save_lineplot(df_group, FIGURE_TEMPLATE.format('lines'), x_col, y_col, hue, x_label, y_label)
 
 
 def draw_violinplot(x, y, hue, x_label, y_label, data, filename):
@@ -190,9 +191,6 @@ def draw_violinplot(x, y, hue, x_label, y_label, data, filename):
 def violinplot_mech():
     df_g = pd.read_csv(constants.PERCENTAGE_MECH_PER_REPO)
     df_g[constants.PERC_PER_REPO] = df_g[constants.PERC_PER_REPO] * 1
-
-    df_means = df_g.groupby([constants.MECH, constants.TYPE], as_index=False).mean()
-    df_means.to_csv(RESULTS_DATA_DIRECTORY + 'df_means.csv', index=False)
 
     df_g.loc[df_g[constants.TYPE] == constants.CLIENT, constants.TYPE] = 'Web-based'
     df_g.loc[df_g[constants.TYPE] == constants.SERVER, constants.TYPE] = 'Node-based'
@@ -241,7 +239,6 @@ def save_strategies_from_mechs(df_data):
         save_image_strategies(df, mech_name)
 
 
-# save_image_strategies
 def save_image_strategies(df_data, figure_name):
     plt.figure()
     sns.set_style('whitegrid')
@@ -253,8 +250,9 @@ def save_image_strategies(df_data, figure_name):
 
     plt.savefig(RESULTS_IMAGES_DIR + 'strategy_count_{}_barplot.png'.format(figure_name))
 
-    df_merge_higher_one = pd.read_csv(RESULTS_DATA_DIRECTORY + 'data_info_higher_one.csv')
 
+def save_barplot():
+    df_merge_higher_one = pd.read_csv(RESULTS_DATA_DIRECTORY + 'data_info_higher_one.csv')
     for abstraction in constants.MECHS:
         df_d = df_merge_higher_one[df_merge_higher_one[constants.MECH] == abstraction]
         df_d[constants.TYPE] = df_d[constants.TYPE].replace(constants.CLIENT, 'Web-based')
@@ -262,8 +260,8 @@ def save_image_strategies(df_data, figure_name):
 
         df_d.rename(index=str, columns={constants.TYPE: 'Class'}, inplace=True)
 
-        df_d.loc[df_d[
-                     constants.STRATEGY] == 'noUsageOfErrorArg,throwErrorObject', constants.STRATEGY] = 'Ignored arg, Throw object'
+        df_d.loc[df_d[constants.STRATEGY] == 'noUsageOfErrorArg,throwErrorObject', constants.STRATEGY] = \
+            'Ignored arg, Throw object'
         df_d.loc[df_d[constants.STRATEGY] == 'others', constants.STRATEGY] = 'Others'
         df_d.loc[df_d[constants.STRATEGY] == 'rethrow', constants.STRATEGY] = 'Re-throw'
         df_d.loc[df_d[constants.STRATEGY] == 'consoleLog,rethrow', constants.STRATEGY] = 'Log, Re-throw'
@@ -275,26 +273,14 @@ def save_image_strategies(df_data, figure_name):
         df_d.loc[df_d[constants.STRATEGY] == 'returnLiteral', constants.STRATEGY] = 'Return literal'
         df_d.loc[df_d[constants.STRATEGY] == 'reassigningError,break', constants.STRATEGY] = 'Reassign error, Break'
         df_d.loc[df_d[constants.STRATEGY] == 'consoleLog', constants.STRATEGY] = 'Log'
-        df_d.loc[
-            df_d[constants.STRATEGY] == 'noUsageOfErrorArg,returnLiteral', constants.STRATEGY] = 'Ignored arg, Return literal'
-        df_d.loc[df_d[constants.STRATEGY] == 'noUsageOfErrorArg,returnNull', constants.STRATEGY] = 'Ignored arg, Return null'
+        df_d.loc[df_d[constants.STRATEGY] == 'noUsageOfErrorArg,returnLiteral', constants.STRATEGY] = \
+            'Ignored arg, Return literal'
+        df_d.loc[df_d[constants.STRATEGY] == 'noUsageOfErrorArg,returnNull', constants.STRATEGY] = \
+            'Ignored arg, Return null'
         df_d.loc[df_d[constants.STRATEGY] == 'break', constants.STRATEGY] = 'Break'
 
-        plt.figure()
-        sns.set_style('whitegrid')
-        ax = sns.barplot(x=constants.STRATEGY, y=constants.PERC, hue='Class', data=df_d, palette='muted')
-        # ax.set_yscale('log')
-        ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
-
-        # Remove title on legend
-        handles, labels = ax.get_legend_handles_labels()
-        ax.legend(loc='upper right', handles=handles[:], labels=labels[:])
-
-        plt.xlabel('')
-        plt.ylabel('% of strategies')
-        plt.tight_layout()
-
-        plt.savefig(RESULTS_IMAGES_DIR + 'strategy_perc_{}_barplot.png'.format(abstraction))
+        filename = RESULTS_IMAGES_DIR + 'strategy_perc_{}_barplot.png'.format(abstraction)
+        graph.save_barplot_rotation(df_d, filename, constants.STRATEGY, constants.PERC, 'Class', '', '% of strategies')
 
 
 if __name__ == '__main__':
@@ -312,4 +298,5 @@ if __name__ == '__main__':
 
     # violinplot_mech()
 
-    save_strategies_from_mechs(df)
+    # save_strategies_from_mechs(df)
+    save_barplot()

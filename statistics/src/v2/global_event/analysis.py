@@ -1,5 +1,5 @@
 import pandas as pd
-import statistics.src.processing.process ds
+import statistics.src.processing.process as ds
 import statistics.src.constants as constants
 
 

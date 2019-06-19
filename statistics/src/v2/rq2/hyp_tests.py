@@ -1,11 +1,11 @@
 import pandas as pd
 import math
 import scipy.stats as stats
-import statistics.src.constants as config
+import statistics.src.constants as constants
 
 
-RESULTS_DATA_DIR = config.STATS_SRC_PATH + 'v2/rq2/data/'
-RESULTS_DIR = config.STATS_SRC_PATH + 'v2/rq2/stats_results/'
+RESULTS_DATA_DIR = constants.STATS_SRC_PATH + 'v2/rq2/data/'
+RESULTS_DIR = constants.STATS_SRC_PATH + 'v2/rq2/stats_results/'
 
 
 def test_normality(x):
@@ -97,28 +97,27 @@ def test(serie_one, serie_two):
 
 def run_test(sample, strategy, remove_zeroes):
 
-    df_sample = sample[sample[config.STRATEGY] == strategy]
+    df_sample = sample[sample[constants.STRATEGY] == strategy]
 
     if remove_zeroes:
-        df_sample = sample[sample[config.COUNT] > 0]
+        df_sample = sample[sample[constants.COUNT] > 0]
 
-    df_client = df_sample[df_sample[config.TYPE] == config.CLIENT]
-    df_server = df_sample[df_sample[config.TYPE] == config.SERVER]
+    df_client = df_sample[df_sample[constants.TYPE] == constants.CLIENT]
+    df_server = df_sample[df_sample[constants.TYPE] == constants.SERVER]
 
-    serie_sample_one = df_client[config.COUNT].tolist()
-    serie_sample_two = df_server[config.COUNT].tolist()
+    serie_sample_one = df_client[constants.COUNT].tolist()
+    serie_sample_two = df_server[constants.COUNT].tolist()
 
     return test(serie_sample_one, serie_sample_two)
 
 
-def run_tests_for_mech(mech, rows, rows_err, remove_zeroes):
-    sample = df[df[config.MECH] == mech]
-    strategies = sample[config.STRATEGY].unique().tolist()
+def run_tests_for_mech(df, mech, rows, rows_err, remove_zeroes):
+    sample = df[df[constants.MECH] == mech]
+    strategies = sample[constants.STRATEGY].unique().tolist()
     for strategy in strategies:
         result = run_test(sample, strategy, remove_zeroes)
-
-        result[config.MECH] = mech
-        result[config.STRATEGY] = strategy
+        result[constants.MECH] = mech
+        result[constants.STRATEGY] = strategy
 
         if 'err' in result:
             rows_err.append(result)
@@ -158,24 +157,17 @@ def main():
     rows_err = []
     remove_zeroes = False
 
-    run_tests_for_mech(config.TRY_CATCH, rows, rows_err, remove_zeroes)
-
-    run_tests_for_mech(config.CALLBACK, rows, rows_err, remove_zeroes)
-
-    run_tests_for_mech(config.EVENT, rows, rows_err, remove_zeroes)
-
-    run_tests_for_mech(config.PROMISE, rows, rows_err, remove_zeroes)
-
-    run_tests_for_mech(config.ASYNC_AWAIT, rows, rows_err, remove_zeroes)
+    for mech in constants.MECHS:
+        run_tests_for_mech(df, mech, rows, rows_err, remove_zeroes)
 
     if rows:
         df_rows = pd.DataFrame(rows)
-        in_front_columns = [config.MECH, config.STRATEGY, 'p_value', 'statistic', 'mean_client', 'mean_server']
+        in_front_columns = [constants.MECH, constants.STRATEGY, 'p_value', 'statistic', 'mean_client', 'mean_server']
         df_res = reorder_df(df_rows, in_front_columns)
         df_res.to_csv(RESULTS_DIR + 'file-result2.csv')
 
     if rows_err:
         df_err = pd.DataFrame(rows_err)
-        in_front_columns = [config.MECH, config.STRATEGY]
+        in_front_columns = [constants.MECH, constants.STRATEGY]
         df_res = reorder_df(df_err, in_front_columns)
         df_res.to_csv(RESULTS_DIR + 'file-result-err2.csv')
