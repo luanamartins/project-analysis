@@ -97,6 +97,23 @@ def save_barplot(data, filename, x, y, hue, log):
     plt.savefig(filename)
 
 
+def save_barplot_rotation(data, filename, x, y, hue, x_label, y_label):
+    plt.figure()
+
+    sns.set_style('whitegrid')
+    ax = sns.barplot(x=x, y=y, data=data, hue=hue, palette='muted')
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
+
+    # Remove title on legend
+    handles, labels = ax.get_legend_handles_labels()
+    ax.legend(loc='upper right', handles=handles[:], labels=labels[:])
+
+    plt.xlabel(x_label)
+    plt.ylabel(y_label)
+    plt.tight_layout()
+    plt.savefig(filename)
+
+
 def save_barplot_with_legend(filename, x, y, hue, data, xlabel, ylabel):
     plt.figure()
     sns.set_style('whitegrid')

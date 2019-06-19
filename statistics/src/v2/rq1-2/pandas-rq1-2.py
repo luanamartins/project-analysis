@@ -1,5 +1,5 @@
 import pandas as pd
-import statistics.src.processing.process ds
+import statistics.src.processing.process as ds
 import statistics.src.constants as config
 
 
@@ -51,7 +51,7 @@ def handle_mech_strategies(df, filename):
     df_copy.loc[df_copy[config.STRATEGY] == 'reassigningError,break', config.STRATEGY] = 'Reassign error, Break'
 
     df_copy.to_csv(RESULTS_DIRECTORY + filename + '2.csv', index=False)
-    # print(df_copy)
+
     print(df_copy[config.PERC].sum())
 
 

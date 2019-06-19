@@ -1,26 +1,38 @@
+import os
 import glob
 import pandas as pd
-import statistics.src.constants as config
+import statistics.src.constants as constants
+
+
+def save_mean_count_perc():
+    df_g = pd.read_csv(constants.PERCENTAGE_MECH_PER_REPO)
+    df_g[constants.PERC_PER_REPO] = df_g[constants.PERC_PER_REPO] * 1
+
+    df_means = df_g.groupby([constants.MECH, constants.TYPE], as_index=False).mean()
+
+    results_base_dir = constants.STATS_SRC_PATH + 'v2/rq2/'
+    data_dir = results_base_dir + 'data/'
+    df_means.to_csv(data_dir + 'df_means.csv', index=False)
 
 
 def number_of_handlers(df_raw):
     df = df_raw.copy()
-    df[config.COUNT] = 1
-    df_g = df.groupby([config.MECH, config.TYPE], as_index=False).sum()
-    columns = [config.MECH, config.LINES, config.STMTS, config.TYPE, config.COUNT]
+    df[constants.COUNT] = 1
+    df_g = df.groupby([constants.MECH, constants.TYPE], as_index=False).sum()
+    columns = [constants.MECH, constants.LINES, constants.STMTS, constants.TYPE, constants.COUNT]
     df_g = df_g[columns]
-    df_g.to_csv(config.RESULT + 'number_of_handlers.csv')
+    df_g.to_csv(constants.RESULT + 'number_of_handlers.csv')
     print(df_g.head())
 
 
 def get_general_info(type):
-    path = config.RESULT_TODAY + type + '/'
+    path = constants.RESULT_TODAY + type + '/'
 
     array = []
     for file in glob.glob(path + '*.csv'):
         df = pd.read_csv(file, index_col=0)
-        df[config.REPO] = file.rsplit('/', 1)[-1]
-        df[config.TYPE] = type
+        df[constants.REPO] = os.path.basename(file)
+        df[constants.TYPE] = type
         array.append(df)
 
     df = pd.concat(array, sort=False)
@@ -30,7 +42,7 @@ def get_general_info(type):
 
 
 def create_general_info():
-    client_path = config.RESULT_TODAY + 'client/'
+    client_path = constants.RESULT_TODAY + 'client/'
 
     array = []
     for file in glob.glob(client_path + '*.csv'):
@@ -40,7 +52,7 @@ def create_general_info():
     df_c.reset_index(inplace=True)
 
     array = []
-    server_path = config.RESULT_TODAY + 'server/'
+    server_path = constants.RESULT_TODAY + 'server/'
     for file in glob.glob(server_path + '*.csv'):
         array.append(pd.read_csv(file))
 
@@ -62,13 +74,13 @@ def create_general_info():
         'overall': df_all['numberOfPhysicalLines'].sum()
     }
 
-    files_c = pd.read_csv(config.RESULT + 'repo-er-client.csv')
+    files_c = pd.read_csv(constants.RESULT + 'repo-er-client.csv')
     total_files_c = files_c['total_files'].sum()
     median_files_c = files_c['total_files'].median()
     min_files_c = files_c['total_files'].min()
     max_files_c = files_c['total_files'].max()
 
-    files_s = pd.read_csv(config.RESULT + 'repo-er-server.csv')
+    files_s = pd.read_csv(constants.RESULT + 'repo-er-server.csv')
     total_files_s = files_s['total_files'].sum()
     median_files_s = files_s['total_files'].median()
     min_files_s = files_s['total_files'].min()
@@ -98,8 +110,8 @@ def create_general_info():
         'overall': max_files_c + max_files_s
     }
 
-    failed_files_c = pd.read_csv(config.RESULT + 'failed-files-client.csv')
-    failed_files_s = pd.read_csv(config.RESULT + 'failed-files-server.csv')
+    failed_files_c = pd.read_csv(constants.RESULT + 'failed-files-client.csv')
+    failed_files_s = pd.read_csv(constants.RESULT + 'failed-files-server.csv')
 
     failed_files_c = failed_files_c['file'].count()
     failed_files_s = failed_files_s['file'].count()
@@ -121,7 +133,7 @@ def create_general_info():
     }
 
     df = pd.DataFrame(data=data)
-    df.to_csv(config.RESULT + 'general-info2.csv')
+    df.to_csv(constants.RESULT + 'general-info2.csv')
 
 
 if __name__ == '__main__':
@@ -129,3 +141,4 @@ if __name__ == '__main__':
 
     # df = ds.read_dataset()
     # number_of_handlers(df)
+    # save_mean_count_perc()
