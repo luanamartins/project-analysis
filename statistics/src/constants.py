@@ -1,17 +1,17 @@
 
-RESULT = '/Users/luanamartins/Documents/Mestrado/project-analysis/results/results-2018-09-01/'
-RESULT_TODAY = '/Users/luanamartins/Documents/Mestrado/project-analysis/results/results-2018-09-01/result-today/'
+RESULT = '/results/results-2018-09-01/'
+RESULT_TODAY = '/results/results-2018-09-01/result-today/'
 RESULT_SUMMARY = RESULT + 'summary-data/'
 RESULT_RQ_1_1 = RESULT + 'rq_1_1/'
 RESULT_RQ_1_2 = RESULT + 'rq_1_2/'
 RESULT_RQ_2 = RESULT + 'rq_2/'
 RESULT_INFO = RESULT + 'summary-data/'
 
-EXTRACT_METRICS_SRC = '/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/src/'
-EXTRACT_METRICS_DATA = '/home/local/CIN/lms7/project/extract-metrics/data/'
-EXTRACT_METRICS_RESULT_DIR = '/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/result/'
-EXTRACT_METRICS_REPO_DIR = '/Users/luanamartins/Documents/Mestrado/project-analysis/extract-metrics/data/repo/'
-STATS_SRC_PATH = '/Users/luanamartins/Documents/Mestrado/project-analysis/statistics/src/'
+EXTRACT_METRICS_SRC = '/extract-metrics/src/'
+EXTRACT_METRICS_DATA = '/extract-metrics/data/'
+EXTRACT_METRICS_RESULT_DIR = '/extract-metrics/data/result/'
+EXTRACT_METRICS_REPO_DIR = '/extract-metrics/data/repo/'
+STATS_SRC_PATH = '/statistics/src/'
 
 PERCENTAGE_MECH_PER_REPO = RESULT + 'percentage_mech_per_repo.csv'
 

@@ -60,17 +60,29 @@ def save_violinplot_hue(df, image_path, x_col, y_col, x_label, y_label, hue):
     plt.savefig(image_path)
 
 
-def save_lineplot(df, image_path, x_column_name, y_column_name, hue, x_label, y_label):
+def save_lineplot(df, image_path, x_column_name, y_column_name, x_label, y_label, log):
+    # Start a new figure
+    plt.figure()
+    ax = sns.lineplot(data=df, x=x_column_name, y=y_column_name)
+    ax.set(xlabel=x_label, ylabel=y_label)
+    if log:
+        ax.set_yscale('log')
+    plt.savefig(image_path)
+
+
+def save_lineplot_hue(df, image_path, x_column_name, y_column_name, hue, x_label, y_label, log):
     # Start a new figure
     plt.figure()
 
     ax = sns.lineplot(data=df, x=x_column_name, y=y_column_name, hue=hue)
-
     ax.set(xlabel=x_label, ylabel=y_label)
     ax.set_yscale('log')
 
     # Set grid style
     # sns.set(style='darkgrid')
+
+    if log:
+        ax.set_yscale('log')
 
     # Save figure
     plt.savefig(image_path)

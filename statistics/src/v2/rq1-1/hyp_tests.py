@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import scipy.stats as stats
 import statistics.src.constants as constants
-# from statsmodels.stats.proportion import proportions_ztest, proportion_confint
+from statsmodels.stats.proportion import proportions_ztest, proportion_confint
 
 RESULTS_BASE_DIR = constants.STATS_SRC_PATH + 'v2/rq1-1/'
 RESULTS_DIRECTORY = RESULTS_BASE_DIR + 'data/'
@@ -34,4 +34,4 @@ if __name__ == '__main__':
         rows.append(get_data(proportion_lines, mech, constants.FILES))
         rows.append(get_data(proportion_stmts, mech, constants.STMTS))
     df = pd.DataFrame(rows)
-    df.to_csv('results.csv', index=False)
+    df.to_csv('stats_results.csv', index=False)

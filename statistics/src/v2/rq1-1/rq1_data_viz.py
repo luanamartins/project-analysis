@@ -11,32 +11,16 @@ RESULTS_DIRECTORY = RESULTS_BASE_DIR + 'data/'
 RESULTS_IMAGE_DIRECTORY = RESULTS_BASE_DIR + 'images/'
 
 
-def save_barplot(data, x_label, x, y, log, ax):
-    plt.figure()
-
-    order_repo = data[constants.REPO].tolist()
-    ax = sns.barplot(x=x, y=y, data=data, palette='Greys_d', order=order_repo, ax=ax)
-    ax.set_xticklabels([])
-
-    if log:
-        ax.set_yscale('log')
-    ax.set_ylim(0, 1)
-    ax.set(xlabel=x_label, ylabel='Ratio')
-
-
-def get_data(mech, type):
+def get_data(mech):
     df_g = pd.read_csv(constants.RESULT + 'percentage_mech_per_repo.csv')
-    df = df_g[(df_g[constants.MECH] == mech)] # & (df_g[config.TYPE] == 'client')
+    df = df_g[(df_g[constants.MECH] == mech)]
     df.sort_values(by=[constants.PERC_PER_REPO], inplace=True)
     df.repo = pd.Categorical(df.repo)
     return df
 
 
 def create_graph():
-    list_dataframes = []
-    for mech in constants.MECHS:
-        list_dataframes.append(get_data(mech, ''))
-
+    list_dataframes = [get_data(mech) for mech in constants.MECHS]
     ds.create_dir_if_not_exists(RESULTS_IMAGE_DIRECTORY)
     filename = RESULTS_IMAGE_DIRECTORY + 'output.png'
     graphs.save_multiple_barplot(filename, list_dataframes, constants.MECHS, constants.REPO, constants.PERC_PER_REPO)
@@ -50,35 +34,28 @@ def lineplot(df_raw):
     df = df[df[constants.MECH] != constants.WINDOW_EVENT_LISTENER]
     df = df[df[constants.MECH] != constants.WINDOW_ON_ERROR]
 
-    xlabel = '# of Statements'
-    ylabel = '# of Handlers'
+    x_label = '# of Statements'
+    y_label = '# of Handlers'
     x_col = constants.STMTS
     y_col = constants.COUNT
-    hue = constants.MECH
 
-    # ds.save_lineplot(df, dir_name.format('line'), x_col, y_col, hue, xlabel, ylabel)
-    # Start a new figure
-    plt.figure()
-    ax = sns.lineplot(data=df, x=x_col, y=y_col, hue=hue)
-    ax.set(xlabel=xlabel, ylabel=ylabel)
-    # Save figure
-    plt.savefig(RESULTS_IMAGE_DIRECTORY + 'line.png')
+    image_path = RESULTS_IMAGE_DIRECTORY + 'line.png'
+    graphs.save_lineplot(df, image_path, x_col, y_col, x_label, y_label, False)
 
-    xlabel = '# of Statements'
-    ylabel = '# of Handlers'
+    x_label = '# of Statements'
+    y_label = '# of Handlers'
     x_col = constants.STMTS
     y_col = constants.COUNT
-    hue = constants.MECH
     new_hue = 'abstractions'
 
-    # df_res = df[df[config.MECH] != config.CALLBACK]
     df_res = df.copy()
     df_res.columns = df_res.columns.str.replace(constants.MECH, new_hue)
-
-    ds.save_lineplot(df_res, RESULTS_IMAGE_DIRECTORY + 'line-abstraction', x_col, y_col, new_hue, xlabel, ylabel)
+    graphs.save_lineplot_hue(
+        df_res, RESULTS_IMAGE_DIRECTORY + 'line-abstraction', x_col, y_col, new_hue, x_label, y_label, False)
 
     df_res = df_res[df_res[new_hue] != constants.CALLBACK]
-    ds.save_lineplot(df_res, RESULTS_IMAGE_DIRECTORY + 'line-rem-callback', x_col, y_col, new_hue, xlabel, ylabel)
+    graphs.save_lineplot_hue(
+        df_res, RESULTS_IMAGE_DIRECTORY + 'line-rem-callback', x_col, y_col, new_hue, x_label, y_label, False)
 
 
 def lineplot_line_per_count(df_raw):
@@ -93,20 +70,13 @@ def lineplot_line_per_count(df_raw):
     print(df_g.max())
     print(df_g[constants.COUNT].sum())
 
-    xlabel = '# Statements in handler scope'
-    ylabel = '# Handlers'
+    x_label = '# Statements in handler scope'
+    y_label = '# Handlers'
     x_col = constants.STMTS
     y_col = constants.COUNT
 
-    # Start a new figure
-    plt.figure()
-    ax = sns.lineplot(data=df_g, x=x_col, y=y_col)
-    ax.set(xlabel=xlabel, ylabel=ylabel)
-
-    ax.set_yscale('log')
-
-    # Save figure
-    plt.savefig(RESULTS_IMAGE_DIRECTORY + 'line-simple-stmts.png')
+    image_path = RESULTS_IMAGE_DIRECTORY + 'line-simple-stmts.png'
+    graphs.save_lineplot(df_g, image_path, x_col, y_col, x_label, y_label)
 
 
 def violinplot_per_mech():
@@ -127,9 +97,6 @@ def violinplot_per_mech():
     g = sns.boxplot(x=x_col, y=y_col, data=df)
     g.set(xlabel=xlabel, ylabel=ylabel)
 
-    # Rescale y-axis to log function
-    # g.set_yscale('log')
-
     # Save figure
     plt.savefig(RESULTS_IMAGE_DIRECTORY + 'violinplot.png')
 
@@ -139,7 +106,7 @@ if __name__ == '__main__':
     ds.create_dir_if_not_exists(RESULTS_IMAGE_DIRECTORY)
 
     df = ds.read_dataset()
-    # create_graph()
+    create_graph()
 
     lineplot(df)
     lineplot_line_per_count(df)
