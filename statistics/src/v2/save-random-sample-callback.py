@@ -13,11 +13,6 @@ def select_callbacks_randomly(df):
     return df_sample.sample(SAMPLE_SIZE)
 
 
-def save_handlers_to_dir(df):
-    beginning = constants.EXTRACT_METRICS_DATA + 'repo-today/'
-    df_files = df[constants.FILE].str.replace(beginning, SAVE_DIR)
-
-
 def pre_process_data():
     df_c = ds.read_data(constants.CLIENT)
     df_s = ds.read_data(constants.SERVER)
@@ -31,4 +26,5 @@ def pre_process_data():
 
 if __name__ == '__main__':
     df_sample = pd.read_csv('callbacks_randomly.csv', index_col=0)
-    save_handlers_to_dir(df_sample)
+    beginning = constants.EXTRACT_METRICS_DATA + 'repo-today/'
+    df_files = df_sample[constants.FILE].str.replace(beginning, SAVE_DIR)

@@ -50,19 +50,14 @@ def lineplot(df_raw):
     df = df[df[constants.MECH] != constants.WINDOW_EVENT_LISTENER]
     df = df[df[constants.MECH] != constants.WINDOW_ON_ERROR]
 
-    xlabel = '# of Statements'
-    ylabel = '# of Handlers'
+    x_label = '# of Statements'
+    y_label = '# of Handlers'
     x_col = constants.STMTS
     y_col = constants.COUNT
     hue = constants.MECH
 
-    # ds.save_lineplot(df, dir_name.format('line'), x_col, y_col, hue, xlabel, ylabel)
-    # Start a new figure
-    plt.figure()
-    ax = sns.lineplot(data=df, x=x_col, y=y_col, hue=hue)
-    ax.set(xlabel=xlabel, ylabel=ylabel)
-    # Save figure
-    plt.savefig(RESULTS_IMAGE_DIRECTORY + 'line.png')
+    image_path = RESULTS_IMAGE_DIRECTORY + 'line.png'
+    graphs.save_lineplot(df, image_path, x_col, y_col, x_label, y_label, False)
 
     xlabel = '# of Statements'
     ylabel = '# of Handlers'
@@ -71,14 +66,13 @@ def lineplot(df_raw):
     hue = constants.MECH
     new_hue = 'abstractions'
 
-    # df_res = df[df[config.MECH] != config.CALLBACK]
     df_res = df.copy()
     df_res.columns = df_res.columns.str.replace(constants.MECH, new_hue)
-
-    ds.save_lineplot(df_res, RESULTS_IMAGE_DIRECTORY + 'line-abstraction', x_col, y_col, new_hue, xlabel, ylabel)
+    graphs.save_lineplot(df_res, RESULTS_IMAGE_DIRECTORY + 'line-abstraction', x_col, y_col, new_hue, xlabel, ylabel, False)
 
     df_res = df_res[df_res[new_hue] != constants.CALLBACK]
-    ds.save_lineplot(df_res, RESULTS_IMAGE_DIRECTORY + 'line-rem-callback', x_col, y_col, new_hue, xlabel, ylabel)
+    graphs.save_lineplot(df_res, RESULTS_IMAGE_DIRECTORY + 'line-rem-callback', x_col, y_col, new_hue,
+                     xlabel, ylabel, False)
 
 
 def lineplot_line_per_count(df_raw):
@@ -93,20 +87,13 @@ def lineplot_line_per_count(df_raw):
     print(df_g.max())
     print(df_g[constants.COUNT].sum())
 
-    xlabel = '# Statements in handler scope'
-    ylabel = '# Handlers'
+    x_label = '# Statements in handler scope'
+    y_label = '# Handlers'
     x_col = constants.STMTS
     y_col = constants.COUNT
 
-    # Start a new figure
-    plt.figure()
-    ax = sns.lineplot(data=df_g, x=x_col, y=y_col)
-    ax.set(xlabel=xlabel, ylabel=ylabel)
-
-    ax.set_yscale('log')
-
-    # Save figure
-    plt.savefig(RESULTS_IMAGE_DIRECTORY + 'line-simple-stmts.png')
+    image_path = RESULTS_IMAGE_DIRECTORY + 'line-simple-stmts.png'
+    graphs.save_lineplot(df_g, image_path, x_col, y_col, x_label, y_label)
 
 
 def violinplot_per_mech():

@@ -94,7 +94,7 @@ def lineplot(df_raw):
     hue = constants.MECH
     dir_name = directory + '{}.png'
 
-    gg.save_lineplot(df, directory + 'line.png', x_col, y_col, hue, xlabel, ylabel)
+    gg.save_lineplot_hue(df, directory + 'line.png', x_col, y_col, hue, xlabel, ylabel)
 
     xlabel = '# of Statements'
     ylabel = '# of Handlers'
@@ -103,22 +103,22 @@ def lineplot(df_raw):
     hue = constants.MECH
 
     df_c = df[df[constants.MECH] != constants.CALLBACK]
-    gg.save_lineplot(df_c, dir_name.format('line-rem-callback'), x_col, y_col, hue, xlabel, ylabel)
+    gg.save_lineplot_hue(df_c, dir_name.format('line-rem-callback'), x_col, y_col, hue, xlabel, ylabel)
 
     df_mech = df[df['mech'] == constants.PROMISE]
-    gg.save_lineplot(df_mech, directory + 'line-promise.png', x_col, y_col, hue, xlabel, ylabel)
+    gg.save_lineplot_hue(df_mech, directory + 'line-promise.png', x_col, y_col, hue, xlabel, ylabel)
 
     df_mech = df[df['mech'] == constants.EVENT]
-    gg.save_lineplot(df_mech, directory + 'line-event.png', x_col, y_col, hue, xlabel, ylabel)
+    gg.save_lineplot_hue(df_mech, directory + 'line-event.png', x_col, y_col, hue, xlabel, ylabel)
 
     df_mech = df[df['mech'] == constants.TRY_CATCH]
-    gg.save_lineplot(df_mech, directory + 'line-try-catch.png', x_col, y_col, hue, xlabel, ylabel)
+    gg.save_lineplot_hue(df_mech, directory + 'line-try-catch.png', x_col, y_col, hue, xlabel, ylabel)
 
     df_mech = df[df['mech'] == constants.CALLBACK]
-    gg.save_lineplot(df_mech, directory + 'line-callback.png', x_col, y_col, hue, xlabel, ylabel)
+    gg.save_lineplot_hue(df_mech, directory + 'line-callback.png', x_col, y_col, hue, xlabel, ylabel)
 
     df_mech = df[df['mech'] == constants.ASYNC_AWAIT]
-    gg.save_lineplot(df_mech, directory + 'line-async-await.png', x_col, y_col, hue, xlabel, ylabel)
+    gg.save_lineplot_hue(df_mech, directory + 'line-async-await.png', x_col, y_col, hue, xlabel, ylabel)
 
 
 def explore_data():

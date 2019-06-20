@@ -60,7 +60,7 @@ def lineplot(df_raw):
     y_col = constants.COUNT
     hue = constants.MECH
 
-    graphs.save_lineplot(df, directory + 'line.png', x_col, y_col, hue, xlabel, ylabel)
+    graphs.save_lineplot_hue(df, directory + 'line.png', x_col, y_col, hue, xlabel, ylabel)
 
     xlabel = '# of Statements'
     ylabel = '# of Handlers'
@@ -70,22 +70,22 @@ def lineplot(df_raw):
 
     dir_name = directory + '{}.png'
     df_c = df[df[constants.MECH] != constants.CALLBACK]
-    graphs.save_lineplot(df_c, dir_name.format('line-rem-callback'), x_col, y_col, hue, xlabel, ylabel)
+    graphs.save_lineplot_hue(df_c, dir_name.format('line-rem-callback'), x_col, y_col, hue, xlabel, ylabel)
 
     df_mech = df[df[constants.MECH] == constants.PROMISE]
-    graphs.save_lineplot(df_mech, directory + 'line-promise.png', x_col, y_col, hue, xlabel, ylabel)
+    graphs.save_lineplot_hue(df_mech, directory + 'line-promise.png', x_col, y_col, hue, xlabel, ylabel)
 
     df_mech = df[df['mech'] == constants.EVENT]
-    graphs.save_lineplot(df_mech, directory + 'line-event.png', x_col, y_col, hue, xlabel, ylabel)
+    graphs.save_lineplot_hue(df_mech, directory + 'line-event.png', x_col, y_col, hue, xlabel, ylabel)
 
     df_mech = df[df['mech'] == constants.TRY_CATCH]
-    graphs.save_lineplot(df_mech, directory + 'line-try-catch.png', x_col, y_col, hue, xlabel, ylabel)
+    graphs.save_lineplot_hue(df_mech, directory + 'line-try-catch.png', x_col, y_col, hue, xlabel, ylabel)
 
     df_mech = df[df['mech'] == constants.CALLBACK]
-    graphs.save_lineplot(df_mech, directory + 'line-callback.png', x_col, y_col, hue, xlabel, ylabel)
+    graphs.save_lineplot_hue(df_mech, directory + 'line-callback.png', x_col, y_col, hue, xlabel, ylabel)
 
     df_mech = df[df['mech'] == constants.ASYNC_AWAIT]
-    graphs.save_lineplot(df_mech, directory + 'line-async-await.png', x_col, y_col, hue, xlabel, ylabel)
+    graphs.save_lineplot_hue(df_mech, directory + 'line-async-await.png', x_col, y_col, hue, xlabel, ylabel)
 
 
 if __name__ == '__main__':

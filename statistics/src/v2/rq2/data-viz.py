@@ -89,16 +89,16 @@ def lineplot_by_mech(df, type):
     hue = constants.MECH
     filename = 'mech-{}'.format(type)
 
-    graph.save_lineplot(df, FIGURE_TEMPLATE.format(filename), x_col, y_col, hue, xlabel, ylabel)
+    graph.save_lineplot_hue(df, FIGURE_TEMPLATE.format(filename), x_col, y_col, hue, xlabel, ylabel)
 
     df = df[df[constants.MECH] != constants.CALLBACK]
-    graph.save_lineplot(df, FIGURE_TEMPLATE.format(filename + '-without-callback'), x_col, y_col, hue, xlabel, ylabel)
+    graph.save_lineplot_hue(df, FIGURE_TEMPLATE.format(filename + '-without-callback'), x_col, y_col, hue, xlabel, ylabel)
 
 
 def plot_handlers_vs_stmts(df_all):
     df_group = df_all.copy()
-    df_group.loc[df_group[constants.TYPE] == constants.SERVER, constants.TYPE] = 'Standalone'
-    df_group.loc[df_group[constants.TYPE] == constants.CLIENT, constants.TYPE] = 'Web'
+    df_group.loc[df_group[constants.TYPE] == constants.SERVER, constants.TYPE] = 'Node-based'
+    df_group.loc[df_group[constants.TYPE] == constants.CLIENT, constants.TYPE] = 'Web-based'
 
     df_group = df_group.groupby([constants.TYPE, constants.STMTS], as_index=False).sum()
     df_group.sort_values(by=constants.STMTS, inplace=True)
@@ -110,21 +110,20 @@ def plot_handlers_vs_stmts(df_all):
     hue = 'Class'
     df_group.rename(index=str, columns={constants.TYPE: 'Class'}, inplace=True)
 
-    # ds.save_lineplot(df_group, FIGURE_TEMPLATE.format('stmts'), x_col, y_col, hue, x_label, y_label)
     # Start a new figure
     plt.figure()
     # df_group[config.STMTS] = df_group[config.STMTS].interpolate()
-    ax = sns.lineplot(data=df_group, x=x_col, y=y_col, hue=hue, hue_order=['Web', 'Standalone'])
+    ax = sns.lineplot(data=df_group, x=x_col, y=y_col, hue=hue, hue_order=['Web-based', 'Node-based'])
     ax.set(xlabel=x_label, ylabel=y_label)
     ax.set_yscale('log')
 
     # Remove title on legend
-    ax.legend(['Web', 'Standalone'])
+    ax.legend(['Web-based', 'Node-based'])
 
     plt.savefig(FIGURE_TEMPLATE.format('stmts'))
 
-    df_web = df_group[df_group['Class'] == 'Web']
-    df_stand = df_group[df_group['Class'] == 'Standalone']
+    df_web = df_group[df_group['Class'] == 'Web-based']
+    df_stand = df_group[df_group['Class'] == 'Node-based']
     sample1 = df_web[constants.STMTS] / df_web[constants.COUNT]
     sample2 = df_stand[constants.STMTS] / df_stand[constants.COUNT]
 
@@ -166,7 +165,7 @@ def lineplot_all_by_lines(df_all):
     y_col = constants.COUNT
     hue = constants.TYPE
 
-    graph.save_lineplot(df_group, FIGURE_TEMPLATE.format('lines'), x_col, y_col, hue, x_label, y_label)
+    graph.save_lineplot_hue(df_group, FIGURE_TEMPLATE.format('lines'), x_col, y_col, hue, x_label, y_label)
 
 
 def draw_violinplot(x, y, hue, x_label, y_label, data, filename):
@@ -288,7 +287,7 @@ if __name__ == '__main__':
     df = ds.read_dataset()
 
     # lineplot_all_by_lines(df)
-    # plot_handlers_vs_stmts(df)
+    plot_handlers_vs_stmts(df)
     # lineplot_by_mech(df, config.CLIENT)
     # lineplot_by_mech(df, config.SERVER)
     # df_proc = process_data_for_barplot(df)
@@ -299,4 +298,4 @@ if __name__ == '__main__':
     # violinplot_mech()
 
     # save_strategies_from_mechs(df)
-    save_barplot()
+    # save_barplot()
