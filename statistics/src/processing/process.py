@@ -1,69 +1,68 @@
 import os
-import numpy as np
+# import numpy as np
 import pandas as pd
 import statistics.src.constants as constants
 
 
-def get_number_lines_handlers(df):
-    # Save data on number of catches
-    df_async_await = get_metrics(df, 'asyncAwaitNumberOfCatchesLines', 'async-await')
-    df_try_catch = get_metrics(df, 'tryCatchNumberOfCatchesLines', 'try-catch')
-    df_callback = get_metrics(df, 'callbacksNumberOfLines', 'callback')
-    df_promise = get_metrics(df, 'promiseNumberOfPromiseCatchesLines', 'promise')
-    df_event_on = get_metrics(df, 'eventsNumberOfEventOnLines', 'event')
-    df_event_once = get_metrics(df, 'eventsNumberOfEventOnceLines', 'event')
+# def get_number_lines_handlers(df):
+#     # Save data on number of catches
+#     df_async_await = get_metrics(df, 'asyncAwaitNumberOfCatchesLines', 'async-await')
+#     df_try_catch = get_metrics(df, 'tryCatchNumberOfCatchesLines', 'try-catch')
+#     df_callback = get_metrics(df, 'callbacksNumberOfLines', 'callback')
+#     df_promise = get_metrics(df, 'promiseNumberOfPromiseCatchesLines', 'promise')
+#     df_event_on = get_metrics(df, 'eventsNumberOfEventOnLines', 'event')
+#     df_event_once = get_metrics(df, 'eventsNumberOfEventOnceLines', 'event')
+#
+#     data = [df_callback, df_promise, df_event_on, df_event_once, df_async_await, df_try_catch]
+#     df = pd.concat(data, ignore_index=True)
+#
+#     return df
+#
+#
+# def get_number_of_handlers_by_mech(df):
+#     # Save data on number of catches
+#     df_async_await = get_metrics(df, 'asyncAwaitNumberOfCatches', 'async-await')
+#     df_try_catch = get_metrics(df, 'tryCatchNumberOfCatches', 'try-catch')
+#     df_callback = get_metrics(df, 'callbacksNumberOfCallbackErrorFunctions', 'callback')
+#     df_promise = get_metrics(df, 'promiseNumberOfPromiseCatches', 'promise')
+#     df_event_on = get_metrics(df, 'eventsNumberOfEventMethodsOn', 'event')
+#     df_event_once = get_metrics(df, 'eventsNumberOfEventMethodsOnce', 'event')
+#
+#     # Get number of handlers by mechanism
+#     data = [df_callback, df_promise, df_event_on, df_event_once, df_async_await, df_try_catch]
+#     df = pd.concat(data, ignore_index=True)
+#
+#     return df
 
-    data = [df_callback, df_promise, df_event_on, df_event_once, df_async_await, df_try_catch]
-    df = pd.concat(data, ignore_index=True)
 
-    return df
-
-
-def get_number_of_handlers_by_mech(df):
-    # Save data on number of catches
-    df_async_await = get_metrics(df, 'asyncAwaitNumberOfCatches', 'async-await')
-    df_try_catch = get_metrics(df, 'tryCatchNumberOfCatches', 'try-catch')
-    df_callback = get_metrics(df, 'callbacksNumberOfCallbackErrorFunctions', 'callback')
-    df_promise = get_metrics(df, 'promiseNumberOfPromiseCatches', 'promise')
-    df_event_on = get_metrics(df, 'eventsNumberOfEventMethodsOn', 'event')
-    df_event_once = get_metrics(df, 'eventsNumberOfEventMethodsOnce', 'event')
-
-    # Get number of handlers by mechanism
-    data = [df_callback, df_promise, df_event_on, df_event_once, df_async_await, df_try_catch]
-
-    df = pd.concat(data, ignore_index=True)
-
-    return df
-
-
-def get_metrics(df, metric, name):
-    # Fill nan on zeroes
-    df_metric = df[metric].fillna(0.0)
-
-    # Remove zeroes from sample
-    df_metric = df_metric[df_metric > 0.0]
-
-    # convert series to dataframe
-    df_metric = df_metric.to_frame()
-
-    # rename metric name to values
-    df_metric.rename(columns={metric: 'values'}, inplace=True)
-
-    # Reset index
-    df_metric.reset_index(drop=True, inplace=True)
-
-    # Create new column with the metric name only
-    size = df_metric.shape[0]
-    df_metric_name = pd.DataFrame(data=np.repeat(name, size))
-    df_metric_name.columns = ['types']
-
-    # Reset index
-    df_metric_name.reset_index(drop=True, inplace=True)
-
-    df_res = pd.concat([df_metric, df_metric_name], axis=1)
-    df_res.columns = ['values', 'types']
-
-    return df_res
+# def get_metrics(df, metric, name):
+#     # Fill nan on zeroes
+#     df_metric = df[metric].fillna(0.0)
+#
+#     # Remove zeroes from sample
+#     df_metric = df_metric[df_metric > 0.0]
+#
+#     # convert series to dataframe
+#     df_metric = df_metric.to_frame()
+#
+#     # rename metric name to values
+#     df_metric.rename(columns={metric: 'values'}, inplace=True)
+#
+#     # Reset index
+#     df_metric.reset_index(drop=True, inplace=True)
+#
+#     # Create new column with the metric name only
+#     size = df_metric.shape[0]
+#     df_metric_name = pd.DataFrame(data=np.repeat(name, size))
+#     df_metric_name.columns = ['types']
+#
+#     # Reset index
+#     df_metric_name.reset_index(drop=True, inplace=True)
+#
+#     df_res = pd.concat([df_metric, df_metric_name], axis=1)
+#     df_res.columns = ['values', 'types']
+#
+#     return df_res
 
 
 def read_data(type):
