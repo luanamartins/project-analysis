@@ -70,11 +70,12 @@ def save_lineplot(df, image_path, x_column_name, y_column_name, x_label, y_label
     plt.savefig(image_path)
 
 
-def save_lineplot_hue(df, image_path, x_column_name, y_column_name, hue, x_label, y_label, log):
+def save_lineplot_hue(df, image_path, x_column_name, y_column_name, hue, x_label, y_label, log,
+                      palette=sns.color_palette()):
     # Start a new figure
     plt.figure()
 
-    ax = sns.lineplot(data=df, x=x_column_name, y=y_column_name, hue=hue)
+    ax = sns.lineplot(data=df, x=x_column_name, y=y_column_name, hue=hue, palette=palette)
     ax.set(xlabel=x_label, ylabel=y_label)
     ax.set_yscale('log')
 

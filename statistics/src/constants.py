@@ -98,7 +98,7 @@ STRATEGIES = [
     REASSIGNING_ERROR,
     ALERT,
     THROW_LITERAL,
-    THROW_UNDEFINED ,
+    THROW_UNDEFINED,
     THROW_NULL,
     THROW_ERROR_OBJECT,
     RETHROW,
@@ -118,6 +118,10 @@ MECHS = [
     PROMISE,
     CALLBACK
 ]
+
+PALLETE = {
+    ASYNC_AWAIT: 'blue', CALLBACK: 'orange', EVENT: 'green', PROMISE: 'red', TRY_CATCH: 'purple'
+ }
 
 OVERALL = 'overall'
 CLIENT = 'client'

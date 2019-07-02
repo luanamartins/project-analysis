@@ -50,12 +50,15 @@ def lineplot(df_raw):
 
     df_res = df.copy()
     df_res.columns = df_res.columns.str.replace(constants.MECH, new_hue)
+
     graphs.save_lineplot_hue(
-        df_res, RESULTS_IMAGE_DIRECTORY + 'line-abstraction', x_col, y_col, new_hue, x_label, y_label, False)
+        df_res, RESULTS_IMAGE_DIRECTORY + 'line-abstraction', x_col, y_col, new_hue, x_label, y_label, False,
+        constants.PALLETE)
 
     df_res = df_res[df_res[new_hue] != constants.CALLBACK]
     graphs.save_lineplot_hue(
-        df_res, RESULTS_IMAGE_DIRECTORY + 'line-rem-callback', x_col, y_col, new_hue, x_label, y_label, False)
+        df_res, RESULTS_IMAGE_DIRECTORY + 'line-rem-callback', x_col, y_col, new_hue, x_label, y_label, False,
+        constants.PALLETE)
 
 
 def lineplot_line_per_count(df_raw):
@@ -76,7 +79,7 @@ def lineplot_line_per_count(df_raw):
     y_col = constants.COUNT
 
     image_path = RESULTS_IMAGE_DIRECTORY + 'line-simple-stmts.png'
-    graphs.save_lineplot(df_g, image_path, x_col, y_col, x_label, y_label)
+    graphs.save_lineplot(df_g, image_path, x_col, y_col, x_label, y_label, False)
 
 
 def violinplot_per_mech():
@@ -102,11 +105,11 @@ def violinplot_per_mech():
 
 
 if __name__ == '__main__':
-    ds.create_dir_if_not_exists(RESULTS_DIRECTORY)
-    ds.create_dir_if_not_exists(RESULTS_IMAGE_DIRECTORY)
+    # ds.create_dir_if_not_exists(RESULTS_DIRECTORY)
+    # ds.create_dir_if_not_exists(RESULTS_IMAGE_DIRECTORY)
 
     df = ds.read_dataset()
-    create_graph()
+    # create_graph()
 
     lineplot(df)
     lineplot_line_per_count(df)
