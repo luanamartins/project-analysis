@@ -7,7 +7,7 @@
   "license": "ISC",
   "dependencies": {
     "@octokit/rest": "^14.0.9",
-    "acorn": "^5.4.1",
+    "acorn": "^5.7.4",
     "ast-source": "^2.1.0",
     "csvtojson": "^2.0.0",
     "dotenv": "^4.0.0",
