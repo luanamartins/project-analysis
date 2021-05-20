@@ -18,7 +18,7 @@
     "fs-temp": "^1.1.2",
     "git-clone": "^0.1.0",
     "git-clone-promise": "^1.0.0",
-    "gitlog": "^3.1.2",
+    "gitlog": "^4.0.4",
     "json2csv": "^4.1.2",
     "jsonfile": "^4.0.0",
     "lodash": "^4.17.21",
