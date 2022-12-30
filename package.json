@@ -17,7 +17,7 @@
     "git-clone": "^0.1.0",
     "git-clone-promise": "^1.0.0",
     "gitlog": "^4.0.4",
-    "json2csv": "^3.11.5",
+    "json2csv": "^5.0.7",
     "jsonfile": "^4.0.0",
     "lodash": "^4.17.21",
     "node-cmd": "^3.0.0",
